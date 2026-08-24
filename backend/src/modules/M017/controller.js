@@ -1,4 +1,4 @@
-﻿// Controller for M017 Module (M017)
+// Controller for M017 Module — AI Fallback / Circuit-Breaker Registry
 const logger = require('../../utils/logger').logger || console;
 const service = require('./service');
 
@@ -8,4 +8,8 @@ async function create(req, res){ try{ const payload = req.body || {}; const item
 async function update(req, res){ try{ const payload = req.body || {}; const item = await service.updateItem(req.params.id, payload); if(!item) return res.status(404).json({ success:false, error:'Not found' }); res.json({ success:true, data:item }); }catch(e){ logger.error('update error', e); res.status(500).json({ success:false, error:e.message }); } }
 async function remove(req, res){ try{ const ok = await service.deleteItem(req.params.id); if(!ok) return res.status(404).json({ success:false, error:'Not found' }); res.json({ success:true }); }catch(e){ logger.error('delete error', e); res.status(500).json({ success:false, error:e.message }); } }
 
-module.exports = { list, get, create, update, remove };
+async function report(req, res){ try{ const { circuit_key, success, fallback_chain } = req.body || {}; const data = await service.reportOutcome(circuit_key, !!success, { fallback_chain }); res.status(201).json({ success:true, data }); }catch(e){ logger.error('report error', e); res.status(400).json({ success:false, error:e.message }); } }
+async function state(req, res){ try{ const data = await service.getState(req.params.circuit_key); res.json({ success:true, data }); }catch(e){ logger.error('state error', e); res.status(400).json({ success:false, error:e.message }); } }
+async function open(req, res){ try{ const data = await service.listOpenCircuits(); res.json({ success:true, data }); }catch(e){ logger.error('open error', e); res.status(500).json({ success:false, error:e.message }); } }
+
+module.exports = { list, get, create, update, remove, report, state, open };

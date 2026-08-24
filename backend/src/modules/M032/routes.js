@@ -3,6 +3,9 @@ const router = express.Router();
 const controller = require('./controller');
 const { authMiddleware, requireRole } = require('../../middleware/auth');
 
+// Static routes must precede '/:id' so they aren't swallowed by it.
+router.get('/analytics/recommendation', controller.recommendation); // ?plot_id=
+
 // Public get/list endpoints, protected writes by default
 router.get('/', controller.list);
 router.get('/:id', controller.get);

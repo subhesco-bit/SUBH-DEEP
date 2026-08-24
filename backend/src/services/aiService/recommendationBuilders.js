@@ -542,7 +542,33 @@ const recommendationBuilders = {
     cost_estimate: 4500,
     subsidy_opportunities: ['MIDH training subsidy covers up to 75% of fee'],
     confidence: 0.79
-  })
+  }),
+
+  // Used by modules/M106 (last-mile delivery partner performance scoring).
+  // The score/tier themselves are computed deterministically in M106's own
+  // service.js from real recorded delivery outcomes; this builder only
+  // drafts the natural-language improvement narrative once M106 has already
+  // decided a partner's weak factors — the genuinely AI-assisted part
+  // (explaining a decision in prose) rather than the decision itself.
+  logistics_partner_improvement_plan: (p) => {
+    const partnerName = p.partnerName || 'This partner';
+    const weakFactors = Array.isArray(p.weakFactors) ? p.weakFactors : [];
+    const factorLabel = (f) => String(f.factor || '').replace(/_/g, ' ');
+    return {
+      partner: partnerName,
+      tier: p.tier || 'unrated',
+      score: p.score ?? null,
+      narrative: weakFactors.length
+        ? `${partnerName} is currently rated ${p.tier || 'unrated'} (score ${p.score ?? 'n/a'}/100). `
+          + `The main drag on the score is ${weakFactors.map(factorLabel).join(' and ')}.`
+        : `${partnerName} is currently rated ${p.tier || 'unrated'} (score ${p.score ?? 'n/a'}/100). `
+          + 'All tracked metrics are within acceptable range.',
+      recommended_actions: weakFactors.length
+        ? weakFactors.map((f) => `Improve ${factorLabel(f)}: currently ${f.value !== undefined ? (Number(f.value) * 100).toFixed(1) + '%' : 'out of range'} against a target of ${f.threshold !== undefined ? (Number(f.threshold) * 100).toFixed(0) + '%' : 'the standard threshold'}`)
+        : ['Maintain current performance level'],
+      confidence: 0.72
+    };
+  }
 };
 
 async function generateRecommendation(request) {

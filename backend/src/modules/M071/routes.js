@@ -5,6 +5,7 @@ const { authMiddleware, requireRole } = require('../../middleware/auth');
 
 // Public get/list endpoints, protected writes by default
 router.get('/', controller.list);
+router.get('/trail/:productId', controller.trail);
 router.get('/:id', controller.get);
 router.post('/', authMiddleware, requireRole('agronomist','admin'), controller.create);
 router.put('/:id', authMiddleware, requireRole('agronomist','admin'), controller.update);

@@ -1,4 +1,4 @@
-﻿// Controller for M013 Module (M013)
+// Controller for M013 Module — AI Prompt/Response Audit Log
 const logger = require('../../utils/logger').logger || console;
 const service = require('./service');
 
@@ -8,4 +8,8 @@ async function create(req, res){ try{ const payload = req.body || {}; const item
 async function update(req, res){ try{ const payload = req.body || {}; const item = await service.updateItem(req.params.id, payload); if(!item) return res.status(404).json({ success:false, error:'Not found' }); res.json({ success:true, data:item }); }catch(e){ logger.error('update error', e); res.status(500).json({ success:false, error:e.message }); } }
 async function remove(req, res){ try{ const ok = await service.deleteItem(req.params.id); if(!ok) return res.status(404).json({ success:false, error:'Not found' }); res.json({ success:true }); }catch(e){ logger.error('delete error', e); res.status(500).json({ success:false, error:e.message }); } }
 
-module.exports = { list, get, create, update, remove };
+async function log(req, res){ try{ const item = await service.logInteraction(req.body || {}); res.status(201).json({ success:true, data:item }); }catch(e){ logger.error('log error', e); res.status(400).json({ success:false, error:e.message }); } }
+async function flagged(req, res){ try{ const result = await service.listFlagged({ page: parseInt(req.query.page)||1, limit: parseInt(req.query.limit)||50 }); res.json({ success:true, data:result }); }catch(e){ logger.error('flagged error', e); res.status(500).json({ success:false, error:e.message }); } }
+async function review(req, res){ try{ const item = await service.markReviewed(req.params.id, (req.body||{}).notes || null); if(!item) return res.status(404).json({ success:false, error:'Not found' }); res.json({ success:true, data:item }); }catch(e){ logger.error('review error', e); res.status(500).json({ success:false, error:e.message }); } }
+
+module.exports = { list, get, create, update, remove, log, flagged, review };

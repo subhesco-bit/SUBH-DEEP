@@ -16,274 +16,274 @@ const { Server } = require('socket.io');
 
 // Import services
 const authService = require('./services/authService');
-const productService = require('./services/productService');
-const orderService = require('./services/orderService');
-const financialService = require('./services/financialService');
-const logisticsService = require('./services/logisticsService');
-const insuranceService = require('./services/insuranceService');
+const productService = require('./services/commerce/productService');
+const orderService = require('./services/commerce/orderService');
+const financialService = require('./services/finance/financialService');
+const logisticsService = require('./services/logistics/logisticsService');
+const insuranceService = require('./services/finance/insuranceService');
 const aiService = require('./services/aiService');
-const erpService = require('./services/erpService');
-const multilingualService = require('./services/multilingualService');
-const organicTraceabilityService = require('./services/organicTraceabilityService');
-const nutritionIntelligenceService = require('./services/nutritionIntelligenceService');
-const conversationalAIService = require('./services/conversationalAIService');
-const laboratoryERPService = require('./services/laboratoryERPService');
-const giIntelligenceService = require('./services/giIntelligenceService');
-const foodIntelligenceService = require('./services/foodIntelligenceService');
-const valueCommerceService = require('./services/valueCommerceService');
-const consumerHealthService = require('./services/consumerHealthService');
-const voiceAIService = require('./services/voiceAIService');
-const blockchainTraceabilityService = require('./services/blockchainTraceabilityService');
-const knowledgeGraphService = require('./services/knowledgeGraphService');
+const erpService = require('./services/platform/erpService');
+const multilingualService = require('./services/platform/multilingualService');
+const organicTraceabilityService = require('./services/logistics/organicTraceabilityService');
+const nutritionIntelligenceService = require('./services/food/nutritionIntelligenceService');
+const conversationalAIService = require('./services/ai/conversationalAIService');
+const laboratoryERPService = require('./services/platform/laboratoryERPService');
+const giIntelligenceService = require('./services/commerce/giIntelligenceService');
+const foodIntelligenceService = require('./services/food/foodIntelligenceService');
+const valueCommerceService = require('./services/commerce/valueCommerceService');
+const consumerHealthService = require('./services/food/consumerHealthService');
+const voiceAIService = require('./services/ai/voiceAIService');
+const blockchainTraceabilityService = require('./services/logistics/blockchainTraceabilityService');
+const knowledgeGraphService = require('./services/ai/knowledgeGraphService');
 // Enterprise Memory ("Hippocampus" — AFRERA_CLAUDE_BUILD_DIRECTIVE.md §2.3):
 // case/episode log, real full-text retrieval. Was "missing" in
 // core/aiOrchestrator.js before 2026-08-09 — see that file's ENGINES.enterprise_memory
 // entry and migration 9997_enterprise_memory_schema.sql for the full rationale.
-const enterpriseMemoryService = require('./services/enterpriseMemoryService');
-const predictiveAnalyticsService = require('./services/predictiveAnalyticsService');
-const iotIntegrationService = require('./services/iotIntegrationService');
-const arVrService = require('./services/arVrService');
-const smsAuthService = require('./services/smsAuthService');
+const enterpriseMemoryService = require('./services/platform/enterpriseMemoryService');
+const predictiveAnalyticsService = require('./services/ai/predictiveAnalyticsService');
+const iotIntegrationService = require('./services/logistics/iotIntegrationService');
+const arVrService = require('./services/commerce/arVrService');
+const smsAuthService = require('./services/platform/smsAuthService');
 // Real Twilio WhatsApp integration (outbound send + inbound webhook). Mirrors
 // smsAuthService's mock-mode-when-unconfigured pattern. See service header.
-const whatsappService = require('./services/whatsappService');
-const advancedVoiceAI = require('./services/advancedVoiceAI');
-const offlinePaymentService = require('./services/offlinePaymentService');
+const whatsappService = require('./services/platform/whatsappService');
+const advancedVoiceAI = require('./services/ai/advancedVoiceAI');
+const offlinePaymentService = require('./services/finance/offlinePaymentService');
 const advancedAIService = require('./services/advancedAIService');
-const offlineSyncService = require('./services/offlineSyncService');
-const formService = require('./services/formService');
-const analyticsService = require('./services/analyticsService');
-const moduleCatalogService = require('./services/moduleCatalogService');
+const offlineSyncService = require('./services/platform/offlineSyncService');
+const formService = require('./services/platform/formService');
+const analyticsService = require('./services/platform/analyticsService');
+const moduleCatalogService = require('./services/platform/moduleCatalogService');
 // User management module (M011)
 const userModule = require('./modules/M011');
 // System Administration module (M006)
 const adminModule = require('./modules/M006');
-const indigenousKnowledgeService = require('./services/indigenousKnowledgeService');
-const biodiversityService = require('./services/biodiversityService');
-const aiCopilotService = require('./services/aiCopilotService');
-const omnichannelAIService = require('./services/omnichannelAIService');
-const foodSafetyService = require('./services/foodSafetyService');
-const shelfLifeService = require('./services/shelfLifeService');
-const institutionalProcurementService = require('./services/institutionalProcurementService');
-const millCircuitService = require('./services/millCircuitService');
+const indigenousKnowledgeService = require('./services/agriculture/indigenousKnowledgeService');
+const biodiversityService = require('./services/agriculture/biodiversityService');
+const aiCopilotService = require('./services/ai/aiCopilotService');
+const omnichannelAIService = require('./services/ai/omnichannelAIService');
+const foodSafetyService = require('./services/food/foodSafetyService');
+const shelfLifeService = require('./services/food/shelfLifeService');
+const institutionalProcurementService = require('./services/commerce/institutionalProcurementService');
+const millCircuitService = require('./services/agriculture/millCircuitService');
 const digitalProductPassportService = require('./services/digitalProductPassportService');
-const recipeIntelligenceService = require('./services/recipeIntelligenceService');
+const recipeIntelligenceService = require('./services/food/recipeIntelligenceService');
 // Business rules recovered from the v43 prototype (see service header).
-const decisionSupportService = require('./services/decisionSupportService');
+const decisionSupportService = require('./services/ai/decisionSupportService');
 // Recovered from the pre-v43 ne_harvest lineage (see service header).
-const neProductIntelligenceService = require('./services/neProductIntelligenceService');
-const commerceRulesService = require('./services/commerceRulesService');
-const catalogIntelligenceService = require('./services/catalogIntelligenceService');
-const enterpriseControlService = require('./services/enterpriseControlService');
-const v42IntelligenceService = require('./services/v42IntelligenceService');
+const neProductIntelligenceService = require('./services/commerce/neProductIntelligenceService');
+const commerceRulesService = require('./services/commerce/commerceRulesService');
+const catalogIntelligenceService = require('./services/commerce/catalogIntelligenceService');
+const enterpriseControlService = require('./services/platform/enterpriseControlService');
+const v42IntelligenceService = require('./services/ai/v42IntelligenceService');
 // Farmer Value Engine (991): the decision layer above every other module.
-const farmerValueService = require('./services/farmerValueService');
-const merchandisingService = require('./services/merchandisingService');
+const farmerValueService = require('./services/agriculture/farmerValueService');
+const merchandisingService = require('./services/commerce/merchandisingService');
 
 // Previously-orphaned services: each of these exports its own setupRoutes(app)
 // function that was never being called anywhere, so none of them had a live route.
-const dynamicPricingService = require('./services/dynamicPricingService');
-const farmerTrainingService = require('./services/farmerTrainingService');
-const governmentSchemeService = require('./services/governmentSchemeService');
-const greenhouseService = require('./services/greenhouseService');
-const insuranceClaimsService = require('./services/insuranceClaimsService');
-const preSeasonOrderService = require('./services/preSeasonOrderService');
-const sharedInfraService = require('./services/sharedInfraService');
-const soilTestingService = require('./services/soilTestingService');
-const subsidyService = require('./services/subsidyService');
+const dynamicPricingService = require('./services/finance/dynamicPricingService');
+const farmerTrainingService = require('./services/agriculture/farmerTrainingService');
+const governmentSchemeService = require('./services/finance/governmentSchemeService');
+const greenhouseService = require('./services/agriculture/greenhouseService');
+const insuranceClaimsService = require('./services/finance/insuranceClaimsService');
+const preSeasonOrderService = require('./services/commerce/preSeasonOrderService');
+const sharedInfraService = require('./services/platform/sharedInfraService');
+const soilTestingService = require('./services/agriculture/soilTestingService');
+const subsidyService = require('./services/finance/subsidyService');
 
 // Import enhancement routes
-const marketplaceEnhancements = require('./routes/marketplaceEnhancements');
-const ecommerceRoutes = require('./routes/ecommerceRoutes');
-const ecommerceIntegrationRoutes = require('./routes/ecommerceIntegrationRoutes');
-const ecommerceAIRoutes = require('./routes/ecommerceAIRoutes');
-const ecommerceERPRoutes = require('./routes/ecommerceERPRoutes');
-const ecommerceBusinessSalesRoutes = require('./routes/ecommerceBusinessSalesRoutes');
-const ecommerceMarketingRoutes = require('./routes/ecommerceMarketingRoutes');
-const nutrientValueSalesRoutes = require('./routes/nutrientValueSalesRoutes');
-const nervousSystemRoutes = require('./routes/nervousSystemRoutes');
-const insuranceEnhancements = require('./routes/insuranceEnhancements');
-const farmerPortalEnhancements = require('./routes/farmerPortalEnhancements');
-const governanceModule = require('./routes/governanceModule');
-const logisticsEnhancements = require('./routes/logisticsEnhancements');
-const advancedFeatures = require('./routes/advancedFeatures');
-const enterpriseAIRoutes = require('./routes/enterpriseAIRoutes');
-const gstRoutes = require('./routes/gstRoutes');
-const logisticsOpsRoutes = require('./routes/logisticsEnhancementRoutes');
-const farmerRoutes = require('./routes/farmerRoutes');
-const auditRoutes = require('./routes/auditRoutes');
+const marketplaceEnhancements = require('./routes/commerce/marketplaceEnhancements');
+const ecommerceRoutes = require('./routes/commerce/ecommerceRoutes');
+const ecommerceIntegrationRoutes = require('./routes/commerce/ecommerceIntegrationRoutes');
+const ecommerceAIRoutes = require('./routes/commerce/ecommerceAIRoutes');
+const ecommerceERPRoutes = require('./routes/commerce/ecommerceERPRoutes');
+const ecommerceBusinessSalesRoutes = require('./routes/commerce/ecommerceBusinessSalesRoutes');
+const ecommerceMarketingRoutes = require('./routes/commerce/ecommerceMarketingRoutes');
+const nutrientValueSalesRoutes = require('./routes/commerce/nutrientValueSalesRoutes');
+const nervousSystemRoutes = require('./routes/ai/nervousSystemRoutes');
+const insuranceEnhancements = require('./routes/finance/insuranceEnhancements');
+const farmerPortalEnhancements = require('./routes/agriculture/farmerPortalEnhancements');
+const governanceModule = require('./routes/platform/governanceModule');
+const logisticsEnhancements = require('./routes/logistics/logisticsEnhancements');
+const advancedFeatures = require('./routes/platform/advancedFeatures');
+const enterpriseAIRoutes = require('./routes/ai/enterpriseAIRoutes');
+const gstRoutes = require('./routes/finance/gstRoutes');
+const logisticsOpsRoutes = require('./routes/logistics/logisticsEnhancementRoutes');
+const farmerRoutes = require('./routes/agriculture/farmerRoutes');
+const auditRoutes = require('./routes/platform/auditRoutes');
 // M121 Dairy Management + M112 Fertilizer Inventory (Livestock / Input
 // Supply, wave 1) — real backends for two pages that were UI-only until now.
-const dairyRoutes = require('./routes/dairyRoutes');
-const fertilizerRoutes = require('./routes/fertilizerRoutes');
-const revenueRoutes = require('./routes/revenueRoutes');
+const dairyRoutes = require('./routes/livestock/dairyRoutes');
+const fertilizerRoutes = require('./routes/agriculture/fertilizerRoutes');
+const revenueRoutes = require('./routes/finance/revenueRoutes');
 // M123-M127 Livestock Management — Poultry, Goat, Sheep, Pig, Animal Health
-const poultryRoutes = require('./routes/poultryRoutes');
-const goatRoutes = require('./routes/goatRoutes');
-const sheepRoutes = require('./routes/sheepRoutes');
-const pigRoutes = require('./routes/pigRoutes');
-const animalHealthRoutes = require('./routes/animalHealthRoutes');
+const poultryRoutes = require('./routes/livestock/poultryRoutes');
+const goatRoutes = require('./routes/livestock/goatRoutes');
+const sheepRoutes = require('./routes/livestock/sheepRoutes');
+const pigRoutes = require('./routes/livestock/pigRoutes');
+const animalHealthRoutes = require('./routes/livestock/animalHealthRoutes');
 // Enterprise Control — Workflow, CRM, Legal, Risk, Emergency (migration 993)
-const enterpriseControlRoutes = require('./routes/enterpriseControlRoutes');
+const enterpriseControlRoutes = require('./routes/platform/enterpriseControlRoutes');
 // Unified Ledger with Economy Segmentation (migration 998) - One Ledger + 9 Economies
-const unifiedLedgerRoutes = require('./routes/unifiedLedgerRoutes');
+const unifiedLedgerRoutes = require('./routes/finance/unifiedLedgerRoutes');
 // Village Profile Service (REOS Missing Layer 5 - District/Village/Block Economic Database)
-const villageProfileService = require('./services/villageProfileService');
+const villageProfileService = require('./services/agriculture/villageProfileService');
 // Procurement Subscription Service (REOS Missing Layer 1.9 - Subscription Commerce)
-const procurementSubscriptionService = require('./services/procurementSubscriptionService');
+const procurementSubscriptionService = require('./services/commerce/procurementSubscriptionService');
 // Buying Club Service (REOS Missing Layer 1.10-1.11 - Group Buying / Community Buying)
-const buyingClubService = require('./services/buyingClubService');
+const buyingClubService = require('./services/commerce/buyingClubService');
 // Rural Enterprise Service (REOS Rural Life OS - rural_enterprises table)
-const ruralEnterpriseService = require('./services/ruralEnterpriseService');
+const ruralEnterpriseService = require('./services/agriculture/ruralEnterpriseService');
 // Renewable Energy Service (REOS Rural Life OS - renewable_energy_systems table)
-const renewableEnergyService = require('./services/renewableEnergyService');
+const renewableEnergyService = require('./services/agriculture/renewableEnergyService');
 // Household Economy Service (REOS Rural Life OS - household_economy table)
-const householdEconomyService = require('./services/householdEconomyService');
+const householdEconomyService = require('./services/agriculture/householdEconomyService');
 // Shared Infrastructure Service (REOS Rural Life OS - shared_infrastructure_access table)
-const sharedInfrastructureService = require('./services/sharedInfrastructureService');
+const sharedInfrastructureService = require('./services/platform/sharedInfrastructureService');
 // Machinery Access Service (REOS Rural Life OS - machinery_access table)
-const machineryAccessService = require('./services/machineryAccessService');
+const machineryAccessService = require('./services/commerce/machineryAccessService');
 // Rural Finance Service (REOS Rural Life OS - rural_finance table)
-const ruralFinanceService = require('./services/ruralFinanceService');
+const ruralFinanceService = require('./services/finance/ruralFinanceService');
 // AI Advisory Service (REOS Rural Life OS - ai_advisories table)
-const aiAdvisoryService = require('./services/aiAdvisoryService');
+const aiAdvisoryService = require('./services/ai/aiAdvisoryService');
 // Market Access Service (REOS Rural Life OS - market_access table)
-const marketAccessService = require('./services/marketAccessService');
+const marketAccessService = require('./services/commerce/marketAccessService');
 // Market Intelligence Service (REOS Rural Life OS - market_intelligence table)
-const marketIntelligenceService = require('./services/marketIntelligenceService');
+const marketIntelligenceService = require('./services/commerce/marketIntelligenceService');
 // Mobility Rides Service (REOS Rural Life OS - mobility_rides table)
-const mobilityRidesService = require('./services/mobilityRidesService');
+const mobilityRidesService = require('./services/logistics/mobilityRidesService');
 // Backup and Disaster Recovery Service
-const backupService = require('./services/backupService');
+const backupService = require('./services/platform/backupService');
 // Analytics and Monitoring Service
-const analyticsMonitoringService = require('./services/analyticsMonitoringService');
+const analyticsMonitoringService = require('./services/platform/analyticsMonitoringService');
 // AI Agentic Companion Service
-const aiAgenticCompanionService = require('./services/aiAgenticCompanionService');
+const aiAgenticCompanionService = require('./services/ai/aiAgenticCompanionService');
 // Digital Twin Service
-const digitalTwinService = require('./services/digitalTwinService');
+const digitalTwinService = require('./services/ai/digitalTwinService');
 // AI Gateway Service - Real AI Backbone System
-const aiGatewayService = require('./services/aiGatewayService');
+const aiGatewayService = require('./services/ai/aiGatewayService');
 // AI Agent Service - Agentic AI Capabilities
-const aiAgentService = require('./services/aiAgentService');
+const aiAgentService = require('./services/ai/aiAgentService');
 // AI Brain Service - Cognitive Processing Layer
-const aiBrainService = require('./services/aiBrainService');
+const aiBrainService = require('./services/ai/aiBrainService');
 // AI Self-Healing Service - Autonomous Error Recovery Layer
-const aiSelfHealingService = require('./services/aiSelfHealingService');
+const aiSelfHealingService = require('./services/ai/aiSelfHealingService');
 // AI Operation Intelligence Service - Real-Time Optimization Layer
-const aiOperationIntelligenceService = require('./services/aiOperationIntelligenceService');
+const aiOperationIntelligenceService = require('./services/ai/aiOperationIntelligenceService');
 // SAP Module Architecture Service - Independent Module Architecture
-const sapModuleArchitectureService = require('./services/sapModuleArchitectureService');
+const sapModuleArchitectureService = require('./services/platform/sapModuleArchitectureService');
 // Cloud Management Service - Multi-Cloud Deployment
-const cloudManagementService = require('./services/cloudManagementService');
+const cloudManagementService = require('./services/platform/cloudManagementService');
 // Server Management Service - Infrastructure Provisioning and Monitoring
-const serverManagementService = require('./services/serverManagementService');
+const serverManagementService = require('./services/platform/serverManagementService');
 // Database Management Service - Distributed Database Operations
-const databaseManagementService = require('./services/databaseManagementService');
+const databaseManagementService = require('./services/platform/databaseManagementService');
 // Advance Rate Pricing — forward curves, basis, commitment advice.
 // Recovered from afrera_platform_v44.html (migration 051).
-const riskPricingRoutes = require('./routes/riskPricingRoutes');
+const riskPricingRoutes = require('./routes/finance/riskPricingRoutes');
 // GST, hash-chained ledger, scheme matching, eNWR, freight, risk (migration 053).
-const recoveredFinanceRoutes = require('./routes/recoveredFinanceRoutes');
+const recoveredFinanceRoutes = require('./routes/finance/recoveredFinanceRoutes');
 // Domain D14 Climate & Weather (057) — was completely empty before today.
-const weatherRoutes = require('./routes/weatherRoutes');
+const weatherRoutes = require('./routes/agriculture/weatherRoutes');
 // M083 Climate Advisory (Operations wave 2) — CRUD for agromet_advisories,
 // the migration-057 table ClimateAdvisoryPage.jsx has been waiting on.
-const climateAdvisoryRoutes = require('./routes/climateAdvisoryRoutes');
+const climateAdvisoryRoutes = require('./routes/agriculture/climateAdvisoryRoutes');
 // TDS, e-invoice IRN, GSTR, RCM (056).
-const complianceRoutes = require('./routes/complianceRoutes');
+const complianceRoutes = require('./routes/platform/complianceRoutes');
 // RFQ sealed bidding, quote outcomes, QC holds, FPO cost centres (056).
-const rfqRoutes = require('./routes/rfqRoutes');
+const rfqRoutes = require('./routes/commerce/rfqRoutes');
 // energyRoutes existed but was never mounted, and its service failed to
 // parse, so nothing would have noticed. Both fixed 2026-08-05.
-const energyRoutes = require('./routes/energyRoutes');
+const energyRoutes = require('./routes/agriculture/energyRoutes');
 // Agmarknet/e-NAM ingestion + DBT reconciliation (056).
-const marketDataRoutes = require('./routes/marketDataRoutes');
+const marketDataRoutes = require('./routes/commerce/marketDataRoutes');
 // FOLU land use + NE organic schemes (991). Logic lives in
 // organicTraceabilityService — these are routes only, no parallel service.
-const foluRoutes = require('./routes/foluRoutes');
+const foluRoutes = require('./routes/agriculture/foluRoutes');
 // Geofencing — circular zone check-ins on top of real mobile GPS (useGeolocation)
 // and the existing driver_location pipeline. See services/geofencingService.js.
-const geofencingRoutes = require('./routes/geofencingRoutes');
+const geofencingRoutes = require('./routes/logistics/geofencingRoutes');
 // Experience Layer / DXP — the 15 engines (migration 060).
-const experienceRoutes = require('./routes/experienceRoutes');
-const demandRoutes = require('./routes/demandRoutes');
-const costRoutes = require('./routes/costRoutes');
+const experienceRoutes = require('./routes/platform/experienceRoutes');
+const demandRoutes = require('./routes/commerce/demandRoutes');
+const costRoutes = require('./routes/finance/costRoutes');
 // AF-AA (Asset Accounting) / AF-CO (Controlling) — named MISSING in
 // docs/registry/12_ERP_COVERAGE.md and AFRERA_CLAUDE_BUILD_DIRECTIVE.md §8.6.
 // Schema (fixed_assets, depreciation_schedule, cost_centers, budgets) already
 // existed in migration 996; these give it a service/route layer for the
 // first time.
-const assetAccountingRoutes = require('./routes/assetAccountingRoutes');
-const costControlRoutes = require('./routes/costControlRoutes');
+const assetAccountingRoutes = require('./routes/finance/assetAccountingRoutes');
+const costControlRoutes = require('./routes/finance/costControlRoutes');
 // AF-PS (Project Systems) — the third domain named MISSING alongside AF-AA/
 // AF-CO. Unlike those two, AF-PS had no schema at all; it is created fresh
 // in migration 9996_project_systems_schema.sql (see that file's header for
 // why it is numbered after 996 rather than in the 060s sequence).
-const projectSystemsRoutes = require('./routes/projectSystemsRoutes');
-const coldStorageRoutes = require('./routes/coldStorageRoutes');
-const dprGenerationRoutes = require('./routes/dprGenerationRoutes');
-const cooperativeShareRoutes = require('./routes/cooperativeShareRoutes');
-const wikipediaRoutes = require('./routes/wikipediaRoutes');
+const projectSystemsRoutes = require('./routes/platform/projectSystemsRoutes');
+const coldStorageRoutes = require('./routes/logistics/coldStorageRoutes');
+const dprGenerationRoutes = require('./routes/commerce/dprGenerationRoutes');
+const cooperativeShareRoutes = require('./routes/finance/cooperativeShareRoutes');
+const wikipediaRoutes = require('./routes/platform/wikipediaRoutes');
 // Found built but with zero HTTP exposure (2026-08-15 junk/orphan sweep) —
 // see each route file's header comment for what was verified before wiring.
-const agriculturalIntelligenceRoutes = require('./routes/agriculturalIntelligenceRoutes');
-const farmerHealthRoutes = require('./routes/farmerHealthRoutes');
-const foodRoutes = require('./routes/foodRoutes');
-const iotSensorService = require('./services/iotSensorService');
-const regionalVarietyRoutes = require('./routes/regionalVarietyRoutes');
-const foluBenchmarkRoutes = require('./routes/foluBenchmarkRoutes');
-const civilDisruptionRoutes = require('./routes/civilDisruptionRoutes');
-const sellerRankingRoutes = require('./routes/sellerRankingRoutes');
-const seedVaultRoutes = require('./routes/seedVaultRoutes');
-const freightPoolingRoutes = require('./routes/freightPoolingRoutes');
-const returnLoadBoardRoutes = require('./routes/returnLoadBoardRoutes');
-const glutWarningRoutes = require('./routes/glutWarningRoutes');
-const trackDartRoutes = require('./routes/trackDartRoutes');
-const equipmentExchangeRoutes = require('./routes/equipmentExchangeRoutes');
+const agriculturalIntelligenceRoutes = require('./routes/agriculture/agriculturalIntelligenceRoutes');
+const farmerHealthRoutes = require('./routes/agriculture/farmerHealthRoutes');
+const foodRoutes = require('./routes/agriculture/foodRoutes');
+const iotSensorService = require('./services/logistics/iotSensorService');
+const regionalVarietyRoutes = require('./routes/agriculture/regionalVarietyRoutes');
+const foluBenchmarkRoutes = require('./routes/agriculture/foluBenchmarkRoutes');
+const civilDisruptionRoutes = require('./routes/platform/civilDisruptionRoutes');
+const sellerRankingRoutes = require('./routes/commerce/sellerRankingRoutes');
+const seedVaultRoutes = require('./routes/agriculture/seedVaultRoutes');
+const freightPoolingRoutes = require('./routes/logistics/freightPoolingRoutes');
+const returnLoadBoardRoutes = require('./routes/logistics/returnLoadBoardRoutes');
+const glutWarningRoutes = require('./routes/commerce/glutWarningRoutes');
+const trackDartRoutes = require('./routes/logistics/trackDartRoutes');
+const equipmentExchangeRoutes = require('./routes/commerce/equipmentExchangeRoutes');
 // Vision (sharp) + OCR (tesseract.js) — real image-quality/metadata/
 // thumbnail and text-extraction dispatch behind core/aiOrchestrator.js's
 // vision_engine / ocr_engine, which were "missing" before 2026-08-09.
-const visionRoutes = require('./routes/visionRoutes');
+const visionRoutes = require('./routes/ai/visionRoutes');
 // AI Gateway Routes - Real AI Backbone System
-const aiGatewayRoutes = require('./routes/aiGatewayRoutes');
+const aiGatewayRoutes = require('./routes/ai/aiGatewayRoutes');
 // AI Agent Routes - Agentic AI Capabilities
-const aiAgentRoutes = require('./routes/aiAgentRoutes');
+const aiAgentRoutes = require('./routes/ai/aiAgentRoutes');
 // AI Brain Routes - Cognitive Processing Layer
-const aiBrainRoutes = require('./routes/aiBrainRoutes');
+const aiBrainRoutes = require('./routes/ai/aiBrainRoutes');
 // AI Self-Healing Routes - Autonomous Error Recovery Layer
-const aiSelfHealingRoutes = require('./routes/aiSelfHealingRoutes');
+const aiSelfHealingRoutes = require('./routes/ai/aiSelfHealingRoutes');
 // AI Operation Intelligence Routes - Real-Time Optimization Layer
-const aiOperationIntelligenceRoutes = require('./routes/aiOperationIntelligenceRoutes');
+const aiOperationIntelligenceRoutes = require('./routes/ai/aiOperationIntelligenceRoutes');
 // SAP Module Architecture Routes - Independent Module Architecture
-const sapModuleArchitectureRoutes = require('./routes/sapModuleArchitectureRoutes');
+const sapModuleArchitectureRoutes = require('./routes/platform/sapModuleArchitectureRoutes');
 // Cloud Management Routes - Multi-Cloud Deployment
-const cloudManagementRoutes = require('./routes/cloudManagementRoutes');
+const cloudManagementRoutes = require('./routes/platform/cloudManagementRoutes');
 // Server Management Routes - Infrastructure Provisioning and Monitoring
-const serverManagementRoutes = require('./routes/serverManagementRoutes');
+const serverManagementRoutes = require('./routes/platform/serverManagementRoutes');
 // Database Management Routes - Distributed Database Operations
-const databaseManagementRoutes = require('./routes/databaseManagementRoutes');
+const databaseManagementRoutes = require('./routes/platform/databaseManagementRoutes');
 // Public Domain Data Extraction Routes - Data Extraction and Subsidy Management
-const publicDomainDataExtractionRoutes = require('./routes/publicDomainDataExtractionRoutes');
+const publicDomainDataExtractionRoutes = require('./routes/platform/publicDomainDataExtractionRoutes');
 // Research and Development Routes - R&D Management with AI Integration
-const researchAndDevelopmentRoutes = require('./routes/researchAndDevelopmentRoutes');
+const researchAndDevelopmentRoutes = require('./routes/platform/researchAndDevelopmentRoutes');
 // Module Support Infrastructure Routes - Module Management with AI Integration
-const moduleSupportInfrastructureRoutes = require('./routes/moduleSupportInfrastructureRoutes');
+const moduleSupportInfrastructureRoutes = require('./routes/platform/moduleSupportInfrastructureRoutes');
 // Startup Environment Routes - Startup Management with AI Integration
-const startupEnvironmentRoutes = require('./routes/startupEnvironmentRoutes');
+const startupEnvironmentRoutes = require('./routes/platform/startupEnvironmentRoutes');
 // Information Sharing Routes - Document and Knowledge Sharing with AI Integration
-const informationSharingRoutes = require('./routes/informationSharingRoutes');
+const informationSharingRoutes = require('./routes/platform/informationSharingRoutes');
 // Community Routes - Community Management with AI Integration
-const communityRoutes = require('./routes/communityRoutes');
+const communityRoutes = require('./routes/platform/communityRoutes');
 // Knowledge Routes - Knowledge Management with AI Integration
-const knowledgeRoutes = require('./routes/knowledgeRoutes');
+const knowledgeRoutes = require('./routes/platform/knowledgeRoutes');
 // Company lookup — resolves accounting UI gap for companyId/fiscalYear/chart-of-accounts
-const companyRoutes = require('./routes/companyRoutes');
+const companyRoutes = require('./routes/platform/companyRoutes');
 // Platform Foundation Routes - AI Enhanced Platform Foundation (D01)
-const platformCoreRoutes = require('./routes/platformCoreRoutes');
-const platformConfigurationRoutes = require('./routes/platformConfigurationRoutes');
-const tenantManagementRoutes = require('./routes/tenantManagementRoutes');
-const organizationManagementRoutes = require('./routes/organizationManagementRoutes');
-const systemAdministrationRoutes = require('./routes/systemAdministrationRoutes');
+const platformCoreRoutes = require('./routes/platform/platformCoreRoutes');
+const platformConfigurationRoutes = require('./routes/platform/platformConfigurationRoutes');
+const tenantManagementRoutes = require('./routes/platform/tenantManagementRoutes');
+const organizationManagementRoutes = require('./routes/platform/organizationManagementRoutes');
+const systemAdministrationRoutes = require('./routes/platform/systemAdministrationRoutes');
 // Poultry/Goat/Sheep/Pig/Animal Health (M123-M127) already required above.
 
 // Cross-module nervous system + decision layer.
@@ -499,22 +499,22 @@ app.use('/api/v1/ecommerce-marketing', ecommerceMarketingRoutes);
 app.use('/api/v1/nutrient-value', nutrientValueSalesRoutes);
 app.use('/api/v1/nervous', nervousSystemRoutes);
 // Bulk Order Service - Bulk/wholesale orders for marketplace
-const bulkOrderRoutes = require('./routes/bulkOrderRoutes');
+const bulkOrderRoutes = require('./routes/commerce/bulkOrderRoutes');
 app.use('/api/v1/bulk-orders', bulkOrderRoutes);
 // Complete ERP Integration - Comprehensive ERP integration with all modules
-const completeERPIntegrationRoutes = require('./routes/completeERPIntegrationRoutes');
+const completeERPIntegrationRoutes = require('./routes/platform/completeERPIntegrationRoutes');
 app.use('/api/v1/complete-erp-integration', completeERPIntegrationRoutes);
 // Complete AI Integration - Comprehensive AI integration with all modules
-const completeAIIntegrationRoutes = require('./routes/completeAIIntegrationRoutes');
+const completeAIIntegrationRoutes = require('./routes/ai/completeAIIntegrationRoutes');
 app.use('/api/v1/complete-ai-integration', completeAIIntegrationRoutes);
 // Comprehensive ERP - Oracle/SAP standards complete ERP system
-const comprehensiveERPRoutes = require('./routes/comprehensiveERPRoutes');
+const comprehensiveERPRoutes = require('./routes/platform/comprehensiveERPRoutes');
 app.use('/api/v1/comprehensive-erp', comprehensiveERPRoutes);
 // AI Backbone - Real AI integration (Claude, ChatGPT, Gemini, Azure, Hugging Face)
-const aiBackboneRoutes = require('./routes/aiBackboneRoutes');
+const aiBackboneRoutes = require('./routes/ai/aiBackboneRoutes');
 app.use('/api/v1/ai-backbone', aiBackboneRoutes);
 // Farmer Training - Agricultural training and FOLU compliance
-const farmerTrainingRoutes = require('./routes/farmerTrainingRoutes');
+const farmerTrainingRoutes = require('./routes/agriculture/farmerTrainingRoutes');
 app.use('/api/v1/training', farmerTrainingRoutes);
 app.use('/api/v1/insurance', insuranceEnhancements);
 app.use('/api/v1/farmer-portal', farmerPortalEnhancements);
@@ -573,10 +573,10 @@ marketIntelligenceService.setupRoutes(app);
 // Mobility Rides Service (REOS Rural Life OS - mobility_rides table)
 mobilityRidesService.setupRoutes(app);
 // Vendor-facing routes (corporate buyers, logistics providers, processors, retailers)
-const vendorRoutes = require('./routes/vendorRoutes');
+const vendorRoutes = require('./routes/commerce/vendorRoutes');
 app.use('/api/v1/vendors', vendorRoutes);
 // HR Module with AI Integration - Complete AI-powered HR management
-const hrRoutes = require('./routes/hrRoutes');
+const hrRoutes = require('./routes/platform/hrRoutes');
 app.use('/api/v1/hr', hrRoutes);
 
 // Economic Layer routes (scaffolded)

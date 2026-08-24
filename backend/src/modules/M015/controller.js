@@ -1,4 +1,4 @@
-﻿// Controller for M015 Module (M015)
+// Controller for M015 Module — AI Cost Tracking Per Feature
 const logger = require('../../utils/logger').logger || console;
 const service = require('./service');
 
@@ -8,4 +8,8 @@ async function create(req, res){ try{ const payload = req.body || {}; const item
 async function update(req, res){ try{ const payload = req.body || {}; const item = await service.updateItem(req.params.id, payload); if(!item) return res.status(404).json({ success:false, error:'Not found' }); res.json({ success:true, data:item }); }catch(e){ logger.error('update error', e); res.status(500).json({ success:false, error:e.message }); } }
 async function remove(req, res){ try{ const ok = await service.deleteItem(req.params.id); if(!ok) return res.status(404).json({ success:false, error:'Not found' }); res.json({ success:true }); }catch(e){ logger.error('delete error', e); res.status(500).json({ success:false, error:e.message }); } }
 
-module.exports = { list, get, create, update, remove };
+async function usage(req, res){ try{ const item = await service.recordUsage(req.body || {}); res.status(201).json({ success:true, data:item }); }catch(e){ logger.error('usage error', e); res.status(400).json({ success:false, error:e.message }); } }
+async function featureSummary(req, res){ try{ const data = await service.getFeatureSummary(req.params.feature, { date: req.query.date || null }); res.json({ success:true, data }); }catch(e){ logger.error('featureSummary error', e); res.status(400).json({ success:false, error:e.message }); } }
+async function overBudget(req, res){ try{ const data = await service.listOverBudget({ date: req.query.date || null }); res.json({ success:true, data }); }catch(e){ logger.error('overBudget error', e); res.status(500).json({ success:false, error:e.message }); } }
+
+module.exports = { list, get, create, update, remove, usage, featureSummary, overBudget };

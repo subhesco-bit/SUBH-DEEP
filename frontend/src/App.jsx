@@ -94,6 +94,7 @@ const LandRegistryPage = lazy(() => import('./pages/LandRegistryPage'))
 const OrchardManagementPage = lazy(() => import('./pages/OrchardManagementPage'))
 const PondManagementPage = lazy(() => import('./pages/PondManagementPage'))
 const ShgManagementPage = lazy(() => import('./pages/ShgManagementPage'))
+const SharedInfraPage = lazy(() => import('./pages/SharedInfraPage'))
 const TractorManagementPage = lazy(() => import('./pages/TractorManagementPage'))
 const VillageRegistryPage = lazy(() => import('./pages/VillageRegistryPage'))
 // Same class of bug, found separately: SowingManagementPage (M067) was also

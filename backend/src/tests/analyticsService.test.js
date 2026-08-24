@@ -1,4 +1,4 @@
-const { buildPipelineInsights } = require('../services/analyticsService');
+const { buildPipelineInsights } = require('../services/platform/analyticsService');
 
 describe('analyticsService', () => {
   it('builds analytics summary from form store data', () => {

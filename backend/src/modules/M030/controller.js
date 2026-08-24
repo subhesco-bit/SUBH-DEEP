@@ -8,4 +8,13 @@ async function create(req, res){ try{ const payload = req.body || {}; const item
 async function update(req, res){ try{ const payload = req.body || {}; const item = await service.updateItem(req.params.id, payload); if(!item) return res.status(404).json({ success:false, error:'Not found' }); res.json({ success:true, data:item }); }catch(e){ logger.error('update error', e); res.status(500).json({ success:false, error:e.message }); } }
 async function remove(req, res){ try{ const ok = await service.deleteItem(req.params.id); if(!ok) return res.status(404).json({ success:false, error:'Not found' }); res.json({ success:true }); }catch(e){ logger.error('delete error', e); res.status(500).json({ success:false, error:e.message }); } }
 
-module.exports = { list, get, create, update, remove };
+async function outbreakRisk(req, res){
+  try {
+    const { region, pest } = req.query;
+    if (!region || !pest) return res.status(400).json({ success: false, error: 'region and pest query params are required' });
+    const result = await service.outbreakRiskForRegion(region, pest);
+    res.json({ success: true, data: result });
+  } catch (e) { logger.error('outbreakRisk error', e); res.status(500).json({ success: false, error: e.message }); }
+}
+
+module.exports = { list, get, create, update, remove, outbreakRisk };

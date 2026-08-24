@@ -27,7 +27,10 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
-    chunkSizeWarningLimit: 1000,
+    // H9: was raised to 1000 KB to mask the bundle-size symptom of C3 (zero
+    // route-level code splitting). Reverted to Vite's 500 KB default now that
+    // App.jsx's ~250 routes are React.lazy()-split, so this warning goes back
+    // to guarding against future regressions instead of being silenced.
     rollupOptions: {
       output: {
         manualChunks: {

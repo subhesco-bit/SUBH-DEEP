@@ -1,39 +1,39 @@
 import { Routes, Route } from 'react-router-dom'
 import { useAuthStore } from './store/authStore'
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
 import ErrorBoundary from './components/ErrorBoundary'
 import Layout from './components/Layout'
 import { errorMonitoring } from './utils/errorMonitoring'
-import HomePage from './pages/HomePage'
-import MarketplacePage from './pages/MarketplacePage'
-import ProductDetailPage from './pages/ProductDetailPage'
-import CartPage from './pages/CartPage'
-import CheckoutPage from './pages/CheckoutPage'
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
-import FarmerPortalPage from './pages/FarmerPortalPage'
-import FarmerHomePage from './pages/FarmerHomePage'
-import FarmerSellPage from './pages/FarmerSellPage'
-import FarmerFieldPage from './pages/FarmerFieldPage'
-import HarvestPlanPage from './pages/HarvestPlanPage'
-import HarvestScorePage from './pages/HarvestScorePage'
-import WhatGrowPage from './pages/WhatGrowPage'
-import SeedVaultPage from './pages/SeedVaultPage'
-import FarmAdvisorPage from './pages/FarmAdvisorPage'
-import PriceCheckPage from './pages/PriceCheckPage'
-import PriceBuildPage from './pages/PriceBuildPage'
-import DynamicPricingPage from './pages/DynamicPricingPage'
-import SellTimingPage from './pages/SellTimingPage'
-import ComparePage from './pages/ComparePage'
-import DiscoverPage from './pages/DiscoverPage'
-import PreOrderPage from './pages/PreOrderPage'
-import LogisticsPage from './pages/LogisticsPage'
-import InsurancePage from './pages/InsurancePage'
-import DashboardPage from './pages/DashboardPage'
+const HomePage = lazy(() => import('./pages/HomePage'))
+const MarketplacePage = lazy(() => import('./pages/MarketplacePage'))
+const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage'))
+const CartPage = lazy(() => import('./pages/CartPage'))
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage'))
+const LoginPage = lazy(() => import('./pages/LoginPage'))
+const RegisterPage = lazy(() => import('./pages/RegisterPage'))
+const FarmerPortalPage = lazy(() => import('./pages/FarmerPortalPage'))
+const FarmerHomePage = lazy(() => import('./pages/FarmerHomePage'))
+const FarmerSellPage = lazy(() => import('./pages/FarmerSellPage'))
+const FarmerFieldPage = lazy(() => import('./pages/FarmerFieldPage'))
+const HarvestPlanPage = lazy(() => import('./pages/HarvestPlanPage'))
+const HarvestScorePage = lazy(() => import('./pages/HarvestScorePage'))
+const WhatGrowPage = lazy(() => import('./pages/WhatGrowPage'))
+const SeedVaultPage = lazy(() => import('./pages/SeedVaultPage'))
+const FarmAdvisorPage = lazy(() => import('./pages/FarmAdvisorPage'))
+const PriceCheckPage = lazy(() => import('./pages/PriceCheckPage'))
+const PriceBuildPage = lazy(() => import('./pages/PriceBuildPage'))
+const DynamicPricingPage = lazy(() => import('./pages/DynamicPricingPage'))
+const SellTimingPage = lazy(() => import('./pages/SellTimingPage'))
+const ComparePage = lazy(() => import('./pages/ComparePage'))
+const DiscoverPage = lazy(() => import('./pages/DiscoverPage'))
+const PreOrderPage = lazy(() => import('./pages/PreOrderPage'))
+const LogisticsPage = lazy(() => import('./pages/LogisticsPage'))
+const InsurancePage = lazy(() => import('./pages/InsurancePage'))
+const DashboardPage = lazy(() => import('./pages/DashboardPage'))
 // Real, transactional wallet backend (services/farmerService.js) existed
 // with complete routes but no frontend page anywhere in the app.
-import WalletPage from './pages/WalletPage'
-import BankPassportPage from './pages/BankPassportPage'
+const WalletPage = lazy(() => import('./pages/WalletPage'))
+const BankPassportPage = lazy(() => import('./pages/BankPassportPage'))
 // Four public "farmer doors" + central hub, recovered 2026-08-07. Built in an
 // earlier session but never mounted (same class of bug as the "14 built
 // pages" and FPODashboardPage below). Fixes the V43 login-wall problem: every
@@ -43,279 +43,279 @@ import BankPassportPage from './pages/BankPassportPage'
 // the section, link to real public tools, and offer "sign in to this
 // section" rather than forcing login before a visitor can evaluate anything.
 // See docs/V43_UX_IMPROVEMENTS_EXTRACTION.md.
-import FarmerEntranceHubPage from './pages/FarmerEntranceHubPage'
-import FarmerSellDoorPage from './pages/FarmerSellDoorPage'
-import FarmerHouseholdDoorPage from './pages/FarmerHouseholdDoorPage'
-import FarmerFieldDoorPage from './pages/FarmerFieldDoorPage'
-import FarmerSharedDoorPage from './pages/FarmerSharedDoorPage'
+const FarmerEntranceHubPage = lazy(() => import('./pages/FarmerEntranceHubPage'))
+const FarmerSellDoorPage = lazy(() => import('./pages/FarmerSellDoorPage'))
+const FarmerHouseholdDoorPage = lazy(() => import('./pages/FarmerHouseholdDoorPage'))
+const FarmerFieldDoorPage = lazy(() => import('./pages/FarmerFieldDoorPage'))
+const FarmerSharedDoorPage = lazy(() => import('./pages/FarmerSharedDoorPage'))
 // Modules recovered 2026-08-05 (migrations 051-058). Each had a working
 // backend service and nothing rendering it — the state the master index
 // reports as NO_UI.
-import ForwardPricingPage from './pages/ForwardPricingPage'
-import ClimateWeatherPage from './pages/ClimateWeatherPage'
-import LedgerPage from './pages/LedgerPage'
-import CompliancePage from './pages/CompliancePage'
-import RfqPage from './pages/RfqPage'
-import CorridorEconomicsPage from './pages/CorridorEconomicsPage'
-import LandUseCarbonPage from './pages/LandUseCarbonPage'
+const ForwardPricingPage = lazy(() => import('./pages/ForwardPricingPage'))
+const ClimateWeatherPage = lazy(() => import('./pages/ClimateWeatherPage'))
+const LedgerPage = lazy(() => import('./pages/LedgerPage'))
+const CompliancePage = lazy(() => import('./pages/CompliancePage'))
+const RfqPage = lazy(() => import('./pages/RfqPage'))
+const CorridorEconomicsPage = lazy(() => import('./pages/CorridorEconomicsPage'))
+const LandUseCarbonPage = lazy(() => import('./pages/LandUseCarbonPage'))
 // ERP domains AF-AA/AF-CO/AF-PS — real, ledger-integrated services (996 /
 // 9996 migrations) that had a working backend and no frontend caller.
-import AssetAccountingPage from './pages/AssetAccountingPage'
-import CostControlPage from './pages/CostControlPage'
-import ProjectSystemsPage from './pages/ProjectSystemsPage'
-import YieldManagementPage from './pages/YieldManagementPage'
-import CompetitivePositionPage from './pages/CompetitivePositionPage'
-import ExperienceLayerPage from './pages/ExperienceLayerPage'
-import FormManagementPage from './pages/FormManagementPage'
-import AnalyticsPage from './pages/AnalyticsPage'
-import ModuleHubPage from './pages/ModuleHubPage'
-import CorporateBuyerPage from './pages/CorporateBuyerPage'
-import LogisticsProviderPage from './pages/LogisticsProviderPage'
-import AdminDashboardPage from './pages/AdminDashboardPage'
+const AssetAccountingPage = lazy(() => import('./pages/AssetAccountingPage'))
+const CostControlPage = lazy(() => import('./pages/CostControlPage'))
+const ProjectSystemsPage = lazy(() => import('./pages/ProjectSystemsPage'))
+const YieldManagementPage = lazy(() => import('./pages/YieldManagementPage'))
+const CompetitivePositionPage = lazy(() => import('./pages/CompetitivePositionPage'))
+const ExperienceLayerPage = lazy(() => import('./pages/ExperienceLayerPage'))
+const FormManagementPage = lazy(() => import('./pages/FormManagementPage'))
+const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage'))
+const ModuleHubPage = lazy(() => import('./pages/ModuleHubPage'))
+const CorporateBuyerPage = lazy(() => import('./pages/CorporateBuyerPage'))
+const LogisticsProviderPage = lazy(() => import('./pages/LogisticsProviderPage'))
+const AdminDashboardPage = lazy(() => import('./pages/AdminDashboardPage'))
 // FPODashboardPage was fully built (Overview/Members/Collective Orders/
 // Inventory/Finance/Profit Distribution tabs) but had no route — the same
 // class of bug as the other "recovered" modules above. Mounting it so the
 // M053/M054/M056/M058/M060 module stubs have a real page to point to.
-import FPODashboardPage from './pages/FPODashboardPage'
+const FPODashboardPage = lazy(() => import('./pages/FPODashboardPage'))
 // 14 more page components were fully built (real forms, react-query hooks,
 // wired to services/api.js clients that already existed) but were never
 // mounted — the same class of bug as FPODashboardPage above. Mounting them
 // so the M013/M024/M031/M041/M046/M075/M083/M093/M098/M101/M112/M121/M132/
 // M141 module stubs have a real page to point to.
-import AuthorizationPage from './pages/AuthorizationPage'
-import ClimateAdvisoryPage from './pages/ClimateAdvisoryPage'
-import DairyManagementPage from './pages/DairyManagementPage'
-import FarmCostingPage from './pages/FarmCostingPage'
-import FarmerKycPage from './pages/FarmerKycPage'
-import FertilizerInventoryPage from './pages/FertilizerInventoryPage'
-import IrrigationManagementPage from './pages/IrrigationManagementPage'
-import LabourManagementPage from './pages/LabourManagementPage'
-import LandRegistryPage from './pages/LandRegistryPage'
-import OrchardManagementPage from './pages/OrchardManagementPage'
-import PondManagementPage from './pages/PondManagementPage'
-import ShgManagementPage from './pages/ShgManagementPage'
-import TractorManagementPage from './pages/TractorManagementPage'
-import VillageRegistryPage from './pages/VillageRegistryPage'
+const AuthorizationPage = lazy(() => import('./pages/AuthorizationPage'))
+const ClimateAdvisoryPage = lazy(() => import('./pages/ClimateAdvisoryPage'))
+const DairyManagementPage = lazy(() => import('./pages/DairyManagementPage'))
+const FarmCostingPage = lazy(() => import('./pages/FarmCostingPage'))
+const FarmerKycPage = lazy(() => import('./pages/FarmerKycPage'))
+const FertilizerInventoryPage = lazy(() => import('./pages/FertilizerInventoryPage'))
+const IrrigationManagementPage = lazy(() => import('./pages/IrrigationManagementPage'))
+const LabourManagementPage = lazy(() => import('./pages/LabourManagementPage'))
+const LandRegistryPage = lazy(() => import('./pages/LandRegistryPage'))
+const OrchardManagementPage = lazy(() => import('./pages/OrchardManagementPage'))
+const PondManagementPage = lazy(() => import('./pages/PondManagementPage'))
+const ShgManagementPage = lazy(() => import('./pages/ShgManagementPage'))
+const TractorManagementPage = lazy(() => import('./pages/TractorManagementPage'))
+const VillageRegistryPage = lazy(() => import('./pages/VillageRegistryPage'))
 // Same class of bug, found separately: SowingManagementPage (M067) was also
 // fully built (sowingAPI already existed in services/api.js) but never mounted.
-import SowingManagementPage from './pages/SowingManagementPage'
+const SowingManagementPage = lazy(() => import('./pages/SowingManagementPage'))
 // Second batch, 2026-08-07: 20 confirmed STUB-ONLY module frontends built as
 // real pages (Farmer: M022/M023/M025/M026/M029, Crop: M062-M066/M068, Land:
 // M033/M035-M039 consolidated into one tabbed page, FPO: M051/M052/M055/
 // M057/M059 added as tabs on the existing FPODashboardPage). M032 is not a
 // new page — it points at the existing LandRegistryPage.jsx.
-import FarmerProfilePage from './pages/FarmerProfilePage'
-import FarmerFamilyPage from './pages/FarmerFamilyPage'
-import FarmerVerificationPage from './pages/FarmerVerificationPage'
-import FarmerSkillPage from './pages/FarmerSkillPage'
-import FarmerHealthWelfarePage from './pages/FarmerHealthWelfarePage'
-import CropCalendarPage from './pages/CropCalendarPage'
-import CropRegistrationPage from './pages/CropRegistrationPage'
-import CropVarietyPage from './pages/CropVarietyPage'
-import SeedPlanningPage from './pages/SeedPlanningPage'
-import NurseryManagementPage from './pages/NurseryManagementPage'
-import CropMonitoringPage from './pages/CropMonitoringPage'
-import LandManagementPage from './pages/LandManagementPage'
+const FarmerProfilePage = lazy(() => import('./pages/FarmerProfilePage'))
+const FarmerFamilyPage = lazy(() => import('./pages/FarmerFamilyPage'))
+const FarmerVerificationPage = lazy(() => import('./pages/FarmerVerificationPage'))
+const FarmerSkillPage = lazy(() => import('./pages/FarmerSkillPage'))
+const FarmerHealthWelfarePage = lazy(() => import('./pages/FarmerHealthWelfarePage'))
+const CropCalendarPage = lazy(() => import('./pages/CropCalendarPage'))
+const CropRegistrationPage = lazy(() => import('./pages/CropRegistrationPage'))
+const CropVarietyPage = lazy(() => import('./pages/CropVarietyPage'))
+const SeedPlanningPage = lazy(() => import('./pages/SeedPlanningPage'))
+const NurseryManagementPage = lazy(() => import('./pages/NurseryManagementPage'))
+const CropMonitoringPage = lazy(() => import('./pages/CropMonitoringPage'))
+const LandManagementPage = lazy(() => import('./pages/LandManagementPage'))
 // Third batch (2026-08-08): consolidated tabbed pages for previously
 // STUB-ONLY modules, matching the LandManagementPage.jsx pattern.
-import InputSupplyManagementPage from './pages/InputSupplyManagementPage'
-import LivestockManagementPage from './pages/LivestockManagementPage'
-import CommunityManagementPage from './pages/CommunityManagementPage'
-import SoilManagementPage from './pages/SoilManagementPage'
-import WaterManagementPage from './pages/WaterManagementPage'
+const InputSupplyManagementPage = lazy(() => import('./pages/InputSupplyManagementPage'))
+const LivestockManagementPage = lazy(() => import('./pages/LivestockManagementPage'))
+const CommunityManagementPage = lazy(() => import('./pages/CommunityManagementPage'))
+const SoilManagementPage = lazy(() => import('./pages/SoilManagementPage'))
+const WaterManagementPage = lazy(() => import('./pages/WaterManagementPage'))
 // SubsidyManagementPage was fully built (real subsidyAPI calls) but never
 // imported into App.jsx — found by V43_ROUTE_PARITY_ANALYSIS.md, the same
 // "built but never wired" bug this session keeps finding and fixing.
-import SubsidyManagementPage from './pages/SubsidyManagementPage'
+const SubsidyManagementPage = lazy(() => import('./pages/SubsidyManagementPage'))
 // Six more fully-built pages found unrouted during the API-completeness sweep
 // (2026-08-08): each already imports a real api.js client (bankerAPI, caAPI,
 // governmentAPI, researchAPI, plus the fertilizer/pesticide/biofertilizer/... and
 // livestock/dairy/... families) but had no <Route>, same bug class as
 // SubsidyManagementPage above.
-import BankerDashboardPage from './pages/BankerDashboardPage'
-import CADashboardPage from './pages/CADashboardPage'
-import GovernmentDashboardPage from './pages/GovernmentDashboardPage'
-import ResearchDashboardPage from './pages/ResearchDashboardPage'
+const BankerDashboardPage = lazy(() => import('./pages/BankerDashboardPage'))
+const CADashboardPage = lazy(() => import('./pages/CADashboardPage'))
+const GovernmentDashboardPage = lazy(() => import('./pages/GovernmentDashboardPage'))
+const ResearchDashboardPage = lazy(() => import('./pages/ResearchDashboardPage'))
 // Fourth batch (2026-08-08): Climate, Operations, Machinery, Horticulture,
 // Fisheries, Identity and Platform Foundation consolidated tabbed pages,
 // same LandManagementPage.jsx pattern as the third batch above.
-import ClimateMonitoringPage from './pages/ClimateMonitoringPage'
-import OperationsManagementPage from './pages/OperationsManagementPage'
-import MachineryManagementPage from './pages/MachineryManagementPage'
-import HorticultureManagementPage from './pages/HorticultureManagementPage'
-import FisheriesManagementPage from './pages/FisheriesManagementPage'
-import IdentityManagementPage from './pages/IdentityManagementPage'
-import PlatformFoundationPage from './pages/PlatformFoundationPage'
-import EnterpriseControlPage from './pages/EnterpriseControlPage'
+const ClimateMonitoringPage = lazy(() => import('./pages/ClimateMonitoringPage'))
+const OperationsManagementPage = lazy(() => import('./pages/OperationsManagementPage'))
+const MachineryManagementPage = lazy(() => import('./pages/MachineryManagementPage'))
+const HorticultureManagementPage = lazy(() => import('./pages/HorticultureManagementPage'))
+const FisheriesManagementPage = lazy(() => import('./pages/FisheriesManagementPage'))
+const IdentityManagementPage = lazy(() => import('./pages/IdentityManagementPage'))
+const PlatformFoundationPage = lazy(() => import('./pages/PlatformFoundationPage'))
+const EnterpriseControlPage = lazy(() => import('./pages/EnterpriseControlPage'))
 // M123-M127 Livestock Management — Poultry, Goat, Sheep, Pig, Animal Health
-import PoultryManagementPage from './pages/PoultryManagementPage'
-import GoatFarmingPage from './pages/GoatFarmingPage'
-import SheepFarmingPage from './pages/SheepFarmingPage'
-import PigFarmingPage from './pages/PigFarmingPage'
-import AnimalHealthPage from './pages/AnimalHealthPage'
+const PoultryManagementPage = lazy(() => import('./pages/PoultryManagementPage'))
+const GoatFarmingPage = lazy(() => import('./pages/GoatFarmingPage'))
+const SheepFarmingPage = lazy(() => import('./pages/SheepFarmingPage'))
+const PigFarmingPage = lazy(() => import('./pages/PigFarmingPage'))
+const AnimalHealthPage = lazy(() => import('./pages/AnimalHealthPage'))
 // Unified Ledger with Economy Segmentation — One Ledger + 9 Economies
-import UnifiedLedgerPage from './pages/UnifiedLedgerPage'
+const UnifiedLedgerPage = lazy(() => import('./pages/UnifiedLedgerPage'))
 // REOS Dashboard — Rural Economic Operating System
-import REOSDashboardPage from './pages/REOSDashboardPage'
+const REOSDashboardPage = lazy(() => import('./pages/REOSDashboardPage'))
 // New Enterprise Modules - AI, ERP, B2B, Marketing, Nutrient-Value
-import AIDashboard from './pages/AIDashboard'
-import ERPDashboard from './pages/ERPDashboard'
-import B2BMarketplace from './pages/B2BMarketplace'
-import MarketingCenter from './pages/MarketingCenter'
-import NutrientValueMarketplace from './pages/NutrientValueMarketplace'
-import M011Page from './modules/M011/M011Page'
-import M006Page from './modules/M006/M006Page'
+const AIDashboard = lazy(() => import('./pages/AIDashboard'))
+const ERPDashboard = lazy(() => import('./pages/ERPDashboard'))
+const B2BMarketplace = lazy(() => import('./pages/B2BMarketplace'))
+const MarketingCenter = lazy(() => import('./pages/MarketingCenter'))
+const NutrientValueMarketplace = lazy(() => import('./pages/NutrientValueMarketplace'))
+const M011Page = lazy(() => import('./modules/M011/M011Page'))
+const M006Page = lazy(() => import('./modules/M006/M006Page'))
 // Auto-generated module imports
-import M001Page from './modules/M001/M001Page'
-import M002Page from './modules/M002/M002Page'
-import M003Page from './modules/M003/M003Page'
-import M004Page from './modules/M004/M004Page'
-import M005Page from './modules/M005/M005Page'
-import M007Page from './modules/M007/M007Page'
-import M008Page from './modules/M008/M008Page'
-import M009Page from './modules/M009/M009Page'
-import M010Page from './modules/M010/M010Page'
-import M012Page from './modules/M012/M012Page'
-import M013Page from './modules/M013/M013Page'
-import M014Page from './modules/M014/M014Page'
-import M015Page from './modules/M015/M015Page'
-import M016Page from './modules/M016/M016Page'
-import M017Page from './modules/M017/M017Page'
-import M018Page from './modules/M018/M018Page'
-import M019Page from './modules/M019/M019Page'
-import M020Page from './modules/M020/M020Page'
-import M021Page from './modules/M021/M021Page'
-import M022Page from './modules/M022/M022Page'
-import M023Page from './modules/M023/M023Page'
-import M024Page from './modules/M024/M024Page'
-import M025Page from './modules/M025/M025Page'
-import M026Page from './modules/M026/M026Page'
-import M027Page from './modules/M027/M027Page'
-import M028Page from './modules/M028/M028Page'
-import M029Page from './modules/M029/M029Page'
-import M030Page from './modules/M030/M030Page'
-import M031Page from './modules/M031/M031Page'
-import M032Page from './modules/M032/M032Page'
-import M033Page from './modules/M033/M033Page'
-import M034Page from './modules/M034/M034Page'
-import M035Page from './modules/M035/M035Page'
-import M036Page from './modules/M036/M036Page'
-import M037Page from './modules/M037/M037Page'
-import M038Page from './modules/M038/M038Page'
-import M039Page from './modules/M039/M039Page'
-import M040Page from './modules/M040/M040Page'
-import M041Page from './modules/M041/M041Page'
-import M042Page from './modules/M042/M042Page'
-import M043Page from './modules/M043/M043Page'
-import M044Page from './modules/M044/M044Page'
-import M045Page from './modules/M045/M045Page'
-import M046Page from './modules/M046/M046Page'
-import M047Page from './modules/M047/M047Page'
-import M048Page from './modules/M048/M048Page'
-import M049Page from './modules/M049/M049Page'
-import M050Page from './modules/M050/M050Page'
-import M051Page from './modules/M051/M051Page'
-import M052Page from './modules/M052/M052Page'
-import M053Page from './modules/M053/M053Page'
-import M054Page from './modules/M054/M054Page'
-import M055Page from './modules/M055/M055Page'
-import M056Page from './modules/M056/M056Page'
-import M057Page from './modules/M057/M057Page'
-import M058Page from './modules/M058/M058Page'
-import M059Page from './modules/M059/M059Page'
-import M060Page from './modules/M060/M060Page'
-import M061Page from './modules/M061/M061Page'
-import M062Page from './modules/M062/M062Page'
-import M063Page from './modules/M063/M063Page'
-import M064Page from './modules/M064/M064Page'
-import M065Page from './modules/M065/M065Page'
-import M066Page from './modules/M066/M066Page'
-import M067Page from './modules/M067/M067Page'
-import M068Page from './modules/M068/M068Page'
-import M069Page from './modules/M069/M069Page'
-import M070Page from './modules/M070/M070Page'
-import M071Page from './modules/M071/M071Page'
-import M072Page from './modules/M072/M072Page'
-import M073Page from './modules/M073/M073Page'
-import M074Page from './modules/M074/M074Page'
-import M075Page from './modules/M075/M075Page'
-import M076Page from './modules/M076/M076Page'
-import M077Page from './modules/M077/M077Page'
-import M078Page from './modules/M078/M078Page'
-import M079Page from './modules/M079/M079Page'
-import M080Page from './modules/M080/M080Page'
-import M081Page from './modules/M081/M081Page'
-import M082Page from './modules/M082/M082Page'
-import M083Page from './modules/M083/M083Page'
-import M084Page from './modules/M084/M084Page'
-import M085Page from './modules/M085/M085Page'
-import M086Page from './modules/M086/M086Page'
-import M087Page from './modules/M087/M087Page'
-import M088Page from './modules/M088/M088Page'
-import M089Page from './modules/M089/M089Page'
-import M090Page from './modules/M090/M090Page'
-import M091Page from './modules/M091/M091Page'
-import M092Page from './modules/M092/M092Page'
-import M093Page from './modules/M093/M093Page'
-import M094Page from './modules/M094/M094Page'
-import M095Page from './modules/M095/M095Page'
-import M096Page from './modules/M096/M096Page'
-import M097Page from './modules/M097/M097Page'
-import M098Page from './modules/M098/M098Page'
-import M099Page from './modules/M099/M099Page'
-import M100Page from './modules/M100/M100Page'
-import M101Page from './modules/M101/M101Page'
-import M102Page from './modules/M102/M102Page'
-import M103Page from './modules/M103/M103Page'
-import M104Page from './modules/M104/M104Page'
-import M105Page from './modules/M105/M105Page'
-import M106Page from './modules/M106/M106Page'
-import M107Page from './modules/M107/M107Page'
-import M108Page from './modules/M108/M108Page'
-import M109Page from './modules/M109/M109Page'
-import M110Page from './modules/M110/M110Page'
-import M111Page from './modules/M111/M111Page'
-import M112Page from './modules/M112/M112Page'
-import M113Page from './modules/M113/M113Page'
-import M114Page from './modules/M114/M114Page'
-import M115Page from './modules/M115/M115Page'
-import M116Page from './modules/M116/M116Page'
-import M117Page from './modules/M117/M117Page'
-import M118Page from './modules/M118/M118Page'
-import M119Page from './modules/M119/M119Page'
-import M120Page from './modules/M120/M120Page'
-import M121Page from './modules/M121/M121Page'
-import M122Page from './modules/M122/M122Page'
-import M123Page from './modules/M123/M123Page'
-import M124Page from './modules/M124/M124Page'
-import M125Page from './modules/M125/M125Page'
-import M126Page from './modules/M126/M126Page'
-import M127Page from './modules/M127/M127Page'
-import M128Page from './modules/M128/M128Page'
-import M129Page from './modules/M129/M129Page'
-import M130Page from './modules/M130/M130Page'
-import M131Page from './modules/M131/M131Page'
-import M132Page from './modules/M132/M132Page'
-import M133Page from './modules/M133/M133Page'
-import M134Page from './modules/M134/M134Page'
-import M135Page from './modules/M135/M135Page'
-import M136Page from './modules/M136/M136Page'
-import M137Page from './modules/M137/M137Page'
-import M138Page from './modules/M138/M138Page'
-import M139Page from './modules/M139/M139Page'
-import M140Page from './modules/M140/M140Page'
-import M141Page from './modules/M141/M141Page'
-import M142Page from './modules/M142/M142Page'
-import M143Page from './modules/M143/M143Page'
-import M144Page from './modules/M144/M144Page'
-import M145Page from './modules/M145/M145Page'
-import M146Page from './modules/M146/M146Page'
-import M147Page from './modules/M147/M147Page'
-import M148Page from './modules/M148/M148Page'
-import M149Page from './modules/M149/M149Page'
-import M150Page from './modules/M150/M150Page'
+const M001Page = lazy(() => import('./modules/M001/M001Page'))
+const M002Page = lazy(() => import('./modules/M002/M002Page'))
+const M003Page = lazy(() => import('./modules/M003/M003Page'))
+const M004Page = lazy(() => import('./modules/M004/M004Page'))
+const M005Page = lazy(() => import('./modules/M005/M005Page'))
+const M007Page = lazy(() => import('./modules/M007/M007Page'))
+const M008Page = lazy(() => import('./modules/M008/M008Page'))
+const M009Page = lazy(() => import('./modules/M009/M009Page'))
+const M010Page = lazy(() => import('./modules/M010/M010Page'))
+const M012Page = lazy(() => import('./modules/M012/M012Page'))
+const M013Page = lazy(() => import('./modules/M013/M013Page'))
+const M014Page = lazy(() => import('./modules/M014/M014Page'))
+const M015Page = lazy(() => import('./modules/M015/M015Page'))
+const M016Page = lazy(() => import('./modules/M016/M016Page'))
+const M017Page = lazy(() => import('./modules/M017/M017Page'))
+const M018Page = lazy(() => import('./modules/M018/M018Page'))
+const M019Page = lazy(() => import('./modules/M019/M019Page'))
+const M020Page = lazy(() => import('./modules/M020/M020Page'))
+const M021Page = lazy(() => import('./modules/M021/M021Page'))
+const M022Page = lazy(() => import('./modules/M022/M022Page'))
+const M023Page = lazy(() => import('./modules/M023/M023Page'))
+const M024Page = lazy(() => import('./modules/M024/M024Page'))
+const M025Page = lazy(() => import('./modules/M025/M025Page'))
+const M026Page = lazy(() => import('./modules/M026/M026Page'))
+const M027Page = lazy(() => import('./modules/M027/M027Page'))
+const M028Page = lazy(() => import('./modules/M028/M028Page'))
+const M029Page = lazy(() => import('./modules/M029/M029Page'))
+const M030Page = lazy(() => import('./modules/M030/M030Page'))
+const M031Page = lazy(() => import('./modules/M031/M031Page'))
+const M032Page = lazy(() => import('./modules/M032/M032Page'))
+const M033Page = lazy(() => import('./modules/M033/M033Page'))
+const M034Page = lazy(() => import('./modules/M034/M034Page'))
+const M035Page = lazy(() => import('./modules/M035/M035Page'))
+const M036Page = lazy(() => import('./modules/M036/M036Page'))
+const M037Page = lazy(() => import('./modules/M037/M037Page'))
+const M038Page = lazy(() => import('./modules/M038/M038Page'))
+const M039Page = lazy(() => import('./modules/M039/M039Page'))
+const M040Page = lazy(() => import('./modules/M040/M040Page'))
+const M041Page = lazy(() => import('./modules/M041/M041Page'))
+const M042Page = lazy(() => import('./modules/M042/M042Page'))
+const M043Page = lazy(() => import('./modules/M043/M043Page'))
+const M044Page = lazy(() => import('./modules/M044/M044Page'))
+const M045Page = lazy(() => import('./modules/M045/M045Page'))
+const M046Page = lazy(() => import('./modules/M046/M046Page'))
+const M047Page = lazy(() => import('./modules/M047/M047Page'))
+const M048Page = lazy(() => import('./modules/M048/M048Page'))
+const M049Page = lazy(() => import('./modules/M049/M049Page'))
+const M050Page = lazy(() => import('./modules/M050/M050Page'))
+const M051Page = lazy(() => import('./modules/M051/M051Page'))
+const M052Page = lazy(() => import('./modules/M052/M052Page'))
+const M053Page = lazy(() => import('./modules/M053/M053Page'))
+const M054Page = lazy(() => import('./modules/M054/M054Page'))
+const M055Page = lazy(() => import('./modules/M055/M055Page'))
+const M056Page = lazy(() => import('./modules/M056/M056Page'))
+const M057Page = lazy(() => import('./modules/M057/M057Page'))
+const M058Page = lazy(() => import('./modules/M058/M058Page'))
+const M059Page = lazy(() => import('./modules/M059/M059Page'))
+const M060Page = lazy(() => import('./modules/M060/M060Page'))
+const M061Page = lazy(() => import('./modules/M061/M061Page'))
+const M062Page = lazy(() => import('./modules/M062/M062Page'))
+const M063Page = lazy(() => import('./modules/M063/M063Page'))
+const M064Page = lazy(() => import('./modules/M064/M064Page'))
+const M065Page = lazy(() => import('./modules/M065/M065Page'))
+const M066Page = lazy(() => import('./modules/M066/M066Page'))
+const M067Page = lazy(() => import('./modules/M067/M067Page'))
+const M068Page = lazy(() => import('./modules/M068/M068Page'))
+const M069Page = lazy(() => import('./modules/M069/M069Page'))
+const M070Page = lazy(() => import('./modules/M070/M070Page'))
+const M071Page = lazy(() => import('./modules/M071/M071Page'))
+const M072Page = lazy(() => import('./modules/M072/M072Page'))
+const M073Page = lazy(() => import('./modules/M073/M073Page'))
+const M074Page = lazy(() => import('./modules/M074/M074Page'))
+const M075Page = lazy(() => import('./modules/M075/M075Page'))
+const M076Page = lazy(() => import('./modules/M076/M076Page'))
+const M077Page = lazy(() => import('./modules/M077/M077Page'))
+const M078Page = lazy(() => import('./modules/M078/M078Page'))
+const M079Page = lazy(() => import('./modules/M079/M079Page'))
+const M080Page = lazy(() => import('./modules/M080/M080Page'))
+const M081Page = lazy(() => import('./modules/M081/M081Page'))
+const M082Page = lazy(() => import('./modules/M082/M082Page'))
+const M083Page = lazy(() => import('./modules/M083/M083Page'))
+const M084Page = lazy(() => import('./modules/M084/M084Page'))
+const M085Page = lazy(() => import('./modules/M085/M085Page'))
+const M086Page = lazy(() => import('./modules/M086/M086Page'))
+const M087Page = lazy(() => import('./modules/M087/M087Page'))
+const M088Page = lazy(() => import('./modules/M088/M088Page'))
+const M089Page = lazy(() => import('./modules/M089/M089Page'))
+const M090Page = lazy(() => import('./modules/M090/M090Page'))
+const M091Page = lazy(() => import('./modules/M091/M091Page'))
+const M092Page = lazy(() => import('./modules/M092/M092Page'))
+const M093Page = lazy(() => import('./modules/M093/M093Page'))
+const M094Page = lazy(() => import('./modules/M094/M094Page'))
+const M095Page = lazy(() => import('./modules/M095/M095Page'))
+const M096Page = lazy(() => import('./modules/M096/M096Page'))
+const M097Page = lazy(() => import('./modules/M097/M097Page'))
+const M098Page = lazy(() => import('./modules/M098/M098Page'))
+const M099Page = lazy(() => import('./modules/M099/M099Page'))
+const M100Page = lazy(() => import('./modules/M100/M100Page'))
+const M101Page = lazy(() => import('./modules/M101/M101Page'))
+const M102Page = lazy(() => import('./modules/M102/M102Page'))
+const M103Page = lazy(() => import('./modules/M103/M103Page'))
+const M104Page = lazy(() => import('./modules/M104/M104Page'))
+const M105Page = lazy(() => import('./modules/M105/M105Page'))
+const M106Page = lazy(() => import('./modules/M106/M106Page'))
+const M107Page = lazy(() => import('./modules/M107/M107Page'))
+const M108Page = lazy(() => import('./modules/M108/M108Page'))
+const M109Page = lazy(() => import('./modules/M109/M109Page'))
+const M110Page = lazy(() => import('./modules/M110/M110Page'))
+const M111Page = lazy(() => import('./modules/M111/M111Page'))
+const M112Page = lazy(() => import('./modules/M112/M112Page'))
+const M113Page = lazy(() => import('./modules/M113/M113Page'))
+const M114Page = lazy(() => import('./modules/M114/M114Page'))
+const M115Page = lazy(() => import('./modules/M115/M115Page'))
+const M116Page = lazy(() => import('./modules/M116/M116Page'))
+const M117Page = lazy(() => import('./modules/M117/M117Page'))
+const M118Page = lazy(() => import('./modules/M118/M118Page'))
+const M119Page = lazy(() => import('./modules/M119/M119Page'))
+const M120Page = lazy(() => import('./modules/M120/M120Page'))
+const M121Page = lazy(() => import('./modules/M121/M121Page'))
+const M122Page = lazy(() => import('./modules/M122/M122Page'))
+const M123Page = lazy(() => import('./modules/M123/M123Page'))
+const M124Page = lazy(() => import('./modules/M124/M124Page'))
+const M125Page = lazy(() => import('./modules/M125/M125Page'))
+const M126Page = lazy(() => import('./modules/M126/M126Page'))
+const M127Page = lazy(() => import('./modules/M127/M127Page'))
+const M128Page = lazy(() => import('./modules/M128/M128Page'))
+const M129Page = lazy(() => import('./modules/M129/M129Page'))
+const M130Page = lazy(() => import('./modules/M130/M130Page'))
+const M131Page = lazy(() => import('./modules/M131/M131Page'))
+const M132Page = lazy(() => import('./modules/M132/M132Page'))
+const M133Page = lazy(() => import('./modules/M133/M133Page'))
+const M134Page = lazy(() => import('./modules/M134/M134Page'))
+const M135Page = lazy(() => import('./modules/M135/M135Page'))
+const M136Page = lazy(() => import('./modules/M136/M136Page'))
+const M137Page = lazy(() => import('./modules/M137/M137Page'))
+const M138Page = lazy(() => import('./modules/M138/M138Page'))
+const M139Page = lazy(() => import('./modules/M139/M139Page'))
+const M140Page = lazy(() => import('./modules/M140/M140Page'))
+const M141Page = lazy(() => import('./modules/M141/M141Page'))
+const M142Page = lazy(() => import('./modules/M142/M142Page'))
+const M143Page = lazy(() => import('./modules/M143/M143Page'))
+const M144Page = lazy(() => import('./modules/M144/M144Page'))
+const M145Page = lazy(() => import('./modules/M145/M145Page'))
+const M146Page = lazy(() => import('./modules/M146/M146Page'))
+const M147Page = lazy(() => import('./modules/M147/M147Page'))
+const M148Page = lazy(() => import('./modules/M148/M148Page'))
+const M149Page = lazy(() => import('./modules/M149/M149Page'))
+const M150Page = lazy(() => import('./modules/M150/M150Page'))
 // End auto-generated module imports
-import { EconomicDashboard } from './pages/economic'
+const EconomicDashboard = lazy(() => import('./pages/economic').then((m) => ({ default: m.EconomicDashboard })))
 import ProtectedRoute from './components/ProtectedRoute'
 import { MultilingualProvider } from './components/Multilingual/MultilingualProvider'
 // Accessibility modes {simple, kiosk, voice, sms} recovered from v42.
@@ -357,6 +357,14 @@ function App() {
       <AccessibilityProvider>
         <MultilingualProvider>
           <Layout>
+            <Suspense fallback={(
+              <div className="flex items-center justify-center min-h-[60vh]">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary mx-auto mb-3" />
+                  <p className="text-sm text-muted-foreground">Loading...</p>
+                </div>
+              </div>
+            )}>
             <Routes>
               {/* Public Routes */}
               <Route path="/" element={<HomePage />} />
@@ -1332,6 +1340,7 @@ function App() {
         {/* 404 */}
         <Route path="*" element={<div className="p-8 text-center">Page not found</div>} />
       </Routes>
+            </Suspense>
     </Layout>
     </MultilingualProvider>
     </AccessibilityProvider>

@@ -10,11 +10,13 @@
 'use strict';
 
 const express = require('express');
+const Joi = require('joi');
 
 const router = express.Router();
 const fin = require('../services/recoveredFinanceService');
 const { authMiddleware } = require('../middleware/auth');
 const { resolveFarmerId } = require('../middleware/resolveFarmerId');
+const { validateBody } = require('../middleware/inputValidation');
 
 function fail(res, error) {
   const bad = /required|must|Unknown|No GST rule|differ/i.test(error.message);
@@ -67,7 +69,20 @@ router.get('/schemes/match', async (req, res) => {
 
 // ---- eNWR ------------------------------------------------------------------
 
-router.post('/enwr/issue', authMiddleware, async (req, res) => {
+// M5 (FIXES.md): joi-validated body, matching the shape actually consumed by
+// recoveredFinanceService.issueEnwr().
+const enwrIssueSchema = Joi.object({
+  bookingId: Joi.alternatives(Joi.string(), Joi.number()).allow(null),
+  facilityId: Joi.alternatives(Joi.string(), Joi.number()).allow(null),
+  farmerId: Joi.alternatives(Joi.string(), Joi.number()).allow(null),
+  commodity: Joi.string().allow('', null),
+  quantityQtl: Joi.number().positive().required(),
+  estimatedValueInr: Joi.number().positive().required(),
+  haircutPct: Joi.number().min(0).max(100).allow(null),
+  validUntil: Joi.alternatives(Joi.date(), Joi.string()).allow(null)
+});
+
+router.post('/enwr/issue', authMiddleware, validateBody(enwrIssueSchema), async (req, res) => {
   try {
     res.json({ success: true, data: await fin.issueEnwr({ ...req.body, issuedBy: req.user?.id }) });
   } catch (e) { fail(res, e); }
@@ -108,15 +123,37 @@ router.get('/subsidy/equipment', async (req, res) => {
   } catch (e) { fail(res, e); }
 });
 
-router.post('/risk/event', authMiddleware, async (req, res) => {
+// M5 (FIXES.md): joi-validated body, matching the shape actually consumed by
+// recoveredFinanceService.recordRiskEvent().
+const riskEventSchema = Joi.object({
+  partyId: Joi.alternatives(Joi.string(), Joi.number()).required(),
+  partyType: Joi.string().allow('', null),
+  eventType: Joi.string().required(),
+  weight: Joi.number().allow(null),
+  reference: Joi.string().allow('', null),
+  detail: Joi.string().allow('', null)
+});
+
+router.post('/risk/event', authMiddleware, validateBody(riskEventSchema), async (req, res) => {
   try {
     const b = req.body || {};
-    if (!b.partyId || !b.eventType) throw new Error('partyId and eventType are required');
     res.json({ success: true, data: await fin.recordRiskEvent(b) });
   } catch (e) { fail(res, e); }
 });
 
+// M3 (FIXES.md, IDOR): partyRisk is a financial risk profile keyed by
+// party_id (party_type defaults to 'user' in recordRiskEvent above), not
+// farmer-specific data — there's no 'lender'/'bank' role anywhere else in
+// this codebase to gate on (grepped: only 'admin'/'superadmin' privileged
+// checks exist, e.g. marketplaceEnhancements.js, insuranceEnhancements.js,
+// farmerPortalEnhancements.js), so this mirrors that same
+// req.user.role === 'admin' bypass pattern rather than inventing a role that
+// doesn't exist elsewhere. Non-admins may only view their own risk profile.
 router.get('/risk/:partyId', authMiddleware, async (req, res) => {
+  const isPrivileged = req.user && (req.user.role === 'admin' || req.user.role === 'superadmin');
+  if (!isPrivileged && String(req.params.partyId) !== String(req.user?.id)) {
+    return res.status(403).json({ success: false, error: 'You may only view your own risk profile' });
+  }
   try { res.json({ success: true, data: await fin.partyRisk(req.params.partyId) }); } catch (e) { fail(res, e); }
 });
 

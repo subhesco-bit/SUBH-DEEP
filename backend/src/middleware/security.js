@@ -1,7 +1,43 @@
+// ============================================================================
+// NOT CURRENTLY ACTIVE (L8, checked 2026-08-17): this file is not required
+// anywhere in backend/src (verified via `grep -rn "middleware/security"
+// backend/src`). None of the exports below - SecurityUtils, auditLogger,
+// rateLimiter, strictRateLimiter, slowDownLimiter, securityHeaders,
+// sanitizeInput, preventSQLInjection, preventXSS, csrfProtection,
+// securityMiddleware - run on any request today.
+//
+// backend/src/index.js already wires up its own helmet() config and its own
+// rate limiter from ./middleware/rateLimiter, so securityHeaders/rateLimiter/
+// slowDownLimiter here would be redundant if activated as-is. More
+// importantly, csrfProtection reads req.session.csrfToken, but this app
+// never installs express-session - wiring csrfProtection in globally would
+// 403 every POST/PUT/DELETE/PATCH request in the app. preventSQLInjection's
+// regex approach also has real false-positive risk against legitimate
+// business text (e.g. the words "and"/"or" adjacent to digits, or "select"
+// appearing in a product description) rather than a parameterized-query
+// audit. Do not assume any "XSS prevention" or "SQL injection prevention" is
+// live in production just because this file exists - it needs a deliberate,
+// piece-by-piece wiring decision (and probably express-session for CSRF)
+// before any of it should be turned on.
+// ============================================================================
 const crypto = require('crypto');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const slowDown = require('express-slow-down');
+
+// SECURITY (H3, fixed 2026-08-16): this module is unused today (see FIXES.md
+// L8), but its ENCRYPTION_KEY/JWT_SECRET usage below has no hardcoded literal
+// fallback - SecurityUtils.encrypt/decrypt already throw at call time if the
+// key is missing. Fail closed at module load (boot time) too, so that if this
+// module is ever wired in, a production deployment can't silently start with
+// crypto operations that are one missing env var away from throwing on first
+// use (or, if a fallback is ever reintroduced here, from becoming forgeable).
+if (process.env.NODE_ENV === 'production' && (!process.env.ENCRYPTION_KEY || !process.env.JWT_SECRET)) {
+  throw new Error(
+    'FATAL: ENCRYPTION_KEY and/or JWT_SECRET are not set and NODE_ENV=production. ' +
+    'Refusing to start with security middleware that cannot encrypt/sign data safely.'
+  );
+}
 
 // Encryption utilities
 class SecurityUtils {

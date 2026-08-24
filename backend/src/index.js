@@ -312,6 +312,13 @@ const io = new Server(httpServer, {
     methods: ['GET', 'POST', 'PUT', 'DELETE']
   }
 });
+// FIXED (M10): backend/src/websocket/socketServer.js used to be a second,
+// never-initialized `ws`-based real-time transport that 3 services silently
+// no-op'd against (see FIXES.md M10). Consolidated onto this single live
+// socket.io instance instead of also starting the dead transport; those 3
+// services now emit through it via websocket/index.js's sendNotification /
+// sendGovernmentAnnouncement helpers.
+require('./websocket').setIO(io);
 
 // Security middleware
 app.use(helmet({

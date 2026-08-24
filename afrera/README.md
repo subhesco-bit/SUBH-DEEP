@@ -63,10 +63,8 @@ We welcome contributions to the AFRERA project! Please follow the guidelines in 
 
 ### License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+Proprietary — All Rights Reserved. Contact the repository owner for licensing terms.
 
 ---
 
 Thank you for your interest in the AFRERA project! We hope you find it useful and look forward to your contributions.
-
-*verified by vibecheck*

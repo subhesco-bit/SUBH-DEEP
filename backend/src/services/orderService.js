@@ -264,15 +264,28 @@ async function createOrder(userId, orderData) {
 
       order = orderResult.rows[0];
 
-      for (const cartItem of cartItems) {
+      // L12: batched into one multi-row INSERT instead of a per-item round trip —
+      // every value here is already computed from cartItem in JS with no
+      // per-row DB read/side effect in between, so batching is a pure win.
+      if (cartItems.length > 0) {
+        const valuesSql = [];
+        const params = [];
+        cartItems.forEach((cartItem) => {
+          const base = params.length;
+          valuesSql.push(`($${base + 1}, $${base + 2}, $${base + 3}, $${base + 4}, $${base + 5}, $${base + 6}, $${base + 7}, $${base + 8})`);
+          params.push(
+            order.id, cartItem.product_id, cartItem.product_name, null,
+            cartItem.quantity, cartItem.base_price,
+            cartItem.base_price * cartItem.quantity,
+            JSON.stringify(cartItem.attributes || {})
+          );
+        });
+
         await client.query(
           `INSERT INTO order_items (order_id, product_id, product_name, product_sku,
                                     quantity, unit_price, total_price, attributes)
-           VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-          [order.id, cartItem.product_id, cartItem.product_name, null,
-            cartItem.quantity, cartItem.base_price,
-            cartItem.base_price * cartItem.quantity,
-            JSON.stringify(cartItem.attributes || {})]
+           VALUES ${valuesSql.join(', ')}`,
+          params
         );
       }
 

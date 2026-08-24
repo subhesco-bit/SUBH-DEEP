@@ -620,6 +620,61 @@ router.get('/dietary-profiles', async (req, res) => {
 });
 
 // ============================================================================
+// WELLNESS / NATURAL-THERAPY PRACTICES
+// ============================================================================
+
+/**
+ * Real, DB-backed lookup against wellness_natural_practices (see migration
+ * 062_wellness_natural_practices_schema.sql). M1 (FIXES.md): aiCopilotService.js's
+ * nutrition copilot called this function expecting to match on a free-text
+ * tag against evidence-labeled traditional/natural remedy rows; it did not
+ * exist here. Every row carries an evidence_level and requires_consultation
+ * flag which callers must surface alongside any match — this is reference/
+ * educational content only, not medical advice.
+ */
+async function getWellnessPractices({ tag, category } = {}) {
+  try {
+    const conditions = [];
+    const params = [];
+
+    if (tag) {
+      params.push(tag);
+      conditions.push(`(
+        practice_name ILIKE '%' || $${params.length} || '%'
+        OR common_name ILIKE '%' || $${params.length} || '%'
+        OR $${params.length} = ANY(related_product_tags)
+      )`);
+    }
+
+    if (category) {
+      params.push(category);
+      conditions.push(`category = $${params.length}`);
+    }
+
+    const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
+
+    const result = await pool.query(
+      `SELECT id, practice_name, category, common_name, botanical_name, traditional_use,
+              related_product_tags, evidence_level, requires_consultation, contraindications,
+              source_reference
+         FROM wellness_natural_practices
+         ${whereClause}
+        ORDER BY practice_name
+        LIMIT 5`,
+      params
+    );
+
+    return {
+      practices: result.rows,
+      disclaimer: 'This is reference/educational information about traditional and natural wellness practices, not medical advice. It does not diagnose conditions or replace consultation with a qualified practitioner.'
+    };
+  } catch (error) {
+    logger.error('Get wellness practices error', { error: error.message, stack: error.stack });
+    return { practices: [], disclaimer: 'Wellness practice lookup unavailable.' };
+  }
+}
+
+// ============================================================================
 // HEALTH CHECK
 // ============================================================================
 
@@ -639,5 +694,6 @@ module.exports = {
   calculateNutritionPricing,
   compareProductsNutrition,
   getDietaryProfiles,
+  getWellnessPractices,
   isHealthy
 };

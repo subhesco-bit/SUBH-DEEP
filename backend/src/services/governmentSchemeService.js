@@ -5,7 +5,7 @@
 
 const { logger } = require('../utils/logger');
 const { aiAPI } = require('./aiService');
-const { socketServer } = require('../websocket');
+const { sendGovernmentAnnouncement } = require('../websocket');
 const { authMiddleware } = require('../middleware/auth');
 
 /**
@@ -498,7 +498,7 @@ async function getWeatherRecommendations(location) {
 
 async function broadcastAnnouncement(announcement) {
   // Broadcast via WebSocket
-  socketServer.sendGovernmentAnnouncement(announcement);
+  sendGovernmentAnnouncement(announcement);
 }
 
 async function getFilteredAnnouncements(params) {

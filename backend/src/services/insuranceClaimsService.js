@@ -4,7 +4,7 @@
 
 const { logger } = require('../utils/logger');
 const { aiAPI } = require('./aiService');
-const { socketServer } = require('../websocket');
+const { sendNotification } = require('../websocket');
 const { authMiddleware } = require('../middleware/auth');
 
 /**
@@ -72,7 +72,7 @@ async function submitInsuranceClaim(claimData) {
     };
 
     // Notify farmer via WebSocket
-    socketServer.sendNotification(farmer_id, {
+    sendNotification(farmer_id, {
       type: 'claim_submitted',
       claim_id: claim.claim_id,
       claim_number: claim.claim_number,
@@ -146,7 +146,7 @@ async function processInsuranceClaim(claimId) {
     claim.assessed_at = new Date().toISOString();
 
     // Notify farmer
-    socketServer.sendNotification(claim.farmer_id, {
+    sendNotification(claim.farmer_id, {
       type: 'claim_assessed',
       claim_id: claimId,
       status: claim.status,
@@ -328,7 +328,7 @@ async function calculateClaimPayout(claimId) {
       }
     };
 
-    const aiResponse = await aiAPI.generateRecommendation(aiResponse);
+    const aiResponse = await aiAPI.generateRecommendation(aiRequest);
 
     const payout = {
       claim_id: claimId,
@@ -508,6 +508,27 @@ async function getDepreciationFactors(claimType) {
   return {};
 }
 
+/**
+ * M4 (FIXES.md): ownership gate for the /status and /payout GET routes.
+ * Admins/adjusters may view any claim; everyone else must own it.
+ *
+ * KNOWN RESIDUAL GAP (same class as FIXES.md M1 — "wrong/missing service
+ * wired up", not an auth-boundary issue): getClaimDetails() above is a
+ * scaffold stub that always returns {}, so claim.farmer_id is never
+ * actually populated yet. Until claims are persisted for real, a non-admin
+ * caller has nothing to compare against, so this fails open for them (same
+ * posture already documented in farmerHealthRoutes.js for its equivalent
+ * scaffold gap). The auth + role check is the real enforceable boundary in
+ * the meantime; this comparison becomes effective the moment claims are
+ * backed by a real data store.
+ */
+function isClaimOwner(req, claim) {
+  const isPrivileged = req.user && (req.user.role === 'admin' || req.user.role === 'adjuster' || req.user.role === 'superadmin');
+  if (isPrivileged) return true;
+  if (!claim || claim.farmer_id === undefined || claim.farmer_id === null) return true;
+  return String(claim.farmer_id) === String(req.user?.id);
+}
+
 async function calculateDeductible(claim) {
   // Calculate deductible
   return {};
@@ -547,8 +568,12 @@ function setupRoutes(app) {
     }
   });
 
-  app.get('/api/v1/insurance/claims/:id/status', async (req, res) => {
+  app.get('/api/v1/insurance/claims/:id/status', authMiddleware, async (req, res) => {
     try {
+      const claim = await getClaimDetails(req.params.id);
+      if (!isClaimOwner(req, claim)) {
+        return res.status(403).json({ success: false, error: 'You may only view your own claim' });
+      }
       const status = await getClaimStatus(req.params.id);
       res.json({ success: true, data: status });
     } catch (error) {
@@ -565,8 +590,12 @@ function setupRoutes(app) {
     }
   });
 
-  app.get('/api/v1/insurance/claims/:id/payout', async (req, res) => {
+  app.get('/api/v1/insurance/claims/:id/payout', authMiddleware, async (req, res) => {
     try {
+      const claim = await getClaimDetails(req.params.id);
+      if (!isClaimOwner(req, claim)) {
+        return res.status(403).json({ success: false, error: 'You may only view your own claim' });
+      }
       const payout = await calculateClaimPayout(req.params.id);
       res.json({ success: true, data: payout });
     } catch (error) {

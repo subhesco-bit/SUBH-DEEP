@@ -69,5 +69,3 @@ This project is licensed under the MIT License. See the LICENSE file for details
 ---
 
 This README provides an overview of the `afrera-web` module, its features, technology stack, and instructions for getting started and contributing.
-
-*verified by vibecheck*

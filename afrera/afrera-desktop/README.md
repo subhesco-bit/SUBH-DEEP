@@ -65,5 +65,3 @@ This project is licensed under the MIT License - see the [LICENSE](../LICENSE) f
 ---
 
 For more information about the AFRERA project, please refer to the main [README.md](../../README.md) file.
-
-*verified by vibecheck*

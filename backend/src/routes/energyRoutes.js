@@ -1,18 +1,41 @@
 /**
  * Rural Energy Cost Intelligence Engine (RECIE) API Routes
  * Energy cost calculation, optimization, and forecasting endpoints
+ *
+ * M2 (FIXES.md, Medium): reads are public here, matching demandRoutes.js's
+ * documented-public pattern — grid tariffs and village energy metrics are
+ * general planning/market information, not per-user data. Writes run
+ * calculations against submitted inputs and now require authMiddleware.
+ * M5 (FIXES.md, Medium): write bodies are now validated with joi via
+ * validateBody before the handler runs.
  */
 
 const express = require('express');
+const Joi = require('joi');
 const EnergyCostCalculator = require('../services/energy/EnergyCostCalculator');
+const { authMiddleware } = require('../middleware/auth');
+const { validateBody } = require('../middleware/inputValidation');
 
 const router = express.Router();
+
+const lifetimeCostSchema = Joi.object({
+  village_id: Joi.string().required(),
+  grid_tariff_per_unit: Joi.number().positive().allow(null),
+  grid_hours_per_day: Joi.number().min(0).max(24).allow(null),
+  outage_hours_per_year: Joi.number().min(0).allow(null),
+  diesel_cost_per_liter: Joi.number().positive().allow(null),
+  diesel_liters_per_year: Joi.number().min(0).allow(null),
+  solar_irradiation: Joi.number().positive().allow(null),
+  battery_replacement_cost_per_year: Joi.number().min(0).allow(null),
+  solar_panel_degradation_rate: Joi.number().min(0).allow(null),
+  projection_years: Joi.number().positive().allow(null)
+});
 
 /**
  * POST /api/v1/energy/calculator/lifetime-cost
  * Calculate lifetime energy cost for a location
  */
-router.post('/calculator/lifetime-cost', async (req, res) => {
+router.post('/calculator/lifetime-cost', authMiddleware, validateBody(lifetimeCostSchema), async (req, res) => {
   try {
     const { village_id, grid_tariff_per_unit, grid_hours_per_day, outage_hours_per_year,
             diesel_cost_per_liter, diesel_liters_per_year, solar_irradiation,
@@ -107,11 +130,24 @@ router.get('/database/grid-tariffs/:region', async (req, res) => {
   }
 });
 
+const recommendStackSchema = Joi.object({
+  village_id: Joi.string().required(),
+  average_daily_demand_kwh: Joi.number().positive().required(),
+  peak_demand_kw: Joi.number().positive().allow(null),
+  grid_availability: Joi.number().min(0).max(1).allow(null),
+  solar_irradiation: Joi.number().positive().allow(null),
+  biomass_available: Joi.boolean().allow(null),
+  biogas_available: Joi.boolean().allow(null),
+  village_population: Joi.number().positive().allow(null),
+  agricultural_area: Joi.number().min(0).allow(null),
+  industrial_demand: Joi.number().min(0).allow(null)
+});
+
 /**
  * POST /api/v1/energy/optimizer/recommend-stack
  * Get recommended energy stack for a location
  */
-router.post('/optimizer/recommend-stack', async (req, res) => {
+router.post('/optimizer/recommend-stack', authMiddleware, validateBody(recommendStackSchema), async (req, res) => {
   try {
     const {
       village_id,
@@ -187,11 +223,21 @@ router.get('/metrics/:village_id', async (req, res) => {
   }
 });
 
+const demandForecastSchema = Joi.object({
+  village_id: Joi.string().required(),
+  farmer_count: Joi.number().positive().allow(null),
+  avg_farm_size_hectares: Joi.number().positive().allow(null),
+  irrigation_area: Joi.number().min(0).allow(null),
+  processing_units_count: Joi.number().min(0).allow(null),
+  cold_chain_facilities: Joi.number().min(0).allow(null),
+  ev_charging_demand: Joi.number().min(0).allow(null)
+});
+
 /**
  * POST /api/v1/energy/productive/demand-forecast
  * Forecast productive energy demand
  */
-router.post('/productive/demand-forecast', async (req, res) => {
+router.post('/productive/demand-forecast', authMiddleware, validateBody(demandForecastSchema), async (req, res) => {
   try {
     const {
       village_id,
@@ -227,11 +273,16 @@ router.post('/productive/demand-forecast', async (req, res) => {
   }
 });
 
+const stackCompareSchema = Joi.object({
+  village_id: Joi.string().required(),
+  stacks: Joi.array().items(Joi.object().unknown(true)).min(2).required()
+});
+
 /**
  * POST /api/v1/energy/stack/compare
  * Compare multiple energy stack configurations
  */
-router.post('/stack/compare', async (req, res) => {
+router.post('/stack/compare', authMiddleware, validateBody(stackCompareSchema), async (req, res) => {
   try {
     const { village_id, stacks } = req.body;
 

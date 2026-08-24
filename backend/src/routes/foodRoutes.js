@@ -1,18 +1,39 @@
 /**
  * Food Intelligence & Processing API Routes
  * Food processing, nutrition analysis, traceability, and compliance endpoints
+ *
+ * M2 (FIXES.md, Medium): reads are public here, matching demandRoutes.js's
+ * documented-public pattern — a farmer/buyer should be able to look up batch
+ * status or a shelf-life estimate without an account. Writes create/modify
+ * supply-chain records (traceability checkpoints, compliance checks, batch
+ * data) and now require authMiddleware so those records are attributable.
+ * M5 (FIXES.md, Medium): write bodies are now validated with joi via
+ * validateBody before the handler runs.
  */
 
 const express = require('express');
+const Joi = require('joi');
 const FoodIntelligenceEngine = require('../services/food/FoodIntelligenceEngine');
+const { authMiddleware } = require('../middleware/auth');
+const { validateBody } = require('../middleware/inputValidation');
 
 const router = express.Router();
+
+const startBatchSchema = Joi.object({
+  product_id: Joi.string().required(),
+  product_name: Joi.string().required(),
+  quantity_kg: Joi.number().positive().required(),
+  source_location: Joi.string().allow('', null),
+  harvest_date: Joi.alternatives(Joi.date(), Joi.string()).allow(null),
+  processing_method: Joi.string().allow('', null),
+  target_shelf_life: Joi.number().positive().allow(null)
+});
 
 /**
  * POST /api/v1/food/processing/start-batch
  * Initialize food processing batch
  */
-router.post('/processing/start-batch', async (req, res) => {
+router.post('/processing/start-batch', authMiddleware, validateBody(startBatchSchema), async (req, res) => {
   try {
     const {
       product_id,
@@ -50,11 +71,19 @@ router.post('/processing/start-batch', async (req, res) => {
   }
 });
 
+const nutritionAnalyzeSchema = Joi.object({
+  product_name: Joi.string().required(),
+  product_type: Joi.string().required(),
+  raw_quantity_g: Joi.number().positive().required(),
+  processing_loss: Joi.number().min(0).allow(null),
+  cooking_method: Joi.string().allow('', null)
+});
+
 /**
  * POST /api/v1/food/nutrition/analyze
  * Analyze nutritional content of food product
  */
-router.post('/nutrition/analyze', async (req, res) => {
+router.post('/nutrition/analyze', authMiddleware, validateBody(nutritionAnalyzeSchema), async (req, res) => {
   try {
     const {
       product_name,
@@ -88,11 +117,21 @@ router.post('/nutrition/analyze', async (req, res) => {
   }
 });
 
+const recordMovementSchema = Joi.object({
+  batch_id: Joi.string().required(),
+  location: Joi.string().required(),
+  operation: Joi.string().required(),
+  operator: Joi.string().allow('', null),
+  notes: Joi.string().allow('', null),
+  environmental_conditions: Joi.object().unknown(true).allow(null),
+  blockchain_hash: Joi.string().allow('', null)
+});
+
 /**
  * POST /api/v1/food/traceability/record-movement
  * Record product movement in supply chain
  */
-router.post('/traceability/record-movement', async (req, res) => {
+router.post('/traceability/record-movement', authMiddleware, validateBody(recordMovementSchema), async (req, res) => {
   try {
     const {
       batch_id,
@@ -130,11 +169,20 @@ router.post('/traceability/record-movement', async (req, res) => {
   }
 });
 
+const shelfLifeSchema = Joi.object({
+  product_type: Joi.string().required(),
+  processing_method: Joi.string().allow('', null),
+  storage_temperature: Joi.number().required(),
+  storage_humidity: Joi.number().min(0).max(100).allow(null),
+  packaging_type: Joi.string().allow('', null),
+  initial_quality: Joi.number().min(0).max(100).allow(null)
+});
+
 /**
  * POST /api/v1/food/shelf-life/predict
  * Predict shelf life based on storage conditions
  */
-router.post('/shelf-life/predict', async (req, res) => {
+router.post('/shelf-life/predict', authMiddleware, validateBody(shelfLifeSchema), async (req, res) => {
   try {
     const {
       product_type,
@@ -170,11 +218,19 @@ router.post('/shelf-life/predict', async (req, res) => {
   }
 });
 
+const complianceCheckSchema = Joi.object({
+  batch_id: Joi.string().required(),
+  product_type: Joi.string().required(),
+  processing_facility_id: Joi.string().allow('', null),
+  certifications_held: Joi.array().items(Joi.string()).allow(null),
+  storage_conditions: Joi.object().unknown(true).allow(null)
+});
+
 /**
  * POST /api/v1/food/safety/compliance-check
  * Verify compliance with food safety standards
  */
-router.post('/safety/compliance-check', async (req, res) => {
+router.post('/safety/compliance-check', authMiddleware, validateBody(complianceCheckSchema), async (req, res) => {
   try {
     const {
       batch_id,
@@ -250,11 +306,19 @@ router.get('/batch/:batch_id', async (req, res) => {
   }
 });
 
+const organicRecommendSchema = Joi.object({
+  batch_id: Joi.string().required(),
+  farm_id: Joi.string().required(),
+  crop_history: Joi.array().items(Joi.object().unknown(true)).allow(null),
+  chemical_usage_records: Joi.array().items(Joi.object().unknown(true)).allow(null),
+  pest_management_logs: Joi.array().items(Joi.object().unknown(true)).allow(null)
+});
+
 /**
  * POST /api/v1/food/certification/organic-recommend
  * Get organic certification recommendation
  */
-router.post('/certification/organic-recommend', async (req, res) => {
+router.post('/certification/organic-recommend', authMiddleware, validateBody(organicRecommendSchema), async (req, res) => {
   try {
     const {
       batch_id,

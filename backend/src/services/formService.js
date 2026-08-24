@@ -25,14 +25,23 @@ function ensureDefaultStore() {
   };
 }
 
-function readStore() {
+// H11: was fs.readFileSync/writeFileSync/existsSync, which blocks Node's
+// single event loop for every concurrent user on every form request.
+// Switched to fs.promises so form reads/writes no longer stall the process.
+async function readStore() {
   try {
-    if (!fs.existsSync(STORE_PATH)) {
-      fs.writeFileSync(STORE_PATH, JSON.stringify(ensureDefaultStore(), null, 2));
-      return ensureDefaultStore();
+    let raw;
+    try {
+      raw = await fs.promises.readFile(STORE_PATH, 'utf8');
+    } catch (readError) {
+      if (readError.code === 'ENOENT') {
+        const defaultStore = ensureDefaultStore();
+        await fs.promises.writeFile(STORE_PATH, JSON.stringify(defaultStore, null, 2));
+        return defaultStore;
+      }
+      throw readError;
     }
 
-    const raw = fs.readFileSync(STORE_PATH, 'utf8');
     const parsed = JSON.parse(raw);
     return {
       forms: Array.isArray(parsed.forms) ? parsed.forms : [],
@@ -44,9 +53,9 @@ function readStore() {
   }
 }
 
-function writeStore(store) {
+async function writeStore(store) {
   try {
-    fs.writeFileSync(STORE_PATH, JSON.stringify(store, null, 2));
+    await fs.promises.writeFile(STORE_PATH, JSON.stringify(store, null, 2));
     return true;
   } catch (error) {
     logger.error('Unable to persist form store', { error: error.message, stack: error.stack });
@@ -61,7 +70,7 @@ async function ensureDatabaseSchema() {
   }
 
   try {
-    const schema = fs.readFileSync(SCHEMA_PATH, 'utf8');
+    const schema = await fs.promises.readFile(SCHEMA_PATH, 'utf8');
     await pg.query(schema);
     logger.info('Form management schema ready in PostgreSQL');
     return true;
@@ -179,10 +188,10 @@ function normalizeForm(formData, existingForm = null) {
 
 async function listForms(search = '', category = '', status = '') {
   const databaseForms = await loadFormsFromDb();
-  let forms = databaseForms?.forms || readStore().forms;
+  let forms = databaseForms?.forms;
 
-  if (databaseForms === null) {
-    forms = readStore().forms;
+  if (!forms) {
+    forms = (await readStore()).forms;
   }
 
   return forms
@@ -221,9 +230,9 @@ async function createForm(formData) {
     }
   }
 
-  const store = readStore();
+  const store = await readStore();
   store.forms.unshift(normalized);
-  writeStore(store);
+  await writeStore(store);
   return normalized;
 }
 
@@ -250,9 +259,9 @@ async function updateForm(formId, formData) {
     }
   }
 
-  const store = readStore();
+  const store = await readStore();
   store.forms = store.forms.map((form) => (form.id === formId ? normalized : form));
-  writeStore(store);
+  await writeStore(store);
   return normalized;
 }
 
@@ -268,9 +277,9 @@ async function deleteForm(formId) {
     }
   }
 
-  const store = readStore();
+  const store = await readStore();
   store.forms = store.forms.filter((form) => form.id !== formId);
-  writeStore(store);
+  await writeStore(store);
   return { success: true, id: formId };
 }
 
@@ -303,9 +312,9 @@ async function submitForm(formId, payload) {
     }
   }
 
-  const store = readStore();
+  const store = await readStore();
   store.submissions.unshift(submission);
-  writeStore(store);
+  await writeStore(store);
   return submission;
 }
 
@@ -321,7 +330,7 @@ async function listSubmissions(formId) {
     }
   }
 
-  const store = readStore();
+  const store = await readStore();
   return store.submissions.filter((submission) => submission.formId === formId).sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
 }
 

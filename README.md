@@ -439,7 +439,7 @@ Ensure all required environment variables are configured for production deployme
 
 ## 📝 License
 
-Proprietary - Ethnoverde Dynamics Pvt. Ltd.
+Proprietary - Ethnoverde Dynamics Pvt. Ltd. — All Rights Reserved. Contact the repository owner for licensing terms.
 
 ## 📞 Support
 

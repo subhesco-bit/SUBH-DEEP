@@ -4,11 +4,11 @@ The `afrera-api` module contains the backend APIs and services for the AFRERA pr
 
 ## Directory Structure
 
-The `afrera-api` module follows a structured approach to organize its codebase:
+**Note: this is a planned/scaffolded structure — implementation has not been added to `src/` yet.** The tree below documents the intended organization once development starts:
 
 ```
 afrera-api/
-├── src/
+├── src/ (planned)
 │   ├── controllers/        # API controllers for handling requests
 │   ├── models/             # Data models and schemas
 │   ├── routes/             # API route definitions

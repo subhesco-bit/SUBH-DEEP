@@ -64,5 +64,3 @@ This project is licensed under the MIT License. See the LICENSE file for details
 ---
 
 This README provides an overview of the AFRERA Mobile Application, its features, setup instructions, and contribution guidelines. For more detailed documentation, please refer to the main project documentation.
-
-*verified by vibecheck*

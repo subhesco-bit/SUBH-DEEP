@@ -49,5 +49,3 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 ---
 
 For more detailed information about each module, please refer to the respective README files located within each module's directory.
-
-*verified by vibecheck*

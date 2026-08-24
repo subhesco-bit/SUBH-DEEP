@@ -3,7 +3,7 @@
 # to avoid Alpine-specific package manager and shell assumptions.
 
 # Stage 1: Build
-FROM node:18-slim AS builder
+FROM node:20-slim AS builder
 
 WORKDIR /app
 
@@ -11,13 +11,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies using npm in a Debian-slim image.
-RUN npm ci --only=production
+RUN npm ci --omit=dev
 
 # Copy source code
 COPY src ./src
 
 # Stage 2: Production
-FROM node:18-slim AS production
+FROM node:20-slim AS production
 
 WORKDIR /app
 

@@ -38,6 +38,7 @@
 // self-contained. In production this delegates to database/connection.getPostgreSQL().
 
 const { getPostgreSQL } = require('./connection');
+const { logger } = require('../utils/logger');
 
 // Simple in-memory stores used only in test mode
 const testStores = {
@@ -341,16 +342,16 @@ function makeTestPool() {
 
       // Trace all queries in test-mode to help align handlers (temporary)
       if (process.env.NODE_ENV === 'test') {
-        try { console.log('TEST-POOL-ALL SQL:', t, 'params=', JSON.stringify(params)); } catch (e) {}
+        try { console.log('TEST-POOL-ALL SQL:', t, 'params=', JSON.stringify(params)); } catch (e) { logger.debug('pool test-mode operation failed', e); }
       }
 
       // Debug: log any blockchain-related queries when running tests
       if (process.env.NODE_ENV === 'test' && (t.includes('blockchain') || t.includes('chain_of_custody') || t.includes('traceability'))) {
-        try { console.log('TEST-POOL: query=', t, 'params=', JSON.stringify(params)); } catch (e) {}
+        try { console.log('TEST-POOL: query=', t, 'params=', JSON.stringify(params)); } catch (e) { logger.debug('pool test-mode operation failed', e); }
       }
       // Debug: also log AR/VR and nutrition and conversational queries to help align handlers
       if (process.env.NODE_ENV === 'test' && (t.includes('ar_vr') || t.includes('arvr') || t.includes('nutrition') || t.includes('conversation') || t.includes('conversational') || t.includes('voice'))) {
-        try { console.log('TEST-POOL: query (verbose)=', t, 'params=', JSON.stringify(params)); } catch (e) {}
+        try { console.log('TEST-POOL: query (verbose)=', t, 'params=', JSON.stringify(params)); } catch (e) { logger.debug('pool test-mode operation failed', e); }
       }
 
       // INSERT INTO health_profiles ... RETURNING *
@@ -512,7 +513,7 @@ function makeTestPool() {
       // DEBUG: any query touching gi_marketplace_listings
       if (t.includes('gi_marketplace_listings')) {
         if (process.env.NODE_ENV === 'test') {
-          try { console.log('TEST-POOL: gi_marketplace query text=', t, 'params=', JSON.stringify(params)); } catch (e) {}
+          try { console.log('TEST-POOL: gi_marketplace query text=', t, 'params=', JSON.stringify(params)); } catch (e) { logger.debug('pool test-mode operation failed', e); }
         }
       }
 
@@ -606,7 +607,7 @@ function makeTestPool() {
         // Store with the exact transaction hash as key
         testStores.blockchain_transactions.set(txHash, row);
         if (process.env.NODE_ENV === 'test') {
-          try { console.log('TEST-POOL: stored blockchain_transactions key=', txHash, 'hash length=', txHash.length); } catch (e) {}
+          try { console.log('TEST-POOL: stored blockchain_transactions key=', txHash, 'hash length=', txHash.length); } catch (e) { logger.debug('pool test-mode operation failed', e); }
         }
         return { rows: [row] };
       }
@@ -615,7 +616,7 @@ function makeTestPool() {
       if (t.includes('from blockchain_transactions')) {
         const txHash = params[0];
         if (process.env.NODE_ENV === 'test') {
-          try { console.log('TEST-POOL: lookup blockchain_transactions key=', txHash); } catch (e) {}
+          try { console.log('TEST-POOL: lookup blockchain_transactions key=', txHash); } catch (e) { logger.debug('pool test-mode operation failed', e); }
         }
         // Direct key lookup first
         let row = testStores.blockchain_transactions.get(txHash);
@@ -633,7 +634,7 @@ function makeTestPool() {
         }
         
         if (process.env.NODE_ENV === 'test') {
-          try { console.log('TEST-POOL: lookup result=', !!row); } catch (e) {}
+          try { console.log('TEST-POOL: lookup result=', !!row); } catch (e) { logger.debug('pool test-mode operation failed', e); }
         }
         return { rows: row ? [row] : [] };
       }
@@ -678,7 +679,7 @@ function makeTestPool() {
         };
         testStores.blockchain_certificates.set(row.certificate_number, row);
         if (process.env.NODE_ENV === 'test') {
-          try { console.log('TEST-POOL: stored blockchain_certificates key=', row.certificate_number, 'params=', JSON.stringify(params)); } catch (e) {}
+          try { console.log('TEST-POOL: stored blockchain_certificates key=', row.certificate_number, 'params=', JSON.stringify(params)); } catch (e) { logger.debug('pool test-mode operation failed', e); }
         }
         return { rows: [row] };
       }
@@ -687,11 +688,11 @@ function makeTestPool() {
       if (t.includes('from blockchain_certificates')) {
         const certNum = params[0];
         if (process.env.NODE_ENV === 'test') {
-          try { console.log('TEST-POOL: lookup blockchain_certificates key=', certNum); } catch (e) {}
+          try { console.log('TEST-POOL: lookup blockchain_certificates key=', certNum); } catch (e) { logger.debug('pool test-mode operation failed', e); }
         }
         const row = testStores.blockchain_certificates.get(certNum);
         if (process.env.NODE_ENV === 'test') {
-          try { console.log('TEST-POOL: lookup result=', !!row, 'row=', row); } catch (e) {}
+          try { console.log('TEST-POOL: lookup result=', !!row, 'row=', row); } catch (e) { logger.debug('pool test-mode operation failed', e); }
         }
         return { rows: row ? [row] : [] };
       }
@@ -1152,7 +1153,7 @@ function makeTestPool() {
         testStores.arvr_experiences = testStores.arvr_experiences || new Map();
         // Expecting params[0] = id
         const id = params && params.length > 0 ? params[0] : null;
-        try { console.log('TEST-POOL: update ar_vr_experiences called with id=', id, 'currentKeys=', Array.from((testStores.arvr_experiences||new Map()).keys())); } catch(e) {}
+        try { console.log('TEST-POOL: update ar_vr_experiences called with id=', id, 'currentKeys=', Array.from((testStores.arvr_experiences||new Map()).keys())); } catch (e) { logger.debug('pool test-mode operation failed', e); }
         if (!id) return { rows: [] };
         // find row by id
         const existing = Array.from(testStores.arvr_experiences.values()).find(r => r.id === id || r.experience_id === id || r.experienceId === id);
@@ -1371,7 +1372,7 @@ function makeTestPool() {
         // store by session_id so lookups that query by session_id succeed
         testStores.conversation_sessions.set(sessionIdValue, row);
         if (process.env.NODE_ENV === 'test') {
-          try { console.log('TEST-POOL: stored conversation_sessions key=', sessionIdValue, 'row=', JSON.stringify(row)); } catch (e) {}
+          try { console.log('TEST-POOL: stored conversation_sessions key=', sessionIdValue, 'row=', JSON.stringify(row)); } catch (e) { logger.debug('pool test-mode operation failed', e); }
         }
         return { rows: [row] };
       }
@@ -1420,7 +1421,7 @@ function makeTestPool() {
         arr.push(row);
         testStores.conversation_messages.set(sessionId, arr);
         if (process.env.NODE_ENV === 'test') {
-          try { console.log('TEST-POOL: stored conversation_messages for session=', sessionId, 'total messages=', arr.length); } catch (e) {}
+          try { console.log('TEST-POOL: stored conversation_messages for session=', sessionId, 'total messages=', arr.length); } catch (e) { logger.debug('pool test-mode operation failed', e); }
         }
         return { rows: [row] };
       }
@@ -1904,7 +1905,7 @@ function makeTestPool() {
         testStores.product_nutrition = testStores.product_nutrition || new Map();
         testStores.product_nutrition.set(row.product_id, row);
         if (process.env.NODE_ENV === 'test') {
-          try { console.log('TEST-POOL: stored product_nutrition for product=', row.product_id, 'row=', JSON.stringify(row)); } catch (e) {}
+          try { console.log('TEST-POOL: stored product_nutrition for product=', row.product_id, 'row=', JSON.stringify(row)); } catch (e) { logger.debug('pool test-mode operation failed', e); }
         }
         return { rows: [row] };
       }
@@ -1923,12 +1924,12 @@ function makeTestPool() {
             }
           }
           if (process.env.NODE_ENV === 'test') {
-            try { console.log('TEST-POOL: returning product_nutrition with food_name for product=', productId, 'row=', JSON.stringify(row)); } catch (e) {}
+            try { console.log('TEST-POOL: returning product_nutrition with food_name for product=', productId, 'row=', JSON.stringify(row)); } catch (e) { logger.debug('pool test-mode operation failed', e); }
           }
           return { rows: [row] };
         }
         if (process.env.NODE_ENV === 'test') {
-          try { console.log('TEST-POOL: product_nutrition not found for product=', productId); } catch (e) {}
+          try { console.log('TEST-POOL: product_nutrition not found for product=', productId); } catch (e) { logger.debug('pool test-mode operation failed', e); }
         }
         return { rows: [] };
       }

@@ -97,11 +97,13 @@ async function addToSyncQueue(userId, entityType, entityData, operation, priorit
 async function processSyncQueue(userId) {
   try {
     // Get pending sync items for user
+    // SECURITY (H5, fixed 2026-08-16): unparenthesized AND/OR meant the OR
+    // branch had no user_id filter at all, leaking every user's failed sync
+    // items to any caller. Parenthesize so user_id scopes both branches.
     const query = `
       SELECT * FROM sync_queue
       WHERE user_id = $1
-        AND status = 'pending'
-        OR (status = 'failed' AND retry_count < $2)
+        AND (status = 'pending' OR (status = 'failed' AND retry_count < $2))
       ORDER BY priority ASC, created_at ASC
       LIMIT 50
     `;
@@ -161,18 +163,31 @@ async function processSyncQueue(userId) {
     }
 
     // Bulk update failed items
+    // DB (M8, fixed 2026-08-16): each failed item previously got its own
+    // per-row UPDATE round trip, inconsistent with the batched completed-items
+    // path just above. Each item needs a different retry_count/backoff/error
+    // message, so a plain `id = ANY($1)` can't be reused as-is — instead pair
+    // each id with its own row of values via UNNEST and join, giving a single
+    // statement for the whole batch.
     if (failedIds.length > 0) {
-      for (const failed of failedIds) {
-        await pool.query(
-          `UPDATE sync_queue 
-           SET status = 'failed', 
-               retry_count = $1, 
-               next_retry_at = NOW() + INTERVAL '1 second' * $2,
-               error_message = $3
-           WHERE id = $4`,
-          [failed.retryCount, failed.backoffTime, failed.errorMessage, failed.id]
-        );
-      }
+      await pool.query(
+        `UPDATE sync_queue AS sq
+         SET status = 'failed',
+             retry_count = v.retry_count,
+             next_retry_at = NOW() + INTERVAL '1 second' * v.backoff_time,
+             error_message = v.error_message
+         FROM (
+           SELECT * FROM UNNEST($1::int[], $2::int[], $3::numeric[], $4::text[])
+             AS t(id, retry_count, backoff_time, error_message)
+         ) AS v
+         WHERE sq.id = v.id`,
+        [
+          failedIds.map(f => f.id),
+          failedIds.map(f => f.retryCount),
+          failedIds.map(f => f.backoffTime),
+          failedIds.map(f => f.errorMessage)
+        ]
+      );
     }
 
     return {

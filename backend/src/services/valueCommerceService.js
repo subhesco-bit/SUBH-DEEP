@@ -405,25 +405,46 @@ async function generateValueRecommendations(userId, limit = 10) {
     });
 
     // Save recommendations
-    for (const rec of recommendations) {
-      await pool.query(
-        `INSERT INTO value_recommendations 
-         (user_id, product_id, recommendation_score, recommendation_reasons, 
-          value_match_score, price_value_ratio)
-         VALUES ($1, $2, $3, $4, $5, $6)
-         ON CONFLICT (user_id, product_id)
-         DO UPDATE SET
-           recommendation_score = EXCLUDED.recommendation_score,
-           generated_at = CURRENT_TIMESTAMP`,
-        [
-          userId,
-          rec.product_id,
-          rec.recommendation_score,
-          JSON.stringify(rec.recommendation_reasons),
-          rec.value_match_score,
-          rec.price_value_ratio
-        ]
-      );
+    // DB (M7, fixed 2026-08-16): previously each row was written with its own
+    // round trip against the shared pool and no transaction, so a mid-loop
+    // failure (e.g. a dropped connection on row 8 of 20) left the user with a
+    // partially-updated recommendation set and no rollback. Match the
+    // BEGIN/COMMIT/ROLLBACK-on-one-checked-out-client pattern already used by
+    // orderService.js's checkout transaction and financialService.js's EMI
+    // generation/payment transactions.
+    if (recommendations.length > 0) {
+      const client = await pool.connect();
+      try {
+        await client.query('BEGIN');
+
+        for (const rec of recommendations) {
+          await client.query(
+            `INSERT INTO value_recommendations
+             (user_id, product_id, recommendation_score, recommendation_reasons,
+              value_match_score, price_value_ratio)
+             VALUES ($1, $2, $3, $4, $5, $6)
+             ON CONFLICT (user_id, product_id)
+             DO UPDATE SET
+               recommendation_score = EXCLUDED.recommendation_score,
+               generated_at = CURRENT_TIMESTAMP`,
+            [
+              userId,
+              rec.product_id,
+              rec.recommendation_score,
+              JSON.stringify(rec.recommendation_reasons),
+              rec.value_match_score,
+              rec.price_value_ratio
+            ]
+          );
+        }
+
+        await client.query('COMMIT');
+      } catch (txErr) {
+        await client.query('ROLLBACK');
+        throw txErr;
+      } finally {
+        client.release();
+      }
     }
 
     return recommendations;

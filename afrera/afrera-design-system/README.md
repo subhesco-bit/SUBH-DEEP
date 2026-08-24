@@ -40,5 +40,3 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 ---
 
 For more information, please refer to the documentation in the [afrera-docs](../afrera-docs/README.md) directory.
-
-*verified by vibecheck*

@@ -45,5 +45,3 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 ---
 
 For further information, refer to the documentation of other modules within the AFRERA project.
-
-*verified by vibecheck*

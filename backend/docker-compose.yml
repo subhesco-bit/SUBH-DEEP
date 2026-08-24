@@ -1,14 +1,24 @@
 version: '3.8'
 
+# LOCAL DEV ONLY. Every ${VAR:-default} below falls back to a well-known,
+# publicly-documented placeholder purely so `docker compose up` works out of
+# the box on a laptop with no setup. These fallbacks must never be treated as
+# real secrets and must never be reused in any shared/staging/production
+# environment. To override locally, create a git-ignored `.env` file next to
+# this compose file (backend/.env, already covered by the repo's .gitignore)
+# with real local values - docker compose loads it automatically. In any
+# non-local environment, secrets must come from a real secrets manager
+# (e.g. AWS Secrets Manager / Vault / your platform's secret store), injected
+# as real environment variables - never hardcoded here.
 services:
   # PostgreSQL Database
   postgres:
     image: postgres:15
     container_name: afrera-postgres
     environment:
-      POSTGRES_USER: afrera
-      POSTGRES_PASSWORD: afrera_password
-      POSTGRES_DB: afrera_db
+      POSTGRES_USER: ${POSTGRES_USER:-afrera}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-afrera_password}
+      POSTGRES_DB: ${POSTGRES_DB:-afrera_db}
     ports:
       - "5432:5432"
     volumes:
@@ -27,9 +37,9 @@ services:
     image: mongo:7
     container_name: afrera-mongodb
     environment:
-      MONGO_INITDB_ROOT_USERNAME: afrera
-      MONGO_INITDB_ROOT_PASSWORD: afrera_password
-      MONGO_INITDB_DATABASE: afrera_mongo
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-afrera}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-afrera_password}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE:-afrera_mongo}
     ports:
       - "27017:27017"
     volumes:
@@ -70,13 +80,13 @@ services:
       PORT: 3001
       PG_HOST: postgres
       PG_PORT: 5432
-      PG_DATABASE: afrera_db
-      PG_USER: afrera
-      PG_PASSWORD: afrera_password
-      MONGO_URI: mongodb://afrera:afrera_password@mongodb:27017/afrera_mongo?authSource=admin
+      PG_DATABASE: ${POSTGRES_DB:-afrera_db}
+      PG_USER: ${POSTGRES_USER:-afrera}
+      PG_PASSWORD: ${POSTGRES_PASSWORD:-afrera_password}
+      MONGO_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME:-afrera}:${MONGO_INITDB_ROOT_PASSWORD:-afrera_password}@mongodb:27017/${MONGO_INITDB_DATABASE:-afrera_mongo}?authSource=admin
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      JWT_SECRET: your-super-secret-key-change-in-production
+      JWT_SECRET: ${JWT_SECRET:-your-super-secret-key-change-in-production}
       JWT_ACCESS_EXPIRY: 15m
       JWT_REFRESH_EXPIRY: 7d
       FRONTEND_URL: http://localhost:3000
@@ -102,8 +112,8 @@ services:
     image: rabbitmq:3-management
     container_name: afrera-rabbitmq
     environment:
-      RABBITMQ_DEFAULT_USER: afrera
-      RABBITMQ_DEFAULT_PASS: afrera_password
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-afrera}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-afrera_password}
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -118,6 +128,12 @@ services:
       - afrera-network
 
   # Elasticsearch
+  # DEV-ONLY: xpack.security.enabled=false runs this node with no auth at all.
+  # That is only acceptable because the port below is bound to 127.0.0.1 (not
+  # reachable from outside this machine) and this compose file is local-dev
+  # only. Never disable security like this, and never publish 9200 to
+  # 0.0.0.0, in any shared/staging/production compose or deployment file -
+  # enable xpack.security and put Elasticsearch behind real auth there.
   elasticsearch:
     image: elasticsearch:8.11.0
     container_name: afrera-elasticsearch
@@ -126,7 +142,7 @@ services:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - xpack.security.enabled=false
     ports:
-      - "9200:9200"
+      - "127.0.0.1:9200:9200"
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
     healthcheck:

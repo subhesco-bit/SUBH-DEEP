@@ -5,6 +5,12 @@
  * farmerService also exposes wallet functions (getFarmerWallet, depositToWallet, etc.) —
  * those are already wired up in farmerPortalEnhancements.js. This file only covers the
  * profile/directory/certification/FPO functions that had no route at all.
+ *
+ * (L10) Any authenticated user can look up any farmer's profile, FDI score, and
+ * certifications by ID — intentional: this is a B2B agri-marketplace directory
+ * (buyers/lenders/insurers vetting a farmer before doing business need this),
+ * not a private-record store, so it's scoped to "logged in" rather than
+ * "owner only". Writes stay locked down separately (see adminMiddleware below).
  */
 
 const express = require('express');

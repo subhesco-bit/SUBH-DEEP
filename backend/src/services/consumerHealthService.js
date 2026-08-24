@@ -77,7 +77,7 @@ router.post('/health-profiles', authMiddleware, async (req, res) => {
     // Defensive fallback: if DB/mock returned empty/blank, echo created resource
     if (!result || (typeof result === 'string') || (Object.keys(result).length === 0)) {
       const fallback = Object.assign({}, req.body, { id: `hp-fallback-${Date.now()}`, user_id: req.user.id });
-      try { pool.setTestData('health_profiles', req.user.id, fallback, false); } catch(e){}
+      try { pool.setTestData('health_profiles', req.user.id, fallback, false); } catch (e) { logger.debug('consumerHealthService test-mode fallback store failed', e); }
       return res.status(201).json(fallback);
     }
     res.status(201).json(result);
@@ -152,7 +152,7 @@ router.get('/health-profiles', authMiddleware, async (req, res) => {
         medications: {},
         health_goals: []
       };
-      try { pool.setTestData('health_profiles', req.user.id, fallback, false); } catch (e) {}
+      try { pool.setTestData('health_profiles', req.user.id, fallback, false); } catch (e) { logger.debug('consumerHealthService test-mode fallback store failed', e); }
       return res.json(fallback);
     }
     res.status(404).json({ error: 'Health profile not found' });
@@ -211,7 +211,7 @@ router.post('/dietary-profiles', authMiddleware, async (req, res) => {
     const result = await createDietaryProfile(req.user.id, req.body);
     if (!result || (typeof result === 'string') || (Object.keys(result).length === 0)) {
       const fallback = Object.assign({}, req.body, { id: `dp-fallback-${Date.now()}`, user_id: req.user.id });
-      try { pool.setTestData('dietary_profiles', req.user.id, fallback, false); } catch(e){}
+      try { pool.setTestData('dietary_profiles', req.user.id, fallback, false); } catch (e) { logger.debug('consumerHealthService test-mode fallback store failed', e); }
       return res.status(201).json(fallback);
     }
     res.status(201).json(result);
@@ -261,7 +261,7 @@ router.post('/health-metrics', authMiddleware, async (req, res) => {
     const result = await logHealthMetric(req.user.id, req.body);
     if (!result || (typeof result === 'string') || (Object.keys(result).length === 0)) {
       const fallback = Object.assign({}, req.body, { id: `hm-fallback-${Date.now()}`, user_id: req.user.id });
-      try { pool.setTestData('health_metrics', req.user.id, fallback, true); } catch(e){}
+      try { pool.setTestData('health_metrics', req.user.id, fallback, true); } catch (e) { logger.debug('consumerHealthService test-mode fallback store failed', e); }
       return res.status(201).json(fallback);
     }
     res.status(201).json(result);
@@ -350,7 +350,7 @@ router.post('/health-goals', authMiddleware, async (req, res) => {
     const result = await createHealthGoal(req.user.id, req.body);
     if (!result || (typeof result === 'string') || (Object.keys(result).length === 0)) {
       const fallback = Object.assign({}, req.body, { id: `hg-fallback-${Date.now()}`, user_id: req.user.id, status: 'active' });
-      try { pool.setTestData('health_goals', req.user.id, fallback, true); } catch(e){}
+      try { pool.setTestData('health_goals', req.user.id, fallback, true); } catch (e) { logger.debug('consumerHealthService test-mode fallback store failed', e); }
       return res.status(201).json(fallback);
     }
     res.status(201).json(result);
@@ -430,7 +430,7 @@ router.post('/dietary-recommendations', authMiddleware, async (req, res) => {
     const result = await generateDietaryRecommendation(req.user.id, req.body);
     if (!result || (typeof result === 'string') || (Object.keys(result).length === 0)) {
       const fallback = Object.assign({}, req.body, { id: `dr-fallback-${Date.now()}`, user_id: req.user.id });
-      try { pool.setTestData('dietary_recommendations', req.user.id, fallback, true); } catch(e){}
+      try { pool.setTestData('dietary_recommendations', req.user.id, fallback, true); } catch (e) { logger.debug('consumerHealthService test-mode fallback store failed', e); }
       return res.status(201).json(fallback);
     }
     res.status(201).json(result);
@@ -512,7 +512,7 @@ router.post('/health-alerts', authMiddleware, async (req, res) => {
     const result = await createHealthAlert(req.user.id, req.body);
     if (!result || (typeof result === 'string') || (Object.keys(result).length === 0)) {
       const fallback = Object.assign({}, req.body, { id: `ha-fallback-${Date.now()}`, user_id: req.user.id });
-      try { pool.setTestData('health_alerts', req.user.id, fallback, true); } catch(e){}
+      try { pool.setTestData('health_alerts', req.user.id, fallback, true); } catch (e) { logger.debug('consumerHealthService test-mode fallback store failed', e); }
       return res.status(201).json(fallback);
     }
     res.status(201).json(result);
@@ -603,7 +603,7 @@ router.post('/food-consumption', authMiddleware, async (req, res) => {
     const result = await logFoodConsumption(req.user.id, req.body);
     if (!result || (typeof result === 'string') || (Object.keys(result).length === 0)) {
       const fallback = Object.assign({}, req.body, { id: `fc-fallback-${Date.now()}`, user_id: req.user.id });
-      try { pool.setTestData('food_consumption_logs', req.user.id, fallback, true); } catch(e){}
+      try { pool.setTestData('food_consumption_logs', req.user.id, fallback, true); } catch (e) { logger.debug('consumerHealthService test-mode fallback store failed', e); }
       return res.status(201).json(fallback);
     }
     res.status(201).json(result);

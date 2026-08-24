@@ -5,7 +5,7 @@
 
 const { logger } = require('../utils/logger');
 const { aiAPI } = require('./aiService');
-const { socketServer } = require('../websocket');
+const { sendNotification } = require('../websocket');
 const { authMiddleware } = require('../middleware/auth');
 
 /**
@@ -132,7 +132,7 @@ async function submitBid(bidData) {
 
     // Notify buyer
     const order = await getPreSeasonOrder(order_id);
-    socketServer.sendNotification(order.buyer_id, {
+    sendNotification(order.buyer_id, {
       type: 'new_bid_received',
       order_id: order_id,
       bid_id: bid.bid_id,
@@ -192,7 +192,7 @@ async function selectWinningBid(orderId, selectionCriteria) {
 
     // Notify selected farmers
     for (const selectedBid of selection.selected_bids) {
-      socketServer.sendNotification(selectedBid.farmer_id, {
+      sendNotification(selectedBid.farmer_id, {
         type: 'bid_selected',
         order_id: orderId,
         bid_id: selectedBid.bid_id,
@@ -568,7 +568,7 @@ async function releaseEscrowPayment(contractId, milestoneId) {
 async function notifyStakeholders(contract, milestone) {
   // Notify stakeholders
   for (const farmer of contract.farmers) {
-    socketServer.sendNotification(farmer.farmer_id, {
+    sendNotification(farmer.farmer_id, {
       type: 'milestone_updated',
       contract_id: contract.contract_id,
       milestone: milestone.milestone_type,

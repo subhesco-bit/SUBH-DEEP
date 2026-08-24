@@ -43,11 +43,11 @@ To get started with the AFRERA Platform, follow these steps:
 
 ## Directory Structure
 
-The `src` directory contains the source code for the platform libraries. It is organized as follows:
+**Note: this is a planned/scaffolded structure — implementation has not been added to `src/` yet.** Once development starts, the `src` directory is intended to be organized as follows:
 
 ```
 afrera-platform/
-└── src/
+└── src/ (planned)
     ├── models/
     ├── utils/
     ├── auth/

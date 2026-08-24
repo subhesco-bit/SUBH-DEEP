@@ -6,14 +6,51 @@
 const { logger } = require('../utils/logger');
 const { getPostgreSQL } = require('../database/connection');
 const { authMiddleware } = require('../middleware/auth');
+const cache = require('../cache/redis');
+
+// H10: marketplace product listing/detail reads are among the highest-traffic
+// READ paths in the app (AUDIT_PERF.md #3) but Redis (backend/src/cache/redis.js)
+// was wired into 0 of 109 services. Wired in here as a read-through cache.
+// cache.get() already returns null on any Redis error (see redis.js); the
+// helpers below additionally swallow cache.set()/delPattern() errors so a
+// down/unreachable Redis (the default in this sandbox) degrades to "always
+// hit Postgres" instead of throwing — same graceful-fallback pattern already
+// used for Postgres/Mongo connection failures elsewhere in this codebase.
+const PRODUCT_LIST_TTL = 60; // seconds — listings change often (stock, price)
+const PRODUCT_ITEM_TTL = 300; // seconds — single-product reads are steadier
+
+async function cacheSetSafe(key, value, ttl) {
+  try {
+    await cache.set(key, value, ttl);
+  } catch (error) {
+    logger.debug('Cache set skipped (Redis unavailable)', { key, error: error.message });
+  }
+}
+
+async function cacheInvalidateProducts(productId) {
+  try {
+    await cache.delPattern('products:list:*');
+    if (productId) {
+      await cache.del(`products:item:${productId}`);
+    }
+  } catch (error) {
+    logger.debug('Cache invalidation skipped (Redis unavailable)', { productId, error: error.message });
+  }
+}
 
 /**
  * Get all products with filtering and pagination
  */
 async function getProducts(filters = {}, pagination = {}) {
   try {
+    const cacheKey = `products:list:${JSON.stringify(filters)}:${JSON.stringify(pagination)}`;
+    const cached = await cache.get(cacheKey);
+    if (cached !== null) {
+      return cached;
+    }
+
     const pg = getPostgreSQL();
-    
+
     const {
       category_id,
       state_id,
@@ -111,8 +148,8 @@ async function getProducts(filters = {}, pagination = {}) {
     params.push(limit, offset);
     
     const result = await pg.query(query, params);
-    
-    return {
+
+    const response = {
       products: result.rows,
       pagination: {
         page,
@@ -121,6 +158,10 @@ async function getProducts(filters = {}, pagination = {}) {
         totalPages: Math.ceil(total / limit)
       }
     };
+
+    await cacheSetSafe(cacheKey, response, PRODUCT_LIST_TTL);
+
+    return response;
   } catch (error) {
     logger.error('Error fetching products', { error: error.message, stack: error.stack });
     throw error;
@@ -132,8 +173,14 @@ async function getProducts(filters = {}, pagination = {}) {
  */
 async function getProductById(productId) {
   try {
+    const cacheKey = `products:item:${productId}`;
+    const cached = await cache.get(cacheKey);
+    if (cached !== null) {
+      return cached;
+    }
+
     const pg = getPostgreSQL();
-    
+
     const query = `
       SELECT p.*, c.name as category_name, s.name as state_name, u.symbol as unit_symbol,
              (SELECT json_agg(json_build_object('id', id, 'type', certification_type, 'certificate_number', certificate_number, 'expiry_date', expiry_date))
@@ -144,13 +191,15 @@ async function getProductById(productId) {
       LEFT JOIN units u ON p.unit_id = u.id
       WHERE p.id = $1
     `;
-    
+
     const result = await pg.query(query, [productId]);
-    
+
     if (result.rows.length === 0) {
       throw new Error('Product not found');
     }
-    
+
+    await cacheSetSafe(cacheKey, result.rows[0], PRODUCT_ITEM_TTL);
+
     return result.rows[0];
   } catch (error) {
     logger.error('Error fetching product', { error: error.message, stack: error.stack });
@@ -207,7 +256,9 @@ async function createProduct(productData) {
     const result = await pg.query(query, values);
     
     logger.info(`Product created: ${result.rows[0].name} (${result.rows[0].id})`);
-    
+
+    await cacheInvalidateProducts(result.rows[0].id);
+
     return result.rows[0];
   } catch (error) {
     logger.error('Error creating product', { error: error.message, stack: error.stack });
@@ -290,7 +341,9 @@ async function updateProduct(productId, productData) {
     }
     
     logger.info(`Product updated: ${result.rows[0].name} (${productId})`);
-    
+
+    await cacheInvalidateProducts(productId);
+
     return result.rows[0];
   } catch (error) {
     logger.error('Error updating product', { error: error.message, stack: error.stack });
@@ -319,7 +372,9 @@ async function deleteProduct(productId) {
     }
     
     logger.info(`Product deleted: ${result.rows[0].name} (${productId})`);
-    
+
+    await cacheInvalidateProducts(productId);
+
     return result.rows[0];
   } catch (error) {
     logger.error('Error deleting product', { error: error.message, stack: error.stack });

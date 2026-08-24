@@ -259,17 +259,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Terraform Init & Plan (infra)
-        uses: hashicorp/setup-terraform@v2
-        with:
-          cli_config_credentials_token: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      - name: Run terraform plan
-        working-directory: ./infra/terraform
-        run: |
-          terraform init -input=false
-          terraform validate
-          terraform plan -out=tfplan
-
       # Lint is advisory for now: there are ~221 unused-import warnings and the
       # script runs with --max-warnings 0. Drop continue-on-error once cleaned.
       - name: Lint
@@ -278,6 +267,37 @@ jobs:
 
       - name: Build
         run: npm run build
+
+  terraform:
+    name: Terraform - init & plan (infra)
+    runs-on: ubuntu-latest
+    # Independent of frontend lint/build: this previously ran as a step inside
+    # the `frontend` job using `cli_config_credentials_token` (a Terraform
+    # Cloud/Enterprise host-token field), which cannot authenticate the `aws`
+    # provider / `s3` backend that infra/terraform actually uses. That made an
+    # unrelated Terraform plan block frontend (and therefore docker/desktop,
+    # which need frontend) the moment AWS_ACCESS_KEY_ID existed as a secret.
+    # Split into its own job with real AWS credentials so a Terraform-only
+    # failure no longer fails frontend/docker/desktop.
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION || 'us-east-1' }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform init, validate, plan
+        working-directory: ./infra/terraform
+        run: |
+          terraform init -input=false
+          terraform validate
+          terraform plan -out=tfplan
 
   mlflow_deploy:
     name: MLflow - staging deploy (dry-run)
@@ -306,7 +326,7 @@ jobs:
     name: Build backend image
     runs-on: ubuntu-latest
     needs: [backend]
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
 
     steps:
       - uses: actions/checkout@v4

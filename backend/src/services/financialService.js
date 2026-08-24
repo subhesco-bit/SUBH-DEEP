@@ -157,6 +157,12 @@ async function generateEMISchedule(loan) {
         [maturityDate, loan.id]
       );
 
+      // L12: batched into one multi-row INSERT instead of a per-instalment round
+      // trip — dueDate/principal/interest/emi are all computed in JS from loop
+      // index i with no per-row DB read/side effect in between, so batching is
+      // a pure win (also cuts the exposure window discussed in BR-08 above).
+      const emiRows = [];
+      const emiParams = [];
       for (let i = 1; i <= loan.term_months; i++) {
         const dueDate = new Date(startDate);
         dueDate.setMonth(dueDate.getMonth() + i);
@@ -164,11 +170,17 @@ async function generateEMISchedule(loan) {
         const principal = emi - (loan.amount * monthlyRate);
         const interest = emi - principal;
 
+        const base = emiParams.length;
+        emiRows.push(`($${base + 1}, $${base + 2}, $${base + 3}, $${base + 4}, $${base + 5}, $${base + 6}, 'pending')`);
+        emiParams.push(loan.id, i, dueDate, principal, interest, emi);
+      }
+
+      if (emiRows.length > 0) {
         await emiClient.query(
           `INSERT INTO emi_schedule (loan_id, installment_number, due_date, principal_amount,
                                      interest_amount, total_amount, status)
-           VALUES ($1, $2, $3, $4, $5, $6, 'pending')`,
-          [loan.id, i, dueDate, principal, interest, emi]
+           VALUES ${emiRows.join(', ')}`,
+          emiParams
         );
       }
 

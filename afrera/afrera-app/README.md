@@ -69,5 +69,3 @@ This project is licensed under the MIT License - see the [LICENSE](../LICENSE) f
 ---
 
 This README provides a comprehensive overview of the `afrera-app` module, detailing its purpose, features, technology stack, and instructions for setup and usage.
-
-*verified by vibecheck*

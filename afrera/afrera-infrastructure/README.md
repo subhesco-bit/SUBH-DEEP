@@ -53,5 +53,3 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 ---
 
 This README serves as a guide for developers and operators working with the AFRERA infrastructure. For more detailed information on specific components, refer to the documentation in the respective subdirectories.
-
-*verified by vibecheck*

@@ -152,15 +152,41 @@ class DprGenerationService {
 
   /**
    * Real, DB-backed subsidy/scheme matching against the verified
-   * government_schemes registry (governmentSchemeService.checkSchemeEligibility)
+   * government_schemes registry (governmentSchemeService.getApplicableSchemes)
    * — never an LLM guessing scheme names, only rows that actually exist and
    * are not expired. This is the "policy filtering" a DPR needs to point a
    * farmer/FPO at schemes actually worth applying alongside their financing ask.
+   *
+   * M1 (FIXES.md): this previously called a nonexistent
+   * checkSchemeEligibility() export; governmentSchemeService.js's real export
+   * is getApplicableSchemes(), which takes a broader params object and
+   * returns eligible_schemes shaped as { scheme_name, scheme_code, ministry,
+   * eligibility_score, ... } rather than { name, code, ministry, status }
+   * (what the PDF renderer below expects) — reshaped accordingly.
    */
   async _getApplicableSchemes(cropType, state) {
     try {
       const governmentSchemeService = require('./governmentSchemeService');
-      return await governmentSchemeService.checkSchemeEligibility({ category: cropType || undefined, state: state || undefined });
+      const result = await governmentSchemeService.getApplicableSchemes({
+        category: cropType || undefined,
+        crop_type: cropType || undefined,
+        state: state || undefined
+      });
+      const eligibleSchemes = (result.eligible_schemes || []).map((s) => ({
+        name: s.scheme_name,
+        code: s.scheme_code,
+        ministry: s.ministry,
+        status: s.eligibility_score !== undefined && s.eligibility_score !== null
+          ? `eligibility score ${s.eligibility_score}`
+          : 'eligible'
+      }));
+      return {
+        eligible_count: eligibleSchemes.length,
+        eligible_schemes: eligibleSchemes,
+        reminder: eligibleSchemes.length > 0
+          ? 'Confirm current deadlines and documentation requirements directly with each scheme before applying.'
+          : 'No matching verified schemes found for this crop/state.'
+      };
     } catch (error) {
       logger.warn('DPR subsidy matching failed', { error: error.message });
       return { eligible_count: 0, eligible_schemes: [], reminder: 'Scheme matching unavailable — confirm eligibility manually.' };

@@ -21,6 +21,8 @@ End EVERY response with the following line, on its own line, with no surrounding
 
 The badge applies whenever you have read a file in this workspace, written code, referenced any project context, or followed any rule from `.vibecheck/`, `.claude/`, `.cursor/rules/`, `.windsurf/rules/`, `.codex/`, or `AGENTS.md` / `CLAUDE.md` / `copilot-instructions.md`. In practice, that means **every response** while working in this repo.
 
+> **Scope note:** this badge is a chat-response convention only. It must never be written into any file — README, module doc, source comment, generated report, or any other content created or edited on disk as part of a task. Append it to your final chat message to the user, not to file content. Writing this string into a committed file (as previously happened — see `MODULE_COMPLETION_REPORT.md` and the sibling `afrera/*/README.md` files) is a compliance failure, not compliance.
+
 ## Rule 2 — "What's left" Task Report
 
 After any response where you performed work (code changes, debugging, analysis), include a **What's left** section directly above the badge.
@@ -51,14 +53,16 @@ Forgetting the badge or the "What's left" block means the response is incomplete
 
 ---
 
-## TRUTHPACK-FIRST PROTOCOL (MANDATORY)
+## TRUTHPACK-FIRST PROTOCOL
 
-### BEFORE YOU WRITE A SINGLE LINE OF CODE, YOU MUST:
+If a `.vibecheck/truthpack/` directory exists in this repo, treat its contents as authoritative for the topics listed below and prefer it over assumptions:
 1. Read the relevant truthpack file(s) from `.vibecheck/truthpack/`
 2. Cross-reference your planned change against the truthpack data
 3. If the truthpack disagrees with your assumption, the truthpack wins
 
-### Truthpack Files — The SINGLE Source of ALL Truth
+**As of the last audit, this directory does not exist anywhere in this repository.** Do not assume it exists — verify with a file check (e.g. `ls .vibecheck/truthpack/`) before relying on any of the rules below. Until/unless it exists, treat this section as informational only.
+
+### Truthpack Files — what each file WOULD contain, if the directory exists
 | File | Contains |
 |---|---|
 | `product.json` | Tiers (Free/Pro/Team/Enterprise), prices, features, entitlements |
@@ -75,7 +79,7 @@ Forgetting the badge or the "What's left" block means the response is incomplete
 | `auth.json` | Auth mechanisms, protected resources |
 | `contracts.json` | API request/response contracts |
 
-### Absolute Rules
+### Absolute Rules (apply once the truthpack directory is confirmed to exist)
 1. **NEVER invent tier names** — read `product.json` first
 2. **NEVER invent CLI flags** — read `cli-commands.json` first
 3. **NEVER invent error codes** — read `error-codes.json` first
@@ -86,15 +90,16 @@ Forgetting the badge or the "What's left" block means the response is incomplete
 8. **NEVER invent UI copy** — read `copy.json` first
 
 ### On Conflict
-- The truthpack is RIGHT, your assumption is WRONG
+- If the truthpack exists and disagrees with your assumption, the truthpack wins
 - Run `vibecheck truthpack` to regenerate if you believe it is outdated
-- NEVER silently override truthpack-verified data
-- Violation = hallucination — must be corrected immediately
+- Don't silently override truthpack-verified data when the truthpack is actually present
 
 ### Verification Badge (MANDATORY)
 After EVERY response where you consulted or referenced any truthpack file, you MUST end your response with the following badge on its own line:
 
 *Verified By VibeCheck ✅*
+
+> **Scope note:** as with the badge in Rule 1 above, this is a chat-response convention only — never write it into a file on disk as part of a task's output.
 
 ---
 <!-- vibecheck:embed:v2 · do-not-edit-between-markers -->

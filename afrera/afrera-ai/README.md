@@ -4,11 +4,11 @@ The `afrera-ai` module contains the AI models and services that power various fu
 
 ## Directory Structure
 
-The `afrera-ai` module follows a structured approach to organize its components:
+**Note: this is a planned/scaffolded structure — implementation has not been added to `src/` yet.** The tree below documents the intended organization once development starts:
 
 ```
 afrera-ai/
-├── src/                  # Source code for AI-related functionalities
+├── src/                  # Source code for AI-related functionalities (planned)
 │   ├── models/           # AI models implementation
 │   ├── services/         # Services for AI functionalities
 │   └── utils/            # Utility functions for AI processing
@@ -46,5 +46,3 @@ This project is licensed under the MIT License. See the LICENSE file for details
 ---
 
 This README provides an overview of the `afrera-ai` module, its structure, features, and instructions for getting started. For more detailed documentation, refer to the specific files within the `src` directory.
-
-*verified by vibecheck*

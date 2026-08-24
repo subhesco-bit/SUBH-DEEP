@@ -294,6 +294,29 @@ class LogisticsEnhancementService {
 
       query += ' ORDER BY timestamp DESC';
 
+      // PERF (M9, fixed 2026-08-16): with no date range supplied, this
+      // previously had no LIMIT at all and returned a shipment's entire
+      // sensor-reading history (temperature_readings is a periodic IoT
+      // time-series table) in one round trip. Default to a bounded page —
+      // capped at 1000, defaulting to 500 — and support the same
+      // { page, limit } offset-pagination convention used by the M0xx
+      // module listItems() functions, so a caller can page through more
+      // history instead of only ever getting the most recent page.
+      // Return shape is intentionally unchanged (still a plain rows array,
+      // not { items, pagination } like M0xx) to stay compatible with the
+      // existing route handlers that pass this result straight to res.json().
+      const limit = Math.min(Math.max(parseInt(filters.limit, 10) || 500, 1), 1000);
+      const page = Math.max(parseInt(filters.page, 10) || 1, 1);
+      const offset = (page - 1) * limit;
+
+      paramCount++;
+      query += ` LIMIT $${paramCount}`;
+      params.push(limit);
+
+      paramCount++;
+      query += ` OFFSET $${paramCount}`;
+      params.push(offset);
+
       const result = await this.pool.query(query, params);
       return result.rows;
     } catch (error) {

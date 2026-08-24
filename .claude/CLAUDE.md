@@ -41,14 +41,16 @@ You are the **orchestrator**. You manage subagents via `Task()`.
 2. Auditors run in parallel; fixers run in sequence.
 3. All outputs go to `.claude/audits/`.
 
-## TRUTHPACK-FIRST PROTOCOL (MANDATORY)
+## TRUTHPACK-FIRST PROTOCOL
 
-### BEFORE YOU WRITE A SINGLE LINE OF CODE, YOU MUST:
+If a `.vibecheck/truthpack/` directory exists in this repo, treat its contents as authoritative for the topics listed below and prefer it over assumptions:
 1. Read the relevant truthpack file(s) from `.vibecheck/truthpack/`
 2. Cross-reference your planned change against the truthpack data
 3. If the truthpack disagrees with your assumption, the truthpack wins
 
-### Truthpack Files — The SINGLE Source of ALL Truth
+**As of the last audit, this directory does not exist anywhere in this repository.** Do not assume it exists — verify with a file check (e.g. `ls .vibecheck/truthpack/`) before relying on any of the rules below. Until/unless it exists, treat this section as informational only.
+
+### Truthpack Files — what each file WOULD contain, if the directory exists
 | File | Contains |
 |---|---|
 | `product.json` | Tiers (Free/Pro/Team/Enterprise), prices, features, entitlements |
@@ -65,7 +67,7 @@ You are the **orchestrator**. You manage subagents via `Task()`.
 | `auth.json` | Auth mechanisms, protected resources |
 | `contracts.json` | API request/response contracts |
 
-### Absolute Rules
+### Absolute Rules (apply once the truthpack directory is confirmed to exist)
 1. **NEVER invent tier names** — read `product.json` first
 2. **NEVER invent CLI flags** — read `cli-commands.json` first
 3. **NEVER invent error codes** — read `error-codes.json` first
@@ -76,15 +78,15 @@ You are the **orchestrator**. You manage subagents via `Task()`.
 8. **NEVER invent UI copy** — read `copy.json` first
 
 ### On Conflict
-- The truthpack is RIGHT, your assumption is WRONG
+- If the truthpack exists and disagrees with your assumption, the truthpack wins
 - Run `vibecheck truthpack` to regenerate if you believe it is outdated
-- NEVER silently override truthpack-verified data
-- Violation = hallucination — must be corrected immediately
+- Don't silently override truthpack-verified data when the truthpack is actually present
 
 ### Verification Badge (MANDATORY)
 After EVERY response where you consulted or referenced any truthpack file, you MUST end your response with the following badge on its own line:
 
 *Verified By VibeCheck ✅*
 
+> **Scope note:** this badge is a chat-response convention only — it must never be written into any file (README, module doc, source comment, generated report, etc.) created or edited on disk as part of a task. This is the root cause of the stray `*verified by vibecheck*` text previously found baked into 12 committed files and the raw chat transcript at `afrera/.github/workflows` — do not repeat that failure mode.
 
-**Violation of truthpack data = hallucination. The truthpack is ALWAYS right.**
+**When the truthpack is genuinely present and consulted, treat conflicts with it as taking priority over assumptions — but this only applies once its existence is verified, not by default.**

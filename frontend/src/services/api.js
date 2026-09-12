@@ -1828,7 +1828,7 @@ export const ecommerceAPI = {
 };
 
 export const ecommerceMarketingAPI = {
-  getEcommerceMarketing: () => api.get('/ecommerce-marketing'),
+  getEcommerceMarketing: (filters) => api.get('/ecommerce-marketing', { params: filters }),
   runMarketingCampaign: (data) => api.post('/ecommerce-marketing/campaign', data),
 };
 
@@ -2280,8 +2280,7 @@ export const sellerVerificationsAPI = {
 };
 
 export const sellerRankingAPI = {
-  getSellerRankings: () => api.get('/seller-ranking'),
-  rankSeller: (id, data) => api.post(`/seller-ranking/${id}`, data),
+  getSellerRankings: (params) => api.get('/seller-ranking', { params }),
 };
 
 export const seedVaultAPI = {
@@ -6832,7 +6831,7 @@ export const blockchainTraceabilityAPI = {
 };
 
 export const organicTraceabilityAPI = {
-  getConsumerTransparency: (params) => api.get('/organic-traceability/consumer-transparency', { params }),
+  getConsumerTransparency: (qrCode) => api.get('/organic-traceability/consumer-transparency', { params: { qrCode } }),
 };
 
 export const varietyDirectoryAPI = {

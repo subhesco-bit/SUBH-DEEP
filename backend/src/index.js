@@ -571,6 +571,9 @@ const cropValueResearchDomainRoutes = require('./routes/cropValueResearchDomainR
 const tenantManagementDomainRoutes = require('./routes/tenantManagementDomainRoutes.js');
 const platformCoreDomainRoutes = require('./routes/platformCoreDomainRoutes.js');
 const mfaDomainRoutes = require('./routes/mfaDomainRoutes.js');
+const organicTraceabilityDomainRoutes = require('./routes/organicTraceabilityDomainRoutes.js');
+const ecommerceMarketingDomainRoutes = require('./routes/ecommerceMarketingDomainRoutes.js');
+const sellerRankingDomainRoutes = require('./routes/sellerRankingDomainRoutes.js');
 const governanceModuleMerged = require('./routes/platform/governanceModule_merged.js');
 const costRoutesMerged = require('./routes/finance/costRoutes_merged.js');
 const costRoutes = require('./routes/costRoutes.js');
@@ -1560,6 +1563,9 @@ async function startup() {
     app.use('/api/v1', tenantManagementDomainRoutes);
     app.use('/api/v1', platformCoreDomainRoutes);
     app.use('/api/v1', mfaDomainRoutes);
+    app.use('/api/v1', organicTraceabilityDomainRoutes);
+    app.use('/api/v1', ecommerceMarketingDomainRoutes);
+    app.use('/api/v1', sellerRankingDomainRoutes);
     app.use('/api/v1/governance', governanceModuleMerged);
     app.use('/api/v1/cost-management', costRoutesMerged);
     app.use('/api/cost', costRoutes);

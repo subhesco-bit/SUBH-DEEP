@@ -538,6 +538,37 @@ class OrganizationManagementService {
       recommendations: [],
     };
   }
+
+  /**
+   * List all organizations (plain listing, no AI enrichment - used by the
+   * organization directory UI, distinct from getOrganization's single-record
+   * AI-enriched view).
+   */
+  async getAllOrganizations({ page = 1, limit = 50 } = {}) {
+    const pageNum = Math.max(1, parseInt(page, 10) || 1);
+    const limitNum = Math.min(200, Math.max(1, parseInt(limit, 10) || 50));
+    const offset = (pageNum - 1) * limitNum;
+
+    const result = await this.db.query(
+      'SELECT * FROM organizations ORDER BY created_at DESC LIMIT $1 OFFSET $2',
+      [limitNum, offset],
+    );
+    return { organizations: result.rows };
+  }
+
+  /**
+   * Delete an organization.
+   */
+  async deleteOrganization(orgId) {
+    const result = await this.db.query(
+      'DELETE FROM organizations WHERE id = $1 RETURNING id',
+      [orgId],
+    );
+    if (result.rows.length === 0) {
+      throw new Error('Organization not found');
+    }
+    return { success: true, id: result.rows[0].id };
+  }
 }
 
 module.exports = new OrganizationManagementService();

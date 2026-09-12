@@ -8,7 +8,7 @@ const router = express.Router();
 const governanceService = require('../../services/platform/governanceService');
 const { authMiddleware } = require('../../middleware/auth');
 const { adminMiddleware } = require('../../middleware/admin');
-const { authRateLimit } = require('../../middleware/rateLimiter');
+const { authLimiter: authRateLimit } = require('../../middleware/rateLimiter');
 
 // Village Management Routes
 router.post('/villages', authMiddleware, adminMiddleware, async (req, res) => {

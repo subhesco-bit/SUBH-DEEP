@@ -382,6 +382,25 @@ export const searchAPI = {
 export const animalHealthAPI = {
   getAnimalHealth: () => api.get('/animal-health'),
   manageAnimalHealth: (data) => api.post('/animal-health/manage', data),
+  listExaminations: (params) => api.get('/animal-health/examinations', { params }),
+  createExamination: (data) => api.post('/animal-health/examination', data),
+  updateExamination: (id, data) => api.put(`/animal-health/examination/${id}`, data),
+  deleteExamination: (id) => api.delete(`/animal-health/examination/${id}`),
+  listTreatments: (params) => api.get('/animal-health/treatments', { params }),
+  createTreatment: (data) => api.post('/animal-health/treatment', data),
+  updateTreatment: (id, data) => api.put(`/animal-health/treatment/${id}`, data),
+  deleteTreatment: (id) => api.delete(`/animal-health/treatment/${id}`),
+  listDiseaseOutbreaks: (params) => api.get('/animal-health/outbreaks', { params }),
+  createOutbreak: (data) => api.post('/animal-health/outbreak', data),
+  updateOutbreak: (id, data) => api.put(`/animal-health/outbreak/${id}`, data),
+  deleteOutbreak: (id) => api.delete(`/animal-health/outbreak/${id}`),
+  getActiveOutbreaks: () => api.get('/animal-health/outbreaks/active'),
+  listQuarantineRecords: (params) => api.get('/animal-health/quarantines', { params }),
+  createQuarantine: (data) => api.post('/animal-health/quarantine', data),
+  updateQuarantine: (id, data) => api.put(`/animal-health/quarantine/${id}`, data),
+  deleteQuarantine: (id) => api.delete(`/animal-health/quarantine/${id}`),
+  getActiveQuarantines: () => api.get('/animal-health/quarantines/active'),
+  getHealthOverview: () => api.get('/animal-health/overview'),
 };
 
 export const assetAccountingAPI = {
@@ -1840,11 +1859,36 @@ export const complianceAPI2 = {
 export const completeERPIntegrationAPI = {
   getCompleteERPIntegration: () => api.get('/complete-erp-integration'),
   integrateERP: (data) => api.post('/complete-erp-integration/integrate', data),
+  syncFarmerCropPlanning: (farmerId, data) => api.post(`/complete-erp-integration/sync-farmer-crop-planning/${farmerId}`, data),
+  syncFarmerHarvest: (farmerId, data) => api.post(`/complete-erp-integration/sync-farmer-harvest/${farmerId}`, data),
+  syncFarmerField: (farmerId, data) => api.post(`/complete-erp-integration/sync-farmer-field/${farmerId}`, data),
+  syncCropLifecycle: (cropId, data) => api.post(`/complete-erp-integration/sync-crop-lifecycle/${cropId}`, data),
+  syncCropYield: (cropId, data) => api.post(`/complete-erp-integration/sync-crop-yield/${cropId}`, data),
+  syncLivestock: (livestockId, data) => api.post(`/complete-erp-integration/sync-livestock/${livestockId}`, data),
+  syncLivestockProduction: (livestockId, data) => api.post(`/complete-erp-integration/sync-livestock-production/${livestockId}`, data),
+  syncLivestockHealth: (livestockId, data) => api.post(`/complete-erp-integration/sync-livestock-health/${livestockId}`, data),
+  syncDairyProduction: (dairyId, data) => api.post(`/complete-erp-integration/sync-dairy-production/${dairyId}`, data),
+  syncPoultryProduction: (poultryId, data) => api.post(`/complete-erp-integration/sync-poultry-production/${poultryId}`, data),
+  syncGoatProduction: (goatId, data) => api.post(`/complete-erp-integration/sync-goat-production/${goatId}`, data),
+  syncSheepProduction: (sheepId, data) => api.post(`/complete-erp-integration/sync-sheep-production/${sheepId}`, data),
+  syncPigProduction: (pigId, data) => api.post(`/complete-erp-integration/sync-pig-production/${pigId}`, data),
 };
 
 export const completeAIIntegrationAPI = {
   getCompleteAIIntegration: () => api.get('/complete-ai-integration'),
   integrateAI: (data) => api.post('/complete-ai-integration/integrate', data),
+  recommendCropPlanning: (farmerId, data) => api.post(`/complete-ai-integration/recommend-crop-planning/${farmerId}`, data),
+  predictHarvestTiming: (farmerId, data) => api.post(`/complete-ai-integration/predict-harvest-timing/${farmerId}`, data),
+  optimizeFarmerResources: (farmerId, data) => api.post(`/complete-ai-integration/optimize-farmer-resources/${farmerId}`, data),
+  detectCropDisease: (cropId, data) => api.post(`/complete-ai-integration/detect-crop-disease/${cropId}`, data),
+  predictCropYield: (cropId, data) => api.post(`/complete-ai-integration/predict-crop-yield/${cropId}`, data),
+  monitorLivestockHealth: (livestockId, data) => api.post(`/complete-ai-integration/monitor-livestock-health/${livestockId}`, data),
+  recommendLivestockBreeding: (livestockId, data) => api.post(`/complete-ai-integration/recommend-livestock-breeding/${livestockId}`, data),
+  optimizeDairyProduction: (dairyId, data) => api.post(`/complete-ai-integration/optimize-dairy-production/${dairyId}`, data),
+  monitorPoultryHealth: (poultryId, data) => api.post(`/complete-ai-integration/monitor-poultry-health/${poultryId}`, data),
+  optimizeGoatProduction: (goatId, data) => api.post(`/complete-ai-integration/optimize-goat-production/${goatId}`, data),
+  optimizeSheepProduction: (sheepId, data) => api.post(`/complete-ai-integration/optimize-sheep-production/${sheepId}`, data),
+  optimizePigProduction: (pigId, data) => api.post(`/complete-ai-integration/optimize-pig-production/${pigId}`, data),
 };
 
 export const communityManagementAPI = {

@@ -1320,6 +1320,40 @@ async function startup() {
     app.use('/api/payment', paymentRoutes);
     app.use('/api/paymentgateway', paymentGatewayRoutes);
     app.use('/api/orphaned_services_mount', ORPHANED_SERVICES_MOUNT);
+
+    // Additional orphaned services: these each have a real setupRoutes(app)
+    // that does its own absolute app.use(...) internally, so they must be
+    // called with the actual `app`, not a sub-router (a sub-router would
+    // double-prefix their absolute paths under whatever it's mounted at).
+    // Found never-called via tools/codex-api-client-mismatch-scan.js.
+    const moreOrphanedServices = [
+      ['householdEconomyService', require('./services/legacy/householdEconomyService')],
+      ['renewableEnergyService', require('./services/legacy/renewableEnergyService')],
+      ['ruralEnterpriseService', require('./services/legacy/ruralEnterpriseService')],
+      ['villageProfileService', require('./services/legacy/villageProfileService')],
+      ['aiAdvisoryService', require('./services/legacy/aiAdvisoryService')],
+      ['aiAgenticCompanionService', require('./services/legacy/aiAgenticCompanionService')],
+      ['decisionSupportService', require('./services/legacy/decisionSupportService')],
+      ['buyingClubService', require('./services/legacy/buyingClubService')],
+      ['machineryAccessService', require('./services/legacy/machineryAccessService')],
+      ['marketAccessService', require('./services/legacy/marketAccessService')],
+      ['marketIntelligenceService', require('./services/legacy/marketIntelligenceService')],
+      ['procurementSubscriptionService', require('./services/legacy/procurementSubscriptionService')],
+      ['ruralFinanceService', require('./services/legacy/ruralFinanceService')],
+      ['custodyEventRoutes', require('./services/legacy/custodyEventRoutes')],
+      ['mobilityRidesService', require('./services/legacy/mobilityRidesService')],
+      ['analyticsMonitoringService', require('./services/legacy/analyticsMonitoringService')],
+    ];
+    for (const [name, svc] of moreOrphanedServices) {
+      try {
+        if (svc && typeof svc.setupRoutes === 'function') {
+          svc.setupRoutes(app);
+          logger.info(`Orphaned service mounted: ${name}`);
+        }
+      } catch (error) {
+        logger.error(`Failed to mount orphaned service ${name}:`, error.message);
+      }
+    }
     app.use('/api/organizationmanagement', organizationManagementRoutes);
     app.use('/api/order', orderRoutes);
     app.use('/api/operationsroutesupport', operationsRouteSupport.router);

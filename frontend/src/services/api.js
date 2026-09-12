@@ -634,6 +634,12 @@ export const soilAPI = {
 export const weatherAPI = {
   getCurrentWeather: () => api.get('/weather/current'),
   getForecast: () => api.get('/weather/forecast'),
+  coverage: () => api.get('/weather/coverage'),
+  forecastAccuracy: () => api.get('/weather/forecast-accuracy'),
+  advisoryTriggers: () => api.get('/weather/advisory-triggers'),
+  forArp: (data) => api.post('/weather/for-arp', data),
+  dispatchCheck: (data) => api.post('/weather/dispatch-check', data),
+  pestForecast: (data) => api.post('/weather/pest-forecast', data),
 };
 
 export const schemeBenefitsAPI = {
@@ -1886,6 +1892,13 @@ export const costControlAPI = {
 export const cooperativeShareAPI = {
   getCooperativeShares: () => api.get('/cooperative-share'),
   buyShare: (data) => api.post('/cooperative-share/buy', data),
+  addMember: (data) => api.post('/cooperative-share/member', data),
+  listMembers: (fpoId) => api.get(`/cooperative-share/members/${fpoId}`),
+  getPaidUpCapital: (fpoId) => api.get(`/cooperative-share/paid-up-capital/${fpoId}`),
+  previewDistribution: (data) => api.post('/cooperative-share/distribution/preview', data),
+  createDistribution: (data) => api.post('/cooperative-share/distribution', data),
+  getDistribution: (id) => api.get(`/cooperative-share/distribution/${id}`),
+  listDistributions: (fpoId) => api.get(`/cooperative-share/distributions/${fpoId}`),
 };
 
 export const comprehensiveERPAPI = {

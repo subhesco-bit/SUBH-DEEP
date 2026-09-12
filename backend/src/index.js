@@ -530,6 +530,8 @@ const assetAccountingDomainRoutes = require('./routes/assetAccountingDomainRoute
 const decisionSupportDomainRoutes = require('./routes/decisionSupportDomainRoutes.js');
 const ecommerceMarketplaceDomainRoutes = require('./routes/ecommerceMarketplaceDomainRoutes.js');
 const ordersDomainRoutes = require('./routes/ordersDomainRoutes.js');
+const weatherDomainRoutes = require('./routes/weatherDomainRoutes.js');
+const cooperativeShareDomainRoutes = require('./routes/cooperativeShareDomainRoutes.js');
 const governanceModuleMerged = require('./routes/platform/governanceModule_merged.js');
 const costRoutesMerged = require('./routes/finance/costRoutes_merged.js');
 const costRoutes = require('./routes/costRoutes.js');
@@ -1478,6 +1480,8 @@ async function startup() {
     app.use('/api/v1', decisionSupportDomainRoutes);
     app.use('/api/v1', ecommerceMarketplaceDomainRoutes);
     app.use('/api/v1', ordersDomainRoutes);
+    app.use('/api/v1', weatherDomainRoutes);
+    app.use('/api/v1', cooperativeShareDomainRoutes);
     app.use('/api/v1/governance', governanceModuleMerged);
     app.use('/api/v1/cost-management', costRoutesMerged);
     app.use('/api/cost', costRoutes);

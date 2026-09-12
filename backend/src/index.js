@@ -555,6 +555,11 @@ const returnLoadBoardDomainRoutes = require('./routes/returnLoadBoardDomainRoute
 const realtimeMonitoringDomainRoutes = require('./routes/realtimeMonitoringDomainRoutes.js');
 const conversationalAIDomainRoutes = require('./routes/conversationalAIDomainRoutes.js');
 const voiceAIDomainRoutes = require('./routes/voiceAIDomainRoutes.js');
+const aiBackboneDomainRoutes = require('./routes/aiBackboneDomainRoutes.js');
+const companyDomainRoutes = require('./routes/companyDomainRoutes.js');
+const financeDomainRoutes = require('./routes/financeDomainRoutes.js');
+const complianceDomainRoutes = require('./routes/complianceDomainRoutes.js');
+const defenseFitnessPrepDomainRoutes = require('./routes/defenseFitnessPrepDomainRoutes.js');
 const governanceModuleMerged = require('./routes/platform/governanceModule_merged.js');
 const costRoutesMerged = require('./routes/finance/costRoutes_merged.js');
 const costRoutes = require('./routes/costRoutes.js');
@@ -1528,6 +1533,11 @@ async function startup() {
     app.use('/api/v1', realtimeMonitoringDomainRoutes);
     app.use('/api/v1', conversationalAIDomainRoutes);
     app.use('/api/v1', voiceAIDomainRoutes);
+    app.use('/api/v1', aiBackboneDomainRoutes);
+    app.use('/api/v1', companyDomainRoutes);
+    app.use('/api/v1', financeDomainRoutes);
+    app.use('/api/v1', complianceDomainRoutes);
+    app.use('/api/v1', defenseFitnessPrepDomainRoutes);
     app.use('/api/v1/governance', governanceModuleMerged);
     app.use('/api/v1/cost-management', costRoutesMerged);
     app.use('/api/cost', costRoutes);

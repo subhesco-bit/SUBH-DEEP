@@ -114,6 +114,9 @@ export const aiAgentAPI = {
 export const aiBackboneAPI = {
   getBackboneStatus: () => api.get('/ai/backbone/status'),
   configureBackbone: (data) => api.put('/ai/backbone/config', data),
+  callAI: (data) => api.post('/ai-backbone/call', data),
+  resetAIStatistics: () => api.post('/ai-backbone/reset-statistics'),
+  getAIProviderStatus: () => api.get('/ai-backbone/provider-status'),
 };
 
 export const aiBrainAPI = {
@@ -492,6 +495,9 @@ export const assetAccountingAPI = {
 export const companyAPI = {
   getCompanies: () => api.get('/company'),
   getCompany: (id) => api.get(`/company/${id}`),
+  listCompanies: () => api.get('/companies'),
+  getFiscalYears: (companyId) => api.get(`/company/${companyId}/fiscal-years`),
+  getChartOfAccounts: (companyId) => api.get(`/company/${companyId}/chart-of-accounts`),
 };
 
 export const authorizationAPI = {
@@ -607,6 +613,9 @@ export const schemeAPI = {
 export const complianceAPI = {
   getComplianceStatus: () => api.get('/compliance/status'),
   submitReport: (data) => api.post('/compliance/reports', data),
+  tdsSummary: (params) => api.get('/compliance/tds-summary', { params }),
+  tdsRates: () => api.get('/compliance/tds-rates'),
+  rcmOutstanding: (period) => api.get('/compliance/rcm-outstanding', { params: { period } }),
 };
 
 export const auditAPI = {
@@ -743,6 +752,9 @@ export const hrAPI = {
 export const financeAPI = {
   getFinancialData: () => api.get('/finance'),
   getAccounts: () => api.get('/finance/accounts'),
+  getMyEnwrReceipts: () => api.get('/finance/my-enwr-receipts'),
+  trialBalance: () => api.get('/finance/trial-balance'),
+  verifyLedger: () => api.get('/finance/verify-ledger'),
 };
 
 export const legalAPI = {
@@ -1857,6 +1869,9 @@ export const demandAPI = {
 export const defenseFitnessPrepAPI = {
   getDefenseFitnessPrep: () => api.get('/defense-fitness-prep'),
   prepareDefense: (data) => api.post('/defense-fitness-prep/prepare', data),
+  getCategories: () => api.get('/defense-fitness-prep/categories'),
+  getReadiness: (category, gender) => api.get(`/defense-fitness-prep/readiness/${category}`, { params: { gender } }),
+  recordAttempt: (category, testComponent, value, source) => api.post('/defense-fitness-prep/attempt', { category, testComponent, value, source }),
 };
 
 export const decisionSupportAPI = {

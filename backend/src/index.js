@@ -593,6 +593,7 @@ const gdprRoutes = require('./routes/gdprRoutes.js');
 const governmentSubsidyRoutes = require('./routes/governmentSubsidyRoutes.js');
 const mushroomRoutes = require('./routes/mushroomRoutes.js');
 const databaseManagementRoutes = require('./routes/databaseManagementRoutes.js');
+const libraryAIWorkspaceRoutes = require('./routes/libraryAIWorkspaceRoutes.js');
 const governanceModuleMerged = require('./routes/platform/governanceModule_merged.js');
 const costRoutesMerged = require('./routes/finance/costRoutes_merged.js');
 const costRoutes = require('./routes/costRoutes.js');
@@ -1604,6 +1605,7 @@ async function startup() {
     app.use('/api/v1/strategic/government', governmentSubsidyRoutes);
     app.use('/api/v1/mushroom', mushroomRoutes);
     app.use('/api/database-management', databaseManagementRoutes);
+    app.use('/api/v1/library-ai', libraryAIWorkspaceRoutes);
     app.use('/api/v1/governance', governanceModuleMerged);
     app.use('/api/v1/cost-management', costRoutesMerged);
     app.use('/api/cost', costRoutes);

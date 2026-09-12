@@ -134,12 +134,26 @@ require-load verification after each batch (commits `e9d77697`, `fd12452c`, `eee
   greenhouseAPI (page's own note admits it), marketplaceAPI, digitalTwinAPI (fragile internal
   state dependency), farmerFamilyAPI/farmerProfileAPI/farmerSkillAPI/userAPI (confirmed stubs or
   no backend at all), cropCalendarAPI, hydroponicsAPI was NOT skipped (real backend found)
-- **424 of 607 resolved, ~48 clients / ~110 mismatches remaining.** Continuing:
-  returnLoadBoardAPI, realtimeMonitoringAPI, conversationalAIAPI, voiceAIAPI, aiBackboneAPI,
-  companyAPI, financeAPI, complianceAPI, defenseFitnessPrepAPI, and the remaining long tail of
-  1-3-mismatch clients
+- Commits `2a56c9a7`, `08203093`, `35a73388`, `a879c721`: returnLoadBoardAPI,
+  realtimeMonitoringAPI, conversationalAIAPI, voiceAIAPI, aiBackboneAPI, companyAPI, financeAPI,
+  complianceAPI, defenseFitnessPrepAPI, enterpriseIntegrationAPI, escrowAPI, financialAIAPI
+  (partial), systemAdministrationAPI, logisticsAIAPI (partial), blockchainVerificationAPI,
+  knowledgeGraphAPI, cropValueResearchAPI, tenantManagementAPI, platformCoreAPI, mfaAPI,
+  organicTraceabilityAPI, ecommerceMarketingAPI, sellerRankingAPI (partial — no write/"set rank"
+  backend exists), farmerValueAPI (surfaced+mounted a real internal router that existed but was
+  never mounted, same pattern as the seed-vault bug), transactionAPI, notificationAPI,
+  privacyAPI, pestForecastingAPI, adminAPI, systemAPI, erpAPI (fixed to call the already-real,
+  already-mounted `/api/v1/erp/status`)
+- **SWEEP COMPLETE: all 607 mismatches across 113 clients triaged.** Final disposition:
+  ~515 wired to real backend routes/methods; ~90 confirmed no real backend exists anywhere
+  (skipped, not faked — see the "Skipped" notes above and below); a small number are documented
+  pre-existing gaps left as-is (`caAPI.getAuditStats` — CADashboardPage.jsx's own comments already
+  flag it as illustrative-only) or intentionally unwired for lack of a matching backend action
+  (`panchayatAPI` — no panchayat entity in communityManagementService.js, only
+  block/district/state/producerGroup/communityAsset/ruralDevelopment; `fpoAPI.getStats` — no
+  aggregate stats method on cooperativeShareService.js, only member/distribution operations)
 
-**Next up after the 22-pair audit (by orphan count, highest first):**
+**Next up (by orphan count, highest first):**
 - `ecommerce-marketplace` — 1,562 stems, 775 orphaned
 - `ai-chat-copilot` — 1,761 stems, 845 orphaned (mostly agent-workspace noise per keyword
   classification — needs noise-filtering before trusting the count)

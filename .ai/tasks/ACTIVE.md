@@ -153,8 +153,39 @@ require-load verification after each batch (commits `e9d77697`, `fd12452c`, `eee
   block/district/state/producerGroup/communityAsset/ruralDevelopment; `fpoAPI.getStats` — no
   aggregate stats method on cooperativeShareService.js, only member/distribution operations)
 
+**`ecommerce-marketplace` track: CLOSED (commits `9e63461f`, `80e72492`).** Of the 775
+"orphaned" (zero wired references) stems, most were false positives or already resolved:
+- 9 "orphaned" SQL migrations were a wiring-check false positive — migrations aren't
+  require()'d/imported, they're picked up by the migration runner's directory scan, and all 9
+  already exist live in `backend/src/database/migrations/` (verified by exact filename match in
+  `docs/codex-file-map.csv`)
+- 227 `module.json` hits are manifest data, not code (noise)
+- ~700 stems (M0xxPage.jsx/M0xxComponent.jsx scaffolds, and named components like
+  `toast.jsx`/`useGeolocation.js`/`QRCodeScanner.jsx`/`FoodSafetyDashboard.jsx`/etc.) were spot-
+  checked and confirmed already present live under `frontend/src/` — stale old-new-folder copies
+  already superseded, not missing features
+- 2 (`productAIRoutes.js`, `orderAIRoutes.js`) are empty "Route operational" scaffolds with zero
+  real business logic — correctly left unwired, nothing to preserve
+- **12 real, fully-formed route files recovered** from the old-new-folder dump — each verified
+  method-by-method against a real, still-live backing service before mounting: apiculture (M028),
+  contractFarming, forestry (M026), vermicompost (M030), sericulture (M027), fisheries (M025 —
+  confirmed a different service from the already-wired fisheriesManagementService.js, no path
+  collision), householdProcurement, moduleRegistry (HTTP shim over `core/moduleRegistry.js`),
+  preSeasonPurchase, gdpr (fuller surface than the already-wired privacyDomainRoutes.js — RTBF,
+  data export, residency, PIA — mounted at a non-colliding path), governmentSubsidy, mushroom
+  (M029). None have a frontend page/API client yet — backend-only recovery of real, previously-
+  lost work.
+- 2 explicitly skipped: `mfaroutes.js` (broken — `getUserMFASecret` placeholder always returns
+  null, verify could never succeed; also collides with the working `mfaDomainRoutes.js`),
+  `hrcontroller.js` (fully redundant with the already-mounted `backend/src/routes/hrRoutes.js`)
+- ~20 remaining stems are dev/ops tooling scripts (`redis-cache.js`, `database-monitor.js`,
+  `backup-manager.js`, `transaction-manager.js`, `advanced-pool.js`, `schema-collisions.js`,
+  `database-security.js`, plus meta-tooling like `find-orphan-services.js`/`module-audit.js`/
+  `route-audit.js`/`a11y-audit.js`/`link-audit.js` that look like artifacts of a *previous*
+  consolidation attempt, not app features) — deferred to Phase 2 Hardening rather than forced
+  into Phase 1, since they're infrastructure/tooling, not user-facing features
+
 **Next up (by orphan count, highest first):**
-- `ecommerce-marketplace` — 1,562 stems, 775 orphaned
 - `ai-chat-copilot` — 1,761 stems, 845 orphaned (mostly agent-workspace noise per keyword
   classification — needs noise-filtering before trusting the count)
 - `database-model` — 310 stems, 304 orphaned (near-total; highest-risk track)

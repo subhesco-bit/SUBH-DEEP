@@ -1721,6 +1721,12 @@ export const dashboardAPI2 = {
 export const dairyAPI = {
   getDairy: () => api.get('/dairy'),
   manageDairy: (data) => api.post('/dairy/manage', data),
+  getAnimals: (params) => api.get('/dairy/animals', { params }),
+  createAnimal: (data) => api.post('/dairy/animal', data),
+  updateAnimal: (id, data) => api.put(`/dairy/animal/${id}`, data),
+  deleteAnimal: (id) => api.delete(`/dairy/animal/${id}`),
+  getMilkRecords: (params) => api.get('/dairy/milk-records', { params }),
+  recordMilk: (data) => api.post('/dairy/milk-record', data),
 };
 
 export const cropValueResearchAPI = {
@@ -3013,6 +3019,10 @@ export const cropVarietyAPI = {
 export const dairyAIAPI = {
   getDairyAI: () => api.get('/dairy-ai'),
   analyzeDairy: (data) => api.post('/dairy-ai/analyze', data),
+  optimizeMilkProduction: (animalId) => api.post(`/dairy-ai/optimize-milk-production/${animalId}`),
+  predictHealthRisks: (animalId) => api.post(`/dairy-ai/predict-health-risks/${animalId}`),
+  optimizeFeedComposition: (animalId, data) => api.post(`/dairy-ai/optimize-feed-composition/${animalId}`, data),
+  recommendBreeding: (animalId) => api.post(`/dairy-ai/recommend-breeding/${animalId}`),
 };
 
 // Additional missing exports
@@ -3075,6 +3085,11 @@ export const farmerVerificationAPI = {
 export const fertilizerAPI = {
   getFertilizers: () => api.get('/fertilizers'),
   manageFertilizer: (data) => api.post('/fertilizers/manage', data),
+  getInventory: (params) => api.get('/fertilizer-inventory/items', { params }),
+  createInventoryItem: (data) => api.post('/fertilizer-inventory/item', data),
+  updateInventoryItem: (id, data) => api.put(`/fertilizer-inventory/item/${id}`, data),
+  deleteInventoryItem: (id) => api.delete(`/fertilizer-inventory/item/${id}`),
+  issueStock: (id, data) => api.post(`/fertilizer-inventory/item/${id}/issue`, data),
 };
 
 export const microFarmAPI = {

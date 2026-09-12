@@ -571,7 +571,7 @@ export const insuranceAPI = {
 };
 
 export const logisticsAPI = {
-  getShipments: () => api.get('/logistics/shipments'),
+  getShipments: (filters, pagination) => api.get('/logistics-ai/shipments', { params: { ...filters, ...pagination } }),
   createShipment: (data) => api.post('/logistics/shipments', data),
 };
 
@@ -1769,6 +1769,9 @@ export const experienceAPI = {
 export const escrowAPI = {
   getEscrows: () => api.get('/escrow'),
   createEscrow: (data) => api.post('/escrow', data),
+  list: () => api.get('/escrow/list'),
+  release: (escrowId, data) => api.post(`/escrow/${escrowId}/release`, data),
+  refund: (escrowId) => api.post(`/escrow/${escrowId}/refund`),
 };
 
 export const equipmentExchangeAPI = {
@@ -1790,6 +1793,8 @@ export const enterpriseRouteSupportAPI = {
 export const enterpriseIntegrationAPI = {
   getEnterpriseIntegration: () => api.get('/enterprise-integration'),
   integrateEnterprise: (data) => api.post('/enterprise-integration/integrate', data),
+  getCurrentOrganizationIntegrations: () => api.get('/enterprise-integration/current'),
+  getIntegrationHealth: (integrationId) => api.get(`/enterprise-integration/health/${integrationId}`),
 };
 
 export const enterpriseAIAPI = {
@@ -2203,6 +2208,9 @@ export const tenantManagementAPI = {
 export const systemAdministrationAPI = {
   getSystemStatus: () => api.get('/system-administration'),
   configureSystem: (data) => api.put('/system-administration', data),
+  triggerSelfHealing: (data) => api.post('/system-administration/self-healing', data),
+  forecastCapacity: (timeframe) => api.get('/system-administration/capacity-forecast', { params: { timeframe } }),
+  getSystemHealthDashboard: () => api.get('/system-administration/health-dashboard'),
 };
 
 export const supplyChainTrackingAPI = {
@@ -3467,6 +3475,7 @@ export const dairyAIAPI = {
 export const financialAPI = {
   getFinancialData: () => api.get('/financial'),
   analyzeFinancials: (data) => api.post('/financial/analyze', data),
+  getLoans: () => api.get('/financial/loans'),
 };
 
 export const enterpriseControlAPI = {

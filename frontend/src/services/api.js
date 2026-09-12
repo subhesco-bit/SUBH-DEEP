@@ -1753,6 +1753,11 @@ export const energyAPI = {
 export const ecommerceAPI = {
   getEcommerce: () => api.get('/ecommerce'),
   manageEcommerce: (data) => api.post('/ecommerce/manage', data),
+  getGIListings: (params) => api.get('/ecommerce-marketplace/gi-listings', { params }),
+  getListings: (params) => api.get('/ecommerce-marketplace/listings', { params }),
+  getPriceTrends: (categoryId, period) => api.get(`/ecommerce-marketplace/price-trends/${categoryId}`, { params: { period } }),
+  getSellerAnalytics: (period) => api.get('/ecommerce-marketplace/seller-analytics', { params: { period } }),
+  createListing: (data) => api.post('/ecommerce-marketplace/listing', data),
 };
 
 export const ecommerceMarketingAPI = {
@@ -5255,8 +5260,15 @@ export const caAPI = {
 };
 
 export const ordersAPI = {
-  getOrders: () => api.get('/orders'),
+  getOrders: (filters, pagination) => api.get('/orders', { params: { ...filters, ...pagination } }),
   createOrder: (data) => api.post('/orders', data),
+  getOrder: (id) => api.get(`/orders/${id}`),
+  cancelOrder: (id) => api.post(`/orders/${id}/cancel`),
+  processPayment: (orderId, data) => api.post(`/orders/${orderId}/payment`, data),
+  getCart: () => api.get('/orders/cart'),
+  addToCart: (data) => api.post('/orders/cart/add', data),
+  updateCartItem: (id, data) => api.put(`/orders/cart/item/${id}`, data),
+  removeFromCart: (id) => api.delete(`/orders/cart/item/${id}`),
 };
 
 export const cartAPI = {

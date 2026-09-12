@@ -494,6 +494,11 @@ export const ecommerceBusinessSalesAPI = {
 export const walletAPI = {
   getWalletBalance: () => api.get('/wallet'),
   makePayment: (data) => api.post('/wallet/payment', data),
+  getWallet: () => api.get('/wallet'),
+  deposit: (data) => api.post('/wallet/deposit', data),
+  withdraw: (data) => api.post('/wallet/withdraw', data),
+  transfer: (data) => api.post('/wallet/transfer', data),
+  getTransactions: (params) => api.get('/wallet/transactions', { params }),
 };
 
 export const finmanAPI = {
@@ -1729,6 +1734,12 @@ export const escrowAPI = {
 export const equipmentExchangeAPI = {
   getEquipmentExchange: () => api.get('/equipment-exchange'),
   exchangeEquipment: (data) => api.post('/equipment-exchange/exchange', data),
+  createListing: (data) => api.post('/equipment-exchange/listing', data),
+  listAvailable: (params) => api.get('/equipment-exchange/listings', { params }),
+  getListing: (listingId) => api.get(`/equipment-exchange/listing/${listingId}`),
+  reserveListing: (listingId) => api.post(`/equipment-exchange/listing/${listingId}/reserve`),
+  completeExchange: (listingId) => api.post(`/equipment-exchange/listing/${listingId}/complete`),
+  withdrawListing: (listingId) => api.post(`/equipment-exchange/listing/${listingId}/withdraw`),
 };
 
 export const enterpriseRouteSupportAPI = {

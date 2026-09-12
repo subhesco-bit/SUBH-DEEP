@@ -3405,6 +3405,9 @@ export const cropMonitoringAPI = {
 export const cropRegistrationAPI = {
   getCropRegistrations: () => api.get('/crop-registrations'),
   registerCrop: (data) => api.post('/crop-registrations', data),
+  getCrops: (params) => api.get('/crop-registrations', { params }),
+  updateCrop: (id, data) => api.put(`/crop-registrations/${id}`, data),
+  deleteCrop: (id) => api.delete(`/crop-registrations/${id}`),
 };
 
 export const cropVarietyAPI = {
@@ -3475,6 +3478,10 @@ export const farmerWelfareAPI = {
 export const kycAPI = {
   getKYC: () => api.get('/kyc'),
   submitKYC: (data) => api.post('/kyc/submit', data),
+  getApplications: (params) => api.get('/farmer-kyc/applications', { params }),
+  submitApplication: (data) => api.post('/farmer-kyc/application', data),
+  verifyApplication: (id, data) => api.post(`/farmer-kyc/application/${id}/verify`, data),
+  rejectApplication: (id, data) => api.post(`/farmer-kyc/application/${id}/reject`, data),
 };
 
 export const farmerProfileAPI = {
@@ -3495,6 +3502,10 @@ export const farmerSkillAPI = {
 export const farmerVerificationAPI = {
   getFarmerVerifications: () => api.get('/farmer-verifications'),
   verifyFarmer: (data) => api.post('/farmer-verifications/verify', data),
+  getRequests: (params) => api.get('/farmer-verification/requests', { params }),
+  submitRequest: (data) => api.post('/farmer-verification/request', data),
+  verifyRequest: (id, data) => api.post(`/farmer-verification/request/${id}/verify`, data),
+  rejectRequest: (id, data) => api.post(`/farmer-verification/request/${id}/reject`, data),
 };
 
 // Additional missing exports for various pages

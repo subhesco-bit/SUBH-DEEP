@@ -198,11 +198,30 @@ non-SQL orphans (`redis-cache.js`, `database-monitor.js`, `backup-manager.js`,
 `query-optimizer.js`, `seed-economic.js`, `enhanced-migrate.js`) are dev/ops tooling script
 duplicates, same disposition as ecommerce-marketplace's tail - deferred to Phase 2 Hardening.
 
-**Next up (by orphan count, highest first):**
+**6 small tracks: CLOSED, no action needed.** `mobile-shell` (39 orphaned) and `desktop-shell` (5
+orphaned) are pure Android/Capacitor/Tauri build assets and config (icons, gradle files,
+manifests) - static build config, not application code, nothing to wire. `dietitian-nutrition` (9),
+`dynamic-pricing` (6), and `voice-farmer` (7) orphans are entirely the SQL-migration false
+positive plus `.html` mirror files and test files - no real gaps. `public-price-extraction` (8)
+had two real candidates, both investigated and left as-is:
+- `publicDomainDataExtractionService.js` (879 lines, `services/platform/`) is an in-memory
+  `Map`-based **simulation** (`simulateExtraction`, no real scraping/API calls, no persistence) -
+  wiring it in as a "real" feature would present simulated data as genuine, against this
+  project's own established discipline. The existing mounted route
+  (`routes/platform/publicDomainDataExtractionRoutes.js`) is an honest in-memory CRUD scaffold
+  that does NOT call this simulation service - left as-is rather than connecting a fake data
+  generator to a live endpoint.
+- `backend/src/jobs/loadMandiPrices.js` is a real, well-documented, government-API-backed job
+  (pulls live Agmarknet mandi prices via data.gov.in, ingests via
+  `services/legacy/marketDataService.js`'s real `ingestMandiPrices`) — genuinely useful but
+  designed for cron/CLI invocation, not an Express route. No cron/scheduler infrastructure exists
+  anywhere in this codebase yet (`find backend/src -iname "*cron*" -o -iname "*scheduler*"` -
+  zero hits), so activating this job is a Phase 2/5 deployment-infrastructure task (add a
+  scheduler, register the job), not a Phase 1 wiring bug — flagged for the deploy checklist.
+
+**Next up:**
 - `ai-chat-copilot` — 1,761 stems, 845 orphaned (mostly agent-workspace noise per keyword
   classification — needs noise-filtering before trusting the count)
-- `mobile-shell`, `dietitian-nutrition`, `dynamic-pricing`, `public-price-extraction`,
-  `voice-farmer`, `desktop-shell`
 
 ### Phase 2 — Hardening — NOT STARTED
 

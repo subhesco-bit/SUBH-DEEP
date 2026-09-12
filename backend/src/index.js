@@ -501,6 +501,8 @@ const cropManagementRoutes = require('./routes/cropManagementRoutes.js');
 const cropDomainRoutes = require('./routes/cropDomainRoutes.js');
 const seedVaultRoutesMerged = require('./routes/seedVaultRoutes_merged.js');
 const financialAIRoutes = require('./routes/claude/financialAIRoutes.js');
+const livestockDomainRoutes = require('./routes/livestockDomainRoutes.js');
+const soilDomainRoutes = require('./routes/soilDomainRoutes.js');
 const costRoutes = require('./routes/costRoutes.js');
 const costControlRoutes = require('./routes/costControlRoutes.js');
 const cooperativeShareRoutes = require('./routes/cooperativeShareRoutes.js');
@@ -1384,6 +1386,8 @@ async function startup() {
     app.use('/api/v1', cropDomainRoutes);
     app.use('/api/v1/seed-vault', seedVaultRoutesMerged);
     app.use('/api/v1/financial-ai', financialAIRoutes);
+    app.use('/api/v1', livestockDomainRoutes);
+    app.use('/api/v1', soilDomainRoutes);
     app.use('/api/cost', costRoutes);
     app.use('/api/costcontrol', costControlRoutes);
     app.use('/api/cooperativeshare', cooperativeShareRoutes);

@@ -544,6 +544,8 @@ const experienceLayerDomainRoutes = require('./routes/experienceLayerDomainRoute
 const insuranceDomainRoutes = require('./routes/insuranceDomainRoutes.js');
 const authorizationDomainRoutes = require('./routes/authorizationDomainRoutes.js');
 const climateMonitoringDomainRoutes = require('./routes/climateMonitoringDomainRoutes.js');
+const communityManagementDomainRoutes = require('./routes/communityManagementDomainRoutes.js');
+const rfqDomainRoutes = require('./routes/rfqDomainRoutes.js');
 const governanceModuleMerged = require('./routes/platform/governanceModule_merged.js');
 const costRoutesMerged = require('./routes/finance/costRoutes_merged.js');
 const costRoutes = require('./routes/costRoutes.js');
@@ -1506,6 +1508,8 @@ async function startup() {
     app.use('/api/v1', insuranceDomainRoutes);
     app.use('/api/v1', authorizationDomainRoutes);
     app.use('/api/v1', climateMonitoringDomainRoutes);
+    app.use('/api/v1', communityManagementDomainRoutes);
+    app.use('/api/v1', rfqDomainRoutes);
     app.use('/api/v1/governance', governanceModuleMerged);
     app.use('/api/v1/cost-management', costRoutesMerged);
     app.use('/api/cost', costRoutes);

@@ -2295,6 +2295,10 @@ export const riskAssessmentAPI = {
 export const rfqAPI = {
   getRFQs: () => api.get('/rfq'),
   createRFQ: (data) => api.post('/rfq', data),
+  activeHolds: () => api.get('/rfq/active-holds'),
+  lossAnalysis: (params) => api.get('/rfq/loss-analysis', { params }),
+  centrePnl: (fpoId) => api.get(`/rfq/centre-pnl/${fpoId}`),
+  releaseQcHold: (data) => api.post('/rfq/qc-hold/release', data),
 };
 
 export const returnLoadBoardAPI = {
@@ -3339,11 +3343,19 @@ export const cooperativeAPI = {
 export const communityAssetAPI = {
   getCommunityAssets: () => api.get('/community-assets'),
   manageCommunityAsset: (data) => api.post('/community-assets/manage', data),
+  getAssets: (params) => api.get('/community-assets', { params }),
+  createAsset: (data) => api.post('/community-asset', data),
+  updateAsset: (id, data) => api.put(`/community-asset/${id}`, data),
+  deleteAsset: (id) => api.delete(`/community-asset/${id}`),
 };
 
 export const producerGroupAPI = {
   getProducerGroups: () => api.get('/producer-groups'),
   createProducerGroup: (data) => api.post('/producer-groups', data),
+  getGroups: (params) => api.get('/producer-groups', { params }),
+  createGroup: (data) => api.post('/producer-group', data),
+  updateGroup: (id, data) => api.put(`/producer-group/${id}`, data),
+  deleteGroup: (id) => api.delete(`/producer-group/${id}`),
 };
 
 export const auditComplianceAPI = {
@@ -4830,6 +4842,10 @@ export const regionalDevelopmentAPI = {
 export const ruralDevelopmentAPI = {
   getRuralDevelopment: () => api.get('/rural-development'),
   planRuralDevelopment: (data) => api.post('/rural-development/plan', data),
+  getProjects: (params) => api.get('/rural-development-projects', { params }),
+  createProject: (data) => api.post('/rural-development-project', data),
+  updateProject: (id, data) => api.put(`/rural-development-project/${id}`, data),
+  deleteProject: (id) => api.delete(`/rural-development-project/${id}`),
 };
 
 export const urbanDevelopmentAPI = {

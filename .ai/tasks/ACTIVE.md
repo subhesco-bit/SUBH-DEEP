@@ -123,12 +123,21 @@ require-load verification after each batch (commits `e9d77697`, `fd12452c`, `eee
   auditComplianceAPI (anomaly-detection/log-integrity concepts absent from real service),
   greenhouseAPI (page's own code comment admits the CRUD shape it calls has no backend),
   marketplaceAPI (unused by any page)
-- **318 of 607 resolved, 82 clients / ~176 mismatches remaining.** Continuing by impact order:
-  authorizationAPI (4), droughtMonitoringAPI/floodMonitoringAPI/diseaseForecastingAPI/
-  climateRiskAPI/agroMeteorologyAPI (4 each, no candidate service - likely a themed cluster to
-  investigate together), producerGroupAPI, communityAssetAPI, ruralDevelopmentAPI, rfqAPI,
-  cropCalendarAPI/cropMonitoringAPI/cropVarietyAPI, digitalTwinAPI, farmerFamilyAPI,
-  farmerHealthRecordsAPI...
+- Commits `8cb52b84` through `f2e6e4c3`: authorizationAPI (partial), climateMonitoring cluster
+  (drought/flood/disease/climateRisk/agroMeteorology, 1 service backing all 5), community
+  management cluster (producerGroup/communityAsset/ruralDevelopment/block/district/state, 1
+  service backing all 6), rfqAPI, cropVarietyAPI/cropMonitoringAPI completion (gap from the very
+  first batch), farmerHealthRecordsAPI, kycAPI, farmerVerificationAPI, cropRegistrationAPI fix,
+  horticultureManagement cluster (8 sub-modules, 1 service - 7 of 8 api.js clients were already
+  correct, just needed the backend), landAPI
+- Skipped (investigated, no real match): enterpriseAIAPI, machineryAPI (tractor), auditComplianceAPI,
+  greenhouseAPI (page's own note admits it), marketplaceAPI, digitalTwinAPI (fragile internal
+  state dependency), farmerFamilyAPI/farmerProfileAPI/farmerSkillAPI/userAPI (confirmed stubs or
+  no backend at all), cropCalendarAPI, hydroponicsAPI was NOT skipped (real backend found)
+- **424 of 607 resolved, ~48 clients / ~110 mismatches remaining.** Continuing:
+  returnLoadBoardAPI, realtimeMonitoringAPI, conversationalAIAPI, voiceAIAPI, aiBackboneAPI,
+  companyAPI, financeAPI, complianceAPI, defenseFitnessPrepAPI, and the remaining long tail of
+  1-3-mismatch clients
 
 **Next up after the 22-pair audit (by orphan count, highest first):**
 - `ecommerce-marketplace` — 1,562 stems, 775 orphaned

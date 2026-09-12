@@ -3100,16 +3100,28 @@ export const microFarmAPI = {
 export const hatcheryManagementAPI = {
   getHatcheries: () => api.get('/hatchery-management'),
   manageHatchery: (data) => api.post('/hatchery-management/manage', data),
+  getBatches: (params) => api.get('/hatchery-management/batches', { params }),
+  createBatch: (data) => api.post('/hatchery-management/batch', data),
+  updateBatch: (id, data) => api.put(`/hatchery-management/batch/${id}`, data),
+  deleteBatch: (id) => api.delete(`/hatchery-management/batch/${id}`),
 };
 
 export const fishFeedAPI = {
   getFishFeeds: () => api.get('/fish-feed'),
   manageFishFeed: (data) => api.post('/fish-feed/manage', data),
+  getLogs: (params) => api.get('/fish-feed/logs', { params }),
+  createLog: (data) => api.post('/fish-feed/log', data),
+  updateLog: (id, data) => api.put(`/fish-feed/log/${id}`, data),
+  deleteLog: (id) => api.delete(`/fish-feed/log/${id}`),
 };
 
 export const fisheriesWaterQualityAPI = {
   getWaterQuality: () => api.get('/fisheries-water-quality'),
   monitorWaterQuality: (data) => api.post('/fisheries-water-quality/monitor', data),
+  getReadings: (params) => api.get('/fisheries-water-quality/readings', { params }),
+  createReading: (data) => api.post('/fisheries-water-quality/reading', data),
+  updateReading: (id, data) => api.put(`/fisheries-water-quality/reading/${id}`, data),
+  deleteReading: (id) => api.delete(`/fisheries-water-quality/reading/${id}`),
 };
 
 export const fisheriesHealthAPI = {
@@ -3120,6 +3132,10 @@ export const fisheriesHealthAPI = {
 export const fisheriesHarvestAPI = {
   getFisheriesHarvest: () => api.get('/fisheries-harvest'),
   manageHarvest: (data) => api.post('/fisheries-harvest/manage', data),
+  getHarvests: (params) => api.get('/fisheries-harvest/harvests', { params }),
+  createHarvest: (data) => api.post('/fisheries-harvest/harvest', data),
+  updateHarvest: (id, data) => api.put(`/fisheries-harvest/harvest/${id}`, data),
+  deleteHarvest: (id) => api.delete(`/fisheries-harvest/harvest/${id}`),
 };
 
 export const fisheriesPCRManagementAPI = {

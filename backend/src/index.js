@@ -579,6 +579,7 @@ const transactionDomainRoutes = require('./routes/transactionDomainRoutes.js');
 const notificationDomainRoutes = require('./routes/notificationDomainRoutes.js');
 const privacyDomainRoutes = require('./routes/privacyDomainRoutes.js');
 const pestForecastingDomainRoutes = require('./routes/pestForecastingDomainRoutes.js');
+const adminAuditDomainRoutes = require('./routes/adminAuditDomainRoutes.js');
 const governanceModuleMerged = require('./routes/platform/governanceModule_merged.js');
 const costRoutesMerged = require('./routes/finance/costRoutes_merged.js');
 const costRoutes = require('./routes/costRoutes.js');
@@ -1576,6 +1577,7 @@ async function startup() {
     app.use('/api/v1', notificationDomainRoutes);
     app.use('/api/v1', privacyDomainRoutes);
     app.use('/api/v1', pestForecastingDomainRoutes);
+    app.use('/api/v1', adminAuditDomainRoutes);
     app.use('/api/v1/governance', governanceModuleMerged);
     app.use('/api/v1/cost-management', costRoutesMerged);
     app.use('/api/cost', costRoutes);

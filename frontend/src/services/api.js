@@ -443,11 +443,13 @@ export const dashboardAPI = {
 export const adminAPI = {
   getAdminData: () => api.get('/admin'),
   manageAdmin: (data) => api.post('/admin/manage', data),
+  getRecentAudit: (limit) => api.get('/admin/recent-audit', { params: { limit } }),
 };
 
 export const systemAPI = {
   getSystemData: () => api.get('/system'),
   manageSystem: (data) => api.post('/system/manage', data),
+  getHealth: () => api.get('/system/health'),
 };
 
 export const searchAPI = {
@@ -3512,6 +3514,7 @@ export const enterpriseControlAPI = {
 export const erpAPI = {
   getERPData: () => api.get('/erp'),
   manageERP: (data) => api.post('/erp/manage', data),
+  getSyncStatus: () => api.get('/erp/status'),
 };
 
 export const fpoAPI = {

@@ -409,8 +409,9 @@ export const orderAPI = {
 };
 
 export const notificationAPI = {
-  getNotifications: () => api.get('/notifications'),
+  getNotifications: (params) => api.get('/notifications', { params }),
   markAsRead: (id) => api.put(`/notifications/${id}/read`),
+  markAllAsRead: () => api.put('/notifications/read-all'),
 };
 
 export const analyticsAPI = {
@@ -1679,6 +1680,7 @@ export const provenanceAPI = {
 export const privacyAPI = {
   getPrivacySettings: () => api.get('/privacy-settings'),
   updatePrivacySettings: (data) => api.put('/privacy-settings', data),
+  recordConsent: (consentType, consentGiven) => api.post('/privacy-settings/consent', { consentType, consentGiven }),
 };
 
 export const consentAPI = {
@@ -2197,6 +2199,7 @@ export const unifiedAIGatewayAPI2 = {
 export const transactionAPI = {
   getTransactions: () => api.get('/transactions'),
   createTransaction: (data) => api.post('/transactions', data),
+  getUserTransactions: (userId, filters) => api.get('/transactions', { params: filters }),
 };
 
 export const trackDartAPI = {
@@ -2631,6 +2634,7 @@ export const floodMonitoringAPI = {
 export const pestForecastingAPI = {
   getPestForecast: () => api.get('/pest-forecasting'),
   forecastPests: (data) => api.post('/pest-forecasting/forecast', data),
+  getForecasts: (params) => api.get('/pest-forecasting', { params }),
 };
 
 export const diseaseForecastingAPI = {
@@ -3548,6 +3552,7 @@ export const farmerProfileAPI = {
 export const farmerValueAPI = {
   getFarmerValue: () => api.get('/farmer-value'),
   calculateFarmerValue: (data) => api.post('/farmer-value/calculate', data),
+  getSeasonLedger: (params) => api.get('/farmer-value/season-ledger', { params }),
 };
 
 export const farmerSkillAPI = {

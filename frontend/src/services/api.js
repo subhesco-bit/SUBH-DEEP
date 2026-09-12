@@ -2286,6 +2286,8 @@ export const sellerRankingAPI = {
 export const seedVaultAPI = {
   getSeeds: () => api.get('/seed-vault'),
   addSeed: (data) => api.post('/seed-vault', data),
+  getCategories: () => api.get('/seed-vault/categories'),
+  deleteSeed: (seedId) => api.delete(`/seed-vault/${seedId}`),
 };
 
 export const sapModuleArchitectureAPI = {

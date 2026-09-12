@@ -25,7 +25,10 @@ async function resolveFarmerId(req, res, next) {
     next();
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
-  }router.get('/', authMiddleware, resolveFarmerId, async (req, res) => {
+  }
+}
+
+router.get('/', authMiddleware, resolveFarmerId, async (req, res) => {
   try {
     const seeds = await seedVaultService.listSeeds(req.farmerId);
     res.json({ success: true, data: seeds });
@@ -78,8 +81,5 @@ router.delete('/:seedId', authMiddleware, resolveFarmerId, async (req, res) => {
     res.status(400).json({ success: false, error: error.message });
   }
 });
-
-
-}
 
 module.exports = router;

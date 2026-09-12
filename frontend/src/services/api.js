@@ -2019,6 +2019,25 @@ export const seedVaultAPI = {
 export const sapModuleArchitectureAPI = {
   getSAPModules: () => api.get('/sap-module-architecture'),
   configureSAPModule: (id, data) => api.put(`/sap-module-architecture/${id}`, data),
+  getArchitectureOverview: () => api.get('/sap-module-architecture/overview'),
+  getDependencyGraph: () => api.get('/sap-module-architecture/dependency-graph'),
+  getAllModules: () => api.get('/sap-module-architecture/modules'),
+  getModulesByType: (type) => api.get(`/sap-module-architecture/modules/by-type/${type}`),
+  registerModule: (data) => api.post('/sap-module-architecture/module', data),
+  getModule: (id) => api.get(`/sap-module-architecture/module/${id}`),
+  updateModule: (id, data) => api.put(`/sap-module-architecture/module/${id}`, data),
+  deleteModule: (id) => api.delete(`/sap-module-architecture/module/${id}`),
+  transitionModuleState: (id, newState) => api.post(`/sap-module-architecture/module/${id}/transition`, { new_state: newState }),
+  getModuleDependencies: (id) => api.get(`/sap-module-architecture/module/${id}/dependencies`),
+  resolveDependencies: (id) => api.get(`/sap-module-architecture/module/${id}/resolve-dependencies`),
+  getModuleConfiguration: (id) => api.get(`/sap-module-architecture/module/${id}/configuration`),
+  setModuleConfiguration: (id, data) => api.put(`/sap-module-architecture/module/${id}/configuration`, data),
+  getModuleVersion: (id) => api.get(`/sap-module-architecture/module/${id}/version`),
+  updateModuleVersion: (id, version) => api.put(`/sap-module-architecture/module/${id}/version`, { version }),
+  getModuleCompatibility: (id) => api.get(`/sap-module-architecture/module/${id}/compatibility`),
+  generateMTADescriptor: (id) => api.get(`/sap-module-architecture/module/${id}/mta-descriptor`),
+  getModuleLifecycle: (id) => api.get(`/sap-module-architecture/module/${id}/lifecycle`),
+  getServiceHealth: () => api.get('/sap-module-architecture/health'),
 };
 
 export const roleManagementAPI = {

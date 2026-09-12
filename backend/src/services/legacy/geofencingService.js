@@ -105,6 +105,85 @@ class GeofencingService {
     return rows[0];
   }
 
+  async updateGeofence(id, { name, description, radiusMeters, isActive } = {}) {
+    if (radiusMeters !== undefined && (!Number.isFinite(Number(radiusMeters)) || Number(radiusMeters) < 20)) {
+      throw new Error('radiusMeters must be at least 20 (below typical GPS accuracy, not a real fence)');
+    }
+    const { rows } = await pool.query(
+      `UPDATE geofences SET
+         name = COALESCE($1, name),
+         description = COALESCE($2, description),
+         radius_meters = COALESCE($3, radius_meters),
+         is_active = COALESCE($4, is_active)
+       WHERE id = $5
+       RETURNING *`,
+      [name ?? null, description ?? null, radiusMeters ?? null, isActive ?? null, id],
+    );
+    if (!rows[0]) throw new Error('Geofence not found');
+    return rows[0];
+  }
+
+  /** Soft-delete: deactivate rather than hard-delete, preserving geofence_events history. */
+  async deactivateGeofence(id) {
+    const { rows } = await pool.query(
+      'UPDATE geofences SET is_active = FALSE WHERE id = $1 RETURNING *',
+      [id],
+    );
+    if (!rows[0]) throw new Error('Geofence not found');
+    return rows[0];
+  }
+
+  /** Generic paginated event log for one zone (admin/ops view, not scoped to a single identity like checkInHistory). */
+  async listGeofenceEvents(geofenceId, { userId, driverId, eventType, page = 1, limit = 200 } = {}) {
+    await this.getGeofence(geofenceId);
+    const pageNum = Math.max(parseInt(page, 10) || 1, 1);
+    const limitNum = Math.min(Math.max(parseInt(limit, 10) || 200, 1), 1000);
+    const offset = (pageNum - 1) * limitNum;
+
+    const params = [geofenceId];
+    let where = 'WHERE geofence_id = $1';
+    if (userId) { params.push(userId); where += ` AND user_id = $${params.length}`; }
+    if (driverId) { params.push(driverId); where += ` AND driver_id = $${params.length}`; }
+    if (eventType) { params.push(eventType); where += ` AND event_type = $${params.length}`; }
+    params.push(limitNum, offset);
+
+    const { rows } = await pool.query(
+      `SELECT * FROM geofence_events ${where} ORDER BY recorded_at DESC LIMIT $${params.length - 1} OFFSET $${params.length}`,
+      params,
+    );
+    return { page: pageNum, limit: limitNum, count: rows.length, events: rows };
+  }
+
+  /** Who/what is currently inside this zone, from the latest event per identity. */
+  async getCurrentOccupants(geofenceId) {
+    await this.getGeofence(geofenceId);
+    const { rows } = await pool.query(
+      `SELECT DISTINCT ON (COALESCE(user_id::text, driver_id::text))
+              user_id, driver_id, shipment_id, source, latitude, longitude,
+              distance_meters, is_inside, recorded_at
+         FROM geofence_events
+        WHERE geofence_id = $1
+        ORDER BY COALESCE(user_id::text, driver_id::text), recorded_at DESC`,
+      [geofenceId],
+    );
+    return rows.filter((r) => r.is_inside);
+  }
+
+  /**
+   * Stateless ad-hoc polygon check — no stored zone, for callers that already
+   * have their own boundary (e.g. an FPO-supplied field survey). Does not
+   * write a geofence_event since there is no geofence row to attach it to.
+   */
+  checkPolygon(latitude, longitude, polygon) {
+    if (!geo.isValidCoord(latitude, longitude)) {
+      throw new Error('latitude/longitude must be valid coordinates');
+    }
+    if (!Array.isArray(polygon) || polygon.length < 3) {
+      throw new Error('polygon must be an array of at least 3 {lat,lng} points');
+    }
+    return { isInside: geo.isWithinPolygon(latitude, longitude, polygon), vertexCount: polygon.length };
+  }
+
   // ==========================================================================
   // SHARED EVALUATION — the honest, cheap, reusable primitive.
   //

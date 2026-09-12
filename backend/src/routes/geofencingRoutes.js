@@ -5,6 +5,15 @@
  * note): a manual labour/farmer check-in, and a driver-ping-vs-warehouse-zone
  * check that reads the existing driver_location pipeline. Nothing here does
  * continuous tracking or polygon-precision geofencing.
+ *
+ * update/deactivate/events/current/check-polygon below were recovered from
+ * an abandoned worktree branch (EBDESIGN.worktrees/integration-devin-key-apk,
+ * commit f57302b2, never merged) that had real DB-backed zone management
+ * missing from this file - verified real (schema, geo.js dependency all
+ * already live) before re-implementing against geofencingService.js instead
+ * of copying its raw pool queries, to keep one source of truth. Its
+ * POST /zones/:id/check was NOT recovered - redundant with the already-real
+ * checkIn/checkDriverZoneArrival flow above.
  */
 const express = require('express');
 const router = express.Router();
@@ -36,6 +45,42 @@ router.get('/zones', authMiddleware, async (req, res) => {
 router.get('/zones/:id', authMiddleware, async (req, res) => {
   try {
     const data = await geofencingService.getGeofence(req.params.id);
+    res.json({ success: true, data });
+  } catch (e) { fail(res, e); }
+});
+
+router.put('/zones/:id', authMiddleware, async (req, res) => {
+  try {
+    const data = await geofencingService.updateGeofence(req.params.id, req.body);
+    res.json({ success: true, data });
+  } catch (e) { fail(res, e); }
+});
+
+router.delete('/zones/:id', authMiddleware, async (req, res) => {
+  try {
+    const data = await geofencingService.deactivateGeofence(req.params.id);
+    res.json({ success: true, data });
+  } catch (e) { fail(res, e); }
+});
+
+router.get('/zones/:id/events', authMiddleware, async (req, res) => {
+  try {
+    const data = await geofencingService.listGeofenceEvents(req.params.id, req.query);
+    res.json({ success: true, ...data });
+  } catch (e) { fail(res, e); }
+});
+
+router.get('/zones/:id/current', authMiddleware, async (req, res) => {
+  try {
+    const data = await geofencingService.getCurrentOccupants(req.params.id);
+    res.json({ success: true, count: data.length, data });
+  } catch (e) { fail(res, e); }
+});
+
+router.post('/check-polygon', authMiddleware, async (req, res) => {
+  try {
+    const { latitude, longitude, polygon } = req.body || {};
+    const data = geofencingService.checkPolygon(latitude, longitude, polygon);
     res.json({ success: true, data });
   } catch (e) { fail(res, e); }
 });

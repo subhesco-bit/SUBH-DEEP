@@ -86,6 +86,16 @@ export const aiAgentAPI = {
   getAgents: () => api.get('/ai/agents'),
   createAgent: (data) => api.post('/ai/agents', data),
   executeAgent: (id, data) => api.post(`/ai/agents/${id}/execute`, data),
+  getAllAgents: () => api.get('/ai-agent/agents'),
+  getHealth: () => api.get('/ai-agent/health'),
+  getTools: () => api.get('/ai-agent/tools'),
+  coordinateAgents: (data) => api.post('/ai-agent/coordinate', data),
+  clearAgentMemory: (agentName) => api.post(`/ai-agent/agent/${agentName}/clear-memory`),
+  getAgent: (agentName) => api.get(`/ai-agent/agent/${agentName}`),
+  executeTask: (data) => api.post(`/ai-agent/agent/${data.agent_name}/execute-task`, { task: data.task, context: data.context }),
+  registerAgent: (data) => api.post('/ai-agent/agent', data),
+  registerTool: (data) => api.post('/ai-agent/tool', data),
+  updateAgent: (agentName, data) => api.put(`/ai-agent/agent/${agentName}`, data),
 };
 
 export const aiBackboneAPI = {
@@ -96,6 +106,15 @@ export const aiBackboneAPI = {
 export const aiBrainAPI = {
   getBrainState: () => api.get('/ai/brain/state'),
   trainBrain: (data) => api.post('/ai/brain/train', data),
+  getKnowledgeGraph: () => api.get('/ai-brain/knowledge-graph'),
+  getMemoryState: () => api.get('/ai-brain/memory-state'),
+  processAttention: (data) => api.post('/ai-brain/attention', data),
+  processDecision: (data) => api.post('/ai-brain/decision', data),
+  processLearning: (data) => api.post('/ai-brain/learning', data),
+  processPerception: (data) => api.post('/ai-brain/perception', data),
+  processPlanning: (data) => api.post('/ai-brain/planning', data),
+  processReasoning: (data) => api.post('/ai-brain/reasoning', data),
+  getCognitiveState: () => api.get('/ai-brain/cognitive-state'),
 };
 
 export const aiAPI = {
@@ -2093,6 +2112,23 @@ export const soilHealthAPI = {
 export const sheepAPI = {
   getSheepData: () => api.get('/sheep'),
   manageSheep: (id, data) => api.put(`/sheep/${id}`, data),
+  listFlock: (params) => api.get('/sheep/flock', { params }),
+  createAnimal: (data) => api.post('/sheep/animal', data),
+  updateAnimal: (id, data) => api.put(`/sheep/animal/${id}`, data),
+  deleteAnimal: (id) => api.delete(`/sheep/animal/${id}`),
+  listWoolProduction: (params) => api.get('/sheep/wool-production', { params }),
+  recordWoolProduction: (data) => api.post('/sheep/wool-production', data),
+  listFeedConsumption: (params) => api.get('/sheep/feed-consumption', { params }),
+  recordFeedConsumption: (data) => api.post('/sheep/feed-consumption', data),
+  listBreedingRecords: (params) => api.get('/sheep/breeding-records', { params }),
+  recordBreeding: (data) => api.post('/sheep/breeding-records', data),
+  updateLambingOutcome: (id, data) => api.put(`/sheep/lambing-outcome/${id}`, data),
+  listVaccinationRecords: (params) => api.get('/sheep/vaccination-records', { params }),
+  recordVaccination: (data) => api.post('/sheep/vaccination-records', data),
+  getFlockPerformance: (animalId) => api.get('/sheep/flock-performance', { params: { animalId } }),
+  getBreedingAlerts: () => api.get('/sheep/breeding-alerts'),
+  getVaccinationAlerts: () => api.get('/sheep/vaccination-alerts'),
+  getShearingAlerts: () => api.get('/sheep/shearing-alerts'),
 };
 
 export const sellerVerificationsAPI = {

@@ -519,6 +519,9 @@ const aiOperationIntelligenceDomainRoutes = require('./routes/aiOperationIntelli
 const aiSelfHealingDomainRoutes = require('./routes/aiSelfHealingDomainRoutes.js');
 const coldStorageDomainRoutes = require('./routes/coldStorageDomainRoutes.js');
 const costControlDomainRoutes = require('./routes/costControlDomainRoutes.js');
+const sheepDomainRoutes = require('./routes/sheepDomainRoutes.js');
+const aiAgentDomainRoutes = require('./routes/aiAgentDomainRoutes.js');
+const aiBrainDomainRoutes = require('./routes/aiBrainDomainRoutes.js');
 const governanceModuleMerged = require('./routes/platform/governanceModule_merged.js');
 const costRoutesMerged = require('./routes/finance/costRoutes_merged.js');
 const costRoutes = require('./routes/costRoutes.js');
@@ -1422,6 +1425,9 @@ async function startup() {
     app.use('/api/v1', aiSelfHealingDomainRoutes);
     app.use('/api/v1', coldStorageDomainRoutes);
     app.use('/api/v1', costControlDomainRoutes);
+    app.use('/api/v1', sheepDomainRoutes);
+    app.use('/api/v1', aiAgentDomainRoutes);
+    app.use('/api/v1', aiBrainDomainRoutes);
     app.use('/api/v1/governance', governanceModuleMerged);
     app.use('/api/v1/cost-management', costRoutesMerged);
     app.use('/api/cost', costRoutes);

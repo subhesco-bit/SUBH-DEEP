@@ -37,4 +37,9 @@ router.post('/weather/for-arp', wrap((req) => svc.weatherForArp(req.body)));
 router.post('/weather/dispatch-check', wrap((req) => svc.dispatchCheck(req.body)));
 router.post('/weather/pest-forecast', wrap((req) => svc.pestForecast(req.body)));
 
+// climateAdvisoryAPI (ClimateAdvisoryPage.jsx): real match is here, not the
+// 15-line services/climateAdvisoryService.js stub.
+router.get('/climate-advisory/advisories', wrap((req) => svc.listAdvisories(req.query)));
+router.post('/climate-advisory/advisory', wrap((req) => svc.createAdvisory(req.body)));
+
 module.exports = router;

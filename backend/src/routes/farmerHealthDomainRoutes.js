@@ -29,4 +29,8 @@ router.post('/farmer-health/record', wrap((req) => svc.createHealthRecord(req.bo
 router.put('/farmer-health/record/:id', wrap((req) => svc.updateHealthRecord(req.params.id, req.body, authCtx(req))));
 router.delete('/farmer-health/record/:id', wrap((req) => svc.deleteHealthRecord(req.params.id, authCtx(req))));
 
+// farmerWelfareAPI (FarmerHealthWelfarePage.jsx)
+router.get('/farmer-welfare/programs', wrap((req) => svc.getWelfarePrograms(req.query)));
+router.post('/farmer-welfare/enroll', wrap((req) => svc.enrollWelfareProgram(req.body.farmerId, req.body.programId)));
+
 module.exports = router;

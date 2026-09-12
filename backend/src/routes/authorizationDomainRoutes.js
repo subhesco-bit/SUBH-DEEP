@@ -29,4 +29,10 @@ const wrap = (fn) => async (req, res) => {
 router.get('/authorization/roles', wrap((req) => svc.getRoles(req.query)));
 router.get('/authorization/users', wrap(() => svc.getUsersWithRoles()));
 
+// roleManagementAPI (IdentityManagementPage.jsx) - same service, full CRUD
+router.post('/role-management/role', wrap((req) => svc.createRole(req.body)));
+router.get('/role-management/roles', wrap((req) => svc.getRoles(req.query)));
+router.put('/role-management/role/:id', wrap((req) => svc.updateRole(req.params.id, req.body)));
+router.delete('/role-management/role/:id', wrap((req) => svc.deleteRole(req.params.id)));
+
 module.exports = router;

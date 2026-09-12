@@ -1916,6 +1916,8 @@ export const dairyAPI = {
 export const cropValueResearchAPI = {
   getCropValueResearch: () => api.get('/crop-value-research'),
   researchCropValue: (data) => api.post('/crop-value-research/research', data),
+  getPending: () => api.get('/crop-value-research/pending'),
+  review: (id, approve) => api.post(`/crop-value-research/${id}/review`, { approve }),
 };
 
 export const cropRecommendationsAPI = {
@@ -2108,6 +2110,8 @@ export const coldChainMonitoringAPI = {
 export const climateAdvisoryAPI = {
   getClimateAdvisory: () => api.get('/climate-advisory'),
   getAdvisory: (data) => api.post('/climate-advisory/get', data),
+  getAdvisories: (params) => api.get('/climate-advisory/advisories', { params }),
+  createAdvisory: (data) => api.post('/climate-advisory/advisory', data),
 };
 
 export const civilDisruptionAPI = {
@@ -2309,8 +2313,10 @@ export const sapModuleArchitectureAPI = {
 };
 
 export const roleManagementAPI = {
-  getRoles: () => api.get('/role-management'),
-  createRole: (data) => api.post('/role-management', data),
+  getRoles: (params) => api.get('/role-management/roles', { params }),
+  createRole: (data) => api.post('/role-management/role', data),
+  updateRole: (id, data) => api.put(`/role-management/role/${id}`, data),
+  deleteRole: (id) => api.delete(`/role-management/role/${id}`),
 };
 
 export const riskPricingAPI = {
@@ -3330,6 +3336,7 @@ export const individualResilienceFarmingAPI = {
 export const knowledgeGraphAPI = {
   getKnowledgeGraph: () => api.get('/knowledge-graph'),
   buildKnowledgeGraph: (data) => api.post('/knowledge-graph/build', data),
+  searchNodes: (q) => api.get('/knowledge-graph/search', { params: { q } }),
 };
 
 export const libraryAPI = {
@@ -3428,6 +3435,7 @@ export const vendorsAPI = {
 export const economicAPI = {
   getEconomicData: () => api.get('/economic'),
   analyzeEconomics: (data) => api.post('/economic/analyze', data),
+  corridorModel: (corridor) => api.get('/cost-management/corridor-model', { params: { corridor } }),
 };
 
 // Crop management APIs
@@ -3517,6 +3525,8 @@ export const farmerHealthRecordsAPI = {
 export const farmerWelfareAPI = {
   getFarmerWelfare: () => api.get('/farmer-welfare'),
   manageWelfare: (data) => api.post('/farmer-welfare/manage', data),
+  getPrograms: () => api.get('/farmer-welfare/programs'),
+  enroll: (farmerId, programId) => api.post('/farmer-welfare/enroll', { farmerId, programId }),
 };
 
 export const kycAPI = {
@@ -5422,6 +5432,8 @@ export const totalWarfareAPI = {
 export const blockchainVerificationAPI = {
   getVerifications: () => api.get('/blockchain-verification'),
   verifyBlockchain: (data) => api.post('/blockchain-verification/verify', data),
+  verifyProduct: (productId) => api.get(`/blockchain-verification/product/${productId}/verify`),
+  getStats: () => api.get('/blockchain-verification/stats'),
 };
 
 export const bulkOrderAPI = {

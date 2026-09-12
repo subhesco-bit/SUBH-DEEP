@@ -100,8 +100,15 @@ require-load verification after each batch (commits `e9d77697`, `fd12452c`, `eee
 - Batch 1: `comprehensiveERPAPI` (46/46) — 12-sub-module SAP-style ERP service wired
 - Batch 2: `researchAndDevelopmentAPI` (23/23) — R&D projects/patents/funding/knowledge base wired
 - Batch 3: `sapModuleArchitectureAPI` (19/19) — module registry (lifecycle, deps, versioning) wired
-- 88 of 607 resolved so far. Next: `animalHealthAPI` (17), `completeAIIntegrationAPI` (15),
-  `completeERPIntegrationAPI` (15), `aiOperationIntelligenceAPI` (14), continuing by impact order
+- Batches 4-18 (commits `d57abf6b` through `a55cd2d8`): animalHealthAPI, completeAIIntegrationAPI,
+  completeERPIntegrationAPI, aiOperationIntelligenceAPI, aiSelfHealingAPI, coldStorageAPI,
+  costControlAPI, enterpriseControlAPI, sheepAPI, aiAgentAPI, aiBrainAPI, ecommerceAIAPI,
+  agriculturalIntelligenceAPI, ecommerceIntegrationAPI, poultryAPI
+- vendorsAPI investigated and skipped: methods don't match any real service at all (genuinely
+  unbuilt concept - corporate buyer/logistics portal - not a wiring gap)
+- 224 of 607 resolved so far, 94 clients / 329 mismatches remaining. Continuing by impact order:
+  assetAccountingAPI, decisionSupportAPI, ecommerceAPI, marketplaceAPI (no candidate service),
+  ordersAPI, weatherAPI, cooperativeShareAPI, walletAPI, enterpriseAIAPI...
 
 **Next up after the 22-pair audit (by orphan count, highest first):**
 - `ecommerce-marketplace` — 1,562 stems, 775 orphaned

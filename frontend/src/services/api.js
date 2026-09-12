@@ -465,6 +465,15 @@ export const animalHealthAPI = {
 export const assetAccountingAPI = {
   getAssetAccounting: () => api.get('/asset-accounting'),
   manageAssets: (data) => api.post('/asset-accounting/manage', data),
+  createAsset: (data) => api.post('/asset-accounting/asset', data),
+  getAssets: (companyId) => api.get(`/asset-accounting/assets/${companyId}`),
+  getAsset: (assetId) => api.get(`/asset-accounting/asset/${assetId}`),
+  generateDepreciationSchedule: (assetId) => api.post(`/asset-accounting/asset/${assetId}/depreciation-schedule`),
+  getDepreciationSchedule: (assetId) => api.get(`/asset-accounting/asset/${assetId}/depreciation-schedule`),
+  postDepreciationPeriod: (assetId, periodDate) => api.post(`/asset-accounting/asset/${assetId}/post-depreciation`, { periodDate }),
+  runDepreciationForPeriod: (companyId, asOfDate) => api.post(`/asset-accounting/company/${companyId}/run-depreciation`, { asOfDate }),
+  disposeAsset: (assetId, data) => api.post(`/asset-accounting/asset/${assetId}/dispose`, data),
+  getAssetRegisterSummary: (companyId) => api.get(`/asset-accounting/company/${companyId}/register-summary`),
 };
 
 export const companyAPI = {
@@ -1793,6 +1802,14 @@ export const defenseFitnessPrepAPI = {
 export const decisionSupportAPI = {
   getDecisionSupport: () => api.get('/decision-support'),
   makeDecision: (data) => api.post('/decision-support/make', data),
+  schemeExpiryStatus: () => api.get('/decision-support/scheme-expiry-status'),
+  allocScore: (data) => api.post('/decision-support/alloc-score', data),
+  complianceGaps: (data) => api.post('/decision-support/compliance-gaps', data),
+  ecoLogisticsMiles: (data) => api.post('/decision-support/eco-logistics-miles', data),
+  harvestPoints: (data) => api.post('/decision-support/harvest-points', data),
+  corpCreditEligible: (data) => api.post('/decision-support/corp-credit-eligible', data),
+  compostPlan: (data) => api.post('/decision-support/compost-plan', data),
+  floorBenchmark: (data) => api.post('/decision-support/floor-benchmark', data),
 };
 
 export const dataVisualizationAPI = {

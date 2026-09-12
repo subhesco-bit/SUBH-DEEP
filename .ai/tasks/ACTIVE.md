@@ -95,8 +95,13 @@ features, not wiring gaps). Biggest single-page gaps by mismatch count: `compreh
 (46 — full GL/journal/trial-balance/balance-sheet accounting UI with a 2-method stub backing it),
 `researchAndDevelopmentAPI` (23), `sapModuleArchitectureAPI` (19), `animalHealthAPI` (17),
 `completeAIIntegrationAPI`/`completeERPIntegrationAPI` (15 each). Full data:
-`_MERGE_LAB/reports/api-mismatch-verified.json`. Not started — this is its own initiative,
-prioritize by impact, don't force through in one sweep.
+`_MERGE_LAB/reports/api-mismatch-verified.json`. Prioritized by impact, tackled in batches with
+require-load verification after each batch (commits `e9d77697`, `fd12452c`, `eee7adc5`):
+- Batch 1: `comprehensiveERPAPI` (46/46) — 12-sub-module SAP-style ERP service wired
+- Batch 2: `researchAndDevelopmentAPI` (23/23) — R&D projects/patents/funding/knowledge base wired
+- Batch 3: `sapModuleArchitectureAPI` (19/19) — module registry (lifecycle, deps, versioning) wired
+- 88 of 607 resolved so far. Next: `animalHealthAPI` (17), `completeAIIntegrationAPI` (15),
+  `completeERPIntegrationAPI` (15), `aiOperationIntelligenceAPI` (14), continuing by impact order
 
 **Next up after the 22-pair audit (by orphan count, highest first):**
 - `ecommerce-marketplace` — 1,562 stems, 775 orphaned

@@ -1754,6 +1754,15 @@ export const ecommerceMarketingAPI = {
 export const ecommerceIntegrationAPI = {
   getEcommerceIntegration: () => api.get('/ecommerce-integration'),
   integrateEcommerce: (data) => api.post('/ecommerce-integration/integrate', data),
+  getDietitianRecommendation: () => api.get('/ecommerce-integration/dietitian-recommendation'),
+  calculateCartNutrition: (data) => api.post('/ecommerce-integration/cart-nutrition', data),
+  calculateNutritionScore: (productId) => api.get(`/ecommerce-integration/nutrition-score/${productId}`),
+  checkCompatibility: (productId) => api.get(`/ecommerce-integration/compatibility/${productId}`),
+  getDietitianCollections: (dietitianId) => api.get('/ecommerce-integration/dietitian-collections', { params: { dietitianId } }),
+  getHealthRecommendations: (limit) => api.get('/ecommerce-integration/health-recommendations', { params: { limit } }),
+  getNutritionPricePremium: (productId, basePrice) => api.get(`/ecommerce-integration/nutrition-price-premium/${productId}`, { params: { basePrice } }),
+  getRecipeProducts: (recipeId) => api.get(`/ecommerce-integration/recipe-products/${recipeId}`),
+  getRecipeSuggestions: (productId, limit) => api.get(`/ecommerce-integration/recipe-suggestions/${productId}`, { params: { limit } }),
 };
 
 export const ecommerceERPAPI = {
@@ -2273,6 +2282,20 @@ export const pyramidHealthAPI = {
 export const poultryAPI = {
   getPoultryData: () => api.get('/poultry'),
   managePoultry: (id, data) => api.put(`/poultry/${id}`, data),
+  listFlocks: (params) => api.get('/poultry/flocks', { params }),
+  createFlock: (data) => api.post('/poultry/flock', data),
+  updateFlock: (id, data) => api.put(`/poultry/flock/${id}`, data),
+  deleteFlock: (id) => api.delete(`/poultry/flock/${id}`),
+  listEggProduction: (params) => api.get('/poultry/egg-production', { params }),
+  recordEggProduction: (data) => api.post('/poultry/egg-production', data),
+  listFeedConsumption: (params) => api.get('/poultry/feed-consumption', { params }),
+  recordFeedConsumption: (data) => api.post('/poultry/feed-consumption', data),
+  listMortality: (params) => api.get('/poultry/mortality', { params }),
+  recordMortality: (data) => api.post('/poultry/mortality', data),
+  listVaccinationRecords: (params) => api.get('/poultry/vaccination-records', { params }),
+  recordVaccination: (data) => api.post('/poultry/vaccination-records', data),
+  getFlockPerformance: (flockId) => api.get('/poultry/flock-performance', { params: { flockId } }),
+  getVaccinationAlerts: () => api.get('/poultry/vaccination-alerts'),
 };
 
 export const pricingOptimizationAPI = {

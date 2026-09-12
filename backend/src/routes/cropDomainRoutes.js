@@ -47,6 +47,9 @@ router.post('/crop-monitoring/monitor', async (req, res) => {
   }
 });
 
+// cropMonitoringAPI (CropMonitoringPage.jsx full CRUD): /crop-monitoring/observations
+mountCrudResource(router, '/crop-monitoring/observations', cropMonitoring);
+
 // seedPlanningAPI: GET/POST/PUT/DELETE /seed-planning/plan(s)
 router.get('/seed-planning/plans', async (req, res) => {
   try {

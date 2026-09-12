@@ -3387,6 +3387,10 @@ export const cropCalendarAPI = {
 export const cropMonitoringAPI = {
   getCropMonitoring: () => api.get('/crop-monitoring'),
   monitorCrop: (data) => api.post('/crop-monitoring/monitor', data),
+  getObservations: (params) => api.get('/crop-monitoring/observations', { params }),
+  createObservation: (data) => api.post('/crop-monitoring/observations', data),
+  updateObservation: (id, data) => api.put(`/crop-monitoring/observations/${id}`, data),
+  deleteObservation: (id) => api.delete(`/crop-monitoring/observations/${id}`),
 };
 
 export const cropRegistrationAPI = {
@@ -3397,6 +3401,10 @@ export const cropRegistrationAPI = {
 export const cropVarietyAPI = {
   getCropVarieties: () => api.get('/crop-varieties'),
   createCropVariety: (data) => api.post('/crop-varieties', data),
+  getVarieties: (params) => api.get('/crop-varieties', { params }),
+  createVariety: (data) => api.post('/crop-varieties', data),
+  updateVariety: (id, data) => api.put(`/crop-varieties/${id}`, data),
+  deleteVariety: (id) => api.delete(`/crop-varieties/${id}`),
 };
 
 export const dairyAIAPI = {

@@ -522,6 +522,8 @@ const costControlDomainRoutes = require('./routes/costControlDomainRoutes.js');
 const sheepDomainRoutes = require('./routes/sheepDomainRoutes.js');
 const aiAgentDomainRoutes = require('./routes/aiAgentDomainRoutes.js');
 const aiBrainDomainRoutes = require('./routes/aiBrainDomainRoutes.js');
+const ecommerceAIDomainRoutes = require('./routes/ecommerceAIDomainRoutes.js');
+const agriculturalIntelligenceDomainRoutes = require('./routes/agriculturalIntelligenceDomainRoutes.js');
 const governanceModuleMerged = require('./routes/platform/governanceModule_merged.js');
 const costRoutesMerged = require('./routes/finance/costRoutes_merged.js');
 const costRoutes = require('./routes/costRoutes.js');
@@ -1428,6 +1430,8 @@ async function startup() {
     app.use('/api/v1', sheepDomainRoutes);
     app.use('/api/v1', aiAgentDomainRoutes);
     app.use('/api/v1', aiBrainDomainRoutes);
+    app.use('/api/v1', ecommerceAIDomainRoutes);
+    app.use('/api/v1', agriculturalIntelligenceDomainRoutes);
     app.use('/api/v1/governance', governanceModuleMerged);
     app.use('/api/v1/cost-management', costRoutesMerged);
     app.use('/api/cost', costRoutes);

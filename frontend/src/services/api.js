@@ -238,6 +238,15 @@ export const platformCoreAPI = {
 export const agriculturalIntelligenceAPI = {
   getIntelligenceData: () => api.get('/agricultural-intelligence'),
   analyzeCropData: (data) => api.post('/agricultural-intelligence/analyze', data),
+  healthCheck: () => api.get('/agricultural-intelligence/health'),
+  analyzeSoil: (data) => api.post('/agricultural-intelligence/analyze-soil', data),
+  optimizeIrrigation: (data) => api.post('/agricultural-intelligence/optimize-irrigation', data),
+  predictCropYield: (data) => api.post('/agricultural-intelligence/predict-crop-yield', data),
+  predictPestOutbreak: (data) => api.post('/agricultural-intelligence/predict-pest-outbreak', data),
+  recommendCrops: (data) => api.post('/agricultural-intelligence/recommend-crops', data),
+  recommendFertilizer: (data) => api.post('/agricultural-intelligence/recommend-fertilizer', data),
+  getAgriculturalAnalytics: (params) => api.get('/agricultural-intelligence/analytics', { params }),
+  getWeatherIntelligence: (location, timeframe) => api.get('/agricultural-intelligence/weather', { params: { location, timeframe } }),
 };
 
 export const advancedFeaturesAPI = {
@@ -263,6 +272,14 @@ export const EnergyCostCalculatorAPI = {
 export const ecommerceAIAPI = {
   getEcommerceAIInsights: () => api.get('/ecommerce/ai/insights'),
   generateRecommendations: (data) => api.post('/ecommerce/ai/recommendations', data),
+  analyzeMarketBasket: (categoryId) => api.get('/ecommerce-ai/market-basket', { params: { categoryId } }),
+  predictSales: (categoryId, periodDays) => api.get('/ecommerce-ai/predict-sales', { params: { categoryId, periodDays } }),
+  segmentCustomersBehavioral: () => api.get('/ecommerce-ai/segment-customers/behavioral'),
+  segmentCustomersRFM: () => api.get('/ecommerce-ai/segment-customers/rfm'),
+  forecastProductDemand: (productId, horizonDays) => api.get(`/ecommerce-ai/forecast-demand/${productId}`, { params: { horizonDays } }),
+  optimizeInventory: (productId) => api.get(`/ecommerce-ai/optimize-inventory/${productId}`),
+  calculateCustomerLifetimeValue: (userId) => api.get(`/ecommerce-ai/customer-lifetime-value/${userId}`),
+  getPersonalizedRecommendations: (userId, limit) => api.get(`/ecommerce-ai/recommendations/${userId}`, { params: { limit } }),
 };
 
 export const aiOperationIntelligenceAPI = {

@@ -508,6 +508,7 @@ const fertilizerDomainRoutes = require('./routes/fertilizerDomainRoutes.js');
 const { router: erpServiceRouter } = require('./services/legacy/erpService.js');
 const organizationDomainRoutes = require('./routes/organizationDomainRoutes.js');
 const fisheriesDomainRoutes = require('./routes/fisheriesDomainRoutes.js');
+const comprehensiveERPDomainRoutes = require('./routes/comprehensiveERPDomainRoutes.js');
 const governanceModuleMerged = require('./routes/platform/governanceModule_merged.js');
 const costRoutesMerged = require('./routes/finance/costRoutes_merged.js');
 const costRoutes = require('./routes/costRoutes.js');
@@ -1400,6 +1401,7 @@ async function startup() {
     app.use('/api/v1/erp', erpServiceRouter);
     app.use('/api/v1', organizationDomainRoutes);
     app.use('/api/v1', fisheriesDomainRoutes);
+    app.use('/api/v1', comprehensiveERPDomainRoutes);
     app.use('/api/v1/governance', governanceModuleMerged);
     app.use('/api/v1/cost-management', costRoutesMerged);
     app.use('/api/cost', costRoutes);

@@ -1767,6 +1767,64 @@ export const cooperativeShareAPI = {
 export const comprehensiveERPAPI = {
   getComprehensiveERP: () => api.get('/comprehensive-erp'),
   configureERP: (data) => api.put('/comprehensive-erp/configure', data),
+  // General Ledger
+  createChartOfAccounts: (data) => api.post('/comprehensive-erp/create-chart-of-accounts', data),
+  createGLAccount: (data) => api.post('/comprehensive-erp/create-g-l-account', data),
+  postJournalEntry: (data) => api.post('/comprehensive-erp/post-journal-entry', data),
+  getTrialBalance: (params) => api.get('/comprehensive-erp/get-trial-balance', { params }),
+  getBalanceSheet: (params) => api.get('/comprehensive-erp/get-balance-sheet', { params }),
+  getProfitLoss: (params) => api.get('/comprehensive-erp/get-profit-loss', { params }),
+  analyzeFinancialsAI: (params) => api.get('/comprehensive-erp/analyze-financials-a-i', { params }),
+  // Controlling
+  createCostCenter: (data) => api.post('/comprehensive-erp/create-cost-center', data),
+  createProfitCenter: (data) => api.post('/comprehensive-erp/create-profit-center', data),
+  postCostAllocation: (data) => api.post('/comprehensive-erp/post-cost-allocation', data),
+  getCostCenterReport: (params) => api.get('/comprehensive-erp/get-cost-center-report', { params }),
+  getProfitCenterReport: (params) => api.get('/comprehensive-erp/get-profit-center-report', { params }),
+  // Materials Management
+  createMaterialMaster: (data) => api.post('/comprehensive-erp/create-material-master', data),
+  createPurchaseOrder: (data) => api.post('/comprehensive-erp/create-purchase-order', data),
+  createGoodsReceipt: (data) => api.post('/comprehensive-erp/create-goods-receipt', data),
+  getInventoryOverview: (params) => api.get('/comprehensive-erp/get-inventory-overview', { params }),
+  optimizeSupplyChainAI: (params) => api.get('/comprehensive-erp/optimize-supply-chain-a-i', { params }),
+  // Sales and Distribution
+  createCustomerMaster: (data) => api.post('/comprehensive-erp/create-customer-master', data),
+  createSalesOrder: (data) => api.post('/comprehensive-erp/create-sales-order', data),
+  createDelivery: (data) => api.post('/comprehensive-erp/create-delivery', data),
+  createInvoice: (data) => api.post('/comprehensive-erp/create-invoice', data),
+  // Production Planning
+  createProductionOrder: (data) => api.post('/comprehensive-erp/create-production-order', data),
+  releaseProductionOrder: (id) => api.post(`/comprehensive-erp/release-production-order/${id}`),
+  confirmProductionOrder: (id, data) => api.post(`/comprehensive-erp/confirm-production-order/${id}`, data),
+  optimizeProductionAI: (params) => api.get('/comprehensive-erp/optimize-production-a-i', { params }),
+  // Quality Management
+  createInspectionLot: (data) => api.post('/comprehensive-erp/create-inspection-lot', data),
+  recordInspectionResult: (data) => api.post('/comprehensive-erp/record-inspection-result', data),
+  makeUsageDecision: (id, data) => api.post(`/comprehensive-erp/make-usage-decision/${id}`, data),
+  // Plant Maintenance
+  createEquipmentMaster: (data) => api.post('/comprehensive-erp/create-equipment-master', data),
+  createMaintenanceOrder: (data) => api.post('/comprehensive-erp/create-maintenance-order', data),
+  confirmMaintenanceOrder: (id, data) => api.post(`/comprehensive-erp/confirm-maintenance-order/${id}`, data),
+  // Human Resources
+  createEmployeeMaster: (data) => api.post('/comprehensive-erp/create-employee-master', data),
+  createOrganizationalUnit: (data) => api.post('/comprehensive-erp/create-organizational-unit', data),
+  processPayroll: (data) => api.post('/comprehensive-erp/process-payroll', data),
+  analyzeHRAI: (params) => api.get('/comprehensive-erp/analyze-h-r-a-i', { params }),
+  // Project System
+  createProjectDefinition: (data) => api.post('/comprehensive-erp/create-project-definition', data),
+  createWBS: (data) => api.post('/comprehensive-erp/create-w-b-s', data),
+  updateProjectStatus: (id, data) => api.post(`/comprehensive-erp/update-project-status/${id}`, data),
+  analyzeProjectAI: (id) => api.post(`/comprehensive-erp/analyze-project-a-i/${id}`),
+  // Treasury
+  createBankAccount: (data) => api.post('/comprehensive-erp/create-bank-account', data),
+  recordCashFlow: (data) => api.post('/comprehensive-erp/record-cash-flow', data),
+  getCashPosition: (params) => api.get('/comprehensive-erp/get-cash-position', { params }),
+  // Asset Management
+  createFixedAsset: (data) => api.post('/comprehensive-erp/create-fixed-asset', data),
+  calculateDepreciation: (id, data) => api.post(`/comprehensive-erp/calculate-depreciation/${id}`, data),
+  // Business Intelligence
+  getExecutiveDashboard: (params) => api.get('/comprehensive-erp/get-executive-dashboard', { params }),
+  getProfitabilityAnalysis: (params) => api.get('/comprehensive-erp/get-profitability-analysis', { params }),
 };
 
 export const complianceTrackingAPI = {

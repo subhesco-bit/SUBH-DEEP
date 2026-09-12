@@ -82,6 +82,22 @@ unclaimed generic placeholder. Fixed so far (commits `22262186`, `e4c495a1`):
   had a second broken/unused import; `governanceModule_merged.js` imported an export
   `rateLimiter.js` doesn't have (`authRateLimit` vs the real `authLimiter`)
 
+**NEW, large initiative found: frontend API-client mismatch sweep.** Systematic scan
+(`tools/codex-api-client-mismatch-scan.js`) of all 1,272 frontend page/component files found
+**607 instances** of the `passwordUtils.js`-class bug (page calls `xxxAPI.method()`, method
+doesn't exist on the exported client) across **113 distinct API clients**. Ran a batch verifier
+(`tools/codex-api-mismatch-verify.js`) to see how much of this is safely scriptable: only
+**1 of 607** has a safe exact-name auto-fix; the rest need the same manual per-resource,
+per-path verification as the module-lineage audit, because most real backend services use the
+CRUD-factory shape (`list`/`get`/`create`/`update`/`remove` per resource), not flat method names
+matching the page. 90 of the 607 have no plausible backend service at all (likely unbuilt
+features, not wiring gaps). Biggest single-page gaps by mismatch count: `comprehensiveERPAPI`
+(46 — full GL/journal/trial-balance/balance-sheet accounting UI with a 2-method stub backing it),
+`researchAndDevelopmentAPI` (23), `sapModuleArchitectureAPI` (19), `animalHealthAPI` (17),
+`completeAIIntegrationAPI`/`completeERPIntegrationAPI` (15 each). Full data:
+`_MERGE_LAB/reports/api-mismatch-verified.json`. Not started — this is its own initiative,
+prioritize by impact, don't force through in one sweep.
+
 **Next up after the 22-pair audit (by orphan count, highest first):**
 - `ecommerce-marketplace` — 1,562 stems, 775 orphaned
 - `ai-chat-copilot` — 1,761 stems, 845 orphaned (mostly agent-workspace noise per keyword

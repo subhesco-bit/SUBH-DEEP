@@ -1799,6 +1799,21 @@ export const costAPI = {
 export const costControlAPI = {
   getCostControl: () => api.get('/cost-control'),
   controlCosts: (data) => api.post('/cost-control/control', data),
+  createCostCenter: (data) => api.post('/cost-control/cost-center', data),
+  getCostCenters: (companyId, params) => api.get(`/cost-control/cost-centers/${companyId}`, { params }),
+  getCostCenter: (costCenterId) => api.get(`/cost-control/cost-center/${costCenterId}`),
+  getCostCenterActuals: (costCenterId, params) => api.get(`/cost-control/cost-center/${costCenterId}/actuals`, { params }),
+  createProfitCenter: (data) => api.post('/cost-control/profit-center', data),
+  getProfitCenters: (companyId, params) => api.get(`/cost-control/profit-centers/${companyId}`, { params }),
+  createBudget: (data) => api.post('/cost-control/budget', data),
+  getBudgets: (companyId, params) => api.get(`/cost-control/budgets/${companyId}`, { params }),
+  getBudget: (budgetId) => api.get(`/cost-control/budget/${budgetId}`),
+  submitBudget: (budgetId) => api.post(`/cost-control/budget/${budgetId}/submit`),
+  approveBudget: (budgetId, approved) => api.post(`/cost-control/budget/${budgetId}/approve`, { approved }),
+  addBudgetLine: (budgetId, data) => api.post(`/cost-control/budget/${budgetId}/line`, data),
+  getBudgetLines: (budgetId) => api.get(`/cost-control/budget/${budgetId}/lines`),
+  getBudgetVsActual: (budgetId) => api.get(`/cost-control/budget/${budgetId}/vs-actual`),
+  getCostReductionRecommendations: (budgetId) => api.get(`/cost-control/budget/${budgetId}/cost-reduction-recommendations`),
 };
 
 export const cooperativeShareAPI = {
@@ -3213,6 +3228,18 @@ export const financialAPI = {
 export const enterpriseControlAPI = {
   getEnterpriseControl: () => api.get('/enterprise-control'),
   controlEnterprise: (data) => api.post('/enterprise-control/control', data),
+  startWorkflow: (body) => api.post('/enterprise-control/workflow/start', body),
+  actOnWorkflow: (instanceCode, body) => api.post(`/enterprise-control/workflow/${instanceCode}/act`, body),
+  createLead: (body) => api.post('/enterprise-control/crm/leads', body),
+  convertLead: (leadCode, body) => api.post(`/enterprise-control/crm/leads/${leadCode}/convert`, body),
+  pipeline: () => api.get('/enterprise-control/crm/pipeline'),
+  clientHealth: (id) => api.get(`/enterprise-control/clients/${id}/health`),
+  legalCalendar: (params) => api.get('/enterprise-control/legal/calendar', { params }),
+  assessRisk: (riskCode, body) => api.post(`/enterprise-control/risk/${riskCode}/assess`, body),
+  riskHeatmap: () => api.get('/enterprise-control/risk/heatmap'),
+  raiseIncident: (body) => api.post('/enterprise-control/emergency/incidents', body),
+  acknowledgeIncident: (incidentCode) => api.post(`/enterprise-control/emergency/incidents/${incidentCode}/acknowledge`),
+  activeIncidents: () => api.get('/enterprise-control/emergency/active'),
 };
 
 export const erpAPI = {

@@ -506,6 +506,7 @@ const soilDomainRoutes = require('./routes/soilDomainRoutes.js');
 const dairyDomainRoutes = require('./routes/dairyDomainRoutes.js');
 const fertilizerDomainRoutes = require('./routes/fertilizerDomainRoutes.js');
 const { router: erpServiceRouter } = require('./services/legacy/erpService.js');
+const { router: enterpriseControlServiceRouter } = require('./services/legacy/enterpriseControlService.js');
 const organizationDomainRoutes = require('./routes/organizationDomainRoutes.js');
 const fisheriesDomainRoutes = require('./routes/fisheriesDomainRoutes.js');
 const comprehensiveERPDomainRoutes = require('./routes/comprehensiveERPDomainRoutes.js');
@@ -517,6 +518,7 @@ const completeERPIntegrationDomainRoutes = require('./routes/completeERPIntegrat
 const aiOperationIntelligenceDomainRoutes = require('./routes/aiOperationIntelligenceDomainRoutes.js');
 const aiSelfHealingDomainRoutes = require('./routes/aiSelfHealingDomainRoutes.js');
 const coldStorageDomainRoutes = require('./routes/coldStorageDomainRoutes.js');
+const costControlDomainRoutes = require('./routes/costControlDomainRoutes.js');
 const governanceModuleMerged = require('./routes/platform/governanceModule_merged.js');
 const costRoutesMerged = require('./routes/finance/costRoutes_merged.js');
 const costRoutes = require('./routes/costRoutes.js');
@@ -1407,6 +1409,7 @@ async function startup() {
     app.use('/api/v1', dairyDomainRoutes);
     app.use('/api/v1', fertilizerDomainRoutes);
     app.use('/api/v1/erp', erpServiceRouter);
+    app.use('/api/v1/enterprise-control', enterpriseControlServiceRouter);
     app.use('/api/v1', organizationDomainRoutes);
     app.use('/api/v1', fisheriesDomainRoutes);
     app.use('/api/v1', comprehensiveERPDomainRoutes);
@@ -1418,6 +1421,7 @@ async function startup() {
     app.use('/api/v1', aiOperationIntelligenceDomainRoutes);
     app.use('/api/v1', aiSelfHealingDomainRoutes);
     app.use('/api/v1', coldStorageDomainRoutes);
+    app.use('/api/v1', costControlDomainRoutes);
     app.use('/api/v1/governance', governanceModuleMerged);
     app.use('/api/v1/cost-management', costRoutesMerged);
     app.use('/api/cost', costRoutes);

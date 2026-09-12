@@ -2551,6 +2551,10 @@ export const hybridFarmingAPI = {
 export const hydroponicsAPI = {
   getHydroponics: () => api.get('/hydroponics'),
   manageHydroponics: (data) => api.post('/hydroponics/manage', data),
+  getSystems: (params) => api.get('/hydroponics/systems', { params }),
+  createSystem: (data) => api.post('/hydroponics/system', data),
+  updateSystem: (id, data) => api.put(`/hydroponics/system/${id}`, data),
+  deleteSystem: (id) => api.delete(`/hydroponics/system/${id}`),
 };
 
 export const homeAutomationAPI = {
@@ -3843,6 +3847,10 @@ export const laborAPI2 = {
 export const landAPI = {
   getLand: () => api.get('/land'),
   manageLand: (data) => api.post('/land/manage', data),
+  getParcels: (params) => api.get('/land/parcels', { params }),
+  createParcel: (data) => api.post('/land/parcel', data),
+  updateParcel: (id, data) => api.put(`/land/parcel/${id}`, data),
+  deleteParcel: (id) => api.delete(`/land/parcel/${id}`),
 };
 
 export const landscapeAPI = {

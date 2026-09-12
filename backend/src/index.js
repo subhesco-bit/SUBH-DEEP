@@ -549,6 +549,8 @@ const rfqDomainRoutes = require('./routes/rfqDomainRoutes.js');
 const farmerHealthDomainRoutes = require('./routes/farmerHealthDomainRoutes.js');
 const farmerKycDomainRoutes = require('./routes/farmerKycDomainRoutes.js');
 const farmerVerificationDomainRoutes = require('./routes/farmerVerificationDomainRoutes.js');
+const horticultureManagementDomainRoutes = require('./routes/horticultureManagementDomainRoutes.js');
+const landRecordsDomainRoutes = require('./routes/landRecordsDomainRoutes.js');
 const governanceModuleMerged = require('./routes/platform/governanceModule_merged.js');
 const costRoutesMerged = require('./routes/finance/costRoutes_merged.js');
 const costRoutes = require('./routes/costRoutes.js');
@@ -1516,6 +1518,8 @@ async function startup() {
     app.use('/api/v1', farmerHealthDomainRoutes);
     app.use('/api/v1', farmerKycDomainRoutes);
     app.use('/api/v1', farmerVerificationDomainRoutes);
+    app.use('/api/v1', horticultureManagementDomainRoutes);
+    app.use('/api/v1', landRecordsDomainRoutes);
     app.use('/api/v1/governance', governanceModuleMerged);
     app.use('/api/v1/cost-management', costRoutesMerged);
     app.use('/api/cost', costRoutes);

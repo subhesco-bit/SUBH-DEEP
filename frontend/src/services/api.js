@@ -3311,18 +3311,27 @@ export const panchayatAPI = {
 };
 
 export const blockManagementAPI = {
-  getBlocks: () => api.get('/blocks'),
+  getBlocks: (params) => api.get('/blocks', { params }),
   getBlock: (id) => api.get(`/blocks/${id}`),
+  createBlock: (data) => api.post('/block', data),
+  updateBlock: (id, data) => api.put(`/block/${id}`, data),
+  deleteBlock: (id) => api.delete(`/block/${id}`),
 };
 
 export const districtManagementAPI = {
-  getDistricts: () => api.get('/districts'),
+  getDistricts: (params) => api.get('/districts', { params }),
   getDistrict: (id) => api.get(`/districts/${id}`),
+  createDistrict: (data) => api.post('/district', data),
+  updateDistrict: (id, data) => api.put(`/district/${id}`, data),
+  deleteDistrict: (id) => api.delete(`/district/${id}`),
 };
 
 export const stateManagementAPI = {
-  getStates: () => api.get('/states'),
+  getStates: (params) => api.get('/states', { params }),
   getState: (id) => api.get(`/states/${id}`),
+  createState: (data) => api.post('/state', data),
+  updateState: (id, data) => api.put(`/state/${id}`, data),
+  deleteState: (id) => api.delete(`/state/${id}`),
 };
 
 export const villageManagementAPI = {

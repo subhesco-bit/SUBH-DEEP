@@ -8,7 +8,7 @@
 const express = require('express');
 const router = express.Router();
 const {
-  producerGroup, communityAsset, ruralDevelopment,
+  producerGroup, communityAsset, ruralDevelopment, blockManagement, districtManagement, stateManagement,
 } = require('../services/legacy/communityManagementService');
 
 try {
@@ -58,5 +58,8 @@ function mountCrud(basePath, singularPath, resource) {
 mountCrud('producer-groups', 'producer-group', producerGroup);
 mountCrud('community-assets', 'community-asset', communityAsset);
 mountCrud('rural-development-projects', 'rural-development-project', ruralDevelopment);
+mountCrud('blocks', 'block', blockManagement);
+mountCrud('districts', 'district', districtManagement);
+mountCrud('states', 'state', stateManagement);
 
 module.exports = router;

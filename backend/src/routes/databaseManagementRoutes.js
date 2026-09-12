@@ -14,6 +14,13 @@
 const express = require('express');
 const router = express.Router();
 const databaseManagementService = require('../services/databaseManagementService');
+// (2026-09-12) Recovered from the old-new-folder dump with zero auth on
+// any route despite exposing database provisioning/deletion/backup-restore
+// - added authMiddleware + adminMiddleware before mounting rather than
+// exposing this wide open.
+const { authMiddleware } = require('../middleware/auth');
+const { adminMiddleware } = require('../middleware/admin');
+router.use(authMiddleware, adminMiddleware);
 
 /**
  * Provision database

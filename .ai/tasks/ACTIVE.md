@@ -104,11 +104,31 @@ require-load verification after each batch (commits `e9d77697`, `fd12452c`, `eee
   completeERPIntegrationAPI, aiOperationIntelligenceAPI, aiSelfHealingAPI, coldStorageAPI,
   costControlAPI, enterpriseControlAPI, sheepAPI, aiAgentAPI, aiBrainAPI, ecommerceAIAPI,
   agriculturalIntelligenceAPI, ecommerceIntegrationAPI, poultryAPI
-- vendorsAPI investigated and skipped: methods don't match any real service at all (genuinely
-  unbuilt concept - corporate buyer/logistics portal - not a wiring gap)
-- 224 of 607 resolved so far, 94 clients / 329 mismatches remaining. Continuing by impact order:
-  assetAccountingAPI, decisionSupportAPI, ecommerceAPI, marketplaceAPI (no candidate service),
-  ordersAPI, weatherAPI, cooperativeShareAPI, walletAPI, enterpriseAIAPI...
+- `5ebd151c`: found `backend/src/routes/ORPHANED_SERVICES_MOUNT.js` already mounts 9 services
+  with real setupRoutes(app) that were never called; found 16 MORE never-called the same way
+  (householdEconomy, renewableEnergy, ruralEnterprise, villageProfile, aiAdvisory,
+  aiAgenticCompanion, decisionSupport, buyingClub, machineryAccess, marketAccess,
+  marketIntelligence, procurementSubscription, ruralFinance, custodyEvent, mobilityRides,
+  analyticsMonitoring) - all verified with setupRoutes(fakeApp) before wiring, mounted directly
+  with the real `app` (not a sub-router, which would double-prefix their absolute paths)
+- Commits `67573168` through `e2fd1c18`: assetAccountingAPI, decisionSupportAPI (custom routes -
+  its own setupRoutes' internal router is itself a stub), ecommerceAPI, ordersAPI (money/order
+  handling - authMiddleware required, not optional), weatherAPI, cooperativeShareAPI, walletAPI
+  (wallet_id resolved via getBalance(userId), a separate DB id from user_id),
+  equipmentExchangeAPI, multilingualAPI, ecommerceBusinessSalesAPI, bulkOrderAPI (userId always
+  from server auth, never client-trusted), civilDisruptionAPI, engineeringProjectAPI,
+  ecommerceERPAPI, experienceAPI, insuranceAPI
+- Skipped (investigated, no real match, not forced): vendorsAPI, machineryAPI (tractor
+  CRUD/booking - no backend anywhere), enterpriseAIAPI (credit-scoring signatures don't match),
+  auditComplianceAPI (anomaly-detection/log-integrity concepts absent from real service),
+  greenhouseAPI (page's own code comment admits the CRUD shape it calls has no backend),
+  marketplaceAPI (unused by any page)
+- **318 of 607 resolved, 82 clients / ~176 mismatches remaining.** Continuing by impact order:
+  authorizationAPI (4), droughtMonitoringAPI/floodMonitoringAPI/diseaseForecastingAPI/
+  climateRiskAPI/agroMeteorologyAPI (4 each, no candidate service - likely a themed cluster to
+  investigate together), producerGroupAPI, communityAssetAPI, ruralDevelopmentAPI, rfqAPI,
+  cropCalendarAPI/cropMonitoringAPI/cropVarietyAPI, digitalTwinAPI, farmerFamilyAPI,
+  farmerHealthRecordsAPI...
 
 **Next up after the 22-pair audit (by orphan count, highest first):**
 - `ecommerce-marketplace` — 1,562 stems, 775 orphaned

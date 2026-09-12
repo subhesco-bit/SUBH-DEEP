@@ -539,6 +539,9 @@ const ecommerceBusinessSalesDomainRoutes = require('./routes/ecommerceBusinessSa
 const bulkOrderDomainRoutes = require('./routes/bulkOrderDomainRoutes.js');
 const civilDisruptionDomainRoutes = require('./routes/civilDisruptionDomainRoutes.js');
 const engineeringProjectDomainRoutes = require('./routes/engineeringProjectDomainRoutes.js');
+const ecommerceERPDomainRoutes = require('./routes/ecommerceERPDomainRoutes.js');
+const experienceLayerDomainRoutes = require('./routes/experienceLayerDomainRoutes.js');
+const insuranceDomainRoutes = require('./routes/insuranceDomainRoutes.js');
 const governanceModuleMerged = require('./routes/platform/governanceModule_merged.js');
 const costRoutesMerged = require('./routes/finance/costRoutes_merged.js');
 const costRoutes = require('./routes/costRoutes.js');
@@ -1496,6 +1499,9 @@ async function startup() {
     app.use('/api/v1', bulkOrderDomainRoutes);
     app.use('/api/v1', civilDisruptionDomainRoutes);
     app.use('/api/v1', engineeringProjectDomainRoutes);
+    app.use('/api/v1', ecommerceERPDomainRoutes);
+    app.use('/api/v1', experienceLayerDomainRoutes);
+    app.use('/api/v1', insuranceDomainRoutes);
     app.use('/api/v1/governance', governanceModuleMerged);
     app.use('/api/v1/cost-management', costRoutesMerged);
     app.use('/api/cost', costRoutes);

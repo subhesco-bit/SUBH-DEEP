@@ -547,8 +547,11 @@ export const loanAPI = {
 };
 
 export const insuranceAPI = {
-  getPolicies: () => api.get('/insurance/policies'),
+  getPolicies: (filters, pagination) => api.get('/insurance/policies', { params: { ...filters, ...pagination } }),
   createPolicy: (data) => api.post('/insurance/policies', data),
+  submitClaim: (data) => api.post('/insurance/claim', data),
+  getClaims: (filters, pagination) => api.get('/insurance/claims', { params: { ...filters, ...pagination } }),
+  getInsuranceProducts: () => api.get('/insurance/products'),
 };
 
 export const logisticsAPI = {
@@ -1734,6 +1737,11 @@ export const farmAnalyticsAPI = {
 export const experienceAPI = {
   getExperiences: () => api.get('/experience'),
   addExperience: (data) => api.post('/experience/add', data),
+  accessibility: () => api.get('/experience-layer/accessibility'),
+  components: (params) => api.get('/experience-layer/components', { params }),
+  motion: (reducedMotion) => api.post('/experience-layer/motion', { reducedMotion }),
+  themes: () => api.get('/experience-layer/themes'),
+  contrast: (fg, bg, large) => api.post('/experience-layer/contrast', { fg, bg, large }),
 };
 
 export const escrowAPI = {
@@ -1814,6 +1822,11 @@ export const ecommerceIntegrationAPI = {
 export const ecommerceERPAPI = {
   getEcommerceERP: () => api.get('/ecommerce-erp'),
   configureERP: (data) => api.put('/ecommerce-erp/configure', data),
+  createProductionOrder: (data) => api.post('/ecommerce-erp/production-order', data),
+  postToGeneralLedger: (data) => api.post('/ecommerce-erp/general-ledger', data),
+  syncCustomerWithCRM: (userId) => api.post(`/ecommerce-erp/sync-customer-crm/${userId}`),
+  generateGSTInvoice: (orderId) => api.get(`/ecommerce-erp/gst-invoice/${orderId}`),
+  syncInventoryWithERP: (productId) => api.get(`/ecommerce-erp/sync-inventory/${productId}`),
 };
 
 export const dprGenerationAPI = {

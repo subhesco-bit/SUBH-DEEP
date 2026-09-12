@@ -489,6 +489,8 @@ export const companyAPI = {
 export const authorizationAPI = {
   getAuthorizations: () => api.get('/authorization'),
   checkAuthorization: (data) => api.post('/authorization/check', data),
+  getRoles: () => api.get('/authorization/roles'),
+  getUsers: () => api.get('/authorization/users'),
 };
 
 export const ecommerceBusinessSalesAPI = {
@@ -2556,11 +2558,19 @@ export const homeAutomationAPI = {
 export const droughtMonitoringAPI = {
   getDroughtData: () => api.get('/drought-monitoring'),
   analyzeDrought: (data) => api.post('/drought-monitoring/analyze', data),
+  getRecords: (params) => api.get('/drought-monitoring/records', { params }),
+  createRecord: (data) => api.post('/drought-monitoring/records/record', data),
+  updateRecord: (id, data) => api.put(`/drought-monitoring/records/record/${id}`, data),
+  deleteRecord: (id) => api.delete(`/drought-monitoring/records/record/${id}`),
 };
 
 export const floodMonitoringAPI = {
   getFloodData: () => api.get('/flood-monitoring'),
   analyzeFlood: (data) => api.post('/flood-monitoring/analyze', data),
+  getRecords: (params) => api.get('/flood-monitoring/records', { params }),
+  createRecord: (data) => api.post('/flood-monitoring/records/record', data),
+  updateRecord: (id, data) => api.put(`/flood-monitoring/records/record/${id}`, data),
+  deleteRecord: (id) => api.delete(`/flood-monitoring/records/record/${id}`),
 };
 
 export const pestForecastingAPI = {
@@ -2571,16 +2581,28 @@ export const pestForecastingAPI = {
 export const diseaseForecastingAPI = {
   getDiseaseForecast: () => api.get('/disease-forecasting'),
   forecastDisease: (data) => api.post('/disease-forecasting/forecast', data),
+  getForecasts: (params) => api.get('/disease-forecasting/forecasts', { params }),
+  createForecast: (data) => api.post('/disease-forecasting/forecasts/forecast', data),
+  updateForecast: (id, data) => api.put(`/disease-forecasting/forecasts/forecast/${id}`, data),
+  deleteForecast: (id) => api.delete(`/disease-forecasting/forecasts/forecast/${id}`),
 };
 
 export const climateRiskAPI = {
   getClimateRisks: () => api.get('/climate-risk'),
   assessRisk: (data) => api.post('/climate-risk/assess', data),
+  getAssessments: (params) => api.get('/climate-risk/assessments', { params }),
+  createAssessment: (data) => api.post('/climate-risk/assessments/assessment', data),
+  updateAssessment: (id, data) => api.put(`/climate-risk/assessments/assessment/${id}`, data),
+  deleteAssessment: (id) => api.delete(`/climate-risk/assessments/assessment/${id}`),
 };
 
 export const agroMeteorologyAPI = {
   getAgroMeteorology: () => api.get('/agro-meteorology'),
   analyzeWeather: (data) => api.post('/agro-meteorology/analyze', data),
+  getRecords: (params) => api.get('/agro-meteorology/records', { params }),
+  createRecord: (data) => api.post('/agro-meteorology/records/record', data),
+  updateRecord: (id, data) => api.put(`/agro-meteorology/records/record/${id}`, data),
+  deleteRecord: (id) => api.delete(`/agro-meteorology/records/record/${id}`),
 };
 
 export const climateSmartAgricultureAPI = {

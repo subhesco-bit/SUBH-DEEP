@@ -80,11 +80,19 @@ export const multilingualAPI = {
 export const conversationalAIAPI = {
   sendMessage: (message) => api.post('/ai/conversational/send', { message }),
   getConversationHistory: () => api.get('/ai/conversational/history'),
+  createSession: (data) => api.post('/conversational-ai/session', data),
+  getDomains: () => api.get('/conversational-ai/domains'),
+  respond: (sessionId, userMessage) => api.post(`/conversational-ai/session/${sessionId}/respond`, { userMessage }),
+  endSession: (sessionId, data) => api.post(`/conversational-ai/session/${sessionId}/end`, data),
 };
 
 export const voiceAIAPI = {
   transcribeAudio: (audio) => api.post('/ai/voice/transcribe', { audio }),
   generateSpeech: (text) => api.post('/ai/voice/speak', { text }),
+  createSession: (language) => api.post('/voice-ai/session', { language }),
+  endSession: (sessionId) => api.post(`/voice-ai/session/${sessionId}/end`),
+  getPreferences: () => api.get('/voice-ai/preferences'),
+  sendCommand: (data) => api.post('/voice-ai/command', data),
 };
 
 export const aiAgentAPI = {
@@ -2304,6 +2312,10 @@ export const rfqAPI = {
 export const returnLoadBoardAPI = {
   getReturnLoads: () => api.get('/return-load-board'),
   postReturnLoad: (data) => api.post('/return-load-board', data),
+  postCapacity: (data) => api.post('/return-load-board/capacity', data),
+  searchAvailable: (params) => api.get('/return-load-board/search', { params }),
+  bookPosting: (postingId, shipmentId) => api.post(`/return-load-board/posting/${postingId}/book`, { shipmentId }),
+  cancelPosting: (postingId) => api.post(`/return-load-board/posting/${postingId}/cancel`),
 };
 
 export const researchAndDevelopmentAPI = {
@@ -2351,7 +2363,11 @@ export const recoveredFinanceAPI = {
 
 export const realtimeMonitoringAPI = {
   getRealtimeMonitoring: () => api.get('/realtime-monitoring'),
-  startMonitoring: (data) => api.post('/realtime-monitoring/start', data),
+  getAllMonitors: () => api.get('/realtime-monitoring/monitors'),
+  healthCheck: () => api.get('/realtime-monitoring/health'),
+  getMonitoringStatus: (id) => api.get(`/realtime-monitoring/monitor/${id}/status`),
+  stopMonitoring: (id) => api.post(`/realtime-monitoring/monitor/${id}/stop`),
+  startMonitoring: (resourceId, data) => api.post(`/realtime-monitoring/resource/${resourceId}/start`, data),
 };
 
 export const qualityAssuranceAPI = {

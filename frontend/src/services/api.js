@@ -70,6 +70,11 @@ export const moduleCrudAPI = {
 export const multilingualAPI = {
   getTranslations: (lang) => api.get(`/i18n/${lang}`),
   updateTranslations: (lang, data) => api.put(`/i18n/${lang}`, data),
+  getPreferences: () => api.get('/multilingual/preferences'),
+  updatePreferences: (data) => api.put('/multilingual/preferences', data),
+  detect: (text) => api.post('/multilingual/detect', { text }),
+  getLanguages: () => api.get('/multilingual/languages'),
+  translate: (data) => api.post('/multilingual/translate', data),
 };
 
 export const conversationalAIAPI = {

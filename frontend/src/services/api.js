@@ -494,6 +494,11 @@ export const authorizationAPI = {
 export const ecommerceBusinessSalesAPI = {
   getBusinessSales: () => api.get('/ecommerce/business-sales'),
   analyzeSales: (data) => api.post('/ecommerce/business-sales/analyze', data),
+  createBulkOrder: (data) => api.post('/ecommerce-business-sales/bulk-order', data),
+  createContractFarming: (data) => api.post('/ecommerce-business-sales/contract-farming', data),
+  acceptQuotation: (quotationId) => api.post(`/ecommerce-business-sales/quotation/${quotationId}/accept`),
+  getB2BConversionMetrics: (periodDays) => api.get('/ecommerce-business-sales/b2b-conversion-metrics', { params: { periodDays } }),
+  getSalesAnalytics: (params) => api.get('/ecommerce-business-sales/sales-analytics', { params }),
 };
 
 export const walletAPI = {
@@ -1764,7 +1769,12 @@ export const enterpriseAIAPI = {
 
 export const engineeringProjectAPI = {
   getEngineeringProjects: () => api.get('/engineering-project'),
-  createProject: (data) => api.post('/engineering-project', data),
+  createProject: (data) => api.post('/engineering-project/project', data),
+  getProject: (id) => api.get(`/engineering-project/project/${id}`),
+  listProjects: (params) => api.get('/engineering-project/projects', { params }),
+  updateProjectPhase: (id, data) => api.put(`/engineering-project/project/${id}/phase`, data),
+  createCostEstimate: (id, data) => api.post(`/engineering-project/project/${id}/cost-estimate`, data),
+  getCostEstimates: (id) => api.get(`/engineering-project/project/${id}/cost-estimates`),
 };
 
 export const energyAPI = {
@@ -2060,6 +2070,11 @@ export const climateAdvisoryAPI = {
 export const civilDisruptionAPI = {
   getCivilDisruption: () => api.get('/civil-disruption'),
   reportDisruption: (data) => api.post('/civil-disruption/report', data),
+  report: (data) => api.post('/civil-disruption/report', data),
+  verify: (id) => api.post(`/civil-disruption/${id}/verify`),
+  resolve: (id, endDate) => api.post(`/civil-disruption/${id}/resolve`, { endDate }),
+  listActive: (params) => api.get('/civil-disruption/active', { params }),
+  checkShipmentRisk: (shipmentId) => api.get(`/civil-disruption/shipment/${shipmentId}/risk`),
 };
 
 export const certificationManagementAPI = {
@@ -5280,7 +5295,12 @@ export const blockchainVerificationAPI = {
 
 export const bulkOrderAPI = {
   getBulkOrders: () => api.get('/bulk-orders'),
-  createBulkOrder: (data) => api.post('/bulk-orders', data),
+  createBulkOrder: (data) => api.post('/bulk-order', data),
+  getBulkOrder: (orderId) => api.get(`/bulk-order/${orderId}`),
+  getBulkOrderQuotations: (orderId) => api.get(`/bulk-order/${orderId}/quotations`),
+  acceptQuotation: (quotationId) => api.post(`/bulk-order/quotation/${quotationId}/accept`),
+  cancelBulkOrder: (orderId, data) => api.post(`/bulk-order/${orderId}/cancel`, data),
+  getUserBulkOrders: () => api.get('/bulk-orders'),
 };
 
 export const caAPI = {

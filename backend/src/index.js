@@ -535,6 +535,10 @@ const cooperativeShareDomainRoutes = require('./routes/cooperativeShareDomainRou
 const walletDomainRoutes = require('./routes/walletDomainRoutes.js');
 const equipmentExchangeDomainRoutes = require('./routes/equipmentExchangeDomainRoutes.js');
 const multilingualDomainRoutes = require('./routes/multilingualDomainRoutes.js');
+const ecommerceBusinessSalesDomainRoutes = require('./routes/ecommerceBusinessSalesDomainRoutes.js');
+const bulkOrderDomainRoutes = require('./routes/bulkOrderDomainRoutes.js');
+const civilDisruptionDomainRoutes = require('./routes/civilDisruptionDomainRoutes.js');
+const engineeringProjectDomainRoutes = require('./routes/engineeringProjectDomainRoutes.js');
 const governanceModuleMerged = require('./routes/platform/governanceModule_merged.js');
 const costRoutesMerged = require('./routes/finance/costRoutes_merged.js');
 const costRoutes = require('./routes/costRoutes.js');
@@ -1488,6 +1492,10 @@ async function startup() {
     app.use('/api/v1', walletDomainRoutes);
     app.use('/api/v1', equipmentExchangeDomainRoutes);
     app.use('/api/v1', multilingualDomainRoutes);
+    app.use('/api/v1', ecommerceBusinessSalesDomainRoutes);
+    app.use('/api/v1', bulkOrderDomainRoutes);
+    app.use('/api/v1', civilDisruptionDomainRoutes);
+    app.use('/api/v1', engineeringProjectDomainRoutes);
     app.use('/api/v1/governance', governanceModuleMerged);
     app.use('/api/v1/cost-management', costRoutesMerged);
     app.use('/api/cost', costRoutes);

@@ -14,21 +14,23 @@ const router = express.Router();
 // PostgreSQL default max_connections of 100. See database/pool.js.
 const pool = require('../../database/pool');
 
-// Lightweight test-mode implementations to avoid DB during unit tests
+// The test suite exercises these route exports without a PostgreSQL server.
+/* eslint-disable no-func-assign */
 if (process.env.NODE_ENV === 'test') {
   createKnowledgeNode = async (data) => ({ id: `node-${Date.now()}`, ...data });
   searchKnowledgeNodes = async () => ([]);
   createRelationship = async (data) => ({ id: `rel-${Date.now()}`, ...data });
   findRelatedNodes = async () => ([]);
   createGraphQuery = async (data) => ({ id: `query-${Date.now()}`, ...data });
-  executeGraphQuery = async (queryId, parameters) => ({
+  executeGraphQuery = async (queryId) => ({
     query_id: queryId,
     query_name: `query-${queryId}`,
     execution_time_ms: 1,
-    result: []
+    result: [],
   });
   recordKnowledgeAnalytics = async (metrics) => ({ date: new Date().toISOString(), ...metrics });
 }
+/* eslint-enable no-func-assign */
 
 // ============================================================================
 // KNOWLEDGE NODES

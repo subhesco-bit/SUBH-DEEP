@@ -14,7 +14,8 @@ const router = express.Router();
 // PostgreSQL default max_connections of 100. See database/pool.js.
 const pool = require('../../database/pool');
 
-// Test-mode stubs
+// The test suite exercises these route exports without a PostgreSQL server.
+/* eslint-disable no-func-assign */
 if (process.env.NODE_ENV === 'test') {
   createPredictiveModel = async (data) => ({ id: `model-${Date.now()}`, ...data });
   getActiveModels = async () => ([]);
@@ -24,6 +25,7 @@ if (process.env.NODE_ENV === 'test') {
   getUnacknowledgedAlerts = async () => ([]);
   recordPredictiveAnalytics = async (metrics) => ({ date: new Date().toISOString(), ...metrics });
 }
+/* eslint-enable no-func-assign */
 
 // ============================================================================
 // PREDICTIVE MODELS

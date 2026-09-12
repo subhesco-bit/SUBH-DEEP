@@ -514,6 +514,9 @@ const sapModuleArchitectureDomainRoutes = require('./routes/sapModuleArchitectur
 const animalHealthDomainRoutes = require('./routes/animalHealthDomainRoutes.js');
 const completeAIIntegrationDomainRoutes = require('./routes/completeAIIntegrationDomainRoutes.js');
 const completeERPIntegrationDomainRoutes = require('./routes/completeERPIntegrationDomainRoutes.js');
+const aiOperationIntelligenceDomainRoutes = require('./routes/aiOperationIntelligenceDomainRoutes.js');
+const aiSelfHealingDomainRoutes = require('./routes/aiSelfHealingDomainRoutes.js');
+const coldStorageDomainRoutes = require('./routes/coldStorageDomainRoutes.js');
 const governanceModuleMerged = require('./routes/platform/governanceModule_merged.js');
 const costRoutesMerged = require('./routes/finance/costRoutes_merged.js');
 const costRoutes = require('./routes/costRoutes.js');
@@ -1412,6 +1415,9 @@ async function startup() {
     app.use('/api/v1', animalHealthDomainRoutes);
     app.use('/api/v1', completeAIIntegrationDomainRoutes);
     app.use('/api/v1', completeERPIntegrationDomainRoutes);
+    app.use('/api/v1', aiOperationIntelligenceDomainRoutes);
+    app.use('/api/v1', aiSelfHealingDomainRoutes);
+    app.use('/api/v1', coldStorageDomainRoutes);
     app.use('/api/v1/governance', governanceModuleMerged);
     app.use('/api/v1/cost-management', costRoutesMerged);
     app.use('/api/cost', costRoutes);

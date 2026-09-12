@@ -249,6 +249,19 @@ export const ecommerceAIAPI = {
 export const aiOperationIntelligenceAPI = {
   getOperationIntelligence: () => api.get('/ai/operation-intelligence'),
   analyzeOperations: (data) => api.post('/ai/operation-intelligence/analyze', data),
+  getMetrics: () => api.get('/ai-operation-intelligence/metrics'),
+  getStrategies: () => api.get('/ai-operation-intelligence/strategies'),
+  getResourceAllocation: () => api.get('/ai-operation-intelligence/resource-allocation'),
+  getOperationHistory: (limit) => api.get('/ai-operation-intelligence/operation-history', { params: { limit } }),
+  addStrategy: (data) => api.post('/ai-operation-intelligence/strategy', data),
+  getContinuousImprovement: () => api.get('/ai-operation-intelligence/continuous-improvement'),
+  getServiceHealth: () => api.get('/ai-operation-intelligence/health'),
+  analyzePerformance: (data) => api.post('/ai-operation-intelligence/analyze-performance', data),
+  executeOptimizations: (data) => api.post('/ai-operation-intelligence/execute-optimizations', data),
+  recommendOptimizations: (data) => api.post('/ai-operation-intelligence/recommend-optimizations', data),
+  detectAnomalies: () => api.get('/ai-operation-intelligence/detect-anomalies'),
+  runOptimizationCycle: () => api.post('/ai-operation-intelligence/run-optimization-cycle'),
+  predictOptimization: (horizon) => api.get('/ai-operation-intelligence/predict-optimization', { params: { horizon } }),
 };
 
 export const productMediaAIAPI = {
@@ -279,6 +292,16 @@ export const nutritionAPI = {
 export const aiSelfHealingAPI = {
   getSelfHealingStatus: () => api.get('/ai/self-healing/status'),
   initiateSelfHealing: (data) => api.post('/ai/self-healing/initiate', data),
+  getHealthMetrics: () => api.get('/ai-self-healing/health-metrics'),
+  getServiceHealth: () => api.get('/ai-self-healing/health'),
+  getSystemState: () => api.get('/ai-self-healing/system-state'),
+  predictFailures: () => api.get('/ai-self-healing/predict-failures'),
+  detectError: (data) => api.post('/ai-self-healing/detect-error', data),
+  rootCauseAnalysis: (data) => api.post('/ai-self-healing/root-cause-analysis', data),
+  getHealingHistory: (limit) => api.get('/ai-self-healing/healing-history', { params: { limit } }),
+  addErrorPattern: (data) => api.post('/ai-self-healing/error-pattern', data),
+  addRecoveryStrategy: (data) => api.post('/ai-self-healing/recovery-strategy', data),
+  executeRecovery: (data) => api.post('/ai-self-healing/execute-recovery', data),
 };
 
 export const orderAIAPI = {
@@ -1899,6 +1922,18 @@ export const communityManagementAPI = {
 export const coldStorageAPI = {
   getColdStorage: () => api.get('/cold-storage'),
   manageColdStorage: (data) => api.post('/cold-storage/manage', data),
+  createFacility: (data) => api.post('/cold-storage/facility', data),
+  getFacilities: (params) => api.get('/cold-storage/facilities', { params }),
+  getFacility: (facilityId) => api.get(`/cold-storage/facility/${facilityId}`),
+  updateFacility: (facilityId, data) => api.put(`/cold-storage/facility/${facilityId}`, data),
+  createBooking: (data) => api.post('/cold-storage/booking', data),
+  getBookings: (params) => api.get('/cold-storage/bookings', { params }),
+  updateBookingStatus: (bookingId, status) => api.put(`/cold-storage/booking/${bookingId}/status`, { status }),
+  bookFacility: (facilityId, data) => api.post(`/cold-storage/facility/${facilityId}/book`, data),
+  getUtilization: (params) => api.get('/cold-storage/utilization', { params }),
+  getComplianceStatus: (facilityId, hours) => api.get(`/cold-storage/compliance-status/${facilityId}`, { params: { hours } }),
+  getStatus: () => api.get('/cold-storage/status'),
+  getTemperatureData: (facilityId, params) => api.get(`/cold-storage/temperature/${facilityId}`, { params }),
 };
 
 export const coldChainMonitoringAPI = {

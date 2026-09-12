@@ -185,10 +185,22 @@ require-load verification after each batch (commits `e9d77697`, `fd12452c`, `eee
   consolidation attempt, not app features) — deferred to Phase 2 Hardening rather than forced
   into Phase 1, since they're infrastructure/tooling, not user-facing features
 
+**`database-model` track: CLOSED (commit `904a30ff`).** Of the 304 orphaned stems, 274 were SQL
+migrations - the same directory-scan-vs-require() false positive found in ecommerce-marketplace.
+One real find: `databaseManagementRoutes.js` (28 endpoints: database provisioning,
+cluster/replication/sharding, backup/restore, query optimization/caching) already existed live
+with a real, fully-matching backing service (`services/databaseManagementService.js`, every
+method + internal Map property verified) but was never mounted. Added `authMiddleware` +
+`adminMiddleware` before mounting - the recovered file had zero auth despite exposing database
+provisioning/deletion and backup/restore, a real security gap if shipped as found. Remaining
+non-SQL orphans (`redis-cache.js`, `database-monitor.js`, `backup-manager.js`,
+`transaction-manager.js`, `advanced-pool.js`, `schema-collisions.js`, `database-security.js`,
+`query-optimizer.js`, `seed-economic.js`, `enhanced-migrate.js`) are dev/ops tooling script
+duplicates, same disposition as ecommerce-marketplace's tail - deferred to Phase 2 Hardening.
+
 **Next up (by orphan count, highest first):**
 - `ai-chat-copilot` — 1,761 stems, 845 orphaned (mostly agent-workspace noise per keyword
   classification — needs noise-filtering before trusting the count)
-- `database-model` — 310 stems, 304 orphaned (near-total; highest-risk track)
 - `mobile-shell`, `dietitian-nutrition`, `dynamic-pricing`, `public-price-extraction`,
   `voice-farmer`, `desktop-shell`
 

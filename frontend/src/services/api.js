@@ -226,8 +226,8 @@ export const gdprAPI = {
 };
 
 export const mfaAPI = {
-  enableMFA: (data) => api.post('/mfa/enable', data),
-  verifyMFA: (data) => api.post('/mfa/verify', data),
+  setup: () => api.post('/mfa/setup'),
+  verify: (userId, token) => api.post('/mfa/verify', { userId, token }),
 };
 
 export const sessionAPI = {
@@ -247,8 +247,8 @@ export const unifiedAIGatewayAPI = {
 };
 
 export const platformCoreAPI = {
-  getPlatformStatus: () => api.get('/platform/status'),
-  getPlatformMetrics: () => api.get('/platform/metrics'),
+  getHealth: () => api.get('/platform-core/health'),
+  getScalingRecommendations: () => api.get('/platform-core/scaling-recommendations'),
 };
 
 export const agriculturalIntelligenceAPI = {
@@ -2205,8 +2205,9 @@ export const trackDartAPI = {
 };
 
 export const tenantManagementAPI = {
-  getTenants: () => api.get('/tenant-management'),
-  createTenant: (data) => api.post('/tenant-management', data),
+  getAllTenants: (filters) => api.get('/tenant-management/tenants', { params: filters }),
+  createTenant: (data) => api.post('/tenant-management/tenant', data),
+  deleteTenant: (id) => api.delete(`/tenant-management/tenant/${id}`),
 };
 
 export const systemAdministrationAPI = {

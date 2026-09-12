@@ -3452,6 +3452,10 @@ export const fpoAPI = {
 export const farmerHealthRecordsAPI = {
   getFarmerHealthRecords: () => api.get('/farmer-health-records'),
   createHealthRecord: (data) => api.post('/farmer-health-records', data),
+  getRecords: (params) => api.get('/farmer-health/records', { params }),
+  createRecord: (data) => api.post('/farmer-health/record', data),
+  updateRecord: (id, data) => api.put(`/farmer-health/record/${id}`, data),
+  deleteRecord: (id) => api.delete(`/farmer-health/record/${id}`),
 };
 
 export const farmerWelfareAPI = {

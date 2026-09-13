@@ -128,7 +128,8 @@ async function segmentCustomersBehavioral() {
           EXTRACT(EPOCH FROM MAX(o.created_at) - MIN(o.created_at))/86400 as purchase_span_days
         FROM orders o
         JOIN order_items oi ON o.id = oi.order_id
-        JOIN product_listings pl ON oi.product_id = pl.id
+        JOIN products prod ON oi.product_id = prod.id
+        LEFT JOIN product_listings pl ON pl.product_id = prod.id
         WHERE o.status = 'completed'
         GROUP BY o.user_id
       )
@@ -454,7 +455,8 @@ async function getPersonalizedRecommendations(userId, limit = 10) {
         COUNT(*) as purchase_count
       FROM orders o
       JOIN order_items oi ON o.id = oi.order_id
-      JOIN product_listings pl ON oi.product_id = pl.id
+      JOIN products prod ON oi.product_id = prod.id
+      LEFT JOIN product_listings pl ON pl.product_id = prod.id
       WHERE o.user_id = $1
         AND o.status = 'completed'
       GROUP BY pl.id, pl.product_name, pl.category_id, pl.nutrition_score, pl.nutrition_grade
@@ -602,7 +604,8 @@ async function predictSales(categoryId = null, periodDays = 30) {
         COUNT(DISTINCT o.user_id) as daily_customers
       FROM orders o
       JOIN order_items oi ON o.id = oi.order_id
-      JOIN product_listings pl ON oi.product_id = pl.id
+      JOIN products prod ON oi.product_id = prod.id
+      LEFT JOIN product_listings pl ON pl.product_id = prod.id
       WHERE o.status = 'completed'
         AND o.created_at > NOW() - INTERVAL '90 days'
     `;

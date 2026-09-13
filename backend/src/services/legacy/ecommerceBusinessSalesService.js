@@ -460,7 +460,8 @@ async function getSalesAnalytics(filters = {}) {
         SUM(oi.quantity) as total_quantity_sold
       FROM orders o
       JOIN order_items oi ON o.id = oi.order_id
-      JOIN product_listings pl ON oi.product_id = pl.id
+      JOIN products prod ON oi.product_id = prod.id
+      LEFT JOIN product_listings pl ON pl.product_id = prod.id
       WHERE o.status = 'completed'
     `;
 

@@ -171,7 +171,8 @@ async function generateGSTInvoice(orderId) {
         pl.unit,
         pl.hsn_code
       FROM order_items oi
-      JOIN product_listings pl ON oi.product_id = pl.id
+      JOIN products prod ON oi.product_id = prod.id
+      LEFT JOIN product_listings pl ON pl.product_id = prod.id
       WHERE oi.order_id = $1
     `, [orderId]);
 

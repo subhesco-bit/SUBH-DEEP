@@ -512,7 +512,8 @@ async function getSellerAnalytics(sellerId, period = '30d') {
         AVG(oi.quantity * oi.unit_price) as avg_order_value
       FROM order_items oi
       JOIN orders o ON oi.order_id = o.id
-      JOIN product_listings pl ON oi.product_id = pl.id
+      JOIN products prod ON oi.product_id = prod.id
+      LEFT JOIN product_listings pl ON pl.product_id = prod.id
       WHERE pl.seller_id = $1
         AND o.created_at > NOW() - INTERVAL '${periodFilter}'
         AND o.status = 'completed'

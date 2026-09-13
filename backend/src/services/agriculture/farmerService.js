@@ -15,7 +15,7 @@ async function getFarmerById(farmerId) {
     const pg = getPostgreSQL();
     
     const query = `
-      SELECT f.*, u.name, u.email, u.phone, u.status as user_status,
+      SELECT f.*, u.full_name, u.email, u.phone, u.status as user_status,
              fpo.name as fpo_name, fpo.registration_number as fpo_reg
       FROM farmers f
       JOIN users u ON f.user_id = u.id
@@ -49,7 +49,7 @@ async function getFarmers(filters = {}, pagination = {}) {
     const offset = (page - 1) * limit;
     
     let query = `
-      SELECT f.*, u.name, u.email, u.phone, fpo.name as fpo_name
+      SELECT f.*, u.full_name, u.email, u.phone, fpo.name as fpo_name
       FROM farmers f
       JOIN users u ON f.user_id = u.id
       LEFT JOIN fpos fpo ON f.fpo_id = fpo.id
@@ -350,7 +350,7 @@ async function getWalletTransactions(farmerId, filters = {}) {
 
     let query = `
       SELECT wt.*,
-             u.name as related_user_name
+             u.full_name as related_user_name
       FROM wallet_transactions wt
       LEFT JOIN users u ON wt.recipient_id = u.id
       WHERE wt.wallet_id = $1

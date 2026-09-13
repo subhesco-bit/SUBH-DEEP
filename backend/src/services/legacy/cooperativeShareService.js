@@ -57,7 +57,7 @@ class CooperativeShareService {
   async listMembers(fpoId) {
     if (!fpoId) throw new Error('fpoId is required');
     const result = await this.pool.query(
-      `SELECT fms.*, u.name AS farmer_name
+      `SELECT fms.*, u.full_name AS farmer_name
          FROM fpo_member_shares fms
          LEFT JOIN farmers f ON f.id = fms.farmer_id
          LEFT JOIN users u ON u.id = f.user_id
@@ -175,7 +175,7 @@ class CooperativeShareService {
     if (distResult.rows.length === 0) throw new Error('Distribution not found');
 
     const linesResult = await this.pool.query(
-      `SELECT dl.*, u.name AS farmer_name
+      `SELECT dl.*, u.full_name AS farmer_name
          FROM fpo_profit_distribution_lines dl
          LEFT JOIN farmers f ON f.id = dl.farmer_id
          LEFT JOIN users u ON u.id = f.user_id

@@ -24,7 +24,7 @@ class InsuranceFraudDetectionService {
           p.policy_number,
           p.policyholder_id,
           p.insurance_type,
-          u.name as claimant_name,
+          u.full_name as claimant_name,
           u.fdi_score as claimant_fdi,
           u.kyc_verified
         FROM claims c

@@ -329,7 +329,7 @@ async function getOrderById(orderId, userId = null) {
     const pg = getPostgreSQL();
     
     let query = `
-      SELECT o.*, u.name as customer_name, u.email as customer_email,
+      SELECT o.*, u.full_name as customer_name, u.email as customer_email,
              sa.address_line1 as shipping_line1, sa.city as shipping_city,
              sa.state as shipping_state, sa.pincode as shipping_pincode,
              ba.address_line1 as billing_line1, ba.city as billing_city,

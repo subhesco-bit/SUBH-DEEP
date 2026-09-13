@@ -159,7 +159,7 @@ class GSTService {
       const query = `
         SELECT 
           o.*,
-          u.name as customer_name,
+          u.full_name as customer_name,
           u.gst_number as customer_gst,
           u.address as customer_address
         FROM orders o

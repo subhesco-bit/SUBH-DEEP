@@ -47,18 +47,8 @@
       "status": 400
     },
     {
-      "file": "backend/src/routes/agriculture/farmerHealthRoutes.js",
-      "path": "/api/v1/agriculture/farmer-health/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/ai/enterpriseAIRoutes.js",
-      "path": "/api/v1/ai/enterprise-ai/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/analyticsRoutes.js",
-      "path": "/api/v1/analytics",
+      "file": "backend/src/routes/analyticsReportRoutes.js",
+      "path": "/api/v1/analytics-report/health",
       "status": 200
     },
     {
@@ -72,13 +62,23 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/analyticsReportRoutes.js",
-      "path": "/api/v1/analytics-report/health",
+      "file": "backend/src/routes/agriculture/farmerHealthRoutes.js",
+      "path": "/api/v1/agriculture/farmer-health/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/ai/enterpriseAIRoutes.js",
+      "path": "/api/v1/ai/enterprise-ai/health",
       "status": 200
     },
     {
       "file": "backend/src/routes/analyticsRoutes.js",
       "path": "/api/v1/analytics/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/analyticsRoutes.js",
+      "path": "/api/v1/analytics",
       "status": 200
     },
     {
@@ -92,18 +92,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/adminAuditDomainRoutes.js",
-      "path": "/api/v1/admin-audit-domain/admin/recent-audit",
-      "status": 400
-    },
-    {
       "file": "backend/src/routes/animalHealthDomainRoutes.js",
       "path": "/api/v1/animal-health-domain/animal-health/outbreaks/active",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/animalHealthDomainRoutes.js",
-      "path": "/api/v1/animal-health-domain/animal-health/outbreaks",
       "status": 200
     },
     {
@@ -117,14 +107,14 @@
       "status": 500
     },
     {
+      "file": "backend/src/routes/animalHealthDomainRoutes.js",
+      "path": "/api/v1/animal-health-domain/animal-health/outbreaks",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/agriculture/farmerHealthRoutes.js",
       "path": "/api/v1/agriculture/farmer-health/health-records",
       "status": 500
-    },
-    {
-      "file": "backend/src/routes/animalHealthDomainRoutes.js",
-      "path": "/api/v1/animal-health-domain/animal-health/quarantines",
-      "status": 200
     },
     {
       "file": "backend/src/routes/animalHealthDomainRoutes.js",
@@ -132,8 +122,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/apiCompatibilityRoutes.js",
-      "path": "/api/v1/api-compatibility/health",
+      "file": "backend/src/routes/animalHealthRoutes.js",
+      "path": "/api/v1/animal-health/examinations",
       "status": 200
     },
     {
@@ -143,7 +133,12 @@
     },
     {
       "file": "backend/src/routes/animalHealthRoutes.js",
-      "path": "/api/v1/animal-health/active-outbreaks",
+      "path": "/api/v1/animal-health/outbreaks",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/apiCompatibilityRoutes.js",
+      "path": "/api/v1/api-compatibility/health",
       "status": 200
     },
     {
@@ -153,12 +148,7 @@
     },
     {
       "file": "backend/src/routes/animalHealthRoutes.js",
-      "path": "/api/v1/animal-health/quarantines",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/animalHealthRoutes.js",
-      "path": "/api/v1/animal-health/outbreaks",
+      "path": "/api/v1/animal-health/active-quarantines",
       "status": 200
     },
     {
@@ -167,8 +157,28 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/animalHealthRoutes.js",
+      "path": "/api/v1/animal-health/quarantines",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/animalHealthDomainRoutes.js",
+      "path": "/api/v1/animal-health-domain/animal-health/quarantines",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/apiDocumentationRoutes.js",
       "path": "/api/v1/api-documentation",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/apicultureRoutes.js",
+      "path": "/api/v1/apiculture",
+      "status": 500
+    },
+    {
+      "file": "backend/src/routes/adminAuditDomainRoutes.js",
+      "path": "/api/v1/admin-audit-domain/admin/recent-audit",
       "status": 200
     },
     {
@@ -180,11 +190,6 @@
       "file": "backend/src/routes/ar.js",
       "path": "/api/v1/ar/health",
       "status": 200
-    },
-    {
-      "file": "backend/src/routes/apicultureRoutes.js",
-      "path": "/api/v1/apiculture",
-      "status": 500
     },
     {
       "file": "backend/src/routes/assetAccountingRoutes.js",
@@ -212,23 +217,28 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/animalHealthRoutes.js",
-      "path": "/api/v1/animal-health/overview",
+      "file": "backend/src/routes/animalHealthDomainRoutes.js",
+      "path": "/api/v1/animal-health-domain/animal-health/quarantines/active",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/auditRoutes.js",
+      "path": "/api/v1/audit/recent",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/auditRoutes.js",
+      "path": "/api/v1/audit/export",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/auditRoutes.js",
+      "path": "/api/v1/audit/security",
       "status": 200
     },
     {
       "file": "backend/src/routes/auditRoutes.js",
       "path": "/api/v1/audit/report",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/auditRoutes.js",
-      "path": "/api/v1/audit/security",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/auditRoutes.js",
-      "path": "/api/v1/audit/export",
       "status": 500
     },
     {
@@ -242,8 +252,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/animalHealthDomainRoutes.js",
-      "path": "/api/v1/animal-health-domain/animal-health/quarantines/active",
+      "file": "backend/src/routes/blockchainVerificationDomainRoutes.js",
+      "path": "/api/v1/blockchain-verification-domain/blockchain-verification/stats",
       "status": 200
     },
     {
@@ -262,8 +272,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/blockchainVerificationDomainRoutes.js",
-      "path": "/api/v1/blockchain-verification-domain/blockchain-verification/stats",
+      "file": "backend/src/routes/bulkOperationRoutes.js",
+      "path": "/api/v1/bulk-operation",
       "status": 200
     },
     {
@@ -277,8 +287,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/bulkOperationRoutes.js",
-      "path": "/api/v1/bulk-operation",
+      "file": "backend/src/routes/authorizationDomainRoutes.js",
+      "path": "/api/v1/authorization-domain/role-management/roles",
       "status": 200
     },
     {
@@ -287,18 +297,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/animalHealthRoutes.js",
-      "path": "/api/v1/animal-health/examinations",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/bulkOrders.js",
       "path": "/api/v1/bulk-orders/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/animalHealthDomainRoutes.js",
-      "path": "/api/v1/animal-health-domain/animal-health/overview",
       "status": 200
     },
     {
@@ -317,44 +317,19 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/climateAdvisory.js",
-      "path": "/api/v1/climate-advisory/health",
+      "file": "backend/src/routes/animalHealthRoutes.js",
+      "path": "/api/v1/animal-health/active-outbreaks",
       "status": 200
     },
     {
-      "file": "backend/src/routes/animalHealthRoutes.js",
-      "path": "/api/v1/animal-health/active-quarantines",
+      "file": "backend/src/routes/climateAdvisory.js",
+      "path": "/api/v1/climate-advisory/health",
       "status": 200
     },
     {
       "file": "backend/src/routes/climateMonitoringRoutes.js",
       "path": "/api/v1/climate-monitoring/health",
       "status": 200
-    },
-    {
-      "file": "backend/src/routes/bulkOrderRoutes.js",
-      "path": "/api/v1/bulk-order/analytics",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/cloudManagementRoutes.js",
-      "path": "/api/v1/cloud-management/providers",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/civilDisruptionDomainRoutes.js",
-      "path": "/api/v1/civil-disruption-domain/civil-disruption/active",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/civilDisruptionRoutes.js",
-      "path": "/api/v1/civil-disruption/active",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/climateMonitoringDomainRoutes.js",
-      "path": "/api/v1/climate-monitoring-domain/${basePath}",
-      "status": 404
     },
     {
       "file": "backend/src/routes/cloudManagementRoutes.js",
@@ -368,8 +343,43 @@
     },
     {
       "file": "backend/src/routes/cloudManagementRoutes.js",
+      "path": "/api/v1/cloud-management/providers",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/animalHealthDomainRoutes.js",
+      "path": "/api/v1/animal-health-domain/animal-health/overview",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/bulkOrderDomainRoutes.js",
+      "path": "/api/v1/bulk-order-domain/bulk-orders",
+      "status": 400
+    },
+    {
+      "file": "backend/src/routes/civilDisruptionRoutes.js",
+      "path": "/api/v1/civil-disruption/active",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/civilDisruptionDomainRoutes.js",
+      "path": "/api/v1/civil-disruption-domain/civil-disruption/active",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/bulkOrderRoutes.js",
+      "path": "/api/v1/bulk-order/analytics",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/cloudManagementRoutes.js",
       "path": "/api/v1/cloud-management/costs",
       "status": 200
+    },
+    {
+      "file": "backend/src/routes/climateMonitoringDomainRoutes.js",
+      "path": "/api/v1/climate-monitoring-domain/${basePath}",
+      "status": 404
     },
     {
       "file": "backend/src/routes/cloudManagementRoutes.js",
@@ -397,11 +407,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/auditRoutes.js",
-      "path": "/api/v1/audit/recent",
-      "status": 500
-    },
-    {
       "file": "backend/src/routes/coldStorageRoutes.js",
       "path": "/api/v1/cold-storage/health",
       "status": 200
@@ -412,13 +417,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/coldStorageDomainRoutes.js",
-      "path": "/api/v1/cold-storage-domain/cold-storage/facilities",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/coldStorageDomainRoutes.js",
-      "path": "/api/v1/cold-storage-domain/cold-storage/bookings",
+      "file": "backend/src/routes/animalHealthRoutes.js",
+      "path": "/api/v1/animal-health/overview",
       "status": 200
     },
     {
@@ -427,19 +427,9 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/coldStorageDomainRoutes.js",
-      "path": "/api/v1/cold-storage-domain/cold-storage/utilization",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/communityRoutes.js",
       "path": "/api/v1/community/members",
       "status": 200
-    },
-    {
-      "file": "backend/src/routes/authorizationDomainRoutes.js",
-      "path": "/api/v1/authorization-domain/authorization/users",
-      "status": 400
     },
     {
       "file": "backend/src/routes/commerce/equipmentExchangeRoutes.js",
@@ -447,13 +437,13 @@
       "status": 400
     },
     {
-      "file": "backend/src/routes/authorizationDomainRoutes.js",
-      "path": "/api/v1/authorization-domain/role-management/roles",
+      "file": "backend/src/routes/coldStorageDomainRoutes.js",
+      "path": "/api/v1/cold-storage-domain/cold-storage/facilities",
       "status": 200
     },
     {
-      "file": "backend/src/routes/communityRoutes.js",
-      "path": "/api/v1/community/events",
+      "file": "backend/src/routes/coldStorageDomainRoutes.js",
+      "path": "/api/v1/cold-storage-domain/cold-storage/bookings",
       "status": 200
     },
     {
@@ -478,6 +468,11 @@
     },
     {
       "file": "backend/src/routes/communityRoutes.js",
+      "path": "/api/v1/community/events",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/communityRoutes.js",
       "path": "/api/v1/community/moderation",
       "status": 200
     },
@@ -498,7 +493,12 @@
     },
     {
       "file": "backend/src/routes/completeAIIntegrationRoutes.js",
-      "path": "/api/v1/complete-aiintegration/model-info",
+      "path": "/api/v1/complete-aiintegration/status",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/completeERPIntegrationRoutes.js",
+      "path": "/api/v1/complete-erpintegration/health",
       "status": 200
     },
     {
@@ -508,12 +508,12 @@
     },
     {
       "file": "backend/src/routes/completeAIIntegrationRoutes.js",
-      "path": "/api/v1/complete-aiintegration/status",
+      "path": "/api/v1/complete-aiintegration/model-info",
       "status": 200
     },
     {
-      "file": "backend/src/routes/completeERPIntegrationRoutes.js",
-      "path": "/api/v1/complete-erpintegration/health",
+      "file": "backend/src/routes/coldStorageDomainRoutes.js",
+      "path": "/api/v1/cold-storage-domain/cold-storage/utilization",
       "status": 200
     },
     {
@@ -532,39 +532,9 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/companyRoutes.js",
-      "path": "/api/v1/company",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/companyDomainRoutes.js",
-      "path": "/api/v1/company-domain/companies",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/coldStorageDomainRoutes.js",
-      "path": "/api/v1/cold-storage-domain/cold-storage/status",
-      "status": 400
-    },
-    {
-      "file": "backend/src/routes/complianceDomainRoutes.js",
-      "path": "/api/v1/compliance-domain/compliance/tds-summary",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/complianceDomainRoutes.js",
-      "path": "/api/v1/compliance-domain/compliance/rcm-outstanding",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/comprehensiveERPRoutes.js",
       "path": "/api/v1/comprehensive-erp/health",
       "status": 200
-    },
-    {
-      "file": "backend/src/routes/bulkOrderDomainRoutes.js",
-      "path": "/api/v1/bulk-order-domain/bulk-orders",
-      "status": 400
     },
     {
       "file": "backend/src/routes/contractFarmingRoutes.js",
@@ -578,12 +548,12 @@
     },
     {
       "file": "backend/src/routes/contractFarmingRoutes.js",
-      "path": "/api/v1/contract-farming/opportunities",
+      "path": "/api/v1/contract-farming/farmer-contracts",
       "status": 403
     },
     {
       "file": "backend/src/routes/contractFarmingRoutes.js",
-      "path": "/api/v1/contract-farming/farmer-contracts",
+      "path": "/api/v1/contract-farming/opportunities",
       "status": 403
     },
     {
@@ -592,19 +562,54 @@
       "status": 400
     },
     {
-      "file": "backend/src/routes/costControlRoutes.js",
-      "path": "/api/v1/cost-control/cost-centers",
-      "status": 400
-    },
-    {
       "file": "backend/src/routes/cooperativeShareRoutes.js",
       "path": "/api/v1/cooperative-share/capital",
       "status": 400
     },
     {
+      "file": "backend/src/routes/complianceDomainRoutes.js",
+      "path": "/api/v1/compliance-domain/compliance/rcm-outstanding",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/complianceRoutes.js",
+      "path": "/api/v1/compliance/tds/summary",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/coldStorageDomainRoutes.js",
+      "path": "/api/v1/cold-storage-domain/cold-storage/status",
+      "status": 400
+    },
+    {
+      "file": "backend/src/routes/complianceDomainRoutes.js",
+      "path": "/api/v1/compliance-domain/compliance/tds-summary",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/companyDomainRoutes.js",
+      "path": "/api/v1/company-domain/companies",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/companyRoutes.js",
+      "path": "/api/v1/company",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/cooperativeShareRoutes.js",
       "path": "/api/v1/cooperative-share/distributions",
       "status": 400
+    },
+    {
+      "file": "backend/src/routes/costControlRoutes.js",
+      "path": "/api/v1/cost-control/cost-centers",
+      "status": 400
+    },
+    {
+      "file": "backend/src/routes/authorizationDomainRoutes.js",
+      "path": "/api/v1/authorization-domain/authorization/users",
+      "status": 200
     },
     {
       "file": "backend/src/routes/costControlRoutes.js",
@@ -622,23 +627,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/conversationalAIDomainRoutes.js",
-      "path": "/api/v1/conversational-aidomain/conversational-ai/domains",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/cropManagementRoutes.js",
       "path": "/api/v1/crop-management/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/costRoutes.js",
-      "path": "/api/v1/cost/breakup",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/costRoutes.js",
-      "path": "/api/v1/cost/corridor-model",
       "status": 200
     },
     {
@@ -657,23 +647,28 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/costRoutes.js",
+      "path": "/api/v1/cost/breakup",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/cropDomainRoutes.js",
+      "path": "/api/v1/crop-domain/crop-monitoring",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/cropValueResearchRoutes.js",
       "path": "/api/v1/crop-value-research/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/cropDomainRoutes.js",
-      "path": "/api/v1/crop-domain/nursery/nurseries",
+      "file": "backend/src/routes/costRoutes.js",
+      "path": "/api/v1/cost/corridor-model",
       "status": 200
     },
     {
-      "file": "backend/src/routes/cropPlanningRoutes.js",
-      "path": "/api/v1/crop-planning/analytics",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/dairyRoutes.js",
-      "path": "/api/v1/dairy/health",
+      "file": "backend/src/routes/complianceRoutes.js",
+      "path": "/api/v1/compliance/rcm/outstanding",
       "status": 200
     },
     {
@@ -682,8 +677,23 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/cropPlanningRoutes.js",
-      "path": "/api/v1/crop-planning",
+      "file": "backend/src/routes/cropDomainRoutes.js",
+      "path": "/api/v1/crop-domain/nursery/nurseries",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/conversationalAIDomainRoutes.js",
+      "path": "/api/v1/conversational-aidomain/conversational-ai/domains",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/cropDomainRoutes.js",
+      "path": "/api/v1/crop-domain/seed-planning/plans",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/dairyRoutes.js",
+      "path": "/api/v1/dairy/health",
       "status": 200
     },
     {
@@ -703,11 +713,6 @@
     },
     {
       "file": "backend/src/routes/databaseManagementRoutes.js",
-      "path": "/api/v1/database-management/replications",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/databaseManagementRoutes.js",
       "path": "/api/v1/database-management/backup-configs",
       "status": 200
     },
@@ -718,22 +723,7 @@
     },
     {
       "file": "backend/src/routes/databaseManagementRoutes.js",
-      "path": "/api/v1/database-management/overview",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/databaseManagementRoutes.js",
-      "path": "/api/v1/database-management/service-health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/dataExportRoutes.js",
-      "path": "/api/v1/data-export/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/dataExportRoutes.js",
-      "path": "/api/v1/data-export",
+      "path": "/api/v1/database-management/replications",
       "status": 200
     },
     {
@@ -747,13 +737,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/dataVisualization.js",
-      "path": "/api/v1/data-visualization/health",
+      "file": "backend/src/routes/databaseManagementRoutes.js",
+      "path": "/api/v1/database-management/overview",
       "status": 200
     },
     {
-      "file": "backend/src/routes/decisionSupportDomainRoutes.js",
-      "path": "/api/v1/decision-support-domain/decision-support/scheme-expiry-status",
+      "file": "backend/src/routes/databaseManagementRoutes.js",
+      "path": "/api/v1/database-management/service-health",
       "status": 200
     },
     {
@@ -767,18 +757,33 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/dataExportRoutes.js",
+      "path": "/api/v1/data-export/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/dataExportRoutes.js",
+      "path": "/api/v1/data-export",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/dataVisualization.js",
+      "path": "/api/v1/data-visualization/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/dairyDomainRoutes.js",
       "path": "/api/v1/dairy-domain/dairy/milk-records",
       "status": 200
     },
     {
-      "file": "backend/src/routes/complianceRoutes.js",
-      "path": "/api/v1/compliance/rcm/outstanding",
+      "file": "backend/src/routes/decisionSupportDomainRoutes.js",
+      "path": "/api/v1/decision-support-domain/decision-support/scheme-expiry-status",
       "status": 200
     },
     {
-      "file": "backend/src/routes/complianceRoutes.js",
-      "path": "/api/v1/compliance/tds/summary",
+      "file": "backend/src/routes/devinRoutes.js",
+      "path": "/api/v1/devin/status",
       "status": 200
     },
     {
@@ -797,23 +802,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/devinRoutes.js",
-      "path": "/api/v1/devin/status",
+      "file": "backend/src/routes/dietTherapyRoutes.js",
+      "path": "/api/v1/diet-therapy/health",
       "status": 200
     },
     {
       "file": "backend/src/routes/defenseFitnessPrepRoutes.js",
       "path": "/api/v1/defense-fitness-prep/categories",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/demandRoutes.js",
-      "path": "/api/v1/demand/forecast",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/dietTherapyRoutes.js",
-      "path": "/api/v1/diet-therapy/health",
       "status": 200
     },
     {
@@ -827,18 +822,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/demandRoutes.js",
-      "path": "/api/v1/demand/heatmap",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/dual-use/mfaRoutes.js",
       "path": "/api/v1/dual-use/mfa/status",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/ecommerceAIRoutes.js",
-      "path": "/api/v1/ecommerce-ai/health",
       "status": 200
     },
     {
@@ -847,24 +832,19 @@
       "status": 400
     },
     {
-      "file": "backend/src/routes/cropDomainRoutes.js",
-      "path": "/api/v1/crop-domain/crop-monitoring",
+      "file": "backend/src/routes/demandRoutes.js",
+      "path": "/api/v1/demand/forecast",
       "status": 200
     },
     {
-      "file": "backend/src/routes/cropDomainRoutes.js",
-      "path": "/api/v1/crop-domain/seed-planning/plans",
+      "file": "backend/src/routes/demandRoutes.js",
+      "path": "/api/v1/demand/heatmap",
       "status": 200
     },
     {
-      "file": "backend/src/routes/cropDomainRoutes.js",
-      "path": "/api/v1/crop-domain/sowing/records",
+      "file": "backend/src/routes/ecommerceAIRoutes.js",
+      "path": "/api/v1/ecommerce-ai/health",
       "status": 200
-    },
-    {
-      "file": "backend/src/routes/ecommerceAIDomainRoutes.js",
-      "path": "/api/v1/ecommerce-aidomain/ecommerce-ai/market-basket",
-      "status": 400
     },
     {
       "file": "backend/src/routes/ecommerceAIDomainRoutes.js",
@@ -873,22 +853,7 @@
     },
     {
       "file": "backend/src/routes/ecommerceAIDomainRoutes.js",
-      "path": "/api/v1/ecommerce-aidomain/ecommerce-ai/segment-customers/behavioral",
-      "status": 400
-    },
-    {
-      "file": "backend/src/routes/ecommerceBusinessSalesRoutes.js",
-      "path": "/api/v1/ecommerce-business-sales/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/ecommerceAIDomainRoutes.js",
-      "path": "/api/v1/ecommerce-aidomain/ecommerce-ai/segment-customers/rfm",
-      "status": 400
-    },
-    {
-      "file": "backend/src/routes/ecommerceBusinessSalesDomainRoutes.js",
-      "path": "/api/v1/ecommerce-business-sales-domain/ecommerce-business-sales/b2b-conversion-metrics",
+      "path": "/api/v1/ecommerce-aidomain/ecommerce-ai/market-basket",
       "status": 400
     },
     {
@@ -897,13 +862,38 @@
       "status": 500
     },
     {
+      "file": "backend/src/routes/ecommerceAIDomainRoutes.js",
+      "path": "/api/v1/ecommerce-aidomain/ecommerce-ai/segment-customers/behavioral",
+      "status": 400
+    },
+    {
+      "file": "backend/src/routes/ecommerceAIDomainRoutes.js",
+      "path": "/api/v1/ecommerce-aidomain/ecommerce-ai/segment-customers/rfm",
+      "status": 400
+    },
+    {
+      "file": "backend/src/routes/ecommerceBusinessSalesRoutes.js",
+      "path": "/api/v1/ecommerce-business-sales/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/ecommerceBusinessSalesDomainRoutes.js",
+      "path": "/api/v1/ecommerce-business-sales-domain/ecommerce-business-sales/b2b-conversion-metrics",
+      "status": 400
+    },
+    {
+      "file": "backend/src/routes/ecommerceImageIntegrationRoutes.js",
+      "path": "/api/v1/ecommerce-image-integration/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/ecommerceERPRoutes.js",
       "path": "/api/v1/ecommerce-erp/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/ecommerceImageIntegrationRoutes.js",
-      "path": "/api/v1/ecommerce-image-integration/health",
+      "file": "backend/src/routes/cropPlanningRoutes.js",
+      "path": "/api/v1/crop-planning/analytics",
       "status": 200
     },
     {
@@ -912,28 +902,13 @@
       "status": 400
     },
     {
-      "file": "backend/src/routes/ecommerceBusinessSalesRoutes.js",
-      "path": "/api/v1/ecommerce-business-sales/sales-analytics",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/ecommerceMarketingRoutes.js",
-      "path": "/api/v1/ecommerce-marketing/health",
+      "file": "backend/src/routes/cropDomainRoutes.js",
+      "path": "/api/v1/crop-domain/sowing/records",
       "status": 200
     },
     {
-      "file": "backend/src/routes/ecommerceBusinessSalesRoutes.js",
-      "path": "/api/v1/ecommerce-business-sales/b2b-conversion-metrics",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/ecommerceIntegrationDomainRoutes.js",
-      "path": "/api/v1/ecommerce-integration-domain/ecommerce-integration/dietitian-collections",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/ecommerceIntegrationRoutes.js",
-      "path": "/api/v1/ecommerce-integration/dietitian-collections",
+      "file": "backend/src/routes/cropPlanningRoutes.js",
+      "path": "/api/v1/crop-planning",
       "status": 200
     },
     {
@@ -942,19 +917,9 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/ecommerceIntegrationRoutes.js",
-      "path": "/api/v1/ecommerce-integration/dietitian-recommendation",
+      "file": "backend/src/routes/ecommerceMarketingRoutes.js",
+      "path": "/api/v1/ecommerce-marketing/health",
       "status": 200
-    },
-    {
-      "file": "backend/src/routes/ecommerceRoutes.js",
-      "path": "/api/v1/ecommerce/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/ecommerceMarketplaceDomainRoutes.js",
-      "path": "/api/v1/ecommerce-marketplace-domain/ecommerce-marketplace/listings",
-      "status": 400
     },
     {
       "file": "backend/src/routes/ecommerceMarketingDomainRoutes.js",
@@ -962,18 +927,58 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/ecommerceRoutes.js",
-      "path": "/api/v1/ecommerce/listings",
-      "status": 500
-    },
-    {
       "file": "backend/src/routes/ecommerceIntegrationDomainRoutes.js",
       "path": "/api/v1/ecommerce-integration-domain/ecommerce-integration/health-recommendations",
       "status": 200
     },
     {
+      "file": "backend/src/routes/ecommerceMarketingRoutes.js",
+      "path": "/api/v1/ecommerce-marketing/analytics",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/ecommerceBusinessSalesRoutes.js",
+      "path": "/api/v1/ecommerce-business-sales/sales-analytics",
+      "status": 500
+    },
+    {
+      "file": "backend/src/routes/ecommerceIntegrationRoutes.js",
+      "path": "/api/v1/ecommerce-integration/dietitian-collections",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/ecommerceBusinessSalesRoutes.js",
+      "path": "/api/v1/ecommerce-business-sales/b2b-conversion-metrics",
+      "status": 500
+    },
+    {
+      "file": "backend/src/routes/ecommerceRoutes.js",
+      "path": "/api/v1/ecommerce/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/ecommerceIntegrationDomainRoutes.js",
+      "path": "/api/v1/ecommerce-integration-domain/ecommerce-integration/dietitian-collections",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/ecommerceMarketplaceDomainRoutes.js",
+      "path": "/api/v1/ecommerce-marketplace-domain/ecommerce-marketplace/gi-listings",
+      "status": 400
+    },
+    {
+      "file": "backend/src/routes/ecommerceMarketplaceDomainRoutes.js",
+      "path": "/api/v1/ecommerce-marketplace-domain/ecommerce-marketplace/listings",
+      "status": 400
+    },
+    {
       "file": "backend/src/routes/ENDPOINT_MISMATCH_FIXER.js",
       "path": "/api/v1/endpoint-mismatch-fixer/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/ecommerceIntegrationRoutes.js",
+      "path": "/api/v1/ecommerce-integration/dietitian-recommendation",
       "status": 200
     },
     {
@@ -982,8 +987,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/ecommerceIntegrationRoutes.js",
-      "path": "/api/v1/ecommerce-integration/health-recommendations",
+      "file": "backend/src/routes/ecommerceMarketingRoutes.js",
+      "path": "/api/v1/ecommerce-marketing/sponsored-products",
       "status": 200
     },
     {
@@ -992,24 +997,9 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/ecommerceRoutes.js",
-      "path": "/api/v1/ecommerce/seller/analytics",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/ecommerceMarketingRoutes.js",
-      "path": "/api/v1/ecommerce-marketing/analytics",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/enterpriseControlRoutes.js",
       "path": "/api/v1/enterprise-control/workflows",
       "status": 500
-    },
-    {
-      "file": "backend/src/routes/ecommerceMarketingRoutes.js",
-      "path": "/api/v1/ecommerce-marketing/sponsored-products",
-      "status": 200
     },
     {
       "file": "backend/src/routes/enterpriseControlRoutes.js",
@@ -1017,18 +1007,13 @@
       "status": 500
     },
     {
+      "file": "backend/src/routes/ecommerceIntegrationRoutes.js",
+      "path": "/api/v1/ecommerce-integration/health-recommendations",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/enterpriseControlRoutes.js",
       "path": "/api/v1/enterprise-control/legal",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/ecommerceMarketplaceDomainRoutes.js",
-      "path": "/api/v1/ecommerce-marketplace-domain/ecommerce-marketplace/gi-listings",
-      "status": 400
-    },
-    {
-      "file": "backend/src/routes/enterpriseControlRoutes.js",
-      "path": "/api/v1/enterprise-control/risks",
       "status": 500
     },
     {
@@ -1037,14 +1022,19 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/engineeringProjectRoutes.js",
-      "path": "/api/v1/engineering-project/projects",
-      "status": 200
+      "file": "backend/src/routes/enterpriseControlRoutes.js",
+      "path": "/api/v1/enterprise-control/risks",
+      "status": 500
     },
     {
       "file": "backend/src/routes/enterpriseControlRoutes.js",
       "path": "/api/v1/enterprise-control/emergencies",
       "status": 500
+    },
+    {
+      "file": "backend/src/routes/engineeringProjectRoutes.js",
+      "path": "/api/v1/engineering-project/projects",
+      "status": 200
     },
     {
       "file": "backend/src/routes/enterpriseIntegrationDomainRoutes.js",
@@ -1057,11 +1047,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/ecommerceMarketplaceDomainRoutes.js",
-      "path": "/api/v1/ecommerce-marketplace-domain/ecommerce-marketplace/seller-analytics",
-      "status": 400
-    },
-    {
       "file": "backend/src/routes/errorLogRoutes.js",
       "path": "/api/v1/error-log/health",
       "status": 200
@@ -1072,14 +1057,14 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/escrowRoutes.js",
-      "path": "/api/v1/escrow/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/equipmentExchangeDomainRoutes.js",
       "path": "/api/v1/equipment-exchange-domain/equipment-exchange/listings",
       "status": 400
+    },
+    {
+      "file": "backend/src/routes/escrowRoutes.js",
+      "path": "/api/v1/escrow/health",
+      "status": 200
     },
     {
       "file": "backend/src/routes/escrowDomainRoutes.js",
@@ -1092,14 +1077,9 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/experienceRoutes.js",
-      "path": "/api/v1/experience/contrast",
-      "status": 400
-    },
-    {
-      "file": "backend/src/routes/experienceRoutes.js",
-      "path": "/api/v1/experience/themes",
-      "status": 200
+      "file": "backend/src/routes/ecommerceRoutes.js",
+      "path": "/api/v1/ecommerce/gi-listings",
+      "status": 500
     },
     {
       "file": "backend/src/routes/ecommerceRoutes.js",
@@ -1108,27 +1088,42 @@
     },
     {
       "file": "backend/src/routes/experienceRoutes.js",
-      "path": "/api/v1/experience/breakpoint",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/ecommerceRoutes.js",
-      "path": "/api/v1/ecommerce/gi-listings",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/experienceRoutes.js",
-      "path": "/api/v1/experience/components",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/exportRoutes.js",
-      "path": "/api/v1/export/health",
-      "status": 200
+      "path": "/api/v1/experience/contrast",
+      "status": 400
     },
     {
       "file": "backend/src/routes/experienceLayerDomainRoutes.js",
       "path": "/api/v1/experience-layer-domain/experience-layer/themes",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/ecommerceRoutes.js",
+      "path": "/api/v1/ecommerce/listings",
+      "status": 500
+    },
+    {
+      "file": "backend/src/routes/experienceRoutes.js",
+      "path": "/api/v1/experience/themes",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/experienceRoutes.js",
+      "path": "/api/v1/experience/motion",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/experienceRoutes.js",
+      "path": "/api/v1/experience/breakpoint",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/ecommerceMarketplaceDomainRoutes.js",
+      "path": "/api/v1/ecommerce-marketplace-domain/ecommerce-marketplace/seller-analytics",
+      "status": 400
+    },
+    {
+      "file": "backend/src/routes/exportRoutes.js",
+      "path": "/api/v1/export/health",
       "status": 200
     },
     {
@@ -1138,7 +1133,7 @@
     },
     {
       "file": "backend/src/routes/experienceRoutes.js",
-      "path": "/api/v1/experience/tokens",
+      "path": "/api/v1/experience/preferences",
       "status": 200
     },
     {
@@ -1152,19 +1147,19 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/farmCosting.js",
-      "path": "/api/v1/farm-costing/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/experienceLayerDomainRoutes.js",
       "path": "/api/v1/experience-layer-domain/experience-layer/components",
       "status": 200
     },
     {
-      "file": "backend/src/routes/experienceRoutes.js",
-      "path": "/api/v1/experience/preferences",
+      "file": "backend/src/routes/farmCosting.js",
+      "path": "/api/v1/farm-costing/health",
       "status": 200
+    },
+    {
+      "file": "backend/src/routes/ecommerceRoutes.js",
+      "path": "/api/v1/ecommerce/seller/analytics",
+      "status": 500
     },
     {
       "file": "backend/src/routes/farmerFamilyRoutes.js",
@@ -1182,23 +1177,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/farmerPortalEnhancements.js",
-      "path": "/api/v1/farmer-portal-enhancements/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/farmerKycDomainRoutes.js",
       "path": "/api/v1/farmer-kyc-domain/farmer-kyc/applications",
       "status": 200
     },
     {
-      "file": "backend/src/routes/farmCosting.js",
-      "path": "/api/v1/farm-costing/records",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/farmerKycRoutes.js",
-      "path": "/api/v1/farmer-kyc/applications",
+      "file": "backend/src/routes/farmerPortalEnhancements.js",
+      "path": "/api/v1/farmer-portal-enhancements/health",
       "status": 200
     },
     {
@@ -1207,8 +1192,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/farmerHealthDomainRoutes.js",
-      "path": "/api/v1/farmer-health-domain/farmer-welfare/programs",
+      "file": "backend/src/routes/farmCosting.js",
+      "path": "/api/v1/farm-costing/records",
       "status": 200
     },
     {
@@ -1217,13 +1202,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/farmerPortalEnhancements.js",
-      "path": "/api/v1/farmer-portal-enhancements/land-records/statistics/region",
+      "file": "backend/src/routes/farmerKycRoutes.js",
+      "path": "/api/v1/farmer-kyc/applications",
       "status": 200
     },
     {
-      "file": "backend/src/routes/farmerRoutes.js",
-      "path": "/api/v1/farmer/health",
+      "file": "backend/src/routes/farmerPortalEnhancements.js",
+      "path": "/api/v1/farmer-portal-enhancements/land-records/statistics/region",
       "status": 200
     },
     {
@@ -1237,11 +1222,6 @@
       "status": 404
     },
     {
-      "file": "backend/src/routes/experienceRoutes.js",
-      "path": "/api/v1/experience/motion",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/farmerPortalEnhancements.js",
       "path": "/api/v1/farmer-portal-enhancements/crop-plans/analytics",
       "status": 404
@@ -1252,19 +1232,24 @@
       "status": 404
     },
     {
-      "file": "backend/src/routes/farmerPortalEnhancements.js",
-      "path": "/api/v1/farmer-portal-enhancements/wallet/transactions",
-      "status": 404
+      "file": "backend/src/routes/farmerRoutes.js",
+      "path": "/api/v1/farmer/health",
+      "status": 200
     },
     {
-      "file": "backend/src/routes/farmerPortalEnhancements.js",
-      "path": "/api/v1/farmer-portal-enhancements/wallet/balance",
-      "status": 404
+      "file": "backend/src/routes/experienceRoutes.js",
+      "path": "/api/v1/experience/tokens",
+      "status": 200
     },
     {
       "file": "backend/src/routes/farmerTrainingRoutes.js",
       "path": "/api/v1/farmer-training/health",
       "status": 200
+    },
+    {
+      "file": "backend/src/routes/farmerPortalEnhancements.js",
+      "path": "/api/v1/farmer-portal-enhancements/wallet/balance",
+      "status": 404
     },
     {
       "file": "backend/src/routes/farmerTrainingRoutes.js",
@@ -1277,28 +1262,13 @@
       "status": 404
     },
     {
-      "file": "backend/src/routes/fertilizerRoutes.js",
-      "path": "/api/v1/fertilizer/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/farmerValueDomainRoutes.js",
       "path": "/api/v1/farmer-value-domain/farmer-value/season-ledger",
       "status": 404
     },
     {
-      "file": "backend/src/routes/farmerRoutes.js",
-      "path": "/api/v1/farmer/fpos/list",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/finance/gstRoutes.js",
-      "path": "/api/v1/finance/gst/summary",
-      "status": 400
-    },
-    {
-      "file": "backend/src/routes/finance/gstRoutes.js",
-      "path": "/api/v1/finance/gst/health",
+      "file": "backend/src/routes/experienceRoutes.js",
+      "path": "/api/v1/experience/components",
       "status": 200
     },
     {
@@ -1307,9 +1277,29 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/farmerRoutes.js",
+      "path": "/api/v1/farmer/fpos/list",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/farmerVerificationRoutes.js",
       "path": "/api/v1/farmer-verification/requests",
       "status": 200
+    },
+    {
+      "file": "backend/src/routes/fertilizerRoutes.js",
+      "path": "/api/v1/fertilizer/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/finance/gstRoutes.js",
+      "path": "/api/v1/finance/gst/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/finance/gstRoutes.js",
+      "path": "/api/v1/finance/gst/summary",
+      "status": 400
     },
     {
       "file": "backend/src/routes/farmerRoutes.js",
@@ -1328,11 +1318,6 @@
     },
     {
       "file": "backend/src/routes/finance/gstRoutes.js",
-      "path": "/api/v1/finance/gst/payments",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/finance/gstRoutes.js",
       "path": "/api/v1/finance/gst/rates",
       "status": 200
     },
@@ -1342,8 +1327,18 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/finance/gstRoutes.js",
+      "path": "/api/v1/finance/gst/payments",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/financialAnalytics.js",
       "path": "/api/v1/financial-analytics/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/farmerHealthDomainRoutes.js",
+      "path": "/api/v1/farmer-health-domain/farmer-welfare/programs",
       "status": 200
     },
     {
@@ -1357,13 +1352,18 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/financeDomainRoutes.js",
+      "path": "/api/v1/finance-domain/finance/trial-balance",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/fisheriesRoutes.js",
       "path": "/api/v1/fisheries/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/foluBenchmarkRoutes.js",
-      "path": "/api/v1/folu-benchmark/health",
+      "file": "backend/src/routes/farmerValueRoutes.js",
+      "path": "/api/v1/farmer-value/season-ledger",
       "status": 200
     },
     {
@@ -1372,24 +1372,34 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/foluBenchmarkRoutes.js",
-      "path": "/api/v1/folu-benchmark/transitions",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/fisheriesDomainRoutes.js",
       "path": "/api/v1/fisheries-domain/${pluralPath}",
       "status": 404
     },
     {
-      "file": "backend/src/routes/fisheriesRoutes.js",
-      "path": "/api/v1/fisheries",
-      "status": 500
+      "file": "backend/src/routes/foluBenchmarkRoutes.js",
+      "path": "/api/v1/folu-benchmark/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/foluBenchmarkRoutes.js",
+      "path": "/api/v1/folu-benchmark/transitions",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/financeDomainRoutes.js",
+      "path": "/api/v1/finance-domain/finance/verify-ledger",
+      "status": 200
     },
     {
       "file": "backend/src/routes/foluRoutes.js",
       "path": "/api/v1/folu/health",
       "status": 200
+    },
+    {
+      "file": "backend/src/routes/fisheriesRoutes.js",
+      "path": "/api/v1/fisheries",
+      "status": 500
     },
     {
       "file": "backend/src/routes/foodRoutes.js",
@@ -1407,16 +1417,6 @@
       "status": 400
     },
     {
-      "file": "backend/src/routes/gdprRoutes.js",
-      "path": "/api/v1/gdpr/policy",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/farmerValueRoutes.js",
-      "path": "/api/v1/farmer-value/season-ledger",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/freightPooling.js",
       "path": "/api/v1/freight-pooling/health",
       "status": 200
@@ -1427,6 +1427,31 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/gdprRoutes.js",
+      "path": "/api/v1/gdpr/policy",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/foluRoutes.js",
+      "path": "/api/v1/folu/land-use/summary",
+      "status": 500
+    },
+    {
+      "file": "backend/src/routes/farmerPortalEnhancements.js",
+      "path": "/api/v1/farmer-portal-enhancements/wallet/transactions",
+      "status": 404
+    },
+    {
+      "file": "backend/src/routes/generated/all_routes.js",
+      "path": "/api/v1/generated/all-_products/list7",
+      "status": 404
+    },
+    {
+      "file": "backend/src/routes/gdprRoutes_merged.js",
+      "path": "/api/v1/gdpr-routes-merged/consent-status",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/forestryRoutes.js",
       "path": "/api/v1/forestry",
       "status": 500
@@ -1434,11 +1459,6 @@
     {
       "file": "backend/src/routes/generated/all_routes.js",
       "path": "/api/v1/generated/all-_products/list3",
-      "status": 404
-    },
-    {
-      "file": "backend/src/routes/generated/all_routes.js",
-      "path": "/api/v1/generated/all-_products/list7",
       "status": 404
     },
     {
@@ -1537,11 +1557,6 @@
       "status": 404
     },
     {
-      "file": "backend/src/routes/financeDomainRoutes.js",
-      "path": "/api/v1/finance-domain/finance/trial-balance",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/generated/all_routes.js",
       "path": "/api/v1/generated/all-_products/list87",
       "status": 404
@@ -1555,11 +1570,6 @@
       "file": "backend/src/routes/generated/all_routes.js",
       "path": "/api/v1/generated/all-_products/list95",
       "status": 404
-    },
-    {
-      "file": "backend/src/routes/financeDomainRoutes.js",
-      "path": "/api/v1/finance-domain/finance/verify-ledger",
-      "status": 200
     },
     {
       "file": "backend/src/routes/generated/all_routes.js",
@@ -1592,6 +1602,16 @@
       "status": 404
     },
     {
+      "file": "backend/src/routes/glutWarningRoutes.js",
+      "path": "/api/v1/glut-warning/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/glutWarningRoutes.js",
+      "path": "/api/v1/glut-warning/check",
+      "status": 400
+    },
+    {
       "file": "backend/src/routes/generated/all_routes.js",
       "path": "/api/v1/generated/all-_products/list123",
       "status": 404
@@ -1607,23 +1627,13 @@
       "status": 404
     },
     {
-      "file": "backend/src/routes/glutWarningRoutes.js",
-      "path": "/api/v1/glut-warning/health",
+      "file": "backend/src/routes/geofencingRoutes.js",
+      "path": "/api/v1/geofencing/zones",
       "status": 200
     },
     {
-      "file": "backend/src/routes/glutWarningRoutes.js",
-      "path": "/api/v1/glut-warning/check",
-      "status": 400
-    },
-    {
-      "file": "backend/src/routes/foluRoutes.js",
-      "path": "/api/v1/folu/land-use/summary",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/geofencingRoutes.js",
-      "path": "/api/v1/geofencing/zones",
+      "file": "backend/src/routes/governanceModule.js",
+      "path": "/api/v1/governance-module/health",
       "status": 200
     },
     {
@@ -1637,43 +1647,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/goatRoutes.js",
-      "path": "/api/v1/goat/breeding-alerts",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/goatRoutes.js",
-      "path": "/api/v1/goat/vaccination-alerts",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/governanceModule.js",
-      "path": "/api/v1/governance-module/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/gdprRoutes_merged.js",
-      "path": "/api/v1/gdpr-routes-merged/consent-status",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/governanceModule.js",
-      "path": "/api/v1/governance-module/compliance/gaps",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/gdprRoutes_merged.js",
-      "path": "/api/v1/gdpr-routes-merged/export",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/governanceModule.js",
-      "path": "/api/v1/governance-module/compliance/ready",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/governmentSubsidyRoutes.js",
-      "path": "/api/v1/government-subsidy/health",
+      "path": "/api/v1/governance-module/csr-projects",
       "status": 200
     },
     {
@@ -1683,18 +1658,8 @@
     },
     {
       "file": "backend/src/routes/governanceModule.js",
-      "path": "/api/v1/governance-module/villages",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/governanceModule.js",
-      "path": "/api/v1/governance-module/compliance/statistics",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/governanceModule.js",
-      "path": "/api/v1/governance-module/csr-projects",
-      "status": 200
+      "path": "/api/v1/governance-module/compliance/gaps",
+      "status": 500
     },
     {
       "file": "backend/src/routes/governanceModule.js",
@@ -1707,13 +1672,38 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/governanceModule.js",
+      "path": "/api/v1/governance-module/compliance/ready",
+      "status": 500
+    },
+    {
+      "file": "backend/src/routes/governanceModule.js",
+      "path": "/api/v1/governance-module/compliance/statistics",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/governmentSubsidyRoutes.js",
+      "path": "/api/v1/government-subsidy/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/governmentSubsidyRoutes.js",
       "path": "/api/v1/government-subsidy/farmer-dashboard",
       "status": 403
     },
     {
+      "file": "backend/src/routes/gdprRoutes_merged.js",
+      "path": "/api/v1/gdpr-routes-merged/export",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/greenhouse.js",
       "path": "/api/v1/greenhouse/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/governanceModule.js",
+      "path": "/api/v1/governance-module/cooperatives",
       "status": 200
     },
     {
@@ -1737,11 +1727,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/governanceModule.js",
-      "path": "/api/v1/governance-module/cooperatives",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/horticultureManagementRoutes.js",
       "path": "/api/v1/horticulture-management/health",
       "status": 200
@@ -1750,6 +1735,21 @@
       "file": "backend/src/routes/householdProcurementRoutes.js",
       "path": "/api/v1/household-procurement/health",
       "status": 200
+    },
+    {
+      "file": "backend/src/routes/governmentSubsidyRoutes.js",
+      "path": "/api/v1/government-subsidy/subsidy-programs",
+      "status": 500
+    },
+    {
+      "file": "backend/src/routes/governmentSubsidyRoutes.js",
+      "path": "/api/v1/government-subsidy/dashboard",
+      "status": 500
+    },
+    {
+      "file": "backend/src/routes/horticultureManagementDomainRoutes.js",
+      "path": "/api/v1/horticulture-management-domain/${pluralPath}",
+      "status": 404
     },
     {
       "file": "backend/src/routes/householdProcurementRoutes.js",
@@ -1762,18 +1762,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/identityManagementRoutes.js",
-      "path": "/api/v1/identity-management/health",
+      "file": "backend/src/routes/hrRoutes.js",
+      "path": "/api/v1/hr/analytics/predictions",
       "status": 200
     },
     {
-      "file": "backend/src/routes/horticultureManagementDomainRoutes.js",
-      "path": "/api/v1/horticulture-management-domain/${pluralPath}",
-      "status": 404
-    },
-    {
-      "file": "backend/src/routes/hrRoutes.js",
-      "path": "/api/v1/hr/analytics/predictions",
+      "file": "backend/src/routes/identityManagementRoutes.js",
+      "path": "/api/v1/identity-management/health",
       "status": 200
     },
     {
@@ -1797,33 +1792,23 @@
       "status": 500
     },
     {
-      "file": "backend/src/routes/inputSupplyManagementRoutes.js",
-      "path": "/api/v1/input-supply-management/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/governmentSubsidyRoutes.js",
-      "path": "/api/v1/government-subsidy/subsidy-programs",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/governmentSubsidyRoutes.js",
-      "path": "/api/v1/government-subsidy/dashboard",
-      "status": 500
-    },
-    {
       "file": "backend/src/routes/insuranceEnhancements.js",
       "path": "/api/v1/insurance-enhancements/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/integrationStatusRoutes.js",
-      "path": "/api/v1/integration-status/complete",
+      "file": "backend/src/routes/inputSupplyManagementRoutes.js",
+      "path": "/api/v1/input-supply-management/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/integrationStatusRoutes.js",
-      "path": "/api/v1/integration-status/routes",
+      "file": "backend/src/routes/goatRoutes.js",
+      "path": "/api/v1/goat/vaccination-alerts",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/goatRoutes.js",
+      "path": "/api/v1/goat/breeding-alerts",
       "status": 200
     },
     {
@@ -1837,6 +1822,11 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/goatRoutes.js",
+      "path": "/api/v1/goat/herd",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/integrationRoutes.js",
       "path": "/api/v1/integration",
       "status": 200
@@ -1847,9 +1837,24 @@
       "status": 500
     },
     {
+      "file": "backend/src/routes/integrationStatusRoutes.js",
+      "path": "/api/v1/integration-status/complete",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/insuranceDomainRoutes.js",
+      "path": "/api/v1/insurance-domain/insurance/policies",
+      "status": 400
+    },
+    {
       "file": "backend/src/routes/insuranceEnhancements.js",
       "path": "/api/v1/insurance-enhancements/fraud/statistics",
       "status": 500
+    },
+    {
+      "file": "backend/src/routes/integrationStatusRoutes.js",
+      "path": "/api/v1/integration-status/routes",
+      "status": 200
     },
     {
       "file": "backend/src/routes/integrationStatusRoutes.js",
@@ -1862,8 +1867,18 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/insuranceDomainRoutes.js",
+      "path": "/api/v1/insurance-domain/insurance/claims",
+      "status": 400
+    },
+    {
       "file": "backend/src/routes/integrationStatusRoutes.js",
       "path": "/api/v1/integration-status/blockers",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/governanceModule.js",
+      "path": "/api/v1/governance-module/villages",
       "status": 200
     },
     {
@@ -1875,16 +1890,6 @@
       "file": "backend/src/routes/integrationStatusRoutes.js",
       "path": "/api/v1/integration-status/team",
       "status": 200
-    },
-    {
-      "file": "backend/src/routes/insuranceDomainRoutes.js",
-      "path": "/api/v1/insurance-domain/insurance/policies",
-      "status": 400
-    },
-    {
-      "file": "backend/src/routes/insuranceDomainRoutes.js",
-      "path": "/api/v1/insurance-domain/insurance/claims",
-      "status": 400
     },
     {
       "file": "backend/src/routes/integrationStatusRoutes.js",
@@ -1917,23 +1922,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/labourRoutes.js",
-      "path": "/api/v1/labour/workers",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/knowledgeGraphDomainRoutes.js",
-      "path": "/api/v1/knowledge-graph-domain/knowledge-graph/search",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/libraryAIWorkspaceRoutes.js",
       "path": "/api/v1/library-aiworkspace/status",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/labourRoutes.js",
-      "path": "/api/v1/labour/attendance",
       "status": 200
     },
     {
@@ -1942,9 +1932,29 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/goatRoutes.js",
-      "path": "/api/v1/goat/herd",
+      "file": "backend/src/routes/knowledgeGraphDomainRoutes.js",
+      "path": "/api/v1/knowledge-graph-domain/knowledge-graph/search",
       "status": 200
+    },
+    {
+      "file": "backend/src/routes/labourRoutes.js",
+      "path": "/api/v1/labour/workers",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/labourRoutes.js",
+      "path": "/api/v1/labour/attendance",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/labourRoutes.js",
+      "path": "/api/v1/labour/payments",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/devinRoutes.js",
+      "path": "/api/v1/devin/sessions",
+      "status": 500
     },
     {
       "file": "backend/src/routes/libraryRoutes.js",
@@ -1957,18 +1967,28 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/landRecordsDomainRoutes.js",
+      "path": "/api/v1/land-records-domain/land/parcels",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/libraryRoutes.js",
       "path": "/api/v1/library/statistics",
       "status": 200
     },
     {
-      "file": "backend/src/routes/libraryRoutes.js",
-      "path": "/api/v1/library/verify",
+      "file": "backend/src/routes/landRecordsRoutes.js",
+      "path": "/api/v1/land-records",
       "status": 200
     },
     {
-      "file": "backend/src/routes/libraryAIWorkspaceRoutes.js",
-      "path": "/api/v1/library-aiworkspace/orchestrator/tasks",
+      "file": "backend/src/routes/landRecordsRoutes.js",
+      "path": "/api/v1/land-records/regional-statistics",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/libraryRoutes.js",
+      "path": "/api/v1/library/verify",
       "status": 200
     },
     {
@@ -1987,16 +2007,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/devinRoutes.js",
-      "path": "/api/v1/devin/sessions",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/libraryAIWorkspaceRoutes.js",
-      "path": "/api/v1/library-aiworkspace/orchestrator/groups/search",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/libraryRoutes.js",
       "path": "/api/v1/library/enterprise-index/summary",
       "status": 200
@@ -2004,6 +2014,11 @@
     {
       "file": "backend/src/routes/libraryRoutes.js",
       "path": "/api/v1/library/enterprise-index/features",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/libraryAIWorkspaceRoutes.js",
+      "path": "/api/v1/library-aiworkspace/orchestrator/tasks",
       "status": 200
     },
     {
@@ -2019,31 +2034,6 @@
     {
       "file": "backend/src/routes/libraryRoutes.js",
       "path": "/api/v1/library/enterprise-index/activity/ledger/latest",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/landRecordsRoutes.js",
-      "path": "/api/v1/land-records/regional-statistics",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/landRecordsRoutes.js",
-      "path": "/api/v1/land-records",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/landRecordsDomainRoutes.js",
-      "path": "/api/v1/land-records-domain/land/parcels",
-      "status": 400
-    },
-    {
-      "file": "backend/src/routes/labourRoutes.js",
-      "path": "/api/v1/labour/payments",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/libraryRoutes.js",
-      "path": "/api/v1/library/enterprise-index/files/search",
       "status": 200
     },
     {
@@ -2072,8 +2062,18 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/libraryRoutes.js",
+      "path": "/api/v1/library/enterprise-index/files/search",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/livestock.js",
       "path": "/api/v1/livestock/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/livestockManagementRoutes.js",
+      "path": "/api/v1/livestock-management/health",
       "status": 200
     },
     {
@@ -2082,8 +2082,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/livestockManagementRoutes.js",
-      "path": "/api/v1/livestock-management/health",
+      "file": "backend/src/routes/libraryAIWorkspaceRoutes.js",
+      "path": "/api/v1/library-aiworkspace/orchestrator/groups/search",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/libraryRoutes.js",
+      "path": "/api/v1/library/enterprise-index/activity/ledger/search",
       "status": 200
     },
     {
@@ -2107,18 +2112,18 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/libraryRoutes.js",
-      "path": "/api/v1/library/enterprise-index/activity/ledger/search",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/livestockDomainRoutes.js",
-      "path": "/api/v1/livestock-domain/livestock-analytics/records",
+      "file": "backend/src/routes/logisticsEnhancements.js",
+      "path": "/api/v1/logistics-enhancements/warehouses",
       "status": 200
     },
     {
       "file": "backend/src/routes/livestockDomainRoutes.js",
       "path": "/api/v1/livestock-domain/feed-management/records",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/livestockDomainRoutes.js",
+      "path": "/api/v1/livestock-domain/livestock-analytics/records",
       "status": 200
     },
     {
@@ -2130,6 +2135,26 @@
       "file": "backend/src/routes/M041VillageERP.js",
       "path": "/api/v1/m041-village-erp/getVillages",
       "status": 503
+    },
+    {
+      "file": "backend/src/routes/M102Routes.js",
+      "path": "/api/v1/m102",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M102Routes.js",
+      "path": "/api/v1/m102/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M103Routes.js",
+      "path": "/api/v1/m103",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/logisticsEnhancements.js",
+      "path": "/api/v1/logistics-enhancements/fleet",
+      "status": 200
     },
     {
       "file": "backend/src/routes/M100Routes.js",
@@ -2152,14 +2177,9 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M102Routes.js",
-      "path": "/api/v1/m102/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M103Routes.js",
-      "path": "/api/v1/m103/health",
-      "status": 200
+      "file": "backend/src/routes/logisticsEnhancements.js",
+      "path": "/api/v1/logistics-enhancements/statistics",
+      "status": 500
     },
     {
       "file": "backend/src/routes/logisticsAIDomainRoutes.js",
@@ -2167,18 +2187,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/logisticsEnhancements.js",
-      "path": "/api/v1/logistics-enhancements/statistics",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/M102Routes.js",
-      "path": "/api/v1/m102",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M103Routes.js",
-      "path": "/api/v1/m103",
+      "path": "/api/v1/m103/health",
       "status": 200
     },
     {
@@ -2194,6 +2204,11 @@
     {
       "file": "backend/src/routes/M105Routes.js",
       "path": "/api/v1/m105",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/logisticsEnhancements.js",
+      "path": "/api/v1/logistics-enhancements/fleet/maintenance-due",
       "status": 200
     },
     {
@@ -2217,16 +2232,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M108Routes.js",
-      "path": "/api/v1/m108/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M110Routes.js",
-      "path": "/api/v1/m110",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M107Routes.js",
       "path": "/api/v1/m107/health",
       "status": 200
@@ -2237,6 +2242,11 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M108Routes.js",
+      "path": "/api/v1/m108/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M109Routes.js",
       "path": "/api/v1/m109",
       "status": 200
@@ -2244,6 +2254,11 @@
     {
       "file": "backend/src/routes/M109Routes.js",
       "path": "/api/v1/m109/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M110Routes.js",
+      "path": "/api/v1/m110",
       "status": 200
     },
     {
@@ -2267,21 +2282,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M112Routes.js",
-      "path": "/api/v1/m112/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M113Routes.js",
-      "path": "/api/v1/m113",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M116Routes.js",
-      "path": "/api/v1/m116",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M113Routes.js",
       "path": "/api/v1/m113/health",
       "status": 200
@@ -2289,6 +2289,16 @@
     {
       "file": "backend/src/routes/M114Routes.js",
       "path": "/api/v1/m114",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M112Routes.js",
+      "path": "/api/v1/m112/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M113Routes.js",
+      "path": "/api/v1/m113",
       "status": 200
     },
     {
@@ -2304,6 +2314,11 @@
     {
       "file": "backend/src/routes/M115Routes.js",
       "path": "/api/v1/m115/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M116Routes.js",
+      "path": "/api/v1/m116",
       "status": 200
     },
     {
@@ -2362,6 +2377,11 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M124Routes.js",
+      "path": "/api/v1/m124",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M122Routes.js",
       "path": "/api/v1/m122",
       "status": 200
@@ -2379,11 +2399,6 @@
     {
       "file": "backend/src/routes/M123Routes.js",
       "path": "/api/v1/m123/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M124Routes.js",
-      "path": "/api/v1/m124",
       "status": 200
     },
     {
@@ -2447,6 +2462,11 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M133Routes.js",
+      "path": "/api/v1/m133",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M130Routes.js",
       "path": "/api/v1/m130/health",
       "status": 200
@@ -2472,23 +2492,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/logisticsEnhancements.js",
-      "path": "/api/v1/logistics-enhancements/fleet",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M133Routes.js",
-      "path": "/api/v1/m133",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M133Routes.js",
       "path": "/api/v1/m133/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M136Routes.js",
-      "path": "/api/v1/m136/health",
       "status": 200
     },
     {
@@ -2499,11 +2504,6 @@
     {
       "file": "backend/src/routes/M134Routes.js",
       "path": "/api/v1/m134/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/logisticsEnhancements.js",
-      "path": "/api/v1/logistics-enhancements/warehouses",
       "status": 200
     },
     {
@@ -2522,8 +2522,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/logisticsEnhancements.js",
-      "path": "/api/v1/logistics-enhancements/fleet/maintenance-due",
+      "file": "backend/src/routes/M136Routes.js",
+      "path": "/api/v1/m136/health",
       "status": 200
     },
     {
@@ -2544,6 +2544,16 @@
     {
       "file": "backend/src/routes/M138Routes.js",
       "path": "/api/v1/m138/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M141Routes.js",
+      "path": "/api/v1/m141/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M142Routes.js",
+      "path": "/api/v1/m142",
       "status": 200
     },
     {
@@ -2572,16 +2582,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M141Routes.js",
-      "path": "/api/v1/m141/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M142Routes.js",
-      "path": "/api/v1/m142",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M142Routes.js",
       "path": "/api/v1/m142/health",
       "status": 200
@@ -2597,6 +2597,11 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M145Routes.js",
+      "path": "/api/v1/m145/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M144Routes.js",
       "path": "/api/v1/m144",
       "status": 200
@@ -2609,11 +2614,6 @@
     {
       "file": "backend/src/routes/M145Routes.js",
       "path": "/api/v1/m145",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M145Routes.js",
-      "path": "/api/v1/m145/health",
       "status": 200
     },
     {
@@ -2639,6 +2639,16 @@
     {
       "file": "backend/src/routes/M148Routes.js",
       "path": "/api/v1/m148",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M151Routes.js",
+      "path": "/api/v1/m151",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M152Routes.js",
+      "path": "/api/v1/m152",
       "status": 200
     },
     {
@@ -2682,6 +2692,11 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M156Routes.js",
+      "path": "/api/v1/m156",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M153Routes.js",
       "path": "/api/v1/m153/health",
       "status": 200
@@ -2702,8 +2717,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M156Routes.js",
-      "path": "/api/v1/m156",
+      "file": "backend/src/routes/M155Routes.js",
+      "path": "/api/v1/m155/health",
       "status": 200
     },
     {
@@ -2722,6 +2737,11 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M161Routes.js",
+      "path": "/api/v1/m161",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M158Routes.js",
       "path": "/api/v1/m158",
       "status": 200
@@ -2729,31 +2749,6 @@
     {
       "file": "backend/src/routes/M158Routes.js",
       "path": "/api/v1/m158/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M160Routes.js",
-      "path": "/api/v1/m160/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M161Routes.js",
-      "path": "/api/v1/m161/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M151Routes.js",
-      "path": "/api/v1/m151",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M152Routes.js",
-      "path": "/api/v1/m152",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M155Routes.js",
-      "path": "/api/v1/m155/health",
       "status": 200
     },
     {
@@ -2772,13 +2767,33 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M160Routes.js",
+      "path": "/api/v1/m160/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M161Routes.js",
-      "path": "/api/v1/m161",
+      "path": "/api/v1/m161/health",
       "status": 200
     },
     {
       "file": "backend/src/routes/M162Routes.js",
       "path": "/api/v1/m162",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M164Routes.js",
+      "path": "/api/v1/m164/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M167Routes.js",
+      "path": "/api/v1/m167",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M162Routes.js",
+      "path": "/api/v1/m162/health",
       "status": 200
     },
     {
@@ -2789,6 +2804,11 @@
     {
       "file": "backend/src/routes/M163Routes.js",
       "path": "/api/v1/m163/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M164Routes.js",
+      "path": "/api/v1/m164",
       "status": 200
     },
     {
@@ -2807,33 +2827,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M169Routes.js",
-      "path": "/api/v1/m169",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M162Routes.js",
-      "path": "/api/v1/m162/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M164Routes.js",
-      "path": "/api/v1/m164",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M164Routes.js",
-      "path": "/api/v1/m164/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M166Routes.js",
       "path": "/api/v1/m166/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M167Routes.js",
-      "path": "/api/v1/m167",
       "status": 200
     },
     {
@@ -2849,6 +2844,11 @@
     {
       "file": "backend/src/routes/M168Routes.js",
       "path": "/api/v1/m168/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M169Routes.js",
+      "path": "/api/v1/m169",
       "status": 200
     },
     {
@@ -2877,51 +2877,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M172Routes.js",
-      "path": "/api/v1/m172",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M172Routes.js",
-      "path": "/api/v1/m172/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M173Routes.js",
-      "path": "/api/v1/m173",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M174Routes.js",
-      "path": "/api/v1/m174",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M174Routes.js",
-      "path": "/api/v1/m174/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M178Routes.js",
-      "path": "/api/v1/m178",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M173Routes.js",
-      "path": "/api/v1/m173/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M175Routes.js",
-      "path": "/api/v1/m175",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M175Routes.js",
-      "path": "/api/v1/m175/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M176Routes.js",
       "path": "/api/v1/m176",
       "status": 200
@@ -2937,8 +2892,43 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M177Routes.js",
-      "path": "/api/v1/m177/health",
+      "file": "backend/src/routes/M172Routes.js",
+      "path": "/api/v1/m172",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M172Routes.js",
+      "path": "/api/v1/m172/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M173Routes.js",
+      "path": "/api/v1/m173",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M173Routes.js",
+      "path": "/api/v1/m173/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M174Routes.js",
+      "path": "/api/v1/m174",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M174Routes.js",
+      "path": "/api/v1/m174/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M175Routes.js",
+      "path": "/api/v1/m175",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M175Routes.js",
+      "path": "/api/v1/m175/health",
       "status": 200
     },
     {
@@ -2952,16 +2942,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M179Routes.js",
-      "path": "/api/v1/m179/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M180Routes.js",
-      "path": "/api/v1/m180",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M180Routes.js",
       "path": "/api/v1/m180/health",
       "status": 200
@@ -2969,6 +2949,31 @@
     {
       "file": "backend/src/routes/M181Routes.js",
       "path": "/api/v1/m181",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M183Routes.js",
+      "path": "/api/v1/m183",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M177Routes.js",
+      "path": "/api/v1/m177/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M178Routes.js",
+      "path": "/api/v1/m178",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M179Routes.js",
+      "path": "/api/v1/m179/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M180Routes.js",
+      "path": "/api/v1/m180",
       "status": 200
     },
     {
@@ -2988,12 +2993,17 @@
     },
     {
       "file": "backend/src/routes/M183Routes.js",
-      "path": "/api/v1/m183",
+      "path": "/api/v1/m183/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/M183Routes.js",
-      "path": "/api/v1/m183/health",
+      "file": "backend/src/routes/M187Routes.js",
+      "path": "/api/v1/m187/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M188Routes.js",
+      "path": "/api/v1/m188",
       "status": 200
     },
     {
@@ -3032,16 +3042,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M187Routes.js",
-      "path": "/api/v1/m187/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M188Routes.js",
-      "path": "/api/v1/m188",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M188Routes.js",
       "path": "/api/v1/m188/health",
       "status": 200
@@ -3068,17 +3068,12 @@
     },
     {
       "file": "backend/src/routes/M191Routes.js",
-      "path": "/api/v1/m191/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M195Routes.js",
-      "path": "/api/v1/m195/health",
+      "path": "/api/v1/m191",
       "status": 200
     },
     {
       "file": "backend/src/routes/M191Routes.js",
-      "path": "/api/v1/m191",
+      "path": "/api/v1/m191/health",
       "status": 200
     },
     {
@@ -3117,13 +3112,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M198Routes.js",
-      "path": "/api/v1/m198/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M200Routes.js",
-      "path": "/api/v1/m200/health",
+      "file": "backend/src/routes/M195Routes.js",
+      "path": "/api/v1/m195/health",
       "status": 200
     },
     {
@@ -3138,12 +3128,17 @@
     },
     {
       "file": "backend/src/routes/M197Routes.js",
-      "path": "/api/v1/m197",
+      "path": "/api/v1/m197/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M198Routes.js",
+      "path": "/api/v1/m198/health",
       "status": 200
     },
     {
       "file": "backend/src/routes/M197Routes.js",
-      "path": "/api/v1/m197/health",
+      "path": "/api/v1/m197",
       "status": 200
     },
     {
@@ -3167,6 +3162,11 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M200Routes.js",
+      "path": "/api/v1/m200/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M201Routes.js",
       "path": "/api/v1/m201",
       "status": 200
@@ -3179,6 +3179,11 @@
     {
       "file": "backend/src/routes/M202Routes.js",
       "path": "/api/v1/m202",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M204Routes.js",
+      "path": "/api/v1/m204",
       "status": 200
     },
     {
@@ -3198,22 +3203,7 @@
     },
     {
       "file": "backend/src/routes/M204Routes.js",
-      "path": "/api/v1/m204",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M204Routes.js",
       "path": "/api/v1/m204/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M206Routes.js",
-      "path": "/api/v1/m206",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M209Routes.js",
-      "path": "/api/v1/m209",
       "status": 200
     },
     {
@@ -3228,7 +3218,17 @@
     },
     {
       "file": "backend/src/routes/M206Routes.js",
+      "path": "/api/v1/m206",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M206Routes.js",
       "path": "/api/v1/m206/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M209Routes.js",
+      "path": "/api/v1/m209/health",
       "status": 200
     },
     {
@@ -3253,7 +3253,7 @@
     },
     {
       "file": "backend/src/routes/M209Routes.js",
-      "path": "/api/v1/m209/health",
+      "path": "/api/v1/m209",
       "status": 200
     },
     {
@@ -3272,13 +3272,33 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M211Routes.js",
-      "path": "/api/v1/m211/health",
+      "file": "backend/src/routes/M212Routes.js",
+      "path": "/api/v1/m212",
       "status": 200
     },
     {
-      "file": "backend/src/routes/M212Routes.js",
-      "path": "/api/v1/m212",
+      "file": "backend/src/routes/M214Routes.js",
+      "path": "/api/v1/m214",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M215Routes.js",
+      "path": "/api/v1/m215",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M216Routes.js",
+      "path": "/api/v1/m216/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M217Routes.js",
+      "path": "/api/v1/m217/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M211Routes.js",
+      "path": "/api/v1/m211/health",
       "status": 200
     },
     {
@@ -3297,23 +3317,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M215Routes.js",
-      "path": "/api/v1/m215/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M214Routes.js",
-      "path": "/api/v1/m214",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M214Routes.js",
       "path": "/api/v1/m214/health",
       "status": 200
     },
     {
       "file": "backend/src/routes/M215Routes.js",
-      "path": "/api/v1/m215",
+      "path": "/api/v1/m215/health",
       "status": 200
     },
     {
@@ -3322,18 +3332,28 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M216Routes.js",
-      "path": "/api/v1/m216/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M217Routes.js",
       "path": "/api/v1/m217",
       "status": 200
     },
     {
-      "file": "backend/src/routes/M217Routes.js",
-      "path": "/api/v1/m217/health",
+      "file": "backend/src/routes/M219Routes.js",
+      "path": "/api/v1/m219",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M220Routes.js",
+      "path": "/api/v1/m220/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M221Routes.js",
+      "path": "/api/v1/m221",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M222Routes.js",
+      "path": "/api/v1/m222/health",
       "status": 200
     },
     {
@@ -3348,27 +3368,12 @@
     },
     {
       "file": "backend/src/routes/M219Routes.js",
-      "path": "/api/v1/m219",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M219Routes.js",
       "path": "/api/v1/m219/health",
       "status": 200
     },
     {
       "file": "backend/src/routes/M220Routes.js",
       "path": "/api/v1/m220",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M220Routes.js",
-      "path": "/api/v1/m220/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M221Routes.js",
-      "path": "/api/v1/m221",
       "status": 200
     },
     {
@@ -3379,21 +3384,6 @@
     {
       "file": "backend/src/routes/M222Routes.js",
       "path": "/api/v1/m222",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M226Routes.js",
-      "path": "/api/v1/m226/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M227Routes.js",
-      "path": "/api/v1/m227",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M222Routes.js",
-      "path": "/api/v1/m222/health",
       "status": 200
     },
     {
@@ -3432,8 +3422,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M230Routes.js",
-      "path": "/api/v1/m230/health",
+      "file": "backend/src/routes/M226Routes.js",
+      "path": "/api/v1/m226/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M227Routes.js",
+      "path": "/api/v1/m227",
       "status": 200
     },
     {
@@ -3467,6 +3462,11 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M230Routes.js",
+      "path": "/api/v1/m230/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M231Routes.js",
       "path": "/api/v1/m231",
       "status": 200
@@ -3477,18 +3477,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M235Routes.js",
-      "path": "/api/v1/m235",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M235Routes.js",
-      "path": "/api/v1/m235/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M232Routes.js",
       "path": "/api/v1/m232",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M236Routes.js",
+      "path": "/api/v1/m236",
       "status": 200
     },
     {
@@ -3517,13 +3512,28 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M236Routes.js",
-      "path": "/api/v1/m236",
+      "file": "backend/src/routes/M235Routes.js",
+      "path": "/api/v1/m235",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M235Routes.js",
+      "path": "/api/v1/m235/health",
       "status": 200
     },
     {
       "file": "backend/src/routes/M236Routes.js",
       "path": "/api/v1/m236/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M238Routes.js",
+      "path": "/api/v1/m238",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M241Routes.js",
+      "path": "/api/v1/m241",
       "status": 200
     },
     {
@@ -3534,11 +3544,6 @@
     {
       "file": "backend/src/routes/M237Routes.js",
       "path": "/api/v1/m237/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M238Routes.js",
-      "path": "/api/v1/m238",
       "status": 200
     },
     {
@@ -3567,18 +3572,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M244Routes.js",
-      "path": "/api/v1/m244/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M241Routes.js",
-      "path": "/api/v1/m241",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M241Routes.js",
       "path": "/api/v1/m241/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M243Routes.js",
+      "path": "/api/v1/m243/health",
       "status": 200
     },
     {
@@ -3597,23 +3597,18 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M243Routes.js",
-      "path": "/api/v1/m243/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M244Routes.js",
       "path": "/api/v1/m244",
       "status": 200
     },
     {
-      "file": "backend/src/routes/M245Routes.js",
-      "path": "/api/v1/m245",
+      "file": "backend/src/routes/M244Routes.js",
+      "path": "/api/v1/m244/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/M247Routes.js",
-      "path": "/api/v1/m247/health",
+      "file": "backend/src/routes/M245Routes.js",
+      "path": "/api/v1/m245",
       "status": 200
     },
     {
@@ -3637,6 +3632,11 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M247Routes.js",
+      "path": "/api/v1/m247/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M248Routes.js",
       "path": "/api/v1/m248",
       "status": 200
@@ -3654,11 +3654,6 @@
     {
       "file": "backend/src/routes/M249Routes.js",
       "path": "/api/v1/m249/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M252Routes.js",
-      "path": "/api/v1/m252/health",
       "status": 200
     },
     {
@@ -3687,6 +3682,11 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M252Routes.js",
+      "path": "/api/v1/m252/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M253Routes.js",
       "path": "/api/v1/m253",
       "status": 200
@@ -3702,23 +3702,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M255Routes.js",
-      "path": "/api/v1/m255/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M256Routes.js",
-      "path": "/api/v1/m256/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M258Routes.js",
       "path": "/api/v1/m258",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M258Routes.js",
-      "path": "/api/v1/m258/health",
       "status": 200
     },
     {
@@ -3732,8 +3717,18 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M255Routes.js",
+      "path": "/api/v1/m255/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M256Routes.js",
       "path": "/api/v1/m256",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M256Routes.js",
+      "path": "/api/v1/m256/health",
       "status": 200
     },
     {
@@ -3744,6 +3739,26 @@
     {
       "file": "backend/src/routes/M257Routes.js",
       "path": "/api/v1/m257/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M258Routes.js",
+      "path": "/api/v1/m258/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M261Routes.js",
+      "path": "/api/v1/m261",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M262Routes.js",
+      "path": "/api/v1/m262/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M264Routes.js",
+      "path": "/api/v1/m264",
       "status": 200
     },
     {
@@ -3762,21 +3777,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M261Routes.js",
-      "path": "/api/v1/m261",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M262Routes.js",
-      "path": "/api/v1/m262",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M264Routes.js",
-      "path": "/api/v1/m264/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M260Routes.js",
       "path": "/api/v1/m260/health",
       "status": 200
@@ -3788,7 +3788,7 @@
     },
     {
       "file": "backend/src/routes/M262Routes.js",
-      "path": "/api/v1/m262/health",
+      "path": "/api/v1/m262",
       "status": 200
     },
     {
@@ -3802,8 +3802,18 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M267Routes.js",
+      "path": "/api/v1/m267/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M268Routes.js",
+      "path": "/api/v1/m268/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M264Routes.js",
-      "path": "/api/v1/m264",
+      "path": "/api/v1/m264/health",
       "status": 200
     },
     {
@@ -3818,6 +3828,11 @@
     },
     {
       "file": "backend/src/routes/M266Routes.js",
+      "path": "/api/v1/m266",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M266Routes.js",
       "path": "/api/v1/m266/health",
       "status": 200
     },
@@ -3827,33 +3842,18 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M269Routes.js",
-      "path": "/api/v1/m269/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M266Routes.js",
-      "path": "/api/v1/m266",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M267Routes.js",
-      "path": "/api/v1/m267/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M268Routes.js",
       "path": "/api/v1/m268",
       "status": 200
     },
     {
-      "file": "backend/src/routes/M268Routes.js",
-      "path": "/api/v1/m268/health",
+      "file": "backend/src/routes/M269Routes.js",
+      "path": "/api/v1/m269",
       "status": 200
     },
     {
       "file": "backend/src/routes/M269Routes.js",
-      "path": "/api/v1/m269",
+      "path": "/api/v1/m269/health",
       "status": 200
     },
     {
@@ -3897,6 +3897,11 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M277Routes.js",
+      "path": "/api/v1/m277",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M274Routes.js",
       "path": "/api/v1/m274",
       "status": 200
@@ -3914,11 +3919,6 @@
     {
       "file": "backend/src/routes/M275Routes.js",
       "path": "/api/v1/m275/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M277Routes.js",
-      "path": "/api/v1/m277",
       "status": 200
     },
     {
@@ -3947,6 +3947,16 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M280Routes.js",
+      "path": "/api/v1/m280/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M282Routes.js",
+      "path": "/api/v1/m282",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M279Routes.js",
       "path": "/api/v1/m279",
       "status": 200
@@ -3962,11 +3972,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M280Routes.js",
-      "path": "/api/v1/m280/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M281Routes.js",
       "path": "/api/v1/m281",
       "status": 200
@@ -3974,11 +3979,6 @@
     {
       "file": "backend/src/routes/M281Routes.js",
       "path": "/api/v1/m281/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M282Routes.js",
-      "path": "/api/v1/m282",
       "status": 200
     },
     {
@@ -4037,6 +4037,11 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M290Routes.js",
+      "path": "/api/v1/m290/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M288Routes.js",
       "path": "/api/v1/m288",
       "status": 200
@@ -4058,7 +4063,12 @@
     },
     {
       "file": "backend/src/routes/M290Routes.js",
-      "path": "/api/v1/m290/health",
+      "path": "/api/v1/m290",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M291Routes.js",
+      "path": "/api/v1/m291",
       "status": 200
     },
     {
@@ -4072,18 +4082,28 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M293Routes.js",
-      "path": "/api/v1/m293/health",
+      "file": "backend/src/routes/M295Routes.js",
+      "path": "/api/v1/m295/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/M290Routes.js",
-      "path": "/api/v1/m290",
+      "file": "backend/src/routes/M296Routes.js",
+      "path": "/api/v1/m296",
       "status": 200
     },
     {
-      "file": "backend/src/routes/M291Routes.js",
-      "path": "/api/v1/m291",
+      "file": "backend/src/routes/M296Routes.js",
+      "path": "/api/v1/m296/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M297Routes.js",
+      "path": "/api/v1/m297",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M298Routes.js",
+      "path": "/api/v1/m298/health",
       "status": 200
     },
     {
@@ -4094,6 +4114,11 @@
     {
       "file": "backend/src/routes/M293Routes.js",
       "path": "/api/v1/m293",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M293Routes.js",
+      "path": "/api/v1/m293/health",
       "status": 200
     },
     {
@@ -4112,13 +4137,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M295Routes.js",
-      "path": "/api/v1/m295/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M296Routes.js",
-      "path": "/api/v1/m296",
+      "file": "backend/src/routes/M297Routes.js",
+      "path": "/api/v1/m297/health",
       "status": 200
     },
     {
@@ -4127,38 +4147,23 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M300Routes.js",
+      "path": "/api/v1/m300",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M302Routes.js",
+      "path": "/api/v1/m302/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M299Routes.js",
       "path": "/api/v1/m299",
       "status": 200
     },
     {
-      "file": "backend/src/routes/M296Routes.js",
-      "path": "/api/v1/m296/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M297Routes.js",
-      "path": "/api/v1/m297",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M297Routes.js",
-      "path": "/api/v1/m297/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M298Routes.js",
-      "path": "/api/v1/m298/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M299Routes.js",
       "path": "/api/v1/m299/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M300Routes.js",
-      "path": "/api/v1/m300",
       "status": 200
     },
     {
@@ -4182,16 +4187,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M304Routes.js",
-      "path": "/api/v1/m304",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M302Routes.js",
-      "path": "/api/v1/m302/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M303Routes.js",
       "path": "/api/v1/m303",
       "status": 200
@@ -4212,6 +4207,21 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M307Routes.js",
+      "path": "/api/v1/m307",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M309Routes.js",
+      "path": "/api/v1/m309",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M304Routes.js",
+      "path": "/api/v1/m304",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M305Routes.js",
       "path": "/api/v1/m305/health",
       "status": 200
@@ -4224,21 +4234,6 @@
     {
       "file": "backend/src/routes/M306Routes.js",
       "path": "/api/v1/m306/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M309Routes.js",
-      "path": "/api/v1/m309",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M310Routes.js",
-      "path": "/api/v1/m310",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M307Routes.js",
-      "path": "/api/v1/m307",
       "status": 200
     },
     {
@@ -4259,11 +4254,6 @@
     {
       "file": "backend/src/routes/M309Routes.js",
       "path": "/api/v1/m309/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M310Routes.js",
-      "path": "/api/v1/m310/health",
       "status": 200
     },
     {
@@ -4292,11 +4282,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M313Routes.js",
-      "path": "/api/v1/m313/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M314Routes.js",
       "path": "/api/v1/m314",
       "status": 200
@@ -4312,18 +4297,23 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M310Routes.js",
+      "path": "/api/v1/m310",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M310Routes.js",
+      "path": "/api/v1/m310/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M313Routes.js",
+      "path": "/api/v1/m313/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M315Routes.js",
       "path": "/api/v1/m315/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M317Routes.js",
-      "path": "/api/v1/m317/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M319Routes.js",
-      "path": "/api/v1/m319/health",
       "status": 200
     },
     {
@@ -4342,8 +4332,28 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M317Routes.js",
+      "path": "/api/v1/m317/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M318Routes.js",
       "path": "/api/v1/m318",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M31Routes.js",
+      "path": "/api/v1/m31/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M322Routes.js",
+      "path": "/api/v1/m322",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M322Routes.js",
+      "path": "/api/v1/m322/health",
       "status": 200
     },
     {
@@ -4357,13 +4367,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M31Routes.js",
-      "path": "/api/v1/m31",
+      "file": "backend/src/routes/M319Routes.js",
+      "path": "/api/v1/m319/health",
       "status": 200
     },
     {
       "file": "backend/src/routes/M31Routes.js",
-      "path": "/api/v1/m31/health",
+      "path": "/api/v1/m31",
       "status": 200
     },
     {
@@ -4387,13 +4397,33 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M322Routes.js",
-      "path": "/api/v1/m322",
+      "file": "backend/src/routes/M324Routes.js",
+      "path": "/api/v1/m324/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/M322Routes.js",
-      "path": "/api/v1/m322/health",
+      "file": "backend/src/routes/M325Routes.js",
+      "path": "/api/v1/m325/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M326Routes.js",
+      "path": "/api/v1/m326/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M327Routes.js",
+      "path": "/api/v1/m327/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M328Routes.js",
+      "path": "/api/v1/m328",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M328Routes.js",
+      "path": "/api/v1/m328/health",
       "status": 200
     },
     {
@@ -4412,18 +4442,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M324Routes.js",
-      "path": "/api/v1/m324/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M325Routes.js",
       "path": "/api/v1/m325",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M325Routes.js",
-      "path": "/api/v1/m325/health",
       "status": 200
     },
     {
@@ -4432,53 +4452,18 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M326Routes.js",
-      "path": "/api/v1/m326/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M327Routes.js",
       "path": "/api/v1/m327",
       "status": 200
     },
     {
-      "file": "backend/src/routes/M327Routes.js",
-      "path": "/api/v1/m327/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M328Routes.js",
-      "path": "/api/v1/m328/health",
+      "file": "backend/src/routes/M329Routes.js",
+      "path": "/api/v1/m329",
       "status": 200
     },
     {
       "file": "backend/src/routes/M329Routes.js",
       "path": "/api/v1/m329/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M330Routes.js",
-      "path": "/api/v1/m330/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M332Routes.js",
-      "path": "/api/v1/m332",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M333Routes.js",
-      "path": "/api/v1/m333",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M328Routes.js",
-      "path": "/api/v1/m328",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M329Routes.js",
-      "path": "/api/v1/m329",
       "status": 200
     },
     {
@@ -4497,6 +4482,11 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M330Routes.js",
+      "path": "/api/v1/m330/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M331Routes.js",
       "path": "/api/v1/m331",
       "status": 200
@@ -4508,7 +4498,22 @@
     },
     {
       "file": "backend/src/routes/M332Routes.js",
+      "path": "/api/v1/m332",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M332Routes.js",
       "path": "/api/v1/m332/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M333Routes.js",
+      "path": "/api/v1/m333",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M337Routes.js",
+      "path": "/api/v1/m337",
       "status": 200
     },
     {
@@ -4519,21 +4524,6 @@
     {
       "file": "backend/src/routes/M334Routes.js",
       "path": "/api/v1/m334",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M336Routes.js",
-      "path": "/api/v1/m336",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M337Routes.js",
-      "path": "/api/v1/m337",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M337Routes.js",
-      "path": "/api/v1/m337/health",
       "status": 200
     },
     {
@@ -4553,7 +4543,27 @@
     },
     {
       "file": "backend/src/routes/M336Routes.js",
+      "path": "/api/v1/m336",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M336Routes.js",
       "path": "/api/v1/m336/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M337Routes.js",
+      "path": "/api/v1/m337/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M339Routes.js",
+      "path": "/api/v1/m339/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M33Routes.js",
+      "path": "/api/v1/m33",
       "status": 200
     },
     {
@@ -4569,21 +4579,6 @@
     {
       "file": "backend/src/routes/M339Routes.js",
       "path": "/api/v1/m339",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M339Routes.js",
-      "path": "/api/v1/m339/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M33Routes.js",
-      "path": "/api/v1/m33",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M343Routes.js",
-      "path": "/api/v1/m343/health",
       "status": 200
     },
     {
@@ -4622,18 +4617,33 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M344Routes.js",
+      "path": "/api/v1/m344",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M35Routes.js",
+      "path": "/api/v1/m35/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M36Routes.js",
+      "path": "/api/v1/m36/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M343Routes.js",
       "path": "/api/v1/m343",
       "status": 200
     },
     {
-      "file": "backend/src/routes/M344Routes.js",
-      "path": "/api/v1/m344/health",
+      "file": "backend/src/routes/M343Routes.js",
+      "path": "/api/v1/m343/health",
       "status": 200
     },
     {
       "file": "backend/src/routes/M344Routes.js",
-      "path": "/api/v1/m344",
+      "path": "/api/v1/m344/health",
       "status": 200
     },
     {
@@ -4652,18 +4662,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M35Routes.js",
-      "path": "/api/v1/m35/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M36Routes.js",
       "path": "/api/v1/m36",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M36Routes.js",
-      "path": "/api/v1/m36/health",
       "status": 200
     },
     {
@@ -4672,33 +4672,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M39Routes.js",
-      "path": "/api/v1/m39/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M37Routes.js",
-      "path": "/api/v1/m37/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M38Routes.js",
       "path": "/api/v1/m38",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M38Routes.js",
-      "path": "/api/v1/m38/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M39Routes.js",
-      "path": "/api/v1/m39",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M40Routes.js",
-      "path": "/api/v1/m40",
       "status": 200
     },
     {
@@ -4722,28 +4697,33 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M37Routes.js",
+      "path": "/api/v1/m37/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M38Routes.js",
+      "path": "/api/v1/m38/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M39Routes.js",
+      "path": "/api/v1/m39",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M39Routes.js",
+      "path": "/api/v1/m39/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M40Routes.js",
+      "path": "/api/v1/m40",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M42Routes.js",
       "path": "/api/v1/m42/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M43Routes.js",
-      "path": "/api/v1/m43",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/m400AiBackboneRoutes.js",
-      "path": "/api/v1/m400-ai-backbone/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M43Routes.js",
-      "path": "/api/v1/m43/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M46Routes.js",
-      "path": "/api/v1/m46/health",
       "status": 200
     },
     {
@@ -4757,8 +4737,33 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M46Routes.js",
+      "path": "/api/v1/m46/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M47Routes.js",
+      "path": "/api/v1/m47/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M43Routes.js",
+      "path": "/api/v1/m43",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M43Routes.js",
+      "path": "/api/v1/m43/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M45Routes.js",
       "path": "/api/v1/m45",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/m400AiBackboneRoutes.js",
+      "path": "/api/v1/m400-ai-backbone/health",
       "status": 200
     },
     {
@@ -4777,8 +4782,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M47Routes.js",
-      "path": "/api/v1/m47/health",
+      "file": "backend/src/routes/M49Routes.js",
+      "path": "/api/v1/m49",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M52Routes.js",
+      "path": "/api/v1/m52",
       "status": 200
     },
     {
@@ -4789,11 +4799,6 @@
     {
       "file": "backend/src/routes/M48Routes.js",
       "path": "/api/v1/m48/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M49Routes.js",
-      "path": "/api/v1/m49",
       "status": 200
     },
     {
@@ -4817,18 +4822,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M52Routes.js",
-      "path": "/api/v1/m52",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M53Routes.js",
-      "path": "/api/v1/m53/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M51Routes.js",
       "path": "/api/v1/m51/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M54Routes.js",
+      "path": "/api/v1/m54",
       "status": 200
     },
     {
@@ -4842,8 +4842,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M54Routes.js",
-      "path": "/api/v1/m54",
+      "file": "backend/src/routes/M53Routes.js",
+      "path": "/api/v1/m53/health",
       "status": 200
     },
     {
@@ -4857,11 +4857,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/m400AiBackboneRoutes.js",
-      "path": "/api/v1/m400-ai-backbone/intelligence",
-      "status": 500
-    },
-    {
       "file": "backend/src/routes/M55Routes.js",
       "path": "/api/v1/m55/health",
       "status": 200
@@ -4869,6 +4864,11 @@
     {
       "file": "backend/src/routes/M56Routes.js",
       "path": "/api/v1/m56",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M59Routes.js",
+      "path": "/api/v1/m59",
       "status": 200
     },
     {
@@ -4897,9 +4897,9 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M59Routes.js",
-      "path": "/api/v1/m59",
-      "status": 200
+      "file": "backend/src/routes/m400AiBackboneRoutes.js",
+      "path": "/api/v1/m400-ai-backbone/intelligence",
+      "status": 500
     },
     {
       "file": "backend/src/routes/M59Routes.js",
@@ -4912,13 +4912,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M64Routes.js",
-      "path": "/api/v1/m64",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M65Routes.js",
-      "path": "/api/v1/m65",
+      "file": "backend/src/routes/M62Routes.js",
+      "path": "/api/v1/m62",
       "status": 200
     },
     {
@@ -4938,11 +4933,6 @@
     },
     {
       "file": "backend/src/routes/M62Routes.js",
-      "path": "/api/v1/m62",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M62Routes.js",
       "path": "/api/v1/m62/health",
       "status": 200
     },
@@ -4958,7 +4948,32 @@
     },
     {
       "file": "backend/src/routes/M64Routes.js",
+      "path": "/api/v1/m64",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M64Routes.js",
       "path": "/api/v1/m64/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M66Routes.js",
+      "path": "/api/v1/m66",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M67Routes.js",
+      "path": "/api/v1/m67",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M69Routes.js",
+      "path": "/api/v1/m69",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M65Routes.js",
+      "path": "/api/v1/m65",
       "status": 200
     },
     {
@@ -4968,17 +4983,7 @@
     },
     {
       "file": "backend/src/routes/M66Routes.js",
-      "path": "/api/v1/m66",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M66Routes.js",
       "path": "/api/v1/m66/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M67Routes.js",
-      "path": "/api/v1/m67",
       "status": 200
     },
     {
@@ -4998,22 +5003,12 @@
     },
     {
       "file": "backend/src/routes/M69Routes.js",
-      "path": "/api/v1/m69",
+      "path": "/api/v1/m69/health",
       "status": 200
     },
     {
       "file": "backend/src/routes/M70Routes.js",
       "path": "/api/v1/m70",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M70Routes.js",
-      "path": "/api/v1/m70/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M71Routes.js",
-      "path": "/api/v1/m71/health",
       "status": 200
     },
     {
@@ -5028,7 +5023,7 @@
     },
     {
       "file": "backend/src/routes/M73Routes.js",
-      "path": "/api/v1/m73",
+      "path": "/api/v1/m73/health",
       "status": 200
     },
     {
@@ -5037,8 +5032,23 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M69Routes.js",
-      "path": "/api/v1/m69/health",
+      "file": "backend/src/routes/M76Routes.js",
+      "path": "/api/v1/m76/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M77Routes.js",
+      "path": "/api/v1/m77",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M77Routes.js",
+      "path": "/api/v1/m77/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M70Routes.js",
+      "path": "/api/v1/m70/health",
       "status": 200
     },
     {
@@ -5047,8 +5057,13 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M71Routes.js",
+      "path": "/api/v1/m71/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M73Routes.js",
-      "path": "/api/v1/m73/health",
+      "path": "/api/v1/m73",
       "status": 200
     },
     {
@@ -5072,31 +5087,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M76Routes.js",
-      "path": "/api/v1/m76/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M77Routes.js",
-      "path": "/api/v1/m77",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M77Routes.js",
-      "path": "/api/v1/m77/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M82Routes.js",
-      "path": "/api/v1/m82",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M78Routes.js",
-      "path": "/api/v1/m78",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M78Routes.js",
       "path": "/api/v1/m78/health",
       "status": 200
@@ -5107,23 +5097,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M79Routes.js",
-      "path": "/api/v1/m79/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M80Routes.js",
-      "path": "/api/v1/m80",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M80Routes.js",
       "path": "/api/v1/m80/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M81Routes.js",
-      "path": "/api/v1/m81",
       "status": 200
     },
     {
@@ -5133,32 +5108,17 @@
     },
     {
       "file": "backend/src/routes/M82Routes.js",
-      "path": "/api/v1/m82/health",
+      "path": "/api/v1/m82",
       "status": 200
     },
     {
-      "file": "backend/src/routes/M84Routes.js",
-      "path": "/api/v1/m84",
+      "file": "backend/src/routes/M82Routes.js",
+      "path": "/api/v1/m82/health",
       "status": 200
     },
     {
       "file": "backend/src/routes/M83Routes.js",
       "path": "/api/v1/m83",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M83Routes.js",
-      "path": "/api/v1/m83/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M84Routes.js",
-      "path": "/api/v1/m84/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M85Routes.js",
-      "path": "/api/v1/m85",
       "status": 200
     },
     {
@@ -5172,13 +5132,43 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M86Routes.js",
-      "path": "/api/v1/m86/health",
+      "file": "backend/src/routes/M78Routes.js",
+      "path": "/api/v1/m78",
       "status": 200
     },
     {
-      "file": "backend/src/routes/M87Routes.js",
-      "path": "/api/v1/m87",
+      "file": "backend/src/routes/M79Routes.js",
+      "path": "/api/v1/m79/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M80Routes.js",
+      "path": "/api/v1/m80",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M81Routes.js",
+      "path": "/api/v1/m81",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M83Routes.js",
+      "path": "/api/v1/m83/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M84Routes.js",
+      "path": "/api/v1/m84",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M84Routes.js",
+      "path": "/api/v1/m84/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M85Routes.js",
+      "path": "/api/v1/m85",
       "status": 200
     },
     {
@@ -5189,6 +5179,16 @@
     {
       "file": "backend/src/routes/M88Routes.js",
       "path": "/api/v1/m88",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M86Routes.js",
+      "path": "/api/v1/m86/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M87Routes.js",
+      "path": "/api/v1/m87",
       "status": 200
     },
     {
@@ -5232,11 +5232,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M92Routes.js",
-      "path": "/api/v1/m92/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M93Routes.js",
       "path": "/api/v1/m93",
       "status": 200
@@ -5244,6 +5239,21 @@
     {
       "file": "backend/src/routes/M93Routes.js",
       "path": "/api/v1/m93/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M96Routes.js",
+      "path": "/api/v1/m96/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M97Routes.js",
+      "path": "/api/v1/m97",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/M92Routes.js",
+      "path": "/api/v1/m92/health",
       "status": 200
     },
     {
@@ -5267,23 +5277,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/M97Routes.js",
-      "path": "/api/v1/m97",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M99Routes.js",
-      "path": "/api/v1/m99/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/M96Routes.js",
       "path": "/api/v1/m96",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/M96Routes.js",
-      "path": "/api/v1/m96/health",
       "status": 200
     },
     {
@@ -5297,13 +5292,23 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/M99Routes.js",
+      "path": "/api/v1/m99",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/marketDataRoutes.js",
+      "path": "/api/v1/market-data/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/M98Routes.js",
       "path": "/api/v1/m98/health",
       "status": 200
     },
     {
       "file": "backend/src/routes/M99Routes.js",
-      "path": "/api/v1/m99",
+      "path": "/api/v1/m99/health",
       "status": 200
     },
     {
@@ -5323,13 +5328,13 @@
     },
     {
       "file": "backend/src/routes/marketDataRoutes.js",
-      "path": "/api/v1/market-data/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/marketDataRoutes.js",
       "path": "/api/v1/market-data/prices/trend",
       "status": 400
+    },
+    {
+      "file": "backend/src/routes/migrationRoutes.js",
+      "path": "/api/v1/migration/health",
+      "status": 200
     },
     {
       "file": "backend/src/routes/marketplaceEnhancements.js",
@@ -5338,37 +5343,7 @@
     },
     {
       "file": "backend/src/routes/migrationRoutes.js",
-      "path": "/api/v1/migration/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/migrationRoutes.js",
       "path": "/api/v1/migration",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/marketDataRoutes.js",
-      "path": "/api/v1/market-data/dbt/unclaimed",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/marketplaceEnhancements.js",
-      "path": "/api/v1/marketplace-enhancements/bulk-orders",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/marketplaceEnhancements.js",
-      "path": "/api/v1/marketplace-enhancements/reviews/user",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/marketplaceEnhancements.js",
-      "path": "/api/v1/marketplace-enhancements/gst/summary",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/marketDataRoutes.js",
-      "path": "/api/v1/market-data/competitor/position",
       "status": 200
     },
     {
@@ -5384,6 +5359,31 @@
     {
       "file": "backend/src/routes/machineryVillageOpsRoutes.js",
       "path": "/api/v1/machinery-village-ops/dashboard",
+      "status": 0
+    },
+    {
+      "file": "backend/src/routes/marketDataRoutes.js",
+      "path": "/api/v1/market-data/dbt/unclaimed",
+      "status": 0
+    },
+    {
+      "file": "backend/src/routes/marketDataRoutes.js",
+      "path": "/api/v1/market-data/competitor/position",
+      "status": 0
+    },
+    {
+      "file": "backend/src/routes/marketplaceEnhancements.js",
+      "path": "/api/v1/marketplace-enhancements/gst/summary",
+      "status": 0
+    },
+    {
+      "file": "backend/src/routes/marketplaceEnhancements.js",
+      "path": "/api/v1/marketplace-enhancements/reviews/user",
+      "status": 0
+    },
+    {
+      "file": "backend/src/routes/marketplaceEnhancements.js",
+      "path": "/api/v1/marketplace-enhancements/bulk-orders",
       "status": 0
     },
     {
@@ -5404,27 +5404,27 @@
     {
       "file": "backend/src/routes/moduleRegistryRoutes.js",
       "path": "/api/v1/module-registry/loaded",
-      "status": 0
-    },
-    {
-      "file": "backend/src/routes/moduleRegistryRoutes.js",
-      "path": "/api/v1/module-registry/modules",
-      "status": 0
+      "status": 200
     },
     {
       "file": "backend/src/routes/moduleSupportInfrastructureRoutes.js",
       "path": "/api/v1/module-support-infrastructure/modules",
-      "status": 0
+      "status": 200
     },
     {
       "file": "backend/src/routes/moduleSupportInfrastructureRoutes.js",
       "path": "/api/v1/module-support-infrastructure/dependencies/graph",
-      "status": 0
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/moduleRegistryRoutes.js",
+      "path": "/api/v1/module-registry/modules",
+      "status": 200
     },
     {
       "file": "backend/src/routes/moduleSupportInfrastructureRoutes.js",
       "path": "/api/v1/module-support-infrastructure/dependencies/order",
-      "status": 0
+      "status": 200
     },
     {
       "file": "backend/src/routes/moduleSupportInfrastructureRoutes.js",
@@ -5452,18 +5452,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/moduleSystemsRoutes.js",
-      "path": "/api/v1/module-systems",
+      "file": "backend/src/routes/nervousSystemRoutes.js",
+      "path": "/api/v1/nervous-system/brain/decision-history",
       "status": 200
     },
     {
       "file": "backend/src/routes/mushroomRoutes.js",
       "path": "/api/v1/mushroom/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/nervousSystemRoutes.js",
-      "path": "/api/v1/nervous-system/brain/decision-history",
       "status": 200
     },
     {
@@ -5497,8 +5492,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/multilingualDomainRoutes.js",
-      "path": "/api/v1/multilingual-domain/multilingual/preferences",
+      "file": "backend/src/routes/moduleSystemsRoutes.js",
+      "path": "/api/v1/module-systems",
       "status": 200
     },
     {
@@ -5507,9 +5502,29 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/multilingualDomainRoutes.js",
+      "path": "/api/v1/multilingual-domain/multilingual/languages",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/multilingualDomainRoutes.js",
+      "path": "/api/v1/multilingual-domain/multilingual/preferences",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/nervousSystemRoutes.js",
       "path": "/api/v1/nervous-system/health",
       "status": 200
+    },
+    {
+      "file": "backend/src/routes/notificationRoutes.js",
+      "path": "/api/v1/notifications/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/nutritionIntelligenceRoutes.js",
+      "path": "/api/v1/nutrition-intelligence/nutrients",
+      "status": 500
     },
     {
       "file": "backend/src/routes/nlp.js",
@@ -5520,11 +5535,6 @@
       "file": "backend/src/routes/notificationDomainRoutes.js",
       "path": "/api/v1/notification-domain/notifications",
       "status": 400
-    },
-    {
-      "file": "backend/src/routes/notificationRoutes.js",
-      "path": "/api/v1/notifications/health",
-      "status": 200
     },
     {
       "file": "backend/src/routes/notificationRoutes.js",
@@ -5543,18 +5553,8 @@
     },
     {
       "file": "backend/src/routes/nutritionIntelligenceRoutes.js",
-      "path": "/api/v1/nutrition-intelligence/nutrients",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/nutritionIntelligenceRoutes.js",
       "path": "/api/v1/nutrition-intelligence/recommendations",
       "status": 500
-    },
-    {
-      "file": "backend/src/routes/neVarietiesRoutes.js",
-      "path": "/api/v1/ne-varieties",
-      "status": 200
     },
     {
       "file": "backend/src/routes/operationsManagementRoutes.js",
@@ -5562,13 +5562,18 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/nutrientValueSalesRoutes.js",
-      "path": "/api/v1/nutrient-value-sales/search",
+      "file": "backend/src/routes/orderRoutes.js",
+      "path": "/api/v1/order/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/orderRoutes.js",
-      "path": "/api/v1/order/health",
+      "file": "backend/src/routes/neVarietiesRoutes.js",
+      "path": "/api/v1/ne-varieties",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/nutritionIntelligenceRoutes.js",
+      "path": "/api/v1/nutrition-intelligence/dietary-profiles",
       "status": 200
     },
     {
@@ -5592,11 +5597,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/ordersDomainRoutes.js",
-      "path": "/api/v1/orders-domain/orders",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/paymentRoutes.js",
       "path": "/api/v1/payments/health",
       "status": 200
@@ -5609,6 +5609,11 @@
     {
       "file": "backend/src/routes/performanceRoutes.js",
       "path": "/api/v1/performance",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/ordersDomainRoutes.js",
+      "path": "/api/v1/orders-domain/orders",
       "status": 200
     },
     {
@@ -5627,18 +5632,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/mushroomRoutes.js",
-      "path": "/api/v1/mushroom",
-      "status": 500
-    },
-    {
       "file": "backend/src/routes/phase11.js",
       "path": "/api/v1/phase11/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/multilingualDomainRoutes.js",
-      "path": "/api/v1/multilingual-domain/multilingual/languages",
       "status": 200
     },
     {
@@ -5662,18 +5657,23 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/platform/completeERPIntegrationRoutes_merged.js",
-      "path": "/api/v1/platform/complete-erpintegration-routes-merged",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/pestForecastingDomainRoutes.js",
       "path": "/api/v1/pest-forecasting-domain/pest-forecasting",
       "status": 200
     },
     {
-      "file": "backend/src/routes/neVarietiesRoutes.js",
-      "path": "/api/v1/ne-varieties/stats/summary",
+      "file": "backend/src/routes/platform/completeERPIntegrationRoutes_merged.js",
+      "path": "/api/v1/platform/complete-erpintegration-routes-merged",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/pigRoutes.js",
+      "path": "/api/v1/pig/breeding-alerts",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/mushroomRoutes.js",
+      "path": "/api/v1/mushroom",
       "status": 500
     },
     {
@@ -5687,21 +5687,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/pigRoutes.js",
-      "path": "/api/v1/pig/breeding-alerts",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/pigRoutes.js",
-      "path": "/api/v1/pig/vaccination-alerts",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/platform/knowledgeRoutes_merged.js",
-      "path": "/api/v1/platform/knowledge-routes-merged",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/platform/organizationManagementRoutes_merged.js",
       "path": "/api/v1/platform/organization-management-routes-merged",
       "status": 200
@@ -5709,6 +5694,16 @@
     {
       "file": "backend/src/routes/platform/publicDomainDataExtractionRoutes.js",
       "path": "/api/v1/platform/public-domain-data-extraction",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/pigRoutes.js",
+      "path": "/api/v1/pig/herd",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/platform/knowledgeRoutes_merged.js",
+      "path": "/api/v1/platform/knowledge-routes-merged",
       "status": 200
     },
     {
@@ -5722,23 +5717,23 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/nutritionIntelligenceRoutes.js",
-      "path": "/api/v1/nutrition-intelligence/dietary-profiles",
+      "file": "backend/src/routes/platformCoreDomainRoutes.js",
+      "path": "/api/v1/platform-core-domain/platform-core/scaling-recommendations",
       "status": 200
     },
     {
-      "file": "backend/src/routes/pigRoutes.js",
-      "path": "/api/v1/pig/herd",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/nutritionIntelligenceRoutes.js",
-      "path": "/api/v1/nutrition-intelligence/wellness-practices",
-      "status": 200
+      "file": "backend/src/routes/neVarietiesRoutes.js",
+      "path": "/api/v1/ne-varieties/stats/summary",
+      "status": 500
     },
     {
       "file": "backend/src/routes/platformCoreDomainRoutes.js",
-      "path": "/api/v1/platform-core-domain/platform-core/scaling-recommendations",
+      "path": "/api/v1/platform-core-domain/platform-core/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/nutrientValueSalesRoutes.js",
+      "path": "/api/v1/nutrient-value-sales/search",
       "status": 200
     },
     {
@@ -5747,14 +5742,29 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/nutritionIntelligenceRoutes.js",
+      "path": "/api/v1/nutrition-intelligence/wellness-practices",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/platformCoreRoutes.js",
       "path": "/api/v1/platform-core/scaling/recommendations",
       "status": 501
     },
     {
-      "file": "backend/src/routes/platformCoreDomainRoutes.js",
-      "path": "/api/v1/platform-core-domain/platform-core/health",
+      "file": "backend/src/routes/platformCoreRoutes.js",
+      "path": "/api/v1/platform-core/config",
       "status": 200
+    },
+    {
+      "file": "backend/src/routes/platformCoreRoutes.js",
+      "path": "/api/v1/platform-core/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/platformCoreRoutes.js",
+      "path": "/api/v1/platform-core/state",
+      "status": 501
     },
     {
       "file": "backend/src/routes/platformCoreRoutes.js",
@@ -5773,22 +5783,7 @@
     },
     {
       "file": "backend/src/routes/platformCoreRoutes.js",
-      "path": "/api/v1/platform-core/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/platformCoreRoutes.js",
-      "path": "/api/v1/platform-core/config",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/platformCoreRoutes.js",
       "path": "/api/v1/platform-core/metrics",
-      "status": 501
-    },
-    {
-      "file": "backend/src/routes/platformCoreRoutes.js",
-      "path": "/api/v1/platform-core/state",
       "status": 501
     },
     {
@@ -5797,23 +5792,18 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/organicTraceabilityDomainRoutes.js",
-      "path": "/api/v1/organic-traceability-domain/organic-traceability/consumer-transparency",
-      "status": 400
-    },
-    {
       "file": "backend/src/routes/platformTelemetryRoutes.js",
       "path": "/api/v1/platform-telemetry/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/poultryRoutes.js",
-      "path": "/api/v1/poultry/health",
-      "status": 200
+      "file": "backend/src/routes/organicTraceabilityDomainRoutes.js",
+      "path": "/api/v1/organic-traceability-domain/organic-traceability/consumer-transparency",
+      "status": 400
     },
     {
-      "file": "backend/src/routes/platformCoreRoutes.js",
-      "path": "/api/v1/platform-core/stats",
+      "file": "backend/src/routes/poultryRoutes.js",
+      "path": "/api/v1/poultry/health",
       "status": 200
     },
     {
@@ -5822,8 +5812,8 @@
       "status": 400
     },
     {
-      "file": "backend/src/routes/predictiveAnalytics.js",
-      "path": "/api/v1/predictive-analytics/health",
+      "file": "backend/src/routes/poultryDomainRoutes.js",
+      "path": "/api/v1/poultry-domain/poultry/egg-production",
       "status": 200
     },
     {
@@ -5833,12 +5823,7 @@
     },
     {
       "file": "backend/src/routes/poultryDomainRoutes.js",
-      "path": "/api/v1/poultry-domain/poultry/vaccination-records",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/poultryDomainRoutes.js",
-      "path": "/api/v1/poultry-domain/poultry/egg-production",
+      "path": "/api/v1/poultry-domain/poultry/mortality",
       "status": 200
     },
     {
@@ -5848,7 +5833,12 @@
     },
     {
       "file": "backend/src/routes/poultryDomainRoutes.js",
-      "path": "/api/v1/poultry-domain/poultry/mortality",
+      "path": "/api/v1/poultry-domain/poultry/vaccination-records",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/predictiveAnalytics.js",
+      "path": "/api/v1/predictive-analytics/health",
       "status": 200
     },
     {
@@ -5862,14 +5852,19 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/poultryRoutes.js",
-      "path": "/api/v1/poultry/vaccination-alerts",
+      "file": "backend/src/routes/productCertifications.js",
+      "path": "/api/v1/product-certifications/health",
       "status": 200
     },
     {
       "file": "backend/src/routes/preSeasonPurchaseRoutes.js",
       "path": "/api/v1/pre-season-purchase/buyer-portfolio",
       "status": 403
+    },
+    {
+      "file": "backend/src/routes/poultryRoutes.js",
+      "path": "/api/v1/poultry/vaccination-alerts",
+      "status": 200
     },
     {
       "file": "backend/src/routes/preSeasonPurchaseRoutes.js",
@@ -5882,18 +5877,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/productCertifications.js",
-      "path": "/api/v1/product-certifications/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/productImageAutoGenerationRoutes.js",
-      "path": "/api/v1/product-image-auto-generation/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/productMediaAIRoutes.js",
-      "path": "/api/v1/product-media-ai/status",
+      "file": "backend/src/routes/poultryRoutes.js",
+      "path": "/api/v1/poultry/flocks",
       "status": 200
     },
     {
@@ -5907,6 +5892,21 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/productImageAutoGenerationRoutes.js",
+      "path": "/api/v1/product-image-auto-generation/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/productMediaAIRoutes.js",
+      "path": "/api/v1/product-media-ai/status",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/preSeasonPurchaseRoutes.js",
+      "path": "/api/v1/pre-season-purchase/opportunities",
+      "status": 500
+    },
+    {
       "file": "backend/src/routes/projectSystemsRoutes.js",
       "path": "/api/v1/project-systems",
       "status": 400
@@ -5915,11 +5915,6 @@
       "file": "backend/src/routes/publicDataRoutes.js",
       "path": "/api/v1/public-data/health",
       "status": 200
-    },
-    {
-      "file": "backend/src/routes/preSeasonPurchaseRoutes.js",
-      "path": "/api/v1/pre-season-purchase/opportunities",
-      "status": 500
     },
     {
       "file": "backend/src/routes/publicDomainDataExtractionRoutes_merged.js",
@@ -5932,19 +5927,24 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/pigRoutes.js",
+      "path": "/api/v1/pig/vaccination-alerts",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/realtimeMonitoringDomainRoutes.js",
       "path": "/api/v1/realtime-monitoring-domain/realtime-monitoring/monitors",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/realtimeMonitoringDomainRoutes.js",
+      "path": "/api/v1/realtime-monitoring-domain/realtime-monitoring/health",
       "status": 200
     },
     {
       "file": "backend/src/routes/productReviewRoutes.js",
       "path": "/api/v1/product-review/me",
       "status": 500
-    },
-    {
-      "file": "backend/src/routes/realtimeMonitoringDomainRoutes.js",
-      "path": "/api/v1/realtime-monitoring-domain/realtime-monitoring/health",
-      "status": 200
     },
     {
       "file": "backend/src/routes/realtimeMonitoringRoutes.js",
@@ -5977,8 +5977,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/recoveredFinanceRoutes.js",
-      "path": "/api/v1/recovered-finance/ledger/trial-balance",
+      "file": "backend/src/routes/reportingRoutes.js",
+      "path": "/api/v1/reporting/health",
       "status": 200
     },
     {
@@ -5987,13 +5987,8 @@
       "status": 404
     },
     {
-      "file": "backend/src/routes/reportingRoutes.js",
-      "path": "/api/v1/reporting/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/reportingRoutes.js",
-      "path": "/api/v1/reporting",
+      "file": "backend/src/routes/recoveredFinanceRoutes.js",
+      "path": "/api/v1/recovered-finance/ledger/trial-balance",
       "status": 200
     },
     {
@@ -6002,13 +5997,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/researchAndDevelopmentDomainRoutes.js",
-      "path": "/api/v1/research-and-development-domain/research-development/rd-projects",
+      "file": "backend/src/routes/reportingRoutes.js",
+      "path": "/api/v1/reporting",
       "status": 200
     },
     {
-      "file": "backend/src/routes/recoveredFinanceRoutes.js",
-      "path": "/api/v1/recovered-finance/ledger/verify",
+      "file": "backend/src/routes/researchAndDevelopmentDomainRoutes.js",
+      "path": "/api/v1/research-and-development-domain/research-development/rd-projects",
       "status": 200
     },
     {
@@ -6022,6 +6017,16 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/regionalVarietyRoutes.js",
+      "path": "/api/v1/regional-variety/categories",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/recoveredFinanceRoutes.js",
+      "path": "/api/v1/recovered-finance/ledger/verify",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/researchAndDevelopmentDomainRoutes.js",
       "path": "/api/v1/research-and-development-domain/research-development/patents",
       "status": 200
@@ -6032,18 +6037,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/regionalVarietyRoutes.js",
-      "path": "/api/v1/regional-variety/categories",
+      "file": "backend/src/routes/researchAndDevelopmentDomainRoutes.js",
+      "path": "/api/v1/research-and-development-domain/research-development/knowledge/search",
       "status": 200
     },
     {
       "file": "backend/src/routes/researchAndDevelopmentDomainRoutes.js",
       "path": "/api/v1/research-and-development-domain/research-development/publications",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/researchAndDevelopmentDomainRoutes.js",
-      "path": "/api/v1/research-and-development-domain/research-development/knowledge/search",
       "status": 200
     },
     {
@@ -6072,6 +6072,11 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/platformCoreRoutes.js",
+      "path": "/api/v1/platform-core/stats",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/revenueRoutes.js",
       "path": "/api/v1/revenue/health",
       "status": 200
@@ -6097,8 +6102,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/poultryDomainRoutes.js",
-      "path": "/api/v1/poultry-domain/poultry/vaccination-alerts",
+      "file": "backend/src/routes/riskAssessment.js",
+      "path": "/api/v1/risk-assessment/health",
       "status": 200
     },
     {
@@ -6107,8 +6112,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/riskAssessment.js",
-      "path": "/api/v1/risk-assessment/health",
+      "file": "backend/src/routes/poultryDomainRoutes.js",
+      "path": "/api/v1/poultry-domain/poultry/vaccination-alerts",
       "status": 200
     },
     {
@@ -6117,23 +6122,23 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/riskPricingRoutes.js",
-      "path": "/api/v1/risk-pricing/forward",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/rfqRoutes.js",
-      "path": "/api/v1/rfq/qc/holds",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/roleRoutes.js",
       "path": "/api/v1/role/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/poultryRoutes.js",
-      "path": "/api/v1/poultry/flocks",
+      "file": "backend/src/routes/riskPricingRoutes.js",
+      "path": "/api/v1/risk-pricing/forward",
+      "status": 500
+    },
+    {
+      "file": "backend/src/routes/rfqDomainRoutes.js",
+      "path": "/api/v1/rfq-domain/rfq/loss-analysis",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/rfqRoutes.js",
+      "path": "/api/v1/rfq/quotes/loss-analysis",
       "status": 200
     },
     {
@@ -6147,18 +6152,18 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/roleManagementRoutes.js",
-      "path": "/api/v1/role-management",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/riskPricingRoutes.js",
-      "path": "/api/v1/risk-pricing/lots/attention",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/sapModuleArchitectureDomainRoutes.js",
       "path": "/api/v1/sap-module-architecture-domain/sap-module-architecture/overview",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/sapModuleArchitectureRoutes.js",
+      "path": "/api/v1/sap-module-architecture/status",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/roleManagementRoutes.js",
+      "path": "/api/v1/role-management",
       "status": 200
     },
     {
@@ -6177,23 +6182,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/sapModuleArchitectureRoutes.js",
-      "path": "/api/v1/sap-module-architecture/status",
+      "file": "backend/src/routes/riskPricingRoutes.js",
+      "path": "/api/v1/risk-pricing/lots/attention",
       "status": 200
     },
     {
       "file": "backend/src/routes/sapModuleArchitectureRoutes.js",
       "path": "/api/v1/sap-module-architecture/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/searchRoutes.js",
-      "path": "/api/v1/search/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/searchRoutes.js",
-      "path": "/api/v1/search",
       "status": 200
     },
     {
@@ -6207,13 +6202,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/sellerRankingRoutes.js",
-      "path": "/api/v1/seller-ranking/health",
+      "file": "backend/src/routes/searchRoutes.js",
+      "path": "/api/v1/search/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/sericultureRoutes.js",
-      "path": "/api/v1/sericulture/health",
+      "file": "backend/src/routes/searchRoutes.js",
+      "path": "/api/v1/search",
       "status": 200
     },
     {
@@ -6227,29 +6222,34 @@
       "status": 500
     },
     {
+      "file": "backend/src/routes/sellerRankingRoutes.js",
+      "path": "/api/v1/seller-ranking/health",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/sellerVerifications.js",
       "path": "/api/v1/seller-verifications/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/serverManagementRoutes.js",
-      "path": "/api/v1/server-management/load-balancers",
+      "file": "backend/src/routes/sericultureRoutes.js",
+      "path": "/api/v1/sericulture/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/sericultureRoutes.js",
-      "path": "/api/v1/sericulture",
-      "status": 500
-    },
-    {
-      "file": "backend/src/routes/serverManagementRoutes.js",
-      "path": "/api/v1/server-management/servers",
+      "file": "backend/src/routes/sellerRankingDomainRoutes.js",
+      "path": "/api/v1/seller-ranking-domain/seller-ranking",
       "status": 200
     },
     {
       "file": "backend/src/routes/seedVaultRoutes.js",
       "path": "/api/v1/seed-vault",
       "status": 404
+    },
+    {
+      "file": "backend/src/routes/serverManagementRoutes.js",
+      "path": "/api/v1/server-management/servers",
+      "status": 200
     },
     {
       "file": "backend/src/routes/seedVaultRoutes.js",
@@ -6262,13 +6262,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/sellerRankingDomainRoutes.js",
-      "path": "/api/v1/seller-ranking-domain/seller-ranking",
-      "status": 400
-    },
-    {
       "file": "backend/src/routes/serverManagementRoutes.js",
-      "path": "/api/v1/server-management/overview",
+      "path": "/api/v1/server-management/load-balancers",
       "status": 200
     },
     {
@@ -6277,8 +6272,18 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/sericultureRoutes.js",
+      "path": "/api/v1/sericulture",
+      "status": 500
+    },
+    {
       "file": "backend/src/routes/serverManagementRoutes.js",
       "path": "/api/v1/server-management/server-groups",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/serverManagementRoutes.js",
+      "path": "/api/v1/server-management/overview",
       "status": 200
     },
     {
@@ -6292,18 +6297,23 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/regionalVarietyRoutes.js",
-      "path": "/api/v1/regional-variety",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/settingsRoutes.js",
       "path": "/api/v1/settings",
       "status": 200
     },
     {
+      "file": "backend/src/routes/regionalVarietyRoutes.js",
+      "path": "/api/v1/regional-variety",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/sheepDomainRoutes.js",
-      "path": "/api/v1/sheep-domain/sheep/feed-consumption",
+      "path": "/api/v1/sheep-domain/sheep/flock-performance",
+      "status": 400
+    },
+    {
+      "file": "backend/src/routes/sheepDomainRoutes.js",
+      "path": "/api/v1/sheep-domain/sheep/flock",
       "status": 200
     },
     {
@@ -6313,12 +6323,12 @@
     },
     {
       "file": "backend/src/routes/sheepDomainRoutes.js",
-      "path": "/api/v1/sheep-domain/sheep/breeding-records",
+      "path": "/api/v1/sheep-domain/sheep/feed-consumption",
       "status": 200
     },
     {
       "file": "backend/src/routes/sheepDomainRoutes.js",
-      "path": "/api/v1/sheep-domain/sheep/flock",
+      "path": "/api/v1/sheep-domain/sheep/breeding-records",
       "status": 200
     },
     {
@@ -6332,8 +6342,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/sheepDomainRoutes.js",
-      "path": "/api/v1/sheep-domain/sheep/shearing-alerts",
+      "file": "backend/src/routes/soilHealth.js",
+      "path": "/api/v1/soil-health/health",
       "status": 200
     },
     {
@@ -6347,18 +6357,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/sheepRoutes.js",
-      "path": "/api/v1/sheep/flock",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/rfqDomainRoutes.js",
-      "path": "/api/v1/rfq-domain/rfq/loss-analysis",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/rfqRoutes.js",
-      "path": "/api/v1/rfq/quotes/loss-analysis",
+      "file": "backend/src/routes/soilManagementRoutes.js",
+      "path": "/api/v1/soil-management/health",
       "status": 200
     },
     {
@@ -6367,13 +6367,8 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/soilHealth.js",
-      "path": "/api/v1/soil-health/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/soilManagementRoutes.js",
-      "path": "/api/v1/soil-management/health",
+      "file": "backend/src/routes/sheepRoutes.js",
+      "path": "/api/v1/sheep/flock",
       "status": 200
     },
     {
@@ -6397,8 +6392,18 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/rfqRoutes.js",
+      "path": "/api/v1/rfq/qc/holds",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/startupEnvironmentRoutes.js",
       "path": "/api/v1/startup-environment/incubation-programs",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/startupEnvironmentRoutes.js",
+      "path": "/api/v1/startup-environment/analytics",
       "status": 200
     },
     {
@@ -6423,11 +6428,6 @@
     },
     {
       "file": "backend/src/routes/startupEnvironmentRoutes.js",
-      "path": "/api/v1/startup-environment/analytics",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/startupEnvironmentRoutes.js",
       "path": "/api/v1/startup-environment/health",
       "status": 200
     },
@@ -6437,13 +6437,13 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/supplyChainDecisionRoutes.js",
-      "path": "/api/v1/supply-chain-decision/health",
+      "file": "backend/src/routes/supplyChainTracking.js",
+      "path": "/api/v1/supply-chain-tracking/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/supplyChainTracking.js",
-      "path": "/api/v1/supply-chain-tracking/health",
+      "file": "backend/src/routes/supplyChainDecisionRoutes.js",
+      "path": "/api/v1/supply-chain-decision/health",
       "status": 200
     },
     {
@@ -6502,11 +6502,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/userRoutes.js",
-      "path": "/api/v1/users/health",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/unifiedAIRoutes.js",
       "path": "/api/v1/unified-ai/health",
       "status": 200
@@ -6524,6 +6519,11 @@
     {
       "file": "backend/src/routes/unifiedLedgerRoutes_merged.js",
       "path": "/api/v1/unified-ledger-routes-merged/health",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/userRoutes.js",
+      "path": "/api/v1/users/health",
       "status": 200
     },
     {
@@ -6557,19 +6557,9 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/sheepDomainRoutes.js",
-      "path": "/api/v1/sheep-domain/sheep/flock-performance",
-      "status": 400
-    },
-    {
       "file": "backend/src/routes/visionRoutes.js",
       "path": "/api/v1/vision/health",
       "status": 200
-    },
-    {
-      "file": "backend/src/routes/vendorProcurementRoutes.js",
-      "path": "/api/v1/vendor-procurement/dashboard",
-      "status": 500
     },
     {
       "file": "backend/src/routes/vermicompostRoutes.js",
@@ -6597,16 +6587,6 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/sheepDomainRoutes.js",
-      "path": "/api/v1/sheep-domain/sheep/vaccination-alerts",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/sheepDomainRoutes.js",
-      "path": "/api/v1/sheep-domain/sheep/breeding-alerts",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/waterIrrigationRoutes.js",
       "path": "/api/v1/water-irrigation/water-budgets",
       "status": 200
@@ -6622,28 +6602,28 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/voiceAIDomainRoutes.js",
-      "path": "/api/v1/voice-aidomain/voice-ai/preferences",
-      "status": 200
-    },
-    {
       "file": "backend/src/routes/wearableIntegrationRoutes.js",
       "path": "/api/v1/wearable-integration/fitbit/auth-url",
       "status": 200
     },
     {
-      "file": "backend/src/routes/weatherRoutes.js",
-      "path": "/api/v1/weather/health",
+      "file": "backend/src/routes/sheepDomainRoutes.js",
+      "path": "/api/v1/sheep-domain/sheep/breeding-alerts",
       "status": 200
     },
     {
-      "file": "backend/src/routes/weatherRoutes.js",
-      "path": "/api/v1/weather/for-arp",
-      "status": 400
+      "file": "backend/src/routes/sheepDomainRoutes.js",
+      "path": "/api/v1/sheep-domain/sheep/shearing-alerts",
+      "status": 200
     },
     {
-      "file": "backend/src/routes/wearableIntegrationRoutes.js",
-      "path": "/api/v1/wearable-integration/status",
+      "file": "backend/src/routes/voiceAIDomainRoutes.js",
+      "path": "/api/v1/voice-aidomain/voice-ai/preferences",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/sheepDomainRoutes.js",
+      "path": "/api/v1/sheep-domain/sheep/vaccination-alerts",
       "status": 200
     },
     {
@@ -6652,19 +6632,24 @@
       "status": 200
     },
     {
-      "file": "backend/src/routes/weatherDomainRoutes.js",
-      "path": "/api/v1/weather-domain/weather/forecast-accuracy",
+      "file": "backend/src/routes/weatherRoutes.js",
+      "path": "/api/v1/weather/health",
       "status": 200
     },
     {
-      "file": "backend/src/routes/weatherDomainRoutes.js",
-      "path": "/api/v1/weather-domain/weather/coverage",
+      "file": "backend/src/routes/vendorProcurementRoutes.js",
+      "path": "/api/v1/vendor-procurement/dashboard",
+      "status": 500
+    },
+    {
+      "file": "backend/src/routes/wearableIntegrationRoutes.js",
+      "path": "/api/v1/wearable-integration/status",
       "status": 200
     },
     {
-      "file": "backend/src/routes/weatherDomainRoutes.js",
-      "path": "/api/v1/weather-domain/climate-advisory/advisories",
-      "status": 200
+      "file": "backend/src/routes/weatherRoutes.js",
+      "path": "/api/v1/weather/for-arp",
+      "status": 400
     },
     {
       "file": "backend/src/routes/weatherRoutes.js",
@@ -6672,28 +6657,13 @@
       "status": 200
     },
     {
+      "file": "backend/src/routes/weatherDomainRoutes.js",
+      "path": "/api/v1/weather-domain/weather/forecast-accuracy",
+      "status": 200
+    },
+    {
       "file": "backend/src/routes/webhookRoutes.js",
       "path": "/api/v1/webhook/health",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/weatherDomainRoutes.js",
-      "path": "/api/v1/weather-domain/weather/advisory-triggers",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/weatherRoutes.js",
-      "path": "/api/v1/weather/alerts/active",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/webhookRoutes.js",
-      "path": "/api/v1/webhook",
-      "status": 200
-    },
-    {
-      "file": "backend/src/routes/wikipediaRoutes.js",
-      "path": "/api/v1/wikipedia/health",
       "status": 200
     },
     {
@@ -6703,7 +6673,32 @@
     },
     {
       "file": "backend/src/routes/weatherRoutes.js",
-      "path": "/api/v1/weather/pest-forecast",
+      "path": "/api/v1/weather/alerts/active",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/weatherDomainRoutes.js",
+      "path": "/api/v1/weather-domain/weather/coverage",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/weatherRoutes.js",
+      "path": "/api/v1/weather/coverage",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/webhookRoutes.js",
+      "path": "/api/v1/webhook",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/weatherDomainRoutes.js",
+      "path": "/api/v1/weather-domain/weather/advisory-triggers",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/wikipediaRoutes.js",
+      "path": "/api/v1/wikipedia/health",
       "status": 200
     },
     {
@@ -6723,12 +6718,17 @@
     },
     {
       "file": "backend/src/routes/weatherRoutes.js",
-      "path": "/api/v1/weather/advisory-triggers",
+      "path": "/api/v1/weather/pest-forecast",
       "status": 200
     },
     {
       "file": "backend/src/routes/weatherRoutes.js",
-      "path": "/api/v1/weather/coverage",
+      "path": "/api/v1/weather/advisory-triggers",
+      "status": 200
+    },
+    {
+      "file": "backend/src/routes/weatherDomainRoutes.js",
+      "path": "/api/v1/weather-domain/climate-advisory/advisories",
       "status": 200
     }
   ],

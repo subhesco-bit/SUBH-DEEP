@@ -381,7 +381,7 @@ async function advancedAssessCreditRisk(farmerId, includeExplanations = true) {
       WITH farmer_data AS (
         SELECT 
           f.*,
-          u.name,
+          u.full_name,
           u.phone,
           up.first_name,
           up.last_name,

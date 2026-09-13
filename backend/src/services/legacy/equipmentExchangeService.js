@@ -38,7 +38,7 @@ class EquipmentExchangeService {
     if (pricingType) { if (!['free', 'priced'].includes(pricingType)) throw new Error('pricingType must be free or priced'); params.push(pricingType); conditions.push(`pricing_type = $${params.length}`); }
 
     const result = await pool.query(
-      `SELECT eel.*, u.name AS listed_by_name
+      `SELECT eel.*, u.full_name AS listed_by_name
          FROM equipment_exchange_listings eel
          JOIN users u ON u.id = eel.listed_by
         WHERE ${conditions.join(' AND ')}
@@ -50,7 +50,7 @@ class EquipmentExchangeService {
 
   async getListing(listingId) {
     const result = await pool.query(
-      `SELECT eel.*, u.name AS listed_by_name
+      `SELECT eel.*, u.full_name AS listed_by_name
          FROM equipment_exchange_listings eel
          JOIN users u ON u.id = eel.listed_by
         WHERE eel.id = $1`,

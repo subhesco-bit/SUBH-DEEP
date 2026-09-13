@@ -393,7 +393,7 @@ class InsurancePremiumService {
       const query = `
         SELECT 
           iq.*,
-          u.name as policyholder_name
+          u.full_name as policyholder_name
         FROM insurance_quotes iq
         JOIN users u ON iq.policyholder_id = u.id
         WHERE iq.id = $1

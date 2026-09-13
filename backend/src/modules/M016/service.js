@@ -330,7 +330,7 @@ async function searchIdentities(searchCriteria) {
   if (!Number.isInteger(Number(limit)) || Number(limit) < 1 || Number(limit) > 100) throw validationError('limit must be between 1 and 100');
 
   let query = `
-    SELECT fi.*, u.name, u.email 
+    SELECT fi.*, u.full_name, u.email 
     FROM federated_identities fi
     JOIN users u ON fi.user_id = u.id
     WHERE 1=1

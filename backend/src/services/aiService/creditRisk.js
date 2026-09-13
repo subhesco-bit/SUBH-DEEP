@@ -15,7 +15,7 @@ async function assessCreditRisk(farmerId) {
 
     // Get farmer data
     const farmerQuery = `
-      SELECT f.*, u.name, u.phone
+      SELECT f.*, u.full_name, u.phone
       FROM farmers f
       JOIN users u ON f.user_id = u.id
       WHERE f.id = $1

@@ -496,7 +496,7 @@ class GSTService {
       const orderQuery = `
         SELECT
           o.*,
-          u.name as customer_name,
+          u.full_name as customer_name,
           u.gst_number as customer_gst
         FROM orders o
         JOIN users u ON o.user_id = u.id

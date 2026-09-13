@@ -58,7 +58,7 @@ async function getPolicyById(policyId) {
 
     const query = `
       SELECT p.*, ip.name as product_name, ip.type as product_type, ip.scheme,
-             u.name as insured_name, u.email as insured_email,
+             u.full_name as insured_name, u.email as insured_email,
              mp.policy_number as master_policy_number
       FROM policies p
       LEFT JOIN insurance_products ip ON p.product_id = ip.id
@@ -93,7 +93,7 @@ async function getPolicies(filters = {}, pagination = {}) {
     const offset = (page - 1) * limit;
 
     let query = `
-      SELECT p.*, ip.name as product_name, ip.type as product_type, u.name as insured_name
+      SELECT p.*, ip.name as product_name, ip.type as product_type, u.full_name as insured_name
       FROM policies p
       LEFT JOIN insurance_products ip ON p.product_id = ip.id
       LEFT JOIN users u ON p.user_id = u.id
@@ -204,7 +204,7 @@ async function getClaimById(claimId) {
 
     const query = `
       SELECT c.*, p.policy_number, p.coverage_amount, p.insurer_name,
-             u.name as claimant_name
+             u.full_name as claimant_name
       FROM claims c
       JOIN policies p ON c.policy_id = p.id
       JOIN users u ON c.user_id = u.id
@@ -237,7 +237,7 @@ async function getClaims(filters = {}, pagination = {}) {
     const offset = (page - 1) * limit;
 
     let query = `
-      SELECT c.*, p.policy_number, u.name as claimant_name
+      SELECT c.*, p.policy_number, u.full_name as claimant_name
       FROM claims c
       JOIN policies p ON c.policy_id = p.id
       JOIN users u ON c.user_id = u.id

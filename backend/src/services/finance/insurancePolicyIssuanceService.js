@@ -207,7 +207,7 @@ class InsurancePolicyIssuanceService {
       let query = `
         SELECT 
           ip.*,
-          u.name as policyholder_name,
+          u.full_name as policyholder_name,
           u.email as policyholder_email,
           u.phone as policyholder_phone
         FROM insurance_policies ip
@@ -243,7 +243,7 @@ class InsurancePolicyIssuanceService {
       const query = `
         SELECT 
           ip.*,
-          u.name as policyholder_name,
+          u.full_name as policyholder_name,
           u.email as policyholder_email
         FROM insurance_policies ip
         JOIN users u ON ip.policyholder_id = u.id

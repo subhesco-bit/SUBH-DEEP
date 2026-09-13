@@ -103,7 +103,7 @@ class SellerRankingService {
     }
 
     const result = await pool.query(
-      `SELECT DISTINCT f.id, f.user_id, u.name, f.fdi_score, f.fulfilled_orders, f.disputes,
+      `SELECT DISTINCT f.id, f.user_id, u.full_name, f.fdi_score, f.fulfilled_orders, f.disputes,
               f.years_active, f.certification_count, f.training_completed
          FROM farmers f
          JOIN users u ON u.id = f.user_id

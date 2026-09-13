@@ -71,7 +71,7 @@ class ProductReviewService {
       let query = `
         SELECT 
           pr.*,
-          u.name as user_name,
+          u.full_name as user_name,
           u.avatar as user_avatar,
           u.fdi_score as user_fdi
         FROM product_reviews pr

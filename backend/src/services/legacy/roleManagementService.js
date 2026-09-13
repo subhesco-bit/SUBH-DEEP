@@ -310,7 +310,7 @@ class RoleManagementService {
       const pg = getPostgreSQL();
 
       const query = `
-        SELECT u.id, u.name, u.email, u.role as primary_role,
+        SELECT u.id, u.full_name, u.email, u.role as primary_role,
                COALESCE(json_agg(DISTINCT r.name) FILTER (WHERE r.name IS NOT NULL), '[]') as roles
         FROM users u
         LEFT JOIN user_roles ur ON u.id = ur.user_id

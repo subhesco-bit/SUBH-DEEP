@@ -73,7 +73,7 @@ class AuditService {
       let query = `
         SELECT 
           al.*,
-          u.name as user_name,
+          u.full_name as user_name,
           u.email as user_email
         FROM audit_logs al
         LEFT JOIN users u ON al.user_id = u.id
@@ -185,7 +185,7 @@ class AuditService {
   async getRecentEvents(limit = 20) {
     try {
       const query = `
-        SELECT al.*, u.name as user_name, u.email as user_email
+        SELECT al.*, u.full_name as user_name, u.email as user_email
         FROM audit_logs al
         LEFT JOIN users u ON al.user_id = u.id
         ORDER BY al.created_at DESC
@@ -208,7 +208,7 @@ class AuditService {
 
       let query = `
         SELECT 
-          ${groupBy === 'user' ? 'al.user_id, u.name as user_name' : 'al.entity_type, al.entity_id'},
+          ${groupBy === 'user' ? 'al.user_id, u.full_name as user_name' : 'al.entity_type, al.entity_id'},
           COUNT(*) as event_count,
           COUNT(CASE WHEN al.status = 'success' THEN 1 END) as success_count,
           COUNT(CASE WHEN al.status = 'failure' THEN 1 END) as failure_count,
@@ -271,7 +271,7 @@ class AuditService {
       const query = `
         SELECT 
           al.*,
-          u.name as user_name,
+          u.full_name as user_name,
           cr.status as compliance_status
         FROM audit_logs al
         LEFT JOIN users u ON al.user_id = u.id
@@ -309,7 +309,7 @@ class AuditService {
       let query = `
         SELECT 
           al.*,
-          u.name as user_name,
+          u.full_name as user_name,
           u.email as user_email
         FROM audit_logs al
         LEFT JOIN users u ON al.user_id = u.id

@@ -89,7 +89,7 @@ class BulkOrderService {
           p.image as product_image,
           p.gi_tag,
           p.category,
-          u.name as user_name,
+          u.full_name as user_name,
           u.company_name as user_company
         FROM bulk_orders bo
         JOIN products p ON bo.product_id = p.id
@@ -178,7 +178,7 @@ class BulkOrderService {
           bo.*,
           p.name as product_name,
           p.image as product_image,
-          u.name as user_name,
+          u.full_name as user_name,
           u.company_name as user_company
         FROM bulk_orders bo
         JOIN products p ON bo.product_id = p.id

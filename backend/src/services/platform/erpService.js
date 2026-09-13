@@ -166,7 +166,7 @@ async function syncOrderToERP(orderId, erpType = 'sap') {
     
     // Get order data with items
     const orderQuery = `
-      SELECT o.*, u.name as customer_name, u.email as customer_email,
+      SELECT o.*, u.full_name as customer_name, u.email as customer_email,
              a.address_line1, a.city, a.state, a.pincode
       FROM orders o
       JOIN users u ON o.user_id = u.id
@@ -239,7 +239,7 @@ async function syncFarmerToERP(farmerId, erpType = 'sap') {
     
     // Get farmer data
     const farmerQuery = `
-      SELECT f.*, u.name, u.email, u.phone,
+      SELECT f.*, u.full_name, u.email, u.phone,
              a.address_line1, a.city, a.state, a.pincode,
              fpo.name as fpo_name, fpo.registration_number as fpo_reg
       FROM farmers f
@@ -303,7 +303,7 @@ async function syncFinancialTransaction(transactionId, erpType = 'sap') {
     
     // Get transaction data
     const transactionQuery = `
-      SELECT ft.*, u.name as user_name,
+      SELECT ft.*, u.full_name as user_name,
              CASE 
                WHEN ft.type = 'payment' THEN 'receipt'
                WHEN ft.type = 'refund' THEN 'payment'
@@ -369,7 +369,7 @@ async function syncAssetToERP(assetId, erpType = 'sap') {
     // Get asset data
     const assetQuery = `
       SELECT a.*, l.name as location_name,
-             u.name as responsible_person
+             u.full_name as responsible_person
       FROM assets a
       LEFT JOIN locations l ON a.location_id = l.id
       LEFT JOIN users u ON a.responsible_user_id = u.id

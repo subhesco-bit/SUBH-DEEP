@@ -39,7 +39,7 @@ class DprGenerationService {
 
   async _getFarmer(farmerId) {
     const result = await this.pool.query(
-      `SELECT f.*, u.name, u.email, u.phone,
+      `SELECT f.*, u.full_name, u.email, u.phone,
               fpo.id AS fpo_uuid, fpo.name AS fpo_name, fpo.registration_number AS fpo_registration_number
        FROM farmers f
        JOIN users u ON f.user_id = u.id

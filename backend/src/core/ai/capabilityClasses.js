@@ -73,11 +73,43 @@ const CLASSES = Object.freeze({
     id: 'frontier_models',
     label: 'Frontier AI Models',
     horizon: 'short-term',
-    applications: ['subsidy research', 'DPR generation', 'engineering design'],
+    applications: [
+      'weather forecasting',
+      'education and tutorials',
+      'DPR and engineering design',
+      'loans and credit assessment',
+      'subsidy research and notification',
+    ],
+    // The real mount paths, taken from the server's route table rather than
+    // guessed. Guessed URLs produced a run of false 404s during this work.
+    endpoints: [
+      '/api/v1/weather', '/api/v1/weather-advisory', '/api/v1/climate-advisory',
+      '/api/v1/farmer-training',
+      '/api/v1/dpr-generation', '/api/v1/engineering-project',
+      '/api/v1/loan-management',
+      '/api/v1/government-subsidy', '/api/v1/notifications',
+    ],
     rationale:
-      'Subsidy schemes and DPRs are long, inconsistent, multi-source documents. ' +
-      'Reasoning over them is the strongest near-term fit because the corpus ' +
+      'These are the applications where an EXTERNAL engine is not optional. ' +
+      'Weather forecasting needs live meteorological data; subsidy and loan ' +
+      'work needs current scheme rules and rates; DPR and engineering design ' +
+      'needs referenced research. None can be answered from the platform\'s own ' +
+      'tables, which is precisely why this class routes through the external ' +
+      'provider backbone rather than the internal one. The corpus to ground it ' +
       'already exists: the library service indexes 1,532 items including 830 raw files.',
+    // Stated as a requirement, not an aspiration: several of these
+    // applications are wrong rather than merely incomplete without it.
+    requires: {
+      externalResearch:
+        'Weather, subsidy rules and engineering references must come from ' +
+        'outside the platform. A confidently generated answer from stale ' +
+        'internal data is worse than no answer.',
+      gpsTracking:
+        'Location is not decoration here. A weather advisory, a subsidy ' +
+        'entitlement and a field-level DPR are all specific to a place, so ' +
+        'output without a verified position is unattributable. Mounted at ' +
+        '/api/v1/geofencing and /api/v1/supply-chain-tracking.',
+    },
     backing: {
       // The EXTERNAL backbone: the multi-provider call router that reaches
       // Claude, OpenAI, Gemini and Azure. Mounted at /api/aibackbone.

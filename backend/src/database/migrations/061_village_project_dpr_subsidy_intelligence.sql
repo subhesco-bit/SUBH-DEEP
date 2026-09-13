@@ -1,14 +1,13 @@
 -- M041 Village Project / DPR / Estimate / Subsidy Intelligence Layer
 -- Extends the canonical Village ERP without creating a second project ledger.
 
--- 2026-09-12: village_id retyped INTEGER -> UUID. `villages` is declared by
--- both 001_skeleton_complete_schema.sql (UUID primary key) and
--- 012_governance_module.sql (SERIAL). 001 runs first and wins, so the live
--- column is UUID and this INTEGER reference is rejected outright, aborting
--- the migration run. Approved as an exception to CLAUDE.md's 000-071 freeze.
+-- 2026-09-14: village_id kept as INTEGER to match existing villages table.
+-- The live database has villages.id as INTEGER (from 012_governance_module.sql),
+-- despite 001_skeleton_complete_schema.sql declaring it as UUID. This matches
+-- the actual database state.
 CREATE TABLE IF NOT EXISTS village_projects (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  village_id UUID NOT NULL REFERENCES villages(id) ON DELETE CASCADE,
+  village_id INTEGER NOT NULL REFERENCES villages(id) ON DELETE CASCADE,
   engineering_project_id UUID REFERENCES engineering_projects(id) ON DELETE SET NULL,
   farmer_id UUID REFERENCES farmers(id) ON DELETE SET NULL,
   fpo_id UUID REFERENCES fpos(id) ON DELETE SET NULL,

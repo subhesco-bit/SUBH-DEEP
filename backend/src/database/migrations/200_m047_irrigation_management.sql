@@ -24,14 +24,14 @@ CREATE TABLE IF NOT EXISTS irrigation_schedules (
   next_scheduled_at TIMESTAMP,
 
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-  -- Indexes for common queries
-  INDEX idx_farm_id_active (farm_id, is_active),
-  INDEX idx_crop_type (crop_type),
-  INDEX idx_next_scheduled (next_scheduled_at),
-  UNIQUE (farm_id, crop_type, schedule_type)
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Indexes for common queries
+CREATE INDEX idx_farm_id_active ON irrigation_schedules(farm_id, is_active);
+CREATE INDEX idx_crop_type ON irrigation_schedules(crop_type);
+CREATE INDEX idx_next_scheduled ON irrigation_schedules(next_scheduled_at);
+CREATE UNIQUE INDEX idx_farm_crop_schedule ON irrigation_schedules(farm_id, crop_type, schedule_type);
 
 -- Irrigation delivery logs
 CREATE TABLE IF NOT EXISTS irrigation_delivery_logs (
@@ -51,12 +51,12 @@ CREATE TABLE IF NOT EXISTS irrigation_delivery_logs (
   notes TEXT,
   operator_id UUID REFERENCES users(id),
 
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-  -- Indexes
-  INDEX idx_schedule_id_date (schedule_id, delivery_date DESC),
-  INDEX idx_status (delivery_status)
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Indexes
+CREATE INDEX idx_schedule_id_date ON irrigation_delivery_logs(schedule_id, delivery_date);
+CREATE INDEX idx_status ON irrigation_delivery_logs(delivery_status);
 
 -- Water sources registry
 CREATE TABLE IF NOT EXISTS water_sources (
@@ -81,12 +81,12 @@ CREATE TABLE IF NOT EXISTS water_sources (
   salinity_ppm INTEGER,
 
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-  -- Indexes
-  INDEX idx_farm_id (farm_id),
-  INDEX idx_source_type (source_type)
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Indexes
+CREATE INDEX idx_farm_id ON water_sources(farm_id);
+CREATE INDEX idx_source_type ON water_sources(source_type);
 
 -- Irrigation efficiency tracking
 CREATE TABLE IF NOT EXISTS irrigation_efficiency_metrics (
@@ -107,12 +107,12 @@ CREATE TABLE IF NOT EXISTS irrigation_efficiency_metrics (
   optimization_score DECIMAL(3,1) CHECK (optimization_score >= 0 AND optimization_score <= 10),
   recommendations TEXT,
 
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-  -- Indexes
-  INDEX idx_farm_date (farm_id, measurement_date DESC),
-  INDEX idx_efficiency (efficiency_percentage)
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Indexes
+CREATE INDEX idx_farm_date ON irrigation_efficiency_metrics(farm_id, measurement_date);
+CREATE INDEX idx_efficiency ON irrigation_efficiency_metrics(efficiency_percentage);
 
 -- Add audit columns if not present
 ALTER TABLE irrigation_schedules ADD COLUMN IF NOT EXISTS audit_user_id UUID REFERENCES users(id);

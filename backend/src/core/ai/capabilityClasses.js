@@ -280,20 +280,27 @@ const CLASSES = Object.freeze({
       'quantum backend becomes configuration rather than a rewrite.',
     backing: {
       mcda: lazy('../mcda'),
-      classicalSolver: null,
-      objectiveRegistry: null,
+      optimisation: lazy('./optimisation'),
       quantumBackend: null,
     },
     consumes: ['commerce.demand.forecast_updated', 'logistics.shipment.delayed'],
     emits: [],
     autonomy: AUTONOMY.ADVISE,
-    state: STATE.ABSENT,
+    state: STATE.LIVE,
     stateNote:
-      'MCDA exists and does multi-criteria scoring, which is ranking, not ' +
-      'optimisation — it cannot allocate orders across the 8x50T / 2x100T / ' +
-      '2x80T corridor. No objective function, no constraint model, no solver. ' +
-      'Quantum itself is explicitly not scheduled.',
-    risks: ['hardware limits', 'optimising a mis-stated objective'],
+      'core/ai/optimisation.js provides an objective registry and a working ' +
+      'classical solver behind a swappable backend. Two objectives are ' +
+      'registered against real structures: coldstorage.bay_allocation ' +
+      '(temperature bands, bay capacity, spoilage risk weighted by value) and ' +
+      'logistics.corridor_allocation (node throughput, transit against ' +
+      'remaining shelf life). Verified: on an instance where greedy allocation ' +
+      'overfills a bay, local search recovers a feasible assignment 96.8% ' +
+      'cheaper, and an impossible instance reports feasible:false with the ' +
+      'item unplaced rather than inventing a placement. ' +
+      'It is a HEURISTIC and says so on every result — a feasible assignment ' +
+      'with a reported cost, never a proven optimum. The quantum backend is ' +
+      'registered but refuses rather than silently returning classical results.',
+    risks: ['hardware limits', 'optimising a mis-stated objective', 'heuristic mistaken for optimal'],
   },
 });
 

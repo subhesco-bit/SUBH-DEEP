@@ -904,6 +904,42 @@ async function startup() {
       logger.warn('⚠️  Disruption routing agent deferred', { error: error.message });
     }
 
+    // Attach the decision layer to the signal bus.
+    //
+    // decisionEngine, reflexEngine and the effectors each ship a start()/
+    // register() that subscribes them to the bus, and none of them was ever
+    // called. Services emitted 30 distinct signals from 39 files while exactly
+    // one production handler existed (disruptionRoutingAgent, on two logistics
+    // signals) — so ~93% of what the platform decided was discarded before
+    // anything could act on it. These three calls are what make emitted signals
+    // reach the rules that reason about them.
+    //
+    // All three are idempotent. Set DECISION_LAYER_ENABLED=false to run the
+    // platform with the bus purely observational.
+    if (process.env.DECISION_LAYER_ENABLED !== 'false') {
+      try {
+        const { decisionEngine } = require('./core/decisionEngine');
+        const { reflexEngine } = require('./core/reflexEngine');
+        const { registerEffectors } = require('./core/effectors');
+
+        decisionEngine.start();   // subscribes '*' — evaluates every signal
+        reflexEngine.start();     // subscribes each reflex's declared signalTypes
+        const effectorCount = registerEffectors();
+
+        app.locals.decisionEngine = decisionEngine;
+        app.locals.reflexEngine = reflexEngine;
+        logger.info('✅ Decision layer attached to signal bus', {
+          rules: decisionEngine.rules.length,
+          reflexes: reflexEngine.reflexes.size,
+          effectors: effectorCount,
+        });
+      } catch (error) {
+        logger.warn('⚠️  Decision layer not attached', { error: error.message });
+      }
+    } else {
+      logger.info('Decision layer disabled by DECISION_LAYER_ENABLED=false');
+    }
+
     // Step 8: Health check endpoint
     app.get('/health', async (req, res) => {
       try {

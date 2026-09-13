@@ -5,7 +5,7 @@
 
 const path = require('path');
 const fs = require('fs');
-const { singleton: libraryKnowledgeService } = require('../../../modules/M645100_LIBRARYKNOWLEDGE/backend/service');
+const { singleton: libraryKnowledgeService } = require('../modules/M645100_LIBRARYKNOWLEDGE/backend/service');
 
 class ModuleRegistry {
   constructor() {

@@ -13,6 +13,29 @@ const crypto = require('crypto');
 
 const MODULE_ID = 'M645100_LIBRARYKNOWLEDGE';
 const MODULE_NAME = 'Library Knowledge';
+const TEXT_PREVIEW_BYTES = Number(process.env.LIBRARY_TEXT_PREVIEW_BYTES || 65536);
+
+/**
+ * Locate the repository root by walking up for the library directory itself.
+ *
+ * A fixed `path.resolve(__dirname, '../../..')` only works from one location,
+ * and this module has already been moved once: from modules/ (where three
+ * levels up is the repo root) into backend/src/modules/ (where it is
+ * backend/src, so the library was never found and nothing got indexed).
+ * Searching for the marker survives the next move too.
+ */
+function findProjectRoot(startDir = __dirname) {
+  let dir = startDir;
+  for (let i = 0; i < 10; i += 1) {
+    if (fs.existsSync(path.join(dir, '_EBDESIGN_LIBRARY'))) return dir;
+    const parent = path.dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  // Nothing found — fall back to the historical guess so behaviour is
+  // unchanged rather than throwing at require time.
+  return path.resolve(startDir, '../../..');
+}
 
 function optionalDatabase() {
   try {
@@ -77,6 +100,26 @@ function readCsvHeader(filePath) {
   };
 }
 
+/**
+ * Read the head of a text file without pulling the whole thing into memory.
+ * The library holds multi-megabyte documents; only a preview is ever indexed.
+ */
+function readTextPreview(filePath, maxBytes = TEXT_PREVIEW_BYTES) {
+  const stat = safeStat(filePath);
+  if (!stat || stat.size === 0) return '';
+
+  const bytesToRead = Math.min(stat.size, maxBytes);
+  const buffer = Buffer.alloc(bytesToRead);
+  const fd = fs.openSync(filePath, 'r');
+
+  try {
+    const bytesRead = fs.readSync(fd, buffer, 0, bytesToRead, 0);
+    return stripBom(buffer.subarray(0, bytesRead).toString('utf8'));
+  } finally {
+    fs.closeSync(fd);
+  }
+}
+
 function safeStat(filePath) {
   try {
     return fs.statSync(filePath);
@@ -87,7 +130,7 @@ function safeStat(filePath) {
 
 class LibraryKnowledgeService {
   constructor(options = {}) {
-    this.projectRoot = options.projectRoot || path.resolve(__dirname, '../../..');
+    this.projectRoot = options.projectRoot || findProjectRoot();
     this.libraryRoot = options.libraryRoot || path.join(this.projectRoot, '_EBDESIGN_LIBRARY');
     this.modulesRoot = options.modulesRoot || path.join(this.projectRoot, 'modules');
     this.backendModulesRoot = options.backendModulesRoot || path.join(this.projectRoot, 'backend', 'src', 'modules');
@@ -127,9 +170,52 @@ class LibraryKnowledgeService {
     this.indexLibraryCatalogues();
     this.indexLibraryModuleCards();
     this.indexModularSystems();
+    this.indexUntrackedLibraryFiles();
     this.indexRuntimeModules();
     this.indexBackendModules();
     return this.index;
+  }
+
+  /**
+   * Sweep the library root for files the catalogue-driven indexers did not
+   * already pick up, so nothing in _EBDESIGN_LIBRARY is invisible to search
+   * just because it is missing from a catalogue.
+   */
+  indexUntrackedLibraryFiles() {
+    if (!fs.existsSync(this.libraryRoot)) return;
+
+    const visit = (directory) => {
+      for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+        const filePath = path.join(directory, entry.name);
+        if (entry.isDirectory()) {
+          visit(filePath);
+          continue;
+        }
+
+        const relativePath = path.relative(this.libraryRoot, filePath).split(path.sep).join('/');
+        const key = `LIBRARY:${relativePath}`;
+        if (this.index.has(key) || Array.from(this.index.values()).some((item) => item.path === filePath)) continue;
+
+        const extension = path.extname(entry.name).toLowerCase();
+        const stat = safeStat(filePath);
+        const data = {
+          name: entry.name,
+          relativePath,
+          extension,
+          fileSize: stat ? stat.size : 0
+        };
+
+        if (['.json', '.jsonl'].includes(extension)) {
+          Object.assign(data, readJson(filePath));
+        } else if (['.md', '.txt', '.csv', '.yaml', '.yml', '.xml'].includes(extension)) {
+          data.content = readTextPreview(filePath).slice(0, 12000);
+        }
+
+        this.indexFile(key, 'library-file', filePath, data);
+      }
+    };
+
+    visit(this.libraryRoot);
   }
 
   indexFile(key, type, filePath, data = {}) {
@@ -379,6 +465,74 @@ class LibraryKnowledgeService {
     return { success: false, error: `Module not found: ${moduleId}` };
   }
 
+  /**
+   * Module-shaped view of searchLibrary, for agents asking "what can do X?"
+   * rather than searching raw library entries.
+   */
+  async discoverModules(query = '', context = {}) {
+    const results = await this.searchLibrary(query, context);
+    const modules = results
+      .filter((result) => ['runtime-module', 'backend-module', 'library-module-card'].includes(result.type))
+      .slice(0, 10)
+      .map((result) => ({
+        moduleId: result.data.moduleId || result.data.module_id || result.key,
+        name: result.data.name || result.data.ModuleName || result.key,
+        matchScore: result.relevance,
+        capabilities: result.data.discovery?.capabilities || [],
+        aiContext: result.data.discovery?.aiContext || '',
+        dependencies: result.data.dependencies || { modules: [] },
+        status: result.data.status || result.data.Status || 'catalogued',
+        category: result.data.category || result.data.domain || null,
+        isProductionReady: result.data.status === 'production'
+      }));
+
+    return {
+      success: true,
+      modules,
+      metadata: {
+        totalMatches: modules.length,
+        queryProcessed: true
+      }
+    };
+  }
+
+  /**
+   * Topologically order a module's dependencies. Returns a failure rather than
+   * throwing when the graph contains a cycle, so a bad catalogue entry cannot
+   * take down the caller.
+   */
+  async resolveDependencies(moduleId) {
+    const moduleResult = await this.getModule(moduleId);
+    if (!moduleResult.success) return moduleResult;
+
+    const resolutionOrder = [];
+    const visiting = new Set();
+    const visited = new Set();
+
+    const visit = async (candidateId) => {
+      if (visited.has(candidateId)) return;
+      if (visiting.has(candidateId)) throw new Error(`Circular dependency detected: ${candidateId}`);
+      visiting.add(candidateId);
+
+      const candidate = await this.getModule(candidateId);
+      if (candidate.success) {
+        const dependencies = candidate.module.data.dependencies?.modules || [];
+        for (const dependency of dependencies) await visit(dependency);
+      }
+
+      visiting.delete(candidateId);
+      visited.add(candidateId);
+      resolutionOrder.push(candidateId);
+    };
+
+    try {
+      await visit(moduleId);
+      return { success: true, resolutionOrder, modules: resolutionOrder };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  }
+
   async buildAIContext(query = '', context = {}) {
     const results = await this.searchLibrary(query, context);
     return {
@@ -472,6 +626,10 @@ class LibraryKnowledgeService {
         case 'aiContext':
         case 'analyze':
           return { success: true, data: await this.buildAIContext(parameters.query || '', context) };
+        case 'discoverModules':
+          return await this.discoverModules(parameters.query || '', context);
+        case 'resolveDependencies':
+          return await this.resolveDependencies(parameters.moduleId || parameters.id);
         case 'verify':
           return { success: true, data: await this.verifyCatalogIntegrity() };
         case 'statistics':

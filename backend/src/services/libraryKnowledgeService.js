@@ -4,7 +4,7 @@
 
 'use strict';
 
-const { singleton: libraryKnowledgeService } = require('../../../modules/M645100_LIBRARYKNOWLEDGE/backend/service');
+const { singleton: libraryKnowledgeService } = require('../modules/M645100_LIBRARYKNOWLEDGE/backend/service');
 
 async function queryLibraryKnowledge(query, options = {}) {
   const results = await libraryKnowledgeService.searchLibrary(query, options);

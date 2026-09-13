@@ -450,7 +450,7 @@ const identityManagementRoutes = require('./routes/identityManagementRoutes.js')
 const hrRoutes = require('./routes/hrRoutes.js');
 const horticultureManagementRoutes = require('./routes/horticultureManagementRoutes.js');
 const horticulture = require('./routes/horticulture.js');
-const gstRoutes = require('./routes/gstRoutes.js');
+const gstRoutes = require('./routes/finance/gstRoutes.js');
 const greenhouse = require('./routes/greenhouse.js');
 const governanceModule = require('./routes/governanceModule.js');
 const goatRoutes = require('./routes/goatRoutes.js');
@@ -468,16 +468,16 @@ const farmerValueRoutes = require('./routes/farmerValueRoutes.js');
 const farmerTrainingRoutes = require('./routes/farmerTrainingRoutes.js');
 const farmerRoutes = require('./routes/farmerRoutes.js');
 const farmerPortalEnhancements = require('./routes/farmerPortalEnhancements.js');
-const farmerHealthRoutes = require('./routes/farmerHealthRoutes.js');
+const farmerHealthRoutes = require('./routes/agriculture/farmerHealthRoutes.js');
 const farmerFamilyRoutes = require('./routes/farmerFamilyRoutes.js');
 const farmCosting = require('./routes/farmCosting.js');
 const farmAnalytics = require('./routes/farmAnalytics.js');
 const experienceRoutes = require('./routes/experienceRoutes.js');
 const escrowRoutes = require('./routes/escrowRoutes.js');
-const equipmentExchangeRoutes = require('./routes/equipmentExchangeRoutes.js');
+const equipmentExchangeRoutes = require('./routes/commerce/equipmentExchangeRoutes.js');
 const enterpriseRouteSupport = require('./routes/enterpriseRouteSupport.js');
 const enterpriseIntegrationRoutes = require('./routes/enterpriseIntegrationRoutes.js');
-const enterpriseAIRoutes = require('./routes/enterpriseAIRoutes.js');
+const enterpriseAIRoutes = require('./routes/ai/enterpriseAIRoutes.js');
 const engineeringProjectRoutes = require('./routes/engineeringProjectRoutes.js');
 const energyRoutes = require('./routes/energyRoutes.js');
 const ecommerceRoutes = require('./routes/ecommerceRoutes.js');
@@ -500,7 +500,7 @@ const cropRecommendations = require('./routes/cropRecommendations.js');
 const cropPlanningRoutes = require('./routes/cropPlanningRoutes.js');
 const cropManagementRoutes = require('./routes/cropManagementRoutes.js');
 const cropDomainRoutes = require('./routes/cropDomainRoutes.js');
-const seedVaultRoutesMerged = require('./routes/seedVaultRoutes_merged.js');
+const seedVaultRoutesMerged = require('./routes/seedVaultRoutes.js');
 const financialAIRoutes = require('./routes/claude/financialAIRoutes.js');
 const livestockDomainRoutes = require('./routes/livestockDomainRoutes.js');
 const soilDomainRoutes = require('./routes/soilDomainRoutes.js');
@@ -596,8 +596,8 @@ const mushroomRoutes = require('./routes/mushroomRoutes.js');
 const databaseManagementRoutes = require('./routes/databaseManagementRoutes.js');
 // (duplicate require removed — already declared at line 55; the second const
 // declaration was a hard parse error that prevented the server from booting)
-const governanceModuleMerged = require('./routes/platform/governanceModule_merged.js');
-const costRoutesMerged = require('./routes/finance/costRoutes_merged.js');
+const governanceModuleMerged = require('./routes/governanceModule.js');
+const costRoutesMerged = require('./routes/costRoutes.js');
 const costRoutes = require('./routes/costRoutes.js');
 const costControlRoutes = require('./routes/costControlRoutes.js');
 const cooperativeShareRoutes = require('./routes/cooperativeShareRoutes.js');
@@ -681,6 +681,7 @@ const ConfigRegistry = require('./core/configRegistry');
 
 // Core infrastructure
 const { logger } = require('./utils/logger');
+const { authMiddleware, requireRole } = require('./middleware/auth');
 const { errorHandler } = require('./middleware/errorHandler');
 const { securityHeaders, rateLimit } = require('./middleware/securityMiddleware');
 const { requestId } = require('./middleware/requestId');
@@ -748,7 +749,12 @@ app.use(routeMonitoring);
 
 // Security enhancements
 app.use(securityHeaders);
-app.use(rateLimit);
+// rateLimit is a factory: (maxRequests, windowMs) => middleware. Both params
+// have defaults, so its .length is 0 and Express mistakes the factory itself
+// for middleware — it gets the inner handler as a return value, never a next()
+// call, and every request hangs. Registering it uncalled also meant no rate
+// limiting was ever applied.
+app.use(rateLimit());
 
 // Auto Image Generation Middleware
 if (process.env.AUTO_IMAGE_GENERATION === 'true') {
@@ -1426,7 +1432,9 @@ async function startup() {
     }
     app.use('/api/organizationmanagement', organizationManagementRoutes);
     app.use('/api/order', orderRoutes);
-    app.use('/api/operationsroutesupport', operationsRouteSupport.router);
+    // Unlike its climate/enterprise/livestock siblings, this module exports the
+    // router directly rather than as { router, ... }.
+    app.use('/api/operationsroutesupport', operationsRouteSupport);
     app.use('/api/operationsmanagement', operationsManagementRoutes);
     app.use('/api/nutritionintelligence', nutritionIntelligenceRoutes);
     app.use('/api/nutrition-intelligence', nutritionIntelligenceRoutes);
@@ -1688,7 +1696,11 @@ async function startup() {
     logger.info('💳 Stripe webhook handler mounted at /api/stripe-webhook');
 
     // Standardized error handling must follow every route registration.
-    app.use(standardizeErrorResponse);
+    // Call the factory: registering it uncalled gives Express an arity-0
+    // function, which it treats as ordinary middleware. It then returns the
+    // inner handler instead of calling next(), and every request that reaches
+    // this layer hangs with no error logged.
+    app.use(standardizeErrorResponse());
     app.use(errorHandler);
 
     // ========================================================================

@@ -174,11 +174,26 @@ function addStandardHeaders() {
 function trackResponseTime() {
   return (req, res, next) => {
     const startTime = Date.now();
-    
+
+    // Stamp the header as the headers go out. Doing this in the 'finish'
+    // handler instead throws ERR_HTTP_HEADERS_SENT — the response is already
+    // flushed by then — and the throw escapes into the finish emitter, where
+    // it kills the response rather than surfacing as a normal error.
+    const originalWriteHead = res.writeHead;
+    res.writeHead = function patchedWriteHead(...args) {
+      if (!res.headersSent) {
+        try {
+          res.setHeader('X-Response-Time', `${Date.now() - startTime}ms`);
+        } catch {
+          // Never let instrumentation break a response.
+        }
+      }
+      return originalWriteHead.apply(this, args);
+    };
+
     res.on('finish', () => {
       const responseTime = Date.now() - startTime;
-      res.setHeader('X-Response-Time', `${responseTime}ms`);
-      
+
       // Log slow requests
       if (responseTime > 1000) {
         logger.warn('Slow API request', {
@@ -282,10 +297,11 @@ function generateCorrelationId() {
  */
 function contentNegotiation() {
   return (req, res, next) => {
-    const acceptHeader = req.headers.accept || 'application/json';
-    
-    // Currently only support JSON
-    if (!acceptHeader.includes('application/json')) {
+    // Use real content negotiation rather than a substring test: a wildcard
+    // (`*/*`, sent by curl and every browser as the tail of its Accept header)
+    // means the client will take JSON. Testing for the literal string
+    // 'application/json' rejected both, so every browser request 406'd.
+    if (!req.accepts('json')) {
       return res.status(406).json({
         success: false,
         error: {

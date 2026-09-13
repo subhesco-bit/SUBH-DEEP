@@ -4,10 +4,10 @@
  *
  * (M11) Split from the former single-file services/authService.js into this
  * directory, purely for code organization - behavior is unchanged. Node
- * module resolution treats `require('./services/authService')` as
+ * module resolution treats `require('../authService')` as
  * `./services/authService.js` OR `./services/authService/index.js`,
  * whichever exists, so every existing caller anywhere in the codebase
- * (`require('../services/authService')`, `require('../../services/authService')`,
+ * (`require('../authService')`, `require('../../services/authService')`,
  * etc.) continues to resolve here identically, unchanged.
  *
  * Sub-modules:

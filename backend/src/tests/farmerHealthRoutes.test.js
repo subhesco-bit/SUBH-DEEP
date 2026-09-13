@@ -17,7 +17,7 @@ jest.mock('../database/pool', () => ({ query: jest.fn() }));
 const farmerHealthService = require('../modules/M029/service');
 const pool = require('../database/pool');
 const { generateAccessToken } = require('../services/dual-use/authService');
-const router = require('../routes/farmerHealthRoutes');
+const router = require('../routes/agriculture/farmerHealthRoutes');
 
 const farmerId = '123e4567-e89b-12d3-a456-426614174000';
 const otherFarmerId = '123e4567-e89b-12d3-a456-426614174001';

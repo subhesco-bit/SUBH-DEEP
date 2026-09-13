@@ -2,12 +2,16 @@
   "artboards": [
     { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1200, "h": 1100, "title": "Enhanced Product Card v2.0" },
     { "file": "UnifiedMarketplace.dc.html", "x": 1280, "y": 0, "w": 1440, "h": 900, "title": "Unified Marketplace Layout" },
-    { "file": "SellerPanel.dc.html", "x": 0, "y": 1200, "w": 1200, "h": 1300, "title": "Seller-Identity Panel" }
+    { "file": "SellerPanel.dc.html", "x": 0, "y": 1200, "w": 1200, "h": 1300, "title": "Seller-Identity Panel" },
+    { "file": "ColdStorage.dc.html", "x": 1400, "y": 1200, "w": 1200, "h": 1500, "title": "Cold Storage Module" },
+    { "file": "NEPlatform.dc.html", "x": 0, "y": 2700, "w": 1200, "h": 1180, "title": "NE Variety Directory" }
   ],
   "annotations": [
     { "id": "brief-1", "x": 50, "y": -80, "w": 280, "text": "Shows standard & GI product variants with seller info, trust badges, and FOLU fields" },
     { "id": "brief-2", "x": 1330, "y": -80, "w": 300, "text": "Single unified marketplace with role-based tabs: Consumer, Seller, B2B, GI, Analytics" },
-    { "id": "brief-3", "x": 50, "y": 1120, "w": 280, "text": "Compact & expanded seller identity panels with trust indicators, certifications, & farm traceability" }
+    { "id": "brief-3", "x": 50, "y": 1120, "w": 280, "text": "Compact & expanded seller identity panels with trust indicators, certifications, & farm traceability" },
+    { "id": "brief-4", "x": 1450, "y": 1120, "w": 320, "text": "M-COLDSTORE-001. Lumiearth x NEIA x UNEP/FOLU. 5-step value flow and the 6 FOLU value dimensions, with the corridor network. Figures taken from COLD_STORAGE_MODULE_COMPLETE.md" },
+    { "id": "brief-5", "x": 50, "y": 2620, "w": 320, "text": "ne_variety_products directory. Category / region / GI filtering. Cultivar figures taken from NE_Varieties_Extracted.txt" }
   ],
   "launch": { "view": "canvas" }
 }

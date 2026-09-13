@@ -41,7 +41,10 @@ x-postgres-env: &postgres-env
 services:
   # ── Canonical datastore ───────────────────────────────────────────────────
   postgres:
-    image: postgres:16-alpine
+    # Pinned to 15: the postgres_data volume holds 1,390 tables from the 384
+    # migrations applied 2026-09-05, and 16 cannot read a 15 data directory.
+    # Upgrading means a dump/restore, not an image bump.
+    image: postgres:15-alpine
     container_name: ebdesign-postgres
     restart: unless-stopped
     environment: *postgres-env

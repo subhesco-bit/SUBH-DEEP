@@ -6,7 +6,7 @@ const express = require('express');
 const router = express.Router();
 
 try {
-  const { authMiddleware } = require('../middleware/auth');
+  const { authMiddleware } = require('../../middleware/auth');
   router.use(authMiddleware);
 } catch (e) {
   // Auth optional

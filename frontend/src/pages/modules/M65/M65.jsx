@@ -13,7 +13,7 @@ export default function M65Page() {
   const handleFetch = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/m65/');
+      const response = await fetch('/api/v1/backend-modules/M65/');
       const result = await response.json();
       setData(result);
     } catch (error) {

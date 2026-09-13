@@ -13,7 +13,7 @@ export default function M151Page() {
   const handleFetch = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/m151/');
+      const response = await fetch('/api/v1/backend-modules/M151/');
       const result = await response.json();
       setData(result);
     } catch (error) {

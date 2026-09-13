@@ -19,7 +19,7 @@ export default function M79Page() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/m79/`);
+      const response = await fetch(`/api/v1/backend-modules/M079/`);
       const result = await response.json();
       setData(result.items || []);
     } catch (error) {
@@ -33,7 +33,7 @@ export default function M79Page() {
     e.preventDefault();
     try {
       const method = editId ? 'PUT' : 'POST';
-      const url = editId ? `/api/m79/${editId}` : `/api/m79/`;
+      const url = editId ? `/api/v1/backend-modules/M079/${editId}` : `/api/v1/backend-modules/M079/`;
       const response = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
@@ -52,7 +52,7 @@ export default function M79Page() {
   const handleDelete = async (id) => {
     if (confirm('Delete this item?')) {
       try {
-        await fetch(`/api/m79/${id}`, { method: 'DELETE' });
+        await fetch(`/api/v1/backend-modules/M079/${id}`, { method: 'DELETE' });
         fetchData();
       } catch (error) {
         console.error('Error deleting:', error);

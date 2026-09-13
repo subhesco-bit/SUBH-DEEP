@@ -13,7 +13,7 @@ export default function M64Page() {
   const handleFetch = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/m64/');
+      const response = await fetch('/api/v1/backend-modules/M64/');
       const result = await response.json();
       setData(result);
     } catch (error) {

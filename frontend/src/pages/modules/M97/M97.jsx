@@ -19,7 +19,7 @@ export default function M97Page() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/m97/`);
+      const response = await fetch(`/api/v1/backend-modules/M097/`);
       const result = await response.json();
       setData(result.items || []);
     } catch (error) {
@@ -33,7 +33,7 @@ export default function M97Page() {
     e.preventDefault();
     try {
       const method = editId ? 'PUT' : 'POST';
-      const url = editId ? `/api/m97/${editId}` : `/api/m97/`;
+      const url = editId ? `/api/v1/backend-modules/M097/${editId}` : `/api/v1/backend-modules/M097/`;
       const response = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
@@ -52,7 +52,7 @@ export default function M97Page() {
   const handleDelete = async (id) => {
     if (confirm('Delete this item?')) {
       try {
-        await fetch(`/api/m97/${id}`, { method: 'DELETE' });
+        await fetch(`/api/v1/backend-modules/M097/${id}`, { method: 'DELETE' });
         fetchData();
       } catch (error) {
         console.error('Error deleting:', error);

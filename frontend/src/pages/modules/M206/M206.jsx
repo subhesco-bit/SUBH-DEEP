@@ -19,7 +19,7 @@ export default function M206Page() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/m206/`);
+      const response = await fetch(`/api/v1/backend-modules/M206/`);
       const result = await response.json();
       setData(result.items || []);
     } catch (error) {
@@ -33,7 +33,7 @@ export default function M206Page() {
     e.preventDefault();
     try {
       const method = editId ? 'PUT' : 'POST';
-      const url = editId ? `/api/m206/${editId}` : `/api/m206/`;
+      const url = editId ? `/api/v1/backend-modules/M206/${editId}` : `/api/v1/backend-modules/M206/`;
       const response = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
@@ -52,7 +52,7 @@ export default function M206Page() {
   const handleDelete = async (id) => {
     if (confirm('Delete this item?')) {
       try {
-        await fetch(`/api/m206/${id}`, { method: 'DELETE' });
+        await fetch(`/api/v1/backend-modules/M206/${id}`, { method: 'DELETE' });
         fetchData();
       } catch (error) {
         console.error('Error deleting:', error);

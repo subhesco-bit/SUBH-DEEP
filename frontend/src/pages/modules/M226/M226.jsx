@@ -19,7 +19,7 @@ export default function M226Page() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/m226/`);
+      const response = await fetch(`/api/v1/backend-modules/M226/`);
       const result = await response.json();
       setData(result.items || []);
     } catch (error) {
@@ -33,7 +33,7 @@ export default function M226Page() {
     e.preventDefault();
     try {
       const method = editId ? 'PUT' : 'POST';
-      const url = editId ? `/api/m226/${editId}` : `/api/m226/`;
+      const url = editId ? `/api/v1/backend-modules/M226/${editId}` : `/api/v1/backend-modules/M226/`;
       const response = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
@@ -52,7 +52,7 @@ export default function M226Page() {
   const handleDelete = async (id) => {
     if (confirm('Delete this item?')) {
       try {
-        await fetch(`/api/m226/${id}`, { method: 'DELETE' });
+        await fetch(`/api/v1/backend-modules/M226/${id}`, { method: 'DELETE' });
         fetchData();
       } catch (error) {
         console.error('Error deleting:', error);

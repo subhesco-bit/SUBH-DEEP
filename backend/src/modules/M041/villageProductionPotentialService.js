@@ -3,11 +3,7 @@
 const pool = require('../../database/pool');
 const { ValidationError, NotFoundError } = require('../../utils/errors');
 
-function villageId(value) {
-  const n = Number(value);
-  if (!Number.isInteger(n) || n < 1) throw new ValidationError('Valid village id is required');
-  return n;
-}
+const { normalizeVillageId: villageId } = require('./identifiers');
 
 async function getPotential(village, commodityCode) {
   const params = [villageId(village)];

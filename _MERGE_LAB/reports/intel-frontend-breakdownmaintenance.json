@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "breakdownmaintenancepage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "BreakdownMaintenancePage"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

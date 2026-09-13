@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "models.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\services\\advancedAIService\\creditScoring.js",
+      "backend\\src\\services\\advancedAIService\\cropDisease.js",
+      "backend\\src\\services\\advancedAIService\\demandForecasting.js",
+      "backend\\src\\services\\advancedAIService\\fraudDetection.js",
+      "backend\\src\\services\\advancedAIService\\priceOptimization.js",
+      "backend\\src\\services\\advancedAIService\\recommendations.js",
+      "backend\\src\\services\\advancedAIService\\router.js"
+    ]
+  }
+]

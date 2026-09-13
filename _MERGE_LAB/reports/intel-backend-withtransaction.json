@@ -1,0 +1,27 @@
+[
+  {
+    "stem": "withtransaction.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "withTransaction"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\services\\finance\\financialService.js",
+      "backend\\src\\services\\finance\\ruralFinanceService.js",
+      "backend\\src\\services\\legacy\\assetAccountingService.js",
+      "backend\\src\\services\\legacy\\coldStorageService.js",
+      "backend\\src\\services\\legacy\\cooperativeShareService.js",
+      "backend\\src\\services\\legacy\\engineeringProjectService.js",
+      "backend\\src\\services\\legacy\\fertilizerInventoryService.js",
+      "backend\\src\\services\\legacy\\financialService.js",
+      "backend\\src\\services\\legacy\\freightPoolingService.js",
+      "backend\\src\\services\\legacy\\gstService.js"
+    ]
+  }
+]

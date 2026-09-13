@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "foodintelligenceengine.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "FoodIntelligenceEngine"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\services\\index.js"
+    ]
+  }
+]

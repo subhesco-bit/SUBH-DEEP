@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "iotmonitoringdashboard.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "IoTMonitoringDashboard"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

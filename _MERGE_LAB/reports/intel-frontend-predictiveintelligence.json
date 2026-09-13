@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "predictiveintelligencepage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "PredictiveIntelligencePage"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

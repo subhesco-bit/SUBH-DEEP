@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "farmadvisorpage.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 4,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M407_CONVERSATIONAL_AI\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

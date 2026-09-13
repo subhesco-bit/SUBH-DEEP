@@ -1,0 +1,39 @@
+[
+  {
+    "stem": "claudeaicoordinator.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "ClaudeAICoordinator"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M041\\service.js",
+      "backend\\src\\routes\\unifiedAIRoutes_merged.js",
+      "backend\\src\\services\\claude\\aiAgentService.js",
+      "backend\\src\\services\\claude\\aiCoordinationService.js",
+      "backend\\src\\services\\claude\\aiCopilotService.js",
+      "backend\\src\\services\\claude\\aiDecisionService.js",
+      "backend\\src\\services\\claude\\aiOptimizationService.js",
+      "backend\\src\\services\\claude\\aiProviderService.js",
+      "backend\\src\\services\\claude\\aiRecoveryService.js",
+      "backend\\src\\services\\claude\\aiStrategyService.js",
+      "backend\\src\\services\\claude\\financialAIService.js",
+      "backend\\src\\services\\claude\\insuranceAIService.js",
+      "backend\\src\\services\\claude\\logisticsAIService.js",
+      "backend\\src\\services\\claude\\orderAIService.js",
+      "backend\\src\\services\\claude\\productAIService.js",
+      "backend\\src\\services\\clinicalNutritionDecisionSupportService.js",
+      "backend\\src\\services\\machineryVillageOpsService.js",
+      "backend\\src\\services\\soilNutrientLandService.js",
+      "backend\\src\\services\\vendorProcurementService.js",
+      "backend\\src\\services\\waterIrrigationService.js",
+      "backend\\src\\services\\__tests__\\cropRecommendationService.test.js",
+      "backend\\src\\tests\\backendModuleBridge.test.js"
+    ]
+  }
+]

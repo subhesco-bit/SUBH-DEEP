@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "certificationmanagement.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:POST:/certifications/issue/:entityId/:type"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

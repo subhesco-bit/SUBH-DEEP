@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "libraryknowledgeservice.js",
+    "candidateCount": 6,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 3,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\routes\\claude\\libraryRoutes.js"
+    ]
+  }
+]

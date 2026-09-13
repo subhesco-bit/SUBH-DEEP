@@ -1,6 +1,12 @@
 // Routes for M029 - Farmer Health & Welfare
 const express = require('express');
 const router = express.Router();
+// Liveness ping carried over from farmerHealthRoutes.js, merged and
+// retired 2026-09-13. Declared first so a pattern route cannot swallow it.
+router.get('/health', (req, res) => {
+  res.json({ success: true, status: 'healthy', module: 'farmerHealthRoutes' });
+});
+
 const farmerHealthService = require('../../modules/M029/service');
 const { authMiddleware } = require('../../middleware/auth');
 const { adminMiddleware } = require('../../middleware/admin');

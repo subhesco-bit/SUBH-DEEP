@@ -1,0 +1,26 @@
+[
+  {
+    "stem": "pushnotifications.js",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "PushNotificationManager",
+        "pushNotificationManager",
+        "initializePushNotifications",
+        "requestNotificationPermission",
+        "subscribeToPush",
+        "unsubscribeFromPush",
+        "showNotification",
+        "getSubscriptionStatus",
+        "base64"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\test\\utils\\pushNotifications.test.js"
+    ]
+  }
+]

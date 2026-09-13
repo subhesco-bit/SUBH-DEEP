@@ -10,6 +10,29 @@ ADD COLUMN IF NOT EXISTS ai_visibility_score DECIMAL(3, 2),
 ADD COLUMN IF NOT EXISTS ai_optimization_flags JSONB DEFAULT '{}',
 ADD COLUMN IF NOT EXISTS last_ai_analysis TIMESTAMP;
 
+-- 2026-09-12 collision repair (batch): the CREATE INDEX statements below
+-- name columns that do not exist on the table that actually gets created.
+-- Each of these tables is declared by more than one migration, and
+-- PostgreSQL's CREATE TABLE IF NOT EXISTS silently skips every declaration
+-- after the first — so the later, wider definition never took effect and
+-- the index that assumed it would fail with "column does not exist",
+-- aborting the whole migration run.
+--
+-- Additive and idempotent: restores exactly the columns the indexes below
+-- require, typed from the losing definition that declared them. No-ops on
+-- a database where the wider definition already won.
+-- journal_entries: winner is 996_enterprise_foundation.sql
+ALTER TABLE journal_entries ADD COLUMN IF NOT EXISTS journal_entry_id VARCHAR(50);
+ALTER TABLE journal_entries ADD COLUMN IF NOT EXISTS account_code VARCHAR(20);
+-- purchase_orders: winner is 995_erp_process_layer.sql
+ALTER TABLE purchase_orders ADD COLUMN IF NOT EXISTS product_id VARCHAR(50);
+ALTER TABLE purchase_orders ADD COLUMN IF NOT EXISTS seller_id UUID;
+ALTER TABLE purchase_orders ADD COLUMN IF NOT EXISTS po_status VARCHAR(20);
+-- production_orders: winner is 995_erp_process_layer.sql
+ALTER TABLE production_orders ADD COLUMN IF NOT EXISTS product_id VARCHAR(50);
+ALTER TABLE production_orders ADD COLUMN IF NOT EXISTS seller_id UUID;
+ALTER TABLE production_orders ADD COLUMN IF NOT EXISTS order_status VARCHAR(20);
+
 CREATE INDEX IF NOT EXISTS idx_product_listings_ai_demand ON product_listings(ai_demand_prediction_score);
 CREATE INDEX IF NOT EXISTS idx_product_listings_ai_visibility ON product_listings(ai_visibility_score);
 

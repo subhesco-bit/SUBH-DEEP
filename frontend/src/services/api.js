@@ -4,7 +4,7 @@ import axios from 'axios';
  * API Client
  * Axios instance configured for EBDESIGN API
  */
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api/v1';
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
@@ -3361,6 +3361,27 @@ export const libraryAPI = {
   getLibraryCard: (id) => api.get(`/library/cards/${encodeURIComponent(id)}`),
   buildAIContext: (data) => api.post('/library/ai-context', data),
   syncDatabase: (options = {}) => api.post('/library/sync-database', options),
+  getEnterpriseSummary: () => api.get('/library/enterprise-index/summary'),
+  getEnterpriseFeatures: (params = {}) => api.get('/library/enterprise-index/features', { params }),
+  getEnterpriseDuplicates: (params = {}) => api.get('/library/enterprise-index/duplicates', { params }),
+  searchEnterpriseFiles: (params = {}) => api.get('/library/enterprise-index/files/search', { params }),
+  getEnterpriseActivitySummary: (params = {}) => api.get('/library/enterprise-index/activity/summary', { params }),
+  searchEnterpriseFileActivity: (params = {}) => api.get('/library/enterprise-index/activity/files/search', { params }),
+  getEnterpriseActivityLedgerSummary: () => api.get('/library/enterprise-index/activity/ledger/summary'),
+  getEnterpriseActivityLedgerLatest: () => api.get('/library/enterprise-index/activity/ledger/latest'),
+  searchEnterpriseActivityLedger: (params = {}) => api.get('/library/enterprise-index/activity/ledger/search', { params }),
+  getEnterpriseWorkflow: () => api.get('/library/enterprise-index/workflow', { responseType: 'text' }),
+  getLibraryAIWorkflow: () => api.get('/library/enterprise-index/ai-workflow', { responseType: 'text' }),
+};
+
+export const libraryAIWorkspaceAPI = {
+  getStatus: () => api.get('/ai/library-workspace/status'),
+  searchFiles: (params = {}) => api.get('/ai/library-workspace/files/search', { params }),
+  getFile: (libraryId) => api.get(`/ai/library-workspace/files/${encodeURIComponent(libraryId)}`),
+  getFileContent: (libraryId, params = {}) => api.get(`/ai/library-workspace/files/${encodeURIComponent(libraryId)}/content`, { params }),
+  buildContext: (data = {}) => api.post('/ai/library-workspace/context', data),
+  createImprovementWorkspace: (data = {}) => api.post('/ai/library-workspace/improvement-workspace', data),
+  recordEvent: (data = {}) => api.post('/ai/library-workspace/events', data),
 };
 
 export const panchayatAPI = {
@@ -6394,9 +6415,14 @@ export const feedManagementAPI = {
   deleteRecord: (id) => api.delete(`/feed-management/record/${id}`),
 };
 
+// POST with a body, not GET with query params. backend/src/routes/authRoutes.js
+// declares `router.post('/login')` and `router.post('/register')` and reads
+// `req.body`, so the GET form 404'd — LoginForm.jsx and RegisterForm.jsx could
+// never sign anyone in. It also put the password in the request line, where it
+// lands in access logs, browser history and any Referer header.
 export const authAPI = {
-  login: (params) => api.get('/auth/login', { params }),
-  register: (params) => api.get('/auth/register', { params }),
+  login: (credentials) => api.post('/auth/login', credentials),
+  register: (userData) => api.post('/auth/register', userData),
 };
 
 export const logisticsEnhancementAPI = {
@@ -6700,7 +6726,7 @@ export const publicDataAPI = {
 };
 
 export const villageProfileAPI = {
-  searchVillages: (data) => api.post('/village-profile/villages', data),
+  searchVillages: (params = {}) => api.get('/village-profiles/villages/search', { params }),
 };
 
 export const procurementSubscriptionAPI = {

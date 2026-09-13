@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "backend-module-service-mapping.md",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

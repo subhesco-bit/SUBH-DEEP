@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "link.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "Link"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

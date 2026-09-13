@@ -1,0 +1,24 @@
+[
+  {
+    "stem": "instrumentation.d.ts",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "computeLocationKey",
+        "shouldSkipNavigation",
+        "addResolvedRoutesToParent",
+        "processResolvedRoutes",
+        "updateNavigationSpan",
+        "createReactRouterV6CompatibleTracingIntegration",
+        "createV6CompatibleWrapUseRoutes",
+        "handleNavigation",
+        "addRoutesToAllRoutes"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

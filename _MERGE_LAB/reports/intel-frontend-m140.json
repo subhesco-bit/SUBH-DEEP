@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "m140page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M140Page"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\M140\\index.jsx"
+    ]
+  },
+  {
+    "stem": "m140component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M140Component"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "regeneratordefine.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_regeneratorDefine",
+        "regeneratorDefine",
+        "o",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

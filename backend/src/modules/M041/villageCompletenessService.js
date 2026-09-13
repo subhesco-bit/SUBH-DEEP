@@ -3,11 +3,7 @@
 const pool = require('../../database/pool');
 const { ValidationError, NotFoundError } = require('../../utils/errors');
 
-function villageId(value) {
-  const id = Number(value);
-  if (!Number.isInteger(id) || id <= 0) throw new ValidationError('Valid village id is required');
-  return id;
-}
+const { normalizeVillageId: villageId } = require('./identifiers');
 
 async function getCompleteness(villageIdValue) {
   const id = villageId(villageIdValue);

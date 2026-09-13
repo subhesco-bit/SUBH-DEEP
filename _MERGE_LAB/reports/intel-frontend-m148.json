@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "m148component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M148Component"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "m148page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M148Page"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\M148\\index.jsx"
+    ]
+  }
+]

@@ -15,7 +15,22 @@ CREATE TABLE IF NOT EXISTS monitoring_sources (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS monitoring_metrics (
+-- 2026-09-12: `monitoring_metrics` and `monitoring_alerts` renamed to
+-- `m086_monitoring_metrics` / `m086_monitoring_alerts`.
+--
+-- Both names were already taken by 095_create_monitoring_tables.sql, which
+-- runs first and therefore wins: its tables are a two-column JSONB blob
+-- (`metric_data` / `alert_data`), nothing like M086's typed schema. The live
+-- consumer is backend/src/services/infrastructureMonitoringService.js, and it
+-- reads and writes 095's shape — so 095 is correct and must not move.
+--
+-- M086's own tables never got created, but this file still declared
+-- `real_time_data.metric_id ... REFERENCES monitoring_metrics(metric_id)` and
+-- indexed `monitoring_alerts(metric_id)`. Against 095's actual tables neither
+-- column exists, so both statements abort the migration run. M086's service
+-- (backend/src/modules/M086/service.js) queries `water_mgmt`, not these
+-- tables, so nothing reads the M086 shape and the rename costs no caller.
+CREATE TABLE IF NOT EXISTS m086_monitoring_metrics (
     metric_id VARCHAR(50) PRIMARY KEY,
     source_id VARCHAR(50) REFERENCES monitoring_sources(source_id) ON DELETE CASCADE,
     metric_name VARCHAR(200) NOT NULL,
@@ -31,7 +46,7 @@ CREATE TABLE IF NOT EXISTS monitoring_metrics (
 
 CREATE TABLE IF NOT EXISTS real_time_data (
     data_id VARCHAR(50) PRIMARY KEY,
-    metric_id VARCHAR(50) REFERENCES monitoring_metrics(metric_id) ON DELETE CASCADE,
+    metric_id VARCHAR(50) REFERENCES m086_monitoring_metrics(metric_id) ON DELETE CASCADE,
     value DECIMAL(15,2) NOT NULL,
     timestamp TIMESTAMP NOT NULL,
     quality_score DECIMAL(5,2),
@@ -52,9 +67,9 @@ CREATE TABLE IF NOT EXISTS monitoring_dashboards (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS monitoring_alerts (
+CREATE TABLE IF NOT EXISTS m086_monitoring_alerts (
     alert_id VARCHAR(50) PRIMARY KEY,
-    metric_id VARCHAR(50) REFERENCES monitoring_metrics(metric_id) ON DELETE CASCADE,
+    metric_id VARCHAR(50) REFERENCES m086_monitoring_metrics(metric_id) ON DELETE CASCADE,
     alert_name VARCHAR(200) NOT NULL,
     alert_type VARCHAR(50) NOT NULL,
     condition_type VARCHAR(50) NOT NULL,
@@ -82,15 +97,15 @@ CREATE TABLE IF NOT EXISTS monitoring_events (
     processed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX IF NOT EXISTS idx_monitoring_metrics_source ON monitoring_metrics(source_id);
+CREATE INDEX IF NOT EXISTS idx_m086_monitoring_metrics_source ON m086_monitoring_metrics(source_id);
 
 CREATE INDEX IF NOT EXISTS idx_real_time_data_metric ON real_time_data(metric_id);
 
 CREATE INDEX IF NOT EXISTS idx_real_time_data_timestamp ON real_time_data(timestamp);
 
-CREATE INDEX IF NOT EXISTS idx_monitoring_alerts_metric ON monitoring_alerts(metric_id);
+CREATE INDEX IF NOT EXISTS idx_m086_monitoring_alerts_metric ON m086_monitoring_alerts(metric_id);
 
-CREATE INDEX IF NOT EXISTS idx_monitoring_alerts_active ON monitoring_alerts(is_active);
+CREATE INDEX IF NOT EXISTS idx_m086_monitoring_alerts_active ON m086_monitoring_alerts(is_active);
 
 CREATE INDEX IF NOT EXISTS idx_monitoring_events_entity ON monitoring_events(entity_id, entity_type);
 

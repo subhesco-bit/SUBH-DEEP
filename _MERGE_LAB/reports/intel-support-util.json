@@ -1,0 +1,35 @@
+[
+  {
+    "stem": "util.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "getArg",
+        "urlParse",
+        "urlGenerate",
+        "lruMemoize",
+        "normalize",
+        "join",
+        "relative",
+        "identity",
+        "toSetString",
+        "fromSetString",
+        "isProtoString",
+        "compareByOriginalPositions",
+        "compareByOriginalPositionsNoSource",
+        "compareByGeneratedPositionsDeflated",
+        "compareByGeneratedPositionsDeflatedNoLine",
+        "strcmp",
+        "compareByGeneratedPositionsInflated",
+        "parseSourceMapInput",
+        "computeSourceURL",
+        "isAbsolute"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

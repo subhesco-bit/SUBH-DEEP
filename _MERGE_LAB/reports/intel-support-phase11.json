@@ -1,0 +1,29 @@
+[
+  {
+    "stem": "phase11.js",
+    "candidateCount": 2,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "Phase11Services",
+        "route:POST:/sso/:id",
+        "route:POST:/mfa/:id",
+        "route:POST:/ldap/:id",
+        "route:POST:/oauth/:id",
+        "route:POST:/backup/:id",
+        "route:POST:/monitoring/:id",
+        "route:POST:/logging/:id",
+        "route:POST:/cdn/:id",
+        "route:POST:/scaling/:id",
+        "route:POST:/loadbalancer/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js",
+      "backend\\src\\services\\index.js"
+    ]
+  }
+]

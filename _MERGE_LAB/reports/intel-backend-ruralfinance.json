@@ -1,0 +1,47 @@
+[
+  {
+    "stem": "ruralfinanceservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "getRuralFinance",
+        "getRuralFinanceByVillage",
+        "getRuralFinanceByServiceType",
+        "upsertRuralFinance",
+        "getVillageFinanceSummary",
+        "setupRoutes",
+        "route:GET:/finance/:financeId",
+        "route:GET:/finance/village/:villageId",
+        "route:GET:/finance/service/:serviceType",
+        "route:GET:/finance/village/:villageId/summary",
+        "route:POST:/finance",
+        "r2",
+        "calcEmi",
+        "totalInterestOverTerm",
+        "generateLoanNumber",
+        "applyForFinance",
+        "listFinanceRecords",
+        "approveAndDisburse",
+        "recordRepayment",
+        "checkRefinanceOpportunity",
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:POST:/:id/disburse",
+        "route:POST:/:id/repay",
+        "route:GET:/:id/refinance-check",
+        "offset",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M333100_RURALFINANCE\\backend\\service.js",
+      "backend\\src\\services\\ruralFinanceService.js",
+      "backend\\src\\__tests__\\financeInsuranceDomain.test.js"
+    ]
+  }
+]

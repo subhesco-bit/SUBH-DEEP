@@ -1,0 +1,33 @@
+[
+  {
+    "stem": "redis.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "initializeRedis",
+        "getClient",
+        "set",
+        "get",
+        "del",
+        "delPattern",
+        "exists",
+        "expire",
+        "ttl",
+        "incr",
+        "decr",
+        "cache",
+        "invalidateEntity",
+        "isHealthy",
+        "close"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\services\\commerce\\productService.js",
+      "backend\\src\\services\\platform\\analyticsService.js"
+    ]
+  }
+]

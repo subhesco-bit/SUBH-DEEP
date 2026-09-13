@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "m112.test.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

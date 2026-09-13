@@ -1,0 +1,35 @@
+[
+  {
+    "stem": "enterpriseintegrationservice.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "EnterpriseIntegrationService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\services\\index.js"
+    ]
+  },
+  {
+    "stem": "enterpriseintegrationroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

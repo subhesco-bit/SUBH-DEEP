@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "insurancepolicyissuanceservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M640100_INSURANCEPOLICYISSUANCE\\backend\\service.js",
+      "backend\\src\\routes\\insuranceEnhancements_merged.js",
+      "backend\\src\\services\\insurancePolicyIssuanceService.js"
+    ]
+  }
+]

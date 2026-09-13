@@ -1,0 +1,32 @@
+{
+  "method": "Read-only SHA-256 comparison of in-tree clones against root paths. Missing live is a review candidate, not proof that a feature should be restored.",
+  "excluded": [
+    ".git",
+    ".next",
+    "__pycache__",
+    "build",
+    "coverage",
+    "dist",
+    "node_modules",
+    "target",
+    ".env*",
+    "*.log",
+    "*.sqlite",
+    "*.sqlite3",
+    "symlinks"
+  ],
+  "scanned": 18796,
+  "roots": {
+    "_ACTIVE_PROJECT/current": {
+      "exact_duplicate": 9250,
+      "missing_live": 5,
+      "variant": 142
+    },
+    "_UNIFIED_PROJECT/current": {
+      "exact_duplicate": 9258,
+      "missing_live": 5,
+      "variant": 136
+    }
+  },
+  "source_code_missing_live": []
+}

@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "financialaiservice.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "ClaudeAIEnhancedFinancialService",
+        "original"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\routes\\claude\\financialAIRoutes.js"
+    ]
+  }
+]

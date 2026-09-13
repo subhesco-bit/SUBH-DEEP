@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "aicollaborationdashboard.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 4,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\pages\\AICollaborationPage.jsx"
+    ]
+  }
+]

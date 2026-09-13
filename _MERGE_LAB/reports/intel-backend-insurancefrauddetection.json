@@ -1,0 +1,23 @@
+[
+  {
+    "stem": "insurancefrauddetectionservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "InsuranceFraudDetectionService",
+        "riskScore"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M697100_INSURANCEFRAUDDETECTION\\backend\\service.js",
+      "backend\\src\\routes\\finance\\insuranceEnhancements.js",
+      "backend\\src\\routes\\insuranceEnhancements_merged.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\services\\insuranceFraudDetectionService.js"
+    ]
+  }
+]

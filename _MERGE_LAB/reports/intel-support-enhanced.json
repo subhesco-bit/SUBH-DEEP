@@ -1,0 +1,28 @@
+[
+  {
+    "stem": "enhancedcomponents.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 15,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\components\\ErrorBoundary\\EnhancedErrorBoundary.jsx",
+      "frontend\\src\\components\\forms\\EnhancedFormValidator.jsx",
+      "frontend\\src\\pages\\AdvancedAnalyticsDashboard.jsx",
+      "frontend\\src\\pages\\BlockchainVerificationPage.jsx",
+      "frontend\\src\\pages\\EnterpriseIntegrationPage.jsx",
+      "frontend\\src\\pages\\FinancialServicesDashboard.jsx",
+      "frontend\\src\\pages\\InsuranceManagementPage.jsx",
+      "frontend\\src\\pages\\IoTMonitoringDashboard.jsx",
+      "frontend\\src\\pages\\LoanManagementPage.jsx",
+      "frontend\\src\\pages\\OperationalDashboard.jsx",
+      "frontend\\src\\pages\\PaymentProcessingPage.jsx",
+      "frontend\\src\\pages\\PredictiveIntelligencePage.jsx",
+      "frontend\\src\\services\\realTimeService.jsx"
+    ]
+  }
+]

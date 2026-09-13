@@ -1,0 +1,15 @@
+[
+  {
+    "stem": "ci.yml",
+    "candidateCount": 5,
+    "sources": [
+      ".github",
+      "claude",
+      "node-modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

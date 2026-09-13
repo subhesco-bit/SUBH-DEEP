@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "energycostcalculator.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "EnergyCostCalculator",
+        "yearlyMaintenanceCost",
+        "batteryCost"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\services\\index.js"
+    ]
+  }
+]

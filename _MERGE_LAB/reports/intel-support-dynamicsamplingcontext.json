@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "dynamicsamplingcontext.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "freezeDscOnSpan",
+        "getDynamicSamplingContextFromClient",
+        "getDynamicSamplingContextFromScope",
+        "getDynamicSamplingContextFromSpan",
+        "applyLocalSampleRateToDsc",
+        "spanToBaggageHeader"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

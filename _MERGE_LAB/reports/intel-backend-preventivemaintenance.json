@@ -1,0 +1,36 @@
+[
+  {
+    "stem": "preventivemaintenanceservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "of"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M701100_PREVENTIVEMAINTENANCE\\backend\\service.js",
+      "backend\\src\\services\\preventiveMaintenanceService.js"
+    ]
+  },
+  {
+    "stem": "preventivemaintenanceroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

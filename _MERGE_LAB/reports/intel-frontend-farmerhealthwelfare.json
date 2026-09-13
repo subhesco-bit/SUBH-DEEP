@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "farmerhealthwelfarepage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "WelfareProgramsSection",
+        "FarmerHealthWelfarePage",
+        "loadPrograms",
+        "enroll"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

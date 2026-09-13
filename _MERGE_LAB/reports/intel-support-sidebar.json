@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "sidebar.jsx",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\components\\index.js",
+      "frontend\\src\\components\\Layout.jsx"
+    ]
+  }
+]

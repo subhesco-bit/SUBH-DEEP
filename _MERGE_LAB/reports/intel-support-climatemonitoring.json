@@ -1,0 +1,44 @@
+[
+  {
+    "stem": "climatemonitoringpage.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "climatemonitoringroutes.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 11,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "climatemonitoringservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 4,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M263100_CLIMATEMONITORING\\backend\\service.js"
+    ]
+  }
+]

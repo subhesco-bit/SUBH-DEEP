@@ -1,0 +1,58 @@
+[
+  {
+    "stem": "analyticspage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "AnalyticsPage"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M746100_ANALYTICS\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "analytics.js",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "initAnalytics",
+        "isAnalyticsEnabled",
+        "hasConsent",
+        "grantConsent",
+        "denyConsent",
+        "trackPageView",
+        "trackEvent",
+        "trackUserAction",
+        "trackNavigation",
+        "trackFeatureUsage",
+        "trackError",
+        "trackPerformance",
+        "setUserProperty",
+        "setUserId",
+        "trackCampaign",
+        "trackSearch",
+        "trackFormSubmission",
+        "trackButtonClick",
+        "trackContentEngagement",
+        "buildEvent",
+        "queueEvent",
+        "flushEventQueue",
+        "analytics"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\App.jsx",
+      "frontend\\src\\components\\RouteAnalytics.jsx"
+    ]
+  }
+]

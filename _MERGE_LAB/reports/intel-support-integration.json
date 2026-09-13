@@ -1,0 +1,25 @@
+[
+  {
+    "stem": "integration.js",
+    "candidateCount": 12,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_wrappedIsEnabled",
+        "growthbookIntegration",
+        "buildLaunchDarklyFlagUsedHandler",
+        "launchDarklyIntegration",
+        "browserProfilingIntegration",
+        "_browserProfilingIntegration",
+        "unleashIntegration",
+        "statsigIntegration",
+        "OpenFeatureIntegrationHook",
+        "openFeatureIntegration"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

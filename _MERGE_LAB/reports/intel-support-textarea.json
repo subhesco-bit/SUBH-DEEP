@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "textarea.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\components\\Marketplace\\ProductReview.jsx",
+      "frontend\\src\\pages\\SellerProductFormPage.jsx"
+    ]
+  }
+]

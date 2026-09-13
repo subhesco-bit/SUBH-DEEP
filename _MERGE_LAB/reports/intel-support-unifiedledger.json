@@ -1,0 +1,51 @@
+[
+  {
+    "stem": "unifiedledgerpage.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {
+      "claude": [
+        "handleReconcile",
+        "formatCurrency",
+        "getEconomyName",
+        "getEconomyColor"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "unifiedledgerroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id",
+        "route:POST:/entries",
+        "route:POST:/cross-economy-transfer",
+        "route:GET:/balance/unified",
+        "route:GET:/balance/economy/:economy",
+        "route:GET:/balance/all",
+        "route:POST:/reconcile",
+        "route:GET:/trial-balance",
+        "route:GET:/economies",
+        "route:GET:/entries",
+        "route:GET:/transfers"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

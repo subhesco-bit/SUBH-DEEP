@@ -254,6 +254,21 @@ CREATE TABLE IF NOT EXISTS portal_roles (
 -- INDEXES
 -- ---------------------------------------------------------------------------
 
+-- 2026-09-12 collision repair (batch): the CREATE INDEX statements below
+-- name columns that do not exist on the table that actually gets created.
+-- Each of these tables is declared by more than one migration, and
+-- PostgreSQL's CREATE TABLE IF NOT EXISTS silently skips every declaration
+-- after the first — so the later, wider definition never took effect and
+-- the index that assumed it would fail with "column does not exist",
+-- aborting the whole migration run.
+--
+-- Additive and idempotent: restores exactly the columns the indexes below
+-- require, typed from the losing definition that declared them. No-ops on
+-- a database where the wider definition already won.
+-- wallets: winner is 544_wallets.sql
+ALTER TABLE wallets ADD COLUMN IF NOT EXISTS owner_type VARCHAR(20);
+ALTER TABLE wallets ADD COLUMN IF NOT EXISTS owner_id VARCHAR(100);
+
 CREATE INDEX IF NOT EXISTS idx_csa_subscriber ON csa_subscriptions (subscriber_id, status);
 CREATE INDEX IF NOT EXISTS idx_csa_farmer ON csa_subscriptions (farmer_id);
 CREATE INDEX IF NOT EXISTS idx_csa_deliveries_sub ON csa_deliveries (subscription_id, scheduled_date);

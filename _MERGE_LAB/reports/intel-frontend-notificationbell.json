@@ -1,0 +1,22 @@
+[
+  {
+    "stem": "notificationbell.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "NotificationBell",
+        "handleClickOutside",
+        "handleMarkRead",
+        "handleMarkAllRead"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\components\\Header.jsx",
+      "frontend\\src\\components\\index.js"
+    ]
+  }
+]

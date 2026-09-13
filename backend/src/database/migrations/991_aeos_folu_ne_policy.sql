@@ -39,7 +39,7 @@
 CREATE TABLE IF NOT EXISTS yield_actuals (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     farmer_id UUID NOT NULL REFERENCES farmers(id) ON DELETE CASCADE,
-    crop_id UUID REFERENCES crops(id) ON DELETE SET NULL,
+    crop_id INTEGER REFERENCES crops(id) ON DELETE SET NULL,
     season VARCHAR(30),
     year SMALLINT CHECK (year BETWEEN 2000 AND 2100),
     area_planted_ha NUMERIC(12,4) CHECK (area_planted_ha > 0),
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS farmer_revenue (
         CHECK (revenue_source IN ('crop','dairy','livestock','fisheries','processing',
                'compost','custom_hiring','equipment_rental','solar','carbon_credit',
                'export','contract_farming','subsidy','other')),
-    crop_id UUID REFERENCES crops(id) ON DELETE SET NULL,
+    crop_id INTEGER REFERENCES crops(id) ON DELETE SET NULL,
     yield_actual_id UUID REFERENCES yield_actuals(id) ON DELETE SET NULL,
     buyer_id UUID REFERENCES buyers(id) ON DELETE SET NULL,
     quantity_kg NUMERIC(14,3) CHECK (quantity_kg IS NULL OR quantity_kg > 0),
@@ -290,7 +290,7 @@ CREATE TABLE IF NOT EXISTS ne_organic_enrolment (
 CREATE TABLE IF NOT EXISTS farmer_listings (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     farmer_id UUID NOT NULL REFERENCES farmers(id) ON DELETE CASCADE,
-    crop_id UUID REFERENCES crops(id) ON DELETE SET NULL,
+    crop_id INTEGER REFERENCES crops(id) ON DELETE SET NULL,
     title VARCHAR(200) NOT NULL,
     quantity_kg NUMERIC(14,3) NOT NULL CHECK (quantity_kg > 0),
     asking_price_per_kg NUMERIC(14,4) CHECK (asking_price_per_kg IS NULL OR asking_price_per_kg > 0),
@@ -442,6 +442,20 @@ WHERE e.conversion_status NOT IN ('withdrawn','expired');
 -- ---------------------------------------------------------------------------
 -- INDEXES
 -- ---------------------------------------------------------------------------
+
+-- 2026-09-12 collision repair (batch): the CREATE INDEX statements below
+-- name columns that do not exist on the table that actually gets created.
+-- Each of these tables is declared by more than one migration, and
+-- PostgreSQL's CREATE TABLE IF NOT EXISTS silently skips every declaration
+-- after the first — so the later, wider definition never took effect and
+-- the index that assumed it would fail with "column does not exist",
+-- aborting the whole migration run.
+--
+-- Additive and idempotent: restores exactly the columns the indexes below
+-- require, typed from the losing definition that declared them. No-ops on
+-- a database where the wider definition already won.
+-- complaints: winner is 437_complaints.sql
+ALTER TABLE complaints ADD COLUMN IF NOT EXISTS severity VARCHAR(20);
 
 CREATE INDEX IF NOT EXISTS idx_yield_actuals_farmer ON yield_actuals (farmer_id, year, season);
 CREATE INDEX IF NOT EXISTS idx_yield_actuals_crop ON yield_actuals (crop_id);

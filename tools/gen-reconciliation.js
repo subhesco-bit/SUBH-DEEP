@@ -30,6 +30,7 @@
 const fs = require('fs');
 const path = require('path');
 const { stripNoise } = require('./schema-collisions');
+const { compareMigrationNames } = require('../backend/src/database/migrationOrder');
 
 /**
  * Comment-only strip. `stripNoise` also blanks string literals, which is right
@@ -102,7 +103,7 @@ function sanitise(rest) {
 
 function main() {
   const statsOnly = process.argv.includes('--stats');
-  const files = fs.readdirSync(MIGRATIONS).filter((f) => f.endsWith('.sql')).sort();
+  const files = fs.readdirSync(MIGRATIONS).filter((f) => f.endsWith('.sql')).sort(compareMigrationNames);
 
   // table -> [{file, cols:[{name,rest}]}] in migration order
   const byTable = new Map();

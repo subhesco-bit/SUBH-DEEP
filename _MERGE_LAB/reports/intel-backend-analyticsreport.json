@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "analyticsreportroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

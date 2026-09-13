@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "m107component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M107Component"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "m107page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M107Page"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\M107\\index.jsx"
+    ]
+  }
+]

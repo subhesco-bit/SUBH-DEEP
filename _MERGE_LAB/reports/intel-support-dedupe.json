@@ -1,0 +1,23 @@
+[
+  {
+    "stem": "dedupe.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_shouldDropEvent",
+        "_isSameMessageEvent",
+        "_isSameExceptionEvent",
+        "_isSameStacktrace",
+        "_isSameFingerprint",
+        "_getExceptionFromEvent",
+        "_dedupeIntegration",
+        "dedupeIntegration"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

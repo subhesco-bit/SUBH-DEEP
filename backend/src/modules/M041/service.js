@@ -13,11 +13,7 @@ const { ValidationError, NotFoundError } = require('../../utils/errors');
 let claudeAICoordinator = null;
 try { claudeAICoordinator = require('../../core/claudeAICoordinator'); } catch (_) { /* AI is optional at runtime */ }
 
-function normalizeVillageId(value) {
-  const id = String(value ?? '').trim();
-  if (!/^\d+$/.test(id)) throw new ValidationError('Valid village id is required');
-  return Number(id);
-}
+const { normalizeVillageId } = require('./identifiers');
 
 function normalizePayload(data = {}) {
   const payload = { ...data };
@@ -34,9 +30,12 @@ function normalizePayload(data = {}) {
 
 function validateVillage(payload, partial = false) {
   const errors = {};
-  if (!partial && !String(payload.name || '').trim()) errors.name = 'Village name is required';
-  if (!partial && !String(payload.district || '').trim()) errors.district = 'District is required';
-  if (!partial && !String(payload.state || '').trim()) errors.state = 'State is required';
+  for (const field of ['name', 'district', 'state']) {
+    if ((!partial || payload[field] !== undefined) &&
+        (typeof payload[field] !== 'string' || !payload[field].trim())) {
+      errors[field] = `${field} must be a non-empty string`;
+    }
+  }
   for (const field of ['population','households','area_sq_km','elevation','agricultural_land_area','avg_income','market_distance_km','financial_institutions_count','schools_count','health_centers_count','cooperative_societies_count']) {
     if (payload[field] !== undefined && payload[field] !== null && (!Number.isFinite(payload[field]) || payload[field] < 0)) errors[field] = `${field} must be a non-negative number`;
   }

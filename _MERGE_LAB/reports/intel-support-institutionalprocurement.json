@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "institutionalprocurementservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 22,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M801100_INSTITUTIONALPROCUREMENT\\backend\\service.js",
+      "backend\\src\\services\\institutionalProcurementService.js"
+    ]
+  }
+]

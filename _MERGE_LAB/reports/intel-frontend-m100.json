@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "m100component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M100Component"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "m100page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M100Page"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\M100\\index.jsx"
+    ]
+  }
+]

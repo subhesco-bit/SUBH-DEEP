@@ -1,0 +1,30 @@
+[
+  {
+    "stem": "iotintegrationservice.js",
+    "candidateCount": 8,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 25,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M90100_IOTINTEGRATION\\backend\\service.js"
+    ]
+  },
+  {
+    "stem": "iotintegrationroutes.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 9,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

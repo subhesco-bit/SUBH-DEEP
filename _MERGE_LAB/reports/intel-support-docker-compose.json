@@ -1,0 +1,15 @@
+[
+  {
+    "stem": "docker-compose.yml",
+    "candidateCount": 8,
+    "sources": [
+      "backend-current",
+      "claude",
+      "old-new-folder",
+      "root-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

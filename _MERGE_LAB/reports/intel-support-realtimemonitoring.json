@@ -1,0 +1,45 @@
+[
+  {
+    "stem": "realtimemonitoringpage.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "realtimemonitoringroutes.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 5,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "realtimemonitoringservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M606100_REALTIMEMONITORING\\backend\\service.js",
+      "backend\\src\\services\\realtimeMonitoringService.js"
+    ]
+  }
+]

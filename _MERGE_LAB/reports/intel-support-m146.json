@@ -1,0 +1,28 @@
+[
+  {
+    "stem": "m146component.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "m146page.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\modules\\M146\\index.jsx"
+    ]
+  }
+]

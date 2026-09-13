@@ -1,0 +1,55 @@
+[
+  {
+    "stem": "seedvaultservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "SeedVaultService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M109_SEED_MANAGEMENT\\backend\\service.js",
+      "backend\\src\\routes\\seedVaultRoutes_merged.js",
+      "backend\\src\\services\\seedVaultService.js"
+    ]
+  },
+  {
+    "stem": "seedvaultroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "seedvaultpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "SeedVaultPage",
+        "handleAddSeedSubmit"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M109_SEED_MANAGEMENT\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

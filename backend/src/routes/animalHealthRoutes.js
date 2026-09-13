@@ -34,9 +34,14 @@ const { logger } = require('../utils/logger');
 const { signalBus, SIGNAL, SEVERITY } = require('../core/signalBus');
 const { protectLivestockRouter } = require('./livestockRouteSupport');
 
-const router = express.Router();// 
-/* DISABLED: protect
-*/
+const router = express.Router();
+
+// Re-enabled 2026-09-13: this call was commented out when
+// livestockRouteSupport.js was replaced by a stub, which left these routes
+// without the rate limiting, pagination bounds and route-param validation
+// they were written with. The helper is restored, and the pig/sheep/poultry
+// siblings call it the same way.
+protectLivestockRouter(router);
 
 // Route params here are DB integer IDs; a non-numeric id (e.g. "invalid")
 // used to fall through to the service layer and surface as a raw 500 -

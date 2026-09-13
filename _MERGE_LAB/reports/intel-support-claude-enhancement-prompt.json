@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "claude-enhancement-prompt.md",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

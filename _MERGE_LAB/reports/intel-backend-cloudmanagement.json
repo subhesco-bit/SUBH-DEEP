@@ -1,0 +1,53 @@
+[
+  {
+    "stem": "cloudmanagementservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "CloudManagementService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\routes\\cloudManagementRoutes.js"
+    ]
+  },
+  {
+    "stem": "cloudmanagementroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:GET:/providers",
+        "route:GET:/providers/:providerId",
+        "route:POST:/providers/:providerId/enable",
+        "route:POST:/providers/:providerId/disable",
+        "route:POST:/provision",
+        "route:GET:/resources",
+        "route:GET:/resources/:resourceId",
+        "route:GET:/resources/provider/:providerId",
+        "route:PUT:/resources/:resourceId",
+        "route:DELETE:/resources/:resourceId",
+        "route:POST:/deployments",
+        "route:GET:/deployments",
+        "route:GET:/deployments/:deploymentId",
+        "route:POST:/deployments/:deploymentId/scale",
+        "route:GET:/costs",
+        "route:POST:/costs/optimize",
+        "route:GET:/security",
+        "route:POST:/security/policies/:policyId/apply",
+        "route:GET:/monitoring",
+        "route:POST:/disaster-recovery",
+        "route:GET:/overview",
+        "route:GET:/service-health"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

@@ -9,6 +9,12 @@ const { authMiddleware } = require('../../middleware/auth');
 const GSTService = require('../../services/finance/gstService');
 
 const router = express.Router();
+// Liveness ping carried over from gstRoutes.js, merged and
+// retired 2026-09-13. Declared first so a pattern route cannot swallow it.
+router.get('/health', (req, res) => {
+  res.json({ success: true, status: 'healthy', module: 'gstRoutes' });
+});
+
 const gstService = GSTService;
 
 // ============================================================================

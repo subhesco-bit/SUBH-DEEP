@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "varietydirectorypage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "GiBadge",
+        "GenerateImageButton",
+        "CreateListingForm",
+        "VarietyDirectoryPage"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

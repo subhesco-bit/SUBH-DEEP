@@ -1,0 +1,29 @@
+[
+  {
+    "stem": "phase9.js",
+    "candidateCount": 2,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:POST:/specialization/:type",
+        "route:POST:/integration/:id",
+        "route:POST:/analytics/:id",
+        "route:POST:/third-party/:id",
+        "route:POST:/mobile/:id",
+        "route:POST:/offline/:id",
+        "route:POST:/reporting/:id",
+        "route:POST:/notifications/:id",
+        "route:POST:/recommendations/:id",
+        "route:POST:/security/:id",
+        "route:POST:/performance/:id",
+        "Phase9Services"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

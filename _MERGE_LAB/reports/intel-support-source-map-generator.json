@@ -1,0 +1,25 @@
+[
+  {
+    "stem": "source-map-generator.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "SourceMapGenerator",
+        "SourceMapGenerator_fromSourceMap",
+        "SourceMapGenerator_addMapping",
+        "SourceMapGenerator_setSourceContent",
+        "SourceMapGenerator_applySourceMap",
+        "SourceMapGenerator_validateMapping",
+        "SourceMapGenerator_serializeMappings",
+        "SourceMapGenerator_generateSourcesContent",
+        "SourceMapGenerator_toJSON",
+        "SourceMapGenerator_toString"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

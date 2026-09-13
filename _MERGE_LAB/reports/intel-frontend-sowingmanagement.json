@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "sowingmanagementpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "SowingManagementPage",
+        "closeForm",
+        "openEdit",
+        "handleSubmit"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

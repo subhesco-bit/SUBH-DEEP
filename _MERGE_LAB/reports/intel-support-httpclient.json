@@ -1,0 +1,30 @@
+[
+  {
+    "stem": "httpclient.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_fetchResponseHandler",
+        "_xhrResponseHandler",
+        "_getResponseSizeFromHeaders",
+        "_extractFetchHeaders",
+        "_getXHRResponseHeaders",
+        "_isInGivenRequestTargets",
+        "_isInGivenStatusRanges",
+        "_wrapFetch",
+        "_wrapXHR",
+        "_shouldCaptureResponse",
+        "_createEvent",
+        "_getRequest",
+        "_getDataCollectionSettings",
+        "httpClientIntegration",
+        "_httpClientIntegration"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

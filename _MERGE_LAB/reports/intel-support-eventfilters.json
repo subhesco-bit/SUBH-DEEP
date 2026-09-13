@@ -1,0 +1,26 @@
+[
+  {
+    "stem": "eventfilters.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_mergeOptions",
+        "_shouldDropEvent",
+        "_isIgnoredError",
+        "_isIgnoredTransaction",
+        "_isDeniedUrl",
+        "_isAllowedUrl",
+        "_getLastValidUrl",
+        "_getEventFilterUrl",
+        "_isUselessError",
+        "eventFiltersIntegration",
+        "inboundFiltersIntegration"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

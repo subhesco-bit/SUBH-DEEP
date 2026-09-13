@@ -1,0 +1,55 @@
+[
+  {
+    "stem": "aioperationintelligenceservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M699100_AIOPERATIONINTELLIGENCE\\backend\\service.js",
+      "backend\\src\\routes\\aiOperationIntelligenceRoutes_merged.js",
+      "backend\\src\\services\\aiOperationIntelligenceService.js",
+      "backend\\src\\services\\claude\\aiOptimizationService.js"
+    ]
+  },
+  {
+    "stem": "aioperationintelligenceroutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 13,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "aioperationintelligencepage.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

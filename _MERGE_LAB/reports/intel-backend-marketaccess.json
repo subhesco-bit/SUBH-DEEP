@@ -1,0 +1,33 @@
+[
+  {
+    "stem": "marketaccessservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "getMarketAccess",
+        "getMarketAccessByVillage",
+        "getMarketAccessByType",
+        "upsertMarketAccess",
+        "getVillageMarketSummary",
+        "setupRoutes",
+        "route:GET:/access/:accessId",
+        "route:GET:/access/village/:villageId",
+        "route:GET:/access/type/:marketType",
+        "route:GET:/access/village/:villageId/summary",
+        "route:POST:/access",
+        "r2",
+        "route:GET:/",
+        "route:POST:/",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M51100_MARKETACCESS\\backend\\service.js",
+      "backend\\src\\services\\marketAccessService.js"
+    ]
+  }
+]

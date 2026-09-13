@@ -1,0 +1,22 @@
+[
+  {
+    "stem": "landrecords.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "LandRecords",
+        "loadLandRecords",
+        "addLandRecord",
+        "syncWithGovernment",
+        "getVerificationBadge"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\pages\\FarmerPortalPage.jsx"
+    ]
+  }
+]

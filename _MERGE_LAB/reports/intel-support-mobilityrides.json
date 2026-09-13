@@ -1,0 +1,23 @@
+[
+  {
+    "stem": "mobilityridesservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 14,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:POST:/",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M629100_MOBILITYRIDES\\backend\\service.js",
+      "backend\\src\\services\\mobilityRidesService.js"
+    ]
+  }
+]

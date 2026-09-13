@@ -1,0 +1,28 @@
+[
+  {
+    "stem": "node.js",
+    "candidateCount": 3,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "cloneNode",
+        "sourceOffset",
+        "Node",
+        "useColors",
+        "formatArgs",
+        "getDate",
+        "log",
+        "save",
+        "load",
+        "init",
+        "destroy",
+        "colors",
+        "inspectOpts"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

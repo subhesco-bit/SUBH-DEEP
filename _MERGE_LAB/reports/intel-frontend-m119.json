@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "m119component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M119Component"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "m119page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M119Page"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\M119\\index.jsx"
+    ]
+  }
+]

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/icons/icon-192.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AFRERA - Empowering Rural India Through Technology" />
+
+    <!-- PWA: makes the app installable and usable on an intermittent
+         connection. The backend already had offlineSyncService and
+         offlinePaymentService; without these tags none of that was reachable
+         from the browser. -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#16a34a" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="AFRERA" />
+
+    <!-- Discoverability (Open Graph / Twitter) - previously absent entirely,
+         so any shared link rendered with no title, description or image. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AFRERA" />
+    <meta property="og:title" content="AFRERA - Agriculture &amp; Rural Economy Platform" />
+    <meta property="og:description" content="Marketplace, farmer services, logistics and insurance for rural India." />
+    <meta property="og:image" content="https://afrera.com/icons/icon-512.png" />
+    <meta property="og:url" content="https://afrera.com/" />
+    <meta property="og:locale" content="en_IN" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AFRERA - Agriculture &amp; Rural Economy Platform" />
+    <meta name="twitter:description" content="Marketplace, farmer services, logistics and insurance for rural India." />
+    <meta name="twitter:image" content="https://afrera.com/icons/icon-512.png" />
+    <link rel="canonical" href="https://afrera.com/" />
+
+    <title>AFRERA Platform</title>
+
+    <!-- JSON-LD: Organization. Static shell-level data; per-page Product/Offer
+         JSON-LD is injected by ProductDetailPage.jsx for individual listings. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "AFRERA",
+      "url": "https://afrera.com/",
+      "logo": "https://afrera.com/icons/icon-512.png",
+      "description": "Marketplace, farmer services, logistics and insurance for rural India.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "support@afrera.com",
+        "contactType": "customer support",
+        "areaServed": "IN"
+      }
+    }
+    </script>
+
+    <!-- JSON-LD: WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "AFRERA",
+      "url": "https://afrera.com/",
+      "description": "AFRERA - Empowering Rural India Through Technology"
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+
+    <script>
+      // Register the service worker. Guarded on production + support so local
+      // development is not served stale assets from cache.
+      if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/sw.js').catch(function (err) {
+            // Registration failure must never break the app - it only means
+            // the user loses offline capability, not the site.
+            console.warn('Service worker registration failed:', err);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

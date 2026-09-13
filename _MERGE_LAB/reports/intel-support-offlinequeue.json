@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "offlinequeue.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\pages\\SellerProductFormPage.jsx"
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "claude.md",
+    "candidateCount": 5,
+    "sources": [
+      "claude",
+      "old-new-folder",
+      "root-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

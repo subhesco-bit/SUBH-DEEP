@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "experiencelayerservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 18,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M805100_EXPERIENCELAYER\\backend\\service.js",
+      "backend\\src\\routes\\experienceRoutes.js",
+      "backend\\src\\services\\experienceLayerService.js"
+    ]
+  },
+  {
+    "stem": "experiencelayerpage.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 3,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

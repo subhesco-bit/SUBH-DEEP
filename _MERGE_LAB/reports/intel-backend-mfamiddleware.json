@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "mfamiddleware.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "getUserMFASecret",
+        "mfaRequired",
+        "mfaEnforced",
+        "verifyMFAToken"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

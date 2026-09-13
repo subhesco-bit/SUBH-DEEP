@@ -1,0 +1,38 @@
+[
+  {
+    "stem": "input.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\components\\FarmerPortal\\LandRecords.jsx",
+      "frontend\\src\\components\\Insurance\\InsurancePremiumCalculator.jsx",
+      "frontend\\src\\components\\Marketplace\\GSTCalculator.jsx",
+      "frontend\\src\\pages\\BlockchainVerificationPage.jsx",
+      "frontend\\src\\pages\\BulkPurchasePage.jsx",
+      "frontend\\src\\pages\\ContractListingPage.jsx",
+      "frontend\\src\\pages\\DisruptionPage.jsx",
+      "frontend\\src\\pages\\EMICalculatorPage.jsx",
+      "frontend\\src\\pages\\EnterpriseIntegrationPage.jsx",
+      "frontend\\src\\pages\\EnterpriseMemoryDashboardPage.jsx",
+      "frontend\\src\\pages\\EscrowPage.jsx",
+      "frontend\\src\\pages\\FarmerRevenueLedgerPage.jsx",
+      "frontend\\src\\pages\\InsuranceManagementPage.jsx",
+      "frontend\\src\\pages\\LoanManagementPage.jsx",
+      "frontend\\src\\pages\\MedicalCodingDashboardPage.jsx",
+      "frontend\\src\\pages\\NutrientCalculatorPage.jsx",
+      "frontend\\src\\pages\\PaymentProcessingPage.jsx",
+      "frontend\\src\\pages\\PredictiveIntelligencePage.jsx",
+      "frontend\\src\\pages\\ReportsDashboardPage.jsx",
+      "frontend\\src\\pages\\SalesReportPage.jsx",
+      "frontend\\src\\pages\\SellerProductFormPage.jsx",
+      "frontend\\src\\pages\\VarietyDirectoryPage.jsx",
+      "frontend\\src\\pages\\WalletPage.jsx"
+    ]
+  }
+]

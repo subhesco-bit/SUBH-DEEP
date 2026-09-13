@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "handleclick.d.ts",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "handleClick",
+        "ignoreElement",
+        "updateClickDetectorForRecordingEvent",
+        "that",
+        "ClickDetector"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

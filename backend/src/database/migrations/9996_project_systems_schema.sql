@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS projects (
 
 CREATE TABLE IF NOT EXISTS project_wbs (
     id SERIAL PRIMARY KEY,
-    project_id INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+    project_id UUID NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
     parent_id INTEGER REFERENCES project_wbs(id) ON DELETE CASCADE,
     wbs_code VARCHAR(40) NOT NULL,
     wbs_name VARCHAR(255) NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS project_wbs (
 
 CREATE TABLE IF NOT EXISTS project_milestones (
     id SERIAL PRIMARY KEY,
-    project_id INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+    project_id UUID NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
     -- Optional: a milestone can mark the completion of a specific WBS
     -- element ("packhouse shell complete") or stand at the project level
     -- ("FPO facility handover").
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS project_milestones (
 -- cost_center_id / profit_center_id / business_unit_id for the same reason.
 -- ---------------------------------------------------------------------------
 
-ALTER TABLE journal_lines ADD COLUMN IF NOT EXISTS project_id INTEGER REFERENCES projects(id) ON DELETE SET NULL;
+ALTER TABLE journal_lines ADD COLUMN IF NOT EXISTS project_id UUID REFERENCES projects(id) ON DELETE SET NULL;
 ALTER TABLE journal_lines ADD COLUMN IF NOT EXISTS wbs_id INTEGER REFERENCES project_wbs(id) ON DELETE SET NULL;
 
 -- A line tagged with a WBS element must also carry the project it belongs
@@ -167,6 +167,21 @@ $$;
 -- ---------------------------------------------------------------------------
 -- 5. INDEXES
 -- ---------------------------------------------------------------------------
+
+-- 2026-09-12 collision repair (batch): the CREATE INDEX statements below
+-- name columns that do not exist on the table that actually gets created.
+-- Each of these tables is declared by more than one migration, and
+-- PostgreSQL's CREATE TABLE IF NOT EXISTS silently skips every declaration
+-- after the first — so the later, wider definition never took effect and
+-- the index that assumed it would fail with "column does not exist",
+-- aborting the whole migration run.
+--
+-- Additive and idempotent: restores exactly the columns the indexes below
+-- require, typed from the losing definition that declared them. No-ops on
+-- a database where the wider definition already won.
+-- projects: winner is 411_projects.sql
+ALTER TABLE projects ADD COLUMN IF NOT EXISTS company_id INTEGER;
+ALTER TABLE projects ADD COLUMN IF NOT EXISTS reu_id UUID;
 
 CREATE INDEX IF NOT EXISTS idx_projects_company ON projects (company_id);
 CREATE INDEX IF NOT EXISTS idx_projects_reu ON projects (reu_id);

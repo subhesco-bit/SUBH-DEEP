@@ -1,0 +1,26 @@
+[
+  {
+    "stem": "jest.config.js",
+    "candidateCount": 7,
+    "sources": [
+      "backend-current",
+      "claude",
+      "frontend-current",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {
+      "backend-current": [
+        "displayName",
+        "rootDir"
+      ],
+      "claude": [
+        "roots",
+        "testMatch",
+        "coverageDirectory",
+        "coverageReporters"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

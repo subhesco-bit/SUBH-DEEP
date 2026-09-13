@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "helpers.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "shouldIgnoreOnError",
+        "ignoreNextOnError",
+        "wrap",
+        "isFunction",
+        "getHttpRequestData",
+        "WINDOW"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

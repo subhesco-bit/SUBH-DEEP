@@ -6,8 +6,7 @@
 const { verifyToken, hasPermission } = require('../services/dual-use/authService');
 const { logger } = require('../utils/logger');
 
-// SKIP_AUTH (and the relaxed test-mode verification below) must never take
-// effect outside test/development. A production deployment that somehow has
+// SKIP_AUTH must never take effect outside test/development. A production deployment that has
 // SKIP_AUTH=true set must fail loudly at startup rather than silently ignore
 // the flag (which would be confusing) or silently honor it (which would be
 // an open auth bypass in production).
@@ -48,33 +47,6 @@ function authMiddleware(req, res, next) {
       );
     }
 
-    // In test mode require a token header but allow relaxed verification
-    if (nodeEnv === 'test') {
-      const authHeader = req.headers.authorization;
-      if (!authHeader) {
-        return res.status(401).json({
-          error: 'No authorization header provided',
-          code: 'NO_TOKEN',
-        });
-      }
-
-      try {
-        const token = authHeader.replace('Bearer ', '');
-        const payload = require('../services/dual-use/authService').verifyToken(token);
-        req.user = {
-          id: payload.userId || payload.id,
-          email: payload.email,
-          role: payload.role || 'consumer',
-          permissions: payload.permissions || [],
-          organization_id: payload.organization_id,
-        };
-
-        return next();
-      } catch (err) {
-        return res.status(401).json({ error: 'Invalid token', code: 'INVALID_TOKEN' });
-      }
-    }
-
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {
@@ -84,16 +56,20 @@ function authMiddleware(req, res, next) {
       });
     }
 
-    const token = authHeader.replace('Bearer ', '');
+    const bearer = typeof authHeader === 'string' && /^Bearer\s+(\S+)$/i.exec(authHeader);
 
-    if (!token) {
+    if (!bearer) {
       return res.status(401).json({
-        error: 'No token provided',
-        code: 'NO_TOKEN',
+        error: 'A Bearer access token is required',
+        code: 'INVALID_TOKEN',
       });
     }
 
-    const payload = verifyToken(token);
+    const payload = verifyToken(bearer[1]);
+    // Refresh credentials are only for the refresh endpoint, never protected resources.
+    if (payload.tokenType === 'refresh' || payload.userId === undefined || payload.userId === null) {
+      throw new Error('Invalid token');
+    }
 
     // Attach user info to request
     req.user = {
@@ -179,10 +155,13 @@ function optionalAuth(req, res, next) {
     const authHeader = req.headers.authorization;
 
     if (authHeader) {
-      const token = authHeader.replace('Bearer ', '');
+      const bearer = typeof authHeader === 'string' && /^Bearer\s+(\S+)$/i.exec(authHeader);
 
-      if (token) {
-        const payload = verifyToken(token);
+      if (bearer) {
+        const payload = verifyToken(bearer[1]);
+        if (payload.tokenType === 'refresh' || payload.userId === undefined || payload.userId === null) {
+          return next();
+        }
         req.user = {
           id: payload.userId,
           email: payload.email,

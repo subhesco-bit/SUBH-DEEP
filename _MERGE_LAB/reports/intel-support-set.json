@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "set.js",
+    "candidateCount": 4,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "set",
+        "_set",
+        "__esModule",
+        "setDunder"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

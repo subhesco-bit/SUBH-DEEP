@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "m141page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M141Page"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\M141\\index.jsx"
+    ]
+  },
+  {
+    "stem": "m141component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M141Component"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

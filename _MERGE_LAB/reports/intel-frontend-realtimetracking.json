@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "realtimetracking.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "RealTimeTracking",
+        "loadTrackingData",
+        "loadTemperatureData",
+        "loadAlerts"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M615100_LOGISTICS\\frontend\\pages\\LogisticsPage.jsx"
+    ]
+  }
+]

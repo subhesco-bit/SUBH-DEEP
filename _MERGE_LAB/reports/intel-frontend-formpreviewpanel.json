@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "formpreviewpanel.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "FormPreviewPanel",
+        "renderInput"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\pages\\FormManagementPage.jsx"
+    ]
+  }
+]

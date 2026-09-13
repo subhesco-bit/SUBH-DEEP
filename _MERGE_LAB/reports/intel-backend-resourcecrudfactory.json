@@ -1,0 +1,26 @@
+[
+  {
+    "stem": "resourcecrudfactory.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "createCrudService",
+        "list",
+        "get",
+        "validateRequired",
+        "create",
+        "update",
+        "remove",
+        "offset"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M538100_RESOURCECRUDFACTORY\\backend\\service.js",
+      "backend\\src\\services\\resourceCrudFactory.js"
+    ]
+  }
+]

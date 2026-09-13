@@ -8,7 +8,18 @@
 
 const fs = require('fs');
 const path = require('path');
-const db = require('./connection');
+// The shared pool proxy, not ./connection.
+//
+// ./connection exports { initialize, getPostgreSQL, getMongoDB,
+// getMongoDatabase, isHealthy, close } — it has no `.query()`, so every
+// `db.query(...)` below threw TypeError on the first call. This file could
+// never have run as written. ./pool is the lazy proxy over the same single
+// pool and does expose query()/connect().
+const db = require('./pool');
+// The proxy intentionally exposes only query()/connect(); closing the shared
+// pool is the connection module's job. `db.end()` here was a TypeError.
+const { close: closeDatabase } = require('./connection');
+const { compareMigrationNames } = require('./migrationOrder');
 
 class MigrationExecutor {
   constructor() {
@@ -39,7 +50,7 @@ class MigrationExecutor {
     try {
       const files = fs.readdirSync(this.migrationsDir)
         .filter(f => f.endsWith('.sql'))
-        .sort();
+        .sort(compareMigrationNames);
 
       console.log(`📋 Found ${files.length} migration files`);
       return files;
@@ -90,25 +101,34 @@ class MigrationExecutor {
         return false;
       }
 
-      // Execute within transaction
-      await db.query('BEGIN');
+      // Execute within a transaction, on ONE connection.
+      //
+      // Issuing BEGIN/COMMIT through the pool would send each statement to
+      // whatever connection happened to be free, so the migration would run
+      // outside the transaction it appears to be wrapped in and ROLLBACK would
+      // undo nothing. Same defect as the one fixed in migrate.js.
+      const client = await db.connect();
 
       try {
+        await client.query('BEGIN');
+
         // Execute migration
-        await db.query(sql);
+        await client.query(sql);
 
         // Record migration
-        await db.query(
+        await client.query(
           `INSERT INTO ${this.trackingTable} (migration, batch) VALUES ($1, $2)`,
           [filename, batch]
         );
 
-        await db.query('COMMIT');
+        await client.query('COMMIT');
         console.log(`✅ Executed: ${filename}`);
         return true;
       } catch (error) {
-        await db.query('ROLLBACK');
+        await client.query('ROLLBACK').catch(() => {});
         throw error;
+      } finally {
+        client.release();
       }
     } catch (error) {
       console.error(`❌ Error executing ${filename}:`, error.message);
@@ -173,7 +193,7 @@ class MigrationExecutor {
       console.error('\n❌ Fatal error during migration:', error);
       process.exit(1);
     } finally {
-      await db.end();
+      await closeDatabase();
     }
   }
 
@@ -210,7 +230,7 @@ class MigrationExecutor {
       console.error('❌ Error during rollback:', error);
       throw error;
     } finally {
-      await db.end();
+      await closeDatabase();
     }
   }
 
@@ -236,7 +256,7 @@ class MigrationExecutor {
     } catch (error) {
       console.error('❌ Error getting status:', error);
     } finally {
-      await db.end();
+      await closeDatabase();
     }
   }
 }

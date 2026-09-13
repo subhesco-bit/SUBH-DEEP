@@ -1,0 +1,92 @@
+[
+  {
+    "stem": "erpservice.js",
+    "candidateCount": 7,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 31,
+    "uniquePerSource": {
+      "claude": [
+        "syncFarmerCropPlanningWithERP",
+        "syncFarmerHarvestWithERP",
+        "syncFarmerFieldWithERP",
+        "syncCropLifecycleWithERP",
+        "syncCropYieldWithERP",
+        "syncLivestockWithERP",
+        "syncLivestockProductionWithERP",
+        "syncLivestockHealthWithERP",
+        "syncDairyProductionWithERP",
+        "syncPoultryProductionWithERP",
+        "syncGoatProductionWithERP",
+        "syncSheepProductionWithERP",
+        "syncPigProductionWithERP",
+        "postCostAllocationToGL",
+        "postRevenueToGL",
+        "postDepreciationToGL",
+        "postProvisionToGL",
+        "postStageCostsToGL",
+        "calculateHarvestRevenue",
+        "calculateYieldRevenue",
+        "calculateLivestockProductionRevenue",
+        "calculateDairyProductionRevenue",
+        "calculatePoultryProductionRevenue",
+        "calculateGoatProductionRevenue",
+        "calculateSheepProductionRevenue",
+        "calculatePigProductionRevenue",
+        "calculateLandDepreciation",
+        "calculateLivestockDepreciation",
+        "calculateHealthEventCost",
+        "postToGeneralLedger",
+        "getCreditAccount",
+        "generateGSTInvoice",
+        "getGSTRate",
+        "syncInventoryWithERP",
+        "createPurchaseOrder",
+        "syncCustomerWithCRM",
+        "calculateCustomerTier",
+        "createProductionOrder",
+        "months",
+        "generalLedger",
+        "controlling",
+        "materialsManagement",
+        "salesDistribution",
+        "productionPlanning",
+        "qualityManagement",
+        "plantMaintenance",
+        "humanResources",
+        "projectSystem",
+        "treasury",
+        "assetManagement",
+        "businessIntelligence"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\controllers\\comprehensiveERPController.js",
+      "backend\\src\\modules\\M300_ERP_CORE\\backend\\service.js",
+      "backend\\src\\services\\erpService.js"
+    ]
+  },
+  {
+    "stem": "erproutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:POST:/cost-centres/create",
+        "route:POST:/costs/allocate",
+        "route:POST:/costs/record-consumption",
+        "route:POST:/costs/allocate-abc",
+        "route:GET:/profitability/:cost_centre_id/:period",
+        "route:GET:/variance/:cost_centre_id/:period",
+        "route:GET:/drill-down/:cost_centre_id/:period"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

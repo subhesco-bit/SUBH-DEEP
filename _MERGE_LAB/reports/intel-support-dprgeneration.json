@@ -1,0 +1,42 @@
+[
+  {
+    "stem": "dprgenerationservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 3,
+    "uniquePerSource": {
+      "claude": [
+        "eligibleSchemes"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M767100_DPRGENERATION\\backend\\service.js",
+      "backend\\src\\routes\\dprGenerationRoutes_merged.js",
+      "backend\\src\\services\\dprGenerationService.js",
+      "backend\\src\\tests\\erpDprSearchContracts.test.js"
+    ]
+  },
+  {
+    "stem": "dprgenerationroutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 5,
+    "uniquePerSource": {
+      "claude": [
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

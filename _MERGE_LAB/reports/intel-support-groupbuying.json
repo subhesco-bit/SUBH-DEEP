@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "groupbuyingpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "GroupBuyingPage",
+        "getProgress"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

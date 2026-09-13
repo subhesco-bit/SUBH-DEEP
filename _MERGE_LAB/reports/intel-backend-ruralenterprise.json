@@ -1,0 +1,38 @@
+[
+  {
+    "stem": "ruralenterpriseservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "setupRoutes",
+        "route:GET:/",
+        "route:POST:/",
+        "router",
+        "getRuralEnterprise",
+        "getRuralEnterprisesByVillage",
+        "getRuralEnterprisesByType",
+        "createRuralEnterprise",
+        "updateRuralEnterprise",
+        "getRuralEnterpriseStatistics",
+        "searchRuralEnterprises",
+        "route:GET:/enterprises/:enterpriseId",
+        "route:GET:/enterprises/village/:villageId",
+        "route:GET:/enterprises/type/:enterpriseType",
+        "route:POST:/enterprises",
+        "route:PUT:/enterprises/:enterpriseId",
+        "route:GET:/enterprises/statistics",
+        "route:GET:/enterprises/search",
+        "r2"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M791100_RURALENTERPRISE\\backend\\service.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\services\\ruralEnterpriseService.js"
+    ]
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "stem": "m001page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M001Page",
+        "load",
+        "initialize"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\criticalModules.test.jsx"
+    ]
+  },
+  {
+    "stem": "m001component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M001Component"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "stem": "asynciterator.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_asyncIterator",
+        "AsyncFromSyncIterator",
+        "AsyncFromSyncIteratorContinuation",
+        "next",
+        "_return",
+        "_throw",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "lazy-routes.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "captureCurrentLocation",
+        "captureActiveSpan",
+        "createAsyncHandlerProxy",
+        "handleAsyncHandlerResult",
+        "checkRouteForAsyncHandler"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

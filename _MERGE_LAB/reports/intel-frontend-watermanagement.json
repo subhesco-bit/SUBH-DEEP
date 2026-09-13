@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "watermanagementpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "ActionCard",
+        "WaterManagementPage",
+        "handleRun"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M77100_WATERMANAGEMENT\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

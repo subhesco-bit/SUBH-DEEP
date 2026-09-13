@@ -1,0 +1,38 @@
+[
+  {
+    "stem": "commercerulesservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "priceFreeze",
+        "loyaltyRedemption",
+        "subscriptionPlan",
+        "deliveryZone",
+        "listServiceablePincodes",
+        "harvestTier",
+        "harvestPoints",
+        "isHealthy",
+        "route:GET:/delivery-zone",
+        "route:GET:/serviceable-pincodes",
+        "route:POST:/subscription-plan",
+        "route:POST:/price-freeze",
+        "route:POST:/loyalty-redemption",
+        "route:GET:/harvest-points/:userId",
+        "handle",
+        "router",
+        "HS_TIERS",
+        "PRICE_FREEZE_MS",
+        "LOYALTY_MIN_REDEEM"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M412100_COMMERCERULES\\backend\\service.js",
+      "backend\\src\\services\\commerceRulesService.js",
+      "backend\\src\\services\\index.js"
+    ]
+  }
+]

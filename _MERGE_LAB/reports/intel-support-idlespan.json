@@ -1,0 +1,26 @@
+[
+  {
+    "stem": "idlespan.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "startIdleSpan",
+        "_cancelIdleTimeout",
+        "_cancelChildSpanTimeout",
+        "_restartIdleTimeout",
+        "_restartChildSpanTimeout",
+        "_pushActivity",
+        "_popActivity",
+        "onIdleSpanEnded",
+        "_startIdleSpan",
+        "TRACING_DEFAULTS",
+        "timeoutWithMarginOfError"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

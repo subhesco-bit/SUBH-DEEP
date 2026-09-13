@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "toolbar.d.ts",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "ToolbarFactory"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

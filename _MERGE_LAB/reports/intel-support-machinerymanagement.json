@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "machinerymanagementpage.jsx",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M290100_MACHINERYACCESS\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

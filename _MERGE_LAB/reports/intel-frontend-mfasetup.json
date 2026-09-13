@@ -1,0 +1,37 @@
+[
+  {
+    "stem": "mfasetup.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "MFASetup",
+        "setupMFA",
+        "verifyMFA"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\pages\\MFASetupPage.jsx"
+    ]
+  },
+  {
+    "stem": "mfasetuppage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "MFASetupPage"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js",
+      "frontend\\src\\router\\routes.jsx"
+    ]
+  }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "stem": "farmerportalenhancements.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "resolveFarmerId",
+        "route:POST:/land-records",
+        "route:GET:/land-records",
+        "route:GET:/land-records/:recordId",
+        "route:PUT:/land-records/:recordId",
+        "route:PUT:/land-records/:recordId/verify",
+        "route:POST:/land-records/sync-government",
+        "route:GET:/land-records/statistics/region",
+        "route:DELETE:/land-records/:recordId",
+        "route:POST:/crop-plans",
+        "route:GET:/crop-plans",
+        "route:GET:/crop-plans/recommendations/:landRecordId",
+        "route:PUT:/crop-plans/:planId/status",
+        "route:GET:/crop-plans/analytics",
+        "route:GET:/wallet",
+        "route:GET:/wallet/transactions",
+        "route:POST:/wallet/deposit",
+        "route:POST:/wallet/withdraw",
+        "route:POST:/wallet/transfer",
+        "route:GET:/wallet/balance",
+        "route:POST:/wallet/link-bank",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

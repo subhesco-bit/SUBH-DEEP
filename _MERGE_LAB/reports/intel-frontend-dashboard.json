@@ -1,0 +1,47 @@
+[
+  {
+    "stem": "dashboardpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "DashboardPage"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\router\\routes.jsx"
+    ]
+  },
+  {
+    "stem": "dashboard.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "Dashboard",
+        "loadDashboardData",
+        "fetchWidgetData",
+        "renderWidget",
+        "getLayoutClasses",
+        "MetricWidget",
+        "ChartWidget",
+        "height",
+        "TableWidget",
+        "GaugeWidget",
+        "percentage",
+        "getColor",
+        "MapWidget"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M200_ORGANIZATION_MANAGEMENT\\frontend\\pages\\PlatformManagementPage.jsx",
+      "frontend\\src\\pages\\PlatformManagementPage.jsx"
+    ]
+  }
+]

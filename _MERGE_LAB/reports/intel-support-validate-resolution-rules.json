@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "validate-resolution-rules.js",
+    "candidateCount": 3,
+    "sources": [
+      "claude",
+      "old-new-folder",
+      "tools"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

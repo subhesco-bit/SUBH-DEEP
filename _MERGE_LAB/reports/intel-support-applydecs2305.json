@@ -1,0 +1,28 @@
+[
+  {
+    "stem": "applydecs2305.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "applyDecs2305",
+        "i",
+        "c",
+        "s",
+        "applyDec",
+        "m",
+        "set",
+        "k",
+        "F",
+        "u",
+        "l",
+        "decorators",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

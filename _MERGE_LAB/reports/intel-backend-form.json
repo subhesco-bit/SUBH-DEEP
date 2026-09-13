@@ -1,0 +1,42 @@
+[
+  {
+    "stem": "formservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "buildId",
+        "ensureDefaultStore",
+        "readStore",
+        "writeStore",
+        "ensureDatabaseSchema",
+        "loadFormsFromDb",
+        "buildAiInsights",
+        "normalizeForm",
+        "listForms",
+        "getFormById",
+        "assertFormOwnership",
+        "createForm",
+        "updateForm",
+        "deleteForm",
+        "submitForm",
+        "listSubmissions",
+        "route:GET:/",
+        "route:GET:/templates",
+        "route:POST:/",
+        "route:GET:/:id",
+        "route:PUT:/:id",
+        "route:DELETE:/:id",
+        "route:POST:/:id/submit",
+        "route:GET:/:id/submissions",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\tests\\productAndFormOwnership.test.js"
+    ]
+  }
+]

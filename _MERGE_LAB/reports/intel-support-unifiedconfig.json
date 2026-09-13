@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "unifiedconfigservice.js",
+    "candidateCount": 6,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {
+      "old-new-folder": [
+        "isPlaceholderSecret"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\core\\claudeAICoordinator.js",
+      "backend\\src\\services\\index.js"
+    ]
+  }
+]

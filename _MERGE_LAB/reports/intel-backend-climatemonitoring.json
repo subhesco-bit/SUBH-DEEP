@@ -1,0 +1,38 @@
+[
+  {
+    "stem": "climatemonitoringroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "climatemonitoringservice.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "droughtMonitoring",
+        "floodMonitoring",
+        "diseaseForecasting",
+        "climateRisk"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M263100_CLIMATEMONITORING\\backend\\service.js"
+    ]
+  }
+]

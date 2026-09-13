@@ -1,0 +1,34 @@
+[
+  {
+    "stem": "buyingclubservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 20,
+    "uniquePerSource": {
+      "claude": [
+        "marginalDiscount",
+        "computeDiscountTier",
+        "createClub",
+        "listClubs",
+        "getClub",
+        "getDiscountTier",
+        "refreshSavings",
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:GET:/:id/discount-tier",
+        "route:POST:/:id/refresh-savings",
+        "offset",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M48100_BUYINGCLUB\\backend\\service.js",
+      "backend\\src\\services\\buyingClubService.js"
+    ]
+  }
+]

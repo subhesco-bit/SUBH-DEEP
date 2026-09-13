@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "backupservice.js",
+    "candidateCount": 8,
+    "sources": [
+      "backend-current",
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M356100_BACKUP\\backend\\service.js",
+      "backend\\src\\services\\backupService.js",
+      "backend\\src\\test\\services\\backupService.test.js"
+    ]
+  }
+]

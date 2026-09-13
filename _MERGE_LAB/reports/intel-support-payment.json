@@ -1,0 +1,38 @@
+[
+  {
+    "stem": "paymentservice.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "database",
+        "validateAmount",
+        "PaymentService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\services\\index.js"
+    ]
+  },
+  {
+    "stem": "paymentroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/status",
+        "route:POST:/stripe/intent",
+        "route:POST:/razorpay/verify"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

@@ -1,0 +1,139 @@
+[
+  {
+    "stem": "voiceaiservice.js",
+    "candidateCount": 6,
+    "sources": [
+      "backend-current",
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 23,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M477100_VOICEAI\\backend\\service.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\services\\voiceAIService.js"
+    ]
+  },
+  {
+    "stem": "advancedvoiceai.js",
+    "candidateCount": 7,
+    "sources": [
+      "backend-current",
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 23,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\services\\index.js"
+    ]
+  },
+  {
+    "stem": "advancedvoiceai.js.html",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "voiceaiservice.js.html",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "service.js",
+    "candidateCount": 4,
+    "sources": [
+      "backend-current",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\core\\moduleRegistry.js",
+      "backend\\src\\modules\\M001\\service.js",
+      "backend\\src\\modules\\M645100_LIBRARYKNOWLEDGE\\api\\routes.js",
+      "backend\\src\\routes\\m400AiBackboneRoutes.js",
+      "backend\\src\\services\\libraryKnowledgeService.js",
+      "backend\\src\\tests\\libraryKnowledgeService.test.js"
+    ]
+  },
+  {
+    "stem": "046-advanced-voice-ai-tables.sql",
+    "candidateCount": 4,
+    "sources": [
+      "backend-current",
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "voiceaiservice.test.js",
+    "candidateCount": 4,
+    "sources": [
+      "backend-current",
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "module.json",
+    "candidateCount": 4,
+    "sources": [
+      "backend-current",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "voice-ai-schema.sql",
+    "candidateCount": 4,
+    "sources": [
+      "backend-current",
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "045-voice-ai-schema.sql",
+    "candidateCount": 4,
+    "sources": [
+      "backend-current",
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

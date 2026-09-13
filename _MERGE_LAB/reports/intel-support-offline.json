@@ -1,0 +1,25 @@
+[
+  {
+    "stem": "offline.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "promisifyRequest",
+        "createStore",
+        "keys",
+        "push",
+        "unshift",
+        "shift",
+        "createIndexedDbStore",
+        "getStore",
+        "makeIndexedDbOfflineTransport",
+        "makeBrowserOfflineTransport"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

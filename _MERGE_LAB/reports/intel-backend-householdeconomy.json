@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "householdeconomyservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "setupRoutes",
+        "route:GET:/",
+        "route:POST:/",
+        "router",
+        "getHouseholdEconomy",
+        "getHouseholdEconomiesByVillage",
+        "upsertHouseholdEconomy",
+        "getVillageHouseholdEconomySummary",
+        "route:GET:/households/:householdId",
+        "route:GET:/households/village/:villageId",
+        "route:GET:/households/village/:villageId/summary",
+        "route:POST:/households",
+        "r2"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M37100_HOUSEHOLDECONOMY\\backend\\service.js",
+      "backend\\src\\services\\householdEconomyService.js",
+      "backend\\src\\services\\index.js"
+    ]
+  }
+]

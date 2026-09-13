@@ -1,0 +1,48 @@
+[
+  {
+    "stem": "instrumentation.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "scheduleCallback",
+        "cancelScheduledCallback",
+        "computeLocationKey",
+        "isParameterizedRoute",
+        "shouldSkipNavigation",
+        "addResolvedRoutesToParent",
+        "trackLazyRouteLoad",
+        "createDeferredLazyRoutePromise",
+        "resolveDeferredLazyRoutePromise",
+        "processResolvedRoutes",
+        "updateNavigationSpan",
+        "setupRouterSubscription",
+        "createV6CompatibleWrapCreateBrowserRouter",
+        "createV6CompatibleWrapCreateMemoryRouter",
+        "createReactRouterV6CompatibleTracingIntegration",
+        "createV6CompatibleWrapUseRoutes",
+        "wrapPatchRoutesOnNavigation",
+        "handleNavigation",
+        "addRoutesToAllRoutes",
+        "removeRoutesFromAllRoutes",
+        "getChildRoutesRecursively",
+        "updatePageloadTransaction",
+        "shouldUpdateWildcardSpanName",
+        "tryUpdateSpanNameBeforeEnd",
+        "patchSpanEnd",
+        "patchedEnd",
+        "createV6CompatibleWithSentryReactRouterRouting",
+        "navigationHandler",
+        "defaultMaxWait",
+        "SentryRoutes",
+        "lazyLoadPromise",
+        "cleanupNavigationSpan",
+        "allRoutes"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

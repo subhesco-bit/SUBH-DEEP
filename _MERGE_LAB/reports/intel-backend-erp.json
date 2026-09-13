@@ -1,0 +1,71 @@
+[
+  {
+    "stem": "erproutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/cost-centres/create",
+        "route:POST:/costs/allocate",
+        "route:POST:/costs/record-consumption",
+        "route:POST:/costs/allocate-abc",
+        "route:GET:/profitability/:cost_centre_id/:period",
+        "route:GET:/variance/:cost_centre_id/:period",
+        "route:GET:/drill-down/:cost_centre_id/:period"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "erpservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "initializeERP",
+        "initializeSAP",
+        "initializeOracle",
+        "initializeCustomERP",
+        "syncProductToERP",
+        "syncOrderToERP",
+        "syncFarmerToERP",
+        "syncFinancialTransaction",
+        "syncAssetToERP",
+        "getSyncStatus",
+        "triggerBulkSync",
+        "transformProductToERPFormat",
+        "transformOrderToERPFormat",
+        "transformFarmerToERPFormat",
+        "transformTransactionToERPFormat",
+        "transformAssetToERPFormat",
+        "mapCategoryToMaterialGroup",
+        "mapStateToTaxCode",
+        "mapAssetTypeToClass",
+        "syncToSAP",
+        "syncToOracle",
+        "syncToCustomERP",
+        "logSyncOperation",
+        "route:GET:/status",
+        "route:POST:/sync/product",
+        "route:POST:/sync/order",
+        "route:POST:/sync/farmer",
+        "route:POST:/sync/transaction",
+        "route:POST:/sync/asset",
+        "route:POST:/sync/bulk",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\controllers\\comprehensiveERPController.js",
+      "backend\\src\\modules\\M300_ERP_CORE\\backend\\service.js",
+      "backend\\src\\services\\erpService.js",
+      "backend\\src\\services\\index.js"
+    ]
+  }
+]

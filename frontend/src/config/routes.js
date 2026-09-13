@@ -44,7 +44,7 @@ const DiscoverPage = lazy(() => import('../pages/DiscoverPage'));
 const PreOrderPage = lazy(() => import('../pages/PreOrderPage'));
 const LogisticsPage = lazy(() => import('../pages/LogisticsPage'));
 const InsurancePage = lazy(() => import('../pages/InsurancePage'));
-const DashboardPage = lazy(() => import('../pages/DashboardPage'));
+const DashboardPage = lazy(() => import('../pages/Generated/Page0'));
 const WalletPage = lazy(() => import('../pages/WalletPage'));
 const EscrowPage = lazy(() => import('../pages/EscrowPage'));
 const FarmerRevenueLedgerPage = lazy(() => import('../pages/FarmerRevenueLedgerPage'));
@@ -256,6 +256,174 @@ const TransactionHistoryPage = lazy(() => import('../pages/TransactionHistoryPag
 /**
  * Public routes - no authentication required
  */
+const DiscoveredERPDashboardPage = lazy(() => import('../pages/ERPDashboardPage'));
+const DiscoveredColdStorageDashboardPage = lazy(() => import('../pages/ColdStorageDashboardPage'));
+const DiscoveredClimateMonitoringDashboardPage = lazy(() => import('../pages/ClimateMonitoringDashboardPage'));
+const DiscoveredEnterpriseMemoryDashboardPage = lazy(() => import('../pages/EnterpriseMemoryDashboardPage'));
+const DiscoveredNutrientCalculatorPage = lazy(() => import('../pages/NutrientCalculatorPage'));
+const DiscoveredDecisionEngineDashboardPage = lazy(() => import('../pages/DecisionEngineDashboardPage'));
+const DiscoveredMedicalCodingDashboardPage = lazy(() => import('../pages/MedicalCodingDashboardPage'));
+const DiscoveredDigitalTwinDashboardPage = lazy(() => import('../pages/DigitalTwinDashboardPage'));
+const DiscoveredAdvancedMedicalCodingPage = lazy(() => import('../pages/AdvancedMedicalCodingPage'));
+const DiscoveredOrganizationTenantManagementPage = lazy(() => import('../pages/OrganizationTenantManagementPage'));
+const DiscoveredMachineryVillageOpsMachineryManagement = lazy(() => import('../pages/MachineryVillageOps/MachineryManagement'));
+const DiscoveredWaterIrrigationWaterManagement = lazy(() => import('../pages/WaterIrrigation/WaterManagement'));
+const DiscoveredSoilNutrientLandSoilManagement = lazy(() => import('../pages/SoilNutrientLand/SoilManagement'));
+const DiscoveredVendorProcurementVendorManagement = lazy(() => import('../pages/VendorProcurement/VendorManagement'));
+const DiscoveredAnalyticsAdvancedAnalyticsDashboard = lazy(() => import('../pages/analytics/AdvancedAnalyticsDashboard'));
+const DiscoveredGovernmentGovernmentSchemeDashboard = lazy(() => import('../pages/government/GovernmentSchemeDashboard'));
+const DiscoveredAdminComplianceDashboard = lazy(() => import('../pages/admin/ComplianceDashboard'));
+const DiscoveredSettingsAPIManagement = lazy(() => import('../pages/settings/APIManagement'));
+const DiscoveredSettingsWebhooks = lazy(() => import('../pages/settings/Webhooks'));
+const DiscoveredPlatformModuleWorkspace = lazy(() => import('../pages/platform/ModuleWorkspace'));
+const DiscoveredSettingsAdvancedSettings = lazy(() => import('../pages/settings/AdvancedSettings'));
+const DiscoveredSettingsAuditTrail = lazy(() => import('../pages/settings/AuditTrail'));
+const DiscoveredSettingsIntegrations = lazy(() => import('../pages/settings/Integrations'));
+const DiscoveredReportsExpenseReport = lazy(() => import('../pages/reports/ExpenseReport'));
+const DiscoveredReportsCropPerformance = lazy(() => import('../pages/reports/CropPerformance'));
+const DiscoveredReportsProfitReport = lazy(() => import('../pages/reports/ProfitReport'));
+const DiscoveredAdminAPIManagement = lazy(() => import('../pages/admin/APIManagement'));
+const DiscoveredAdminAuditLogs = lazy(() => import('../pages/admin/AuditLogs'));
+const DiscoveredAdminBackupRecovery = lazy(() => import('../pages/admin/BackupRecovery'));
+const DiscoveredAdminCacheManagement = lazy(() => import('../pages/admin/CacheManagement'));
+const DiscoveredAdminDatabaseManagement = lazy(() => import('../pages/admin/DatabaseManagement'));
+const DiscoveredAdminErrorHandling = lazy(() => import('../pages/admin/ErrorHandling'));
+const DiscoveredAdminIntegrationSettings = lazy(() => import('../pages/admin/IntegrationSettings'));
+const DiscoveredAdminLogViewer = lazy(() => import('../pages/admin/LogViewer'));
+const DiscoveredAdminNotificationPreferences = lazy(() => import('../pages/admin/NotificationPreferences'));
+const DiscoveredAdminPerformanceTuning = lazy(() => import('../pages/admin/PerformanceTuning'));
+const DiscoveredAdminResourceMonitoring = lazy(() => import('../pages/admin/ResourceMonitoring'));
+const DiscoveredAdminRolePermissions = lazy(() => import('../pages/admin/RolePermissions'));
+const DiscoveredAdminSecuritySettings = lazy(() => import('../pages/admin/SecuritySettings'));
+const DiscoveredAdminSystemConfiguration = lazy(() => import('../pages/admin/SystemConfiguration'));
+const DiscoveredAdminUserManagement = lazy(() => import('../pages/admin/UserManagement'));
+const DiscoveredAnalyticsAnomalyDetection = lazy(() => import('../pages/analytics/AnomalyDetection'));
+const DiscoveredAnalyticsCropYieldPrediction = lazy(() => import('../pages/analytics/CropYieldPrediction'));
+const DiscoveredAnalyticsCustomReportBuilder = lazy(() => import('../pages/analytics/CustomReportBuilder'));
+const DiscoveredAnalyticsDataQualityReport = lazy(() => import('../pages/analytics/DataQualityReport'));
+const DiscoveredAnalyticsErrorRateAnalysis = lazy(() => import('../pages/analytics/ErrorRateAnalysis'));
+const DiscoveredAnalyticsFarmerBehaviorAnalytics = lazy(() => import('../pages/analytics/FarmerBehaviorAnalytics'));
+const DiscoveredAnalyticsForecastingDashboard = lazy(() => import('../pages/analytics/ForecastingDashboard'));
+const DiscoveredAnalyticsHistoricalDataView = lazy(() => import('../pages/analytics/HistoricalDataView'));
+const DiscoveredAnalyticsIntelligenceReports = lazy(() => import('../pages/analytics/IntelligenceReports'));
+const DiscoveredAnalyticsMarketTrendAnalysis = lazy(() => import('../pages/analytics/MarketTrendAnalysis'));
+const DiscoveredAnalyticsOpportunitiesIdentifier = lazy(() => import('../pages/analytics/OpportunitiesIdentifier'));
+const DiscoveredAnalyticsPerformanceMetrics = lazy(() => import('../pages/analytics/PerformanceMetrics'));
+const DiscoveredAnalyticsPriceVolatilityChart = lazy(() => import('../pages/analytics/PriceVolatilityChart'));
+const DiscoveredAnalyticsRegionalComparison = lazy(() => import('../pages/analytics/RegionalComparison'));
+const DiscoveredAnalyticsResponseTimeMetrics = lazy(() => import('../pages/analytics/ResponseTimeMetrics'));
+const DiscoveredAnalyticsRiskAssessment = lazy(() => import('../pages/analytics/RiskAssessment'));
+const DiscoveredAnalyticsSubsidyDistributionMap = lazy(() => import('../pages/analytics/SubsidyDistributionMap'));
+const DiscoveredAnalyticsSystemHealthMonitor = lazy(() => import('../pages/analytics/SystemHealthMonitor'));
+const DiscoveredAnalyticsUserEngagementStats = lazy(() => import('../pages/analytics/UserEngagementStats'));
+const DiscoveredAnalyticsWeatherImpactAssessment = lazy(() => import('../pages/analytics/WeatherImpactAssessment'));
+const DiscoveredGovernmentAnnouncementBoard = lazy(() => import('../pages/government/AnnouncementBoard'));
+const DiscoveredGovernmentApplicationStatusTracker = lazy(() => import('../pages/government/ApplicationStatusTracker'));
+const DiscoveredGovernmentApprovalWorkflow = lazy(() => import('../pages/government/ApprovalWorkflow'));
+const DiscoveredGovernmentAuditLogPage = lazy(() => import('../pages/government/AuditLogPage'));
+const DiscoveredGovernmentBeneficiaryManagement = lazy(() => import('../pages/government/BeneficiaryManagement'));
+const DiscoveredGovernmentBiometricAuthentication = lazy(() => import('../pages/government/BiometricAuthentication'));
+const DiscoveredGovernmentCancellationManagement = lazy(() => import('../pages/government/CancellationManagement'));
+const DiscoveredGovernmentComplianceValidator = lazy(() => import('../pages/government/ComplianceValidator'));
+const DiscoveredGovernmentDeadlineTracker = lazy(() => import('../pages/government/DeadlineTracker'));
+const DiscoveredGovernmentDisputeResolutionPage = lazy(() => import('../pages/government/DisputeResolutionPage'));
+const DiscoveredGovernmentDocumentUploadPage = lazy(() => import('../pages/government/DocumentUploadPage'));
+const DiscoveredGovernmentGovernmentNotificationCenter = lazy(() => import('../pages/government/GovernmentNotificationCenter'));
+const DiscoveredGovernmentMobileVerification = lazy(() => import('../pages/government/MobileVerification'));
+const DiscoveredGovernmentPaymentGateway = lazy(() => import('../pages/government/PaymentGateway'));
+const DiscoveredGovernmentSchemeBeneficiaryList = lazy(() => import('../pages/government/SchemeBeneficiaryList'));
+const DiscoveredGovernmentSchemeEligibilityChecker = lazy(() => import('../pages/government/SchemeEligibilityChecker'));
+const DiscoveredGovernmentSchemeReportGenerator = lazy(() => import('../pages/government/SchemeReportGenerator'));
+const DiscoveredGovernmentSchemeUpdateNotifier = lazy(() => import('../pages/government/SchemeUpdate Notifier'));
+const DiscoveredGovernmentSchemeVerificationPage = lazy(() => import('../pages/government/SchemeVerificationPage'));
+const DiscoveredGovernmentSubsidyApplicationPage = lazy(() => import('../pages/government/SubsidyApplicationPage'));
+const DiscoveredMobileMobileChat = lazy(() => import('../pages/mobile/MobileChat'));
+const DiscoveredMobileMobileHelp = lazy(() => import('../pages/mobile/MobileHelp'));
+const DiscoveredMobileMobileHomepage = lazy(() => import('../pages/mobile/MobileHomepage'));
+const DiscoveredMobileMobileMarketplace = lazy(() => import('../pages/mobile/MobileMarketplace'));
+const DiscoveredMobileMobileNotifications = lazy(() => import('../pages/mobile/MobileNotifications'));
+const DiscoveredMobileMobileOffers = lazy(() => import('../pages/mobile/MobileOffers'));
+const DiscoveredMobileMobilePayments = lazy(() => import('../pages/mobile/MobilePayments'));
+const DiscoveredMobileMobileProfile = lazy(() => import('../pages/mobile/MobileProfile'));
+const DiscoveredMobileMobileSettings = lazy(() => import('../pages/mobile/MobileSettings'));
+const DiscoveredMobileMobileWallet = lazy(() => import('../pages/mobile/MobileWallet'));
+
+const SweepAccessibilityPage = lazy(() => import('../pages/AccessibilityPage'));
+const SweepAccountPage = lazy(() => import('../pages/AccountPage'));
+const SweepActivityPage = lazy(() => import('../pages/ActivityPage'));
+const SweepAdvancedPage = lazy(() => import('../pages/AdvancedPage'));
+const SweepAIDashboardPage = lazy(() => import('../pages/AIDashboardPage'));
+const SweepArchivePage = lazy(() => import('../pages/ArchivePage'));
+const SweepBackupPage = lazy(() => import('../pages/BackupPage'));
+const SweepBillingPage = lazy(() => import('../pages/BillingPage'));
+const SweepBrowsePage = lazy(() => import('../pages/BrowsePage'));
+const SweepCategoriesPage = lazy(() => import('../pages/CategoriesPage'));
+const SweepClaimsPage = lazy(() => import('../pages/ClaimsPage'));
+const SweepCollaboratePage = lazy(() => import('../pages/CollaboratePage'));
+const SweepCollectionsPage = lazy(() => import('../pages/CollectionsPage'));
+const SweepContactPage = lazy(() => import('../pages/ContactPage'));
+const SweepCookiePage = lazy(() => import('../pages/CookiePage'));
+const SweepCropsPage = lazy(() => import('../pages/CropsPage'));
+const SweepDevicesPage = lazy(() => import('../pages/DevicesPage'));
+const SweepDocumentationPage = lazy(() => import('../pages/DocumentationPage'));
+const SweepEmptyPage = lazy(() => import('../pages/EmptyPage'));
+const SweepEquipmentPage = lazy(() => import('../pages/EquipmentPage'));
+const SweepExplorePage = lazy(() => import('../pages/ExplorePage'));
+const SweepExportPage = lazy(() => import('../pages/ExportPage'));
+const SweepFAQPage = lazy(() => import('../pages/FAQPage'));
+const SweepFarmsPage = lazy(() => import('../pages/FarmsPage'));
+const SweepFavoritesPage = lazy(() => import('../pages/FavoritesPage'));
+const SweepFeedbackPage = lazy(() => import('../pages/FeedbackPage'));
+const SweepFieldsPage = lazy(() => import('../pages/FieldsPage'));
+const SweepFinancePage = lazy(() => import('../pages/FinancePage'));
+const SweepHelpPage = lazy(() => import('../pages/HelpPage'));
+const SweepHistoryPage = lazy(() => import('../pages/HistoryPage'));
+const SweepImportPage = lazy(() => import('../pages/ImportPage'));
+const SweepInboxPage = lazy(() => import('../pages/InboxPage'));
+const SweepInsuranceCoveragesPage = lazy(() => import('../pages/InsuranceCoveragesPage'));
+const SweepInvoicesPage = lazy(() => import('../pages/InvoicesPage'));
+const SweepLabelsPage = lazy(() => import('../pages/LabelsPage'));
+const SweepLanguagePage = lazy(() => import('../pages/LanguagePage'));
+const SweepLoadingPage = lazy(() => import('../pages/LoadingPage'));
+const SweepLogsPage = lazy(() => import('../pages/LogsPage'));
+const SweepMembersPage = lazy(() => import('../pages/MembersPage'));
+const SweepMessagesPage = lazy(() => import('../pages/MessagesPage'));
+const SweepMobilePage = lazy(() => import('../pages/MobilePage'));
+const SweepNotFoundPage = lazy(() => import('../pages/NotFoundPage'));
+const SweepNotificationsPage = lazy(() => import('../pages/NotificationsPage'));
+const SweepOnboardingPage = lazy(() => import('../pages/OnboardingPage'));
+const SweepPaymentsPage = lazy(() => import('../pages/PaymentsPage'));
+const SweepPermissionsPage = lazy(() => import('../pages/PermissionsPage'));
+const SweepPopularPage = lazy(() => import('../pages/PopularPage'));
+const SweepPreferencesPage = lazy(() => import('../pages/PreferencesPage'));
+const SweepPrivacyPage = lazy(() => import('../pages/PrivacyPage'));
+const SweepReceiptsPage = lazy(() => import('../pages/ReceiptsPage'));
+const SweepRecentPage = lazy(() => import('../pages/RecentPage'));
+const SweepReportingPage = lazy(() => import('../pages/ReportingPage'));
+const SweepRestorePage = lazy(() => import('../pages/RestorePage'));
+const SweepResultsPage = lazy(() => import('../pages/ResultsPage'));
+const SweepRolesPage = lazy(() => import('../pages/RolesPage'));
+const SweepSearchPage = lazy(() => import('../pages/SearchPage'));
+const SweepSecurityPage = lazy(() => import('../pages/SecurityPage'));
+const SweepServerErrorPage = lazy(() => import('../pages/ServerErrorPage'));
+const SweepSessionsPage = lazy(() => import('../pages/SessionsPage'));
+const SweepSettingsPage = lazy(() => import('../pages/SettingsPage'));
+const SweepSharePage = lazy(() => import('../pages/SharePage'));
+const SweepSubscriptionPage = lazy(() => import('../pages/SubscriptionPage'));
+const SweepSyncPage = lazy(() => import('../pages/SyncPage'));
+const SweepTagsPage = lazy(() => import('../pages/TagsPage'));
+const SweepTeamPage = lazy(() => import('../pages/TeamPage'));
+const SweepTermsPage = lazy(() => import('../pages/TermsPage'));
+const SweepThemePage = lazy(() => import('../pages/ThemePage'));
+const SweepTrashPage = lazy(() => import('../pages/TrashPage'));
+const SweepTrendingPage = lazy(() => import('../pages/TrendingPage'));
+const SweepTutorialPage = lazy(() => import('../pages/TutorialPage'));
+const SweepUnauthorizedPage = lazy(() => import('../pages/UnauthorizedPage'));
+const SweepWelcomePage = lazy(() => import('../pages/WelcomePage'));
+const SweepProductsPage = lazy(() => import('../pages/Generated/Page1'));
+const SweepOrdersPage = lazy(() => import('../pages/Generated/Page2'));
+const SweepProfilePage = lazy(() => import('../pages/Generated/Page3'));
+
 export const publicRoutes = [
   {
     path: '/',
@@ -446,6 +614,22 @@ export const publicRoutes = [
     keywords: 'land use, carbon, credits, agriculture',
     transition: 'fade',
   },
+  {
+    path: '/library',
+    component: LibraryBrowserPage,
+    title: 'Library - AFRERA',
+    description: 'Browse the module and knowledge library',
+    keywords: 'library, knowledge, modules, catalogue',
+    transition: 'fade',
+  },
+  {
+    path: '/library-knowledge',
+    component: LibraryBrowserPage,
+    title: 'Library Knowledge - AFRERA',
+    description: 'Search indexed files, modules, and connectivity evidence',
+    keywords: 'library, knowledge, modules, catalogue, connectivity',
+    transition: 'fade',
+  },
 ];
 
 /**
@@ -504,7 +688,7 @@ export const protectedRoutes = [
     transition: 'fade',
   },
   {
-    path: '/wallet',
+    path: '/my-wallet',
     component: WalletPage,
     title: 'Wallet - AFRERA',
     description: 'Manage your digital wallet and payments',
@@ -1596,22 +1780,6 @@ export const managementRoutes = [
     transition: 'fade',
   },
   {
-    path: '/library',
-    component: LibraryBrowserPage,
-    title: 'Library - AFRERA',
-    description: 'Browse the module and knowledge library',
-    keywords: 'library, knowledge, modules, catalogue',
-    transition: 'fade',
-  },
-  {
-    path: '/library-knowledge',
-    component: LibraryBrowserPage,
-    title: 'Library Knowledge - AFRERA',
-    description: 'Search indexed files, modules, and connectivity evidence',
-    keywords: 'library, knowledge, modules, catalogue, connectivity',
-    transition: 'fade',
-  },
-  {
     path: '/ai/chat',
     component: AIChatPage,
     title: 'AI Assistant - AFRERA',
@@ -2134,6 +2302,1174 @@ export function getRouteByPath(path) {
 /**
  * Get all routes
  */
+export const discoveredRoutes = [
+  {
+    path: '/erp-operations-dashboard',
+    component: DiscoveredERPDashboardPage,
+    title: 'ERPDashboard - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/cold-storage-dashboard',
+    component: DiscoveredColdStorageDashboardPage,
+    title: 'ColdStorageDashboard - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/climate-monitoring-dashboard',
+    component: DiscoveredClimateMonitoringDashboardPage,
+    title: 'ClimateMonitoringDashboard - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/enterprise-memory-dashboard',
+    component: DiscoveredEnterpriseMemoryDashboardPage,
+    title: 'EnterpriseMemoryDashboard - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/nutrient-calculator',
+    component: DiscoveredNutrientCalculatorPage,
+    title: 'NutrientCalculator - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/decision-engine-dashboard',
+    component: DiscoveredDecisionEngineDashboardPage,
+    title: 'DecisionEngineDashboard - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/medical-coding-dashboard',
+    component: DiscoveredMedicalCodingDashboardPage,
+    title: 'MedicalCodingDashboard - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/digital-twin-dashboard',
+    component: DiscoveredDigitalTwinDashboardPage,
+    title: 'DigitalTwinDashboard - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/advanced-medical-coding',
+    component: DiscoveredAdvancedMedicalCodingPage,
+    title: 'AdvancedMedicalCoding - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/organization-tenant-management',
+    component: DiscoveredOrganizationTenantManagementPage,
+    title: 'OrganizationTenantManagement - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/machinery-village-ops/machinery-management',
+    component: DiscoveredMachineryVillageOpsMachineryManagement,
+    title: 'MachineryManagement - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/water-irrigation/water-management',
+    component: DiscoveredWaterIrrigationWaterManagement,
+    title: 'WaterManagement - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/soil-nutrient-land/soil-management',
+    component: DiscoveredSoilNutrientLandSoilManagement,
+    title: 'SoilManagement - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/vendor-procurement/vendor-management',
+    component: DiscoveredVendorProcurementVendorManagement,
+    title: 'VendorManagement - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/advanced-analytics-dashboard',
+    component: DiscoveredAnalyticsAdvancedAnalyticsDashboard,
+    title: 'AdvancedAnalyticsDashboard - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/government-scheme-dashboard',
+    component: DiscoveredGovernmentGovernmentSchemeDashboard,
+    title: 'GovernmentSchemeDashboard - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/admin/compliance-dashboard',
+    component: DiscoveredAdminComplianceDashboard,
+    title: 'ComplianceDashboard - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/settings/api-management',
+    component: DiscoveredSettingsAPIManagement,
+    title: 'APIManagement - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/settings/webhooks',
+    component: DiscoveredSettingsWebhooks,
+    title: 'Webhooks - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/platform/module-workspace',
+    component: DiscoveredPlatformModuleWorkspace,
+    title: 'ModuleWorkspace - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/settings/advanced-settings',
+    component: DiscoveredSettingsAdvancedSettings,
+    title: 'AdvancedSettings - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/settings/audit-trail',
+    component: DiscoveredSettingsAuditTrail,
+    title: 'AuditTrail - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/settings/integrations',
+    component: DiscoveredSettingsIntegrations,
+    title: 'Integrations - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/reports/expense-report',
+    component: DiscoveredReportsExpenseReport,
+    title: 'ExpenseReport - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/reports/crop-performance',
+    component: DiscoveredReportsCropPerformance,
+    title: 'CropPerformance - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/reports/profit-report',
+    component: DiscoveredReportsProfitReport,
+    title: 'ProfitReport - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/admin/api-management',
+    component: DiscoveredAdminAPIManagement,
+    title: 'APIManagement - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/admin/audit-logs',
+    component: DiscoveredAdminAuditLogs,
+    title: 'AuditLogs - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/admin/backup-recovery',
+    component: DiscoveredAdminBackupRecovery,
+    title: 'BackupRecovery - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/admin/cache-management',
+    component: DiscoveredAdminCacheManagement,
+    title: 'CacheManagement - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/admin/database-management',
+    component: DiscoveredAdminDatabaseManagement,
+    title: 'DatabaseManagement - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/admin/error-handling',
+    component: DiscoveredAdminErrorHandling,
+    title: 'ErrorHandling - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/admin/integration-settings',
+    component: DiscoveredAdminIntegrationSettings,
+    title: 'IntegrationSettings - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/admin/log-viewer',
+    component: DiscoveredAdminLogViewer,
+    title: 'LogViewer - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/admin/notification-preferences',
+    component: DiscoveredAdminNotificationPreferences,
+    title: 'NotificationPreferences - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/admin/performance-tuning',
+    component: DiscoveredAdminPerformanceTuning,
+    title: 'PerformanceTuning - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/admin/resource-monitoring',
+    component: DiscoveredAdminResourceMonitoring,
+    title: 'ResourceMonitoring - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/admin/role-permissions',
+    component: DiscoveredAdminRolePermissions,
+    title: 'RolePermissions - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/admin/security-settings',
+    component: DiscoveredAdminSecuritySettings,
+    title: 'SecuritySettings - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/admin/system-configuration',
+    component: DiscoveredAdminSystemConfiguration,
+    title: 'SystemConfiguration - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/admin/user-management',
+    component: DiscoveredAdminUserManagement,
+    title: 'UserManagement - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/anomaly-detection',
+    component: DiscoveredAnalyticsAnomalyDetection,
+    title: 'AnomalyDetection - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/crop-yield-prediction',
+    component: DiscoveredAnalyticsCropYieldPrediction,
+    title: 'CropYieldPrediction - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/custom-report-builder',
+    component: DiscoveredAnalyticsCustomReportBuilder,
+    title: 'CustomReportBuilder - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/data-quality-report',
+    component: DiscoveredAnalyticsDataQualityReport,
+    title: 'DataQualityReport - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/error-rate-analysis',
+    component: DiscoveredAnalyticsErrorRateAnalysis,
+    title: 'ErrorRateAnalysis - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/farmer-behavior-analytics',
+    component: DiscoveredAnalyticsFarmerBehaviorAnalytics,
+    title: 'FarmerBehaviorAnalytics - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/forecasting-dashboard',
+    component: DiscoveredAnalyticsForecastingDashboard,
+    title: 'ForecastingDashboard - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/historical-data-view',
+    component: DiscoveredAnalyticsHistoricalDataView,
+    title: 'HistoricalDataView - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/intelligence-reports',
+    component: DiscoveredAnalyticsIntelligenceReports,
+    title: 'IntelligenceReports - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/market-trend-analysis',
+    component: DiscoveredAnalyticsMarketTrendAnalysis,
+    title: 'MarketTrendAnalysis - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/opportunities-identifier',
+    component: DiscoveredAnalyticsOpportunitiesIdentifier,
+    title: 'OpportunitiesIdentifier - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/performance-metrics',
+    component: DiscoveredAnalyticsPerformanceMetrics,
+    title: 'PerformanceMetrics - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/price-volatility-chart',
+    component: DiscoveredAnalyticsPriceVolatilityChart,
+    title: 'PriceVolatilityChart - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/regional-comparison',
+    component: DiscoveredAnalyticsRegionalComparison,
+    title: 'RegionalComparison - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/response-time-metrics',
+    component: DiscoveredAnalyticsResponseTimeMetrics,
+    title: 'ResponseTimeMetrics - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/risk-assessment',
+    component: DiscoveredAnalyticsRiskAssessment,
+    title: 'RiskAssessment - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/subsidy-distribution-map',
+    component: DiscoveredAnalyticsSubsidyDistributionMap,
+    title: 'SubsidyDistributionMap - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/system-health-monitor',
+    component: DiscoveredAnalyticsSystemHealthMonitor,
+    title: 'SystemHealthMonitor - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/user-engagement-stats',
+    component: DiscoveredAnalyticsUserEngagementStats,
+    title: 'UserEngagementStats - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/analytics/weather-impact-assessment',
+    component: DiscoveredAnalyticsWeatherImpactAssessment,
+    title: 'WeatherImpactAssessment - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/announcement-board',
+    component: DiscoveredGovernmentAnnouncementBoard,
+    title: 'AnnouncementBoard - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/application-status-tracker',
+    component: DiscoveredGovernmentApplicationStatusTracker,
+    title: 'ApplicationStatusTracker - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/approval-workflow',
+    component: DiscoveredGovernmentApprovalWorkflow,
+    title: 'ApprovalWorkflow - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/audit-log',
+    component: DiscoveredGovernmentAuditLogPage,
+    title: 'AuditLog - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/beneficiary-management',
+    component: DiscoveredGovernmentBeneficiaryManagement,
+    title: 'BeneficiaryManagement - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/biometric-authentication',
+    component: DiscoveredGovernmentBiometricAuthentication,
+    title: 'BiometricAuthentication - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/cancellation-management',
+    component: DiscoveredGovernmentCancellationManagement,
+    title: 'CancellationManagement - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/compliance-validator',
+    component: DiscoveredGovernmentComplianceValidator,
+    title: 'ComplianceValidator - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/deadline-tracker',
+    component: DiscoveredGovernmentDeadlineTracker,
+    title: 'DeadlineTracker - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/dispute-resolution',
+    component: DiscoveredGovernmentDisputeResolutionPage,
+    title: 'DisputeResolution - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/document-upload',
+    component: DiscoveredGovernmentDocumentUploadPage,
+    title: 'DocumentUpload - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/government-notification-center',
+    component: DiscoveredGovernmentGovernmentNotificationCenter,
+    title: 'GovernmentNotificationCenter - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/mobile-verification',
+    component: DiscoveredGovernmentMobileVerification,
+    title: 'MobileVerification - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/payment-gateway',
+    component: DiscoveredGovernmentPaymentGateway,
+    title: 'PaymentGateway - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/scheme-beneficiary-list',
+    component: DiscoveredGovernmentSchemeBeneficiaryList,
+    title: 'SchemeBeneficiaryList - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/scheme-eligibility-checker',
+    component: DiscoveredGovernmentSchemeEligibilityChecker,
+    title: 'SchemeEligibilityChecker - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/scheme-report-generator',
+    component: DiscoveredGovernmentSchemeReportGenerator,
+    title: 'SchemeReportGenerator - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/scheme-update-notifier',
+    component: DiscoveredGovernmentSchemeUpdateNotifier,
+    title: 'Scheme Update Notifier - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/scheme-verification',
+    component: DiscoveredGovernmentSchemeVerificationPage,
+    title: 'SchemeVerification - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/government/subsidy-application',
+    component: DiscoveredGovernmentSubsidyApplicationPage,
+    title: 'SubsidyApplication - AFRERA',
+    role: 'admin',
+    transition: 'fade',
+  },
+  {
+    path: '/mobile/mobile-chat',
+    component: DiscoveredMobileMobileChat,
+    title: 'MobileChat - AFRERA',
+    role: undefined,
+    transition: 'fade',
+  },
+  {
+    path: '/mobile/mobile-help',
+    component: DiscoveredMobileMobileHelp,
+    title: 'MobileHelp - AFRERA',
+    role: undefined,
+    transition: 'fade',
+  },
+  {
+    path: '/mobile/mobile-homepage',
+    component: DiscoveredMobileMobileHomepage,
+    title: 'MobileHomepage - AFRERA',
+    role: undefined,
+    transition: 'fade',
+  },
+  {
+    path: '/mobile/mobile-marketplace',
+    component: DiscoveredMobileMobileMarketplace,
+    title: 'MobileMarketplace - AFRERA',
+    role: undefined,
+    transition: 'fade',
+  },
+  {
+    path: '/mobile/mobile-notifications',
+    component: DiscoveredMobileMobileNotifications,
+    title: 'MobileNotifications - AFRERA',
+    role: undefined,
+    transition: 'fade',
+  },
+  {
+    path: '/mobile/mobile-offers',
+    component: DiscoveredMobileMobileOffers,
+    title: 'MobileOffers - AFRERA',
+    role: undefined,
+    transition: 'fade',
+  },
+  {
+    path: '/mobile/mobile-payments',
+    component: DiscoveredMobileMobilePayments,
+    title: 'MobilePayments - AFRERA',
+    role: undefined,
+    transition: 'fade',
+  },
+  {
+    path: '/mobile/mobile-profile',
+    component: DiscoveredMobileMobileProfile,
+    title: 'MobileProfile - AFRERA',
+    role: undefined,
+    transition: 'fade',
+  },
+  {
+    path: '/mobile/mobile-settings',
+    component: DiscoveredMobileMobileSettings,
+    title: 'MobileSettings - AFRERA',
+    role: undefined,
+    transition: 'fade',
+  },
+  {
+    path: '/mobile/mobile-wallet',
+    component: DiscoveredMobileMobileWallet,
+    title: 'MobileWallet - AFRERA',
+    role: undefined,
+    transition: 'fade',
+  },
+];
+
+export const sweepRoutes = [
+  {
+    path: '/accessibility',
+    component: SweepAccessibilityPage,
+    title: 'Accessibility - AFRERA',
+    isPublic: true,
+    transition: 'fade',
+  },
+  {
+    path: '/account',
+    component: SweepAccountPage,
+    title: 'Account - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/activity',
+    component: SweepActivityPage,
+    title: 'Activity - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/advanced',
+    component: SweepAdvancedPage,
+    title: 'Advanced - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/aidashboard',
+    component: SweepAIDashboardPage,
+    title: 'AIDashboard - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/archive',
+    component: SweepArchivePage,
+    title: 'Archive - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/backup',
+    component: SweepBackupPage,
+    title: 'Backup - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/billing',
+    component: SweepBillingPage,
+    title: 'Billing - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/browse',
+    component: SweepBrowsePage,
+    title: 'Browse - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/categories',
+    component: SweepCategoriesPage,
+    title: 'Categories - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/claims',
+    component: SweepClaimsPage,
+    title: 'Claims - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/collaborate',
+    component: SweepCollaboratePage,
+    title: 'Collaborate - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/collections',
+    component: SweepCollectionsPage,
+    title: 'Collections - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/contact',
+    component: SweepContactPage,
+    title: 'Contact - AFRERA',
+    isPublic: true,
+    transition: 'fade',
+  },
+  {
+    path: '/cookie',
+    component: SweepCookiePage,
+    title: 'Cookie - AFRERA',
+    isPublic: true,
+    transition: 'fade',
+  },
+  {
+    path: '/crops',
+    component: SweepCropsPage,
+    title: 'Crops - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/devices',
+    component: SweepDevicesPage,
+    title: 'Devices - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/documentation',
+    component: SweepDocumentationPage,
+    title: 'Documentation - AFRERA',
+    isPublic: true,
+    transition: 'fade',
+  },
+  {
+    path: '/empty',
+    component: SweepEmptyPage,
+    title: 'Empty - AFRERA',
+    isPublic: true,
+    transition: 'fade',
+  },
+  {
+    path: '/equipment',
+    component: SweepEquipmentPage,
+    title: 'Equipment - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/explore',
+    component: SweepExplorePage,
+    title: 'Explore - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/export',
+    component: SweepExportPage,
+    title: 'Export - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/faq',
+    component: SweepFAQPage,
+    title: 'FAQ - AFRERA',
+    isPublic: true,
+    transition: 'fade',
+  },
+  {
+    path: '/farms',
+    component: SweepFarmsPage,
+    title: 'Farms - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/favorites',
+    component: SweepFavoritesPage,
+    title: 'Favorites - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/feedback',
+    component: SweepFeedbackPage,
+    title: 'Feedback - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/fields',
+    component: SweepFieldsPage,
+    title: 'Fields - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/finance',
+    component: SweepFinancePage,
+    title: 'Finance - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/help',
+    component: SweepHelpPage,
+    title: 'Help - AFRERA',
+    isPublic: true,
+    transition: 'fade',
+  },
+  {
+    path: '/history',
+    component: SweepHistoryPage,
+    title: 'History - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/import',
+    component: SweepImportPage,
+    title: 'Import - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/inbox',
+    component: SweepInboxPage,
+    title: 'Inbox - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/insurance-coverages',
+    component: SweepInsuranceCoveragesPage,
+    title: 'InsuranceCoverages - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/invoices',
+    component: SweepInvoicesPage,
+    title: 'Invoices - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/labels',
+    component: SweepLabelsPage,
+    title: 'Labels - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/language',
+    component: SweepLanguagePage,
+    title: 'Language - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/loading',
+    component: SweepLoadingPage,
+    title: 'Loading - AFRERA',
+    isPublic: true,
+    transition: 'fade',
+  },
+  {
+    path: '/logs',
+    component: SweepLogsPage,
+    title: 'Logs - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/members',
+    component: SweepMembersPage,
+    title: 'Members - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/messages',
+    component: SweepMessagesPage,
+    title: 'Messages - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/mobile',
+    component: SweepMobilePage,
+    title: 'Mobile - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/not-found',
+    component: SweepNotFoundPage,
+    title: 'NotFound - AFRERA',
+    isPublic: true,
+    transition: 'fade',
+  },
+  {
+    path: '/notifications',
+    component: SweepNotificationsPage,
+    title: 'Notifications - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/onboarding',
+    component: SweepOnboardingPage,
+    title: 'Onboarding - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/payments',
+    component: SweepPaymentsPage,
+    title: 'Payments - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/permissions',
+    component: SweepPermissionsPage,
+    title: 'Permissions - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/popular',
+    component: SweepPopularPage,
+    title: 'Popular - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/preferences',
+    component: SweepPreferencesPage,
+    title: 'Preferences - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/privacy',
+    component: SweepPrivacyPage,
+    title: 'Privacy - AFRERA',
+    isPublic: true,
+    transition: 'fade',
+  },
+  {
+    path: '/receipts',
+    component: SweepReceiptsPage,
+    title: 'Receipts - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/recent',
+    component: SweepRecentPage,
+    title: 'Recent - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/reporting',
+    component: SweepReportingPage,
+    title: 'Reporting - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/restore',
+    component: SweepRestorePage,
+    title: 'Restore - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/results',
+    component: SweepResultsPage,
+    title: 'Results - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/roles',
+    component: SweepRolesPage,
+    title: 'Roles - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/search',
+    component: SweepSearchPage,
+    title: 'Search - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/security',
+    component: SweepSecurityPage,
+    title: 'Security - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/server-error',
+    component: SweepServerErrorPage,
+    title: 'ServerError - AFRERA',
+    isPublic: true,
+    transition: 'fade',
+  },
+  {
+    path: '/sessions',
+    component: SweepSessionsPage,
+    title: 'Sessions - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/settings',
+    component: SweepSettingsPage,
+    title: 'Settings - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/share',
+    component: SweepSharePage,
+    title: 'Share - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/subscription',
+    component: SweepSubscriptionPage,
+    title: 'Subscription - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/sync',
+    component: SweepSyncPage,
+    title: 'Sync - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/tags',
+    component: SweepTagsPage,
+    title: 'Tags - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/team',
+    component: SweepTeamPage,
+    title: 'Team - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/terms',
+    component: SweepTermsPage,
+    title: 'Terms - AFRERA',
+    isPublic: true,
+    transition: 'fade',
+  },
+  {
+    path: '/theme',
+    component: SweepThemePage,
+    title: 'Theme - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/trash',
+    component: SweepTrashPage,
+    title: 'Trash - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/trending',
+    component: SweepTrendingPage,
+    title: 'Trending - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/tutorial',
+    component: SweepTutorialPage,
+    title: 'Tutorial - AFRERA',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/unauthorized',
+    component: SweepUnauthorizedPage,
+    title: 'Unauthorized - AFRERA',
+    isPublic: true,
+    transition: 'fade',
+  },
+  {
+    path: '/welcome',
+    component: SweepWelcomePage,
+    title: 'Welcome - AFRERA',
+    isPublic: true,
+    transition: 'fade',
+  },
+  {
+    path: '/products',
+    component: SweepProductsPage,
+    title: 'Products - Browse the AFRERA Marketplace',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/orders',
+    component: SweepOrdersPage,
+    title: 'My Orders - Track Your Purchases',
+    isPublic: false,
+    transition: 'fade',
+  },
+  {
+    path: '/profile',
+    component: SweepProfilePage,
+    title: 'My Profile - Account Settings',
+    isPublic: false,
+    transition: 'fade',
+  },
+];
+
 export function getAllRoutes() {
   return [
     ...publicRoutes,

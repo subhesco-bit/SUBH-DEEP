@@ -1,0 +1,39 @@
+[
+  {
+    "stem": "browsermetrics.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "startTrackingWebVitals",
+        "startTrackingLongTasks",
+        "startTrackingLongAnimationFrames",
+        "startTrackingInteractions",
+        "_trackCLS",
+        "_trackLCP",
+        "_trackTtfb",
+        "_trackFpFcp",
+        "addPerformanceEntries",
+        "addWebVitalsToSpan",
+        "resetWebVitalState",
+        "isReact19MeasureEntry",
+        "_addMeasureSpans",
+        "_addDetailToSpanAttributes",
+        "_addNavigationSpans",
+        "_addPerformanceNavigationTiming",
+        "_getEndPropertyNameForNavigationTiming",
+        "_addRequest",
+        "_addResourceSpans",
+        "_trackNavigator",
+        "_setWebVitalAttributes",
+        "_setResourceRequestAttributes",
+        "_addTtfbRequestTimeToMeasurements",
+        "setAttr"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

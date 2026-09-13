@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "geo.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 14,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\services\\legacy\\geofencingService.js",
+      "backend\\src\\tests\\geo.test.js"
+    ]
+  }
+]

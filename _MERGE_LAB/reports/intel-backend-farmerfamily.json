@@ -1,0 +1,35 @@
+[
+  {
+    "stem": "farmerfamilyservice.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "FarmerfamilyService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M775100_FARMERFAMILY\\backend\\service.js"
+    ]
+  },
+  {
+    "stem": "farmerfamilyroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

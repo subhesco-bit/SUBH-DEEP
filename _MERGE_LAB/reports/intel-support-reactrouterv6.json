@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "reactrouterv6.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "reactRouterV6BrowserTracingIntegration",
+        "wrapUseRoutesV6",
+        "wrapCreateBrowserRouterV6",
+        "wrapCreateMemoryRouterV6",
+        "withSentryReactRouterV6Routing"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "stem": "clover.xml",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

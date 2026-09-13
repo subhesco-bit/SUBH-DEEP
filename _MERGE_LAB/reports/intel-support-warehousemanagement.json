@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "warehousemanagement.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:POST:/warehouses",
+        "route:POST:/warehouses/:warehouseId/stock",
+        "route:GET:/warehouses/:warehouseId/inventory"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

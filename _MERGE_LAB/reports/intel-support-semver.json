@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "semver.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "SemVer",
+        "isPrereleaseIdentifier",
+        "main",
+        "failInc",
+        "fail",
+        "help"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

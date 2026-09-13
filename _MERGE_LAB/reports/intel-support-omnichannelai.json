@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "omnichannelaiservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 30,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M639100_OMNICHANNELAI\\backend\\service.js",
+      "backend\\src\\services\\omnichannelAIService.js"
+    ]
+  }
+]

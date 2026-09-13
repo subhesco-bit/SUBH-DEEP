@@ -1,0 +1,23 @@
+[
+  {
+    "stem": "browserapierrors.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_wrapTimeFunction",
+        "_wrapRAF",
+        "_wrapXHR",
+        "_wrapEventTarget",
+        "isEventListenerObject",
+        "unregisterOriginalCallback",
+        "_browserApiErrorsIntegration",
+        "browserApiErrorsIntegration"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

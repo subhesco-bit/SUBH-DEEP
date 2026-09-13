@@ -1,0 +1,66 @@
+[
+  {
+    "stem": "projectsystemspage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "WbsNode",
+        "ProjectSystemsPage",
+        "submitWbs",
+        "changeWbsStatus",
+        "submitMilestone",
+        "completeMilestone",
+        "submitStatus"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M865100_PROJECTSYSTEMS\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "projectsystemsservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "ProjectSystemsService",
+        "r4",
+        "compute"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M865100_PROJECTSYSTEMS\\backend\\service.js",
+      "backend\\src\\routes\\projectSystemsRoutes_merged.js",
+      "backend\\src\\services\\projectSystemsService.js"
+    ]
+  },
+  {
+    "stem": "projectsystemsroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

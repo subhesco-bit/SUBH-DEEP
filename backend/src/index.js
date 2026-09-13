@@ -52,6 +52,7 @@ const productReviewRoutes = require('./routes/productReviewRoutes.js');
 const productMediaAIRoutes = require('./routes/productMediaAIRoutes.js');
 const publicDataRoutes = require('./routes/publicDataRoutes.js');
 const productCertifications = require('./routes/productCertifications.js');
+const libraryAIWorkspaceRoutes = require('./routes/libraryAIWorkspaceRoutes.js');
 const priceForecasting = require('./routes/priceForecasting.js');
 const preventiveMaintenanceRoutes = require('./routes/preventiveMaintenanceRoutes.js');
 const predictiveIntelligenceRoutes = require('./routes/predictiveIntelligenceRoutes.js');
@@ -593,7 +594,8 @@ const gdprRoutes = require('./routes/gdprRoutes.js');
 const governmentSubsidyRoutes = require('./routes/governmentSubsidyRoutes.js');
 const mushroomRoutes = require('./routes/mushroomRoutes.js');
 const databaseManagementRoutes = require('./routes/databaseManagementRoutes.js');
-const libraryAIWorkspaceRoutes = require('./routes/libraryAIWorkspaceRoutes.js');
+// (duplicate require removed — already declared at line 55; the second const
+// declaration was a hard parse error that prevented the server from booting)
 const governanceModuleMerged = require('./routes/platform/governanceModule_merged.js');
 const costRoutesMerged = require('./routes/finance/costRoutes_merged.js');
 const costRoutes = require('./routes/costRoutes.js');
@@ -1446,6 +1448,9 @@ async function startup() {
     app.use('/api/library', libraryRoutes);
     app.use('/api/library-knowledge', libraryRoutes);
     app.use('/api/v1/library', libraryRoutes);
+    app.use('/api/library-ai-workspace', libraryAIWorkspaceRoutes);
+    app.use('/api/ai/library-workspace', libraryAIWorkspaceRoutes);
+    app.use('/api/v1/ai/library-workspace', libraryAIWorkspaceRoutes);
     app.use('/api/landrecords', landRecordsRoutes);
     app.use('/api/landmanagement', landManagementRoutes);
     app.use('/api/knowledge', knowledgeRoutes);

@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "healthroutes.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 15,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

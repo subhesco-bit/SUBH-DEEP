@@ -1,0 +1,28 @@
+[
+  {
+    "stem": "vermicompostroutes.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 5,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "vermicompostservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M120100_VERMICOMPOST\\backend\\service.js"
+    ]
+  }
+]

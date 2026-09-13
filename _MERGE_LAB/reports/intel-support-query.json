@@ -1,0 +1,40 @@
+[
+  {
+    "stem": "query.js",
+    "candidateCount": 3,
+    "sources": [
+      "-ebdesign-library",
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "-ebdesign-library": [
+        "printRows"
+      ],
+      "node-modules": [
+        "fetchState",
+        "successState",
+        "getDefaultState",
+        "extends",
+        "addSignalProperty",
+        "fetchFn",
+        "createQueryFnContext",
+        "createFetchContext",
+        "reducer",
+        "_dispatch",
+        "promise"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "query.cjs",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

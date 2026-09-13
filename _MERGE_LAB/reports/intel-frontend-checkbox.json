@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "checkbox.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "Checkbox"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

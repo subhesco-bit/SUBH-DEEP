@@ -1,0 +1,25 @@
+[
+  {
+    "stem": "livestockroutesupport.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "requestId",
+        "fail",
+        "validateValue",
+        "validatePayload",
+        "validateRouteParam",
+        "requestGuard",
+        "protectLivestockRouter",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

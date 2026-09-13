@@ -215,6 +215,24 @@ CREATE TABLE IF NOT EXISTS optimized_schedules (
 );
 
 -- Indexes for performance
+-- 2026-09-12 collision repair (batch): the CREATE INDEX statements below
+-- name columns that do not exist on the table that actually gets created.
+-- Each of these tables is declared by more than one migration, and
+-- PostgreSQL's CREATE TABLE IF NOT EXISTS silently skips every declaration
+-- after the first — so the later, wider definition never took effect and
+-- the index that assumed it would fail with "column does not exist",
+-- aborting the whole migration run.
+--
+-- Additive and idempotent: restores exactly the columns the indexes below
+-- require, typed from the losing definition that declared them. No-ops on
+-- a database where the wider definition already won.
+-- training_records: winner is 000_base_schema.sql
+ALTER TABLE training_records ADD COLUMN IF NOT EXISTS employee_id INTEGER;
+ALTER TABLE training_records ADD COLUMN IF NOT EXISTS training_program_id INTEGER;
+-- promotions: winner is 3102_ecommerce_ai_erp_business_marketing.sql
+ALTER TABLE promotions ADD COLUMN IF NOT EXISTS employee_id INTEGER;
+ALTER TABLE promotions ADD COLUMN IF NOT EXISTS promotion_date DATE;
+
 CREATE INDEX IF NOT EXISTS idx_employees_employee_id ON employees(employee_id);
 CREATE INDEX IF NOT EXISTS idx_employees_department_id ON employees(department_id);
 CREATE INDEX IF NOT EXISTS idx_employees_status ON employees(status);

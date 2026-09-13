@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "formbuilderpanel.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "FormBuilderPanel"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\pages\\FormManagementPage.jsx"
+    ]
+  }
+]

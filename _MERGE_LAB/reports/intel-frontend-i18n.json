@@ -1,0 +1,36 @@
+[
+  {
+    "stem": "i18n.js",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "getCurrentLanguage",
+        "setLanguage",
+        "detectLanguage",
+        "t",
+        "interpolateVariables",
+        "pluralize",
+        "formatDate",
+        "formatTime",
+        "formatDateTime",
+        "formatNumber",
+        "formatCurrency",
+        "formatPercent",
+        "formatRelativeTime",
+        "isRTL",
+        "getTextDirection",
+        "loadTranslations",
+        "addTranslations",
+        "getSupportedLanguages",
+        "getLanguageInfo",
+        "init",
+        "i18n"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,33 @@
+[
+  {
+    "stem": "applydecs.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "old_createMetadataMethodsForProperty",
+        "getMetadata",
+        "setMetadata",
+        "old_convertMetadataMapToFinal",
+        "old_createAddInitializerMethod",
+        "old_memberDec",
+        "old_assertNotFinished",
+        "old_assertMetadataKey",
+        "old_assertCallable",
+        "old_assertValidReturnValue",
+        "old_getInit",
+        "old_applyMemberDec",
+        "d",
+        "old_applyMemberDecs",
+        "old_pushInitializers",
+        "old_applyClassDecs",
+        "applyDecs",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

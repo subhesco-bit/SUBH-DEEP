@@ -1,0 +1,27 @@
+[
+  {
+    "stem": "requestid.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "generateUUID",
+        "generateShortId",
+        "extractCorrelationId",
+        "generateTraceParent",
+        "requestId",
+        "generateRequestFingerprint",
+        "addChildSpan",
+        "completeChildSpan",
+        "getTraceContext",
+        "spanTiming"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

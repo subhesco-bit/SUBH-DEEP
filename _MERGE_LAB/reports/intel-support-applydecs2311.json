@@ -1,0 +1,27 @@
+[
+  {
+    "stem": "applydecs2311.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "applyDecs2311",
+        "g",
+        "b",
+        "applyDec",
+        "d",
+        "I",
+        "set",
+        "w",
+        "l",
+        "p",
+        "decorators",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

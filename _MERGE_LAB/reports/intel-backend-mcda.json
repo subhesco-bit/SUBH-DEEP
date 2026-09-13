@@ -1,0 +1,24 @@
+[
+  {
+    "stem": "mcda.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "mcda",
+        "rankOptions",
+        "gatedMcda",
+        "round1"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\services\\legacy\\dynamicPricingService.js",
+      "backend\\src\\services\\legacy\\farmerValueService.js",
+      "backend\\src\\services\\legacy\\financialService.js",
+      "backend\\src\\tests\\decisionSupport.test.js"
+    ]
+  }
+]

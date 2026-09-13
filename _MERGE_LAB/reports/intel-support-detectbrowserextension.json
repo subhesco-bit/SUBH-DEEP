@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "detectbrowserextension.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "checkAndWarnIfIsEmbeddedBrowserExtension",
+        "_isEmbeddedBrowserExtension"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

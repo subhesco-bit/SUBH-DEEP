@@ -4,6 +4,9 @@
  */
 
 const { Pool } = require('pg');
+// Resolve the target through the shared config so this module cannot point at
+// a different database than the application. See ../config/database.
+const { resolvePoolConfig } = require('../../config/database');
 const crypto = require('crypto');
 const { logger } = require('../../utils/logger');
 
@@ -56,10 +59,18 @@ class DatabaseSecurity {
    */
   async initialize() {
     try {
-      this.pool = new Pool({
-        connectionString: this.config.databaseUrl,
-        ssl: this.config.requireSSL ? { rejectUnauthorized: true } : undefined,
-      });
+      // Target resolved through the shared config so this module cannot point
+      // at a different database than the application. `requireSSL` stays an
+      // explicit override on top of whatever PG_SSL resolves to.
+      const poolConfig = this.config.databaseUrl
+        ? resolvePoolConfig({}, { DATABASE_URL: this.config.databaseUrl })
+        : resolvePoolConfig();
+
+      if (this.config.requireSSL) {
+        poolConfig.ssl = { rejectUnauthorized: true };
+      }
+
+      this.pool = new Pool(poolConfig);
 
       // Initialize encryption key
       if (this.config.enableColumnEncryption) {

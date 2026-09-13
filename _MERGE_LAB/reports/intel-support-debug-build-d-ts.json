@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "debug-build.d.ts.map",
+    "candidateCount": 3,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

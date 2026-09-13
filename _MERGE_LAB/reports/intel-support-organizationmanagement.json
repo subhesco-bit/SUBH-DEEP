@@ -1,0 +1,42 @@
+[
+  {
+    "stem": "organizationmanagementroutes.js",
+    "candidateCount": 6,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 10,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id",
+        "route:GET:/organizations",
+        "route:DELETE:/organizations/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js",
+      "backend\\src\\__tests__\\organizationManagementRoutes.test.js"
+    ]
+  },
+  {
+    "stem": "organizationmanagementservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M200_ORGANIZATION_MANAGEMENT\\backend\\service.js",
+      "backend\\src\\services\\organizationManagementService.js"
+    ]
+  }
+]

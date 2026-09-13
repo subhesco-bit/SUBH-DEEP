@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "inherits.js",
+    "candidateCount": 3,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_inherits",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

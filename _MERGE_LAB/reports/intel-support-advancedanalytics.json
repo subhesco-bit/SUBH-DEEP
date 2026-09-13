@@ -1,0 +1,31 @@
+[
+  {
+    "stem": "advancedanalyticsroutes.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 6,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "advancedanalyticsservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\services\\index.js",
+      "backend\\src\\services\\predictiveIntelligenceService.js"
+    ]
+  }
+]

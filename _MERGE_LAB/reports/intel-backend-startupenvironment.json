@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "startupenvironmentroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

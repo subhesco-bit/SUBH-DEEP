@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "logisticsproviderpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "LogisticsProviderPage"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M100100_LOGISTICSENHANCEMENT\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

@@ -6,7 +6,10 @@ const { ValidationError, NotFoundError } = require('../../utils/errors');
 const FACILITY_TYPES = ['post_office','railway_station','airport','market','warehouse','cold_store','collection_center','processing_unit','road_hub','other'];
 const FLOW_TYPES = ['household_consumption','village_consumption','production_input','processing','storage','donation','loss','market','external_purchase'];
 
+const { normalizeVillageId } = require('./identifiers');
+
 function id(value, label = 'village id') {
+  if (label === 'village id') return normalizeVillageId(value);
   const n = Number(value);
   if (!Number.isInteger(n) || n < 1) throw new ValidationError(`Valid ${label} is required`);
   return n;

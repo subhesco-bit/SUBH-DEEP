@@ -1,0 +1,25 @@
+[
+  {
+    "stem": "requestvalidator.js",
+    "candidateCount": 2,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "validate",
+        "validateQuery",
+        "formatResponse",
+        "formatErrorResponse",
+        "sanitizeInput",
+        "sanitize",
+        "schemas",
+        "requestValidator"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\middleware\\index.js"
+    ]
+  }
+]

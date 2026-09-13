@@ -13,6 +13,7 @@ const crypto = require('crypto');
 
 const MODULE_ID = 'M645100_LIBRARYKNOWLEDGE';
 const MODULE_NAME = 'Library Knowledge';
+const TEXT_PREVIEW_BYTES = Number(process.env.LIBRARY_TEXT_PREVIEW_BYTES || 65536);
 
 function optionalDatabase() {
   try {
@@ -23,11 +24,27 @@ function optionalDatabase() {
 }
 
 function stripBom(content) {
-  return content.charCodeAt(0) === 0xFEFF ? content.slice(1) : content;
+  return content && content.charCodeAt(0) === 0xFEFF ? content.slice(1) : content;
+}
+
+function readTextPreview(filePath, maxBytes = TEXT_PREVIEW_BYTES) {
+  const stat = safeStat(filePath);
+  if (!stat || stat.size === 0) return '';
+
+  const bytesToRead = Math.min(stat.size, maxBytes);
+  const buffer = Buffer.alloc(bytesToRead);
+  const fd = fs.openSync(filePath, 'r');
+
+  try {
+    const bytesRead = fs.readSync(fd, buffer, 0, bytesToRead, 0);
+    return stripBom(buffer.subarray(0, bytesRead).toString('utf8'));
+  } finally {
+    fs.closeSync(fd);
+  }
 }
 
 function readJson(filePath) {
-  const content = stripBom(fs.readFileSync(filePath, 'utf8'));
+  const content = readTextPreview(filePath, Math.max(TEXT_PREVIEW_BYTES, 1024 * 1024));
 
   try {
     return JSON.parse(content);
@@ -67,14 +84,28 @@ function parseCsvHeaderLine(line) {
 }
 
 function readCsvHeader(filePath) {
-  const content = stripBom(fs.readFileSync(filePath, 'utf8'));
+  const content = readTextPreview(filePath);
   const rows = content.split(/\r?\n/).filter(Boolean);
   const [header = ''] = rows;
+  const stat = safeStat(filePath);
 
   return {
     columns: parseCsvHeaderLine(header),
-    rowCount: Math.max(rows.length - 1, 0)
+    rowCount: Math.max(rows.length - 1, 0),
+    rowCountIsPreview: Boolean(stat && stat.size > Buffer.byteLength(content)),
+    previewBytes: Buffer.byteLength(content)
   };
+}
+
+function hashFile(filePath) {
+  return new Promise((resolve, reject) => {
+    const hash = crypto.createHash('sha256');
+    const stream = fs.createReadStream(filePath);
+
+    stream.on('data', chunk => hash.update(chunk));
+    stream.on('error', reject);
+    stream.on('end', () => resolve(hash.digest('hex')));
+  });
 }
 
 function safeStat(filePath) {
@@ -101,8 +132,23 @@ class LibraryKnowledgeService {
     await this.buildIndex();
     await this.computeContentHashes();
 
+    let databaseSync = null;
     if (options.syncDatabase === true) {
-      await this.syncToDatabase();
+      try {
+        databaseSync = await this.syncToDatabase();
+      } catch (error) {
+        databaseSync = {
+          success: false,
+          skipped: true,
+          reason: error.message || 'Database sync failed'
+        };
+        this.indexingWarnings.push({
+          key: MODULE_ID,
+          type: 'database_sync',
+          warning: 'database_sync_failed',
+          message: databaseSync.reason
+        });
+      }
     }
 
     this.initialized = true;
@@ -111,7 +157,8 @@ class LibraryKnowledgeService {
       moduleId: MODULE_ID,
       indexedItems: this.index.size,
       contentHashes: this.contentHashes.size,
-      indexingWarnings: this.indexingWarnings.length
+      indexingWarnings: this.indexingWarnings.length,
+      databaseSync
     };
   }
 
@@ -160,7 +207,7 @@ class LibraryKnowledgeService {
         if (['.json', '.jsonl'].includes(extension)) {
           Object.assign(data, readJson(filePath));
         } else if (['.md', '.txt', '.csv', '.yaml', '.yml', '.xml'].includes(extension)) {
-          data.content = fs.readFileSync(filePath, 'utf8').slice(0, 12000);
+          data.content = readTextPreview(filePath).slice(0, 12000);
         }
 
         this.indexFile(key, 'library-file', filePath, data);
@@ -303,12 +350,11 @@ class LibraryKnowledgeService {
     for (const [key, item] of this.index) {
       const stat = safeStat(item.path);
       if (!stat || !stat.isFile()) continue;
-      const content = fs.readFileSync(item.path);
       this.contentHashes.set(key, {
         key,
-        hash: crypto.createHash('sha256').update(content).digest('hex'),
+        hash: await hashFile(item.path),
         path: item.path,
-        size: content.length,
+        size: stat.size,
         computedAt: new Date().toISOString()
       });
     }

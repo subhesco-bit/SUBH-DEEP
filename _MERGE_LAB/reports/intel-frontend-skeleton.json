@@ -1,0 +1,34 @@
+[
+  {
+    "stem": "skeleton.jsx",
+    "candidateCount": 2,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "Skeleton",
+        "TextSkeleton",
+        "ImageSkeleton",
+        "CardSkeleton",
+        "ListSkeleton",
+        "TableSkeleton",
+        "AvatarSkeleton",
+        "ButtonSkeleton",
+        "InputSkeleton",
+        "PageSkeleton",
+        "LoadingSpinner",
+        "LoadingBar",
+        "LoadingDots",
+        "LoadingOverlay"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\App.jsx",
+      "frontend\\src\\components\\RouteErrorBoundary.jsx",
+      "frontend\\src\\components\\RouteGuard.jsx",
+      "frontend\\src\\components\\RouteLoading.jsx"
+    ]
+  }
+]

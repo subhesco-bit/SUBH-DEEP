@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "classprivatemethodinitspec.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_classPrivateMethodInitSpec",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

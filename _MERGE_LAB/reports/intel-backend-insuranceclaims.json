@@ -1,0 +1,61 @@
+[
+  {
+    "stem": "insuranceclaimsservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "submitInsuranceClaim",
+        "processInsuranceClaim",
+        "followUpClaimSettlement",
+        "getClaimStatus",
+        "detectClaimFraud",
+        "calculateClaimPayout",
+        "generateId",
+        "generateClaimNumber",
+        "getPolicyDetails",
+        "getFarmerClaimHistory",
+        "checkFraudIndicators",
+        "getClaimDetails",
+        "analyzeEvidence",
+        "analyzeWeatherConditions",
+        "getSatelliteImagery",
+        "getCurrentMarketPrices",
+        "getHistoricalClaimData",
+        "getInsuranceCompany",
+        "getCommunicationHistory",
+        "determineNextAction",
+        "estimateSettlementDate",
+        "getRequiredActions",
+        "determineEscalationLevel",
+        "getCompanyPolicies",
+        "getIndustryBenchmarks",
+        "sendReminderToInsuranceCompany",
+        "escalateClaim",
+        "getCurrentStage",
+        "getNextMilestone",
+        "getPendingActions",
+        "analyzeClaimPatterns",
+        "analyzeLocation",
+        "analyzeDocuments",
+        "getIndustryFraudPatterns",
+        "assessDamage",
+        "getDepreciationFactors",
+        "isClaimOwner",
+        "calculateDeductible",
+        "getCoverageLimits",
+        "setupRoutes",
+        "as"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M18100_INSURANCECLAIMS\\backend\\service.js",
+      "backend\\src\\routes\\ORPHANED_SERVICES_MOUNT.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\__tests__\\financeInsuranceDomain.test.js"
+    ]
+  }
+]

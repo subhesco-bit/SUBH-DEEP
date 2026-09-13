@@ -1,0 +1,24 @@
+[
+  {
+    "stem": "aiprovideradapters.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "providerStatus",
+        "listProviders",
+        "listConfiguredProviders",
+        "getProviderEnv",
+        "validateProviderConfig",
+        "PROVIDER_ENV"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\core\\ai\\aiOrchestratorCore.js",
+      "backend\\src\\core\\ai\\index.js"
+    ]
+  }
+]

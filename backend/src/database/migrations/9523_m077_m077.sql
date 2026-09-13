@@ -77,6 +77,20 @@ CREATE TABLE IF NOT EXISTS treatment_recommendations (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- 2026-09-12 collision repair (batch): the CREATE INDEX statements below
+-- name columns that do not exist on the table that actually gets created.
+-- Each of these tables is declared by more than one migration, and
+-- PostgreSQL's CREATE TABLE IF NOT EXISTS silently skips every declaration
+-- after the first — so the later, wider definition never took effect and
+-- the index that assumed it would fail with "column does not exist",
+-- aborting the whole migration run.
+--
+-- Additive and idempotent: restores exactly the columns the indexes below
+-- require, typed from the losing definition that declared them. No-ops on
+-- a database where the wider definition already won.
+-- water_sources: winner is 200_m047_irrigation_management.sql
+ALTER TABLE water_sources ADD COLUMN IF NOT EXISTS location_id VARCHAR(50);
+
 CREATE INDEX IF NOT EXISTS idx_water_quality_location ON water_quality_measurements(location_id);
 
 CREATE INDEX IF NOT EXISTS idx_water_quality_date ON water_quality_measurements(sample_date);

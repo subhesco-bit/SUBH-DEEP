@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "classprivatefieldget2.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_classPrivateFieldGet2",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

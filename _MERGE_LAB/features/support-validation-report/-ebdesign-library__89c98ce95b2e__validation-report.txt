@@ -1,0 +1,40 @@
+VALIDATION STATUS: PASSED
+
+Original authority rows : 326496
+Staged authority rows   : 326864
+New IDs                 : 368
+Existing IDs preserved  : 326496
+Hash-backfilled rows    : 4414
+Manifest rows           : 4782
+Physical files          : 36704
+
+Hash-backfill candidates : 4433 (sha computed 4414, missing on disk 19, patched into STAGED 4414, not matched in registry 0)
+New-accession candidates : 368 (minted 368, missing on disk 0)
+
+Straggler resolution (follow-up pass, see patch_stragglers.js) — 19 "missing on disk" reduced to 0 unresolved:
+  - 4 files relocated to _JUNK_QUARANTINE/_SUBH_MASTER_EXECUTION/ earlier this session: CurrentLocation
+    repointed to the quarantine path, SHA256 hash-backfilled from the quarantine copy (file still exists,
+    just moved). LocationStatus=RELOCATED_TO_QUARANTINE.
+  - 10 files already deleted from disk before this session (matches `D` entries in `git status` from the
+    start of this conversation: 8x .claude/audits/AUDIT_*.md, _pre_enhancement_backup_20260803_162224.tar.gz,
+    EBDESIGN_BUILD_INDEX_BAD_BACKUP.ps1): explicitly marked DeaccessionStatus=DEACCESSIONED_FILE_NOT_FOUND_ON_DISK,
+    LocationStatus=PHYSICAL_ITEM_ABSENT, instead of being left as a silent unresolved gap.
+  - 5 files were NOT actually missing — they exceeded Node's synchronous readFileSync size limit
+    (ERR_FS_FILE_TOO_LARGE): a 2.5GB Docker/OCI blob (blobs/sha256-3e4c...) and 4 worktree-inflated
+    forensic scan CSVs (4.4GB, 12.0GB, 2.8GB, 2.8GB under _EBDESIGN_FORENSIC_INDEX/). Marked
+    SourceStatus=LARGE_FILE_HASH_DEFERRED with real recorded SizeBytes and an honest blank SHA256
+    (not fabricated) rather than silently dropped. The 12GB/4.4GB CSVs are redundant with the
+    deduplicated route/import graph already in 16_AI_CONTEXT/knowledge_graph.db.
+  - Total: 19 = 4 relocated + 10 deaccessioned + 5 large-file-deferred. 0 unresolved.
+
+FLAGGED FOR USER: _JUNK_QUARANTINE move for blobs/ (the 2.5GB Docker/OCI blob store at project root,
+not source code) was blocked by the harness's auto-mode safety classifier (large binary file move).
+Not moved; blobs/ is untouched at its original path. Needs explicit user approval to quarantine.
+
+Implementation: streaming line-by-line pass over the 204MB source registry (no full-file materialization,
+no --max-old-space-size flag). Pattern reused from _CONTROL/ONE_PASS_LIBRARY_COMPLETION_20260820_223355
+(same PI-<hex> ID scheme, same BEFORE/STAGED/MANIFEST/VALIDATION_REPORT shape), scaled from 1 file to the
+full triage backlog.
+
+NOT DONE (matches precedent, which also stopped here): STAGED registry has not been promoted over the live
+04_AUTHORITY/IDENTITY_REGISTRY/PHYSICAL_ITEM_IDENTITY_REGISTRY.csv. The live file is untouched by this run.

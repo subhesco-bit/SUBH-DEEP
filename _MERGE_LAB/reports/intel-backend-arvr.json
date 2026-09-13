@@ -1,0 +1,41 @@
+[
+  {
+    "stem": "arvrservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "createExperience",
+        "getExperiences",
+        "publishExperience",
+        "createAsset",
+        "getAssets",
+        "createInteractionPoint",
+        "getInteractionPoints",
+        "createSession",
+        "endSession",
+        "recordArVrAnalytics",
+        "isHealthy",
+        "route:POST:/experiences",
+        "route:GET:/experiences",
+        "route:PATCH:/experiences/:experienceId/publish",
+        "route:POST:/assets",
+        "route:GET:/assets",
+        "route:POST:/interaction-points",
+        "route:GET:/experiences/:experienceId/interaction-points",
+        "route:POST:/sessions",
+        "route:PATCH:/sessions/:sessionId/end",
+        "route:POST:/ar-vr-analytics",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M652100_ARVR\\backend\\service.js",
+      "backend\\src\\services\\arVrService.js",
+      "backend\\src\\services\\index.js"
+    ]
+  }
+]

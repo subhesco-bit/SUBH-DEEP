@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "createperformanceentries.d.ts",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "webVitalHandler",
+        "createPerformanceEntries",
+        "getLargestContentfulPaint",
+        "getCumulativeLayoutShift",
+        "getInteractionToNextPaint"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

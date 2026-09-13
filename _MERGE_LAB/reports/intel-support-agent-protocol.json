@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "agent-protocol.md",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "codex-or-ai-workspace"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

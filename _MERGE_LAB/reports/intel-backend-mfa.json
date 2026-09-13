@@ -1,0 +1,45 @@
+[
+  {
+    "stem": "mfaservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "MFAService",
+        "generateSecret",
+        "verifyToken",
+        "enable",
+        "disable",
+        "verifyLogin",
+        "status"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\platform\\index.js"
+    ]
+  },
+  {
+    "stem": "mfaroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "placeholders",
+        "getUserMFASecret",
+        "updateBackupCodes",
+        "route:POST:/setup",
+        "route:POST:/verify",
+        "route:POST:/disable",
+        "route:POST:/backup/sms",
+        "route:GET:/status"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

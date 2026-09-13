@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "footer.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\components\\index.js",
+      "frontend\\src\\components\\Layout.jsx"
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "stem": "aiorchestrationservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "listModelSlots",
+        "listUnservedIntents",
+        "upsertModelSlot"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\core\\aiOrchestrator.js",
+      "backend\\src\\modules\\M402_AI_ORCHESTRATION\\backend\\service.js",
+      "backend\\src\\services\\aiOrchestrationService.js",
+      "backend\\src\\services\\claude\\aiCoordinationService.js"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "vendorprocurementservice.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "VendorProcurementService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\routes\\vendorProcurementRoutes.js",
+      "frontend\\src\\pages\\VendorProcurement\\VendorManagement.jsx"
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "openapi.json",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

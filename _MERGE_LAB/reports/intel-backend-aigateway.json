@@ -1,0 +1,44 @@
+[
+  {
+    "stem": "aigatewayservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "AiGatewayService",
+        "normalizeText",
+        "buildGovernedPrompt",
+        "loadLibraryContext",
+        "run",
+        "matches"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M401_AI_GATEWAY\\backend\\service.js"
+    ]
+  },
+  {
+    "stem": "aigatewayroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

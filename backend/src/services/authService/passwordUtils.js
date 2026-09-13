@@ -17,7 +17,14 @@ async function hashPassword(password) {
  * Compare password with hash
  */
 async function comparePassword(password, hash) {
-  return bcrypt.compare(password, hash);
+  // Fail closed for legacy plaintext, malformed fixtures, and non-string input.
+  if (typeof password !== 'string' || typeof hash !== 'string' ||
+      !/^\$2[aby]\$\d{2}\$[./A-Za-z0-9]{53}$/.test(hash)) return false;
+  try {
+    return await bcrypt.compare(password, hash);
+  } catch {
+    return false;
+  }
 }
 
 module.exports = { hashPassword, comparePassword };

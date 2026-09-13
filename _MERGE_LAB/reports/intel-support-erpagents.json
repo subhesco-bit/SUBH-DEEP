@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "erpagents.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 11,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\tests\\enterpriseControl.test.js"
+    ]
+  }
+]

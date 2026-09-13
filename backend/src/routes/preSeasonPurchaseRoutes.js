@@ -12,6 +12,12 @@
 
 const express = require('express');
 const router = express.Router();
+// Liveness ping carried over from preSeasonPurchaseRoutes.js, merged and
+// retired 2026-09-13. Declared first so a pattern route cannot swallow it.
+router.get('/health', (req, res) => {
+  res.json({ success: true, status: 'healthy', module: 'preSeasonPurchaseRoutes' });
+});
+
 const PreSeasonPurchaseService = require('../services/strategic/preSeasonPurchaseService');
 const { authMiddleware: authenticate, requireRole } = require('../middleware/auth');
 const authorize = (roles) => requireRole(...roles);

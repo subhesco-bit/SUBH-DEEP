@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "cropplanningservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 3,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M30100_CROPPLANNING\\backend\\service.js",
+      "backend\\src\\routes\\cropPlanningRoutes.js",
+      "backend\\src\\routes\\farmerPortalEnhancements_merged.js",
+      "backend\\src\\services\\cropPlanningService.js"
+    ]
+  }
+]

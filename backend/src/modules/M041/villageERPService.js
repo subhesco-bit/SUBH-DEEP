@@ -3,7 +3,10 @@
 const pool = require('../../database/pool');
 const { ValidationError, NotFoundError } = require('../../utils/errors');
 
+const { normalizeVillageId } = require('./identifiers');
+
 function id(value, label = 'id') {
+  if (label === 'village id') return normalizeVillageId(value);
   const n = Number(value);
   if (!Number.isInteger(n) || n <= 0) throw new ValidationError(`Valid ${label} is required`);
   return n;

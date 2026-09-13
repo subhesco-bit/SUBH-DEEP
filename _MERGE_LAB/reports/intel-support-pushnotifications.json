@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "pushnotifications.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 9,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\test\\utils\\pushNotifications.test.js"
+    ]
+  }
+]

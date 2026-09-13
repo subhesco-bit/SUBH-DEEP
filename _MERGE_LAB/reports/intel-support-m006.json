@@ -1,0 +1,28 @@
+[
+  {
+    "stem": "m006component.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "m006page.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 3,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\modules\\M006\\index.jsx"
+    ]
+  }
+]

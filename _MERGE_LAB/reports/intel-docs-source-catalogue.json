@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "source-catalogue.json",
+    "candidateCount": 1,
+    "sources": [
+      "docs"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "module.json",
+    "candidateCount": 167,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

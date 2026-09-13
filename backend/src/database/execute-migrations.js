@@ -7,6 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 const { Pool } = require('pg');
+const { compareMigrationNames } = require('./migrationOrder');
 require('dotenv').config();
 
 const pool = new Pool({
@@ -54,7 +55,7 @@ class MigrationExecutor {
     try {
       const files = fs.readdirSync(this.migrationsPath)
         .filter(f => f.endsWith('.sql') || f.endsWith('.js'))
-        .sort();
+        .sort(compareMigrationNames);
 
       return files.filter(f => !this.executedMigrations.has(f));
     } catch (error) {

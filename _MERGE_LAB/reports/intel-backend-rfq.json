@@ -1,0 +1,54 @@
+[
+  {
+    "stem": "rfqservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "handleFor",
+        "createRfq",
+        "submitBid",
+        "bidsFor",
+        "recordQuoteOutcome",
+        "lossAnalysis",
+        "raiseQcHold",
+        "releaseQcHold",
+        "activeHolds",
+        "centrePnl"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\routes\\commerce\\rfqRoutes.js"
+    ]
+  },
+  {
+    "stem": "rfqroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/rfq",
+        "route:POST:/rfq/:id/bid",
+        "route:GET:/rfq/:id/bids",
+        "route:POST:/quotes/outcome",
+        "route:GET:/quotes/loss-analysis",
+        "route:POST:/qc/hold",
+        "route:POST:/qc/release",
+        "route:GET:/qc/holds",
+        "route:GET:/fpo/centre-pnl",
+        "fail",
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "fisheriesmanagementpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "FisheriesManagementPage"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M103_FISHERIES_MANAGEMENT\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

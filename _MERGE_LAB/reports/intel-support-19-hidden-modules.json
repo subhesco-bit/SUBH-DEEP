@@ -1,0 +1,23 @@
+[
+  {
+    "stem": "19-hidden-modules.json",
+    "candidateCount": 2,
+    "sources": [
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "19-hidden-modules.md",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

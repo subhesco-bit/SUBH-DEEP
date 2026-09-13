@@ -1,0 +1,25 @@
+[
+  {
+    "stem": "inp.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "startTrackingINP",
+        "_trackINP",
+        "getCachedInteractionContext",
+        "registerInpInteractionListener",
+        "captureElementFromEvent",
+        "resolveElementNameFromEntry",
+        "INP_ENTRY_MAP",
+        "MAX_PLAUSIBLE_INP_DURATION",
+        "_onInp",
+        "handleEntries"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

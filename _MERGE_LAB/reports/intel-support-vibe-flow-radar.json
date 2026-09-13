@@ -1,0 +1,13 @@
+[
+  {
+    "stem": "vibe-flow-radar.mdc",
+    "candidateCount": 3,
+    "sources": [
+      "claude",
+      "cursor"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

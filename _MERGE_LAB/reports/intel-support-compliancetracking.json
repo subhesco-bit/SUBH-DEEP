@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "compliancetracking.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:POST:/compliance/track/:entityId/:regulationId"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "duplicate-candidates.csv",
+    "candidateCount": 2,
+    "sources": [
+      "-ebdesign-library"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

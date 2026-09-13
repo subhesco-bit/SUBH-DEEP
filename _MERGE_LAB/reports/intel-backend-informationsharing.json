@@ -1,0 +1,36 @@
+[
+  {
+    "stem": "informationsharingroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "informationsharingservice.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "InformationSharingService",
+        "buildTree"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M854100_INFORMATIONSHARING\\backend\\service.js"
+    ]
+  }
+]

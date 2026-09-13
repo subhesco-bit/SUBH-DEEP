@@ -1,0 +1,22 @@
+[
+  {
+    "stem": "index.js.html",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "index.js.map",
+    "candidateCount": 14,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

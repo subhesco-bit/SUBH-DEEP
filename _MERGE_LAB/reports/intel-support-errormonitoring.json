@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "errormonitoring.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 5,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\jest.setup.js",
+      "frontend\\src\\App.jsx",
+      "frontend\\src\\components\\ErrorBoundary.jsx",
+      "frontend\\src\\components\\RouteErrorBoundary.jsx",
+      "frontend\\src\\test\\utils\\errorMonitoring.test.js"
+    ]
+  }
+]

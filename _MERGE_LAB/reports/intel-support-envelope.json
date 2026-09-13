@@ -1,0 +1,43 @@
+[
+  {
+    "stem": "envelope.js",
+    "candidateCount": 10,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "createMetricContainerEnvelopeItem",
+        "createMetricEnvelope",
+        "_enhanceEventWithSdkInfo",
+        "createSessionEnvelope",
+        "createEventEnvelope",
+        "createSpanEnvelope",
+        "dscHasRequiredProps",
+        "createLogContainerEnvelopeItem",
+        "createLogEnvelope",
+        "createEnvelope",
+        "addItemToEnvelope",
+        "forEachEnvelopeItem",
+        "envelopeContainsItemType",
+        "encodeUTF8",
+        "decodeUTF8",
+        "serializeEnvelope",
+        "append",
+        "concatBuffers",
+        "parseEnvelope",
+        "readBinary",
+        "readJson",
+        "createSpanEnvelopeItem",
+        "createAttachmentEnvelopeItem",
+        "_isOverriddenType",
+        "envelopeItemTypeToDataCategory",
+        "getSdkMetadataForEnvelopeHeader",
+        "createEventEnvelopeHeaders",
+        "createStreamedSpanEnvelope"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

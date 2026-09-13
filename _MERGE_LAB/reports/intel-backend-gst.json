@@ -1,0 +1,56 @@
+[
+  {
+    "stem": "gstservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "of",
+        "GSTService",
+        "r2",
+        "gstAmount"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M695100_GST\\backend\\service.js",
+      "backend\\src\\routes\\marketplaceEnhancements_merged.js",
+      "backend\\src\\services\\gstService.js"
+    ]
+  },
+  {
+    "stem": "gstroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health",
+        "route:POST:/calculate/order/:orderId",
+        "route:POST:/calculate/product",
+        "route:GET:/summary",
+        "route:POST:/invoice/:orderId",
+        "route:PUT:/order/:orderId/gst",
+        "route:POST:/validate/gst-number",
+        "route:GET:/rate/:category",
+        "route:GET:/rates",
+        "route:POST:/rates",
+        "route:DELETE:/rates/:category",
+        "route:POST:/returns",
+        "route:GET:/returns",
+        "route:PUT:/returns/:returnId/status",
+        "route:POST:/payments",
+        "route:GET:/payments",
+        "route:PUT:/payments/:paymentId/status"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

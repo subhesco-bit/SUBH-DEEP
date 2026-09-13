@@ -1,0 +1,25 @@
+[
+  {
+    "stem": "label.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\components\\FarmerPortal\\LandRecords.jsx",
+      "frontend\\src\\components\\Insurance\\InsurancePremiumCalculator.jsx",
+      "frontend\\src\\components\\Marketplace\\GSTCalculator.jsx",
+      "frontend\\src\\components\\Marketplace\\ProductReview.jsx",
+      "frontend\\src\\pages\\DisruptionPage.jsx",
+      "frontend\\src\\pages\\EscrowPage.jsx",
+      "frontend\\src\\pages\\FarmerRevenueLedgerPage.jsx",
+      "frontend\\src\\pages\\NutrientCalculatorPage.jsx",
+      "frontend\\src\\pages\\SellerProductFormPage.jsx",
+      "frontend\\src\\pages\\WalletPage.jsx"
+    ]
+  }
+]

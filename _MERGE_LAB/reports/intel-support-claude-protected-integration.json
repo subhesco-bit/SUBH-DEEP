@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "claude-protected-integration.bat",
+    "candidateCount": 4,
+    "sources": [
+      "claude",
+      "old-new-folder",
+      "root-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

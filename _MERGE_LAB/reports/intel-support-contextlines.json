@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "contextlines.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "addSourceContext",
+        "applySourceContextToFrame",
+        "contextLinesIntegration",
+        "_contextLinesIntegration"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

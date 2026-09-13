@@ -1,0 +1,13 @@
+[
+  {
+    "stem": "01-file-inventory.csv",
+    "candidateCount": 7,
+    "sources": [
+      "-audit",
+      ".system-audit"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

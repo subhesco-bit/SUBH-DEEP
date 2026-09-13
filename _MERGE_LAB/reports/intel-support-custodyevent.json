@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "custodyeventroutes.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 8,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M181100_CUSTODYEVENTROUTES\\backend\\service.js",
+      "backend\\src\\services\\custodyEventRoutes.js"
+    ]
+  },
+  {
+    "stem": "custodyeventservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 7,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M353100_CUSTODYEVENT\\backend\\service.js",
+      "backend\\src\\services\\custodyEventService.js"
+    ]
+  }
+]

@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "sheepfarmingpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "SheepFarmingPage",
+        "closeForm",
+        "openEdit"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M499100_SHEEP\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

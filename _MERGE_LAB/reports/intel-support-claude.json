@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "claude.md",
+    "candidateCount": 3,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

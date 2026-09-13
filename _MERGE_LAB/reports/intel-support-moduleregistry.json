@@ -1,0 +1,35 @@
+[
+  {
+    "stem": "moduleregistryroutes.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/modules/:moduleName"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "moduleregistry.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 4,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\test_module_discovery.js",
+      "backend\\test_module_discovery2.js",
+      "backend\\test_module_loading.js",
+      "backend\\test_module_loading_simple.js"
+    ]
+  }
+]

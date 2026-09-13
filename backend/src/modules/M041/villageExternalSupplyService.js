@@ -7,11 +7,7 @@ const LAYERS = ['household', 'village', 'agro'];
 const PRIORITIES = ['critical', 'high', 'normal', 'low'];
 const ORDER_STATUSES = ['draft', 'submitted', 'approved', 'sourcing', 'in_transit', 'delivered', 'cancelled', 'closed'];
 
-function villageId(value) {
-  const n = Number(value);
-  if (!Number.isInteger(n) || n < 1) throw new ValidationError('Valid village id is required');
-  return n;
-}
+const { normalizeVillageId: villageId } = require('./identifiers');
 function layer(value) {
   const v = String(value || '').trim().toLowerCase();
   if (!LAYERS.includes(v)) throw new ValidationError(`demand_layer must be one of: ${LAYERS.join(', ')}`);

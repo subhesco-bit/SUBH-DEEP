@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "financialreportpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "FinancialReportPage",
+        "handleApplyRecommendation"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

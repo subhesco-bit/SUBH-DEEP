@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "multilingualservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 26,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M657100_MULTILINGUAL\\backend\\service.js",
+      "backend\\src\\services\\multilingualService.js"
+    ]
+  }
+]

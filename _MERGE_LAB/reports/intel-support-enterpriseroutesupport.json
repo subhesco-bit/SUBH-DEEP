@@ -1,0 +1,25 @@
+[
+  {
+    "stem": "enterpriseroutesupport.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "correlationId",
+        "fail",
+        "validateValue",
+        "validateRouteParam",
+        "requestGuard",
+        "protectRouter",
+        "requireHumanAuthorization",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

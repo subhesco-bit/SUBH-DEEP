@@ -1,0 +1,27 @@
+[
+  {
+    "stem": "formmanagementpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "createTemplateDraft",
+        "FormManagementPage",
+        "loadForms",
+        "updateDraftValue",
+        "handleAddField",
+        "handleRemoveField",
+        "handleLoadTemplate",
+        "handleSave",
+        "handleSubmitDraft",
+        "values"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

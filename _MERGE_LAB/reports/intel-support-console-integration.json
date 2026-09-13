@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "console-integration.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "consoleLoggingIntegration",
+        "_consoleLoggingIntegration"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

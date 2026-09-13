@@ -1,0 +1,23 @@
+[
+  {
+    "stem": "labourroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:GET:/workers",
+        "route:POST:/workers",
+        "route:PUT:/workers/:id",
+        "route:GET:/attendance",
+        "route:POST:/attendance",
+        "route:GET:/payments",
+        "route:POST:/payments",
+        "handle"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

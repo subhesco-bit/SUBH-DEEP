@@ -1,0 +1,30 @@
+[
+  {
+    "stem": "analyticsmonitoringservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "trackRequest",
+        "requestMetricsSnapshot",
+        "collectPlatformMetrics",
+        "initialize",
+        "setupRoutes",
+        "route:GET:/",
+        "route:GET:/requests",
+        "route:GET:/security",
+        "router",
+        "AnalyticsMonitoringService",
+        "errorRate"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M576100_ANALYTICSMONITORING\\backend\\service.js",
+      "backend\\src\\services\\analyticsMonitoringService.js",
+      "backend\\src\\services\\index.js"
+    ]
+  }
+]

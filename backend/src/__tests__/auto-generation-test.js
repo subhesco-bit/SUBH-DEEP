@@ -290,14 +290,26 @@ Next Steps:
   4. Test endpoints with curl or Postman
   5. Monitor dashboard at /admin/auto-generation
 
-Ready for production deployment! 🚀
+Local trigger checks only; provider and deployment readiness are not verified.
   `);
 
-  process.exit(passed === total ? 0 : 1);
+  return { passed, total };
 }
 
-// Run tests
-runAllTests().catch(error => {
-  console.error('Test suite failed:', error);
-  process.exit(1);
-});
+// Preserve CLI use while allowing Jest to own its process and failure status.
+if (require.main === module) {
+  runAllTests().then(({ passed, total }) => {
+    process.exitCode = passed === total ? 0 : 1;
+  }).catch(error => {
+    console.error('Test suite failed:', error);
+    process.exitCode = 1;
+  });
+} else if (typeof test === 'function') {
+  test('local automatic image trigger checks', async () => {
+    const { passed, total } = await runAllTests();
+    expect(total).toBeGreaterThan(0);
+    expect(passed).toBe(total);
+  });
+}
+
+module.exports = { runAllTests };

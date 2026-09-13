@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "disclaimers.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\routes\\nutritionIntelligenceRoutes.js",
+      "backend\\src\\services\\clinicalNutritionDecisionSupportService.js",
+      "backend\\src\\services\\dietTherapyService.js",
+      "backend\\src\\services\\legacy\\consumerHealthService.js",
+      "backend\\src\\services\\legacy\\nutritionIntelligenceService.js"
+    ]
+  }
+]

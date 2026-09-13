@@ -1,0 +1,29 @@
+[
+  {
+    "stem": "cli.js",
+    "candidateCount": 3,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "run_cli",
+        "convert_ast",
+        "fatal",
+        "simple_glob",
+        "read_file",
+        "parse_js",
+        "to_string",
+        "symdef",
+        "collect_from_map",
+        "format_object",
+        "print_error",
+        "describe_ast",
+        "doitem",
+        "names"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

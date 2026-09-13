@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "cache.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 17,
+    "uniquePerSource": {
+      "claude": [
+        "CacheManager"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\core\\index.js",
+      "backend\\src\\core\\productionService.js"
+    ]
+  }
+]

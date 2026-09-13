@@ -3,7 +3,7 @@
 
 CREATE TABLE IF NOT EXISTS irrigation_schedules (
   id SERIAL PRIMARY KEY,
-  farm_id INTEGER NOT NULL REFERENCES farms(id) ON DELETE CASCADE,
+  farm_id UUID NOT NULL REFERENCES farms(id) ON DELETE CASCADE,
 
   -- Crop and irrigation details
   crop_type VARCHAR(100) NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS irrigation_delivery_logs (
 
   -- Notes and observations
   notes TEXT,
-  operator_id INTEGER REFERENCES users(id),
+  operator_id UUID REFERENCES users(id),
 
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS irrigation_delivery_logs (
 -- Water sources registry
 CREATE TABLE IF NOT EXISTS water_sources (
   id SERIAL PRIMARY KEY,
-  farm_id INTEGER NOT NULL REFERENCES farms(id) ON DELETE CASCADE,
+  farm_id UUID NOT NULL REFERENCES farms(id) ON DELETE CASCADE,
 
   -- Water source details
   source_type VARCHAR(100) NOT NULL CHECK (source_type IN ('well', 'canal', 'pond', 'borehole', 'river', 'tank')),
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS water_sources (
 -- Irrigation efficiency tracking
 CREATE TABLE IF NOT EXISTS irrigation_efficiency_metrics (
   id SERIAL PRIMARY KEY,
-  farm_id INTEGER NOT NULL REFERENCES farms(id) ON DELETE CASCADE,
+  farm_id UUID NOT NULL REFERENCES farms(id) ON DELETE CASCADE,
 
   -- Efficiency metrics
   scheduled_volume INTEGER,
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS irrigation_efficiency_metrics (
 );
 
 -- Add audit columns if not present
-ALTER TABLE irrigation_schedules ADD COLUMN IF NOT EXISTS audit_user_id INTEGER REFERENCES users(id);
-ALTER TABLE irrigation_delivery_logs ADD COLUMN IF NOT EXISTS audit_user_id INTEGER REFERENCES users(id);
+ALTER TABLE irrigation_schedules ADD COLUMN IF NOT EXISTS audit_user_id UUID REFERENCES users(id);
+ALTER TABLE irrigation_delivery_logs ADD COLUMN IF NOT EXISTS audit_user_id UUID REFERENCES users(id);
 
 COMMIT;

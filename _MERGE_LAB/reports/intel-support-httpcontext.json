@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "httpcontext.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "httpContextIntegration"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

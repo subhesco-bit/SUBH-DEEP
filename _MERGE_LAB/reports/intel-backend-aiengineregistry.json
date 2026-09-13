@@ -1,0 +1,28 @@
+[
+  {
+    "stem": "aiengineregistry.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "getEngine",
+        "getEngineByName",
+        "getEnginesByType",
+        "getEnginesByCapability",
+        "listEngines",
+        "listReadyEngines",
+        "registerEngine",
+        "generateEngineId",
+        "findBestEngine",
+        "AI_ENGINES"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\core\\ai\\aiOrchestratorCore.js",
+      "backend\\src\\core\\ai\\index.js"
+    ]
+  }
+]

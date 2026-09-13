@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "governmentnotificationcenter.jsx",
+    "candidateCount": 2,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "GovernmentNotificationCenter"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

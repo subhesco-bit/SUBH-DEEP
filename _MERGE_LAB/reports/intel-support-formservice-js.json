@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "formservice.js.html",
+    "candidateCount": 4,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

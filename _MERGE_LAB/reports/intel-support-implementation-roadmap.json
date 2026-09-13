@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "implementation-roadmap.md",
+    "candidateCount": 4,
+    "sources": [
+      "claude",
+      "codex-or-ai-workspace",
+      "root-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

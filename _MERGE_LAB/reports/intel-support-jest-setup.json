@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "jest.setup.js",
+    "candidateCount": 6,
+    "sources": [
+      "backend-current",
+      "claude",
+      "frontend-current",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "PushManager"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

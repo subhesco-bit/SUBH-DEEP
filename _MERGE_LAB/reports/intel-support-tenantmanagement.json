@@ -1,0 +1,40 @@
+[
+  {
+    "stem": "tenantmanagementservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M652100_TENANTMANAGEMENT\\backend\\service.js",
+      "backend\\src\\services\\tenantManagementService.js"
+    ]
+  },
+  {
+    "stem": "tenantmanagementroutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 9,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js",
+      "backend\\src\\__tests__\\tenantManagementRoutes.test.js"
+    ]
+  }
+]

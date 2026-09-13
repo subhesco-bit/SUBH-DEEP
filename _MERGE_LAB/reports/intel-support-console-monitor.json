@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "console-monitor.md",
+    "candidateCount": 2,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

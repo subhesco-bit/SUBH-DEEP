@@ -1,0 +1,41 @@
+[
+  {
+    "stem": "wikipediaservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "getCached",
+        "setCached",
+        "findBestTitle",
+        "getSummaryByTitle",
+        "lookup"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M713100_WIKIPEDIA\\backend\\service.js",
+      "backend\\src\\routes\\wikipediaRoutes_merged.js",
+      "backend\\src\\services\\wikipediaService.js"
+    ]
+  },
+  {
+    "stem": "wikipediaroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

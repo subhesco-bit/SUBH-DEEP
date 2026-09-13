@@ -1,0 +1,25 @@
+[
+  {
+    "stem": "platformmanagementpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "PlatformManagementPage",
+        "loadPlatformData",
+        "loadAIInsights",
+        "fetchPlatformStatus",
+        "fetchPlatformAnalytics",
+        "handleOptimization",
+        "handleApplyOptimization"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M200_ORGANIZATION_MANAGEMENT\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

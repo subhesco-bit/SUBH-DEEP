@@ -1,0 +1,42 @@
+[
+  {
+    "stem": "tenantmanagementroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js",
+      "backend\\src\\__tests__\\tenantManagementRoutes.test.js"
+    ]
+  },
+  {
+    "stem": "tenantmanagementservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "TenantManagementService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M652100_TENANTMANAGEMENT\\backend\\service.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\services\\tenantManagementService.js"
+    ]
+  }
+]

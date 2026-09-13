@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "errorhandler.js",
+    "candidateCount": 8,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 16,
+    "uniquePerSource": {
+      "claude": [
+        "AppError",
+        "AuthenticationError",
+        "AuthorizationError",
+        "ServerError"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\core\\enhancedServiceFramework.js",
+      "backend\\src\\core\\index.js",
+      "backend\\src\\core\\productionService.js",
+      "backend\\src\\core\\serviceAuditAndEnhancement.js",
+      "backend\\src\\core\\validation.js",
+      "backend\\src\\index.js",
+      "backend\\src\\middleware\\index.js",
+      "backend\\src\\services\\advancedMedicalCodingService.js",
+      "backend\\src\\services\\legacy\\erpService.js",
+      "backend\\src\\services\\productionExampleService.js"
+    ]
+  }
+]

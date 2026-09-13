@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "find-hidden-modules.js",
+    "candidateCount": 3,
+    "sources": [
+      "claude",
+      "old-new-folder",
+      "tools"
+    ],
+    "sharedSymbolCount": 8,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

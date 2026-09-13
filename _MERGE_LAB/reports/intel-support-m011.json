@@ -1,0 +1,28 @@
+[
+  {
+    "stem": "m011page.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 3,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\modules\\M011\\index.jsx"
+    ]
+  },
+  {
+    "stem": "m011component.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "async.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "asyncIteratorConcurrentProcess",
+        "async",
+        "async_callback",
+        "nextTick_callback"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

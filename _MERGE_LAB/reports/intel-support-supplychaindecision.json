@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "supplychaindecisionroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:POST:/select-farmers",
+        "route:POST:/plan-delivery",
+        "route:POST:/explain"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

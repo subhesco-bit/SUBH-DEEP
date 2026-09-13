@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "extraerrordata.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_enhanceEventWithErrorData",
+        "_extractErrorData",
+        "_extraErrorDataIntegration",
+        "extraErrorDataIntegration"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

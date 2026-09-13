@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "insurancepage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "InsurancePage"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M359100_INSURANCE\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

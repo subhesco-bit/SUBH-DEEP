@@ -5,6 +5,8 @@
 
 const { Pool } = require('pg');
 const { logger } = require('../utils/logger');
+// Single source of truth for which database this connects to.
+const { resolvePostgresConfig } = require('../config/database');
 
 class AdvancedConnectionPool {
   constructor(config = {}) {
@@ -33,18 +35,15 @@ class AdvancedConnectionPool {
       maxRetries: config.maxRetries || 3,
       retryDelay: config.retryDelay || 1000,
 
-      // Connection string or individual parameters
-      connectionString: process.env.DATABASE_URL,
-      host: process.env.PG_HOST || 'localhost',
-      port: parseInt(process.env.PG_PORT, 10) || 5432,
-      database: process.env.PG_DATABASE || 'afrera_db',
-      user: process.env.PG_USER || 'postgres',
-      password: process.env.PG_PASSWORD || 'password',
-
-      // SSL configuration
-      ssl: process.env.PG_SSL === 'true' ? {
-        rejectUnauthorized: process.env.PG_SSL_STRICT !== 'false',
-      } : undefined,
+      // Connection target, SSL included, resolved through the shared config.
+      //
+      // This block previously set `connectionString` AND host/port/database/
+      // user/password at the same time. node-postgres ignores the individual
+      // fields when a connection string is present, so the visible defaults
+      // here (afrera_db as postgres/password) were dead when DATABASE_URL was
+      // set and live when it was not — the module appeared to be configured
+      // for one database while connecting to another.
+      ...resolvePostgresConfig(),
 
       ...config,
     };

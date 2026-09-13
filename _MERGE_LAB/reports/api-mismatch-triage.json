@@ -1,0 +1,567 @@
+[
+  {
+    "client": "comprehensiveERPAPI",
+    "mismatchCount": 46,
+    "candidateServiceGuess": "comprehensiveerpservice"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "mismatchCount": 23,
+    "candidateServiceGuess": "researchanddevelopmentservice"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "mismatchCount": 19,
+    "candidateServiceGuess": "sapmodulearchitectureservice"
+  },
+  {
+    "client": "animalHealthAPI",
+    "mismatchCount": 17,
+    "candidateServiceGuess": "animalhealthservice"
+  },
+  {
+    "client": "completeAIIntegrationAPI",
+    "mismatchCount": 15,
+    "candidateServiceGuess": "completeaiintegrationservice"
+  },
+  {
+    "client": "completeERPIntegrationAPI",
+    "mismatchCount": 15,
+    "candidateServiceGuess": "completeerpintegrationservice"
+  },
+  {
+    "client": "aiOperationIntelligenceAPI",
+    "mismatchCount": 14,
+    "candidateServiceGuess": "aioperationintelligenceservice"
+  },
+  {
+    "client": "aiSelfHealingAPI",
+    "mismatchCount": 12,
+    "candidateServiceGuess": "aiselfhealingservice"
+  },
+  {
+    "client": "coldStorageAPI",
+    "mismatchCount": 12,
+    "candidateServiceGuess": "coldstorageservice"
+  },
+  {
+    "client": "costControlAPI",
+    "mismatchCount": 12,
+    "candidateServiceGuess": "costcontrolservice"
+  },
+  {
+    "client": "enterpriseControlAPI",
+    "mismatchCount": 12,
+    "candidateServiceGuess": "enterprisecontrolservice"
+  },
+  {
+    "client": "sheepAPI",
+    "mismatchCount": 12,
+    "candidateServiceGuess": "sheepservice"
+  },
+  {
+    "client": "aiAgentAPI",
+    "mismatchCount": 11,
+    "candidateServiceGuess": "aiagenticcompanionservice"
+  },
+  {
+    "client": "aiBrainAPI",
+    "mismatchCount": 11,
+    "candidateServiceGuess": "aibrainservice"
+  },
+  {
+    "client": "ecommerceAIAPI",
+    "mismatchCount": 11,
+    "candidateServiceGuess": "ecommerceaiservice"
+  },
+  {
+    "client": "agriculturalIntelligenceAPI",
+    "mismatchCount": 9,
+    "candidateServiceGuess": "agriculturalintelligenceservice"
+  },
+  {
+    "client": "vendorsAPI",
+    "mismatchCount": 9,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "ecommerceIntegrationAPI",
+    "mismatchCount": 9,
+    "candidateServiceGuess": "ecommerceintegrationservice"
+  },
+  {
+    "client": "poultryAPI",
+    "mismatchCount": 9,
+    "candidateServiceGuess": "poultryservice"
+  },
+  {
+    "client": "assetAccountingAPI",
+    "mismatchCount": 8,
+    "candidateServiceGuess": "assetaccountingservice"
+  },
+  {
+    "client": "decisionSupportAPI",
+    "mismatchCount": 8,
+    "candidateServiceGuess": "decisionsupportservice"
+  },
+  {
+    "client": "ecommerceAPI",
+    "mismatchCount": 8,
+    "candidateServiceGuess": "ecommerceaiservice"
+  },
+  {
+    "client": "marketplaceAPI",
+    "mismatchCount": 8,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "ordersAPI",
+    "mismatchCount": 7,
+    "candidateServiceGuess": "orderservice"
+  },
+  {
+    "client": "weatherAPI",
+    "mismatchCount": 7,
+    "candidateServiceGuess": "weatherservice"
+  },
+  {
+    "client": "cooperativeShareAPI",
+    "mismatchCount": 7,
+    "candidateServiceGuess": "cooperativeshareservice"
+  },
+  {
+    "client": "walletAPI",
+    "mismatchCount": 6,
+    "candidateServiceGuess": "walletservice"
+  },
+  {
+    "client": "enterpriseAIAPI",
+    "mismatchCount": 6,
+    "candidateServiceGuess": "enterpriseaiservice"
+  },
+  {
+    "client": "equipmentExchangeAPI",
+    "mismatchCount": 6,
+    "candidateServiceGuess": "equipmentexchangeservice"
+  },
+  {
+    "client": "machineryAPI",
+    "mismatchCount": 6,
+    "candidateServiceGuess": "machineryaccessservice"
+  },
+  {
+    "client": "multilingualAPI",
+    "mismatchCount": 6,
+    "candidateServiceGuess": "multilingualservice"
+  },
+  {
+    "client": "ecommerceBusinessSalesAPI",
+    "mismatchCount": 5,
+    "candidateServiceGuess": "ecommercebusinesssalesservice"
+  },
+  {
+    "client": "bulkOrderAPI",
+    "mismatchCount": 5,
+    "candidateServiceGuess": "bulkorderservice"
+  },
+  {
+    "client": "auditComplianceAPI",
+    "mismatchCount": 5,
+    "candidateServiceGuess": "auditservice"
+  },
+  {
+    "client": "civilDisruptionAPI",
+    "mismatchCount": 5,
+    "candidateServiceGuess": "civildisruptionservice"
+  },
+  {
+    "client": "engineeringProjectAPI",
+    "mismatchCount": 5,
+    "candidateServiceGuess": "engineeringprojectservice"
+  },
+  {
+    "client": "ecommerceERPAPI",
+    "mismatchCount": 5,
+    "candidateServiceGuess": "ecommerceerpservice"
+  },
+  {
+    "client": "experienceAPI",
+    "mismatchCount": 5,
+    "candidateServiceGuess": "experiencelayerservice"
+  },
+  {
+    "client": "greenhouseAPI",
+    "mismatchCount": 5,
+    "candidateServiceGuess": "greenhouseservice"
+  },
+  {
+    "client": "insuranceAPI",
+    "mismatchCount": 5,
+    "candidateServiceGuess": "insuranceaiservice"
+  },
+  {
+    "client": "authorizationAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": "authservice"
+  },
+  {
+    "client": "droughtMonitoringAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "floodMonitoringAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "diseaseForecastingAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "climateRiskAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "agroMeteorologyAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "producerGroupAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "communityAssetAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": "communityservice"
+  },
+  {
+    "client": "ruralDevelopmentAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "rfqAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": "rfqservice"
+  },
+  {
+    "client": "cropCalendarAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "cropMonitoringAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "cropVarietyAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "digitalTwinAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": "digitaltwinservice"
+  },
+  {
+    "client": "farmerFamilyAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": "farmerservice"
+  },
+  {
+    "client": "farmerHealthRecordsAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": "farmerservice"
+  },
+  {
+    "client": "kycAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "farmerProfileAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": "farmerservice"
+  },
+  {
+    "client": "farmerSkillAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": "farmerservice"
+  },
+  {
+    "client": "farmerVerificationAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": "farmerservice"
+  },
+  {
+    "client": "userAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": "userauthenticationservice"
+  },
+  {
+    "client": "hydroponicsAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "landAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": "landrecordsservice"
+  },
+  {
+    "client": "returnLoadBoardAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": "returnloadboardservice"
+  },
+  {
+    "client": "realtimeMonitoringAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": "realtimemonitoringservice"
+  },
+  {
+    "client": "conversationalAIAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": "conversationalaiservice"
+  },
+  {
+    "client": "voiceAIAPI",
+    "mismatchCount": 4,
+    "candidateServiceGuess": "voiceaiservice"
+  },
+  {
+    "client": "aiBackboneAPI",
+    "mismatchCount": 3,
+    "candidateServiceGuess": "aibackboneservice"
+  },
+  {
+    "client": "companyAPI",
+    "mismatchCount": 3,
+    "candidateServiceGuess": "companyservice"
+  },
+  {
+    "client": "financeAPI",
+    "mismatchCount": 3,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "complianceAPI",
+    "mismatchCount": 3,
+    "candidateServiceGuess": "complianceservice"
+  },
+  {
+    "client": "blockManagementAPI",
+    "mismatchCount": 3,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "districtManagementAPI",
+    "mismatchCount": 3,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "stateManagementAPI",
+    "mismatchCount": 3,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "cropRegistrationAPI",
+    "mismatchCount": 3,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "defenseFitnessPrepAPI",
+    "mismatchCount": 3,
+    "candidateServiceGuess": "defensefitnessprepservice"
+  },
+  {
+    "client": "enterpriseIntegrationAPI",
+    "mismatchCount": 3,
+    "candidateServiceGuess": "enterpriseintegrationservice"
+  },
+  {
+    "client": "escrowAPI",
+    "mismatchCount": 3,
+    "candidateServiceGuess": "escrowservice"
+  },
+  {
+    "client": "financialAPI",
+    "mismatchCount": 3,
+    "candidateServiceGuess": "financialaiservice"
+  },
+  {
+    "client": "systemAdministrationAPI",
+    "mismatchCount": 3,
+    "candidateServiceGuess": "systemadministrationservice"
+  },
+  {
+    "client": "logisticsAPI",
+    "mismatchCount": 3,
+    "candidateServiceGuess": "logisticsaiservice"
+  },
+  {
+    "client": "predictiveAnalyticsAPI",
+    "mismatchCount": 3,
+    "candidateServiceGuess": "predictiveanalyticsservice"
+  },
+  {
+    "client": "analyticsAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": "analyticsmonitoringservice"
+  },
+  {
+    "client": "bankerAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "blockchainVerificationAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": "blockchainverificationservice"
+  },
+  {
+    "client": "climateAdvisoryAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": "climateadvisoryservice"
+  },
+  {
+    "client": "knowledgeGraphAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": "knowledgegraphservice"
+  },
+  {
+    "client": "economicAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "cropValueResearchAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": "cropvalueresearchservice"
+  },
+  {
+    "client": "farmerWelfareAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": "farmerservice"
+  },
+  {
+    "client": "roleManagementAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": "rolemanagementservice"
+  },
+  {
+    "client": "ecommerceMarketingAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": "ecommercemarketingservice"
+  },
+  {
+    "client": "sellerRankingAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": "sellerrankingservice"
+  },
+  {
+    "client": "modulesAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": "modulesupportinfrastructureservice"
+  },
+  {
+    "client": "tenantManagementAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": "tenantmanagementservice"
+  },
+  {
+    "client": "platformCoreAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": "platformcoreservice"
+  },
+  {
+    "client": "seedVaultAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": "seedvaultservice"
+  },
+  {
+    "client": "mfaAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": "mfaservice"
+  },
+  {
+    "client": "organicTraceabilityAPI",
+    "mismatchCount": 2,
+    "candidateServiceGuess": "organictraceabilityservice"
+  },
+  {
+    "client": "adminAPI",
+    "mismatchCount": 1,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "systemAPI",
+    "mismatchCount": 1,
+    "candidateServiceGuess": "systemadministrationservice"
+  },
+  {
+    "client": "caAPI",
+    "mismatchCount": 1,
+    "candidateServiceGuess": "cachemanagementservice"
+  },
+  {
+    "client": "pestForecastingAPI",
+    "mismatchCount": 1,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "panchayatAPI",
+    "mismatchCount": 1,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "erpAPI",
+    "mismatchCount": 1,
+    "candidateServiceGuess": "erpservice"
+  },
+  {
+    "client": "farmerValueAPI",
+    "mismatchCount": 1,
+    "candidateServiceGuess": "farmerservice"
+  },
+  {
+    "client": "fpoAPI",
+    "mismatchCount": 1,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "dashboardAPI",
+    "mismatchCount": 1,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "productMediaAIAPI",
+    "mismatchCount": 1,
+    "candidateServiceGuess": "productmediaaiservice"
+  },
+  {
+    "client": "researchAPI",
+    "mismatchCount": 1,
+    "candidateServiceGuess": "researchanddevelopmentservice"
+  },
+  {
+    "client": "transactionAPI",
+    "mismatchCount": 1,
+    "candidateServiceGuess": "transactionservice"
+  },
+  {
+    "client": "privacyAPI",
+    "mismatchCount": 1,
+    "candidateServiceGuess": null
+  },
+  {
+    "client": "notificationAPI",
+    "mismatchCount": 1,
+    "candidateServiceGuess": "notificationservice"
+  }
+]

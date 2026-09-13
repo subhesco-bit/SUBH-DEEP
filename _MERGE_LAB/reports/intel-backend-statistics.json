@@ -1,0 +1,46 @@
+[
+  {
+    "stem": "statistics.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "clean",
+        "mean",
+        "median",
+        "stdDev",
+        "variance",
+        "percentile",
+        "coefficientOfVariation",
+        "linearRegression",
+        "correlation",
+        "movingAverage",
+        "exponentialSmoothing",
+        "holtLinearForecast",
+        "seasonalIndices",
+        "zScoreOutliers",
+        "iqrOutliers",
+        "confidenceInterval",
+        "rmse",
+        "mape",
+        "normalize",
+        "weightedScore",
+        "xMean"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\core\\decisionEngine.js",
+      "backend\\src\\core\\erpAgents.js",
+      "backend\\src\\services\\advancedAIService\\creditScoring.js",
+      "backend\\src\\services\\advancedAIService\\demandForecasting.js",
+      "backend\\src\\services\\advancedAIService\\fraudDetection.js",
+      "backend\\src\\services\\advancedAIService\\priceOptimization.js",
+      "backend\\src\\services\\legacy\\advancedAIService.js",
+      "backend\\src\\services\\legacy\\hrService.js",
+      "backend\\src\\tests\\statistics.test.js"
+    ]
+  }
+]

@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "decisionengine.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "DecisionEngine",
+        "projectedChange",
+        "decisionEngine"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\services\\legacy\\aiBrainService.js",
+      "backend\\src\\tests\\decisionEngine.test.js"
+    ]
+  }
+]

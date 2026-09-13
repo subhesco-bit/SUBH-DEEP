@@ -1,0 +1,33 @@
+[
+  {
+    "stem": "apicultureservice.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "ApicultureService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M43100_APICULTURE\\backend\\service.js"
+    ]
+  },
+  {
+    "stem": "apicultureroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

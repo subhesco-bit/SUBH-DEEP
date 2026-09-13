@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "test.js",
+    "candidateCount": 8,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

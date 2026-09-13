@@ -1,0 +1,35 @@
+[
+  {
+    "stem": "index.md",
+    "candidateCount": 3,
+    "sources": [
+      "claude",
+      "root-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\database\\connection.js",
+      "backend\\src\\services\\commerce\\orderService.js",
+      "backend\\src\\services\\legacy\\logisticsService.js",
+      "backend\\src\\services\\legacy\\orderService.js",
+      "backend\\src\\services\\logistics\\logisticsService.js",
+      "backend\\src\\services\\notificationService.js",
+      "backend\\src\\tests\\arVrService.test.js",
+      "backend\\src\\tests\\blockchainTraceabilityService.test.js",
+      "backend\\src\\tests\\consumerHealthService.test.js",
+      "backend\\src\\tests\\conversationalAIService.test.js",
+      "backend\\src\\tests\\foodIntelligenceService.test.js",
+      "backend\\src\\tests\\giIntelligenceService.test.js",
+      "backend\\src\\tests\\iotIntegrationService.test.js",
+      "backend\\src\\tests\\knowledgeGraphService.test.js",
+      "backend\\src\\tests\\laboratoryERPService.test.js",
+      "backend\\src\\tests\\multilingualService.test.js",
+      "backend\\src\\tests\\nutritionIntelligenceService.test.js",
+      "backend\\src\\tests\\organicTraceabilityService.test.js",
+      "backend\\src\\tests\\predictiveAnalyticsService.test.js",
+      "backend\\src\\tests\\valueCommerceService.test.js",
+      "backend\\src\\tests\\voiceAIService.test.js"
+    ]
+  }
+]

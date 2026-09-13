@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "readme.md",
+    "candidateCount": 706,
+    "sources": [
+      "backend-current",
+      "claude",
+      "docs",
+      "modules",
+      "node-modules",
+      "old-new-folder",
+      "root-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

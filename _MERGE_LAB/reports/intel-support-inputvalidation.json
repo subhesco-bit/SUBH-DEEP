@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "inputvalidation.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 4,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\controllers\\ecommerceController.js",
+      "backend\\src\\test\\middleware\\inputValidation.test.js"
+    ]
+  }
+]

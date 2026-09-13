@@ -1,0 +1,200 @@
+[
+  {
+    "stem": "farmcosting.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current",
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "currentUserId",
+        "normalizeNumber",
+        "normalizeRecord",
+        "validateRecord",
+        "ensureTable",
+        "listRecords",
+        "createRecord",
+        "deleteRecord",
+        "summarize",
+        "buildFarmerVoicePrompt",
+        "buildOptimization",
+        "route:GET:/health",
+        "route:GET:/",
+        "route:GET:/records",
+        "route:POST:/records",
+        "route:DELETE:/records/:id",
+        "route:POST:/calculate",
+        "route:POST:/optimize"
+      ],
+      "claude": [
+        "route:POST:/farms/:farmId/cost"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "costcontrolservice.js",
+    "candidateCount": 6,
+    "sources": [
+      "backend-current",
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M771100_COSTCONTROL\\backend\\service.js",
+      "backend\\src\\routes\\costControlRoutes.js",
+      "backend\\src\\services\\costControlService.js"
+    ]
+  },
+  {
+    "stem": "aicostcontroller.js",
+    "candidateCount": 4,
+    "sources": [
+      "backend-current",
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 11,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\core\\ai\\aiOrchestratorCore.js",
+      "backend\\src\\core\\ai\\index.js"
+    ]
+  },
+  {
+    "stem": "module.json",
+    "candidateCount": 4,
+    "sources": [
+      "backend-current",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "service.js",
+    "candidateCount": 4,
+    "sources": [
+      "backend-current",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\core\\moduleRegistry.js",
+      "backend\\src\\modules\\M001\\service.js",
+      "backend\\src\\modules\\M645100_LIBRARYKNOWLEDGE\\api\\routes.js",
+      "backend\\src\\routes\\m400AiBackboneRoutes.js",
+      "backend\\src\\services\\libraryKnowledgeService.js",
+      "backend\\src\\tests\\libraryKnowledgeService.test.js"
+    ]
+  },
+  {
+    "stem": "index.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backend-current",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\database\\connection.js",
+      "backend\\src\\services\\commerce\\orderService.js",
+      "backend\\src\\services\\legacy\\logisticsService.js",
+      "backend\\src\\services\\legacy\\orderService.js",
+      "backend\\src\\services\\logistics\\logisticsService.js",
+      "backend\\src\\services\\notificationService.js",
+      "backend\\src\\tests\\arVrService.test.js",
+      "backend\\src\\tests\\blockchainTraceabilityService.test.js",
+      "backend\\src\\tests\\consumerHealthService.test.js",
+      "backend\\src\\tests\\conversationalAIService.test.js",
+      "backend\\src\\tests\\foodIntelligenceService.test.js",
+      "backend\\src\\tests\\giIntelligenceService.test.js",
+      "backend\\src\\tests\\iotIntegrationService.test.js",
+      "backend\\src\\tests\\knowledgeGraphService.test.js",
+      "backend\\src\\tests\\laboratoryERPService.test.js",
+      "backend\\src\\tests\\multilingualService.test.js",
+      "backend\\src\\tests\\nutritionIntelligenceService.test.js",
+      "backend\\src\\tests\\organicTraceabilityService.test.js",
+      "backend\\src\\tests\\predictiveAnalyticsService.test.js",
+      "backend\\src\\tests\\valueCommerceService.test.js",
+      "backend\\src\\tests\\voiceAIService.test.js"
+    ]
+  },
+  {
+    "stem": "costcontrolroutes.js",
+    "candidateCount": 6,
+    "sources": [
+      "backend-current",
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 15,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "costcontrolpage.jsx",
+    "candidateCount": 6,
+    "sources": [
+      "backend-current",
+      "backup",
+      "claude",
+      "frontend-current",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 5,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M771100_COSTCONTROL\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "farmcostingpage.jsx",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "frontend-current",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {
+      "frontend-current": [
+        "buildCostInsights"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

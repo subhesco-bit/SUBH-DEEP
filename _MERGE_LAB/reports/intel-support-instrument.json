@@ -1,0 +1,30 @@
+[
+  {
+    "stem": "instrument.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "addClsInstrumentationHandler",
+        "addLcpInstrumentationHandler",
+        "addTtfbInstrumentationHandler",
+        "addInpInstrumentationHandler",
+        "addPerformanceInstrumentationHandler",
+        "triggerHandlers",
+        "instrumentCls",
+        "instrumentLcp",
+        "instrumentTtfb",
+        "instrumentInp",
+        "addMetricObserver",
+        "instrumentPerformanceObserver",
+        "addHandler",
+        "getCleanupCallback",
+        "isPerformanceEventTiming"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

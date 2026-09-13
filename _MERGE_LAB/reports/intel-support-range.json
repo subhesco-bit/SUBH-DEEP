@@ -1,0 +1,30 @@
+[
+  {
+    "stem": "range.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "for",
+        "Range",
+        "memoOpts",
+        "isSatisfiable",
+        "parseComparator",
+        "invalidXRangeOrder",
+        "replaceTildes",
+        "replaceTilde",
+        "replaceCarets",
+        "replaceCaret",
+        "replaceXRanges",
+        "replaceXRange",
+        "replaceStars",
+        "replaceGTE0",
+        "testSet"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

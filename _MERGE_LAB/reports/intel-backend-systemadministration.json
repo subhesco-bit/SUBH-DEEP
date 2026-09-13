@@ -1,0 +1,60 @@
+[
+  {
+    "stem": "systemadministrationservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "SystemAdministrationService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M840100_SYSTEMADMINISTRATION\\backend\\service.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\services\\systemAdministrationService.js"
+    ]
+  },
+  {
+    "stem": "systemadministrationpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "SystemAdministrationPage",
+        "loadSystemData",
+        "handleUpdateSetting"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M840100_SYSTEMADMINISTRATION\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "systemadministrationroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health",
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

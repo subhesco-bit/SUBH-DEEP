@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "errorboundary.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "ErrorBoundary"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\scripts\\fix-frontend-issues.js",
+      "frontend\\src\\App.jsx",
+      "frontend\\src\\test\\components\\ErrorBoundary.test.jsx"
+    ]
+  }
+]

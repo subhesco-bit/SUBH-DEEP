@@ -1,0 +1,43 @@
+[
+  {
+    "stem": "machineryaccessservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "getMachineryAccess",
+        "getMachineryAccessByVillage",
+        "getMachineryAccessByType",
+        "upsertMachineryAccess",
+        "getVillageMachinerySummary",
+        "setupRoutes",
+        "route:GET:/access/:accessId",
+        "route:GET:/access/village/:villageId",
+        "route:GET:/access/type/:machineryType",
+        "route:GET:/access/village/:villageId/summary",
+        "route:POST:/access",
+        "r2",
+        "daysBetween",
+        "computeBookingCost",
+        "checkConflict",
+        "createBooking",
+        "listBookings",
+        "completeBooking",
+        "getUtilization",
+        "route:GET:/",
+        "route:POST:/",
+        "route:POST:/:id/complete",
+        "route:GET:/machinery/:machineryId/utilization",
+        "offset",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M290100_MACHINERYACCESS\\backend\\service.js",
+      "backend\\src\\services\\machineryAccessService.js"
+    ]
+  }
+]

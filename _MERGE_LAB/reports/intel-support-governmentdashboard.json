@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "governmentdashboardpage.jsx",
+    "candidateCount": 7,
+    "sources": [
+      "backup",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M652100_GOVERNMENTSCHEME\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

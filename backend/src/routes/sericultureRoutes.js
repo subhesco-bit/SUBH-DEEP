@@ -9,6 +9,14 @@
 
 const express = require('express');
 const router = express.Router();
+// Liveness ping preserved from the generated stub at
+// backend/src/routes/legacy/sericultureRoutes.js, retired 2026-09-13. That stub shared this
+// file's basename, so dynamicRouteLoader.js mounted it INSTEAD of this file and
+// these 5 routes never reached the API.
+router.get('/health', (req, res) => {
+  res.json({ success: true, status: 'healthy', module: 'sericultureRoutes' });
+});
+
 const sericultureService = require('../services/legacy/sericultureService');
 const { authMiddleware: authenticate } = require('../middleware/auth');
 

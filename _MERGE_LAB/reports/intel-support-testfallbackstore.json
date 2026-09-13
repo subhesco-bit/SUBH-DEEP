@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "testfallbackstore.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\services\\legacy\\arVrService.js",
+      "backend\\src\\services\\legacy\\blockchainTraceabilityService.js",
+      "backend\\src\\services\\legacy\\consumerHealthService.js",
+      "backend\\src\\services\\legacy\\foodIntelligenceService.js",
+      "backend\\src\\services\\legacy\\giIntelligenceService.js"
+    ]
+  }
+]

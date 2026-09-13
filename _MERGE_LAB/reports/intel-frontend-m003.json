@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "m003component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M003Component"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "m003page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M003Page"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\M003\\index.jsx"
+    ]
+  }
+]

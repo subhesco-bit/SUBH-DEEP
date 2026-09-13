@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "aicollaborationpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "AICollaborationPage"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js",
+      "frontend\\src\\router\\routes.jsx"
+    ]
+  }
+]

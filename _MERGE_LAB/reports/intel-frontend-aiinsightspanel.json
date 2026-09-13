@@ -1,0 +1,27 @@
+[
+  {
+    "stem": "aiinsightspanel.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "AIInsightsPanel",
+        "toggleExpand",
+        "getSeverityColor",
+        "getSeverityIcon"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M200_ORGANIZATION_MANAGEMENT\\frontend\\pages\\PlatformManagementPage.jsx",
+      "frontend\\src\\pages\\FinancialReportPage.jsx",
+      "frontend\\src\\pages\\FPODashboardPage.jsx",
+      "frontend\\src\\pages\\InventoryReportPage.jsx",
+      "frontend\\src\\pages\\OrderDetailPage.jsx",
+      "frontend\\src\\pages\\PlatformManagementPage.jsx",
+      "frontend\\src\\pages\\RiskManagementPage.jsx"
+    ]
+  }
+]

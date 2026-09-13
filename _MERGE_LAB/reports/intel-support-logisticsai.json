@@ -1,0 +1,36 @@
+[
+  {
+    "stem": "logisticsaiservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {
+      "claude": [
+        "LogisticsaiBackboneService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\services\\index.js"
+    ]
+  },
+  {
+    "stem": "logisticsairoutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:POST:/ai-enhanced/optimize-route",
+        "route:GET:/ai-capability",
+        "route:POST:/create-shipment"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

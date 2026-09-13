@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "m090component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M090Component"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "m090page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M090Page"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\M090\\index.jsx"
+    ]
+  }
+]

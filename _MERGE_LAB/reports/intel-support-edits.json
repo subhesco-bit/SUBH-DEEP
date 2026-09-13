@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "edits.jsonl",
+    "candidateCount": 4,
+    "sources": [
+      ".vibecheck",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

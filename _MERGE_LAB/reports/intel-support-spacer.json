@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "spacer.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "Spacer"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

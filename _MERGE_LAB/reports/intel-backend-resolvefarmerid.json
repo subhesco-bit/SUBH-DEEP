@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "resolvefarmerid.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "resolveFarmerId"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\routes\\agriculture\\farmerHealthRoutes.js",
+      "backend\\src\\routes\\agriculture\\farmerRoutes.js",
+      "backend\\src\\routes\\farmerRoutes_merged.js",
+      "backend\\src\\routes\\recoveredFinanceRoutes_merged.js"
+    ]
+  }
+]

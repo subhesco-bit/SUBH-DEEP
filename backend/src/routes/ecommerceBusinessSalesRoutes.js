@@ -1,38 +1,120 @@
 /**
- * ecommerce Business Sales Routes
+ * ecommerceBusinessSalesRoutes — the canonical implementation for this resource.
+ *
+ * Consolidated from ecommerceBusinessSalesRoutes_merged.js on 2026-09-13, per
+ * .ai/decisions/0001-module-lineage-consolidation.md and
+ * .ai/consolidation/CONSOLIDATION_PLAN.md (Phase 3.1): the consolidated code
+ * belongs in the canonical file; duplicates are retired once their unique
+ * behaviour is preserved and verified.
+ *
+ * History (why this file looked empty before): dynamicRouteLoader.js derives a
+ * mount path from the FILENAME, so this implementation was published at a
+ * "...-merged" URL that nothing called, while this file — a generated stub whose
+ * only endpoints were a POST / answering "Route operational" and a GET /health —
+ * owned the path the frontend actually requests. The stub's blanket
+ * router.use(authMiddleware) is deliberately NOT carried over: the code below
+ * applies auth per route and several endpoints are intentionally public. Its
+ * POST / reply is not carried over either — it answered { success: true }
+ * without writing anything.
+ */
+/**
+ * AFRERA E-Commerce Business Sales Routes
+ *
+ * B2B and business sales endpoints:
+ * - Bulk Order Management
+ * - Contract Farming
+ * - Quotation Management
+ * - Sales Analytics
+ * - Commission Management
  */
 
 const express = require('express');
 const router = express.Router();
-
-try {
-  const { authMiddleware } = require('../middleware/auth');
-  router.use(authMiddleware);
-} catch (e) {
-  // Auth optional
-}
-
-/**
- * Main endpoint
- */
-router.post('/', async (req, res) => {
-  res.json({
-    success: true,
-    module: 'ecommerceBusinessSalesRoutes',
-    message: 'Route operational',
-    timestamp: new Date().toISOString()
-  });
-});
-
-/**
- * Health check
- */
+// Liveness ping preserved from the generated stub this file used to contain.
+// Declared first so a pattern route such as '/:id' cannot swallow it.
 router.get('/health', (req, res) => {
-  res.json({
-    success: true,
-    status: 'healthy',
-    module: 'ecommerceBusinessSalesRoutes'
-  });
+  res.json({ success: true, status: 'healthy', module: 'ecommerceBusinessSalesRoutes' });
 });
+
+const ecommerceBusinessSalesController = require('../controllers/ecommerceBusinessSalesController');
+const { authMiddleware } = require('../middleware/auth');
+const { authLimiter } = require('../middleware/rateLimiter');
+
+// ============================================================================
+// B2B BULK ORDER ROUTES
+// ============================================================================
+
+/**
+ * @route   POST /api/ecommerce-business/create-bulk-order
+ * @desc    Create B2B bulk order request
+ * @access  Private (Buyer)
+ */
+router.post('/create-bulk-order', authLimiter, authMiddleware, ecommerceBusinessSalesController.createBulkOrder);
+
+/**
+ * @route   POST /api/ecommerce-business/submit-quotation
+ * @desc    Submit quotation for bulk order
+ * @access  Private (Seller)
+ */
+router.post('/submit-quotation', authLimiter, authMiddleware, ecommerceBusinessSalesController.submitQuotation);
+
+/**
+ * @route   POST /api/ecommerce-business/accept-quotation/:quotationId
+ * @desc    Accept quotation and create order
+ * @access  Private (Buyer)
+ */
+router.post('/accept-quotation/:quotationId', authLimiter, authMiddleware, ecommerceBusinessSalesController.acceptQuotation);
+
+// ============================================================================
+// CONTRACT FARMING ROUTES
+// ============================================================================
+
+/**
+ * @route   POST /api/ecommerce-business/create-contract-farming
+ * @desc    Create contract farming agreement
+ * @access  Private (Buyer)
+ */
+router.post('/create-contract-farming', authLimiter, authMiddleware, ecommerceBusinessSalesController.createContractFarming);
+
+/**
+ * @route   POST /api/ecommerce-business/record-milestone
+ * @desc    Record contract farming milestone
+ * @access  Private (Admin/Buyer/Farmer)
+ */
+router.post('/record-milestone', authLimiter, authMiddleware, ecommerceBusinessSalesController.recordContractMilestone);
+
+// ============================================================================
+// SALES ANALYTICS ROUTES
+// ============================================================================
+
+/**
+ * @route   GET /api/ecommerce-business/sales-analytics
+ * @desc    Get comprehensive sales analytics
+ * @access  Private (Admin/Seller)
+ */
+router.get('/sales-analytics', authMiddleware, ecommerceBusinessSalesController.getSalesAnalytics);
+
+/**
+ * @route   GET /api/ecommerce-business/b2b-conversion-metrics
+ * @desc    Get B2B conversion metrics
+ * @access  Private (Admin)
+ */
+router.get('/b2b-conversion-metrics', authMiddleware, ecommerceBusinessSalesController.getB2BConversionMetrics);
+
+// ============================================================================
+// COMMISSION MANAGEMENT ROUTES
+// ============================================================================
+
+/**
+ * @route   POST /api/ecommerce-business/calculate-commission/:orderId
+ * @desc    Calculate platform commission for order
+ * @access  Private (Admin)
+ */
+router.post('/calculate-commission/:orderId', authLimiter, authMiddleware, ecommerceBusinessSalesController.calculateCommission);
+
+// ============================================================================
+// EXPORTS
+// ============================================================================
 
 module.exports = router;
+

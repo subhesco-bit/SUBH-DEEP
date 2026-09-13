@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "financialservice.js.html",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

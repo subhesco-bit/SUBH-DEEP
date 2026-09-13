@@ -1,0 +1,31 @@
+[
+  {
+    "stem": "breadcrumbs.js",
+    "candidateCount": 4,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "addBreadcrumb",
+        "_getSentryBreadcrumbHandler",
+        "addSentryBreadcrumb",
+        "_getDomBreadcrumbHandler",
+        "_innerDomBreadcrumb",
+        "_getConsoleBreadcrumbHandler",
+        "_consoleBreadcrumb",
+        "_getXhrBreadcrumbHandler",
+        "_xhrBreadcrumb",
+        "_getFetchBreadcrumbHandler",
+        "_fetchBreadcrumb",
+        "_getHistoryBreadcrumbHandler",
+        "_historyBreadcrumb",
+        "_isEvent",
+        "_breadcrumbsIntegration",
+        "breadcrumbsIntegration"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

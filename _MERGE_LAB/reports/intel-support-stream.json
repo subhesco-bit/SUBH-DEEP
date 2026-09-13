@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "stream.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "parallel",
+        "ReadableParallel",
+        "serial",
+        "ReadableSerial",
+        "serialOrdered",
+        "ReadableSerialOrdered"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

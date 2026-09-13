@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "generate-openapi.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 4,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "stem": "aiagentroutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 10,
+    "uniquePerSource": {
+      "claude": [
+        "route:POST:/ai-enhanced/process-task",
+        "route:GET:/ai-capability",
+        "route:POST:/process-task",
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "aiagentservice.js",
+    "candidateCount": 7,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\services\\index.js",
+      "backend\\src\\services\\legacy\\hrService.js",
+      "backend\\src\\tests\\aiAgentSecurity.test.js"
+    ]
+  },
+  {
+    "stem": "aiagentpage.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

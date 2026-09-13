@@ -12,6 +12,14 @@
 
 const express = require('express');
 const router = express.Router();
+// Liveness ping preserved from the generated stub at
+// backend/src/routes/dual-use/gdprRoutes.js, retired 2026-09-13. That stub shared this
+// file's basename, so dynamicRouteLoader.js mounted it INSTEAD of this file and
+// these 7 routes never reached the API.
+router.get('/health', (req, res) => {
+  res.json({ success: true, status: 'healthy', module: 'gdprRoutes' });
+});
+
 const gdprService = require('../services/dual-use/gdprService');
 const { authMiddleware } = require('../middleware/auth');
 const { adminMiddleware } = require('../middleware/admin');

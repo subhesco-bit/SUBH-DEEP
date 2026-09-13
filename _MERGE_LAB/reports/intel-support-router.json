@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "router.js",
+    "candidateCount": 2,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:POST:/predict/demand",
+        "route:POST:/optimize/price",
+        "route:POST:/assess/credit-risk",
+        "route:POST:/detect/fraud",
+        "route:POST:/recommend",
+        "route:POST:/predict-demand",
+        "route:POST:/optimize-price",
+        "route:POST:/assess-credit-risk",
+        "route:POST:/detect-fraud",
+        "route:POST:/recommendations",
+        "route:POST:/detect-crop-disease",
+        "route:GET:/models",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\services\\advancedAIService\\index.js",
+      "backend\\src\\services\\aiService\\index.js",
+      "backend\\src\\services\\authService\\index.js"
+    ]
+  }
+]

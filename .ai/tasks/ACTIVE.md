@@ -254,3 +254,138 @@ had two real candidates, both investigated and left as-is:
 **Reports:** `docs/codex-feature-merge-matrix.md`, `docs/codex-duplicate-rename-plan.csv`,
 `_MERGE_LAB/reports/intel-summary-all.json`
 **Protocol:** `.ai/AGENT_PROTOCOL.md`
+
+---
+
+## 2026-09-12 — Batch bug resolution: migration chain unblocked
+
+Full write-up: `.claude/audits/FIXES_2026-09-12_BATCH.md`.
+
+**Headline:** `npm run migrate` could not run at all. Not "had not been run" — the chain
+contained 156 statements PostgreSQL rejects outright, the earliest in `014`, and
+`migrate.js` rethrows on the first failure. All 156 are now closed, and
+`migration_preflight.js` reports 0 blockers (was 3).
+
+Worked by bug class, each class swept to zero and re-scanned to prove it:
+
+| Class | Before | After |
+|---|---|---|
+| FK child type ≠ winning parent PK type | 94 | 0 |
+| FK → column the winning parent lacks | 2 | 0 |
+| `CREATE INDEX` on a column the winning table lacks | 147 | 0 |
+| Partial index `WHERE deleted_at IS NULL`, no `deleted_at` | 14 | 0 |
+| `migration_preflight.js` blockers | 3 | 0 |
+
+Root cause throughout: ~105 table names are declared by more than one migration and
+`CREATE TABLE IF NOT EXISTS` silently skips all but the first, so later migrations index,
+reference and type columns against a shape that never got created.
+
+**Four collisions had the wrong winner** — resolved by renaming the squatter after checking
+which definition live code actually queries. Recorded in `schema-decisions.json`:
+`product_listings` → 097's AI-image copy renamed `ai_image_product_listings` (this alone
+closed 14 FK findings); `monitoring_metrics`/`monitoring_alerts` → 9532's M086 copies renamed
+`m086_*`; `soil_samples` → 9510's M032 copy renamed `m032_soil_samples`.
+
+**Protected-file exceptions.** 18 column repairs that appeared to need edits inside
+`000-071` did not: `000_zz_collision_column_repair.sql` and
+`010_zz_collision_column_repair.sql` sort into the gap after each table is created and
+before the first index needing it (same approach as the existing `roles` repair). 7 FK type
+mismatches in `014`/`041`/`061` genuinely could not be repaired from a later migration —
+fixed in place **with explicit user approval**, each annotated with why.
+
+**Also fixed**
+- Unary `+`/`-` in the agent calculator (`aiAgentService.js`) — `-5+3`, `(-5+3)`, `2*-3` were
+  all rejected. This was the only finding in `.claude/audits/AUDIT_BUGS.md` still live; the
+  other three were already fixed and that audit is now stale.
+- Migration ordering disagreed with itself across 5 sites. `migrate.js` orders numerically;
+  `migration_preflight.js`, `tools/schema-collisions.js`, `tools/gen-reconciliation.js` and
+  the two alternate runners used plain `.sort()`, where `"1000_"` precedes `"999_"`. The
+  checkers named the wrong winner for 5 tables and the alternate runners would have produced
+  a different database than `npm run migrate`. All now import
+  `backend/src/database/migrationOrder.js`.
+- **Login and registration were broken and leaking credentials.** `authAPI.login`/`register`
+  used `api.get('/auth/login', { params })` against a `router.post('/login')` that reads
+  `req.body` — `LoginForm.jsx`/`RegisterForm.jsx` could never sign anyone in, and the
+  password travelled in the request line into logs, history and `Referer`. Now `api.post`.
+
+**Wiring — quantified, deliberately not auto-fixed.** Resolved the real 5,819-endpoint table
+the way `dynamicRouteLoader.js` actually mounts it (auto-mount of everything under
+`backend/src/routes` at `/api/v1/<kebab name>`, plus aliases, plus `index.js`). Note for
+future passes: reading `index.js` alone is misleading — it makes ~545 route files look
+orphaned and suggests `/api/v1/auth` is unmounted, which it is not.
+`tools/route-audit.js`'s "545 orphaned" figure has this flaw.
+
+Remaining: 285 call sites invoke an API-client method that does not exist (each a render-time
+`TypeError`), and 2,823 endpoint literals have no backend route. A fuzzy matcher for these was
+built and **discarded** — it paired `consumerHealthAPI.getHealthMetrics()` with
+`/api/v1/ai-self-healing/health-metrics`, i.e. a different subsystem. Under a strict rule only
+1 of 285 was justifiable. This is the surface `FIXES.md` already defers as **F6**: a bounded
+backend build-out per resource family, not a wiring fix.
+
+**Not verified against a live database** — PostgreSQL is not up here. Everything is checked
+structurally and against the resolved schema model. Run `npm run migrate` in CI/staging before
+trusting it.
+
+## ASTRA reconstruction continuation — 12 September 2026
+
+Bounded batches implemented: authentication/password verification and test-runner integrity;
+canonical M041 village search → frontend dashboard wiring and validation; streaming authority
+reconciliation tooling. Existing user changes preserved. See `docs/reconstruction-20260912.md`
+for source preservation, verification commands, limits and remaining work. Full project
+reconstruction is still IN PROGRESS; the full backend run recorded 359 failing suites before
+being stopped and is not a passing gate. No completion certificate, deployment or merge.
+
+---
+
+## 2026-09-13 — Duplicate retirement under ADR 0001
+
+Full record: `.claude/audits/RETIREMENT_2026-09-13.md`.
+
+Applied the retirement gate in `.ai/decisions/0001-module-lineage-consolidation.md` §6 and
+`CONSOLIDATION_PLAN.md` Phase 3.1 to the `*_merged.js` route duplicates.
+
+**Direction corrected first.** The previous pass had each canonical `xRoutes.js` delegate to
+its `xRoutes_merged.js` sibling — reachable, but with the duplicate holding the
+implementation. Phase 3.1 step 4 puts the consolidated code in the canonical file and leaves
+the wrapper on the duplicate. 42 files inverted; endpoint sets byte-identical.
+
+**Running the gate before retiring paid for itself:**
+- 6 route families did not load at all. `enterpriseRouteSupport.js`,
+  `livestockRouteSupport.js`, `climateRouteSupport.js` hold shared request-hardening helpers;
+  `2e3420a1` corrupted them and `441c87e4` replaced them with router stubs instead of
+  repairing. Recovered from git; every consumer was throwing `... is not a function`.
+- A corruption class that passes every syntax gate: a **bare `\r`** where a newline belonged.
+  JS treats `\r` as a line terminator, so the file parses — but the enclosing function is
+  never closed and the routes after it are unreachable. `platformCoreRoutes` registered 5 of
+  15, `unifiedAIRoutes` 3 of 8, `labourRoutes` **0 of 7**. Seven files affected.
+  `animalHealthRoutes` and `goatRoutes` additionally had `protectLivestockRouter(router)`
+  disabled, so they ran without the hardening their livestock siblings had. Re-enabled.
+
+**Consolidated:** `governanceModule` 1 → **25 endpoints live** (villages, panchayats, CSR,
+compliance, cooperatives — the real implementation was filed as
+`platform/governanceModule_merged.js` and published at a `-merged` URL nothing calls);
+`costRoutes` 2 → 3; plus `aiGatewayRoutes`, `trackDartRoutes`, and `sapModuleArchitecture`'s
+`/status` alias preserved.
+
+**Second duplicate class found:** `dynamicRouteLoader.js` keys its registry by *basename* and
+drops later files with a name it has seen, so a 39-line stub in a subfolder beat the real
+top-level implementation on walk order. 12 cases, 64 routes unblocked.
+
+**Retired 98** (86 `_merged` + 12 duplicate-basename stubs) under two rules — (A) every route
+already present in the canonical file, 73; (B) in-memory CRUD scaffold whose canonical
+counterpart is real service/DB-backed, 13 — both also requiring no requirer and no
+`-merged` caller. All were git-tracked before deletion, so all are recoverable.
+
+**Kept 11**, reasons recorded: `gdprRoutes_merged` (3 real GDPR endpoints), `libraryRoutes_merged`
+(2), three holding a `/health` the canonical lacks, and six in-memory scaffolds whose canonical
+counterpart is *also* a placeholder — retiring those would remove the only thing there, so they
+are a build-out decision, not a retirement one.
+
+**Verified:** 753 route files `node --check` clean; 0 load failures (was 6); live endpoint sets
+match the pre-consolidation snapshot (three are supersets — an array-path route the static
+scanner half-read, plus a mounted sub-router); 0 remaining stubs hiding a real implementation
+(was 12); no dangling requires. Not run against a live database — infrastructure is down here.
+
+**Follow-up:** the `_merged` suffix is itself the root cause — the loader turns it into a
+`/api/v1/x-merged` URL nothing calls. The 11 kept files still carry it; the name should go when
+their unique routes are merged.

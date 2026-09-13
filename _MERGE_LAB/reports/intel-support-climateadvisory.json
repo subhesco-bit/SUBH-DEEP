@@ -1,0 +1,56 @@
+[
+  {
+    "stem": "climateadvisorypage.jsx",
+    "candidateCount": 7,
+    "sources": [
+      "backup",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M403_AGRICULTURAL_AI\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "climateadvisoryroutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 4,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "climateadvisory.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/farms/:farmId/climate-advisory"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

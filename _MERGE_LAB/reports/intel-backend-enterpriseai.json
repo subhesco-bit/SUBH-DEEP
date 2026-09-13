@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "enterpriseairoutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health",
+        "route:POST:/credit-score",
+        "route:POST:/scheme-eligibility",
+        "route:POST:/assess-risk",
+        "route:POST:/recommendations",
+        "route:POST:/entity-profile",
+        "route:POST:/anomaly-detection",
+        "route:POST:/predict-yield",
+        "route:POST:/predict-demand",
+        "route:POST:/predict-price",
+        "route:GET:/model-slots",
+        "route:GET:/unserved-intents",
+        "route:POST:/model-slots",
+        "route:POST:/query"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "postcss.config.cjs",
+    "candidateCount": 3,
+    "sources": [
+      "claude",
+      "frontend-current",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

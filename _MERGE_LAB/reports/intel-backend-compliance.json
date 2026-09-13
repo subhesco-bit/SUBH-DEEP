@@ -1,0 +1,78 @@
+[
+  {
+    "stem": "complianceservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "financialYearOf",
+        "quarterOf",
+        "deductTds",
+        "tdsSummary",
+        "registerIrn",
+        "recordIrnResult",
+        "buildGstrDraft",
+        "recordRcm",
+        "rcmOutstanding",
+        "r2",
+        "TDS_RATES"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\routes\\platform\\complianceRoutes_merged.js"
+    ]
+  },
+  {
+    "stem": "compliance.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "gdprCompliance",
+        "dataRetention",
+        "consentManagement",
+        "dataMinimization",
+        "minimizeData",
+        "rightToBeForgotten",
+        "dataPortability",
+        "auditTrail",
+        "generateComplianceReport",
+        "complianceCheck",
+        "complianceLogger"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\middleware\\index.js"
+    ]
+  },
+  {
+    "stem": "complianceroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/tds/deduct",
+        "route:GET:/tds/summary",
+        "route:GET:/tds/rates",
+        "route:POST:/irn/register",
+        "route:POST:/irn/result",
+        "route:POST:/gstr/draft",
+        "route:POST:/rcm",
+        "route:GET:/rcm/outstanding",
+        "fail"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

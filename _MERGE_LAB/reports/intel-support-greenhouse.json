@@ -1,0 +1,37 @@
+[
+  {
+    "stem": "greenhouseservice.js",
+    "candidateCount": 7,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 13,
+    "uniquePerSource": {
+      "claude": [
+        "GreenhouseService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M129100_GREENHOUSE\\backend\\service.js",
+      "backend\\src\\routes\\ORPHANED_SERVICES_MOUNT.js"
+    ]
+  },
+  {
+    "stem": "greenhouse.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:POST:/greenhouses"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "offlinepaymentservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 23,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M3100_OFFLINEPAYMENT\\backend\\service.js",
+      "backend\\src\\services\\offlinePaymentService.js"
+    ]
+  }
+]

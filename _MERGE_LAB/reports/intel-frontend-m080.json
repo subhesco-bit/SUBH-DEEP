@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "m080page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M080Page"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\M080\\index.jsx"
+    ]
+  },
+  {
+    "stem": "m080component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M080Component"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "get.js",
+    "candidateCount": 4,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_get",
+        "getDunder",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,55 @@
+[
+  {
+    "stem": "watermanagementservice.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "waterBudgeting",
+        "waterQuality",
+        "rainwaterHarvesting",
+        "watershedManagement"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M77100_WATERMANAGEMENT\\backend\\service.js"
+    ]
+  },
+  {
+    "stem": "watermanagementpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "WaterManagementPage"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M77100_WATERMANAGEMENT\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "watermanagementroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "stem": "service-enhancement-connectivity-report.md",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "codex-or-ai-workspace",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

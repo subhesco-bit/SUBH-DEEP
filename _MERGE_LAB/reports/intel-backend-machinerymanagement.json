@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "machinerymanagementpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "FleetMaintenanceDuePanel",
+        "MachineryManagementPage"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M290100_MACHINERYACCESS\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

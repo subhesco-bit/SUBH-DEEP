@@ -1,0 +1,26 @@
+[
+  {
+    "stem": "setup.ts",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "setup.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "of"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

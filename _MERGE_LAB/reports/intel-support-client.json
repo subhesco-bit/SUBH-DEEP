@@ -1,0 +1,33 @@
+[
+  {
+    "stem": "client.js",
+    "candidateCount": 4,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_makeInternalError",
+        "_makeDoNotSendEventError",
+        "_isInternalError",
+        "_isDoNotSendEventError",
+        "setupWeightBasedFlushing",
+        "getDataCategoryByType",
+        "_validateBeforeSendResult",
+        "processBeforeSend",
+        "isErrorEvent",
+        "isTransactionEvent",
+        "estimateMetricSizeInBytes",
+        "estimateLogSizeInBytes",
+        "estimateAttributesSizeInBytes",
+        "estimatePrimitiveSizeInBytes",
+        "Client",
+        "uniqueCallback",
+        "applyDefaultOptions",
+        "BrowserClient"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

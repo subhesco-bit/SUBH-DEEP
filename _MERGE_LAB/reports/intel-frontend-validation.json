@@ -1,0 +1,28 @@
+[
+  {
+    "stem": "validation.js",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "createValidator",
+        "validate",
+        "ValidationError",
+        "SchemaValidator"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\scripts\\automated-fixes.js",
+      "backend\\src\\core\\enhancedServiceFramework.js",
+      "backend\\src\\core\\index.js",
+      "backend\\src\\core\\serviceAuditAndEnhancement.js",
+      "backend\\src\\middleware\\index.js",
+      "backend\\src\\routes\\buyerTrust.js",
+      "backend\\src\\routes\\subscriptions.js",
+      "backend\\src\\services\\productionExampleService.js"
+    ]
+  }
+]

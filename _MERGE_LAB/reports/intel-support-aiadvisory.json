@@ -1,0 +1,23 @@
+[
+  {
+    "stem": "aiadvisoryservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 16,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:POST:/",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M472100_AIADVISORY\\backend\\service.js",
+      "backend\\src\\services\\aiAdvisoryService.js"
+    ]
+  }
+]

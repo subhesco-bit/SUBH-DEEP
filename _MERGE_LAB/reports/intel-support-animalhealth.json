@@ -1,0 +1,56 @@
+[
+  {
+    "stem": "animalhealthroutes.js",
+    "candidateCount": 6,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 19,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "animalhealthservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 21,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M87100_ANIMALHEALTH\\backend\\service.js",
+      "backend\\src\\routes\\animalHealthRoutes.js",
+      "backend\\src\\services\\animalHealthService.js"
+    ]
+  },
+  {
+    "stem": "animalhealthpage.jsx",
+    "candidateCount": 6,
+    "sources": [
+      "backup",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 6,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M87100_ANIMALHEALTH\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "constants.d.ts",
+    "candidateCount": 5,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

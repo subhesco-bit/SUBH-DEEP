@@ -1,0 +1,31 @@
+[
+  {
+    "stem": "farmerhealthroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "selfScopeUnlessAdmin",
+        "isAdmin",
+        "as",
+        "route:GET:/health-records",
+        "route:GET:/health-records/:id",
+        "route:POST:/health-records",
+        "route:PUT:/health-records/:id",
+        "route:DELETE:/health-records/:id",
+        "route:GET:/farmers/:farmerId/health-summary",
+        "route:GET:/welfare-programs",
+        "route:POST:/welfare-enrollments",
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js",
+      "backend\\src\\tests\\farmerHealthRoutes.test.js"
+    ]
+  }
+]

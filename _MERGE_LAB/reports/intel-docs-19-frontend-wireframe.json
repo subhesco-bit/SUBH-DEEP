@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "19-frontend-wireframe.md",
+    "candidateCount": 3,
+    "sources": [
+      "claude",
+      "docs",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

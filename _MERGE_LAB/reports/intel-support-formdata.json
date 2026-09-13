@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "formdata.js",
+    "candidateCount": 3,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "typeof",
+        "FormData"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,31 @@
+[
+  {
+    "stem": "erpdashboard.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 9,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M300_ERP_CORE\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "erpdashboardpage.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude"
+    ],
+    "sharedSymbolCount": 3,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

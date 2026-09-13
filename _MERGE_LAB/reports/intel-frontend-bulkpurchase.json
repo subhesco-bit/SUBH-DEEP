@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "bulkpurchasepage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "BulkPurchasePage",
+        "handleAddProduct",
+        "handleQuantityChange",
+        "calculateTotal"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

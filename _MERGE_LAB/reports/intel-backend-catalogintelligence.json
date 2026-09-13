@@ -1,0 +1,44 @@
+[
+  {
+    "stem": "catalogintelligenceservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "monthIndex",
+        "inSeason",
+        "productCalendar",
+        "glutForecast",
+        "scarcityMonths",
+        "wellnessRecommendation",
+        "listConcerns",
+        "explainTerm",
+        "listTerms",
+        "isHealthy",
+        "honey",
+        "route:GET:/in-season",
+        "route:GET:/product-calendar",
+        "route:GET:/glut-forecast",
+        "route:GET:/scarcity-months",
+        "route:GET:/wellness",
+        "route:GET:/wellness/concerns",
+        "route:GET:/explain",
+        "route:GET:/glossary",
+        "handle",
+        "router",
+        "SEASONALITY",
+        "WELLNESS_MAP",
+        "JARGON"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\core\\aiOrchestrator.js",
+      "backend\\src\\modules\\M707100_CATALOGINTELLIGENCE\\backend\\service.js",
+      "backend\\src\\services\\catalogIntelligenceService.js",
+      "backend\\src\\services\\index.js"
+    ]
+  }
+]

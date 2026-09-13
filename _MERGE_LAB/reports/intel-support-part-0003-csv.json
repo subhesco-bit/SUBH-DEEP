@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "part-0003.csv.gz",
+    "candidateCount": 7,
+    "sources": [
+      "-ebdesign-library"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

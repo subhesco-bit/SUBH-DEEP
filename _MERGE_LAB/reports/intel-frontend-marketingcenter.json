@@ -1,0 +1,24 @@
+[
+  {
+    "stem": "marketingcenter.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "MarketingCenter",
+        "renderOverview",
+        "renderCampaigns",
+        "renderSponsoredProducts",
+        "renderPromotions",
+        "renderRetargeting",
+        "renderAnalytics"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

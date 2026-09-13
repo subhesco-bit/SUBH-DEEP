@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "aioperationintelligencepage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "AIOperationIntelligencePage",
+        "loadPerformanceMetrics",
+        "executeOptimizationDecision"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

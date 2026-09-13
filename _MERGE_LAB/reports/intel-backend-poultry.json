@@ -1,0 +1,66 @@
+[
+  {
+    "stem": "poultryservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "listFlocks",
+        "createFlock",
+        "updateFlock",
+        "deleteFlock",
+        "listEggProduction",
+        "recordEggProduction",
+        "listFeedConsumption",
+        "recordFeedConsumption",
+        "listMortality",
+        "recordMortality",
+        "listVaccinationRecords",
+        "recordVaccination",
+        "getFlockPerformance",
+        "getVaccinationAlerts",
+        "optimizeEggProduction",
+        "monitorFlockHealth",
+        "optimizePoultryFeed",
+        "predictMortalityRisk",
+        "generateHealthRecommendations",
+        "generateMortalityRecommendations",
+        "offset",
+        "daysBetween",
+        "productionTrend",
+        "productionDecline",
+        "mortalityIncrease",
+        "flockAge"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M18100_POULTRY\\backend\\service.js",
+      "backend\\src\\routes\\poultryRoutes_merged.js",
+      "backend\\src\\services\\poultryService.js"
+    ]
+  },
+  {
+    "stem": "poultryroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

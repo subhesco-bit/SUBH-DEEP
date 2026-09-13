@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "yieldmanagementpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "YieldManagementPage",
+        "checkPrice",
+        "openBucket",
+        "loadCurve"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

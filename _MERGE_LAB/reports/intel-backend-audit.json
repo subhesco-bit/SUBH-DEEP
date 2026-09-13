@@ -1,0 +1,48 @@
+[
+  {
+    "stem": "auditservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "AuditService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\middleware\\compliance.js",
+      "backend\\src\\modules\\M206_AUDIT_MANAGEMENT\\backend\\service.js",
+      "backend\\src\\platform\\index.js",
+      "backend\\src\\routes\\auditRoutes.js",
+      "backend\\src\\routes\\platform\\auditRoutes_merged.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\services\\platform\\analyticsMonitoringService.js",
+      "backend\\src\\__tests__\\governanceComplianceAuditDomain.test.js"
+    ]
+  },
+  {
+    "stem": "auditroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/events",
+        "route:GET:/entities/:entityType/:entityId",
+        "route:GET:/users/:userId",
+        "route:GET:/report",
+        "route:GET:/compliance/:complianceType",
+        "route:GET:/security",
+        "route:GET:/export",
+        "route:GET:/recent"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

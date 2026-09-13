@@ -1,0 +1,26 @@
+[
+  {
+    "stem": "libraryroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health",
+        "route:POST:/initialize",
+        "route:GET:/search",
+        "route:GET:/statistics",
+        "route:GET:/verify",
+        "route:GET:/item/:filename",
+        "route:GET:/modules",
+        "route:GET:/components"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

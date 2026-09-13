@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "ocrservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 3,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\core\\aiOrchestrator.js",
+      "backend\\src\\modules\\M510100_OCR\\backend\\service.js",
+      "backend\\src\\services\\ocrService.js"
+    ]
+  }
+]

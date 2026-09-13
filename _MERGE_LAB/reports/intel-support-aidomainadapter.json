@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "aidomainadapterroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:POST:/:domain/explain"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\routes\\unifiedAIRoutes_merged.js"
+    ]
+  }
+]

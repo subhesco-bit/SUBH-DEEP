@@ -1,0 +1,47 @@
+[
+  {
+    "stem": "laboratoryerpservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "registerLaboratory",
+        "getLaboratories",
+        "getTestCategories",
+        "getTestMethods",
+        "registerSample",
+        "getSamples",
+        "getSampleByNumber",
+        "assignTest",
+        "updateTestResults",
+        "generateCertificationReport",
+        "getCertificationReport",
+        "addSampleTracking",
+        "getSampleTracking",
+        "isHealthy",
+        "route:POST:/laboratories",
+        "route:GET:/laboratories",
+        "route:GET:/test-categories",
+        "route:GET:/test-methods",
+        "route:POST:/samples",
+        "route:GET:/samples",
+        "route:GET:/samples/:sampleNumber",
+        "route:POST:/test-assignments",
+        "route:PUT:/test-assignments/:assignmentId/results",
+        "route:POST:/certification-reports",
+        "route:GET:/certification-reports/:reportNumber",
+        "route:POST:/samples/:sampleId/tracking",
+        "route:GET:/samples/:sampleId/tracking",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M282100_LABORATORYERP\\backend\\service.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\services\\laboratoryERPService.js"
+    ]
+  }
+]

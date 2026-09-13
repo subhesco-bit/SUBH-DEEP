@@ -47,6 +47,20 @@ CREATE TABLE IF NOT EXISTS cooperative_members (
   UNIQUE (society_id, member_number)
 );
 
+-- 2026-09-12 collision repair (batch): the CREATE INDEX statements below
+-- name columns that do not exist on the table that actually gets created.
+-- Each of these tables is declared by more than one migration, and
+-- PostgreSQL's CREATE TABLE IF NOT EXISTS silently skips every declaration
+-- after the first — so the later, wider definition never took effect and
+-- the index that assumed it would fail with "column does not exist",
+-- aborting the whole migration run.
+--
+-- Additive and idempotent: restores exactly the columns the indexes below
+-- require, typed from the losing definition that declared them. No-ops on
+-- a database where the wider definition already won.
+-- cooperative_members: winner is 012_governance_module.sql
+ALTER TABLE cooperative_members ADD COLUMN IF NOT EXISTS society_id UUID;
+
 CREATE INDEX IF NOT EXISTS idx_cooperative_members_society ON cooperative_members(society_id);
 
 -- Append-only share transaction ledger (issue / transfer / redeem). Current
@@ -55,14 +69,14 @@ CREATE INDEX IF NOT EXISTS idx_cooperative_members_society ON cooperative_member
 CREATE TABLE IF NOT EXISTS cooperative_share_transactions (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   society_id UUID NOT NULL REFERENCES cooperative_societies(id) ON DELETE CASCADE,
-  member_id UUID NOT NULL REFERENCES cooperative_members(id) ON DELETE CASCADE,
+  member_id INTEGER NOT NULL REFERENCES cooperative_members(id) ON DELETE CASCADE,
   transaction_type VARCHAR(20) NOT NULL CHECK (transaction_type IN ('issue', 'transfer_in', 'transfer_out', 'redeem')),
   -- Positive for issue/transfer_in, negative for transfer_out/redeem — signed
   -- so SUM() over this column is the holding directly.
   share_count INTEGER NOT NULL CHECK (share_count <> 0),
   price_per_share NUMERIC(12,2) NOT NULL CHECK (price_per_share > 0),
   amount NUMERIC(14,2) GENERATED ALWAYS AS (share_count * price_per_share) STORED,
-  counterparty_member_id UUID REFERENCES cooperative_members(id) ON DELETE SET NULL,
+  counterparty_member_id INTEGER REFERENCES cooperative_members(id) ON DELETE SET NULL,
   transaction_date DATE NOT NULL DEFAULT CURRENT_DATE,
   reference VARCHAR(100),
   recorded_by UUID,

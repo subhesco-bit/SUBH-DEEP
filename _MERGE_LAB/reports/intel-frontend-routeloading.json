@@ -1,0 +1,27 @@
+[
+  {
+    "stem": "routeloading.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "RouteLoadingFallback",
+        "PageLoadingFallback",
+        "CardLoadingFallback",
+        "SmartRouteLoading",
+        "RouteSuspense",
+        "ProgressiveLoading",
+        "RoutePreloader",
+        "LoadingOverlay",
+        "InlineLoading",
+        "getLoadingType"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\App.jsx"
+    ]
+  }
+]

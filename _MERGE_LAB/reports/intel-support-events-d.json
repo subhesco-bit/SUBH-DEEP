@@ -1,0 +1,41 @@
+[
+  {
+    "stem": "events.d.ts",
+    "candidateCount": 3,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "firstListener",
+        "secondListener",
+        "thirdListener",
+        "pong",
+        "example",
+        "addAbortListener",
+        "getEventListeners",
+        "getMaxListeners",
+        "listenerCount",
+        "on",
+        "foo",
+        "once",
+        "setMaxListeners",
+        "is",
+        "EventEmitter",
+        "MyClass",
+        "MyEmitter",
+        "has",
+        "EventEmitterAsyncResource",
+        "that",
+        "callback",
+        "callbackA",
+        "callbackB",
+        "listener",
+        "createEvent",
+        "fireEvent"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

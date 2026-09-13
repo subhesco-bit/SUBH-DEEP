@@ -1,0 +1,22 @@
+[
+  {
+    "stem": "backendmodulebridge.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {
+      "claude": [
+        "discoverModules",
+        "route:GET:/",
+        "route:GET:/:moduleName"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\tests\\backendModuleBridge.test.js"
+    ]
+  }
+]

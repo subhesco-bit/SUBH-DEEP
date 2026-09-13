@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "commercerulesservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 18,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M412100_COMMERCERULES\\backend\\service.js",
+      "backend\\src\\services\\commerceRulesService.js"
+    ]
+  }
+]

@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "pigfarmingpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "PigFarmingPage",
+        "closeForm",
+        "openEdit"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M858100_PIG\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

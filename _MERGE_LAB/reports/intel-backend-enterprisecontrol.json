@@ -1,0 +1,87 @@
+[
+  {
+    "stem": "enterprisecontrolroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/workflows",
+        "route:GET:/workflows",
+        "route:GET:/workflows/:id",
+        "route:PUT:/workflows/:id",
+        "route:DELETE:/workflows/:id",
+        "route:POST:/workflows/:id/execute",
+        "route:POST:/clients",
+        "route:GET:/clients",
+        "route:GET:/clients/:id",
+        "route:PUT:/clients/:id",
+        "route:DELETE:/clients/:id",
+        "route:POST:/legal",
+        "route:GET:/legal",
+        "route:GET:/legal/:id",
+        "route:PUT:/legal/:id",
+        "route:DELETE:/legal/:id",
+        "route:POST:/risks",
+        "route:GET:/risks",
+        "route:GET:/risks/:id",
+        "route:PUT:/risks/:id",
+        "route:DELETE:/risks/:id",
+        "route:POST:/emergencies",
+        "route:GET:/emergencies",
+        "route:GET:/emergencies/:id",
+        "route:PUT:/emergencies/:id",
+        "route:DELETE:/emergencies/:id",
+        "route:POST:/emergencies/:id/execute"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "enterprisecontrolservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "makeCode",
+        "fail",
+        "startWorkflow",
+        "actOnWorkflow",
+        "listPendingApprovals",
+        "createLead",
+        "convertLead",
+        "getPipeline",
+        "computeClientHealth",
+        "listLegalCalendar",
+        "assessRisk",
+        "getRiskHeatmap",
+        "raiseIncident",
+        "acknowledgeIncident",
+        "listActiveIncidents",
+        "route:POST:/workflow/start",
+        "route:POST:/workflow/:instanceCode/act",
+        "route:GET:/workflow/pending",
+        "route:POST:/crm/leads",
+        "route:POST:/crm/leads/:leadCode/convert",
+        "route:GET:/crm/pipeline",
+        "route:GET:/clients/:id/health",
+        "route:GET:/legal/calendar",
+        "route:POST:/risk/:riskCode/assess",
+        "route:GET:/risk/heatmap",
+        "route:POST:/emergency/incidents",
+        "route:POST:/emergency/incidents/:incidentCode/acknowledge",
+        "route:GET:/emergency/active",
+        "router",
+        "SEVERITY_RANK"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\routes\\enterpriseControlRoutes.js"
+    ]
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "stem": "module-strategy-framework.md",
+    "candidateCount": 2,
+    "sources": [
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

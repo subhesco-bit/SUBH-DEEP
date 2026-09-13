@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "livestockmanagementpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "LivestockManagementPage"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M101_LIVESTOCK_MANAGEMENT\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

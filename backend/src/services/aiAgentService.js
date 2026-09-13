@@ -158,14 +158,27 @@ class AIAgentService {
           if (tokens.join('') !== expression) throw new Error('Invalid arithmetic expression');
           const values = [];
           const operators = [];
-          const precedence = { '+': 1, '-': 1, '*': 2, '/': 2 };
+          // 'u+'/'u-' are unary. Without them a leading or post-operator sign
+          // ('-5+3', '(-5+3)', '2*-3') popped a binary operator with only one
+          // operand on the stack and rejected a perfectly valid expression.
+          // Unary binds tighter than * and / and is right-associative, so
+          // '2*-3' is 2*(-3) = -6, not (2*0)-3.
+          const precedence = { '+': 1, '-': 1, '*': 2, '/': 2, 'u+': 3, 'u-': 3 };
+          const isUnary = (op) => op === 'u+' || op === 'u-';
           const apply = () => {
             const operator = operators.pop();
             const right = values.pop();
+            if (right === undefined) throw new Error('Invalid arithmetic expression');
+            if (isUnary(operator)) {
+              values.push(operator === 'u-' ? -right : right);
+              return;
+            }
             const left = values.pop();
+            if (left === undefined) throw new Error('Invalid arithmetic expression');
             if (operator === '/' && right === 0) throw new Error('Division by zero');
             values.push(operator === '+' ? left + right : operator === '-' ? left - right : operator === '*' ? left * right : left / right);
           };
+          let previous = null;
           for (const token of tokens) {
             if (!Number.isNaN(Number(token))) values.push(Number(token));
             else if (token === '(') operators.push(token);
@@ -173,9 +186,20 @@ class AIAgentService {
               while (operators.length && operators[operators.length - 1] !== '(') apply();
               if (operators.pop() !== '(') throw new Error('Unbalanced parentheses');
             } else {
-              while (operators.length && operators[operators.length - 1] !== '(' && precedence[operators[operators.length - 1]] >= precedence[token]) apply();
-              operators.push(token);
+              // A '+'/'-' is unary when nothing can be its left operand:
+              // start of expression, after another operator, or after '('.
+              const unary = (token === '+' || token === '-')
+                && (previous === null || previous === '(' || precedence[previous] !== undefined);
+              const operator = unary ? `u${token}` : token;
+              // Left-associative operators also pop equal precedence; unary is
+              // right-associative, so it only pops strictly higher.
+              while (operators.length && operators[operators.length - 1] !== '('
+                && (isUnary(operator)
+                  ? precedence[operators[operators.length - 1]] > precedence[operator]
+                  : precedence[operators[operators.length - 1]] >= precedence[operator])) apply();
+              operators.push(operator);
             }
+            previous = token;
           }
           while (operators.length) {
             if (operators[operators.length - 1] === '(') throw new Error('Unbalanced parentheses');

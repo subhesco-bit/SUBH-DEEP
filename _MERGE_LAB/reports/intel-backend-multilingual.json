@@ -1,0 +1,45 @@
+[
+  {
+    "stem": "multilingualservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "detectLanguage",
+        "translateText",
+        "translateWithExternalAPI",
+        "getContentTranslation",
+        "saveContentTranslation",
+        "getUserLanguagePreferences",
+        "updateUserLanguagePreferences",
+        "getAvailableLanguages",
+        "getPronunciation",
+        "searchPronunciations",
+        "savePronunciation",
+        "getTranslationMemoryStats",
+        "isHealthy",
+        "route:POST:/detect",
+        "route:POST:/translate",
+        "route:GET:/content",
+        "route:GET:/content/:key",
+        "route:POST:/content",
+        "route:GET:/preferences",
+        "route:PUT:/preferences",
+        "route:GET:/languages",
+        "route:GET:/pronunciation/:term",
+        "route:GET:/pronunciation",
+        "route:POST:/pronunciation",
+        "route:GET:/memory/stats",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M657100_MULTILINGUAL\\backend\\service.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\services\\multilingualService.js"
+    ]
+  }
+]

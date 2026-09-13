@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "dispose.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "dispose_SuppressedError",
+        "_dispose",
+        "next",
+        "err",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

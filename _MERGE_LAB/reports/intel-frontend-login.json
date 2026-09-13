@@ -1,0 +1,22 @@
+[
+  {
+    "stem": "loginpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "LoginPage",
+        "handleSubmit",
+        "handleChange",
+        "handleDemoLogin"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js",
+      "frontend\\src\\router\\routes.jsx"
+    ]
+  }
+]

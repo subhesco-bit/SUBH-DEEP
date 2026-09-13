@@ -1,0 +1,28 @@
+[
+  {
+    "stem": "routes.js",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "getRouteByPath",
+        "getAllRoutes",
+        "getRoutesByRole",
+        "publicRoutes",
+        "protectedRoutes",
+        "farmerRoutes",
+        "adminRoutes",
+        "dashboardRoutes",
+        "managementRoutes",
+        "discoveredRoutes",
+        "sweepRoutes"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\App.jsx"
+    ]
+  }
+]

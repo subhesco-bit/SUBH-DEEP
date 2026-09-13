@@ -1,0 +1,44 @@
+[
+  {
+    "stem": "cropvalueresearchroutes.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 4,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "cropvalueresearchcontroller.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "cropvalueresearchservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 9,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\controllers\\cropValueResearchController.js",
+      "backend\\src\\modules\\M444100_CROPVALUERESEARCH\\backend\\service.js",
+      "backend\\src\\services\\cropValueResearchService.js"
+    ]
+  }
+]

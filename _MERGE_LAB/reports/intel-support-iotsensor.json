@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "iotsensorservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M186100_IOTSENSOR\\backend\\service.js",
+      "backend\\src\\services\\iotSensorService.js"
+    ]
+  }
+]

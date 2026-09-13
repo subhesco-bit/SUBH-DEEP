@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "launch.json",
+    "candidateCount": 3,
+    "sources": [
+      ".vscode",
+      "node-modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

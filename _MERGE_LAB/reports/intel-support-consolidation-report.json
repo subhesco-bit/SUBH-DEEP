@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "consolidation-report.md",
+    "candidateCount": 3,
+    "sources": [
+      ".consolidation-work",
+      "claude",
+      "root-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

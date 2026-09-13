@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "pushnotifications.test.js",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

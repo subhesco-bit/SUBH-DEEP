@@ -1,0 +1,15 @@
+[
+  {
+    "stem": "api-documentation.md",
+    "candidateCount": 4,
+    "sources": [
+      "backend-current",
+      "claude",
+      "docs",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

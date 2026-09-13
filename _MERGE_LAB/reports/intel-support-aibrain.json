@@ -1,0 +1,64 @@
+[
+  {
+    "stem": "aibrainpage.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "aibrainservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/health",
+        "route:POST:/process",
+        "route:GET:/knowledge-graph",
+        "route:POST:/memory/working",
+        "route:POST:/memory/long-term",
+        "router",
+        "aiBrainService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\routes\\aiBrainRoutes_merged.js",
+      "backend\\src\\routes\\claude\\aiStrategyRoutes.js",
+      "backend\\src\\services\\claude\\aiStrategyService.js"
+    ]
+  },
+  {
+    "stem": "aibrainroutes.js",
+    "candidateCount": 6,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 14,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

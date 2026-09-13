@@ -1,0 +1,59 @@
+[
+  {
+    "stem": "hrservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "HRService",
+        "performanceBoost"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\controllers\\hrController.js",
+      "backend\\src\\modules\\M306_HUMAN_RESOURCES\\backend\\service.js",
+      "backend\\src\\routes\\hrRoutes.js",
+      "backend\\src\\services\\hrService.js"
+    ]
+  },
+  {
+    "stem": "hrroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/employees",
+        "route:GET:/employees/:employeeId/attrition-risk",
+        "route:GET:/employees/:employeeId/sentiment",
+        "route:GET:/employees/:employeeId/training-recommendations",
+        "route:POST:/shifts/optimize",
+        "route:POST:/timesheets/analyze-anomalies",
+        "route:GET:/analytics/workforce",
+        "route:GET:/analytics/predictions"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "hrcontroller.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "HRController"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

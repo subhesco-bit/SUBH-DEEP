@@ -1,0 +1,41 @@
+[
+  {
+    "stem": "types.js",
+    "candidateCount": 5,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "WINDOW"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "types.ts",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "SourceMap",
+        "parse"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "types.cjs",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

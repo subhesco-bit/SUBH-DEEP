@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "m049page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M049Page"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\M049\\index.jsx"
+    ]
+  },
+  {
+    "stem": "m049component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M049Component"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

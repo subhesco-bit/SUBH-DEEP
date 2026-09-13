@@ -1,0 +1,31 @@
+[
+  {
+    "stem": "cropmanagementroutes.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 13,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "cropmanagementservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 6,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M100_CROP_MANAGEMENT\\backend\\service.js",
+      "backend\\src\\services\\cropManagementService.js"
+    ]
+  }
+]

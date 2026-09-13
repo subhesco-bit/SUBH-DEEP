@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "sorter.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current",
+      "node-modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 12,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

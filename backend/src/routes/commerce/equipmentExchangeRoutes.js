@@ -4,6 +4,12 @@
 
 const express = require('express');
 const router = express.Router();
+// Liveness ping carried over from equipmentExchangeRoutes.js, merged and
+// retired 2026-09-13. Declared first so a pattern route cannot swallow it.
+router.get('/health', (req, res) => {
+  res.json({ success: true, status: 'healthy', module: 'equipmentExchangeRoutes' });
+});
+
 const equipmentExchangeService = require('../../services/commerce/equipmentExchangeService');
 const { authMiddleware } = require('../../middleware/auth');
 

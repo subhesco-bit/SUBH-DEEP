@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "governmentschemeservice.js",
+    "candidateCount": 6,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 48,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M652100_GOVERNMENTSCHEME\\backend\\service.js",
+      "backend\\src\\routes\\ORPHANED_SERVICES_MOUNT.js",
+      "backend\\src\\services\\governmentSchemeService.js"
+    ]
+  }
+]

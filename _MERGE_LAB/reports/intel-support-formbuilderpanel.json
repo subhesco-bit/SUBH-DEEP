@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "formbuilderpanel.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\pages\\FormManagementPage.jsx"
+    ]
+  }
+]

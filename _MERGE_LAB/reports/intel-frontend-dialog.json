@@ -1,0 +1,27 @@
+[
+  {
+    "stem": "dialog.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "Dialog",
+        "DialogTrigger",
+        "DialogPortal",
+        "DialogClose",
+        "DialogOverlay",
+        "DialogContent",
+        "DialogHeader",
+        "DialogFooter",
+        "DialogTitle",
+        "DialogDescription"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\components\\FarmerPortal\\LandRecords.jsx"
+    ]
+  }
+]

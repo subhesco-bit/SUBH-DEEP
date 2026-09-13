@@ -53,6 +53,22 @@
 -- ============================================================================
 
 -- Part 1: composite btree on typed coordinate columns (supports bounding box)
+-- 2026-09-12 collision repair (batch): the CREATE INDEX statements below
+-- name columns that do not exist on the table that actually gets created.
+-- Each of these tables is declared by more than one migration, and
+-- PostgreSQL's CREATE TABLE IF NOT EXISTS silently skips every declaration
+-- after the first — so the later, wider definition never took effect and
+-- the index that assumed it would fail with "column does not exist",
+-- aborting the whole migration run.
+--
+-- Additive and idempotent: restores exactly the columns the indexes below
+-- require, typed from the losing definition that declared them. No-ops on
+-- a database where the wider definition already won.
+-- villages: winner is 001_skeleton_complete_schema.sql
+ALTER TABLE villages ADD COLUMN IF NOT EXISTS coordinates JSONB;
+-- warehouses: winner is 337_warehouses.sql
+ALTER TABLE warehouses ADD COLUMN IF NOT EXISTS location VARCHAR(255);
+
 CREATE INDEX IF NOT EXISTS idx_addresses_lat_lng
     ON addresses (latitude, longitude);
 CREATE INDEX IF NOT EXISTS idx_shipment_tracking_lat_lng

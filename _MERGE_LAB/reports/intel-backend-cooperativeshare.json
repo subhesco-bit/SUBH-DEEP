@@ -1,0 +1,42 @@
+[
+  {
+    "stem": "cooperativeshareroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/members",
+        "route:GET:/members",
+        "route:GET:/capital",
+        "route:POST:/distributions/preview",
+        "route:POST:/distributions",
+        "route:GET:/distributions",
+        "route:GET:/distributions/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "cooperativeshareservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "CooperativeShareService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M569100_COOPERATIVESHARE\\backend\\service.js",
+      "backend\\src\\routes\\cooperativeShareRoutes.js",
+      "backend\\src\\services\\cooperativeShareService.js"
+    ]
+  }
+]

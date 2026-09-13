@@ -39,6 +39,27 @@ CREATE TABLE IF NOT EXISTS technical_packages (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- 2026-09-12 collision repair (batch): the CREATE INDEX statements below
+-- name columns that do not exist on the table that actually gets created.
+-- Each of these tables is declared by more than one migration, and
+-- PostgreSQL's CREATE TABLE IF NOT EXISTS silently skips every declaration
+-- after the first — so the later, wider definition never took effect and
+-- the index that assumed it would fail with "column does not exist",
+-- aborting the whole migration run.
+--
+-- Additive and idempotent: restores exactly the columns the indexes below
+-- require, typed from the losing definition that declared them. No-ops on
+-- a database where the wider definition already won.
+-- suppliers: winner is 332_suppliers.sql
+ALTER TABLE suppliers ADD COLUMN IF NOT EXISTS supplier_type VARCHAR(50);
+-- contract_farming_agreements: winner is 9999_zzzzzz_pre_season_orders_schema.sql
+ALTER TABLE contract_farming_agreements ADD COLUMN IF NOT EXISTS farmer_id UUID;
+ALTER TABLE contract_farming_agreements ADD COLUMN IF NOT EXISTS contract_period_start DATE;
+ALTER TABLE contract_farming_agreements ADD COLUMN IF NOT EXISTS contract_period_end DATE;
+ALTER TABLE contract_farming_agreements ADD COLUMN IF NOT EXISTS dispute_status VARCHAR(50);
+-- laboratories: winner is 001_skeleton_complete_schema.sql
+ALTER TABLE laboratories ADD COLUMN IF NOT EXISTS status VARCHAR(20);
+
 CREATE INDEX idx_technical_packages_crop ON technical_packages(crop_type);
 CREATE INDEX idx_technical_packages_region ON technical_packages(region);
 
@@ -100,7 +121,7 @@ CREATE TABLE IF NOT EXISTS pre_season_agreements (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   farmer_id UUID NOT NULL REFERENCES farmers(id),
   buyer_id UUID NOT NULL REFERENCES buyers(id),
-  crop_id UUID NOT NULL REFERENCES crops(id),
+  crop_id INTEGER NOT NULL REFERENCES crops(id),
   variety_id INTEGER NOT NULL REFERENCES regional_variety_directory(id),
   
   -- Agreement terms
@@ -163,7 +184,7 @@ CREATE INDEX idx_pre_season_milestones_status ON pre_season_milestones(status);
 CREATE TABLE IF NOT EXISTS pre_season_opportunities (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   buyer_id UUID NOT NULL REFERENCES buyers(id),
-  crop_id UUID NOT NULL REFERENCES crops(id),
+  crop_id INTEGER NOT NULL REFERENCES crops(id),
   variety_id INTEGER NOT NULL REFERENCES regional_variety_directory(id),
   
   quantity_required DECIMAL(10,2) NOT NULL,

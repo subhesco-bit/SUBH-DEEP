@@ -1,0 +1,46 @@
+[
+  {
+    "stem": "engineeringprojectservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 10,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M712100_ENGINEERINGPROJECT\\backend\\service.js",
+      "backend\\src\\routes\\engineeringProjectRoutes.js",
+      "backend\\src\\services\\engineeringProjectService.js"
+    ]
+  },
+  {
+    "stem": "engineeringprojectpage.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "engineeringprojectroutes.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 6,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

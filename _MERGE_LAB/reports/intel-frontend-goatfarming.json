@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "goatfarmingpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "GoatFarmingPage",
+        "closeForm",
+        "openEdit"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M82100_GOAT\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

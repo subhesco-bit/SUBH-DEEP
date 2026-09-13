@@ -1,0 +1,54 @@
+{
+  "integrated_at": "2026-09-12T14:10:33.330Z",
+  "target": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_UNIFIED_PROJECT\\current",
+  "files": [
+    {
+      "relative_path": "backend/src/services/libraryAIWorkspaceService.js",
+      "sha256": "0d02ceb86039add16dcf037106ef755ff881e7287a44dcd43556b223e5682bf5",
+      "bytes": 16267,
+      "status": "integrated"
+    },
+    {
+      "relative_path": "backend/src/routes/libraryAIWorkspaceRoutes.js",
+      "sha256": "051019b4c358ee021a8ade0003aec8d511e75c898cf7c531749336e79e693d77",
+      "bytes": 3405,
+      "status": "integrated"
+    },
+    {
+      "relative_path": "tools/codex-unified-project-orchestrator.js",
+      "sha256": "0e1355242e0fee4a9d77ea2ba621298242695b645c693e0b44b48ae52c2901b6",
+      "bytes": 25627,
+      "status": "integrated"
+    },
+    {
+      "relative_path": "tools/codex-unified-merge-batch.js",
+      "sha256": "21947dd0a6911b8a87d0bd437ba48193fdb6bf4a34087bba4e569b6409418d44",
+      "bytes": 7906,
+      "status": "integrated"
+    },
+    {
+      "relative_path": "tools/codex-library-operational-smoke.js",
+      "sha256": "e7c7fe2150a820f4ac23293fc7de0f3a8dbad6a85aec821abfffd41e1c56f000",
+      "bytes": 13607,
+      "status": "integrated"
+    },
+    {
+      "relative_path": "tools/codex-consolidate-project.js",
+      "sha256": "74a6c9ebcc0290ede96737d6587561b2a2550b3e3a60863eeb1c98137cfefbb9",
+      "bytes": 9805,
+      "status": "integrated"
+    },
+    {
+      "relative_path": "docs/codex-library-operational-smoke-report.md",
+      "sha256": "f0fc1052298dfcff21d1594189487bcafa0e0fd80b3f334980250a20f1366990",
+      "bytes": 4545,
+      "status": "integrated"
+    },
+    {
+      "relative_path": "docs/codex-library-operational-smoke-report.json",
+      "sha256": "f741f69496017facd98b0810ea06b339531c9cd80817037a6b817050e7ad82ba",
+      "bytes": 6469,
+      "status": "integrated"
+    }
+  ]
+}

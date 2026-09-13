@@ -63,9 +63,18 @@ CREATE INDEX idx_organizations_tenant ON organizations(tenant_id);
 CREATE INDEX idx_organizations_status ON organizations(status);
 
 -- Environments Table
+-- 2026-09-12: organization_id retyped INTEGER -> UUID here and in
+-- sso_configurations below. This file re-declares `organizations`, but
+-- 001_skeleton_complete_schema.sql creates it first with a UUID primary key,
+-- so 001's shape is what exists and `INTEGER REFERENCES organizations(id)`
+-- is a type Postgres rejects outright ("foreign key constraint cannot be
+-- implemented"), aborting the migration run at this file. Retyped to match
+-- the table that actually wins. Approved as an exception to CLAUDE.md's
+-- 000-071 freeze: no later migration can repair a bad constraint inside this
+-- file's own CREATE TABLE, and these tables have never been created.
 CREATE TABLE IF NOT EXISTS environments (
   id SERIAL PRIMARY KEY,
-  organization_id INTEGER REFERENCES organizations(id),
+  organization_id UUID REFERENCES organizations(id),
   name VARCHAR(100) NOT NULL,
   type VARCHAR(50) DEFAULT 'production' CHECK (type IN ('development', 'staging', 'production')),
   status VARCHAR(50) DEFAULT 'active',
@@ -219,7 +228,7 @@ CREATE TABLE IF NOT EXISTS sso_configurations (
   id SERIAL PRIMARY KEY,
   provider VARCHAR(50) NOT NULL,
   provider_config JSONB NOT NULL,
-  organization_id INTEGER REFERENCES organizations(id),
+  organization_id UUID REFERENCES organizations(id),
   is_enabled BOOLEAN DEFAULT false,
   is_default BOOLEAN DEFAULT false,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

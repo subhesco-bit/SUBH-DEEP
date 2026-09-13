@@ -1,0 +1,51 @@
+[
+  {
+    "stem": "dairyroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "dairyservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "listAnimals",
+        "createAnimal",
+        "updateAnimal",
+        "deleteAnimal",
+        "listMilkRecords",
+        "recordMilk",
+        "getMilkYieldTrends",
+        "getHealthAlerts",
+        "optimizeMilkProduction",
+        "predictHealthRisks",
+        "optimizeFeedComposition",
+        "recommendBreeding",
+        "offset",
+        "daysBetween",
+        "yieldTrend"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M102_DAIRY_MANAGEMENT\\backend\\service.js",
+      "backend\\src\\services\\dairyService.js",
+      "backend\\src\\services\\index.js"
+    ]
+  }
+]

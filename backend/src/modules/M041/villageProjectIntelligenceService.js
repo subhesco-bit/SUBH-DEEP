@@ -12,17 +12,20 @@ const crypto = require('crypto');
 const pool = require('../../database/pool');
 const { ValidationError, NotFoundError } = require('../../utils/errors');
 
+// Same shape every other UUID check in this codebase uses (core/validation.js,
+// middleware/validation.js, modules/M016/service.js, legacy/sharedInfraService.js).
+// The previous `/^[0-9a-fA-F-]{36}$/` only counted characters, so it accepted a
+// string of 36 hyphens, or hex and hyphens in any arrangement, and passed it
+// straight to a `WHERE id = $1` that then errors as invalid uuid input syntax.
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 function uuid(value, field = 'id') {
   const v = String(value || '').trim();
-  if (!/^[0-9a-fA-F-]{36}$/.test(v)) throw new ValidationError(`Valid ${field} is required`);
+  if (!UUID_RE.test(v)) throw new ValidationError(`Valid ${field} is required`);
   return v;
 }
 
-function villageId(value) {
-  const n = Number(value);
-  if (!Number.isInteger(n) || n <= 0) throw new ValidationError('Valid village id is required');
-  return n;
-}
+const { normalizeVillageId: villageId } = require('./identifiers');
 
 function money(value, field) {
   const n = Number(value ?? 0);

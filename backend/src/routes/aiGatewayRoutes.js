@@ -1,38 +1,55 @@
 /**
- * ai Gateway Routes
+ * aiGatewayRoutes — the canonical implementation for this resource.
+ *
+ * Consolidated from aiGatewayRoutes_merged.js on 2026-09-13, per
+ * .ai/decisions/0001-module-lineage-consolidation.md and
+ * .ai/consolidation/CONSOLIDATION_PLAN.md (Phase 3.1).
+ *
+ * History: dynamicRouteLoader.js derives a mount path from the FILENAME, so this
+ * implementation was published at a "...-merged" URL nothing calls, while this
+ * file — a generated stub whose only endpoints were a POST / answering
+ * "Route operational" and a GET /health — owned the path the frontend requests.
+ *
+ * Not carried over from the stub: its blanket router.use(authMiddleware) (the
+ * code below applies auth per route, and some endpoints are deliberately
+ * public), and its POST / reply, which returned { success: true } without
+ * writing anything.
+ */
+/**
+ * AI Gateway API Routes
+ *
+ * This file was written against a multi-provider LLM router shape
+ * (routeRequest/providers/getAvailableModels/setProviderEnabled), but the real
+ * aiBackboneService.js implements a different thing entirely - a predict/optimize/
+ * analyze/recommend ML service (see its module.exports). No file anywhere in
+ * backend/src/services implements routeRequest, providers, getAvailableModels or
+ * setProviderEnabled, and no frontend page calls /api/v1/ai-gateway/* - this is
+ * unbuilt capability, not a wiring bug. Every route below returns 501 rather than
+ * crashing with ReferenceError. Building the actual multi-provider gateway is new
+ * feature scope, not an audit fix.
  */
 
 const express = require('express');
 const router = express.Router();
 
-try {
-  const { authMiddleware } = require('../middleware/auth');
-  router.use(authMiddleware);
-} catch (e) {
-  // Auth optional
-}
-
-/**
- * Main endpoint
- */
-router.post('/', async (req, res) => {
-  res.json({
-    success: true,
-    module: 'aiGatewayRoutes',
-    message: 'Route operational',
-    timestamp: new Date().toISOString()
-  });
-});
-
-/**
- * Health check
- */
+// Liveness ping preserved from the generated stub this file used to contain.
+// Declared first so a pattern route such as '/:id' cannot swallow it.
 router.get('/health', (req, res) => {
-  res.json({
-    success: true,
-    status: 'healthy',
-    module: 'aiGatewayRoutes'
-  });
+  res.json({ success: true, status: 'healthy', module: 'aiGatewayRoutes' });
 });
+
+const notImplemented = (feature) => (req, res) => {
+  res.status(501).json({ success: false, error: `${feature} is not implemented`, code: 'NOT_IMPLEMENTED' });
+};
+
+router.post('/chat', notImplemented('Multi-provider AI gateway chat'));
+router.get('/statistics', notImplemented('AI gateway statistics'));
+router.get('/providers', notImplemented('AI provider registry'));
+router.get('/models/:provider', notImplemented('AI provider model listing'));
+router.put('/providers/:provider/enable', notImplemented('AI provider enable/disable'));
+router.put('/providers/:provider/disable', notImplemented('AI provider enable/disable'));
+
+router.post('/stream', notImplemented('Multi-provider AI gateway streaming'));
 
 module.exports = router;
+

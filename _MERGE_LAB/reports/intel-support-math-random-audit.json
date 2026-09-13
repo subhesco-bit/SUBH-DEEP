@@ -1,0 +1,13 @@
+[
+  {
+    "stem": "math-random-audit.md",
+    "candidateCount": 2,
+    "sources": [
+      "codex-or-ai-workspace",
+      "root-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

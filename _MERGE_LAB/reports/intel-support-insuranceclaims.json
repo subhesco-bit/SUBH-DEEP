@@ -1,0 +1,23 @@
+[
+  {
+    "stem": "insuranceclaimsservice.js",
+    "candidateCount": 7,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 39,
+    "uniquePerSource": {
+      "claude": [
+        "isClaimOwner",
+        "as"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M18100_INSURANCECLAIMS\\backend\\service.js",
+      "backend\\src\\routes\\ORPHANED_SERVICES_MOUNT.js",
+      "backend\\src\\__tests__\\financeInsuranceDomain.test.js"
+    ]
+  }
+]

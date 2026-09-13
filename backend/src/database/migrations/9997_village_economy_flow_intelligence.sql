@@ -26,6 +26,23 @@ CREATE TABLE IF NOT EXISTS village_economic_activities (
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+-- 2026-09-12 collision repair (batch): the CREATE INDEX statements below
+-- name columns that do not exist on the table that actually gets created.
+-- Each of these tables is declared by more than one migration, and
+-- PostgreSQL's CREATE TABLE IF NOT EXISTS silently skips every declaration
+-- after the first — so the later, wider definition never took effect and
+-- the index that assumed it would fail with "column does not exist",
+-- aborting the whole migration run.
+--
+-- Additive and idempotent: restores exactly the columns the indexes below
+-- require, typed from the losing definition that declared them. No-ops on
+-- a database where the wider definition already won.
+-- village_production_records: winner is 9996_village_economy_geo_logistics.sql
+ALTER TABLE village_production_records ADD COLUMN IF NOT EXISTS production_date DATE;
+ALTER TABLE village_production_records ADD COLUMN IF NOT EXISTS product_code VARCHAR(100);
+ALTER TABLE village_production_records ADD COLUMN IF NOT EXISTS product_name VARCHAR(255);
+ALTER TABLE village_production_records ADD COLUMN IF NOT EXISTS producer_ref UUID;
+
 CREATE INDEX IF NOT EXISTS idx_village_econ_activity_village
   ON village_economic_activities(village_id);
 CREATE INDEX IF NOT EXISTS idx_village_econ_activity_sector
@@ -95,7 +112,7 @@ CREATE TABLE IF NOT EXISTS village_household_consumption (
   unit VARCHAR(30) NOT NULL,
   source_type VARCHAR(40) NOT NULL DEFAULT 'purchased'
     CHECK (source_type IN ('own_production','village_supply','purchased','received','processed')),
-  source_production_id UUID REFERENCES village_production_records(id) ON DELETE SET NULL,
+  source_production_id BIGINT REFERENCES village_production_records(id) ON DELETE SET NULL,
   value_estimate NUMERIC(18,2) DEFAULT 0 CHECK (value_estimate >= 0),
   essential BOOLEAN NOT NULL DEFAULT FALSE,
   metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
@@ -126,7 +143,7 @@ CREATE TABLE IF NOT EXISTS village_common_consumption (
   unit VARCHAR(30) NOT NULL,
   source_type VARCHAR(40) NOT NULL DEFAULT 'purchased'
     CHECK (source_type IN ('village_production','village_stock','purchased','received','processed')),
-  source_production_id UUID REFERENCES village_production_records(id) ON DELETE SET NULL,
+  source_production_id BIGINT REFERENCES village_production_records(id) ON DELETE SET NULL,
   value_estimate NUMERIC(18,2) DEFAULT 0 CHECK (value_estimate >= 0),
   funded_by VARCHAR(80),
   metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
@@ -145,7 +162,7 @@ CREATE INDEX IF NOT EXISTS idx_village_common_consumption_consumer
 CREATE TABLE IF NOT EXISTS village_market_flows (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   village_id UUID NOT NULL REFERENCES villages(id) ON DELETE CASCADE,
-  production_id UUID REFERENCES village_production_records(id) ON DELETE SET NULL,
+  production_id BIGINT REFERENCES village_production_records(id) ON DELETE SET NULL,
   seller_ref UUID,
   aggregator_ref UUID,
   buyer_ref UUID,

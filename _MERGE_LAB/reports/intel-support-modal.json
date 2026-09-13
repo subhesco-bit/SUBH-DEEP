@@ -1,0 +1,42 @@
+[
+  {
+    "stem": "modal.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\pages\\AnimalHealthPage.jsx",
+      "frontend\\src\\pages\\BulkOrderPage.jsx",
+      "frontend\\src\\pages\\ClimateAdvisoryPage.jsx",
+      "frontend\\src\\pages\\CorporateBuyerPage.jsx",
+      "frontend\\src\\pages\\DairyManagementPage.jsx",
+      "frontend\\src\\pages\\EcommerceMarketplacePage.jsx",
+      "frontend\\src\\pages\\FarmCostingPage.jsx",
+      "frontend\\src\\pages\\FarmerFieldPage.jsx",
+      "frontend\\src\\pages\\FarmerKycPage.jsx",
+      "frontend\\src\\pages\\FertilizerInventoryPage.jsx",
+      "frontend\\src\\pages\\GoatFarmingPage.jsx",
+      "frontend\\src\\pages\\HarvestPlanPage.jsx",
+      "frontend\\src\\pages\\IrrigationManagementPage.jsx",
+      "frontend\\src\\pages\\LabourManagementPage.jsx",
+      "frontend\\src\\pages\\LandRegistryPage.jsx",
+      "frontend\\src\\pages\\LogisticsProviderPage.jsx",
+      "frontend\\src\\pages\\OrchardManagementPage.jsx",
+      "frontend\\src\\pages\\PigFarmingPage.jsx",
+      "frontend\\src\\pages\\PondManagementPage.jsx",
+      "frontend\\src\\pages\\PoultryManagementPage.jsx",
+      "frontend\\src\\pages\\PreOrderPage.jsx",
+      "frontend\\src\\pages\\SeedVaultPage.jsx",
+      "frontend\\src\\pages\\SheepFarmingPage.jsx",
+      "frontend\\src\\pages\\ShgManagementPage.jsx",
+      "frontend\\src\\pages\\SowingManagementPage.jsx",
+      "frontend\\src\\pages\\TractorManagementPage.jsx",
+      "frontend\\src\\pages\\WhatGrowPage.jsx"
+    ]
+  }
+]

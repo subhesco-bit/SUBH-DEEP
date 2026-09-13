@@ -1,0 +1,45 @@
+[
+  {
+    "stem": "recoveredfinanceservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 13,
+    "uniquePerSource": {
+      "claude": [
+        "gstFor",
+        "buildInvoice",
+        "appendLedgerEntry"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M407100_RECOVEREDFINANCE\\backend\\service.js",
+      "backend\\src\\routes\\recoveredFinanceRoutes_merged.js",
+      "backend\\src\\services\\recoveredFinanceService.js"
+    ]
+  },
+  {
+    "stem": "recoveredfinanceroutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 12,
+    "uniquePerSource": {
+      "claude": [
+        "deprecatedFinance",
+        "route:GET:/gst/classify",
+        "route:POST:/gst/invoice",
+        "route:POST:/ledger/entry"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

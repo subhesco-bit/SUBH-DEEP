@@ -1,0 +1,23 @@
+[
+  {
+    "stem": "farmerhealthroutes.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 8,
+    "uniquePerSource": {
+      "claude": [
+        "selfScopeUnlessAdmin",
+        "isAdmin",
+        "as"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js",
+      "backend\\src\\tests\\farmerHealthRoutes.test.js"
+    ]
+  }
+]

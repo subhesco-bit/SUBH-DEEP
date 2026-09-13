@@ -1,0 +1,77 @@
+[
+  {
+    "stem": "enterprisecontrolservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 29,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M763100_ENTERPRISECONTROL\\backend\\service.js",
+      "backend\\src\\services\\enterpriseControlService.js",
+      "backend\\src\\tests\\enterpriseControl.test.js"
+    ]
+  },
+  {
+    "stem": "enterprisecontrolpage.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 11,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "enterprisecontrolroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id",
+        "route:POST:/workflows",
+        "route:GET:/workflows",
+        "route:GET:/workflows/:id",
+        "route:PUT:/workflows/:id",
+        "route:DELETE:/workflows/:id",
+        "route:POST:/workflows/:id/execute",
+        "route:POST:/clients",
+        "route:GET:/clients",
+        "route:GET:/clients/:id",
+        "route:PUT:/clients/:id",
+        "route:DELETE:/clients/:id",
+        "route:POST:/legal",
+        "route:GET:/legal",
+        "route:GET:/legal/:id",
+        "route:PUT:/legal/:id",
+        "route:DELETE:/legal/:id",
+        "route:POST:/risks",
+        "route:GET:/risks",
+        "route:GET:/risks/:id",
+        "route:PUT:/risks/:id",
+        "route:DELETE:/risks/:id",
+        "route:POST:/emergencies",
+        "route:GET:/emergencies",
+        "route:GET:/emergencies/:id",
+        "route:PUT:/emergencies/:id",
+        "route:DELETE:/emergencies/:id",
+        "route:POST:/emergencies/:id/execute"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

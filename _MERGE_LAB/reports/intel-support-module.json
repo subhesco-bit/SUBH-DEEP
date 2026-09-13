@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "module.json",
+    "candidateCount": 501,
+    "sources": [
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

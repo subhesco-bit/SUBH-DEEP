@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "index.d.ts.map",
+    "candidateCount": 9,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

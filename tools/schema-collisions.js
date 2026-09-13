@@ -36,6 +36,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { compareMigrationNames } = require('../backend/src/database/migrationOrder');
 
 const MIGRATIONS = path.join(__dirname, '..', 'backend', 'src', 'database', 'migrations');
 const DECISIONS = path.join(__dirname, '..', 'backend', 'src', 'database', 'schema-decisions.json');
@@ -111,7 +112,7 @@ function findTables(sql) {
 
 function main() {
   const asJson = process.argv.includes('--json');
-  const files = fs.readdirSync(MIGRATIONS).filter((f) => f.endsWith('.sql')).sort();
+  const files = fs.readdirSync(MIGRATIONS).filter((f) => f.endsWith('.sql')).sort(compareMigrationNames);
 
   const tables = new Map();  // name -> [{file, columns}]
   const views = new Map();   // name -> [file]

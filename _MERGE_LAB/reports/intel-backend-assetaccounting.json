@@ -1,0 +1,72 @@
+[
+  {
+    "stem": "assetaccountingroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/assets",
+        "route:GET:/assets",
+        "route:GET:/assets/summary",
+        "route:GET:/assets/:assetId",
+        "route:POST:/assets/:assetId/depreciation-schedule",
+        "route:GET:/assets/:assetId/depreciation-schedule",
+        "route:POST:/assets/:assetId/depreciation-schedule/:periodDate/post",
+        "route:POST:/depreciation-run",
+        "route:POST:/assets/:assetId/dispose"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "assetaccountingpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "AssetAccountingPage",
+        "and",
+        "loadSchedule",
+        "generateSchedule",
+        "postOnePeriod",
+        "runBatch",
+        "submitDisposal",
+        "loadSummary",
+        "unpostedPeriods"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M308_ASSET_MANAGEMENT\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "assetaccountingservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "addMonthsFirstOfMonth",
+        "AssetAccountingService",
+        "r4",
+        "targetMonth"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M308_ASSET_MANAGEMENT\\backend\\service.js",
+      "backend\\src\\routes\\assetAccountingRoutes.js",
+      "backend\\src\\services\\assetAccountingService.js"
+    ]
+  }
+]

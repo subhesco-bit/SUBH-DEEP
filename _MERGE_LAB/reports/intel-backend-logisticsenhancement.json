@@ -1,0 +1,43 @@
+[
+  {
+    "stem": "logisticsenhancementroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "logisticsenhancementservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "LogisticsEnhancementService",
+        "offset",
+        "daysBetween",
+        "openOrders"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M100100_LOGISTICSENHANCEMENT\\backend\\service.js",
+      "backend\\src\\routes\\logistics\\logisticsEnhancements.js",
+      "backend\\src\\routes\\logisticsEnhancements_merged.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\services\\logisticsEnhancementService.js",
+      "backend\\src\\tests\\unit\\logisticsDomain.test.js"
+    ]
+  }
+]

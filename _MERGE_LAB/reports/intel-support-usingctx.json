@@ -1,0 +1,22 @@
+[
+  {
+    "stem": "usingctx.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_usingCtx",
+        "using",
+        "o",
+        "d",
+        "next",
+        "err",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

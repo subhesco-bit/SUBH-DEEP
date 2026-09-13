@@ -1,0 +1,13 @@
+[
+  {
+    "stem": "source-catalogue.json",
+    "candidateCount": 2,
+    "sources": [
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

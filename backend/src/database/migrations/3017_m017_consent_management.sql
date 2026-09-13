@@ -68,6 +68,21 @@ CREATE TABLE IF NOT EXISTS consent_history (
 );
 
 -- Indexes for performance
+-- 2026-09-12 collision repair (batch): the CREATE INDEX statements below
+-- name columns that do not exist on the table that actually gets created.
+-- Each of these tables is declared by more than one migration, and
+-- PostgreSQL's CREATE TABLE IF NOT EXISTS silently skips every declaration
+-- after the first — so the later, wider definition never took effect and
+-- the index that assumed it would fail with "column does not exist",
+-- aborting the whole migration run.
+--
+-- Additive and idempotent: restores exactly the columns the indexes below
+-- require, typed from the losing definition that declared them. No-ops on
+-- a database where the wider definition already won.
+-- consents: winner is 014_platform_foundation_modules.sql
+ALTER TABLE consents ADD COLUMN IF NOT EXISTS status VARCHAR(20);
+ALTER TABLE consents ADD COLUMN IF NOT EXISTS valid_until TIMESTAMP;
+
 CREATE INDEX IF NOT EXISTS idx_consents_user_id ON consents(user_id);
 CREATE INDEX IF NOT EXISTS idx_consents_status ON consents(status);
 CREATE INDEX IF NOT EXISTS idx_consents_valid_until ON consents(valid_until);

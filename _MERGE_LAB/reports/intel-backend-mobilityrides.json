@@ -1,0 +1,35 @@
+[
+  {
+    "stem": "mobilityridesservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "getMobilityRide",
+        "getMobilityRidesByVillage",
+        "getMobilityRidesByDriver",
+        "createMobilityRide",
+        "updateRideStatus",
+        "getMobilityRideStatistics",
+        "setupRoutes",
+        "route:GET:/rides/:rideId",
+        "route:GET:/rides/village/:villageId",
+        "route:GET:/rides/driver/:driverId",
+        "route:POST:/rides",
+        "route:PUT:/rides/:rideId/status",
+        "route:GET:/rides/statistics",
+        "r2",
+        "route:GET:/",
+        "route:POST:/",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M629100_MOBILITYRIDES\\backend\\service.js",
+      "backend\\src\\services\\mobilityRidesService.js"
+    ]
+  }
+]

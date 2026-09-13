@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "advancedaiservice.js",
+    "candidateCount": 8,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 70,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\core\\aiOrchestrator.js",
+      "backend\\src\\modules\\M409100_ADVANCEDAI\\backend\\service.js",
+      "backend\\src\\services\\advancedAIService.js"
+    ]
+  }
+]

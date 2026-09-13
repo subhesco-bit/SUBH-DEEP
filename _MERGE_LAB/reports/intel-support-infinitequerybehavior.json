@@ -1,0 +1,37 @@
+[
+  {
+    "stem": "infinitequerybehavior.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "infiniteQueryBehavior",
+        "getNextPageParam",
+        "getPreviousPageParam",
+        "hasNextPage",
+        "hasPreviousPage",
+        "direction",
+        "oldPages",
+        "oldPageParams",
+        "fetchFn",
+        "addSignalProperty",
+        "fetchPage",
+        "createQueryFnContext"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "infinitequerybehavior.cjs",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

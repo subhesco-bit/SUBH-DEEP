@@ -1,0 +1,41 @@
+[
+  {
+    "stem": "gdprroutes.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 7,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/export",
+        "route:POST:/delete-request",
+        "route:GET:/consent-status"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "gdprservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {
+      "claude": [
+        "exportUserData",
+        "requestErasure",
+        "consentStatus"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\routes\\gdprRoutes_merged.js",
+      "backend\\src\\services\\index.js"
+    ]
+  }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "stem": "platformcoreservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "PlatformCoreService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\routes\\platformCoreRoutes_merged.js"
+    ]
+  },
+  {
+    "stem": "platformcoreroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health",
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

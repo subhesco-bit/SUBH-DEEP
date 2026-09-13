@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "sdk.js",
+    "candidateCount": 5,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "init",
+        "normalizeStringifyValue",
+        "getDefaultIntegrations",
+        "forceLoad",
+        "onLoad"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

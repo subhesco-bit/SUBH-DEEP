@@ -1,0 +1,67 @@
+[
+  {
+    "stem": "completeaiintegrationcontroller.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 15,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\routes\\completeAIIntegrationRoutes_merged.js"
+    ]
+  },
+  {
+    "stem": "completeaiintegrationpage.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "completeaiintegrationservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 43,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\controllers\\completeAIIntegrationController.js",
+      "backend\\src\\modules\\M150100_COMPLETEAIINTEGRATION\\backend\\service.js"
+    ]
+  },
+  {
+    "stem": "completeaiintegrationroutes.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 15,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

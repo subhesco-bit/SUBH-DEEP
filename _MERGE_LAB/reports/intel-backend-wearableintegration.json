@@ -1,0 +1,62 @@
+[
+  {
+    "stem": "wearableintegrationservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "fitbitConfigured",
+        "getConnectionStatus",
+        "getFitbitAuthUrl",
+        "handleFitbitCallback",
+        "syncFitbitActivity",
+        "ingestDeviceActivity",
+        "getRecentActivitySummary",
+        "disconnectProvider"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\controllers\\wearableIntegrationController.js",
+      "backend\\src\\modules\\M49100_WEARABLEINTEGRATION\\backend\\service.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\services\\wearableIntegrationService.js"
+    ]
+  },
+  {
+    "stem": "wearableintegrationcontroller.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\routes\\wearableIntegrationRoutes.js"
+    ]
+  },
+  {
+    "stem": "wearableintegrationroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:GET:/status",
+        "route:GET:/fitbit/auth-url",
+        "route:POST:/fitbit/callback",
+        "route:POST:/fitbit/sync",
+        "route:POST:/sync",
+        "route:GET:/activity/recent",
+        "route:DELETE:/:provider"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

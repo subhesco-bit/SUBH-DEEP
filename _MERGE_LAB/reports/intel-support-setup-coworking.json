@@ -1,0 +1,24 @@
+[
+  {
+    "stem": "setup-coworking.sh",
+    "candidateCount": 2,
+    "sources": [
+      "old-new-folder",
+      "root-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "setup-coworking.ps1",
+    "candidateCount": 2,
+    "sources": [
+      "old-new-folder",
+      "root-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

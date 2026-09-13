@@ -1,0 +1,23 @@
+[
+  {
+    "stem": "regenerator.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_regenerator",
+        "i",
+        "d",
+        "Generator",
+        "GeneratorFunction",
+        "GeneratorFunctionPrototype",
+        "f",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

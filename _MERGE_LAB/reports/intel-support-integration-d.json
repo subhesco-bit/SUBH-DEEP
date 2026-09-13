@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "integration.d.ts",
+    "candidateCount": 6,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "dairymanagementpage.jsx",
+    "candidateCount": 7,
+    "sources": [
+      "backup",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 3,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M102_DAIRY_MANAGEMENT\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

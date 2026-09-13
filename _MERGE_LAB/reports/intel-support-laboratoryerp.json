@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "laboratoryerpservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 28,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M282100_LABORATORYERP\\backend\\service.js",
+      "backend\\src\\services\\laboratoryERPService.js"
+    ]
+  }
+]

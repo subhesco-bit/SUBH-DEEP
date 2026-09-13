@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "m085page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M085Page"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\M085\\index.jsx"
+    ]
+  },
+  {
+    "stem": "m085component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M085Component"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

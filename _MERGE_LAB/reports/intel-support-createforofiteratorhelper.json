@@ -1,0 +1,22 @@
+[
+  {
+    "stem": "createforofiteratorhelper.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_createForOfIteratorHelper",
+        "F",
+        "n",
+        "e",
+        "s",
+        "f",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

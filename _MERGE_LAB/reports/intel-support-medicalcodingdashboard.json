@@ -1,0 +1,15 @@
+[
+  {
+    "stem": "medicalcodingdashboardpage.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude"
+    ],
+    "sharedSymbolCount": 3,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

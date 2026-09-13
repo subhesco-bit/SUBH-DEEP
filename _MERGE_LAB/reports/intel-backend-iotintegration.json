@@ -1,0 +1,60 @@
+[
+  {
+    "stem": "iotintegrationservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "registerIoTDevice",
+        "getIoTDevices",
+        "updateDeviceStatus",
+        "recordSensorData",
+        "getSensorData",
+        "sendDeviceCommand",
+        "getDeviceCommands",
+        "createDeviceAlert",
+        "getUnacknowledgedAlerts",
+        "checkDeviceHealth",
+        "recordIoTAnalytics",
+        "isHealthy",
+        "route:POST:/iot-devices",
+        "route:GET:/iot-devices",
+        "route:PATCH:/iot-devices/:deviceId/status",
+        "route:POST:/sensor-data",
+        "route:GET:/sensor-data/:deviceId",
+        "route:POST:/device-commands",
+        "route:GET:/device-commands/:deviceId",
+        "route:POST:/device-alerts",
+        "route:GET:/device-alerts/unacknowledged",
+        "route:GET:/iot-devices/:deviceId/health",
+        "route:POST:/iot-analytics",
+        "router",
+        "IoTIntegrationService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M90100_IOTINTEGRATION\\backend\\service.js",
+      "backend\\src\\services\\index.js"
+    ]
+  },
+  {
+    "stem": "iotintegrationroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

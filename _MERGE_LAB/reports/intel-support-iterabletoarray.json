@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "iterabletoarray.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_iterableToArray",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

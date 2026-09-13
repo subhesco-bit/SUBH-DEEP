@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "querycache.js.map",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

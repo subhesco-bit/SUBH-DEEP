@@ -1,0 +1,29 @@
+[
+  {
+    "stem": "moduleoperationpanel.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "ModuleOperationPanel",
+        "OperationCard",
+        "run"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\pages\\AssetLifecycleManagementPage.jsx",
+      "frontend\\src\\pages\\BreakdownMaintenancePage.jsx",
+      "frontend\\src\\pages\\CattleRegistryPage.jsx",
+      "frontend\\src\\pages\\EnvironmentManagementPage.jsx",
+      "frontend\\src\\pages\\EquipmentInventoryPage.jsx",
+      "frontend\\src\\pages\\EquipmentRentalPage.jsx",
+      "frontend\\src\\pages\\FPORegistrationPage.jsx",
+      "frontend\\src\\pages\\FuelManagementPage.jsx",
+      "frontend\\src\\pages\\ImplementManagementPage.jsx",
+      "frontend\\src\\pages\\SparePartsManagementPage.jsx"
+    ]
+  }
+]

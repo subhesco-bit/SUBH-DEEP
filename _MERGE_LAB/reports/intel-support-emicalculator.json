@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "emicalculatorpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "EMICalculatorPage",
+        "calculateEMI",
+        "emi",
+        "handleInputChange"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

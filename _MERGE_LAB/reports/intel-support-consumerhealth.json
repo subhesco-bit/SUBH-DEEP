@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "consumerhealthservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 35,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M897100_CONSUMERHEALTH\\backend\\service.js",
+      "backend\\src\\services\\consumerHealthService.js"
+    ]
+  }
+]

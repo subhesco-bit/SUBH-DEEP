@@ -1,0 +1,62 @@
+[
+  {
+    "stem": ".env.example",
+    "candidateCount": 7,
+    "sources": [
+      "backend-current",
+      "claude",
+      "frontend-current",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": ".env",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current",
+      "root-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "env.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "node-modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "isBrowserBundle",
+        "getSDKSource"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\App.jsx",
+      "frontend\\src\\services\\apiClient.js",
+      "frontend\\src\\utils\\analytics.js",
+      "frontend\\src\\utils\\cache.js",
+      "frontend\\src\\utils\\i18n.js",
+      "frontend\\src\\utils\\monitoring.js"
+    ]
+  },
+  {
+    "stem": ".env.docker",
+    "candidateCount": 2,
+    "sources": [
+      "claude",
+      "root-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

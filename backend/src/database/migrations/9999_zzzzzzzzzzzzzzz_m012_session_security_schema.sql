@@ -26,6 +26,20 @@ CREATE TABLE IF NOT EXISTS sessions (
 -- user_sessions table and runs first; since this file's CREATE INDEX uses
 -- IF NOT EXISTS, the name collision meant this table's own index silently
 -- never got created.
+-- 2026-09-12 collision repair (batch): the CREATE INDEX statements below
+-- name columns that do not exist on the table that actually gets created.
+-- Each of these tables is declared by more than one migration, and
+-- PostgreSQL's CREATE TABLE IF NOT EXISTS silently skips every declaration
+-- after the first — so the later, wider definition never took effect and
+-- the index that assumed it would fail with "column does not exist",
+-- aborting the whole migration run.
+--
+-- Additive and idempotent: restores exactly the columns the indexes below
+-- require, typed from the losing definition that declared them. No-ops on
+-- a database where the wider definition already won.
+-- sessions: winner is 001_skeleton_complete_schema.sql
+ALTER TABLE sessions ADD COLUMN IF NOT EXISTS session_token VARCHAR(128);
+
 CREATE INDEX IF NOT EXISTS idx_m012_sessions_user ON sessions(user_id);
 CREATE INDEX IF NOT EXISTS idx_sessions_token ON sessions(session_token);
 

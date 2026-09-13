@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "weatherroutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 13,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "weatherservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 19,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M105_WEATHER_INTELLIGENCE\\backend\\service.js",
+      "backend\\src\\routes\\weatherRoutes_merged.js",
+      "backend\\src\\services\\weatherService.js"
+    ]
+  }
+]

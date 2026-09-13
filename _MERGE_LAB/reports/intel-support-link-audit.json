@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "link-audit.js",
+    "candidateCount": 3,
+    "sources": [
+      "claude",
+      "frontend-current",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 5,
+    "uniquePerSource": {
+      "frontend-current": [
+        "normalizeRoute",
+        "loadConfiguredRoutes"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

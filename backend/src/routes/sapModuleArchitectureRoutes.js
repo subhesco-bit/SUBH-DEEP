@@ -27,6 +27,14 @@ router.post('/', async (req, res) => {
 /**
  * Health check
  */
+// Alias preserved from sapModuleArchitectureRoutes_merged.js before it was
+// retired (2026-09-13). That file's only endpoint was GET /status returning
+// { status: 'ok' } — the same liveness fact this module's /health reports under
+// a different name. Kept so the retired file's contract is not silently dropped.
+router.get('/status', (req, res) => {
+  res.json({ status: 'ok', module: 'sapModuleArchitecture' });
+});
+
 router.get('/health', (req, res) => {
   res.json({
     success: true,

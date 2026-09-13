@@ -40,6 +40,22 @@ CREATE TABLE IF NOT EXISTS product_listings (
 );
 
 -- Indexes for product_listings
+-- 2026-09-12 collision repair (batch): the CREATE INDEX statements below
+-- name columns that do not exist on the table that actually gets created.
+-- Each of these tables is declared by more than one migration, and
+-- PostgreSQL's CREATE TABLE IF NOT EXISTS silently skips every declaration
+-- after the first — so the later, wider definition never took effect and
+-- the index that assumed it would fail with "column does not exist",
+-- aborting the whole migration run.
+--
+-- Additive and idempotent: restores exactly the columns the indexes below
+-- require, typed from the losing definition that declared them. No-ops on
+-- a database where the wider definition already won.
+-- product_reviews: winner is 009_marketplace_enhancements.sql
+ALTER TABLE product_reviews ADD COLUMN IF NOT EXISTS moderation_status VARCHAR(20);
+-- bulk_orders: winner is 009_marketplace_enhancements.sql
+ALTER TABLE bulk_orders ADD COLUMN IF NOT EXISTS category_id INTEGER;
+
 CREATE INDEX IF NOT EXISTS idx_product_listings_seller ON product_listings(seller_id);
 CREATE INDEX IF NOT EXISTS idx_product_listings_category ON product_listings(category_id);
 CREATE INDEX IF NOT EXISTS idx_product_listings_state ON product_listings(state_id);
@@ -119,7 +135,7 @@ CREATE INDEX IF NOT EXISTS idx_product_reviews_created ON product_reviews(create
 -- Review Helpful Votes Table
 CREATE TABLE IF NOT EXISTS review_helpful_votes (
     id VARCHAR(50) PRIMARY KEY,
-    review_id VARCHAR(50) NOT NULL REFERENCES product_reviews(id) ON DELETE CASCADE,
+    review_id INTEGER NOT NULL REFERENCES product_reviews(id) ON DELETE CASCADE,
     user_id UUID NOT NULL REFERENCES users(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
@@ -172,7 +188,7 @@ CREATE INDEX IF NOT EXISTS idx_bulk_orders_created ON bulk_orders(created_at DES
 -- Quotations Table
 CREATE TABLE IF NOT EXISTS quotations (
     id VARCHAR(50) PRIMARY KEY,
-    bulk_order_id VARCHAR(50) NOT NULL REFERENCES bulk_orders(id),
+    bulk_order_id INTEGER NOT NULL REFERENCES bulk_orders(id),
     seller_id UUID NOT NULL REFERENCES users(id),
     quoted_price DECIMAL(15, 2) NOT NULL,
     available_quantity DECIMAL(15, 2) NOT NULL,

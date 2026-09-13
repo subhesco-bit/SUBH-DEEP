@@ -7,14 +7,13 @@
  * delivery scheduling for individual families and households.
  */
 
-const { Pool } = require('pg');
 const { logger } = require('../../utils/logger');
 
 class HouseholdProcurementService {
   constructor() {
-    this.pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-    });
+    // Shared pool — see backend/src/database/pool.js for why this is a proxy
+    // and not `new Pool()` per service.
+    this.pool = require('../../database/pool');
   }
 
   /**

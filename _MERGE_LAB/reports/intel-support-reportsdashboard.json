@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "reportsdashboardpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "ReportsDashboardPage",
+        "handleGenerateReport",
+        "handleDownload"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

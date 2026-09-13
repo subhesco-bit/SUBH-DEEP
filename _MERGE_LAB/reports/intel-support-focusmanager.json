@@ -1,0 +1,27 @@
+[
+  {
+    "stem": "focusmanager.cjs",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "focusmanager.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "extends",
+        "listener"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

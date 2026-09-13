@@ -1,0 +1,25 @@
+[
+  {
+    "stem": "routeerrorboundary.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "ErrorFallback",
+        "ErrorWithRetry",
+        "useRouteErrorBoundary",
+        "ErrorPage",
+        "NotFoundPage",
+        "UnauthorizedPage",
+        "RouteErrorBoundary",
+        "handleError"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\App.jsx"
+    ]
+  }
+]

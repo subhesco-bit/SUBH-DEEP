@@ -1,0 +1,24 @@
+[
+  {
+    "stem": "animalhealthpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "AnimalHealthPage",
+        "closeForm",
+        "openExaminationForm",
+        "openTreatmentForm",
+        "openOutbreakForm",
+        "openQuarantineForm"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M87100_ANIMALHEALTH\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

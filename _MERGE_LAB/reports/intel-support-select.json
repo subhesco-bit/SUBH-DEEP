@@ -1,0 +1,30 @@
+[
+  {
+    "stem": "select.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 8,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\components\\FarmerPortal\\LandRecords.jsx",
+      "frontend\\src\\components\\Insurance\\InsurancePremiumCalculator.jsx",
+      "frontend\\src\\components\\Marketplace\\GSTCalculator.jsx",
+      "frontend\\src\\pages\\EnterpriseIntegrationPage.jsx",
+      "frontend\\src\\pages\\FarmerReportPage.jsx",
+      "frontend\\src\\pages\\FinancialReportPage.jsx",
+      "frontend\\src\\pages\\InsuranceManagementPage.jsx",
+      "frontend\\src\\pages\\InventoryReportPage.jsx",
+      "frontend\\src\\pages\\LoanManagementPage.jsx",
+      "frontend\\src\\pages\\MedicalCodingDashboardPage.jsx",
+      "frontend\\src\\pages\\NutrientCalculatorPage.jsx",
+      "frontend\\src\\pages\\OperationsReportPage.jsx",
+      "frontend\\src\\pages\\PaymentProcessingPage.jsx",
+      "frontend\\src\\pages\\PredictiveIntelligencePage.jsx",
+      "frontend\\src\\pages\\SalesReportPage.jsx"
+    ]
+  }
+]

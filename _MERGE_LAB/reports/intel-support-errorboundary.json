@@ -1,0 +1,39 @@
+[
+  {
+    "stem": "errorboundary.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\scripts\\fix-frontend-issues.js",
+      "frontend\\src\\App.jsx",
+      "frontend\\src\\test\\components\\ErrorBoundary.test.jsx"
+    ]
+  },
+  {
+    "stem": "errorboundary.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "withErrorBoundary",
+        "ErrorBoundary",
+        "UNKNOWN_COMPONENT"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\scripts\\fix-frontend-issues.js",
+      "frontend\\src\\App.jsx",
+      "frontend\\src\\components\\index.js",
+      "frontend\\src\\test\\components\\ErrorBoundary.test.jsx"
+    ]
+  }
+]

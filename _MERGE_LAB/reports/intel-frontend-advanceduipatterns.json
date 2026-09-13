@@ -1,0 +1,37 @@
+[
+  {
+    "stem": "advanceduipatterns.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "Skeleton",
+        "SkeletonCard",
+        "SkeletonList",
+        "SkeletonTable",
+        "SkeletonForm",
+        "ProgressiveImage",
+        "ProgressiveContent",
+        "ProgressiveList",
+        "useOptimisticUpdate",
+        "useOptimisticList",
+        "OptimisticUI",
+        "useInfiniteScroll",
+        "InfiniteScrollList",
+        "usePullToRefresh",
+        "PullToRefreshIndicator",
+        "StaggeredAnimation",
+        "StaggeredList",
+        "EmptyState",
+        "ErrorState",
+        "LoadingState",
+        "ProgressiveSkeleton",
+        "InfiniteScrollWithSkeleton"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

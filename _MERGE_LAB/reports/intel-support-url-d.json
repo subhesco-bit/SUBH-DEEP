@@ -1,0 +1,25 @@
+[
+  {
+    "stem": "url.d.ts",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "getURL",
+        "parse",
+        "format",
+        "resolve",
+        "domainToASCII",
+        "domainToUnicode",
+        "fileURLToPath",
+        "fileURLToPathBuffer",
+        "pathToFileURL",
+        "urlToHttpOptions"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "networkutils.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "serializeFormData",
+        "getBodyString",
+        "getFetchRequestArgBody",
+        "parseXhrResponseHeaders",
+        "ORIGINAL_REQ_BODY"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

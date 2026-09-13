@@ -1,0 +1,144 @@
+[
+  {
+    "stem": "01-file-inventory.csv",
+    "candidateCount": 1,
+    "sources": [
+      ".system-audit"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "02-linkage-candidates.csv",
+    "candidateCount": 1,
+    "sources": [
+      ".system-audit"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "service.js",
+    "candidateCount": 4,
+    "sources": [
+      "backend-current",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\core\\moduleRegistry.js",
+      "backend\\src\\modules\\M001\\service.js",
+      "backend\\src\\modules\\M645100_LIBRARYKNOWLEDGE\\api\\routes.js",
+      "backend\\src\\routes\\m400AiBackboneRoutes.js",
+      "backend\\src\\services\\libraryKnowledgeService.js",
+      "backend\\src\\tests\\libraryKnowledgeService.test.js"
+    ]
+  },
+  {
+    "stem": "productmediaaiservice.js",
+    "candidateCount": 8,
+    "sources": [
+      "backend-current",
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 9,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\controllers\\productMediaAIController.js",
+      "backend\\src\\modules\\M714100_PRODUCTMEDIAAI\\backend\\service.js",
+      "backend\\src\\services\\productMediaAIService.js"
+    ]
+  },
+  {
+    "stem": "9999-zz-product-media-ai-schema.sql",
+    "candidateCount": 4,
+    "sources": [
+      "backend-current",
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "productmediaaicontroller.js",
+    "candidateCount": 6,
+    "sources": [
+      "backend-current",
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\routes\\productMediaAIRoutes.js"
+    ]
+  },
+  {
+    "stem": "module.json",
+    "candidateCount": 4,
+    "sources": [
+      "backend-current",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "productmediaairoutes.js",
+    "candidateCount": 6,
+    "sources": [
+      "backend-current",
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 4,
+    "uniquePerSource": {
+      "claude": [
+        "route:POST:/products/:productId/video/script"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js",
+      "backend\\src\\tests\\productMediaAIRoutes.test.js"
+    ]
+  },
+  {
+    "stem": "aiimagegenerationservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current",
+      "claude"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\__tests__\\services\\aiImageGenerator.test.js"
+    ]
+  },
+  {
+    "stem": "visual-studio-coworking-setup.md",
+    "candidateCount": 2,
+    "sources": [
+      "old-new-folder",
+      "root-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

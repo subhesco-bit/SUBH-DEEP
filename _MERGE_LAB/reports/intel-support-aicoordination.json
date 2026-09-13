@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "aicoordinationservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\services\\index.js"
+    ]
+  },
+  {
+    "stem": "aicoordinationroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:POST:/ai-enhanced/coordinate-ai",
+        "route:GET:/ai-capability",
+        "route:POST:/coordinate-ai"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

@@ -3,6 +3,7 @@
  * Tests the aiImageGenerationService functionality
  */
 
+const assert = require("node:assert/strict");
 const aiImageGenerationService = require("../../services/aiImageGenerationService");
 
 async function testAIImageGenerator() {
@@ -43,6 +44,7 @@ async function testAIImageGenerator() {
   ];
 
   try {
+    aiImageGenerationService.clearCache();
     // Test 1: Generate single image
     console.log("TEST 1: Single Image Generation");
     console.log("================================");
@@ -51,6 +53,7 @@ async function testAIImageGenerator() {
       testVarieties[0],
       "Premium basmati rice grains in professional studio lighting"
     );
+    assert.equal(typeof singleImage.url, "string");
     console.log("✅ Single image generated:");
     console.log(JSON.stringify(singleImage, null, 2));
     console.log();
@@ -61,6 +64,9 @@ async function testAIImageGenerator() {
     const batchResults = await aiImageGenerationService.generateBatchImages(
       testVarieties
     );
+    assert.equal(batchResults.total, testVarieties.length);
+    assert.equal(batchResults.images.length, testVarieties.length);
+    assert.equal(batchResults.successful + batchResults.fallback, batchResults.total);
     console.log("✅ Batch generation complete:");
     console.log(`   Total: ${batchResults.total}`);
     console.log(`   Successful: ${batchResults.successful}`);
@@ -71,6 +77,7 @@ async function testAIImageGenerator() {
     console.log("TEST 3: Cache Statistics");
     console.log("========================");
     const stats = aiImageGenerationService.getCacheStats();
+    assert.equal(stats.cachedImages, testVarieties.length);
     console.log("✅ Cache stats:");
     console.log(JSON.stringify(stats, null, 2));
     console.log();
@@ -81,6 +88,7 @@ async function testAIImageGenerator() {
     const metadata = aiImageGenerationService.getImageMetadata(
       testVarieties[0].id
     );
+    assert.equal(metadata.varietyName, testVarieties[0].name);
     console.log("✅ Metadata for first image:");
     console.log(JSON.stringify(metadata, null, 2));
     console.log();
@@ -93,6 +101,7 @@ async function testAIImageGenerator() {
       testVarieties[0],
       "Same variety - should be cached"
     );
+    assert.deepEqual(cachedImage, singleImage);
     console.log("✅ Cached image retrieved (should be identical):");
     console.log(`   Same as original: ${JSON.stringify(singleImage) === JSON.stringify(cachedImage)}`);
     console.log();
@@ -100,7 +109,7 @@ async function testAIImageGenerator() {
     console.log("\n🎉 ALL TESTS PASSED!");
     console.log("=====================================");
     console.log("AI Image Generator is working correctly.");
-    console.log("Ready for production use.");
+    console.log("Local cache and batch behavior verified; real provider generation remains unverified.");
 
     return {
       status: "SUCCESS",
@@ -117,9 +126,20 @@ async function testAIImageGenerator() {
   }
 }
 
-// Run tests
-testAIImageGenerator().then(result => {
-  console.log("\nFinal Result:");
-  console.log(JSON.stringify(result, null, 2));
-  process.exit(result.status === "SUCCESS" ? 0 : 1);
-});
+// CLI execution must never terminate the Jest runner.
+if (require.main === module) {
+  testAIImageGenerator().then(result => {
+    console.log(JSON.stringify(result, null, 2));
+    process.exitCode = result.status === "SUCCESS" ? 0 : 1;
+  }).catch(error => {
+    console.error(error);
+    process.exitCode = 1;
+  });
+} else if (typeof test === 'function') {
+  test('local image cache and batch contracts', async () => {
+    const result = await testAIImageGenerator();
+    expect(result.status).toBe('SUCCESS');
+  });
+}
+
+module.exports = { testAIImageGenerator };

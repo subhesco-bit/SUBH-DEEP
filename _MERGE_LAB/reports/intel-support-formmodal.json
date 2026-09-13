@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "formmodal.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "FormModal"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

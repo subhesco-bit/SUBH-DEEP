@@ -1,0 +1,46 @@
+[
+  {
+    "stem": "dprgenerationservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "DprGenerationService",
+        "eligibleSchemes",
+        "section",
+        "line"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M767100_DPRGENERATION\\backend\\service.js",
+      "backend\\src\\routes\\dprGenerationRoutes_merged.js",
+      "backend\\src\\services\\dprGenerationService.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\tests\\erpDprSearchContracts.test.js"
+    ]
+  },
+  {
+    "stem": "dprgenerationroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

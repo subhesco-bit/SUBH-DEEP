@@ -1,0 +1,49 @@
+[
+  {
+    "stem": "decisionsupportroutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 9,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\index.js",
+      "backend\\src\\services\\legacy\\decisionSupportService.js"
+    ]
+  },
+  {
+    "stem": "decisionsupportpage.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "decisionsupportservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 7,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\core\\aiOrchestrator.js",
+      "backend\\src\\modules\\M404_DECISION_SUPPORT\\backend\\service.js",
+      "backend\\src\\routes\\decisionSupportRoutes_merged.js",
+      "backend\\src\\services\\decisionSupportService.js",
+      "backend\\src\\tests\\decisionSupport.test.js"
+    ]
+  }
+]

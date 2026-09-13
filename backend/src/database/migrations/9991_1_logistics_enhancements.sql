@@ -26,6 +26,23 @@ CREATE TABLE IF NOT EXISTS fleet_vehicles (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- 2026-09-12 collision repair (batch): the CREATE INDEX statements below
+-- name columns that do not exist on the table that actually gets created.
+-- Each of these tables is declared by more than one migration, and
+-- PostgreSQL's CREATE TABLE IF NOT EXISTS silently skips every declaration
+-- after the first — so the later, wider definition never took effect and
+-- the index that assumed it would fail with "column does not exist",
+-- aborting the whole migration run.
+--
+-- Additive and idempotent: restores exactly the columns the indexes below
+-- require, typed from the losing definition that declared them. No-ops on
+-- a database where the wider definition already won.
+-- warehouses: winner is 337_warehouses.sql
+ALTER TABLE warehouses ADD COLUMN IF NOT EXISTS type VARCHAR(50);
+ALTER TABLE warehouses ADD COLUMN IF NOT EXISTS manager_id UUID;
+-- warehouse_inventory: winner is 034_logistics_enhancement_schema.sql
+ALTER TABLE warehouse_inventory ADD COLUMN IF NOT EXISTS zone VARCHAR(50);
+
 CREATE INDEX IF NOT EXISTS idx_fleet_vehicles_type ON fleet_vehicles(type);
 CREATE INDEX IF NOT EXISTS idx_fleet_vehicles_driver_id ON fleet_vehicles(driver_id);
 CREATE INDEX IF NOT EXISTS idx_fleet_vehicles_status ON fleet_vehicles(status);
@@ -190,7 +207,7 @@ CREATE INDEX IF NOT EXISTS idx_warehouse_inventory_zone ON warehouse_inventory(z
 -- Warehouse Shipments Table
 CREATE TABLE IF NOT EXISTS warehouse_shipments (
   id SERIAL PRIMARY KEY,
-  warehouse_id INTEGER NOT NULL REFERENCES warehouses(id),
+  warehouse_id UUID NOT NULL REFERENCES warehouses(id),
   type VARCHAR(50) NOT NULL CHECK (type IN ('inbound', 'outbound', 'transfer')),
   items JSONB NOT NULL,
   reference_id VARCHAR(100),

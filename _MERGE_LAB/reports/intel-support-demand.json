@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "demandroutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 4,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "demandservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 5,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M759100_DEMAND\\backend\\service.js",
+      "backend\\src\\routes\\demandRoutes_merged.js",
+      "backend\\src\\services\\demandService.js"
+    ]
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "stem": "mutation.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "getDefaultState",
+        "extends",
+        "onContinue",
+        "reducer",
+        "_dispatch"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "mutation.cjs",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

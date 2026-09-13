@@ -1,0 +1,23 @@
+[
+  {
+    "stem": "error.js",
+    "candidateCount": 5,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "CommanderError",
+        "InvalidArgumentError",
+        "SentryError",
+        "isAtLeastReact17",
+        "setCause",
+        "recurse",
+        "captureReactException",
+        "reactErrorHandler"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

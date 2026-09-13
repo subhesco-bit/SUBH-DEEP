@@ -186,10 +186,18 @@ CREATE INDEX IF NOT EXISTS idx_household_orders_delivery ON household_orders(del
 -- LAYER 2: FARM CONSUMABLES
 -- ============================================================================
 
+-- 2026-09-12: crop_id retyped UUID -> INTEGER here and in machinery_access,
+-- shared_infrastructure_access and ai_advisories below. This file declares
+-- its own UUID-keyed `crops`, but 001_skeleton_complete_schema.sql creates
+-- `crops` first with `id SERIAL`, so 041's CREATE silently no-ops and the
+-- live table is integer-keyed. `UUID REFERENCES crops(id)` against it is
+-- rejected outright, aborting the migration run. Same fix already applied to
+-- crop_plantings.crop_id in 9999_..._farms_crop_plantings_schema.sql.
+-- Approved as an exception to CLAUDE.md's 000-071 freeze.
 CREATE TABLE IF NOT EXISTS farm_consumables (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   reu_id UUID NOT NULL REFERENCES rural_economic_units(id) ON DELETE CASCADE,
-  crop_id UUID REFERENCES crops(id) ON DELETE SET NULL,
+  crop_id INTEGER REFERENCES crops(id) ON DELETE SET NULL,
   
   -- Input Details
   input_type VARCHAR(50) NOT NULL, -- seed, fertilizer, protection, micronutrient, mulch, irrigation, feed
@@ -271,7 +279,7 @@ CREATE TABLE IF NOT EXISTS machinery_access (
   
   -- Purpose
   purpose VARCHAR(100),
-  crop_id UUID REFERENCES crops(id) ON DELETE SET NULL,
+  crop_id INTEGER REFERENCES crops(id) ON DELETE SET NULL,
   area DECIMAL, -- in acres
   area_unit VARCHAR(20), -- acre, hectare, sqft
   
@@ -338,7 +346,7 @@ CREATE TABLE IF NOT EXISTS shared_infrastructure_access (
   
   -- Purpose
   purpose VARCHAR(100),
-  crop_id UUID REFERENCES crops(id) ON DELETE SET NULL,
+  crop_id INTEGER REFERENCES crops(id) ON DELETE SET NULL,
   produce_type VARCHAR(100),
   
   -- Status
@@ -751,7 +759,7 @@ CREATE INDEX IF NOT EXISTS idx_financial_needs_assessment_date ON financial_need
 CREATE TABLE IF NOT EXISTS ai_advisories (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   reu_id UUID NOT NULL REFERENCES rural_economic_units(id) ON DELETE CASCADE,
-  crop_id UUID REFERENCES crops(id) ON DELETE SET NULL,
+  crop_id INTEGER REFERENCES crops(id) ON DELETE SET NULL,
   enterprise_id UUID REFERENCES rural_enterprises(id) ON DELETE SET NULL,
   
   -- Advisory Details

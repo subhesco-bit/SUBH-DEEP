@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "routeanalytics.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 15,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\App.jsx"
+    ]
+  }
+]

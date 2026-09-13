@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "libraryknowledgeservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "LibraryKnowledgeService",
+        "occurrences",
+        "queryLibraryKnowledge"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\routes\\claude\\libraryRoutes.js"
+    ]
+  }
+]

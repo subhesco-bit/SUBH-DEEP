@@ -5,6 +5,7 @@
 
 const { Pool } = require('pg');
 const { logger } = require('../utils/logger');
+const { resolvePoolConfig, describePostgresTarget } = require('../config/database');
 
 /**
  * The MongoDB driver is loaded on first use, not at import time.
@@ -42,7 +43,9 @@ let pgPool = null;
 
 // MongoDB client
 let mongoClient = null;
+let mongoConnected = false;
 let initializationError = null;
+let mongoInitializationError = null;
 let initializationCompleted = false;
 
 /**
@@ -50,39 +53,17 @@ let initializationCompleted = false;
  */
 async function initPostgreSQL() {
   try {
-    // DATABASE_URL takes precedence when present.
+    // Target resolution (DATABASE_URL > PG_* > DB_* > canonical defaults) and
+    // pool sizing both live in ../config/database, so that this process and the
+    // migration runner cannot disagree about which database they are using.
+    // They previously did: the app read DATABASE_URL while migrate.js read DB_*,
+    // pointing them at different databases on different ports.
     //
-    // Managed platforms (Railway, Heroku, Render, Fly, Supabase) inject
-    // DATABASE_URL and nothing else. This file previously read only PG_* vars,
-    // so on any of them it would quietly fall back to
-    // localhost:5432/afrera_db as postgres/password — connect to nothing, and
-    // report "PostgreSQL connection failed" as if the database were down
-    // rather than as if it had never been told where to look.
-    //
-    // PG_* still works and is what CI supplies, so both paths are supported.
-    const pgConfig = process.env.DATABASE_URL ?
-      { connectionString: process.env.DATABASE_URL } :
-      {
-        host: process.env.PG_HOST || 'localhost',
-        port: parseInt(process.env.PG_PORT, 10) || 5432,
-        database: process.env.PG_DATABASE || 'afrera_db',
-        user: process.env.PG_USER || 'postgres',
-        password: process.env.PG_PASSWORD || 'password',
-      };
+    // Say the target out loud. A connection failure is far cheaper to diagnose
+    // when the log states which host/database was attempted.
+    logger.info(`PostgreSQL target: ${describePostgresTarget()}`);
 
-    // Managed Postgres almost always requires TLS, and its certificates are
-    // usually not in the container's trust store. Opt in explicitly rather
-    // than defaulting rejectUnauthorized to false everywhere.
-    if (process.env.PG_SSL === 'true') {
-      pgConfig.ssl = { rejectUnauthorized: process.env.PG_SSL_STRICT !== 'false' };
-    }
-
-    pgPool = new Pool({
-      ...pgConfig,
-      max: 20, // Maximum pool size
-      idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 2000,
-    });
+    pgPool = new Pool(resolvePoolConfig());
 
     // Test connection
     const client = await pgPool.connect();
@@ -113,16 +94,25 @@ async function initMongoDB() {
     await mongoClient.connect();
     await mongoClient.db('admin').command({ ping: 1 });
 
+    mongoConnected = true;
     logger.info('MongoDB connection established successfully');
     return mongoClient;
   } catch (error) {
+    mongoConnected = false;
     logger.error('MongoDB connection failed', { error: error.message, stack: error.stack });
     throw error;
   }
 }
 
 /**
- * Initialize all database connections
+ * Initialize all database connections.
+ *
+ * PostgreSQL is the authoritative datastore for most of the platform, so its
+ * failure is treated as a real initialization error. MongoDB is used by
+ * exactly one service (aiBackboneService, for fraud patterns) and is
+ * deliberately optional: a Mongo failure is logged and tracked on its own
+ * (mongoInitializationError / isHealthy().mongodb) without flipping
+ * initializationError or fallback mode for the whole platform.
  */
 async function initialize() {
   if (initializationCompleted) {
@@ -131,17 +121,25 @@ async function initialize() {
 
   try {
     await initPostgreSQL();
-    await initMongoDB();
-    initializationCompleted = true;
     initializationError = null;
-    logger.info('All database connections initialized');
-    return { pgPool, mongoClient };
   } catch (error) {
-    initializationCompleted = true;
     initializationError = error;
-    logger.warn('Database initialization failed; continuing in fallback mode', { error: error.message });
-    return { pgPool, mongoClient };
+    logger.warn('PostgreSQL initialization failed; continuing in fallback mode', { error: error.message });
   }
+
+  try {
+    await initMongoDB();
+    mongoInitializationError = null;
+  } catch (error) {
+    mongoInitializationError = error;
+    logger.warn('MongoDB initialization failed; continuing without MongoDB (optional datastore)', { error: error.message });
+  }
+
+  initializationCompleted = true;
+  if (!initializationError && !mongoInitializationError) {
+    logger.info('All database connections initialized');
+  }
+  return { pgPool, mongoClient };
 }
 
 /**
@@ -176,12 +174,14 @@ function getMongoDatabase() {
  * Health check for databases
  */
 function isHealthy() {
-  const pgHealthy = pgPool !== null;
-  const mongoHealthy = mongoClient !== null && mongoClient.isConnected();
+  const pgHealthy = pgPool !== null && initializationError === null;
+  const mongoHealthy = mongoClient !== null && mongoConnected;
   return {
     postgresql: pgHealthy,
     mongodb: mongoHealthy,
-    overall: pgHealthy && mongoHealthy,
+    // PostgreSQL is the authoritative datastore; MongoDB is optional (used by
+    // exactly one service), so overall health does not depend on it.
+    overall: pgHealthy,
     fallback: initializationError !== null,
   };
 }
@@ -197,6 +197,7 @@ async function close() {
     }
     if (mongoClient) {
       await mongoClient.close();
+      mongoConnected = false;
       logger.info('MongoDB connection closed');
     }
   } catch (error) {

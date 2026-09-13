@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "styles.css",
+    "candidateCount": 150,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "stem": "errorhandler.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "errorHandler",
+        "AppError",
+        "notFound",
+        "catchAsync",
+        "ValidationError",
+        "AuthenticationError",
+        "AuthorizationError",
+        "NotFoundError",
+        "ConflictError",
+        "RateLimitError",
+        "ServerError"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js",
+      "backend\\src\\services\\advancedMedicalCodingService.js",
+      "backend\\src\\services\\legacy\\erpService.js"
+    ]
+  }
+]

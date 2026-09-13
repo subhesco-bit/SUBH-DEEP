@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "accessibilityprovider.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "readStored",
+        "AccessibilityProvider",
+        "useAccessibility",
+        "A11Y_MODES"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\App.jsx"
+    ]
+  }
+]

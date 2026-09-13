@@ -1,0 +1,56 @@
+[
+  {
+    "stem": "soilmanagementpage.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M104_SOIL_MANAGEMENT\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "soilmanagementservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M104_SOIL_MANAGEMENT\\backend\\service.js"
+    ]
+  },
+  {
+    "stem": "soilmanagementroutes.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 9,
+    "uniquePerSource": {
+      "claude": [
+        "inRange",
+        "soilHealthValidate",
+        "soilHealth",
+        "signal",
+        "SOIL_RECORD_CHANGED",
+        "source",
+        "validate"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

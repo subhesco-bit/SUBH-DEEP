@@ -1,0 +1,40 @@
+[
+  {
+    "stem": "civildisruptionservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "CivilDisruptionService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M528100_CIVILDISRUPTION\\backend\\service.js",
+      "backend\\src\\routes\\civilDisruptionRoutes.js",
+      "backend\\src\\services\\civilDisruptionService.js"
+    ]
+  },
+  {
+    "stem": "civildisruptionroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/active",
+        "route:POST:/:id/verify",
+        "route:POST:/:id/resolve",
+        "route:GET:/shipments/:shipmentId/risk"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

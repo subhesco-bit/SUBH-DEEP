@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "libraryknowledgeservice.test.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "runServiceHarness"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

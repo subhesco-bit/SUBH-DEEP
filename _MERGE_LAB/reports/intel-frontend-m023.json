@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "m023component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M023Component"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "m023page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M023Page"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\M023\\index.jsx"
+    ]
+  }
+]

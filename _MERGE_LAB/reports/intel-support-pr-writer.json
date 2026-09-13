@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "pr-writer.md",
+    "candidateCount": 2,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

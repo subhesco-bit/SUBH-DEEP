@@ -1,0 +1,15 @@
+[
+  {
+    "stem": "last-command-audit-instruction.md",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "codex-or-ai-workspace",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

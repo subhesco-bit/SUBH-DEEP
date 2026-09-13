@@ -1,0 +1,41 @@
+[
+  {
+    "stem": "institutionalprocurementservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "isHealthy",
+        "route:POST:/tenders",
+        "route:GET:/tenders",
+        "route:POST:/tenders/:id/bids",
+        "route:POST:/demand-forecast",
+        "route:GET:/demand-forecast",
+        "route:POST:/menu-plans",
+        "route:GET:/menu-plans",
+        "route:POST:/nutrition-compliance",
+        "route:GET:/nutrition-compliance",
+        "route:POST:/contracts",
+        "route:GET:/contracts",
+        "route:POST:/quality-inspections",
+        "route:GET:/quality-inspections",
+        "route:POST:/settlements",
+        "route:GET:/settlements",
+        "route:GET:/dashboard",
+        "router",
+        "generateOfferNumber",
+        "route:POST:/contract-offers",
+        "route:GET:/contract-offers",
+        "route:PUT:/contract-offers/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M801100_INSTITUTIONALPROCUREMENT\\backend\\service.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\services\\institutionalProcurementService.js"
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "full-audit.md",
+    "candidateCount": 3,
+    "sources": [
+      "claude",
+      "old-new-folder",
+      "workflows"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

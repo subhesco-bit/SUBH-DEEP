@@ -5,6 +5,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { compareMigrationNames } = require('./migrationOrder');
 
 const databaseDir = __dirname;
 const migrationsDir = path.join(databaseDir, 'migrations');
@@ -196,7 +197,7 @@ function inspectSchemaMigrationDefinitions() {
 }
 
 function run() {
-  const files = fs.readdirSync(migrationsDir).filter(file => file.endsWith('.sql')).sort();
+  const files = fs.readdirSync(migrationsDir).filter(file => file.endsWith('.sql')).sort(compareMigrationNames);
   const tables = files.flatMap(file => parseTables(file, fs.readFileSync(path.join(migrationsDir, file), 'utf8')));
   const report = {
     migrationCount: files.length,

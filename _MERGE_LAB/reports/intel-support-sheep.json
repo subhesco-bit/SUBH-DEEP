@@ -1,0 +1,41 @@
+[
+  {
+    "stem": "sheepservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 28,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M499100_SHEEP\\backend\\service.js",
+      "backend\\src\\routes\\sheepRoutes_merged.js",
+      "backend\\src\\services\\sheepService.js"
+    ]
+  },
+  {
+    "stem": "sheeproutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 21,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id",
+        "route:PUT:/breeding/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

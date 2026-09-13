@@ -1,0 +1,59 @@
+[
+  {
+    "stem": "iter.d.ts",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "compressBrotli",
+        "compressBrotliSync",
+        "compressDeflate",
+        "compressDeflateSync",
+        "compressGzip",
+        "compressGzipSync",
+        "compressZstd",
+        "compressZstdSync",
+        "decompressBrotli",
+        "decompressBrotliSync",
+        "decompressDeflate",
+        "decompressDeflateSync",
+        "decompressGzip",
+        "decompressGzipSync",
+        "decompressZstd",
+        "decompressZstdSync",
+        "push",
+        "from",
+        "fromSync",
+        "pull",
+        "pullSync",
+        "pipeTo",
+        "pipeToSync",
+        "bytes",
+        "bytesSync",
+        "text",
+        "textSync",
+        "arrayBuffer",
+        "arrayBufferSync",
+        "array",
+        "arraySync",
+        "tap",
+        "tapSync",
+        "merge",
+        "ondrain",
+        "broadcast",
+        "share",
+        "shareSync",
+        "duplex",
+        "fromReadable",
+        "fromWritable",
+        "toReadable",
+        "toReadableSync",
+        "toWritable"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

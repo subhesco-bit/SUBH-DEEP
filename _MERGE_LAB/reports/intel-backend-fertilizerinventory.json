@@ -1,0 +1,46 @@
+[
+  {
+    "stem": "fertilizerinventoryservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "listInventory",
+        "createInventoryItem",
+        "updateInventoryItem",
+        "deleteInventoryItem",
+        "issueStock",
+        "listIssues",
+        "getReorderAlerts",
+        "offset"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M108_FERTILIZER_MANAGEMENT\\backend\\service.js",
+      "backend\\src\\services\\fertilizerInventoryService.js",
+      "backend\\src\\services\\index.js"
+    ]
+  },
+  {
+    "stem": "fertilizerinventorypage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "FertilizerInventoryPage",
+        "closeForm",
+        "openEdit"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M108_FERTILIZER_MANAGEMENT\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

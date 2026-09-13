@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "sheepfarmingpage.jsx",
+    "candidateCount": 6,
+    "sources": [
+      "backup",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 3,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M499100_SHEEP\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

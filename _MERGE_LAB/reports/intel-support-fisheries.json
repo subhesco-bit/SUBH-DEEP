@@ -1,0 +1,28 @@
+[
+  {
+    "stem": "fisheriesservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M103_FISHERIES_MANAGEMENT\\backend\\service.js"
+    ]
+  },
+  {
+    "stem": "fisheriesroutes.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 6,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

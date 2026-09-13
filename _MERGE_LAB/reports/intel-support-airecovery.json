@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "airecoveryservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\test\\startup\\aiBackboneLoad.test.js"
+    ]
+  }
+]

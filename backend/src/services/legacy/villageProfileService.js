@@ -17,6 +17,12 @@ function setupRoutes(app) {
   const authMiddleware = require('../../middleware/auth');
   router.use(authMiddleware);
 
+  // Literal routes precede IDs so `search` cannot be parsed as a village ID.
+  router.get('/villages/search', async (req, res) => {
+    try { res.json({ success: true, data: await villageService.searchVillages(req.query) }); }
+    catch (error) { logger.error(`Village search failed: ${error.message}`); res.status(error.statusCode || 500).json({ success: false, error: error.message }); }
+  });
+
   router.get('/villages/:villageId', async (req, res) => {
     try { res.json({ success: true, data: await villageService.getVillageProfile(req.params.villageId) }); }
     catch (error) { logger.error(`Village profile lookup failed: ${error.message}`); res.status(error.statusCode || 404).json({ success: false, error: error.message }); }
@@ -47,10 +53,7 @@ function setupRoutes(app) {
     catch (error) { logger.error(`Village update failed: ${error.message}`); res.status(error.statusCode || 400).json({ success: false, error: error.message }); }
   });
 
-  router.get('/villages/search', async (req, res) => {
-    try { res.json({ success: true, data: await villageService.searchVillages(req.query) }); }
-    catch (error) { logger.error(`Village search failed: ${error.message}`); res.status(error.statusCode || 500).json({ success: false, error: error.message }); }
-  });
+
 
   app.use('/api/v1/village-profiles', router);
   logger.info('Canonical village profile compatibility routes mounted at /api/v1/village-profiles');

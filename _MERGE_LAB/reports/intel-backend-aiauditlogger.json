@@ -1,0 +1,27 @@
+[
+  {
+    "stem": "aiauditlogger.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "logAIDecision",
+        "getAuditTrail",
+        "getActorAuditLogs",
+        "getOperationAuditLogs",
+        "generateAuditId",
+        "generateTraceId",
+        "summarizeInput",
+        "summarizeOutput",
+        "getAuditStatistics"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\core\\ai\\aiOrchestratorCore.js",
+      "backend\\src\\core\\ai\\index.js"
+    ]
+  }
+]

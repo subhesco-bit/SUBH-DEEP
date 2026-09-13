@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "schemeverificationpage.jsx",
+    "candidateCount": 2,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "SchemeVerificationPage",
+        "startEdit",
+        "submitEdit"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

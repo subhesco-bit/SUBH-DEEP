@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "regeneratorkeys.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_regeneratorKeys",
+        "e",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

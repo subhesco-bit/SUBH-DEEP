@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "layout.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "Layout"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\App.jsx",
+      "frontend\\src\\router\\routes.jsx"
+    ]
+  }
+]

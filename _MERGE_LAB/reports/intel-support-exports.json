@@ -1,0 +1,43 @@
+[
+  {
+    "stem": "exports.js",
+    "candidateCount": 4,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "replaceExports",
+        "default",
+        "captureException",
+        "captureMessage",
+        "captureEvent",
+        "setContext",
+        "setExtras",
+        "setExtra",
+        "setTags",
+        "setTag",
+        "setAttributes",
+        "setAttribute",
+        "setUser",
+        "setConversationId",
+        "lastEventId",
+        "captureCheckIn",
+        "withMonitor",
+        "runCallback",
+        "finishCheckIn",
+        "flush",
+        "close",
+        "isInitialized",
+        "isEnabled",
+        "addEventProcessor",
+        "startSession",
+        "endSession",
+        "_sendSessionUpdate",
+        "captureSession"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

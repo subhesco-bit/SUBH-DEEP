@@ -1,0 +1,22 @@
+[
+  {
+    "stem": "alertmodal.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "AlertModal",
+        "AlertStack",
+        "SuccessAlert",
+        "ErrorAlert",
+        "WarningAlert",
+        "InfoAlert",
+        "handleEscape"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

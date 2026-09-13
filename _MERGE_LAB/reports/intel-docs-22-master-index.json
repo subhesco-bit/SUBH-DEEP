@@ -1,0 +1,24 @@
+[
+  {
+    "stem": "22-master-index.md",
+    "candidateCount": 3,
+    "sources": [
+      "claude",
+      "docs",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "22-master-index.json",
+    "candidateCount": 1,
+    "sources": [
+      "docs"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "stem": "pigroutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 21,
+    "uniquePerSource": {
+      "claude": [
+        "route:PUT:/breeding/:id",
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "pigservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 27,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M858100_PIG\\backend\\service.js",
+      "backend\\src\\routes\\pigRoutes_merged.js",
+      "backend\\src\\services\\pigService.js"
+    ]
+  }
+]

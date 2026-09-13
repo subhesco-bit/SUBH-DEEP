@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "shelflifeservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 20,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M451100_SHELFLIFE\\backend\\service.js",
+      "backend\\src\\services\\shelfLifeService.js"
+    ]
+  }
+]

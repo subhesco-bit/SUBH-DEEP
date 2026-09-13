@@ -1,0 +1,42 @@
+[
+  {
+    "stem": "dataprimitives.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 11,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M105_WEATHER_INTELLIGENCE\\frontend\\pages\\ClimateWeatherPage.jsx",
+      "backend\\src\\modules\\M308_ASSET_MANAGEMENT\\frontend\\pages\\AssetAccountingPage.jsx",
+      "backend\\src\\modules\\M400_AI_CORE\\frontend\\pages\\AIBackbonePage.jsx",
+      "backend\\src\\modules\\M771100_COSTCONTROL\\frontend\\pages\\CostControlPage.jsx",
+      "backend\\src\\modules\\M865100_PROJECTSYSTEMS\\frontend\\pages\\ProjectSystemsPage.jsx",
+      "frontend\\src\\pages\\AIBackbonePage.jsx",
+      "frontend\\src\\pages\\AssetAccountingPage.jsx",
+      "frontend\\src\\pages\\ClimateWeatherPage.jsx",
+      "frontend\\src\\pages\\CompetitivePositionPage.jsx",
+      "frontend\\src\\pages\\CompliancePage.jsx",
+      "frontend\\src\\pages\\CorridorEconomicsPage.jsx",
+      "frontend\\src\\pages\\CostControlPage.jsx",
+      "frontend\\src\\pages\\CropValueReviewPage.jsx",
+      "frontend\\src\\pages\\DefenseFitnessPrepPage.jsx",
+      "frontend\\src\\pages\\DietRecipesPage.jsx",
+      "frontend\\src\\pages\\EnterpriseControlPage.jsx",
+      "frontend\\src\\pages\\ExperienceLayerPage.jsx",
+      "frontend\\src\\pages\\ForwardPricingPage.jsx",
+      "frontend\\src\\pages\\LandUseCarbonPage.jsx",
+      "frontend\\src\\pages\\LedgerPage.jsx",
+      "frontend\\src\\pages\\ProjectSystemsPage.jsx",
+      "frontend\\src\\pages\\PublicDataExtractorPage.jsx",
+      "frontend\\src\\pages\\RfqPage.jsx",
+      "frontend\\src\\pages\\SellerProductFormPage.jsx",
+      "frontend\\src\\pages\\VarietyDirectoryPage.jsx",
+      "frontend\\src\\pages\\WearablesPage.jsx",
+      "frontend\\src\\pages\\YieldManagementPage.jsx"
+    ]
+  }
+]

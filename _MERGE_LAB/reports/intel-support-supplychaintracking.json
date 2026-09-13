@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "supplychaintracking.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:POST:/shipments",
+        "route:GET:/shipments/:shipmentId",
+        "route:POST:/shipments/:shipmentId/tracking"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "stem": "nervoussystem.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 28,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\controllers\\nervousSystemController.js"
+    ]
+  },
+  {
+    "stem": "nervoussystemcontroller.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 22,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\routes\\nervousSystemRoutes_merged.js"
+    ]
+  },
+  {
+    "stem": "nervoussystemroutes.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 22,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "nervoussystempage.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

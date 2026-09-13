@@ -4,6 +4,9 @@
  */
 
 const { Pool } = require('pg');
+// Resolve the target through the shared config so this module cannot point at
+// a different database than the application. See ../config/database.
+const { resolvePoolConfig } = require('../../config/database');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
@@ -101,9 +104,9 @@ class BackupManager {
    */
   async initialize() {
     try {
-      this.pool = new Pool({
-        connectionString: this.config.databaseUrl,
-      });
+      this.pool = new Pool(this.config.databaseUrl
+        ? resolvePoolConfig({}, { DATABASE_URL: this.config.databaseUrl })
+        : resolvePoolConfig());
 
       // Test connection
       await this.pool.query('SELECT NOW()');

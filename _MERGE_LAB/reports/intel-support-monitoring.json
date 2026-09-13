@@ -1,0 +1,23 @@
+[
+  {
+    "stem": "monitoring.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 19,
+    "uniquePerSource": {
+      "claude": [
+        "MetricsCollector",
+        "HealthChecker",
+        "metricsMiddleware"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\App.jsx",
+      "frontend\\src\\components\\RouteAnalytics.jsx"
+    ]
+  }
+]

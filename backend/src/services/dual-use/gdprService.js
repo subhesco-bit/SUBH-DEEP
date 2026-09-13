@@ -55,12 +55,22 @@ class GDPRService {
    * Right to be Forgotten - Anonymize user data
    */
   async rightToBeForgotten(userId, reason, requestId) {
+    // The transaction must run on ONE connection.
+    //
+    // This used to issue BEGIN / UPDATE / INSERT / COMMIT as separate
+    // `pool.query()` calls. A pool hands each call whatever connection is free,
+    // so BEGIN opened a transaction on one connection while the anonymising
+    // UPDATE ran on another with autocommit on, and ROLLBACK on failure undid
+    // nothing. For a right-to-be-forgotten request that means a user could be
+    // left permanently half-anonymised with no audit row recorded — the erasure
+    // applied, the proof that it was requested lost.
+    const client = await this.pool.connect();
+
     try {
-      // Start transaction
-      await this.pool.query('BEGIN');
+      await client.query('BEGIN');
 
       // Anonymize user personal data
-      const anonymizedUser = await this.pool.query(`
+      const anonymizedUser = await client.query(`
         UPDATE users 
         SET 
           email = 'deleted_' || id || '@deleted.local',
@@ -77,12 +87,12 @@ class GDPRService {
       `, [userId]);
 
       // Log the deletion request
-      await this.pool.query(`
+      await client.query(`
         INSERT INTO data_subject_requests (user_id, request_type, reason, status, created_at)
         VALUES ($1, 'RIGHT_TO_BE_FORGOTTEN', $2, 'COMPLETED', CURRENT_TIMESTAMP)
       `, [userId, reason]);
 
-      await this.pool.query('COMMIT');
+      await client.query('COMMIT');
 
       return {
         success: true,
@@ -90,9 +100,11 @@ class GDPRService {
         requestId,
       };
     } catch (error) {
-      await this.pool.query('ROLLBACK');
+      await client.query('ROLLBACK').catch(() => {});
       console.error('Error processing right to be forgotten:', error);
       throw new Error('Failed to process right to be forgotten');
+    } finally {
+      client.release();
     }
   }
 

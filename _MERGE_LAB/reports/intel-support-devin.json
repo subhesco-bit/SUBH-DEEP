@@ -1,0 +1,47 @@
+[
+  {
+    "stem": "devincontroller.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\routes\\devinRoutes.js"
+    ]
+  },
+  {
+    "stem": "devinroutes.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "devinservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\scripts\\monitor_devin_quota.js",
+      "backend\\scripts\\test_devin_connection.js",
+      "backend\\scripts\\trigger_devin_handoff.js",
+      "backend\\src\\controllers\\devinController.js"
+    ]
+  }
+]

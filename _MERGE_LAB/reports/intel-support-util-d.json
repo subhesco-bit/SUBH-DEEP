@@ -1,0 +1,55 @@
+[
+  {
+    "stem": "util.d.ts",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "headerNameToString",
+        "parseHeaders",
+        "diff",
+        "format",
+        "formatWithOptions",
+        "exampleFunction",
+        "anotherFunction",
+        "getCallSites",
+        "getSystemErrorName",
+        "setTraceSigInt",
+        "getSystemErrorMap",
+        "getSystemErrorMessage",
+        "toUSVString",
+        "transferableAbortController",
+        "transferableAbortSignal",
+        "aborted",
+        "inspect",
+        "isArray",
+        "MyStream",
+        "inherits",
+        "convertProcessSignalToExitCode",
+        "debuglog",
+        "isDeepStrictEqual",
+        "stripVTControlCharacters",
+        "fn",
+        "callbackify",
+        "callStat",
+        "promisify",
+        "parseEnv",
+        "styleText",
+        "Foo",
+        "Bar",
+        "syntax",
+        "methods",
+        "prototype",
+        "MIMEType",
+        "MIMEParams",
+        "deprecate",
+        "parseArgs",
+        "obsoleteFunction"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

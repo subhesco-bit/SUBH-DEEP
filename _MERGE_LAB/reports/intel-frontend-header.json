@@ -1,0 +1,24 @@
+[
+  {
+    "stem": "header.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "Header",
+        "handleLogout",
+        "toggleDropdown",
+        "closeDropdown",
+        "handleClickOutside",
+        "handleKeyDown"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\components\\index.js",
+      "frontend\\src\\components\\Layout.jsx"
+    ]
+  }
+]

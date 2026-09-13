@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "agent-protocol.md",
+    "candidateCount": 6,
+    "sources": [
+      "claude",
+      "old-new-folder",
+      "root-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

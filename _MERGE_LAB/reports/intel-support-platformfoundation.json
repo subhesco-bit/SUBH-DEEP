@@ -1,0 +1,58 @@
+[
+  {
+    "stem": "platformfoundationpage.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 4,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "platformfoundationroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/platform/status",
+        "route:GET:/platform/health",
+        "route:GET:/platform/config",
+        "route:PUT:/platform/config/:configId",
+        "route:POST:/platform/optimize",
+        "route:POST:/platform/analyze",
+        "route:GET:/platform/analytics",
+        "route:POST:/platform/monitoring/start",
+        "route:POST:/users",
+        "route:GET:/users",
+        "route:GET:/users/:id",
+        "route:PUT:/users/:id",
+        "route:DELETE:/users/:id",
+        "route:POST:/users/:id/roles/:roleId",
+        "route:DELETE:/users/:id/roles/:roleId",
+        "route:GET:/users/:id/behavior",
+        "route:POST:/users/segment",
+        "route:GET:/users/analytics",
+        "route:POST:/roles",
+        "route:GET:/roles",
+        "route:GET:/roles/:id",
+        "route:PUT:/roles/:id",
+        "route:DELETE:/roles/:id",
+        "route:POST:/roles/:id/permissions/:permissionId",
+        "route:DELETE:/roles/:id/permissions/:permissionId",
+        "route:POST:/roles/optimize",
+        "route:GET:/roles/permissions/analysis",
+        "route:GET:/health/users",
+        "route:GET:/health/roles"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

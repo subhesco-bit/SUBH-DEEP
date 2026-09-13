@@ -1,0 +1,69 @@
+[
+  {
+    "stem": "sheepservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "listFlock",
+        "createAnimal",
+        "updateAnimal",
+        "deleteAnimal",
+        "listWoolProduction",
+        "recordWoolProduction",
+        "listFeedConsumption",
+        "recordFeedConsumption",
+        "listBreedingRecords",
+        "recordBreeding",
+        "updateLambingOutcome",
+        "listVaccinationRecords",
+        "recordVaccination",
+        "getFlockPerformance",
+        "getBreedingAlerts",
+        "getVaccinationAlerts",
+        "getShearingAlerts",
+        "optimizeWoolProduction",
+        "monitorSheepHealth",
+        "optimizeSheepFeed",
+        "recommendSheepBreeding",
+        "generateSheepHealthRecommendations",
+        "offset",
+        "daysBetween",
+        "productionTrend",
+        "productionDecline",
+        "age",
+        "daysSinceVaccination"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M499100_SHEEP\\backend\\service.js",
+      "backend\\src\\routes\\sheepRoutes_merged.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\services\\sheepService.js"
+    ]
+  },
+  {
+    "stem": "sheeproutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

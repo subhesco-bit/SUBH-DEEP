@@ -21,11 +21,6 @@ Thumbs.db
 auth_store.json
 backend/src/database/*.json
 
-# Unrelated local AI-model download cache (~17GB Ollama-format blob,
-# interrupted mid-pull) - not part of this project, see blobs/_WHAT_IS_THIS.md.
-# Ignored, not deleted, so it never gets accidentally committed.
-blobs/
-
 # Pre-existing local audit/catalog data, never committed before, too large
 # for git regardless of value (2026-08-29: largest single CSV here is 204MB,
 # over GitHub's 100MB hard file-size limit - a push including it fails
@@ -42,3 +37,12 @@ FileAuditIndex.csv
 # it is project source, and the nested worktree would break `git add` if
 # ever swept in. ~2.1GB. Ignored, not deleted.
 New folder/
+
+# Generated scan artifacts (regenerable; excluded to keep .git small)
+docs/codex-file-map.csv
+docs/codex-junk-quarantine-manifest.csv
+docs/codex-enterprise-library-index-summary.json
+docs/codex-duplicate-rename-plan.csv
+docs/codex-duplicate-filename-conflicts.csv
+.audit/chatgpt-clone-tree-comparison.jsonl
+FileAuditReport.csv

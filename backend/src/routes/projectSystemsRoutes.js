@@ -1,38 +1,179 @@
 /**
- * project Systems Routes
+ * projectSystemsRoutes — the canonical implementation for this resource.
+ *
+ * Consolidated from projectSystemsRoutes_merged.js on 2026-09-13, per
+ * .ai/decisions/0001-module-lineage-consolidation.md and
+ * .ai/consolidation/CONSOLIDATION_PLAN.md (Phase 3.1): the consolidated code
+ * belongs in the canonical file; duplicates are retired once their unique
+ * behaviour is preserved and verified.
+ *
+ * History (why this file looked empty before): dynamicRouteLoader.js derives a
+ * mount path from the FILENAME, so this implementation was published at a
+ * "...-merged" URL that nothing called, while this file — a generated stub whose
+ * only endpoints were a POST / answering "Route operational" and a GET /health —
+ * owned the path the frontend actually requests. The stub's blanket
+ * router.use(authMiddleware) is deliberately NOT carried over: the code below
+ * applies auth per route and several endpoints are intentionally public. Its
+ * POST / reply is not carried over either — it answered { success: true }
+ * without writing anything.
+ */
+/**
+ * Project Systems Routes — AF-PS.
+ * Projects, work breakdown structure, milestones, WBS cost rollup and
+ * budget-vs-actual against the posted general ledger.
+ * See backend/src/services/projectSystemsService.js for scope notes.
  */
 
 const express = require('express');
+const logger = console; // TODO: use Winston/Pino logger
+
 const router = express.Router();
-
-try {
-  const { authMiddleware } = require('../middleware/auth');
-  router.use(authMiddleware);
-} catch (e) {
-  // Auth optional
-}
-
-/**
- * Main endpoint
- */
-router.post('/', async (req, res) => {
-  res.json({
-    success: true,
-    module: 'projectSystemsRoutes',
-    message: 'Route operational',
-    timestamp: new Date().toISOString()
-  });
+// Liveness ping preserved from the generated stub this file used to contain.
+// Declared first so a pattern route such as '/:id' cannot swallow it.
+router.get('/health', (req, res) => {
+  res.json({ success: true, status: 'healthy', module: 'projectSystemsRoutes' });
 });
 
-/**
- * Health check
- */
-router.get('/health', (req, res) => {
-  res.json({
-    success: true,
-    status: 'healthy',
-    module: 'projectSystemsRoutes'
-  });
+const projectSystemsService = require('../services/legacy/projectSystemsService');
+const { authMiddleware } = require('../middleware/auth');
+const { adminMiddleware } = require('../middleware/admin');
+
+// Projects
+router.post('/', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    const project = await projectSystemsService.createProject(req.body);
+    res.json({ success: true, data: project });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+});
+
+router.get('/', authMiddleware, async (req, res) => {
+  try {
+    const { companyId, ...filters } = req.query;
+    const projects = await projectSystemsService.getProjects(companyId, filters);
+    res.json({ success: true, data: projects });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+});
+
+router.get('/:projectId', authMiddleware, async (req, res) => {
+  try {
+    const project = await projectSystemsService.getProject(req.params.projectId);
+    res.json({ success: true, data: project });
+  } catch (error) {
+    res.status(error.message === 'Project not found' ? 404 : 400).json({ success: false, error: error.message });
+  }
+});
+
+router.post('/:projectId/status', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    const { status, actualStartDate, actualEndDate } = req.body;
+    const project = await projectSystemsService.updateProjectStatus(
+      req.params.projectId, status, { actualStartDate, actualEndDate },
+    );
+    res.json({ success: true, data: project });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+});
+
+// Work Breakdown Structure
+router.post('/:projectId/wbs', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    const wbs = await projectSystemsService.createWbsElement(req.params.projectId, req.body);
+    res.json({ success: true, data: wbs });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+});
+
+router.get('/:projectId/wbs', authMiddleware, async (req, res) => {
+  try {
+    const wbs = await projectSystemsService.getProjectWbs(req.params.projectId);
+    res.json({ success: true, data: wbs });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+});
+
+router.get('/:projectId/wbs/rollup', authMiddleware, async (req, res) => {
+  try {
+    const rollup = await projectSystemsService.getWbsCostRollup(req.params.projectId);
+    res.json({ success: true, data: rollup });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+});
+
+router.get('/wbs/:wbsId', authMiddleware, async (req, res) => {
+  try {
+    const wbs = await projectSystemsService.getWbsElement(req.params.wbsId);
+    res.json({ success: true, data: wbs });
+  } catch (error) {
+    res.status(error.message === 'WBS element not found' ? 404 : 400).json({ success: false, error: error.message });
+  }
+});
+
+router.post('/wbs/:wbsId/status', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    const { status, actualStartDate, actualEndDate } = req.body;
+    const wbs = await projectSystemsService.updateWbsStatus(
+      req.params.wbsId, status, { actualStartDate, actualEndDate },
+    );
+    res.json({ success: true, data: wbs });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+});
+
+// Milestones
+router.post('/:projectId/milestones', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    const milestone = await projectSystemsService.createMilestone(req.params.projectId, req.body);
+    res.json({ success: true, data: milestone });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+});
+
+router.get('/:projectId/milestones', authMiddleware, async (req, res) => {
+  try {
+    const milestones = await projectSystemsService.getProjectMilestones(req.params.projectId, req.query);
+    res.json({ success: true, data: milestones });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+});
+
+router.get('/:projectId/milestones/summary', authMiddleware, async (req, res) => {
+  try {
+    const summary = await projectSystemsService.getMilestoneStatusSummary(req.params.projectId, req.query.asOfDate);
+    res.json({ success: true, data: summary });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+});
+
+router.post('/milestones/:milestoneId/complete', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    const { actualCompletionDate } = req.body;
+    const milestone = await projectSystemsService.completeMilestone(req.params.milestoneId, actualCompletionDate);
+    res.json({ success: true, data: milestone });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+});
+
+// Budget vs. Actual
+router.get('/:projectId/budget-vs-actual', authMiddleware, async (req, res) => {
+  try {
+    const report = await projectSystemsService.getProjectBudgetVsActual(req.params.projectId);
+    res.json({ success: true, data: report });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
 });
 
 module.exports = router;

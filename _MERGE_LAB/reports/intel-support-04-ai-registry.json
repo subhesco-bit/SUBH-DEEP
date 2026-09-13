@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "04-ai-registry.md",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "stem": "disclaimers.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "NUTRITION_WELLNESS_DISCLAIMER"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\routes\\nutritionIntelligenceRoutes.js",
+      "backend\\src\\services\\clinicalNutritionDecisionSupportService.js",
+      "backend\\src\\services\\dietTherapyService.js",
+      "backend\\src\\services\\legacy\\consumerHealthService.js",
+      "backend\\src\\services\\legacy\\nutritionIntelligenceService.js"
+    ]
+  }
+]

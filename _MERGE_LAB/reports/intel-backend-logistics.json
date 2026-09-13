@@ -1,0 +1,65 @@
+[
+  {
+    "stem": "logisticspage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "LogisticsPage"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M615100_LOGISTICS\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "logisticsservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "createShipment",
+        "getShipmentById",
+        "getShipments",
+        "updateShipmentStatus",
+        "addTrackingUpdate",
+        "getShipmentTracking",
+        "registerVehicle",
+        "getVehicles",
+        "registerDriver",
+        "getDrivers",
+        "getShipmentModes",
+        "getEcoLogisticsScore",
+        "generateShipmentNumber",
+        "route:POST:/shipments",
+        "route:GET:/shipments/:id",
+        "route:GET:/shipments",
+        "route:PUT:/shipments/:id/status",
+        "route:POST:/shipments/:id/tracking",
+        "route:GET:/shipments/:id/tracking",
+        "route:POST:/vehicles",
+        "route:GET:/vehicles",
+        "route:POST:/drivers",
+        "route:GET:/drivers",
+        "route:GET:/modes",
+        "route:GET:/lanes/:laneCode/eco-score",
+        "route:GET:/shipments/:id/eco-score",
+        "offset",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M615100_LOGISTICS\\backend\\service.js",
+      "backend\\src\\services\\claude\\logisticsAIService.js",
+      "backend\\src\\services\\logisticsService.js",
+      "backend\\src\\tests\\unit\\logisticsDomain.test.js"
+    ]
+  }
+]

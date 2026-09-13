@@ -1,0 +1,25 @@
+[
+  {
+    "stem": "currentscopes.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "registerExternalPropagationContext",
+        "getExternalPropagationContext",
+        "hasExternalPropagationContext",
+        "getCurrentScope",
+        "getIsolationScope",
+        "getGlobalScope",
+        "withScope",
+        "withIsolationScope",
+        "getClient",
+        "getTraceContextFromScope"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

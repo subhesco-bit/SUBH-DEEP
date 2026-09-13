@@ -1,0 +1,52 @@
+[
+  {
+    "stem": "recoveredfinanceservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "trialBalance",
+        "verifyLedger",
+        "matchSchemes",
+        "issueEnwr",
+        "listMyEnwrReceipts",
+        "freightRate",
+        "equipmentSubsidy",
+        "recordRiskEvent",
+        "partyRisk",
+        "certExpiryAlerts",
+        "rate",
+        "multiplier",
+        "r2",
+        "gstFor",
+        "buildInvoice",
+        "appendLedgerEntry"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M407100_RECOVEREDFINANCE\\backend\\service.js",
+      "backend\\src\\routes\\recoveredFinanceRoutes_merged.js",
+      "backend\\src\\services\\recoveredFinanceService.js"
+    ]
+  },
+  {
+    "stem": "recoveredfinanceroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

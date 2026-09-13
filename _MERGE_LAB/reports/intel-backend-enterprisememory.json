@@ -1,0 +1,42 @@
+[
+  {
+    "stem": "enterprisememoryservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "extractSubject",
+        "categoryFor",
+        "narrativeFor",
+        "recordCase",
+        "linkToOutcome",
+        "installSignalHooks",
+        "recallSimilar",
+        "recallByEntity",
+        "listRecent",
+        "recordManualNote",
+        "route:GET:/",
+        "route:GET:/search",
+        "route:GET:/entity/:type/:id",
+        "route:POST:/",
+        "router",
+        "severityLabel",
+        "recordMemory",
+        "linkOutcome",
+        "toTsQuery",
+        "isHealthy",
+        "route:POST:/entries",
+        "route:GET:/entities/:entityType/:entityId"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\core\\aiOrchestrator.js",
+      "backend\\src\\modules\\M265100_ENTERPRISEMEMORY\\backend\\service.js",
+      "backend\\src\\services\\enterpriseMemoryService.js",
+      "backend\\src\\services\\index.js"
+    ]
+  }
+]

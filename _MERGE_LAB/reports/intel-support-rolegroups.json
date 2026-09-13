@@ -1,0 +1,25 @@
+[
+  {
+    "stem": "rolegroups.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 4,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M021\\routes.js",
+      "backend\\src\\services\\legacy\\biodiversityService.js",
+      "backend\\src\\services\\legacy\\foodSafetyService.js",
+      "backend\\src\\services\\legacy\\indigenousKnowledgeService.js",
+      "backend\\src\\services\\legacy\\institutionalProcurementService.js",
+      "backend\\src\\services\\legacy\\insuranceService.js",
+      "backend\\src\\services\\legacy\\iotIntegrationService.js",
+      "backend\\src\\services\\legacy\\laboratoryERPService.js",
+      "backend\\src\\services\\legacy\\logisticsService.js",
+      "backend\\src\\services\\legacy\\omnichannelAIService.js"
+    ]
+  }
+]

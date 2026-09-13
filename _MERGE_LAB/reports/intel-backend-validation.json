@@ -1,0 +1,35 @@
+[
+  {
+    "stem": "validation.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "getPattern",
+        "sanitizeString",
+        "coerceType",
+        "validateField",
+        "validateType",
+        "validate",
+        "sanitize",
+        "validateBody",
+        "validateQuery",
+        "validateParams",
+        "validateAsync",
+        "validateBodyAsync",
+        "with",
+        "ValidationError",
+        "Validator",
+        "validateRequest"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\scripts\\automated-fixes.js",
+      "backend\\src\\routes\\buyerTrust.js",
+      "backend\\src\\routes\\subscriptions.js"
+    ]
+  }
+]

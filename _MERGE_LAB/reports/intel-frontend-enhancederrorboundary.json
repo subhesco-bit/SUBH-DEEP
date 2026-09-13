@@ -1,0 +1,31 @@
+[
+  {
+    "stem": "enhancederrorboundary.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "EnhancedErrorBoundary",
+        "useError",
+        "ERROR_TYPES",
+        "ERROR_SEVERITY",
+        "classifyError",
+        "RECOVERY_STRATEGIES",
+        "ErrorProvider",
+        "AsyncErrorBoundary",
+        "useErrorHandler",
+        "FeatureFallback",
+        "GracefulDegradation",
+        "NetworkErrorBoundary",
+        "handleOnline",
+        "handleOffline"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\pages\\AdvancedAnalyticsDashboard.jsx"
+    ]
+  }
+]

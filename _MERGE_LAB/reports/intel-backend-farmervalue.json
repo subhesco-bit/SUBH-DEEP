@@ -1,0 +1,35 @@
+[
+  {
+    "stem": "farmervalueservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "fail",
+        "getSeasonLedger",
+        "detectUnclaimedSubsidy",
+        "computeFVI",
+        "buildStatement",
+        "getCashFlow",
+        "route:GET:/farmers/:farmerId/value-index",
+        "route:POST:/farmers/:farmerId/value-index/compute",
+        "route:GET:/farmers/:farmerId/unclaimed-support",
+        "route:GET:/farmers/:farmerId/cash-flow",
+        "route:GET:/farmers/:farmerId/ledger",
+        "num",
+        "round2",
+        "router",
+        "BASIS_QUALITY",
+        "DATA_QUALITY_WEIGHT"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M844100_FARMERVALUE\\backend\\service.js",
+      "backend\\src\\routes\\farmerValueRoutes.js",
+      "backend\\src\\services\\farmerValueService.js"
+    ]
+  }
+]

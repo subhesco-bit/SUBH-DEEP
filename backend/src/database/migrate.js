@@ -8,14 +8,26 @@ const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
 const { Pool } = require('pg');
-require('dotenv').config();
+
+// Load the same env files, in the same order, as src/index.js.
+//
+// dotenv does not overwrite a variable that is already set, so the FIRST file
+// to define a key wins — .env.local overrides .env. This runner previously
+// called a bare `dotenv.config()`, which loads only `.env` relative to the
+// working directory. That alone was enough to point migrations at a different
+// database than the server, because the two files disagree.
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env.local') });
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+
+const { resolvePoolConfig, describePostgresTarget } = require('../config/database');
+const { compareMigrationNames } = require('./migrationOrder');
 
 const migrationsDir = path.join(__dirname, 'migrations');
 
 function getMigrationFiles() {
   return fs.readdirSync(migrationsDir)
     .filter(file => file.endsWith('.sql'))
-    .sort((left, right) => left.localeCompare(right, undefined, { numeric: true }));
+    .sort(compareMigrationNames);
 }
 
 function stripTransactionMarkers(sql) {
@@ -36,16 +48,18 @@ function runPreflight() {
 }
 
 async function runMigrations() {
-  const pool = new Pool({
-    user: process.env.DB_USER || 'ebdesign_user',
-    password: process.env.DB_PASSWORD || 'ebdesign_dev_password_change_in_prod',
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 5432,
-    database: process.env.DB_NAME || 'ebdesign',
-  });
+  // Resolved through the shared config, not read from DB_* directly.
+  //
+  // This runner used to ignore DATABASE_URL and read only DB_*. The application
+  // does the opposite. With `backend/.env` setting both to different values,
+  // migrations were applied to one database while the app read another — the
+  // tables existed, just not where anything looked for them.
+  //
+  // A migration run needs one connection, not a serving pool.
+  const pool = new Pool(resolvePoolConfig({ max: 2 }));
 
   try {
-    console.log('✅ Connected to PostgreSQL');
+    console.log(`✅ Migration target: ${describePostgresTarget()}`);
     const preflight = runPreflight();
     console.log(`✅ Migration preflight passed: ${preflight.migrationCount} files, ${preflight.blockers} blockers`);
 
@@ -80,19 +94,32 @@ async function runMigrations() {
       const filePath = path.join(migrationsDir, file);
       const sql = stripTransactionMarkers(fs.readFileSync(filePath, 'utf8'));
 
+      // The transaction must run on ONE connection.
+      //
+      // This previously issued BEGIN, the migration body, the bookkeeping
+      // INSERT and COMMIT as four separate `pool.query()` calls. A pool hands
+      // each call whatever connection is free and releases it again, so BEGIN
+      // could open a transaction on one connection while the migration ran on
+      // another with autocommit on. The net effect was that migrations were
+      // NOT transactional and the ROLLBACK on failure did nothing — a
+      // half-applied migration would be left behind and simply not recorded,
+      // so the next run would try it again from a dirty state.
+      const client = await pool.connect();
       try {
-        await pool.query('BEGIN');
-        await pool.query(sql);
-        await pool.query(
+        await client.query('BEGIN');
+        await client.query(sql);
+        await client.query(
           'INSERT INTO migrations (name) VALUES ($1)',
           [file],
         );
-        await pool.query('COMMIT');
+        await client.query('COMMIT');
         console.log(`✅ Executed ${file}`);
       } catch (err) {
-        await pool.query('ROLLBACK').catch(() => {});
+        await client.query('ROLLBACK').catch(() => {});
         console.error(`❌ Failed to execute ${file}:`, err.message);
         throw err;
+      } finally {
+        client.release();
       }
     }
 

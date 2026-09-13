@@ -1,0 +1,30 @@
+[
+  {
+    "stem": "villageprofileservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "setupRoutes",
+        "route:GET:/villages/:villageId",
+        "route:GET:/villages/district/:district",
+        "route:GET:/villages/block/:block",
+        "route:GET:/districts/:district/economic-summary",
+        "route:POST:/villages",
+        "route:PUT:/villages/:villageId",
+        "route:GET:/villages/search",
+        "villageService",
+        "route:GET:/",
+        "route:POST:/",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M445100_VILLAGEPROFILE\\backend\\service.js",
+      "backend\\src\\services\\villageProfileService.js"
+    ]
+  }
+]

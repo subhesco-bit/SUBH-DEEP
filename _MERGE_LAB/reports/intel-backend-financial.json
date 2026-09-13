@@ -1,0 +1,51 @@
+[
+  {
+    "stem": "financialservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "applyForLoan",
+        "getFarmerLoans",
+        "approveLoan",
+        "generateEMISchedule",
+        "requestAdvance",
+        "getFarmerAdvances",
+        "getEMISchedule",
+        "payEMI",
+        "getCreditScore",
+        "generateCreditScore",
+        "generateLoanNumber",
+        "generateAdvanceNumber",
+        "route:POST:/loans",
+        "route:GET:/loans/farmer/:farmerId",
+        "route:POST:/loans/:id/approve",
+        "route:GET:/loans/:id/emi",
+        "route:POST:/emi/:id/pay",
+        "route:POST:/advances",
+        "route:GET:/advances/farmer/:farmerId",
+        "route:GET:/credit-score/:farmerId",
+        "emi",
+        "router",
+        "getBuyerCreditEligibility",
+        "farmerCreditRiskScore",
+        "route:GET:/overview",
+        "route:GET:/buyers/:buyerId/credit-eligibility",
+        "route:GET:/credit-risk-score/:farmerId",
+        "receivedPct",
+        "badPenalty"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M301_FINANCIAL_MANAGEMENT\\backend\\service.js",
+      "backend\\src\\routes\\claude\\financialAIRoutes.js",
+      "backend\\src\\services\\claude\\financialAIService.js",
+      "backend\\src\\services\\financialService.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\services\\legacy\\advancedAIService.js"
+    ]
+  }
+]

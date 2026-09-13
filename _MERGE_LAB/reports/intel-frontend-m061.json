@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "m061component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M061Component"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "m061page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M061Page"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\M061\\index.jsx"
+    ]
+  }
+]

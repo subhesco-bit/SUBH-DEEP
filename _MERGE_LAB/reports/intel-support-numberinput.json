@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "numberinput.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "NumberInput"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

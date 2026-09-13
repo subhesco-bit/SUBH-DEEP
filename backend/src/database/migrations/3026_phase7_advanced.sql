@@ -9,6 +9,22 @@ CREATE TABLE IF NOT EXISTS vr_spaces (id UUID PRIMARY KEY, space_name VARCHAR(25
 CREATE TABLE IF NOT EXISTS ml_models (id UUID PRIMARY KEY, model_id UUID, training_data JSONB, accuracy NUMERIC, created_at TIMESTAMP);
 CREATE TABLE IF NOT EXISTS nlp_analyses (id UUID PRIMARY KEY, text TEXT, sentiment VARCHAR(50), created_at TIMESTAMP);
 CREATE TABLE IF NOT EXISTS charts (id UUID PRIMARY KEY, data_id UUID, chart_type VARCHAR(100), created_at TIMESTAMP);
+-- 2026-09-12 collision repair (batch): the CREATE INDEX statements below
+-- name columns that do not exist on the table that actually gets created.
+-- Each of these tables is declared by more than one migration, and
+-- PostgreSQL's CREATE TABLE IF NOT EXISTS silently skips every declaration
+-- after the first — so the later, wider definition never took effect and
+-- the index that assumed it would fail with "column does not exist",
+-- aborting the whole migration run.
+--
+-- Additive and idempotent: restores exactly the columns the indexes below
+-- require, typed from the losing definition that declared them. No-ops on
+-- a database where the wider definition already won.
+-- iot_readings: winner is 015_advanced_features.sql
+ALTER TABLE iot_readings ADD COLUMN IF NOT EXISTS sensor_id UUID;
+-- ml_models: winner is 3005_phase2_price_forecasting.sql
+ALTER TABLE ml_models ADD COLUMN IF NOT EXISTS model_id UUID;
+
 CREATE INDEX IF NOT EXISTS idx_blockchain_product ON blockchain_records(product_id);
 CREATE INDEX IF NOT EXISTS idx_automation_workflow ON automation_logs(workflow_id);
 CREATE INDEX IF NOT EXISTS idx_biometric_user ON biometric_logs(user_id);

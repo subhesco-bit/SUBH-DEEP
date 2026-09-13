@@ -1,0 +1,103 @@
+[
+  {
+    "stem": "nervoussystem.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "initializeNervousSystem",
+        "startSensorDataCollection",
+        "CentralBrain",
+        "HeartBeat",
+        "NervousSystem",
+        "SensorNetwork",
+        "MotorFunctions",
+        "EnterpriseRouteControl",
+        "centralBrain",
+        "heartBeat",
+        "nervousSystem",
+        "sensorNetwork",
+        "motorFunctions",
+        "enterpriseRouteControl",
+        "createNeuralPathway",
+        "from",
+        "to",
+        "strengthenPathway",
+        "createReflexArc",
+        "trigger",
+        "action",
+        "triggerReflex",
+        "executeFunction",
+        "name",
+        "registerRoute",
+        "routeRequest",
+        "config",
+        "getOptimalRoute"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\controllers\\nervousSystemController.js"
+    ]
+  },
+  {
+    "stem": "nervoussystemroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health",
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "nervoussystemcontroller.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "processEventThroughBrain",
+        "getBrainDecisionHistory",
+        "getBrainFocus",
+        "startHeartBeat",
+        "stopHeartBeat",
+        "getHeartBeatStatus",
+        "createNeuralPathway",
+        "getNeuralPathways",
+        "strengthenNeuralPathway",
+        "createReflexArc",
+        "getReflexArcs",
+        "triggerReflex",
+        "registerSensor",
+        "getSensorData",
+        "getSensorsStatus",
+        "executeMotorFunction",
+        "getActiveMotorFunctions",
+        "registerEnterpriseRoute",
+        "routeRequest",
+        "getOptimalRoute",
+        "deactivateEnterpriseRoute",
+        "getNervousSystemHealth"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\routes\\nervousSystemRoutes_merged.js"
+    ]
+  }
+]

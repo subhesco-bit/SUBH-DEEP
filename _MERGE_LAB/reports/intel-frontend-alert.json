@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "alert.jsx",
+    "candidateCount": 2,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "Alert"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

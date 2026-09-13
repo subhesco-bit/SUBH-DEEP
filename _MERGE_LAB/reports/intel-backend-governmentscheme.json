@@ -1,0 +1,65 @@
+[
+  {
+    "stem": "governmentschemeservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "getApplicableSchemes",
+        "getWeatherAlerts",
+        "createGovernmentAnnouncement",
+        "getGovernmentAnnouncements",
+        "governmentOfficialLogin",
+        "getCSROpportunities",
+        "submitCSRProposal",
+        "getLocalizedDefaultPage",
+        "trackSchemeApplication",
+        "generateId",
+        "generateTrackingNumber",
+        "generateOfficialToken",
+        "getAllGovernmentSchemes",
+        "getUserProfile",
+        "getUserSchemeHistory",
+        "getCurrentWeather",
+        "getActiveWeatherAlerts",
+        "getWeatherForecast",
+        "assessAgriculturalImpact",
+        "getWeatherRecommendations",
+        "broadcastAnnouncement",
+        "getFilteredAnnouncements",
+        "validateGovernmentCredentials",
+        "getCSRProjects",
+        "assessCSRImpact",
+        "getCSRCompliance",
+        "getGovernmentPriorities",
+        "assessImpactPotential",
+        "calculateAlignmentScore",
+        "getFeaturedSchemes",
+        "getLocalSuccessStories",
+        "getLocalMarketPrices",
+        "getUpcomingEvents",
+        "getPublicAnnouncements",
+        "getFeaturedProducts",
+        "getTrackingNumber",
+        "getApplicationHistory",
+        "getNextSteps",
+        "getContactOfficer",
+        "getEstimatedCompletion",
+        "getPendingDocuments",
+        "setupRoutes",
+        "listSchemeRegistry",
+        "getSchemeByCode",
+        "updateSchemeRegistry",
+        "getExpiringSchemeRegistry",
+        "schemeExpiryStatus",
+        "checkSchemeEligibility"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\services\\commerce\\dprGenerationService.js"
+    ]
+  }
+]

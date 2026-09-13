@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "consola.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "createConsolaReporter",
+        "getLogSeverityLevel",
+        "defaultExtractAttributes",
+        "processExtractedAttributes"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

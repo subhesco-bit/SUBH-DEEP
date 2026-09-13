@@ -1,0 +1,46 @@
+[
+  {
+    "stem": "librarybrowser.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "unwrap",
+        "getItemType",
+        "getModuleId",
+        "getTitle",
+        "getDescription",
+        "filterByTab",
+        "StatusBanner",
+        "MetricCard",
+        "LibraryBrowser",
+        "handleSearch",
+        "initializeLibrary",
+        "verifyCatalog",
+        "inspectItem"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\pages\\LibraryBrowserPage.jsx"
+    ]
+  },
+  {
+    "stem": "librarybrowserpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "LibraryBrowserPage"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

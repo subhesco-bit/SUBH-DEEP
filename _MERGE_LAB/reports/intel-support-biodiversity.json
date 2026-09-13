@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "biodiversityservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 20,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M590100_BIODIVERSITY\\backend\\service.js",
+      "backend\\src\\services\\biodiversityService.js"
+    ]
+  }
+]

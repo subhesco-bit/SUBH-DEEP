@@ -1,0 +1,39 @@
+[
+  {
+    "stem": "coldstorageservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "ColdStorageService",
+        "offset"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M379100_COLDSTORAGE\\backend\\service.js",
+      "backend\\src\\services\\coldStorageService.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\tests\\unit\\coldStorageService.test.js"
+    ]
+  },
+  {
+    "stem": "coldstorageroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

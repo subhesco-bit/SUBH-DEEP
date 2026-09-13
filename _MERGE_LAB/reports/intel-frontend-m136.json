@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "m136page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M136Page"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\M136\\index.jsx"
+    ]
+  },
+  {
+    "stem": "m136component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M136Component"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

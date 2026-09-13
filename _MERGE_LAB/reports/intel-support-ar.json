@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "ar.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:POST:/ar/:productId/create"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

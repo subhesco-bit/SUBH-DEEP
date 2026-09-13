@@ -1,0 +1,27 @@
+[
+  {
+    "stem": "applydecs2203r.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "applyDecs2203RFactory",
+        "createAddInitializerMethod",
+        "memberDec",
+        "l",
+        "u",
+        "assertCallable",
+        "assertValidReturnValue",
+        "applyMemberDec",
+        "applyMemberDecs",
+        "pushInitializers",
+        "applyDecs2203R",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

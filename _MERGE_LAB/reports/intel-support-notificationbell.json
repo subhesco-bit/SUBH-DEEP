@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "notificationbell.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 4,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\components\\Header.jsx",
+      "frontend\\src\\components\\index.js"
+    ]
+  }
+]

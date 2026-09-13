@@ -1,0 +1,51 @@
+[
+  {
+    "stem": "marketdataroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:GET:/prices/trend",
+        "route:POST:/prices/ingest",
+        "route:POST:/dbt/reconcile",
+        "route:GET:/dbt/unclaimed",
+        "route:POST:/competitor/observe",
+        "route:GET:/competitor/position",
+        "fail",
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "marketdataservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "ingestMandiPrices",
+        "num",
+        "priceTrend",
+        "reconcileDbt",
+        "unclaimedEntitlements",
+        "recordCompetitorPrice",
+        "competitivePosition"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\jobs\\loadMandiPrices.js",
+      "backend\\src\\modules\\M374100_MARKETDATA\\backend\\service.js",
+      "backend\\src\\routes\\marketDataRoutes_merged.js",
+      "backend\\src\\services\\marketDataService.js"
+    ]
+  }
+]

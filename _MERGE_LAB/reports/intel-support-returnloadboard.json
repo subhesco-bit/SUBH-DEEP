@@ -1,0 +1,33 @@
+[
+  {
+    "stem": "returnloadboardservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M414100_RETURNLOADBOARD\\backend\\service.js",
+      "backend\\src\\routes\\returnLoadBoardRoutes_merged.js",
+      "backend\\src\\services\\returnLoadBoardService.js",
+      "backend\\src\\tests\\unit\\logisticsDomain.test.js"
+    ]
+  },
+  {
+    "stem": "returnloadboardroutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 4,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

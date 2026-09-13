@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "audit-bugs.md",
+    "candidateCount": 3,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

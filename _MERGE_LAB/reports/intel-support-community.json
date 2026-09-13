@@ -1,0 +1,46 @@
+[
+  {
+    "stem": "communityroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/members",
+        "route:GET:/members/:memberId",
+        "route:POST:/members",
+        "route:PUT:/members/:memberId",
+        "route:GET:/categories",
+        "route:POST:/categories",
+        "route:GET:/threads",
+        "route:GET:/threads/:threadId",
+        "route:POST:/threads",
+        "route:GET:/threads/:threadId/posts",
+        "route:POST:/posts",
+        "route:POST:/like",
+        "route:GET:/groups",
+        "route:POST:/groups",
+        "route:POST:/groups/:groupId/join",
+        "route:GET:/events",
+        "route:POST:/events",
+        "route:POST:/events/:eventId/register",
+        "route:GET:/moderation",
+        "route:POST:/moderation",
+        "route:PUT:/moderation/:queueId",
+        "route:POST:/members/:memberId/badges",
+        "route:POST:/ai-insights",
+        "route:GET:/activity-feed",
+        "route:GET:/analytics",
+        "route:GET:/health",
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

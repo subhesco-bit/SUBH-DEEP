@@ -1,0 +1,106 @@
+[
+  {
+    "stem": "aibackboneroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health",
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "aibackbonecontroller.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\routes\\aiBackboneRoutes_merged.js"
+    ]
+  },
+  {
+    "stem": "aibackbonepage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "ProviderStatusBadge",
+        "ProviderCard",
+        "SetupNotice",
+        "AIBackbonePage"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M400_AI_CORE\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "aibackboneservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "callClaudeAI",
+        "callOpenAI",
+        "callGeminiAI",
+        "callAzureOpenAI",
+        "callHuggingFace",
+        "callOllamaAI",
+        "callAI",
+        "getPreferredProvider",
+        "analyzeFinancialData",
+        "optimizeSupplyChain",
+        "optimizeProduction",
+        "analyzeHR",
+        "analyzeProject",
+        "supportAgriculturalDecision",
+        "optimizeLivestock",
+        "getAIProviderStatus",
+        "switchProvider",
+        "resetAIStatistics",
+        "AI_PROVIDERS",
+        "aiRequestTracker"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\controllers\\aiBackboneController.js",
+      "backend\\src\\modules\\M002\\service.js",
+      "backend\\src\\modules\\M003\\service.js",
+      "backend\\src\\modules\\M004\\service.js",
+      "backend\\src\\modules\\M005\\service.js",
+      "backend\\src\\modules\\M022\\service.js",
+      "backend\\src\\modules\\M023\\service.js",
+      "backend\\src\\modules\\M024\\service.js",
+      "backend\\src\\modules\\M025\\service.js",
+      "backend\\src\\modules\\M723100_AIBRAIN\\backend\\service.js",
+      "backend\\src\\modules\\M752100_AIBACKBONE\\backend\\service.js",
+      "backend\\src\\services\\aiBackboneService.js",
+      "backend\\src\\services\\aiGatewayService.js",
+      "backend\\src\\services\\claude\\aiProviderService.js",
+      "backend\\src\\tests\\aiBackboneFailureRetry.test.js",
+      "backend\\src\\tests\\aiGatewayService.test.js",
+      "backend\\src\\tests\\unit\\aiBackboneFallback.test.js"
+    ]
+  }
+]

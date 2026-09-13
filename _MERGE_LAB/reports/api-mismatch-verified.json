@@ -1,0 +1,4161 @@
+[
+  {
+    "client": "analyticsAPI",
+    "method": "getPlatformStats",
+    "file": "frontend\\src\\pages\\AdminDashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\analyticsMonitoringService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "analyticsAPI",
+    "method": "getInsights",
+    "file": "frontend\\src\\pages\\AdvancedAnalyticsDashboard.jsx",
+    "candidateService": "backend\\src\\services\\analyticsMonitoringService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "adminAPI",
+    "method": "getRecentAudit",
+    "file": "frontend\\src\\pages\\AdminDashboardPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "systemAPI",
+    "method": "getHealth",
+    "file": "frontend\\src\\pages\\AdminDashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\systemAdministrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "agriculturalIntelligenceAPI",
+    "method": "predictCropYield",
+    "file": "frontend\\src\\pages\\AgriculturalIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\agriculturalIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "agriculturalIntelligenceAPI",
+    "method": "analyzeSoil",
+    "file": "frontend\\src\\pages\\AgriculturalIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\agriculturalIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "agriculturalIntelligenceAPI",
+    "method": "getWeatherIntelligence",
+    "file": "frontend\\src\\pages\\AgriculturalIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\agriculturalIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "agriculturalIntelligenceAPI",
+    "method": "predictPestOutbreak",
+    "file": "frontend\\src\\pages\\AgriculturalIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\agriculturalIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "agriculturalIntelligenceAPI",
+    "method": "recommendCrops",
+    "file": "frontend\\src\\pages\\AgriculturalIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\agriculturalIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "agriculturalIntelligenceAPI",
+    "method": "optimizeIrrigation",
+    "file": "frontend\\src\\pages\\AgriculturalIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\agriculturalIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "agriculturalIntelligenceAPI",
+    "method": "recommendFertilizer",
+    "file": "frontend\\src\\pages\\AgriculturalIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\agriculturalIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "agriculturalIntelligenceAPI",
+    "method": "getAgriculturalAnalytics",
+    "file": "frontend\\src\\pages\\AgriculturalIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\agriculturalIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "agriculturalIntelligenceAPI",
+    "method": "healthCheck",
+    "file": "frontend\\src\\pages\\AgriculturalIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\agriculturalIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiAgentAPI",
+    "method": "getHealth",
+    "file": "frontend\\src\\pages\\AIAgentPage.jsx",
+    "candidateService": "backend\\src\\services\\aiAgenticCompanionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiAgentAPI",
+    "method": "executeDecision",
+    "file": "frontend\\src\\pages\\AIAgentPage.jsx",
+    "candidateService": "backend\\src\\services\\aiAgenticCompanionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiAgentAPI",
+    "method": "executeTask",
+    "file": "frontend\\src\\pages\\AIAgentPage.jsx",
+    "candidateService": "backend\\src\\services\\aiAgenticCompanionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiAgentAPI",
+    "method": "coordinateAgents",
+    "file": "frontend\\src\\pages\\AIAgentPage.jsx",
+    "candidateService": "backend\\src\\services\\aiAgenticCompanionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiAgentAPI",
+    "method": "getAgent",
+    "file": "frontend\\src\\pages\\AIAgentPage.jsx",
+    "candidateService": "backend\\src\\services\\aiAgenticCompanionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiAgentAPI",
+    "method": "getAllAgents",
+    "file": "frontend\\src\\pages\\AIAgentPage.jsx",
+    "candidateService": "backend\\src\\services\\aiAgenticCompanionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiAgentAPI",
+    "method": "registerAgent",
+    "file": "frontend\\src\\pages\\AIAgentPage.jsx",
+    "candidateService": "backend\\src\\services\\aiAgenticCompanionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiAgentAPI",
+    "method": "updateAgent",
+    "file": "frontend\\src\\pages\\AIAgentPage.jsx",
+    "candidateService": "backend\\src\\services\\aiAgenticCompanionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiAgentAPI",
+    "method": "clearAgentMemory",
+    "file": "frontend\\src\\pages\\AIAgentPage.jsx",
+    "candidateService": "backend\\src\\services\\aiAgenticCompanionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiAgentAPI",
+    "method": "registerTool",
+    "file": "frontend\\src\\pages\\AIAgentPage.jsx",
+    "candidateService": "backend\\src\\services\\aiAgenticCompanionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiAgentAPI",
+    "method": "getTools",
+    "file": "frontend\\src\\pages\\AIAgentPage.jsx",
+    "candidateService": "backend\\src\\services\\aiAgenticCompanionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiBackboneAPI",
+    "method": "getAIProviderStatus",
+    "file": "frontend\\src\\pages\\AIBackbonePage.jsx",
+    "candidateService": "backend\\src\\services\\aiBackboneService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiBackboneAPI",
+    "method": "callAI",
+    "file": "frontend\\src\\pages\\AIBackbonePage.jsx",
+    "candidateService": "backend\\src\\services\\aiBackboneService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiBackboneAPI",
+    "method": "resetAIStatistics",
+    "file": "frontend\\src\\pages\\AIBackbonePage.jsx",
+    "candidateService": "backend\\src\\services\\aiBackboneService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiBrainAPI",
+    "method": "getCognitiveState",
+    "file": "frontend\\src\\pages\\AIBrainPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\aiBrainService.js",
+    "status": "auto-fixable-exact-method-match"
+  },
+  {
+    "client": "aiBrainAPI",
+    "method": "executeDecision",
+    "file": "frontend\\src\\pages\\AIBrainPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\aiBrainService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiBrainAPI",
+    "method": "processPerception",
+    "file": "frontend\\src\\pages\\AIBrainPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\aiBrainService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiBrainAPI",
+    "method": "processAttention",
+    "file": "frontend\\src\\pages\\AIBrainPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\aiBrainService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiBrainAPI",
+    "method": "processReasoning",
+    "file": "frontend\\src\\pages\\AIBrainPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\aiBrainService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiBrainAPI",
+    "method": "processLearning",
+    "file": "frontend\\src\\pages\\AIBrainPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\aiBrainService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiBrainAPI",
+    "method": "processDecision",
+    "file": "frontend\\src\\pages\\AIBrainPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\aiBrainService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiBrainAPI",
+    "method": "processPlanning",
+    "file": "frontend\\src\\pages\\AIBrainPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\aiBrainService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiBrainAPI",
+    "method": "getKnowledgeGraph",
+    "file": "frontend\\src\\pages\\AIBrainPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\aiBrainService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiBrainAPI",
+    "method": "getMemoryState",
+    "file": "frontend\\src\\pages\\AIBrainPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\aiBrainService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiBrainAPI",
+    "method": "getCognitiveLoad",
+    "file": "frontend\\src\\pages\\AIBrainPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\aiBrainService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAIAPI",
+    "method": "segmentCustomersRFM",
+    "file": "frontend\\src\\pages\\AIDashboard.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAIAPI",
+    "method": "segmentCustomersBehavioral",
+    "file": "frontend\\src\\pages\\AIDashboard.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAIAPI",
+    "method": "forecastProductDemand",
+    "file": "frontend\\src\\pages\\AIDashboard.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAIAPI",
+    "method": "optimizeInventory",
+    "file": "frontend\\src\\pages\\AIDashboard.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAIAPI",
+    "method": "getPersonalizedRecommendations",
+    "file": "frontend\\src\\pages\\AIDashboard.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAIAPI",
+    "method": "predictSales",
+    "file": "frontend\\src\\pages\\AIDashboard.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAIAPI",
+    "method": "calculateCustomerLifetimeValue",
+    "file": "frontend\\src\\pages\\AIDashboard.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAIAPI",
+    "method": "analyzeMarketBasket",
+    "file": "frontend\\src\\pages\\AIDashboard.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAIAPI",
+    "method": "getAIAlerts",
+    "file": "frontend\\src\\pages\\AIDashboard.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAIAPI",
+    "method": "getAIDecisions",
+    "file": "frontend\\src\\pages\\AIDashboard.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAIAPI",
+    "method": "executeAIDecision",
+    "file": "frontend\\src\\pages\\AIDashboard.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiOperationIntelligenceAPI",
+    "method": "getMetrics",
+    "file": "frontend\\src\\pages\\AIOperationIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\aiOperationIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiOperationIntelligenceAPI",
+    "method": "executeOptimizationDecision",
+    "file": "frontend\\src\\pages\\AIOperationIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\aiOperationIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiOperationIntelligenceAPI",
+    "method": "analyzePerformance",
+    "file": "frontend\\src\\pages\\AIOperationIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\aiOperationIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiOperationIntelligenceAPI",
+    "method": "recommendOptimizations",
+    "file": "frontend\\src\\pages\\AIOperationIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\aiOperationIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiOperationIntelligenceAPI",
+    "method": "executeOptimizations",
+    "file": "frontend\\src\\pages\\AIOperationIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\aiOperationIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiOperationIntelligenceAPI",
+    "method": "runOptimizationCycle",
+    "file": "frontend\\src\\pages\\AIOperationIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\aiOperationIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiOperationIntelligenceAPI",
+    "method": "predictOptimization",
+    "file": "frontend\\src\\pages\\AIOperationIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\aiOperationIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiOperationIntelligenceAPI",
+    "method": "detectAnomalies",
+    "file": "frontend\\src\\pages\\AIOperationIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\aiOperationIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiOperationIntelligenceAPI",
+    "method": "getContinuousImprovement",
+    "file": "frontend\\src\\pages\\AIOperationIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\aiOperationIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiOperationIntelligenceAPI",
+    "method": "getStrategies",
+    "file": "frontend\\src\\pages\\AIOperationIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\aiOperationIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiOperationIntelligenceAPI",
+    "method": "addStrategy",
+    "file": "frontend\\src\\pages\\AIOperationIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\aiOperationIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiOperationIntelligenceAPI",
+    "method": "getResourceAllocation",
+    "file": "frontend\\src\\pages\\AIOperationIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\aiOperationIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiOperationIntelligenceAPI",
+    "method": "getOperationHistory",
+    "file": "frontend\\src\\pages\\AIOperationIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\aiOperationIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiOperationIntelligenceAPI",
+    "method": "getServiceHealth",
+    "file": "frontend\\src\\pages\\AIOperationIntelligencePage.jsx",
+    "candidateService": "backend\\src\\services\\aiOperationIntelligenceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiSelfHealingAPI",
+    "method": "getHealthMetrics",
+    "file": "frontend\\src\\pages\\AISelfHealingPage.jsx",
+    "candidateService": "backend\\src\\services\\aiSelfHealingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiSelfHealingAPI",
+    "method": "executeHealingDecision",
+    "file": "frontend\\src\\pages\\AISelfHealingPage.jsx",
+    "candidateService": "backend\\src\\services\\aiSelfHealingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiSelfHealingAPI",
+    "method": "detectError",
+    "file": "frontend\\src\\pages\\AISelfHealingPage.jsx",
+    "candidateService": "backend\\src\\services\\aiSelfHealingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiSelfHealingAPI",
+    "method": "rootCauseAnalysis",
+    "file": "frontend\\src\\pages\\AISelfHealingPage.jsx",
+    "candidateService": "backend\\src\\services\\aiSelfHealingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiSelfHealingAPI",
+    "method": "executeRecovery",
+    "file": "frontend\\src\\pages\\AISelfHealingPage.jsx",
+    "candidateService": "backend\\src\\services\\aiSelfHealingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiSelfHealingAPI",
+    "method": "runHealingCycle",
+    "file": "frontend\\src\\pages\\AISelfHealingPage.jsx",
+    "candidateService": "backend\\src\\services\\aiSelfHealingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiSelfHealingAPI",
+    "method": "predictFailures",
+    "file": "frontend\\src\\pages\\AISelfHealingPage.jsx",
+    "candidateService": "backend\\src\\services\\aiSelfHealingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiSelfHealingAPI",
+    "method": "getHealingHistory",
+    "file": "frontend\\src\\pages\\AISelfHealingPage.jsx",
+    "candidateService": "backend\\src\\services\\aiSelfHealingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiSelfHealingAPI",
+    "method": "addErrorPattern",
+    "file": "frontend\\src\\pages\\AISelfHealingPage.jsx",
+    "candidateService": "backend\\src\\services\\aiSelfHealingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiSelfHealingAPI",
+    "method": "addRecoveryStrategy",
+    "file": "frontend\\src\\pages\\AISelfHealingPage.jsx",
+    "candidateService": "backend\\src\\services\\aiSelfHealingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiSelfHealingAPI",
+    "method": "getSystemState",
+    "file": "frontend\\src\\pages\\AISelfHealingPage.jsx",
+    "candidateService": "backend\\src\\services\\aiSelfHealingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "aiSelfHealingAPI",
+    "method": "getServiceHealth",
+    "file": "frontend\\src\\pages\\AISelfHealingPage.jsx",
+    "candidateService": "backend\\src\\services\\aiSelfHealingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "listExaminations",
+    "file": "frontend\\src\\pages\\AnimalHealthPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "listTreatments",
+    "file": "frontend\\src\\pages\\AnimalHealthPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "listDiseaseOutbreaks",
+    "file": "frontend\\src\\pages\\AnimalHealthPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "listQuarantineRecords",
+    "file": "frontend\\src\\pages\\AnimalHealthPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "getHealthOverview",
+    "file": "frontend\\src\\pages\\AnimalHealthPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "getActiveOutbreaks",
+    "file": "frontend\\src\\pages\\AnimalHealthPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "getActiveQuarantines",
+    "file": "frontend\\src\\pages\\AnimalHealthPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "updateExamination",
+    "file": "frontend\\src\\pages\\AnimalHealthPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "createExamination",
+    "file": "frontend\\src\\pages\\AnimalHealthPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "deleteExamination",
+    "file": "frontend\\src\\pages\\AnimalHealthPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "updateTreatment",
+    "file": "frontend\\src\\pages\\AnimalHealthPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "createTreatment",
+    "file": "frontend\\src\\pages\\AnimalHealthPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "updateOutbreak",
+    "file": "frontend\\src\\pages\\AnimalHealthPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "createOutbreak",
+    "file": "frontend\\src\\pages\\AnimalHealthPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "updateQuarantine",
+    "file": "frontend\\src\\pages\\AnimalHealthPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "createQuarantine",
+    "file": "frontend\\src\\pages\\AnimalHealthPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "animalHealthAPI",
+    "method": "getRecords",
+    "file": "frontend\\src\\pages\\LivestockManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\animalHealthService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "companyAPI",
+    "method": "listCompanies",
+    "file": "frontend\\src\\pages\\AssetAccountingPage.jsx",
+    "candidateService": "backend\\src\\services\\companyService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "companyAPI",
+    "method": "getFiscalYears",
+    "file": "frontend\\src\\pages\\CostControlPage.jsx",
+    "candidateService": "backend\\src\\services\\companyService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "companyAPI",
+    "method": "getChartOfAccounts",
+    "file": "frontend\\src\\pages\\CostControlPage.jsx",
+    "candidateService": "backend\\src\\services\\companyService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "assetAccountingAPI",
+    "method": "getAssets",
+    "file": "frontend\\src\\pages\\AssetAccountingPage.jsx",
+    "candidateService": "backend\\src\\services\\assetAccountingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "assetAccountingAPI",
+    "method": "getDepreciationSchedule",
+    "file": "frontend\\src\\pages\\AssetAccountingPage.jsx",
+    "candidateService": "backend\\src\\services\\assetAccountingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "assetAccountingAPI",
+    "method": "generateDepreciationSchedule",
+    "file": "frontend\\src\\pages\\AssetAccountingPage.jsx",
+    "candidateService": "backend\\src\\services\\assetAccountingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "assetAccountingAPI",
+    "method": "postDepreciationPeriod",
+    "file": "frontend\\src\\pages\\AssetAccountingPage.jsx",
+    "candidateService": "backend\\src\\services\\assetAccountingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "assetAccountingAPI",
+    "method": "runDepreciationForPeriod",
+    "file": "frontend\\src\\pages\\AssetAccountingPage.jsx",
+    "candidateService": "backend\\src\\services\\assetAccountingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "assetAccountingAPI",
+    "method": "disposeAsset",
+    "file": "frontend\\src\\pages\\AssetAccountingPage.jsx",
+    "candidateService": "backend\\src\\services\\assetAccountingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "assetAccountingAPI",
+    "method": "getAssetRegisterSummary",
+    "file": "frontend\\src\\pages\\AssetAccountingPage.jsx",
+    "candidateService": "backend\\src\\services\\assetAccountingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "assetAccountingAPI",
+    "method": "createAsset",
+    "file": "frontend\\src\\pages\\AssetAccountingPage.jsx",
+    "candidateService": "backend\\src\\services\\assetAccountingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "authorizationAPI",
+    "method": "getRoles",
+    "file": "frontend\\src\\pages\\AuthorizationPage.jsx",
+    "candidateService": "backend\\src\\services\\authService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "authorizationAPI",
+    "method": "getUsers",
+    "file": "frontend\\src\\pages\\AuthorizationPage.jsx",
+    "candidateService": "backend\\src\\services\\authService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "authorizationAPI",
+    "method": "getAuditLog",
+    "file": "frontend\\src\\pages\\AuthorizationPage.jsx",
+    "candidateService": "backend\\src\\services\\authService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "authorizationAPI",
+    "method": "updateUserRole",
+    "file": "frontend\\src\\pages\\AuthorizationPage.jsx",
+    "candidateService": "backend\\src\\services\\authService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceBusinessSalesAPI",
+    "method": "getSalesAnalytics",
+    "file": "frontend\\src\\pages\\B2BMarketplace.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceBusinessSalesService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceBusinessSalesAPI",
+    "method": "getB2BConversionMetrics",
+    "file": "frontend\\src\\pages\\B2BMarketplace.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceBusinessSalesService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceBusinessSalesAPI",
+    "method": "createBulkOrder",
+    "file": "frontend\\src\\pages\\B2BMarketplace.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceBusinessSalesService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceBusinessSalesAPI",
+    "method": "createContractFarming",
+    "file": "frontend\\src\\pages\\B2BMarketplace.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceBusinessSalesService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceBusinessSalesAPI",
+    "method": "acceptQuotation",
+    "file": "frontend\\src\\pages\\B2BMarketplace.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceBusinessSalesService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "bankerAPI",
+    "method": "getPortfolio",
+    "file": "frontend\\src\\pages\\BankerDashboardPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "bankerAPI",
+    "method": "getRiskDashboard",
+    "file": "frontend\\src\\pages\\BankerDashboardPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "walletAPI",
+    "method": "getTransactions",
+    "file": "frontend\\src\\pages\\BankPassportPage.jsx",
+    "candidateService": "backend\\src\\services\\walletService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "walletAPI",
+    "method": "getWallet",
+    "file": "frontend\\src\\pages\\WalletPage.jsx",
+    "candidateService": "backend\\src\\services\\walletService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "walletAPI",
+    "method": "deposit",
+    "file": "frontend\\src\\pages\\WalletPage.jsx",
+    "candidateService": "backend\\src\\services\\walletService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "walletAPI",
+    "method": "withdraw",
+    "file": "frontend\\src\\pages\\WalletPage.jsx",
+    "candidateService": "backend\\src\\services\\walletService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "walletAPI",
+    "method": "transfer",
+    "file": "frontend\\src\\pages\\WalletPage.jsx",
+    "candidateService": "backend\\src\\services\\walletService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "walletAPI",
+    "method": "getBalance",
+    "file": "frontend\\src\\components\\Display\\WalletCard.jsx",
+    "candidateService": "backend\\src\\services\\walletService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "financeAPI",
+    "method": "getMyEnwrReceipts",
+    "file": "frontend\\src\\pages\\BankPassportPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "financeAPI",
+    "method": "trialBalance",
+    "file": "frontend\\src\\pages\\LedgerPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "financeAPI",
+    "method": "verifyLedger",
+    "file": "frontend\\src\\pages\\LedgerPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "blockchainVerificationAPI",
+    "method": "getStats",
+    "file": "frontend\\src\\pages\\BlockchainVerificationPage.jsx",
+    "candidateService": "backend\\src\\services\\blockchainVerificationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "blockchainVerificationAPI",
+    "method": "verifyProduct",
+    "file": "frontend\\src\\pages\\BlockchainVerificationPage.jsx",
+    "candidateService": "backend\\src\\services\\blockchainVerificationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "bulkOrderAPI",
+    "method": "getUserBulkOrders",
+    "file": "frontend\\src\\pages\\BulkOrderPage.jsx",
+    "candidateService": "backend\\src\\services\\bulkOrderService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "bulkOrderAPI",
+    "method": "getBulkOrder",
+    "file": "frontend\\src\\pages\\BulkOrderPage.jsx",
+    "candidateService": "backend\\src\\services\\bulkOrderService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "bulkOrderAPI",
+    "method": "getBulkOrderQuotations",
+    "file": "frontend\\src\\pages\\BulkOrderPage.jsx",
+    "candidateService": "backend\\src\\services\\bulkOrderService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "bulkOrderAPI",
+    "method": "acceptQuotation",
+    "file": "frontend\\src\\pages\\BulkOrderPage.jsx",
+    "candidateService": "backend\\src\\services\\bulkOrderService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "bulkOrderAPI",
+    "method": "cancelBulkOrder",
+    "file": "frontend\\src\\pages\\BulkOrderPage.jsx",
+    "candidateService": "backend\\src\\services\\bulkOrderService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "caAPI",
+    "method": "getAuditStats",
+    "file": "frontend\\src\\pages\\CADashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\CacheManagementService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "complianceAPI",
+    "method": "tdsSummary",
+    "file": "frontend\\src\\pages\\CADashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\complianceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "complianceAPI",
+    "method": "tdsRates",
+    "file": "frontend\\src\\pages\\CADashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\complianceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "complianceAPI",
+    "method": "rcmOutstanding",
+    "file": "frontend\\src\\pages\\CompliancePage.jsx",
+    "candidateService": "backend\\src\\services\\complianceService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ordersAPI",
+    "method": "getCart",
+    "file": "frontend\\src\\pages\\CartPage.jsx",
+    "candidateService": "backend\\src\\services\\orderService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ordersAPI",
+    "method": "updateCartItem",
+    "file": "frontend\\src\\pages\\CartPage.jsx",
+    "candidateService": "backend\\src\\services\\orderService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ordersAPI",
+    "method": "removeFromCart",
+    "file": "frontend\\src\\pages\\CartPage.jsx",
+    "candidateService": "backend\\src\\services\\orderService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ordersAPI",
+    "method": "cancelOrder",
+    "file": "frontend\\src\\pages\\Generated\\Page2.jsx",
+    "candidateService": "backend\\src\\services\\orderService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ordersAPI",
+    "method": "getOrder",
+    "file": "frontend\\src\\pages\\OrderDetailPage.jsx",
+    "candidateService": "backend\\src\\services\\orderService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ordersAPI",
+    "method": "processPayment",
+    "file": "frontend\\src\\pages\\PaymentProcessingPage.jsx",
+    "candidateService": "backend\\src\\services\\orderService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ordersAPI",
+    "method": "addToCart",
+    "file": "frontend\\src\\pages\\ProductDetailPage.jsx",
+    "candidateService": "backend\\src\\services\\orderService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "climateAdvisoryAPI",
+    "method": "getAdvisories",
+    "file": "frontend\\src\\pages\\ClimateAdvisoryPage.jsx",
+    "candidateService": "backend\\src\\services\\climateAdvisoryService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "climateAdvisoryAPI",
+    "method": "createAdvisory",
+    "file": "frontend\\src\\pages\\ClimateAdvisoryPage.jsx",
+    "candidateService": "backend\\src\\services\\climateAdvisoryService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "weatherAPI",
+    "method": "activeAlerts",
+    "file": "frontend\\src\\pages\\ClimateAdvisoryPage.jsx",
+    "candidateService": "backend\\src\\services\\weatherService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "weatherAPI",
+    "method": "pestForecast",
+    "file": "frontend\\src\\pages\\ClimateAdvisoryPage.jsx",
+    "candidateService": "backend\\src\\services\\weatherService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "weatherAPI",
+    "method": "coverage",
+    "file": "frontend\\src\\pages\\ClimateWeatherPage.jsx",
+    "candidateService": "backend\\src\\services\\weatherService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "weatherAPI",
+    "method": "forecastAccuracy",
+    "file": "frontend\\src\\pages\\ClimateWeatherPage.jsx",
+    "candidateService": "backend\\src\\services\\weatherService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "weatherAPI",
+    "method": "dispatchCheck",
+    "file": "frontend\\src\\pages\\ClimateWeatherPage.jsx",
+    "candidateService": "backend\\src\\services\\weatherService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "weatherAPI",
+    "method": "forArp",
+    "file": "frontend\\src\\pages\\ForwardPricingPage.jsx",
+    "candidateService": "backend\\src\\services\\weatherService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "weatherAPI",
+    "method": "advisoryTriggers",
+    "file": "frontend\\src\\pages\\WeatherAnalyticsPage.jsx",
+    "candidateService": "backend\\src\\services\\weatherService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "droughtMonitoringAPI",
+    "method": "getRecords",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "droughtMonitoringAPI",
+    "method": "createRecord",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "droughtMonitoringAPI",
+    "method": "updateRecord",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "droughtMonitoringAPI",
+    "method": "deleteRecord",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "floodMonitoringAPI",
+    "method": "getRecords",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "floodMonitoringAPI",
+    "method": "createRecord",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "floodMonitoringAPI",
+    "method": "updateRecord",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "floodMonitoringAPI",
+    "method": "deleteRecord",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "pestForecastingAPI",
+    "method": "getForecasts",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "diseaseForecastingAPI",
+    "method": "getForecasts",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "diseaseForecastingAPI",
+    "method": "createForecast",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "diseaseForecastingAPI",
+    "method": "updateForecast",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "diseaseForecastingAPI",
+    "method": "deleteForecast",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "climateRiskAPI",
+    "method": "getAssessments",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "climateRiskAPI",
+    "method": "createAssessment",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "climateRiskAPI",
+    "method": "updateAssessment",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "climateRiskAPI",
+    "method": "deleteAssessment",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "agroMeteorologyAPI",
+    "method": "getRecords",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "agroMeteorologyAPI",
+    "method": "createRecord",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "agroMeteorologyAPI",
+    "method": "updateRecord",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "agroMeteorologyAPI",
+    "method": "deleteRecord",
+    "file": "frontend\\src\\pages\\ClimateMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "coldStorageAPI",
+    "method": "getStatus",
+    "file": "frontend\\src\\pages\\ColdStorageDashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\coldStorageService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "coldStorageAPI",
+    "method": "getFacilities",
+    "file": "frontend\\src\\pages\\ColdStorageDashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\coldStorageService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "coldStorageAPI",
+    "method": "getTemperatureData",
+    "file": "frontend\\src\\pages\\ColdStorageDashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\coldStorageService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "coldStorageAPI",
+    "method": "getComplianceStatus",
+    "file": "frontend\\src\\pages\\ColdStorageDashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\coldStorageService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "coldStorageAPI",
+    "method": "bookFacility",
+    "file": "frontend\\src\\pages\\ColdStorageDashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\coldStorageService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "coldStorageAPI",
+    "method": "createFacility",
+    "file": "frontend\\src\\pages\\ColdStoragePage.jsx",
+    "candidateService": "backend\\src\\services\\coldStorageService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "coldStorageAPI",
+    "method": "getFacility",
+    "file": "frontend\\src\\pages\\ColdStoragePage.jsx",
+    "candidateService": "backend\\src\\services\\coldStorageService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "coldStorageAPI",
+    "method": "updateFacility",
+    "file": "frontend\\src\\pages\\ColdStoragePage.jsx",
+    "candidateService": "backend\\src\\services\\coldStorageService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "coldStorageAPI",
+    "method": "getUtilization",
+    "file": "frontend\\src\\pages\\ColdStoragePage.jsx",
+    "candidateService": "backend\\src\\services\\coldStorageService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "coldStorageAPI",
+    "method": "createBooking",
+    "file": "frontend\\src\\pages\\ColdStoragePage.jsx",
+    "candidateService": "backend\\src\\services\\coldStorageService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "coldStorageAPI",
+    "method": "getBookings",
+    "file": "frontend\\src\\pages\\ColdStoragePage.jsx",
+    "candidateService": "backend\\src\\services\\coldStorageService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "coldStorageAPI",
+    "method": "updateBookingStatus",
+    "file": "frontend\\src\\pages\\ColdStoragePage.jsx",
+    "candidateService": "backend\\src\\services\\coldStorageService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "knowledgeGraphAPI",
+    "method": "searchNodes",
+    "file": "frontend\\src\\pages\\CommunityForumPage.jsx",
+    "candidateService": "backend\\src\\services\\knowledgeGraphService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "knowledgeGraphAPI",
+    "method": "getRelatedNodes",
+    "file": "frontend\\src\\components\\KnowledgeGraph\\KnowledgeExplorer.jsx",
+    "candidateService": "backend\\src\\services\\knowledgeGraphService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "panchayatAPI",
+    "method": "createPanchayat",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "blockManagementAPI",
+    "method": "createBlock",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "blockManagementAPI",
+    "method": "updateBlock",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "blockManagementAPI",
+    "method": "deleteBlock",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "districtManagementAPI",
+    "method": "createDistrict",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "districtManagementAPI",
+    "method": "updateDistrict",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "districtManagementAPI",
+    "method": "deleteDistrict",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "stateManagementAPI",
+    "method": "createState",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "stateManagementAPI",
+    "method": "updateState",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "stateManagementAPI",
+    "method": "deleteState",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "producerGroupAPI",
+    "method": "getGroups",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "producerGroupAPI",
+    "method": "createGroup",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "producerGroupAPI",
+    "method": "updateGroup",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "producerGroupAPI",
+    "method": "deleteGroup",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "communityAssetAPI",
+    "method": "getAssets",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\communityService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "communityAssetAPI",
+    "method": "createAsset",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\communityService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "communityAssetAPI",
+    "method": "updateAsset",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\communityService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "communityAssetAPI",
+    "method": "deleteAsset",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\communityService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ruralDevelopmentAPI",
+    "method": "getProjects",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "ruralDevelopmentAPI",
+    "method": "createProject",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "ruralDevelopmentAPI",
+    "method": "updateProject",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "ruralDevelopmentAPI",
+    "method": "deleteProject",
+    "file": "frontend\\src\\pages\\CommunityManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "completeAIIntegrationAPI",
+    "method": "recommendCropPlanning",
+    "file": "frontend\\src\\pages\\CompleteAIIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\completeAIIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeAIIntegrationAPI",
+    "method": "predictHarvestTiming",
+    "file": "frontend\\src\\pages\\CompleteAIIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\completeAIIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeAIIntegrationAPI",
+    "method": "optimizeFarmerResources",
+    "file": "frontend\\src\\pages\\CompleteAIIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\completeAIIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeAIIntegrationAPI",
+    "method": "detectCropDisease",
+    "file": "frontend\\src\\pages\\CompleteAIIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\completeAIIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeAIIntegrationAPI",
+    "method": "predictCropYield",
+    "file": "frontend\\src\\pages\\CompleteAIIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\completeAIIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeAIIntegrationAPI",
+    "method": "monitorLivestockHealth",
+    "file": "frontend\\src\\pages\\CompleteAIIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\completeAIIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeAIIntegrationAPI",
+    "method": "recommendLivestockBreeding",
+    "file": "frontend\\src\\pages\\CompleteAIIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\completeAIIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeAIIntegrationAPI",
+    "method": "optimizeDairyProduction",
+    "file": "frontend\\src\\pages\\CompleteAIIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\completeAIIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeAIIntegrationAPI",
+    "method": "monitorPoultryHealth",
+    "file": "frontend\\src\\pages\\CompleteAIIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\completeAIIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeAIIntegrationAPI",
+    "method": "optimizeGoatProduction",
+    "file": "frontend\\src\\pages\\CompleteAIIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\completeAIIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeAIIntegrationAPI",
+    "method": "optimizeSheepProduction",
+    "file": "frontend\\src\\pages\\CompleteAIIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\completeAIIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeAIIntegrationAPI",
+    "method": "optimizePigProduction",
+    "file": "frontend\\src\\pages\\CompleteAIIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\completeAIIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeAIIntegrationAPI",
+    "method": "getAIIntegrationStatus",
+    "file": "frontend\\src\\pages\\CompleteAIIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\completeAIIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeAIIntegrationAPI",
+    "method": "forceSyncAllAIIntegrations",
+    "file": "frontend\\src\\pages\\CompleteAIIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\completeAIIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeAIIntegrationAPI",
+    "method": "getAIModelInfo",
+    "file": "frontend\\src\\pages\\CompleteAIIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\legacy\\completeAIIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeERPIntegrationAPI",
+    "method": "syncFarmerCropPlanning",
+    "file": "frontend\\src\\pages\\CompleteERPIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\completeERPIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeERPIntegrationAPI",
+    "method": "syncFarmerHarvest",
+    "file": "frontend\\src\\pages\\CompleteERPIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\completeERPIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeERPIntegrationAPI",
+    "method": "syncFarmerField",
+    "file": "frontend\\src\\pages\\CompleteERPIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\completeERPIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeERPIntegrationAPI",
+    "method": "syncCropLifecycle",
+    "file": "frontend\\src\\pages\\CompleteERPIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\completeERPIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeERPIntegrationAPI",
+    "method": "syncCropYield",
+    "file": "frontend\\src\\pages\\CompleteERPIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\completeERPIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeERPIntegrationAPI",
+    "method": "syncLivestock",
+    "file": "frontend\\src\\pages\\CompleteERPIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\completeERPIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeERPIntegrationAPI",
+    "method": "syncLivestockProduction",
+    "file": "frontend\\src\\pages\\CompleteERPIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\completeERPIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeERPIntegrationAPI",
+    "method": "syncLivestockHealth",
+    "file": "frontend\\src\\pages\\CompleteERPIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\completeERPIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeERPIntegrationAPI",
+    "method": "syncDairyProduction",
+    "file": "frontend\\src\\pages\\CompleteERPIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\completeERPIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeERPIntegrationAPI",
+    "method": "syncPoultryProduction",
+    "file": "frontend\\src\\pages\\CompleteERPIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\completeERPIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeERPIntegrationAPI",
+    "method": "syncGoatProduction",
+    "file": "frontend\\src\\pages\\CompleteERPIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\completeERPIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeERPIntegrationAPI",
+    "method": "syncSheepProduction",
+    "file": "frontend\\src\\pages\\CompleteERPIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\completeERPIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeERPIntegrationAPI",
+    "method": "syncPigProduction",
+    "file": "frontend\\src\\pages\\CompleteERPIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\completeERPIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeERPIntegrationAPI",
+    "method": "getERPIntegrationStatus",
+    "file": "frontend\\src\\pages\\CompleteERPIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\completeERPIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "completeERPIntegrationAPI",
+    "method": "forceSyncAllERPIntegrations",
+    "file": "frontend\\src\\pages\\CompleteERPIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\completeERPIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "auditComplianceAPI",
+    "method": "getAuditLogs",
+    "file": "frontend\\src\\pages\\ComplianceDashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\auditService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "auditComplianceAPI",
+    "method": "listComplianceRules",
+    "file": "frontend\\src\\pages\\ComplianceDashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\auditService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "auditComplianceAPI",
+    "method": "createAuditLog",
+    "file": "frontend\\src\\pages\\ComplianceDashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\auditService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "auditComplianceAPI",
+    "method": "detectAuditAnomalies",
+    "file": "frontend\\src\\pages\\SystemAdministrationPage.jsx",
+    "candidateService": "backend\\src\\services\\auditService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "auditComplianceAPI",
+    "method": "verifyAuditLogIntegrity",
+    "file": "frontend\\src\\pages\\SystemAdministrationPage.jsx",
+    "candidateService": "backend\\src\\services\\auditService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createChartOfAccounts",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createGLAccount",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "postJournalEntry",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "getTrialBalance",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "getBalanceSheet",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "getProfitLoss",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "analyzeFinancialsAI",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createCostCenter",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createProfitCenter",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "postCostAllocation",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "getCostCenterReport",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "getProfitCenterReport",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createMaterialMaster",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createPurchaseOrder",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createGoodsReceipt",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "getInventoryOverview",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "optimizeSupplyChainAI",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createCustomerMaster",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createSalesOrder",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createDelivery",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createInvoice",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createProductionOrder",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "releaseProductionOrder",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "confirmProductionOrder",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "optimizeProductionAI",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createInspectionLot",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "recordInspectionResult",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "makeUsageDecision",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createEquipmentMaster",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createMaintenanceOrder",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "confirmMaintenanceOrder",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createEmployeeMaster",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createOrganizationalUnit",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "processPayroll",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "analyzeHRAI",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createProjectDefinition",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createWBS",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "updateProjectStatus",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "analyzeProjectAI",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createBankAccount",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "recordCashFlow",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "getCashPosition",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "createFixedAsset",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "calculateDepreciation",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "getExecutiveDashboard",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "comprehensiveERPAPI",
+    "method": "getProfitabilityAnalysis",
+    "file": "frontend\\src\\pages\\ComprehensiveERPPage.jsx",
+    "candidateService": "backend\\src\\services\\comprehensiveERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "cooperativeShareAPI",
+    "method": "addMember",
+    "file": "frontend\\src\\pages\\CooperativeSharePage.jsx",
+    "candidateService": "backend\\src\\services\\cooperativeShareService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "cooperativeShareAPI",
+    "method": "listMembers",
+    "file": "frontend\\src\\pages\\CooperativeSharePage.jsx",
+    "candidateService": "backend\\src\\services\\cooperativeShareService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "cooperativeShareAPI",
+    "method": "getPaidUpCapital",
+    "file": "frontend\\src\\pages\\CooperativeSharePage.jsx",
+    "candidateService": "backend\\src\\services\\cooperativeShareService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "cooperativeShareAPI",
+    "method": "previewDistribution",
+    "file": "frontend\\src\\pages\\CooperativeSharePage.jsx",
+    "candidateService": "backend\\src\\services\\cooperativeShareService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "cooperativeShareAPI",
+    "method": "createDistribution",
+    "file": "frontend\\src\\pages\\CooperativeSharePage.jsx",
+    "candidateService": "backend\\src\\services\\cooperativeShareService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "cooperativeShareAPI",
+    "method": "listDistributions",
+    "file": "frontend\\src\\pages\\CooperativeSharePage.jsx",
+    "candidateService": "backend\\src\\services\\cooperativeShareService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "cooperativeShareAPI",
+    "method": "getDistribution",
+    "file": "frontend\\src\\pages\\CooperativeSharePage.jsx",
+    "candidateService": "backend\\src\\services\\cooperativeShareService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "vendorsAPI",
+    "method": "getBuyerProfile",
+    "file": "frontend\\src\\pages\\CorporateBuyerPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "vendorsAPI",
+    "method": "getCreditStatus",
+    "file": "frontend\\src\\pages\\CorporateBuyerPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "vendorsAPI",
+    "method": "getActiveOrders",
+    "file": "frontend\\src\\pages\\CorporateBuyerPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "vendorsAPI",
+    "method": "createCorporateOrder",
+    "file": "frontend\\src\\pages\\CorporateBuyerPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "vendorsAPI",
+    "method": "getLogisticsProfile",
+    "file": "frontend\\src\\pages\\LogisticsProviderPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "vendorsAPI",
+    "method": "getActiveShipments",
+    "file": "frontend\\src\\pages\\LogisticsProviderPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "vendorsAPI",
+    "method": "getColdChainNodes",
+    "file": "frontend\\src\\pages\\LogisticsProviderPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "vendorsAPI",
+    "method": "getReturnTruckOpportunities",
+    "file": "frontend\\src\\pages\\LogisticsProviderPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "vendorsAPI",
+    "method": "createLogisticsBooking",
+    "file": "frontend\\src\\pages\\LogisticsProviderPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "economicAPI",
+    "method": "corridorModel",
+    "file": "frontend\\src\\pages\\CorridorEconomicsPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "economicAPI",
+    "method": "mandiSignal",
+    "file": "frontend\\src\\pages\\CorridorEconomicsPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "rfqAPI",
+    "method": "centrePnl",
+    "file": "frontend\\src\\pages\\CostControlPage.jsx",
+    "candidateService": "backend\\src\\services\\rfqService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "rfqAPI",
+    "method": "activeHolds",
+    "file": "frontend\\src\\pages\\RfqPage.jsx",
+    "candidateService": "backend\\src\\services\\rfqService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "rfqAPI",
+    "method": "lossAnalysis",
+    "file": "frontend\\src\\pages\\RfqPage.jsx",
+    "candidateService": "backend\\src\\services\\rfqService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "rfqAPI",
+    "method": "releaseQcHold",
+    "file": "frontend\\src\\pages\\RfqPage.jsx",
+    "candidateService": "backend\\src\\services\\rfqService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "costControlAPI",
+    "method": "getCostCenters",
+    "file": "frontend\\src\\pages\\CostControlPage.jsx",
+    "candidateService": "backend\\src\\services\\costControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "costControlAPI",
+    "method": "getBudgets",
+    "file": "frontend\\src\\pages\\CostControlPage.jsx",
+    "candidateService": "backend\\src\\services\\costControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "costControlAPI",
+    "method": "getCostCenterActuals",
+    "file": "frontend\\src\\pages\\CostControlPage.jsx",
+    "candidateService": "backend\\src\\services\\costControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "costControlAPI",
+    "method": "getBudgetLines",
+    "file": "frontend\\src\\pages\\CostControlPage.jsx",
+    "candidateService": "backend\\src\\services\\costControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "costControlAPI",
+    "method": "getBudgetVsActual",
+    "file": "frontend\\src\\pages\\CostControlPage.jsx",
+    "candidateService": "backend\\src\\services\\costControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "costControlAPI",
+    "method": "addBudgetLine",
+    "file": "frontend\\src\\pages\\CostControlPage.jsx",
+    "candidateService": "backend\\src\\services\\costControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "costControlAPI",
+    "method": "submitBudget",
+    "file": "frontend\\src\\pages\\CostControlPage.jsx",
+    "candidateService": "backend\\src\\services\\costControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "costControlAPI",
+    "method": "approveBudget",
+    "file": "frontend\\src\\pages\\CostControlPage.jsx",
+    "candidateService": "backend\\src\\services\\costControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "costControlAPI",
+    "method": "createCostCenter",
+    "file": "frontend\\src\\pages\\CostControlPage.jsx",
+    "candidateService": "backend\\src\\services\\costControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "costControlAPI",
+    "method": "getProfitCenters",
+    "file": "frontend\\src\\pages\\CostControlPage.jsx",
+    "candidateService": "backend\\src\\services\\costControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "costControlAPI",
+    "method": "createProfitCenter",
+    "file": "frontend\\src\\pages\\CostControlPage.jsx",
+    "candidateService": "backend\\src\\services\\costControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "costControlAPI",
+    "method": "createBudget",
+    "file": "frontend\\src\\pages\\CostControlPage.jsx",
+    "candidateService": "backend\\src\\services\\costControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "cropCalendarAPI",
+    "method": "getEntries",
+    "file": "frontend\\src\\pages\\CropCalendarPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "cropCalendarAPI",
+    "method": "createEntry",
+    "file": "frontend\\src\\pages\\CropCalendarPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "cropCalendarAPI",
+    "method": "updateEntry",
+    "file": "frontend\\src\\pages\\CropCalendarPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "cropCalendarAPI",
+    "method": "deleteEntry",
+    "file": "frontend\\src\\pages\\CropCalendarPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "cropMonitoringAPI",
+    "method": "getObservations",
+    "file": "frontend\\src\\pages\\CropMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "cropMonitoringAPI",
+    "method": "createObservation",
+    "file": "frontend\\src\\pages\\CropMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "cropMonitoringAPI",
+    "method": "updateObservation",
+    "file": "frontend\\src\\pages\\CropMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "cropMonitoringAPI",
+    "method": "deleteObservation",
+    "file": "frontend\\src\\pages\\CropMonitoringPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "cropRegistrationAPI",
+    "method": "getCrops",
+    "file": "frontend\\src\\pages\\CropRegistrationPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "cropRegistrationAPI",
+    "method": "updateCrop",
+    "file": "frontend\\src\\pages\\CropRegistrationPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "cropRegistrationAPI",
+    "method": "deleteCrop",
+    "file": "frontend\\src\\pages\\CropRegistrationPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "cropValueResearchAPI",
+    "method": "getPending",
+    "file": "frontend\\src\\pages\\CropValueReviewPage.jsx",
+    "candidateService": "backend\\src\\services\\cropValueResearchService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "cropValueResearchAPI",
+    "method": "review",
+    "file": "frontend\\src\\pages\\CropValueReviewPage.jsx",
+    "candidateService": "backend\\src\\services\\cropValueResearchService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "cropVarietyAPI",
+    "method": "getVarieties",
+    "file": "frontend\\src\\pages\\CropVarietyPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "cropVarietyAPI",
+    "method": "createVariety",
+    "file": "frontend\\src\\pages\\CropVarietyPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "cropVarietyAPI",
+    "method": "updateVariety",
+    "file": "frontend\\src\\pages\\CropVarietyPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "cropVarietyAPI",
+    "method": "deleteVariety",
+    "file": "frontend\\src\\pages\\CropVarietyPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "decisionSupportAPI",
+    "method": "corpCreditEligible",
+    "file": "frontend\\src\\pages\\DecisionSupportPage.jsx",
+    "candidateService": "backend\\src\\services\\decisionSupportService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "decisionSupportAPI",
+    "method": "floorBenchmark",
+    "file": "frontend\\src\\pages\\DecisionSupportPage.jsx",
+    "candidateService": "backend\\src\\services\\decisionSupportService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "decisionSupportAPI",
+    "method": "ecoLogisticsMiles",
+    "file": "frontend\\src\\pages\\DecisionSupportPage.jsx",
+    "candidateService": "backend\\src\\services\\decisionSupportService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "decisionSupportAPI",
+    "method": "harvestPoints",
+    "file": "frontend\\src\\pages\\DecisionSupportPage.jsx",
+    "candidateService": "backend\\src\\services\\decisionSupportService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "decisionSupportAPI",
+    "method": "allocScore",
+    "file": "frontend\\src\\pages\\DecisionSupportPage.jsx",
+    "candidateService": "backend\\src\\services\\decisionSupportService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "decisionSupportAPI",
+    "method": "compostPlan",
+    "file": "frontend\\src\\pages\\DecisionSupportPage.jsx",
+    "candidateService": "backend\\src\\services\\decisionSupportService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "decisionSupportAPI",
+    "method": "schemeExpiryStatus",
+    "file": "frontend\\src\\pages\\DecisionSupportPage.jsx",
+    "candidateService": "backend\\src\\services\\decisionSupportService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "decisionSupportAPI",
+    "method": "complianceGaps",
+    "file": "frontend\\src\\pages\\DecisionSupportPage.jsx",
+    "candidateService": "backend\\src\\services\\decisionSupportService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "defenseFitnessPrepAPI",
+    "method": "getCategories",
+    "file": "frontend\\src\\pages\\DefenseFitnessPrepPage.jsx",
+    "candidateService": "backend\\src\\services\\defenseFitnessPrepService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "defenseFitnessPrepAPI",
+    "method": "getReadiness",
+    "file": "frontend\\src\\pages\\DefenseFitnessPrepPage.jsx",
+    "candidateService": "backend\\src\\services\\defenseFitnessPrepService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "defenseFitnessPrepAPI",
+    "method": "recordAttempt",
+    "file": "frontend\\src\\pages\\DefenseFitnessPrepPage.jsx",
+    "candidateService": "backend\\src\\services\\defenseFitnessPrepService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "digitalTwinAPI",
+    "method": "getStatus",
+    "file": "frontend\\src\\pages\\DigitalTwinDashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\digitalTwinService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "digitalTwinAPI",
+    "method": "getTwins",
+    "file": "frontend\\src\\pages\\DigitalTwinDashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\digitalTwinService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "digitalTwinAPI",
+    "method": "runSimulation",
+    "file": "frontend\\src\\pages\\DigitalTwinDashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\digitalTwinService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "digitalTwinAPI",
+    "method": "syncRealData",
+    "file": "frontend\\src\\pages\\DigitalTwinDashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\digitalTwinService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "civilDisruptionAPI",
+    "method": "listActive",
+    "file": "frontend\\src\\pages\\DisruptionPage.jsx",
+    "candidateService": "backend\\src\\services\\civilDisruptionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "civilDisruptionAPI",
+    "method": "report",
+    "file": "frontend\\src\\pages\\DisruptionPage.jsx",
+    "candidateService": "backend\\src\\services\\civilDisruptionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "civilDisruptionAPI",
+    "method": "verify",
+    "file": "frontend\\src\\pages\\MarketSignalsPage.jsx",
+    "candidateService": "backend\\src\\services\\civilDisruptionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "civilDisruptionAPI",
+    "method": "resolve",
+    "file": "frontend\\src\\pages\\MarketSignalsPage.jsx",
+    "candidateService": "backend\\src\\services\\civilDisruptionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "civilDisruptionAPI",
+    "method": "checkShipmentRisk",
+    "file": "frontend\\src\\pages\\MarketSignalsPage.jsx",
+    "candidateService": "backend\\src\\services\\civilDisruptionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceIntegrationAPI",
+    "method": "calculateNutritionScore",
+    "file": "frontend\\src\\pages\\EcommerceIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceIntegrationAPI",
+    "method": "getNutritionPricePremium",
+    "file": "frontend\\src\\pages\\EcommerceIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceIntegrationAPI",
+    "method": "getRecipeSuggestions",
+    "file": "frontend\\src\\pages\\EcommerceIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceIntegrationAPI",
+    "method": "getRecipeProducts",
+    "file": "frontend\\src\\pages\\EcommerceIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceIntegrationAPI",
+    "method": "getHealthRecommendations",
+    "file": "frontend\\src\\pages\\EcommerceIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceIntegrationAPI",
+    "method": "checkCompatibility",
+    "file": "frontend\\src\\pages\\EcommerceIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceIntegrationAPI",
+    "method": "calculateCartNutrition",
+    "file": "frontend\\src\\pages\\EcommerceIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceIntegrationAPI",
+    "method": "getDietitianCollections",
+    "file": "frontend\\src\\pages\\EcommerceIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceIntegrationAPI",
+    "method": "getDietitianRecommendation",
+    "file": "frontend\\src\\pages\\EcommerceIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAPI",
+    "method": "getListings",
+    "file": "frontend\\src\\pages\\EcommerceMarketplacePage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAPI",
+    "method": "getGIListings",
+    "file": "frontend\\src\\pages\\EcommerceMarketplacePage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAPI",
+    "method": "getSellerListings",
+    "file": "frontend\\src\\pages\\EcommerceMarketplacePage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAPI",
+    "method": "getSellerAnalytics",
+    "file": "frontend\\src\\pages\\EcommerceMarketplacePage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAPI",
+    "method": "getPriceTrends",
+    "file": "frontend\\src\\pages\\EcommerceMarketplacePage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAPI",
+    "method": "updateListing",
+    "file": "frontend\\src\\pages\\EcommerceMarketplacePage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAPI",
+    "method": "createListing",
+    "file": "frontend\\src\\pages\\EcommerceMarketplacePage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceAPI",
+    "method": "deleteListing",
+    "file": "frontend\\src\\pages\\EcommerceMarketplacePage.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "engineeringProjectAPI",
+    "method": "listProjects",
+    "file": "frontend\\src\\pages\\EngineeringProjectPage.jsx",
+    "candidateService": "backend\\src\\services\\engineeringProjectService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "engineeringProjectAPI",
+    "method": "getProject",
+    "file": "frontend\\src\\pages\\EngineeringProjectPage.jsx",
+    "candidateService": "backend\\src\\services\\engineeringProjectService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "engineeringProjectAPI",
+    "method": "updateProjectPhase",
+    "file": "frontend\\src\\pages\\EngineeringProjectPage.jsx",
+    "candidateService": "backend\\src\\services\\engineeringProjectService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "engineeringProjectAPI",
+    "method": "createCostEstimate",
+    "file": "frontend\\src\\pages\\EngineeringProjectPage.jsx",
+    "candidateService": "backend\\src\\services\\engineeringProjectService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "engineeringProjectAPI",
+    "method": "getCostEstimates",
+    "file": "frontend\\src\\pages\\EngineeringProjectPage.jsx",
+    "candidateService": "backend\\src\\services\\engineeringProjectService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseAIAPI",
+    "method": "getCreditScore",
+    "file": "frontend\\src\\pages\\EnterpriseAIPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseAIAPI",
+    "method": "getSchemeEligibility",
+    "file": "frontend\\src\\pages\\EnterpriseAIPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseAIAPI",
+    "method": "getModelSlots",
+    "file": "frontend\\src\\pages\\EnterpriseAIPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseAIAPI",
+    "method": "getUnservedIntents",
+    "file": "frontend\\src\\pages\\EnterpriseAIPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseAIAPI",
+    "method": "upsertModelSlot",
+    "file": "frontend\\src\\pages\\EnterpriseAIPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseAIAPI",
+    "method": "query",
+    "file": "frontend\\src\\pages\\EnterpriseAIPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseControlAPI",
+    "method": "startWorkflow",
+    "file": "frontend\\src\\pages\\EnterpriseControlPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseControlAPI",
+    "method": "actOnWorkflow",
+    "file": "frontend\\src\\pages\\EnterpriseControlPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseControlAPI",
+    "method": "pipeline",
+    "file": "frontend\\src\\pages\\EnterpriseControlPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseControlAPI",
+    "method": "createLead",
+    "file": "frontend\\src\\pages\\EnterpriseControlPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseControlAPI",
+    "method": "convertLead",
+    "file": "frontend\\src\\pages\\EnterpriseControlPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseControlAPI",
+    "method": "clientHealth",
+    "file": "frontend\\src\\pages\\EnterpriseControlPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseControlAPI",
+    "method": "legalCalendar",
+    "file": "frontend\\src\\pages\\EnterpriseControlPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseControlAPI",
+    "method": "riskHeatmap",
+    "file": "frontend\\src\\pages\\EnterpriseControlPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseControlAPI",
+    "method": "assessRisk",
+    "file": "frontend\\src\\pages\\EnterpriseControlPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseControlAPI",
+    "method": "activeIncidents",
+    "file": "frontend\\src\\pages\\EnterpriseControlPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseControlAPI",
+    "method": "raiseIncident",
+    "file": "frontend\\src\\pages\\EnterpriseControlPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseControlAPI",
+    "method": "acknowledgeIncident",
+    "file": "frontend\\src\\pages\\EnterpriseControlPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseControlService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseIntegrationAPI",
+    "method": "getCurrentOrganizationIntegrations",
+    "file": "frontend\\src\\pages\\EnterpriseIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseIntegrationAPI",
+    "method": "getSystemStatus",
+    "file": "frontend\\src\\pages\\EnterpriseIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "enterpriseIntegrationAPI",
+    "method": "getIntegrationHealth",
+    "file": "frontend\\src\\pages\\EnterpriseIntegrationPage.jsx",
+    "candidateService": "backend\\src\\services\\enterpriseIntegrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceERPAPI",
+    "method": "postToGeneralLedger",
+    "file": "frontend\\src\\pages\\ERPDashboard.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceERPAPI",
+    "method": "generateGSTInvoice",
+    "file": "frontend\\src\\pages\\ERPDashboard.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceERPAPI",
+    "method": "syncInventoryWithERP",
+    "file": "frontend\\src\\pages\\ERPDashboard.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceERPAPI",
+    "method": "syncCustomerWithCRM",
+    "file": "frontend\\src\\pages\\ERPDashboard.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceERPAPI",
+    "method": "createProductionOrder",
+    "file": "frontend\\src\\pages\\ERPDashboard.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceERPService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "escrowAPI",
+    "method": "list",
+    "file": "frontend\\src\\pages\\EscrowPage.jsx",
+    "candidateService": "backend\\src\\services\\escrowService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "escrowAPI",
+    "method": "release",
+    "file": "frontend\\src\\pages\\EscrowPage.jsx",
+    "candidateService": "backend\\src\\services\\escrowService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "escrowAPI",
+    "method": "refund",
+    "file": "frontend\\src\\pages\\EscrowPage.jsx",
+    "candidateService": "backend\\src\\services\\escrowService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "experienceAPI",
+    "method": "themes",
+    "file": "frontend\\src\\pages\\ExperienceLayerPage.jsx",
+    "candidateService": "backend\\src\\services\\experienceLayerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "experienceAPI",
+    "method": "motion",
+    "file": "frontend\\src\\pages\\ExperienceLayerPage.jsx",
+    "candidateService": "backend\\src\\services\\experienceLayerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "experienceAPI",
+    "method": "components",
+    "file": "frontend\\src\\pages\\ExperienceLayerPage.jsx",
+    "candidateService": "backend\\src\\services\\experienceLayerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "experienceAPI",
+    "method": "accessibility",
+    "file": "frontend\\src\\pages\\ExperienceLayerPage.jsx",
+    "candidateService": "backend\\src\\services\\experienceLayerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "experienceAPI",
+    "method": "contrast",
+    "file": "frontend\\src\\pages\\ExperienceLayerPage.jsx",
+    "candidateService": "backend\\src\\services\\experienceLayerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "erpAPI",
+    "method": "getSyncStatus",
+    "file": "frontend\\src\\pages\\ExportDocumentationPage.jsx",
+    "candidateService": "backend\\src\\services\\erpService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerFamilyAPI",
+    "method": "getMembers",
+    "file": "frontend\\src\\pages\\FarmerFamilyPage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerFamilyAPI",
+    "method": "createMember",
+    "file": "frontend\\src\\pages\\FarmerFamilyPage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerFamilyAPI",
+    "method": "updateMember",
+    "file": "frontend\\src\\pages\\FarmerFamilyPage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerFamilyAPI",
+    "method": "deleteMember",
+    "file": "frontend\\src\\pages\\FarmerFamilyPage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerWelfareAPI",
+    "method": "getPrograms",
+    "file": "frontend\\src\\pages\\FarmerHealthWelfarePage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerWelfareAPI",
+    "method": "enroll",
+    "file": "frontend\\src\\pages\\FarmerHealthWelfarePage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerHealthRecordsAPI",
+    "method": "getRecords",
+    "file": "frontend\\src\\pages\\FarmerHealthWelfarePage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerHealthRecordsAPI",
+    "method": "createRecord",
+    "file": "frontend\\src\\pages\\FarmerHealthWelfarePage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerHealthRecordsAPI",
+    "method": "updateRecord",
+    "file": "frontend\\src\\pages\\FarmerHealthWelfarePage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerHealthRecordsAPI",
+    "method": "deleteRecord",
+    "file": "frontend\\src\\pages\\FarmerHealthWelfarePage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "kycAPI",
+    "method": "getApplications",
+    "file": "frontend\\src\\pages\\FarmerKycPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "kycAPI",
+    "method": "submitApplication",
+    "file": "frontend\\src\\pages\\FarmerKycPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "kycAPI",
+    "method": "verifyApplication",
+    "file": "frontend\\src\\pages\\FarmerKycPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "kycAPI",
+    "method": "rejectApplication",
+    "file": "frontend\\src\\pages\\FarmerKycPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "financialAPI",
+    "method": "getCreditScore",
+    "file": "frontend\\src\\pages\\FarmerPortalPage.jsx",
+    "candidateService": "backend\\src\\services\\claude\\financialAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "financialAPI",
+    "method": "getOverview",
+    "file": "frontend\\src\\pages\\FinancialServicesDashboard.jsx",
+    "candidateService": "backend\\src\\services\\claude\\financialAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "financialAPI",
+    "method": "getLoans",
+    "file": "frontend\\src\\pages\\LoanManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\claude\\financialAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerProfileAPI",
+    "method": "getProfiles",
+    "file": "frontend\\src\\pages\\FarmerProfilePage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerProfileAPI",
+    "method": "createProfile",
+    "file": "frontend\\src\\pages\\FarmerProfilePage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerProfileAPI",
+    "method": "updateProfile",
+    "file": "frontend\\src\\pages\\FarmerProfilePage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerProfileAPI",
+    "method": "deleteProfile",
+    "file": "frontend\\src\\pages\\FarmerProfilePage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerValueAPI",
+    "method": "getSeasonLedger",
+    "file": "frontend\\src\\pages\\FarmerRevenueLedgerPage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerSkillAPI",
+    "method": "getSkills",
+    "file": "frontend\\src\\pages\\FarmerSkillPage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerSkillAPI",
+    "method": "addSkill",
+    "file": "frontend\\src\\pages\\FarmerSkillPage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerSkillAPI",
+    "method": "updateSkill",
+    "file": "frontend\\src\\pages\\FarmerSkillPage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerSkillAPI",
+    "method": "deleteSkill",
+    "file": "frontend\\src\\pages\\FarmerSkillPage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerVerificationAPI",
+    "method": "verifyRequest",
+    "file": "frontend\\src\\pages\\FarmerVerificationPage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerVerificationAPI",
+    "method": "rejectRequest",
+    "file": "frontend\\src\\pages\\FarmerVerificationPage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerVerificationAPI",
+    "method": "getRequests",
+    "file": "frontend\\src\\pages\\FarmerVerificationPage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "farmerVerificationAPI",
+    "method": "submitRequest",
+    "file": "frontend\\src\\pages\\FarmerVerificationPage.jsx",
+    "candidateService": "backend\\src\\services\\farmerService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "fpoAPI",
+    "method": "getStats",
+    "file": "frontend\\src\\pages\\FPODashboardPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "dashboardAPI",
+    "method": "getStats",
+    "file": "frontend\\src\\pages\\Generated\\Page0.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "userAPI",
+    "method": "getProfile",
+    "file": "frontend\\src\\pages\\Generated\\Page3.jsx",
+    "candidateService": "backend\\src\\services\\UserAuthenticationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "userAPI",
+    "method": "getAddresses",
+    "file": "frontend\\src\\pages\\Generated\\Page3.jsx",
+    "candidateService": "backend\\src\\services\\UserAuthenticationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "userAPI",
+    "method": "updateProfile",
+    "file": "frontend\\src\\pages\\Generated\\Page3.jsx",
+    "candidateService": "backend\\src\\services\\UserAuthenticationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "userAPI",
+    "method": "addAddress",
+    "file": "frontend\\src\\pages\\Generated\\Page3.jsx",
+    "candidateService": "backend\\src\\services\\UserAuthenticationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "greenhouseAPI",
+    "method": "getRegistry",
+    "file": "frontend\\src\\pages\\HorticultureManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\greenhouseService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "greenhouseAPI",
+    "method": "createEntry",
+    "file": "frontend\\src\\pages\\HorticultureManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\greenhouseService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "greenhouseAPI",
+    "method": "updateEntry",
+    "file": "frontend\\src\\pages\\HorticultureManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\greenhouseService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "greenhouseAPI",
+    "method": "deleteEntry",
+    "file": "frontend\\src\\pages\\HorticultureManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\greenhouseService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "greenhouseAPI",
+    "method": "monitor",
+    "file": "frontend\\src\\pages\\HorticultureManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\greenhouseService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "hydroponicsAPI",
+    "method": "getSystems",
+    "file": "frontend\\src\\pages\\HorticultureManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "hydroponicsAPI",
+    "method": "createSystem",
+    "file": "frontend\\src\\pages\\HorticultureManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "hydroponicsAPI",
+    "method": "updateSystem",
+    "file": "frontend\\src\\pages\\HorticultureManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "hydroponicsAPI",
+    "method": "deleteSystem",
+    "file": "frontend\\src\\pages\\HorticultureManagementPage.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "roleManagementAPI",
+    "method": "updateRole",
+    "file": "frontend\\src\\pages\\IdentityManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\roleManagementService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "roleManagementAPI",
+    "method": "deleteRole",
+    "file": "frontend\\src\\pages\\IdentityManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\roleManagementService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "insuranceAPI",
+    "method": "getInsuranceProducts",
+    "file": "frontend\\src\\pages\\InsuranceManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\claude\\insuranceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "insuranceAPI",
+    "method": "getClaims",
+    "file": "frontend\\src\\pages\\InsuranceManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\claude\\insuranceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "insuranceAPI",
+    "method": "submitClaim",
+    "file": "frontend\\src\\pages\\InsuranceManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\claude\\insuranceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "insuranceAPI",
+    "method": "calculatePremiumByType",
+    "file": "frontend\\src\\components\\Insurance\\InsurancePremiumCalculator.jsx",
+    "candidateService": "backend\\src\\services\\claude\\insuranceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "insuranceAPI",
+    "method": "generateQuote",
+    "file": "frontend\\src\\components\\Insurance\\InsurancePremiumCalculator.jsx",
+    "candidateService": "backend\\src\\services\\claude\\insuranceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "landAPI",
+    "method": "getParcels",
+    "file": "frontend\\src\\pages\\LandRegistryPage.jsx",
+    "candidateService": "backend\\src\\services\\landRecordsService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "landAPI",
+    "method": "updateParcel",
+    "file": "frontend\\src\\pages\\LandRegistryPage.jsx",
+    "candidateService": "backend\\src\\services\\landRecordsService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "landAPI",
+    "method": "createParcel",
+    "file": "frontend\\src\\pages\\LandRegistryPage.jsx",
+    "candidateService": "backend\\src\\services\\landRecordsService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "landAPI",
+    "method": "deleteParcel",
+    "file": "frontend\\src\\pages\\LandRegistryPage.jsx",
+    "candidateService": "backend\\src\\services\\landRecordsService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "returnLoadBoardAPI",
+    "method": "postCapacity",
+    "file": "frontend\\src\\pages\\LogisticsMatchingPage.jsx",
+    "candidateService": "backend\\src\\services\\returnLoadBoardService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "returnLoadBoardAPI",
+    "method": "searchAvailable",
+    "file": "frontend\\src\\pages\\LogisticsMatchingPage.jsx",
+    "candidateService": "backend\\src\\services\\returnLoadBoardService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "returnLoadBoardAPI",
+    "method": "bookPosting",
+    "file": "frontend\\src\\pages\\LogisticsMatchingPage.jsx",
+    "candidateService": "backend\\src\\services\\returnLoadBoardService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "returnLoadBoardAPI",
+    "method": "cancelPosting",
+    "file": "frontend\\src\\pages\\LogisticsMatchingPage.jsx",
+    "candidateService": "backend\\src\\services\\returnLoadBoardService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "equipmentExchangeAPI",
+    "method": "createListing",
+    "file": "frontend\\src\\pages\\LogisticsMatchingPage.jsx",
+    "candidateService": "backend\\src\\services\\equipmentExchangeService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "equipmentExchangeAPI",
+    "method": "listAvailable",
+    "file": "frontend\\src\\pages\\LogisticsMatchingPage.jsx",
+    "candidateService": "backend\\src\\services\\equipmentExchangeService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "equipmentExchangeAPI",
+    "method": "getListing",
+    "file": "frontend\\src\\pages\\LogisticsMatchingPage.jsx",
+    "candidateService": "backend\\src\\services\\equipmentExchangeService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "equipmentExchangeAPI",
+    "method": "reserveListing",
+    "file": "frontend\\src\\pages\\LogisticsMatchingPage.jsx",
+    "candidateService": "backend\\src\\services\\equipmentExchangeService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "equipmentExchangeAPI",
+    "method": "completeExchange",
+    "file": "frontend\\src\\pages\\LogisticsMatchingPage.jsx",
+    "candidateService": "backend\\src\\services\\equipmentExchangeService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "equipmentExchangeAPI",
+    "method": "withdrawListing",
+    "file": "frontend\\src\\pages\\LogisticsMatchingPage.jsx",
+    "candidateService": "backend\\src\\services\\equipmentExchangeService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceMarketingAPI",
+    "method": "getMarketingAnalytics",
+    "file": "frontend\\src\\pages\\MarketingCenter.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceMarketingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "ecommerceMarketingAPI",
+    "method": "getSponsoredProducts",
+    "file": "frontend\\src\\pages\\MarketingCenter.jsx",
+    "candidateService": "backend\\src\\services\\ecommerceMarketingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sellerRankingAPI",
+    "method": "getRankedSellers",
+    "file": "frontend\\src\\pages\\MarketSignalsPage.jsx",
+    "candidateService": "backend\\src\\services\\sellerRankingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sellerRankingAPI",
+    "method": "getSellerTrustScore",
+    "file": "frontend\\src\\pages\\MarketSignalsPage.jsx",
+    "candidateService": "backend\\src\\services\\sellerRankingService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "modulesAPI",
+    "method": "getOverview",
+    "file": "frontend\\src\\pages\\ModuleHubPage.jsx",
+    "candidateService": "backend\\src\\services\\moduleSupportInfrastructureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "modulesAPI",
+    "method": "askAssistant",
+    "file": "frontend\\src\\pages\\ModuleHubPage.jsx",
+    "candidateService": "backend\\src\\services\\moduleSupportInfrastructureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "tenantManagementAPI",
+    "method": "getAllTenants",
+    "file": "frontend\\src\\pages\\OrganizationTenantManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\tenantManagementService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "tenantManagementAPI",
+    "method": "deleteTenant",
+    "file": "frontend\\src\\pages\\OrganizationTenantManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\tenantManagementService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "platformCoreAPI",
+    "method": "getScalingRecommendations",
+    "file": "frontend\\src\\pages\\PlatformFoundationPage.jsx",
+    "candidateService": "backend\\src\\services\\platformCoreService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "platformCoreAPI",
+    "method": "getHealth",
+    "file": "frontend\\src\\pages\\PlatformFoundationPage.jsx",
+    "candidateService": "backend\\src\\services\\platformCoreService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "systemAdministrationAPI",
+    "method": "forecastCapacity",
+    "file": "frontend\\src\\pages\\PlatformFoundationPage.jsx",
+    "candidateService": "backend\\src\\services\\systemAdministrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "systemAdministrationAPI",
+    "method": "getSystemHealthDashboard",
+    "file": "frontend\\src\\pages\\PlatformFoundationPage.jsx",
+    "candidateService": "backend\\src\\services\\systemAdministrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "systemAdministrationAPI",
+    "method": "triggerSelfHealing",
+    "file": "frontend\\src\\pages\\PlatformFoundationPage.jsx",
+    "candidateService": "backend\\src\\services\\systemAdministrationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "poultryAPI",
+    "method": "listFlocks",
+    "file": "frontend\\src\\pages\\PoultryManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\poultryService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "poultryAPI",
+    "method": "listEggProduction",
+    "file": "frontend\\src\\pages\\PoultryManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\poultryService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "poultryAPI",
+    "method": "getFlockPerformance",
+    "file": "frontend\\src\\pages\\PoultryManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\poultryService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "poultryAPI",
+    "method": "getVaccinationAlerts",
+    "file": "frontend\\src\\pages\\PoultryManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\poultryService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "poultryAPI",
+    "method": "updateFlock",
+    "file": "frontend\\src\\pages\\PoultryManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\poultryService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "poultryAPI",
+    "method": "createFlock",
+    "file": "frontend\\src\\pages\\PoultryManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\poultryService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "poultryAPI",
+    "method": "deleteFlock",
+    "file": "frontend\\src\\pages\\PoultryManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\poultryService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "poultryAPI",
+    "method": "recordEggProduction",
+    "file": "frontend\\src\\pages\\PoultryManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\poultryService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "poultryAPI",
+    "method": "recordFeedConsumption",
+    "file": "frontend\\src\\pages\\PoultryManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\poultryService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "productMediaAIAPI",
+    "method": "generateImage",
+    "file": "frontend\\src\\pages\\ProductDetailPage.jsx",
+    "candidateService": "backend\\src\\services\\productMediaAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "realtimeMonitoringAPI",
+    "method": "getAllMonitors",
+    "file": "frontend\\src\\pages\\RealtimeMonitoringPage.jsx",
+    "candidateService": "backend\\src\\services\\realtimeMonitoringService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "realtimeMonitoringAPI",
+    "method": "getMonitoringStatus",
+    "file": "frontend\\src\\pages\\RealtimeMonitoringPage.jsx",
+    "candidateService": "backend\\src\\services\\realtimeMonitoringService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "realtimeMonitoringAPI",
+    "method": "stopMonitoring",
+    "file": "frontend\\src\\pages\\RealtimeMonitoringPage.jsx",
+    "candidateService": "backend\\src\\services\\realtimeMonitoringService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "realtimeMonitoringAPI",
+    "method": "healthCheck",
+    "file": "frontend\\src\\pages\\RealtimeMonitoringPage.jsx",
+    "candidateService": "backend\\src\\services\\realtimeMonitoringService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "getRDProjects",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "getRDProject",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "createRDProject",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "updateRDProject",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "deleteRDProject",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "addMilestone",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "updateMilestone",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "getCollaborations",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "createCollaboration",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "getInnovations",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "createInnovation",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "getPatents",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "createPatent",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "getFundingOpportunities",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "createFundingOpportunity",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "applyForFunding",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "getPublications",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "createPublication",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "getAIResearchAssistance",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "searchKnowledgeBase",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "addKnowledge",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "getRDAnalytics",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAndDevelopmentAPI",
+    "method": "getHealthStatus",
+    "file": "frontend\\src\\pages\\ResearchAndDevelopmentPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "researchAPI",
+    "method": "getStats",
+    "file": "frontend\\src\\pages\\ResearchDashboardPage.jsx",
+    "candidateService": "backend\\src\\services\\researchAndDevelopmentService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "getAllModules",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "getModule",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "getModulesByType",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "registerModule",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "updateModule",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "deleteModule",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "getModuleDependencies",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "getDependencyGraph",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "resolveDependencies",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "getModuleCompatibility",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "getModuleLifecycle",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "transitionModuleState",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "getModuleVersion",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "updateModuleVersion",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "getModuleConfiguration",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "setModuleConfiguration",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "generateMTADescriptor",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "getArchitectureOverview",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sapModuleArchitectureAPI",
+    "method": "getServiceHealth",
+    "file": "frontend\\src\\pages\\SAPModuleArchitecturePage.jsx",
+    "candidateService": "backend\\src\\services\\platform\\sapModuleArchitectureService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "seedVaultAPI",
+    "method": "getCategories",
+    "file": "frontend\\src\\pages\\SeedVaultPage.jsx",
+    "candidateService": "backend\\src\\services\\seedVaultService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "seedVaultAPI",
+    "method": "deleteSeed",
+    "file": "frontend\\src\\pages\\SeedVaultPage.jsx",
+    "candidateService": "backend\\src\\services\\seedVaultService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sheepAPI",
+    "method": "listFlock",
+    "file": "frontend\\src\\pages\\SheepFarmingPage.jsx",
+    "candidateService": "backend\\src\\services\\sheepService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sheepAPI",
+    "method": "listWoolProduction",
+    "file": "frontend\\src\\pages\\SheepFarmingPage.jsx",
+    "candidateService": "backend\\src\\services\\sheepService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sheepAPI",
+    "method": "getFlockPerformance",
+    "file": "frontend\\src\\pages\\SheepFarmingPage.jsx",
+    "candidateService": "backend\\src\\services\\sheepService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sheepAPI",
+    "method": "getBreedingAlerts",
+    "file": "frontend\\src\\pages\\SheepFarmingPage.jsx",
+    "candidateService": "backend\\src\\services\\sheepService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sheepAPI",
+    "method": "getVaccinationAlerts",
+    "file": "frontend\\src\\pages\\SheepFarmingPage.jsx",
+    "candidateService": "backend\\src\\services\\sheepService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sheepAPI",
+    "method": "getShearingAlerts",
+    "file": "frontend\\src\\pages\\SheepFarmingPage.jsx",
+    "candidateService": "backend\\src\\services\\sheepService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sheepAPI",
+    "method": "updateAnimal",
+    "file": "frontend\\src\\pages\\SheepFarmingPage.jsx",
+    "candidateService": "backend\\src\\services\\sheepService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sheepAPI",
+    "method": "createAnimal",
+    "file": "frontend\\src\\pages\\SheepFarmingPage.jsx",
+    "candidateService": "backend\\src\\services\\sheepService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sheepAPI",
+    "method": "deleteAnimal",
+    "file": "frontend\\src\\pages\\SheepFarmingPage.jsx",
+    "candidateService": "backend\\src\\services\\sheepService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sheepAPI",
+    "method": "recordWoolProduction",
+    "file": "frontend\\src\\pages\\SheepFarmingPage.jsx",
+    "candidateService": "backend\\src\\services\\sheepService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sheepAPI",
+    "method": "recordFeedConsumption",
+    "file": "frontend\\src\\pages\\SheepFarmingPage.jsx",
+    "candidateService": "backend\\src\\services\\sheepService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "sheepAPI",
+    "method": "recordBreeding",
+    "file": "frontend\\src\\pages\\SheepFarmingPage.jsx",
+    "candidateService": "backend\\src\\services\\sheepService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "machineryAPI",
+    "method": "getTractors",
+    "file": "frontend\\src\\pages\\TractorManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\machineryAccessService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "machineryAPI",
+    "method": "getBookings",
+    "file": "frontend\\src\\pages\\TractorManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\machineryAccessService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "machineryAPI",
+    "method": "updateTractor",
+    "file": "frontend\\src\\pages\\TractorManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\machineryAccessService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "machineryAPI",
+    "method": "createTractor",
+    "file": "frontend\\src\\pages\\TractorManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\machineryAccessService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "machineryAPI",
+    "method": "deleteTractor",
+    "file": "frontend\\src\\pages\\TractorManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\machineryAccessService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "machineryAPI",
+    "method": "createBooking",
+    "file": "frontend\\src\\pages\\TractorManagementPage.jsx",
+    "candidateService": "backend\\src\\services\\machineryAccessService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "transactionAPI",
+    "method": "getUserTransactions",
+    "file": "frontend\\src\\pages\\TransactionHistoryPage.jsx",
+    "candidateService": "backend\\src\\services\\transactionService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "conversationalAIAPI",
+    "method": "getDomains",
+    "file": "frontend\\src\\components\\ConversationalAI\\ChatInterface.jsx",
+    "candidateService": "backend\\src\\services\\conversationalAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "conversationalAIAPI",
+    "method": "createSession",
+    "file": "frontend\\src\\components\\ConversationalAI\\ChatInterface.jsx",
+    "candidateService": "backend\\src\\services\\conversationalAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "conversationalAIAPI",
+    "method": "respond",
+    "file": "frontend\\src\\components\\ConversationalAI\\ChatInterface.jsx",
+    "candidateService": "backend\\src\\services\\conversationalAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "conversationalAIAPI",
+    "method": "endSession",
+    "file": "frontend\\src\\components\\ConversationalAI\\ChatInterface.jsx",
+    "candidateService": "backend\\src\\services\\conversationalAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "privacyAPI",
+    "method": "recordConsent",
+    "file": "frontend\\src\\components\\GDPR\\GDPRConsent.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "logisticsAPI",
+    "method": "getLiveTracking",
+    "file": "frontend\\src\\components\\Logistics\\RealTimeTracking.jsx",
+    "candidateService": "backend\\src\\services\\claude\\logisticsAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "logisticsAPI",
+    "method": "getTemperatureData",
+    "file": "frontend\\src\\components\\Logistics\\RealTimeTracking.jsx",
+    "candidateService": "backend\\src\\services\\claude\\logisticsAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "logisticsAPI",
+    "method": "getTemperatureAlerts",
+    "file": "frontend\\src\\components\\Logistics\\RealTimeTracking.jsx",
+    "candidateService": "backend\\src\\services\\claude\\logisticsAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "marketplaceAPI",
+    "method": "calculateProductGST",
+    "file": "frontend\\src\\components\\Marketplace\\GSTCalculator.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "marketplaceAPI",
+    "method": "calculateOrderGST",
+    "file": "frontend\\src\\components\\Marketplace\\GSTCalculator.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "marketplaceAPI",
+    "method": "generateGstInvoice",
+    "file": "frontend\\src\\components\\Marketplace\\GSTCalculator.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "marketplaceAPI",
+    "method": "getProductReviews",
+    "file": "frontend\\src\\components\\Marketplace\\ProductReview.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "marketplaceAPI",
+    "method": "getProductReviewStats",
+    "file": "frontend\\src\\components\\Marketplace\\ProductReview.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "marketplaceAPI",
+    "method": "getUserReviews",
+    "file": "frontend\\src\\components\\Marketplace\\ProductReview.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "marketplaceAPI",
+    "method": "submitReview",
+    "file": "frontend\\src\\components\\Marketplace\\ProductReview.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "marketplaceAPI",
+    "method": "markReviewHelpful",
+    "file": "frontend\\src\\components\\Marketplace\\ProductReview.jsx",
+    "status": "no-candidate-service"
+  },
+  {
+    "client": "mfaAPI",
+    "method": "setup",
+    "file": "frontend\\src\\components\\MFA\\MFASetup.jsx",
+    "candidateService": "backend\\src\\services\\mfaService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "mfaAPI",
+    "method": "verify",
+    "file": "frontend\\src\\components\\MFA\\MFASetup.jsx",
+    "candidateService": "backend\\src\\services\\mfaService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "multilingualAPI",
+    "method": "detect",
+    "file": "frontend\\src\\components\\Multilingual\\AutoTranslate.jsx",
+    "candidateService": "backend\\src\\services\\multilingualService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "multilingualAPI",
+    "method": "translate",
+    "file": "frontend\\src\\components\\Multilingual\\AutoTranslate.jsx",
+    "candidateService": "backend\\src\\services\\multilingualService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "multilingualAPI",
+    "method": "getLanguages",
+    "file": "frontend\\src\\components\\Multilingual\\MultilingualProvider.jsx",
+    "candidateService": "backend\\src\\services\\multilingualService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "multilingualAPI",
+    "method": "getPreferences",
+    "file": "frontend\\src\\components\\Multilingual\\MultilingualProvider.jsx",
+    "candidateService": "backend\\src\\services\\multilingualService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "multilingualAPI",
+    "method": "getContent",
+    "file": "frontend\\src\\components\\Multilingual\\MultilingualProvider.jsx",
+    "candidateService": "backend\\src\\services\\multilingualService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "multilingualAPI",
+    "method": "updatePreferences",
+    "file": "frontend\\src\\components\\Multilingual\\MultilingualProvider.jsx",
+    "candidateService": "backend\\src\\services\\multilingualService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "notificationAPI",
+    "method": "markAllAsRead",
+    "file": "frontend\\src\\components\\NotificationBell.jsx",
+    "candidateService": "backend\\src\\services\\notificationService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "organicTraceabilityAPI",
+    "method": "getStandards",
+    "file": "frontend\\src\\components\\OrganicTraceability\\OrganicFarmRegistration.jsx",
+    "candidateService": "backend\\src\\services\\organicTraceabilityService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "organicTraceabilityAPI",
+    "method": "registerFarm",
+    "file": "frontend\\src\\components\\OrganicTraceability\\OrganicFarmRegistration.jsx",
+    "candidateService": "backend\\src\\services\\organicTraceabilityService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "predictiveAnalyticsAPI",
+    "method": "getForecasts",
+    "file": "frontend\\src\\components\\PredictiveAnalytics\\DemandForecast.jsx",
+    "candidateService": "backend\\src\\services\\predictiveAnalyticsService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "predictiveAnalyticsAPI",
+    "method": "getPredictions",
+    "file": "frontend\\src\\components\\PredictiveAnalytics\\DemandForecast.jsx",
+    "candidateService": "backend\\src\\services\\predictiveAnalyticsService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "predictiveAnalyticsAPI",
+    "method": "getUnacknowledgedAlerts",
+    "file": "frontend\\src\\components\\PredictiveAnalytics\\DemandForecast.jsx",
+    "candidateService": "backend\\src\\services\\predictiveAnalyticsService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "voiceAIAPI",
+    "method": "createSession",
+    "file": "frontend\\src\\components\\VoiceAI\\VoiceAssistant.jsx",
+    "candidateService": "backend\\src\\services\\voiceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "voiceAIAPI",
+    "method": "getPreferences",
+    "file": "frontend\\src\\components\\VoiceAI\\VoiceAssistant.jsx",
+    "candidateService": "backend\\src\\services\\voiceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "voiceAIAPI",
+    "method": "sendCommand",
+    "file": "frontend\\src\\components\\VoiceAI\\VoiceAssistant.jsx",
+    "candidateService": "backend\\src\\services\\voiceAIService.js",
+    "status": "needs-individual-review"
+  },
+  {
+    "client": "voiceAIAPI",
+    "method": "endSession",
+    "file": "frontend\\src\\components\\VoiceAI\\VoiceAssistant.jsx",
+    "candidateService": "backend\\src\\services\\voiceAIService.js",
+    "status": "needs-individual-review"
+  }
+]

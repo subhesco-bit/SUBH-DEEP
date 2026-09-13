@@ -1,0 +1,29 @@
+[
+  {
+    "stem": "modulecatalogservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "getModuleCatalog",
+        "buildPlatformOverview",
+        "buildAssistantResponse",
+        "route:GET:/",
+        "route:GET:/overview",
+        "route:GET:/:id",
+        "route:POST:/assistant",
+        "normalizedPrompt",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M144100_MODULECATALOG\\backend\\service.js",
+      "backend\\src\\services\\index.js",
+      "backend\\src\\services\\moduleCatalogService.js",
+      "backend\\src\\tests\\moduleCatalogService.test.js"
+    ]
+  }
+]

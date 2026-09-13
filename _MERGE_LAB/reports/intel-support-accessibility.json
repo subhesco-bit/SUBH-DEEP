@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "accessibility.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 11,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

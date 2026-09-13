@@ -1,0 +1,40 @@
+[
+  {
+    "stem": "poultryservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 26,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M18100_POULTRY\\backend\\service.js",
+      "backend\\src\\routes\\poultryRoutes_merged.js",
+      "backend\\src\\services\\poultryService.js"
+    ]
+  },
+  {
+    "stem": "poultryroutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 19,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

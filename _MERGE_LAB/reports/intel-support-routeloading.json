@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "routeloading.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 10,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\App.jsx"
+    ]
+  }
+]

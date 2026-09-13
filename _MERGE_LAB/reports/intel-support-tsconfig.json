@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "tsconfig.json",
+    "candidateCount": 13,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

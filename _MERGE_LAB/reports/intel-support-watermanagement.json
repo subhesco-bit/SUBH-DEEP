@@ -1,0 +1,55 @@
+[
+  {
+    "stem": "watermanagementpage.jsx",
+    "candidateCount": 6,
+    "sources": [
+      "backup",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M77100_WATERMANAGEMENT\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "watermanagementroutes.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 11,
+    "uniquePerSource": {
+      "claude": [
+        "waterBudgetingValidate",
+        "waterBudgeting",
+        "signal",
+        "WATER_RECORD_CHANGED",
+        "source",
+        "validate"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "watermanagementservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 4,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M77100_WATERMANAGEMENT\\backend\\service.js"
+    ]
+  }
+]

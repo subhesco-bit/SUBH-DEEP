@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "sw.js",
+    "candidateCount": 3,
+    "sources": [
+      "claude",
+      "frontend-current",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 3,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

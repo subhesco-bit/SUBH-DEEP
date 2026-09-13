@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "subsidymanagementpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "SubsidyManagementPage"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M386100_SUBSIDY\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

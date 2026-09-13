@@ -1,0 +1,33 @@
+[
+  {
+    "stem": "whatsappservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 12,
+    "uniquePerSource": {
+      "claude": [
+        "substitutePlaceholders",
+        "resolveTemplate",
+        "createOrUpdateTemplate",
+        "listTemplates",
+        "logMessage",
+        "sendTemplateMessage",
+        "sendMessage",
+        "getMessageHistory",
+        "route:GET:/",
+        "route:GET:/templates",
+        "route:POST:/templates",
+        "route:POST:/send",
+        "route:GET:/messages/:phoneNumber"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M639100_WHATSAPP\\backend\\service.js",
+      "backend\\src\\services\\whatsappService.js"
+    ]
+  }
+]

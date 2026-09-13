@@ -1,0 +1,21 @@
+[
+  {
+    "stem": "error.d.ts",
+    "candidateCount": 4,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "EventBufferSizeExceededError",
+        "WorkerDestroyedError",
+        "isAtLeastReact17",
+        "setCause",
+        "captureReactException",
+        "reactErrorHandler"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

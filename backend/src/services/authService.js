@@ -142,13 +142,6 @@ function generateRefreshToken(user) {
 function verifyToken(token) {
   try {
     const secret = JWT_CONFIG.secret;
-    // Pin the algorithm explicitly so a token can't be forged by switching to
-    // 'none' or an asymmetric alg (algorithm confusion hardening).
-    // In test mode tests sign tokens without issuer/audience; relax those two
-    // checks there, but algorithms is always pinned regardless of environment.
-    if (process.env.NODE_ENV === 'test') {
-      return jwt.verify(token, secret, { algorithms: ['HS256'] });
-    }
     return jwt.verify(token, secret, {
       algorithms: ['HS256'],
       issuer: JWT_CONFIG.issuer,
@@ -177,26 +170,7 @@ async function hashPassword(password) {
  * Compare password with hash
  */
 async function comparePassword(password, hash) {
-  if (!hash) return false;
-
-  // The repository test fixtures use a placeholder hash string such as
-  // "$2a$10$test" and a known password of "password". Treat that as the
-  // compatibility mode used by the legacy suites, while keeping real bcrypt
-  // verification for real users.
-  if (typeof hash === 'string' && hash === '$2a$10$test' && password === 'password') {
-    return true;
-  }
-
-  if (typeof hash === 'string' && hash === String(password)) return true;
-  if (typeof hash === 'string' && !hash.startsWith('$2')) {
-    return hash === String(password);
-  }
-
-  try {
-    return await bcrypt.compare(password, hash);
-  } catch (error) {
-    return hash === String(password);
-  }
+  return require('./authService/passwordUtils').comparePassword(password, hash);
 }
 
 /**

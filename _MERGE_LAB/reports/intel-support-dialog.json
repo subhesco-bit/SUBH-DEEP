@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "dialog.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 10,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\components\\FarmerPortal\\LandRecords.jsx"
+    ]
+  }
+]

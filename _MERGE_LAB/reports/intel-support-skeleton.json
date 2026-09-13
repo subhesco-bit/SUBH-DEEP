@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "skeleton.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 14,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\App.jsx",
+      "frontend\\src\\components\\RouteErrorBoundary.jsx",
+      "frontend\\src\\components\\RouteGuard.jsx",
+      "frontend\\src\\components\\RouteLoading.jsx"
+    ]
+  }
+]

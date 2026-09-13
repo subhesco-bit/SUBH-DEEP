@@ -1,0 +1,40 @@
+[
+  {
+    "stem": "landmanagementservice.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "landLease",
+        "gisLandMapping",
+        "soilMapping",
+        "waterResourceMapping",
+        "geoBoundary",
+        "surveyManagement"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M781100_LANDMANAGEMENT\\backend\\service.js"
+    ]
+  },
+  {
+    "stem": "landmanagementroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

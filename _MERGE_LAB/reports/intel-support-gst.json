@@ -1,0 +1,36 @@
+[
+  {
+    "stem": "gstroutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 16,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "gstservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 3,
+    "uniquePerSource": {
+      "claude": [
+        "gstAmount"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M695100_GST\\backend\\service.js",
+      "backend\\src\\routes\\marketplaceEnhancements_merged.js",
+      "backend\\src\\services\\gstService.js"
+    ]
+  }
+]

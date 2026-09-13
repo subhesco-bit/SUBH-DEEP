@@ -338,6 +338,38 @@
       "rationale": "Not a migration collision (digital_twins is declared exactly once, in 072_tier1_m025_m030_schema.sql, entity_type/entity_id/owner_id/current_state) - a genuine duplicate SERVICE. services/legacy/digitalTwinService.js was written earlier against a digital_twins shape (farm_id, configuration, is_active) plus a `farms` table that has never existed in any migration - every DB-touching method in it has been broken since it was written, not since 072 landed. It was still live: required directly in index.js, initialize()'d at boot, and self-mounting routes via setupRoutes(app) at the exact prefix /api/v1/digital-twin the real service also uses. Most of its routes were silently shadowed (Express matches the real router, mounted first, before this one); the ones that didn't collide (bare POST/GET /api/v1/digital-twin, PUT /:twinId, POST /:twinId/sensor-data, GET /:twinId/simulations) were reachable and would 500 on every call.",
       "resolution_2026_08_31": "Un-mounted, not deleted. Removed the require/initialize()/setupRoutes() calls from index.js (kept the source file on disk, in case its simulation models - cropGrowthSimulation, soilMoistureSimulation, pestSpreadSimulation etc. - are worth porting into the real service later; the real one currently only has a subset). Verified: fresh backend boot clean, no ReferenceError from the removed variable, all other route mounting unaffected.",
       "note": "The real service's own farm/crop paths (createFarmDigitalTwin -> verifyFarm(), getFarmRealTimeData(); createCropDigitalTwin -> verifyCrop(), getCropRealTimeData()) are still blocked - they query a `farms` table and per-farmer crop-instance columns (crop_type, growth_stage, estimated_yield_kg, planting_date) that don't exist, for the exact same underlying reason as the 'crops (per-farmer planting model)' entry above. Same root cause as that entry, not a new one - see there for the real fix needed (a farms + crop_plantings schema)."
+    },
+    {
+      "table": "product_listings",
+      "winner": "3100_ecommerce_tables.sql",
+      "loser": "097_ai_image_generation_enhanced.sql",
+      "kind": "renamed",
+      "renamed_to": "ai_image_product_listings",
+      "rationale": "Two unrelated tables shared this name. 097's is the AI-image-generation module's listing record (listing_id / primary_image_id / quality_score / visibility_*); 3100's is the marketplace listing (seller_id / product_name / price / listing_status / gi_tagged / organic). 097 ran first so its shape won and 3100's CREATE silently no-opped - the wrong winner: every live consumer queries 3100's shape (ecommerceController.js, ecommerceService.js, ecommerceAIService.js, ecommerceERPService.js, ecommerceBusinessSalesService.js), 3101/3102/3103 ALTER product_listings with nutrition/AI/nutrient columns that only make sense on the marketplace listing, and 14 FKs there declare product_id VARCHAR(50) REFERENCES product_listings(id), which Postgres rejects against 097's SERIAL id and which aborted the migration run. Nothing in backend/src queries 097's shape, so 097's table was renamed to ai_image_product_listings (2026-09-12)."
+    },
+    {
+      "table": "monitoring_metrics",
+      "winner": "095_create_monitoring_tables.sql",
+      "loser": "9532_m086_monitoring_alerts.sql",
+      "kind": "renamed",
+      "renamed_to": "m086_monitoring_metrics",
+      "rationale": "095's table is a two-column JSONB blob (metric_data) and is what backend/src/services/infrastructureMonitoringService.js actually reads and writes, so 095 is the correct winner. 9532 (folded from modules/M086/model.sql) declares a typed metric catalogue under the same name; its CREATE no-opped but it still declared real_time_data.metric_id REFERENCES monitoring_metrics(metric_id) and indexed monitoring_alerts(metric_id), neither of which exists on 095's tables - both abort the migration run. M086's service queries water_mgmt, not these tables, so nothing reads the M086 shape. Renamed 9532's two colliding tables (2026-09-12)."
+    },
+    {
+      "table": "monitoring_alerts",
+      "winner": "095_create_monitoring_tables.sql",
+      "loser": "9532_m086_monitoring_alerts.sql",
+      "kind": "renamed",
+      "renamed_to": "m086_monitoring_alerts",
+      "rationale": "Same collision and same resolution as monitoring_metrics above - see that entry (2026-09-12)."
+    },
+    {
+      "table": "soil_samples",
+      "winner": "m010_soil_nutrient_land_schema.sql",
+      "loser": "9510_m032_land_records_extra.sql",
+      "kind": "renamed",
+      "renamed_to": "m032_soil_samples",
+      "rationale": "9510 sorts before m010 so its narrow VARCHAR-keyed table won the name, but backend/src/services/soilNutrientLandService.js inserts m010's column list (sample_id, farmer_id, farm_id, location, state, district, sample_depth, sample_type, crop_planned, irrigation_type, collection_date, collector_name, lab_preference, ai_optimization) and updates WHERE id = $2 against m010's UUID primary key. m010 also declares soil_analysis.sample_id UUID REFERENCES soil_samples(id), which cannot be created against 9510's sample_id VARCHAR(50) primary key and aborts the migration run. M032's service queries suppliers, not this table, so 9510's table was renamed (2026-09-12)."
     }
   ]
 }

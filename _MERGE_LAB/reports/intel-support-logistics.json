@@ -1,0 +1,35 @@
+[
+  {
+    "stem": "logisticsservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 28,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M615100_LOGISTICS\\backend\\service.js",
+      "backend\\src\\services\\claude\\logisticsAIService.js",
+      "backend\\src\\services\\logisticsService.js",
+      "backend\\src\\tests\\unit\\logisticsDomain.test.js"
+    ]
+  },
+  {
+    "stem": "logisticspage.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M615100_LOGISTICS\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

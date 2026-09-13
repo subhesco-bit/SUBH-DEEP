@@ -1,0 +1,52 @@
+[
+  {
+    "stem": "admin.js",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M001\\routes.js",
+      "backend\\src\\routes\\advancedFeatures.js",
+      "backend\\src\\routes\\agriculture\\farmerHealthRoutes.js",
+      "backend\\src\\routes\\agriculture\\farmerPortalEnhancements.js",
+      "backend\\src\\routes\\agriculture\\farmerRoutes.js",
+      "backend\\src\\routes\\ai\\decisionSupportRoutes.js",
+      "backend\\src\\routes\\assetAccountingRoutes.js",
+      "backend\\src\\routes\\auditRoutes.js",
+      "backend\\src\\routes\\civilDisruptionRoutes.js",
+      "backend\\src\\routes\\commerce\\marketplaceEnhancements.js",
+      "backend\\src\\routes\\cooperativeShareRoutes.js",
+      "backend\\src\\routes\\costControlRoutes.js",
+      "backend\\src\\routes\\decisionSupportRoutes_merged.js",
+      "backend\\src\\routes\\dual-use\\mfaRoutes.js",
+      "backend\\src\\routes\\ecommerceRoutes_merged.js",
+      "backend\\src\\routes\\enterpriseControlRoutes.js",
+      "backend\\src\\routes\\erpRoutes.js",
+      "backend\\src\\routes\\farmerPortalEnhancements_merged.js",
+      "backend\\src\\routes\\farmerRoutes_merged.js",
+      "backend\\src\\routes\\finance\\insuranceEnhancements.js",
+      "backend\\src\\routes\\insuranceEnhancements_merged.js",
+      "backend\\src\\routes\\landRecordsRoutes.js",
+      "backend\\src\\routes\\logistics\\logisticsEnhancements.js",
+      "backend\\src\\routes\\logisticsEnhancements_merged.js",
+      "backend\\src\\routes\\m400AiBackboneRoutes.js",
+      "backend\\src\\routes\\marketplaceEnhancements_merged.js",
+      "backend\\src\\routes\\platform\\advancedFeatures_merged.js",
+      "backend\\src\\routes\\platform\\auditRoutes_merged.js",
+      "backend\\src\\routes\\platform\\civilDisruptionRoutes_merged.js",
+      "backend\\src\\routes\\platform\\governanceModule_merged.js",
+      "backend\\src\\routes\\platformCoreRoutes_merged.js",
+      "backend\\src\\routes\\productReviewRoutes.js",
+      "backend\\src\\routes\\projectSystemsRoutes_merged.js",
+      "backend\\src\\services\\commerce\\orderService.js",
+      "backend\\src\\services\\legacy\\enterpriseControlService.js",
+      "backend\\src\\services\\legacy\\orderService.js",
+      "backend\\src\\services\\legacy\\v42IntelligenceService.js"
+    ]
+  }
+]

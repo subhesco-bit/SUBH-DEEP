@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "config.json",
+    "candidateCount": 3,
+    "sources": [
+      ".vibecheck",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\services\\authService\\oauth.js",
+      "backend\\src\\services\\authService\\tokens.js",
+      "backend\\src\\services\\authService\\userAuth.js"
+    ]
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "debug-build.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "DEBUG_BUILD"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

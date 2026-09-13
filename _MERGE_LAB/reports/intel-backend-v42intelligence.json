@@ -1,0 +1,38 @@
+[
+  {
+    "stem": "v42intelligenceservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "fail",
+        "resolveCrop",
+        "getConceptTerms",
+        "quoteFreight",
+        "bookFreightSlot",
+        "listSlotAvailability",
+        "validatePromo",
+        "getEngineRules",
+        "route:GET:/crops/resolve",
+        "route:GET:/crops/:conceptKey/terms",
+        "route:GET:/freight/quote",
+        "route:GET:/freight/slots",
+        "route:POST:/freight/slots/:slotCode/book",
+        "route:POST:/promos/validate",
+        "route:GET:/engines",
+        "route:GET:/organic-inputs",
+        "route:GET:/insurance-plans",
+        "route:GET:/accessibility-modes",
+        "route:POST:/freight/slots/:slotCode/release",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M764100_V42INTELLIGENCE\\backend\\service.js",
+      "backend\\src\\services\\v42IntelligenceService.js"
+    ]
+  }
+]

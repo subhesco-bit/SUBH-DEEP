@@ -1,0 +1,59 @@
+[
+  {
+    "stem": "freightpoolingroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:GET:/poolable-shipments",
+        "route:POST:/windows",
+        "route:GET:/windows",
+        "route:GET:/windows/:windowId",
+        "route:POST:/windows/:windowId/join",
+        "route:POST:/windows/:windowId/dispatch"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "freightpoolingservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "rateForFillPct",
+        "FreightPoolingService",
+        "fillPctAfterJoin"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M132100_FREIGHTPOOLING\\backend\\service.js",
+      "backend\\src\\routes\\freightPoolingRoutes.js",
+      "backend\\src\\tests\\unit\\logisticsDomain.test.js"
+    ]
+  },
+  {
+    "stem": "freightpooling.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "asynctogenerator.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "asyncGeneratorStep",
+        "_asyncToGenerator",
+        "_next",
+        "_throw",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

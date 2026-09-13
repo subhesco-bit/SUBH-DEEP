@@ -1,0 +1,63 @@
+[
+  {
+    "stem": "sapmodulearchitectureroutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 19,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "sapmodulearchitecturepage.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  },
+  {
+    "stem": "sapmodulearchitectureservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {
+      "claude": [
+        "listJsFiles",
+        "listDomains",
+        "buildServiceRegistry",
+        "buildDependencyMap",
+        "route:GET:/",
+        "route:GET:/dependencies",
+        "route:GET:/:domain",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M388100_SAPMODULEARCHITECTURE\\backend\\service.js"
+    ]
+  }
+]

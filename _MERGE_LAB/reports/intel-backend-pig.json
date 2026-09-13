@@ -1,0 +1,67 @@
+[
+  {
+    "stem": "pigroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health",
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "pigservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "listHerd",
+        "createAnimal",
+        "updateAnimal",
+        "deleteAnimal",
+        "listWeightRecords",
+        "recordWeight",
+        "listFeedConsumption",
+        "recordFeedConsumption",
+        "listBreedingRecords",
+        "recordBreeding",
+        "updateFarrowingOutcome",
+        "listVaccinationRecords",
+        "recordVaccination",
+        "getHerdPerformance",
+        "getBreedingAlerts",
+        "getVaccinationAlerts",
+        "optimizeMeatProduction",
+        "monitorPigHealth",
+        "optimizePigFeed",
+        "recommendPigBreeding",
+        "generatePigHealthRecommendations",
+        "offset",
+        "daysBetween",
+        "growthTrend",
+        "growthDecline",
+        "age",
+        "daysSinceVaccination"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M858100_PIG\\backend\\service.js",
+      "backend\\src\\routes\\pigRoutes_merged.js",
+      "backend\\src\\services\\pigService.js"
+    ]
+  }
+]

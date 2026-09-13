@@ -1,0 +1,36 @@
+[
+  {
+    "stem": "insuranceaiservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {
+      "claude": [
+        "InsuranceaiBackboneService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\services\\index.js"
+    ]
+  },
+  {
+    "stem": "insuranceairoutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "route:POST:/ai-enhanced/assess-risk",
+        "route:GET:/ai-capability",
+        "route:POST:/assess-risk"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

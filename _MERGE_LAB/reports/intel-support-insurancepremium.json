@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "insurancepremiumservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 1,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M292100_INSURANCEPREMIUM\\backend\\service.js",
+      "backend\\src\\routes\\insuranceEnhancements_merged.js",
+      "backend\\src\\services\\insurancePremiumService.js"
+    ]
+  }
+]

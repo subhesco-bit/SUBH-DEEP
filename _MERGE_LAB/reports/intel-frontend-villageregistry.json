@@ -1,0 +1,30 @@
+[
+  {
+    "stem": "villageregistrypage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "toNumberOrNull",
+        "VillageRegistryPage",
+        "Stat",
+        "Modal",
+        "Section",
+        "Input",
+        "NumberInput",
+        "AnalyticsPanel",
+        "Metric",
+        "closeForm",
+        "openEdit",
+        "openCreate"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M445100_VILLAGEPROFILE\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "registry-cache.json",
+    "candidateCount": 7,
+    "sources": [
+      ".vibecheck",
+      "backend-current",
+      "backup",
+      "claude",
+      "frontend-current",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

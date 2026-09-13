@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "wrapregexp.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_wrapRegExp",
+        "BabelRegExp",
+        "buildGroups",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

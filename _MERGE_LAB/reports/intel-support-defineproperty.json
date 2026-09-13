@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "defineproperty.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "_defineProperty",
+        "__esModule"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

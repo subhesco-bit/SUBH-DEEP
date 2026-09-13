@@ -1,0 +1,13 @@
+[
+  {
+    "stem": "11-module-audit.md",
+    "candidateCount": 3,
+    "sources": [
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

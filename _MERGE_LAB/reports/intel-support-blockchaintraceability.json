@@ -1,0 +1,17 @@
+[
+  {
+    "stem": "blockchaintraceabilityservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 25,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M388100_BLOCKCHAINTRACEABILITY\\backend\\service.js",
+      "backend\\src\\services\\blockchainTraceabilityService.js"
+    ]
+  }
+]

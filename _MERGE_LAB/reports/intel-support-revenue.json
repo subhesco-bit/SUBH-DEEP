@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "revenueroutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 3,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "revenueservice.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M117100_REVENUE\\backend\\service.js",
+      "backend\\src\\routes\\revenueRoutes_merged.js",
+      "backend\\src\\services\\revenueService.js"
+    ]
+  }
+]

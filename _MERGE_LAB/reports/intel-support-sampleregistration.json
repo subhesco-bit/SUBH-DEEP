@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "sampleregistration.jsx",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 8,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "applicationstatustracker.jsx",
+    "candidateCount": 2,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "ApplicationStatusTracker",
+        "handleSubmit"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

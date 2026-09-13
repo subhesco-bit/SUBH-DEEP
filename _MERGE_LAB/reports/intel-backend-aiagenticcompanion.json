@@ -1,0 +1,24 @@
+[
+  {
+    "stem": "aiagenticcompanionservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "initialize",
+        "setupRoutes",
+        "route:GET:/",
+        "AIAgenticCompanionService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M675100_AIAGENTICCOMPANION\\backend\\service.js",
+      "backend\\src\\services\\aiAgenticCompanionService.js",
+      "backend\\src\\services\\claude\\aiAgentService.js",
+      "backend\\src\\services\\index.js"
+    ]
+  }
+]

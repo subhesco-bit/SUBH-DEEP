@@ -1,0 +1,15 @@
+[
+  {
+    "stem": "settings.json",
+    "candidateCount": 5,
+    "sources": [
+      ".vscode",
+      "claude",
+      "cursor",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

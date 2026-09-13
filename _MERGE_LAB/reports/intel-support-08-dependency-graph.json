@@ -1,0 +1,12 @@
+[
+  {
+    "stem": "08-dependency-graph.md",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "modulehubpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "ModuleHubPage",
+        "loadPlatform",
+        "handleAssistant"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "autotranslate.jsx",
+    "candidateCount": 3,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 3,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

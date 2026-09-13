@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "m115component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M115Component"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "m115page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M115Page"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\M115\\index.jsx"
+    ]
+  }
+]

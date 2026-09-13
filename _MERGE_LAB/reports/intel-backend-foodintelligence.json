@@ -1,0 +1,43 @@
+[
+  {
+    "stem": "foodintelligenceservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "createFoodItem",
+        "searchFoodItems",
+        "createQualityAssessment",
+        "getQualityAssessments",
+        "recordContaminantTest",
+        "getContaminantTests",
+        "createFreshnessAssessment",
+        "createFoodRecall",
+        "getActiveRecalls",
+        "recordFoodIntelligence",
+        "isHealthy",
+        "route:POST:/food-items",
+        "route:GET:/food-items/search",
+        "route:POST:/quality-assessments",
+        "route:GET:/food-items/:foodItemId/quality-assessments",
+        "route:POST:/contaminant-tests",
+        "route:GET:/food-items/:foodItemId/contaminant-tests",
+        "route:POST:/freshness-assessments",
+        "route:POST:/food-recalls",
+        "route:GET:/food-recalls/active",
+        "route:POST:/food-intelligence",
+        "grade",
+        "router",
+        "isTestMode"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M167100_FOODINTELLIGENCE\\backend\\service.js",
+      "backend\\src\\services\\foodIntelligenceService.js",
+      "backend\\src\\services\\index.js"
+    ]
+  }
+]

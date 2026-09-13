@@ -1,0 +1,38 @@
+[
+  {
+    "stem": "routepreloader.js",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "preloadRoute",
+        "clearPreloadCache",
+        "getPreloadCacheSize",
+        "useRoutePreloader",
+        "useHoverPreload",
+        "useViewportPreload",
+        "usePredictivePreloader",
+        "findNavigationPatterns",
+        "useNetworkAwarePreloader",
+        "useMemoryAwarePreloader",
+        "RoutePreloader",
+        "preloadRoutes",
+        "handleMouseEnter",
+        "handleMouseLeave",
+        "observeElement",
+        "unobserveElement",
+        "handleRouteChange",
+        "predictAndPreload",
+        "count",
+        "checkNetworkAndPreload",
+        "checkMemoryAndClear"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\App.jsx"
+    ]
+  }
+]

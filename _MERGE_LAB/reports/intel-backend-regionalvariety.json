@@ -1,0 +1,40 @@
+[
+  {
+    "stem": "regionalvarietyroutes.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:GET:/",
+        "route:GET:/categories",
+        "route:GET:/:id",
+        "route:POST:/:id/generate-image",
+        "route:POST:/:id/create-listing",
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "regionalvarietyservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "RegionalVarietyService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\routes\\agriculture\\regionalVarietyRoutes.js"
+    ]
+  }
+]

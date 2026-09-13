@@ -1,0 +1,28 @@
+[
+  {
+    "stem": "mutationcache.cjs",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  },
+  {
+    "stem": "mutationcache.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "scopeFor",
+        "extends",
+        "foundMutation"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "stem": "cache.js",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "isOnline",
+        "getCacheKey",
+        "parseCacheEntry",
+        "stringifyCacheEntry",
+        "isExpired",
+        "getStorage",
+        "setItem",
+        "getItem",
+        "removeItem",
+        "clearCache",
+        "clearByTag",
+        "getCacheSize",
+        "staleWhileRevalidate",
+        "return",
+        "cache",
+        "handleOnline",
+        "handleOffline"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\core\\index.js",
+      "backend\\src\\core\\productionService.js"
+    ]
+  }
+]

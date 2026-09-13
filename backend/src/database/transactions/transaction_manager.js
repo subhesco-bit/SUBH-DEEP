@@ -4,6 +4,9 @@
  */
 
 const { Pool } = require('pg');
+// Resolve the target through the shared config so this module cannot point at
+// a different database than the application. See ../config/database.
+const { resolvePoolConfig } = require('../../config/database');
 const { logger } = require('../../utils/logger');
 
 class TransactionManager {
@@ -52,9 +55,9 @@ class TransactionManager {
    */
   async initialize() {
     try {
-      this.pool = new Pool({
-        connectionString: this.config.databaseUrl,
-      });
+      this.pool = new Pool(this.config.databaseUrl
+        ? resolvePoolConfig({}, { DATABASE_URL: this.config.databaseUrl })
+        : resolvePoolConfig());
 
       this.isInitialized = true;
       logger.info('Transaction manager initialized');

@@ -1,0 +1,26 @@
+[
+  {
+    "stem": "apicompatibilityroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "rejectDurability",
+        "route:GET:/financial/overview",
+        "route:GET:/financial/loans",
+        "route:GET:/financial/loan-products",
+        "route:GET:/operations/overview",
+        "route:POST:/errors/log",
+        "route:POST:/notifications/subscribe",
+        "route:POST:/notifications/unsubscribe",
+        "route:GET:/enterprise/organizations/current/integrations"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

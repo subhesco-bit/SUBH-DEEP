@@ -1,0 +1,16 @@
+[
+  {
+    "stem": "alertmodal.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "claude"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "claude": [
+        "AlertModal"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

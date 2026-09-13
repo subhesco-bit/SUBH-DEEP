@@ -1,0 +1,10 @@
+{
+  "routes": [],
+  "links": [],
+  "issues": [
+    "Routes configuration file not found"
+  ],
+  "recommendations": [
+    "Create routes configuration file"
+  ]
+}

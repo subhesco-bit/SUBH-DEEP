@@ -1,0 +1,38 @@
+[
+  {
+    "stem": "glutwarningservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "GlutWarningService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M618100_GLUTWARNING\\backend\\service.js",
+      "backend\\src\\routes\\glutWarningRoutes_merged.js",
+      "backend\\src\\services\\glutWarningService.js",
+      "backend\\src\\services\\index.js"
+    ]
+  },
+  {
+    "stem": "glutwarningroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/health"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

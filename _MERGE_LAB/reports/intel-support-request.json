@@ -1,0 +1,24 @@
+[
+  {
+    "stem": "request.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "instrumentOutgoingRequests",
+        "addHTTPTimings",
+        "shouldAttachHeaders",
+        "xhrCallback",
+        "addTracingHeadersToXhrRequest",
+        "setHeaderOnXhr",
+        "defaultRequestInstrumentationOptions",
+        "shouldAttachHeadersWithTargets",
+        "endSpanAndCleanup"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

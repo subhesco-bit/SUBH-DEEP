@@ -5,8 +5,8 @@
 CREATE TABLE IF NOT EXISTS ai_generated_images (
   id SERIAL PRIMARY KEY,
   image_id VARCHAR(255) UNIQUE NOT NULL,
-  product_id INTEGER REFERENCES products(id),
-  farmer_id INTEGER REFERENCES farmers(id),
+  product_id UUID REFERENCES products(id),
+  farmer_id UUID REFERENCES farmers(id),
   prompt_text TEXT,
   image_url VARCHAR(500),
   cdn_url VARCHAR(500),
@@ -50,10 +50,27 @@ CREATE INDEX idx_metadata_image_id ON ai_image_metadata(image_id);
 CREATE INDEX idx_metadata_category ON ai_image_metadata(category);
 
 -- Product Listings Table (E-Commerce)
-CREATE TABLE IF NOT EXISTS product_listings (
+-- 2026-09-12: renamed from `product_listings` to `ai_image_product_listings`.
+-- This file's listing table is the AI-image-generation module's own listing
+-- record (listing_id / primary_image_id / quality_score / visibility_*). It
+-- collided with the REAL marketplace listing table in
+-- 3100_ecommerce_tables.sql (seller_id / product_name / price / listing_status /
+-- gi_tagged / organic), and because 097 runs first its unrelated shape won and
+-- 3100's CREATE TABLE silently no-opped.
+--
+-- That was the wrong winner: every live consumer queries 3100's shape
+-- (ecommerceController.js, ecommerceService.js, ecommerceAIService.js,
+-- ecommerceERPService.js, ecommerceBusinessSalesService.js), 3101/3102/3103
+-- ALTER `product_listings` to add nutrition/AI/nutrient columns that only make
+-- sense on the marketplace listing, and 14 FKs in those files declare
+-- `product_id VARCHAR(50) REFERENCES product_listings(id)` — a type Postgres
+-- rejects outright against this table's SERIAL id, which halted the whole
+-- migration run here. Nothing in backend/src queries THIS table's shape.
+-- Renaming the squatter lets the real table be created and resolves all 14.
+CREATE TABLE IF NOT EXISTS ai_image_product_listings (
   id SERIAL PRIMARY KEY,
   listing_id VARCHAR(255) UNIQUE NOT NULL,
-  product_id INTEGER REFERENCES products(id),
+  product_id UUID REFERENCES products(id),
   primary_image_id VARCHAR(255) REFERENCES ai_generated_images(image_id),
   category VARCHAR(100),
   quality_score DECIMAL(5, 2),
@@ -66,14 +83,14 @@ CREATE TABLE IF NOT EXISTS product_listings (
   last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX idx_listings_product_id ON product_listings(product_id);
-CREATE INDEX idx_listings_quality_score ON product_listings(quality_score);
-CREATE INDEX idx_listings_region ON product_listings(region);
+CREATE INDEX idx_ai_image_listings_product_id ON ai_image_product_listings(product_id);
+CREATE INDEX idx_ai_image_listings_quality_score ON ai_image_product_listings(quality_score);
+CREATE INDEX idx_ai_image_listings_region ON ai_image_product_listings(region);
 
 -- Marketplace Optimization Table
 CREATE TABLE IF NOT EXISTS listing_marketplace_optimization (
   id SERIAL PRIMARY KEY,
-  listing_id VARCHAR(255) NOT NULL REFERENCES product_listings(listing_id) ON DELETE CASCADE,
+  listing_id VARCHAR(255) NOT NULL REFERENCES ai_image_product_listings(listing_id) ON DELETE CASCADE,
   marketplace_name VARCHAR(100), -- amazon, flipkart, local_marketplace
   primary_image_size VARCHAR(50),
   compression_quality INTEGER,
@@ -88,7 +105,7 @@ CREATE INDEX idx_optimization_marketplace ON listing_marketplace_optimization(ma
 CREATE TABLE IF NOT EXISTS farmer_image_portfolios (
   id SERIAL PRIMARY KEY,
   portfolio_id VARCHAR(255) UNIQUE NOT NULL,
-  farmer_id INTEGER NOT NULL REFERENCES farmers(id) ON DELETE CASCADE,
+  farmer_id UUID NOT NULL REFERENCES farmers(id) ON DELETE CASCADE,
   farmer_name VARCHAR(255),
   region VARCHAR(50),
   languages TEXT, -- JSON array of supported languages
@@ -108,7 +125,7 @@ CREATE TABLE IF NOT EXISTS farmer_products (
   id SERIAL PRIMARY KEY,
   product_id VARCHAR(255) UNIQUE NOT NULL,
   portfolio_id VARCHAR(255) NOT NULL REFERENCES farmer_image_portfolios(portfolio_id) ON DELETE CASCADE,
-  farmer_id INTEGER NOT NULL REFERENCES farmers(id) ON DELETE CASCADE,
+  farmer_id UUID NOT NULL REFERENCES farmers(id) ON DELETE CASCADE,
   product_name VARCHAR(255),
   category VARCHAR(100),
   description TEXT,
@@ -146,7 +163,7 @@ CREATE INDEX idx_farmer_images_language ON farmer_product_images(language);
 -- Listing Performance Metrics Table
 CREATE TABLE IF NOT EXISTS listing_performance_metrics (
   id SERIAL PRIMARY KEY,
-  listing_id VARCHAR(255) NOT NULL REFERENCES product_listings(listing_id) ON DELETE CASCADE,
+  listing_id VARCHAR(255) NOT NULL REFERENCES ai_image_product_listings(listing_id) ON DELETE CASCADE,
   views INTEGER DEFAULT 0,
   clicks INTEGER DEFAULT 0,
   conversions INTEGER DEFAULT 0,
@@ -177,7 +194,7 @@ CREATE INDEX idx_feedback_image ON image_quality_feedback(image_id);
 CREATE TABLE IF NOT EXISTS sku_images (
   id SERIAL PRIMARY KEY,
   sku VARCHAR(255) UNIQUE NOT NULL,
-  product_id INTEGER REFERENCES products(id),
+  product_id UUID REFERENCES products(id),
   image_id VARCHAR(255) REFERENCES ai_generated_images(image_id),
   variant_name VARCHAR(255),
   quality_score DECIMAL(5, 2),

@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "sitemap.xml",
+    "candidateCount": 4,
+    "sources": [
+      "claude",
+      "frontend-current",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

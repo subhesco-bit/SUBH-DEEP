@@ -148,6 +148,27 @@ CREATE TABLE IF NOT EXISTS water_analytics_records (
 -- ============================================================================
 
 -- Water budget indexes
+-- 2026-09-12 collision repair (batch): the CREATE INDEX statements below
+-- name columns that do not exist on the table that actually gets created.
+-- Each of these tables is declared by more than one migration, and
+-- PostgreSQL's CREATE TABLE IF NOT EXISTS silently skips every declaration
+-- after the first — so the later, wider definition never took effect and
+-- the index that assumed it would fail with "column does not exist",
+-- aborting the whole migration run.
+--
+-- Additive and idempotent: restores exactly the columns the indexes below
+-- require, typed from the losing definition that declared them. No-ops on
+-- a database where the wider definition already won.
+-- water_budgets: winner is 9999_zzzzzzzzzzzzzzzzzzz_water_management_schema.sql
+ALTER TABLE water_budgets ADD COLUMN IF NOT EXISTS created_by UUID;
+-- irrigation_schedules: winner is 200_m047_irrigation_management.sql
+ALTER TABLE irrigation_schedules ADD COLUMN IF NOT EXISTS status VARCHAR(50);
+ALTER TABLE irrigation_schedules ADD COLUMN IF NOT EXISTS created_by UUID;
+-- irrigation_water_sources: winner is 9999_zzzzzzzzzzzzzzzzzz_irrigation_management_schema.sql
+ALTER TABLE irrigation_water_sources ADD COLUMN IF NOT EXISTS status VARCHAR(50);
+-- watersheds: winner is 9999_zzzzzzzzzzzzzzzzzzz_water_management_schema.sql
+ALTER TABLE watersheds ADD COLUMN IF NOT EXISTS created_by UUID;
+
 CREATE INDEX IF NOT EXISTS idx_water_budgets_season ON water_budgets(season);
 CREATE INDEX IF NOT EXISTS idx_water_budgets_source ON water_budgets(source);
 CREATE INDEX IF NOT EXISTS idx_water_budgets_created_by ON water_budgets(created_by);

@@ -1,0 +1,37 @@
+[
+  {
+    "stem": "aiadvisoryservice.js",
+    "candidateCount": 3,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "getAIAdvisory",
+        "getAIAdvisoriesByVillage",
+        "getAIAdvisoriesByFarmer",
+        "getAIAdvisoriesByType",
+        "createAIAdvisory",
+        "updateAdvisoryStatus",
+        "getAIAdvisoryStatistics",
+        "setupRoutes",
+        "route:GET:/advisories/:advisoryId",
+        "route:GET:/advisories/village/:villageId",
+        "route:GET:/advisories/farmer/:farmerId",
+        "route:GET:/advisories/type/:advisoryType",
+        "route:POST:/advisories",
+        "route:PUT:/advisories/:advisoryId/status",
+        "route:GET:/advisories/statistics",
+        "r2",
+        "route:GET:/",
+        "route:POST:/",
+        "router"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M472100_AIADVISORY\\backend\\service.js",
+      "backend\\src\\services\\aiAdvisoryService.js"
+    ]
+  }
+]

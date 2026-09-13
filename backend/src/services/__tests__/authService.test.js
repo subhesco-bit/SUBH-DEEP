@@ -1,91 +1,99 @@
-const authService = require('../dual-use/authService');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
-describe('AuthService', () => {
-  describe('validateCredentials', () => {
-    it('should validate correct credentials', async () => {
-      const result = await authService.validateCredentials('user@example.com', 'password123');
-      expect(result).toBeDefined();
-      expect(result.valid).toBe(true);
-    });
+jest.mock('../../database/connection', () => ({ getPostgreSQL: jest.fn() }));
+jest.mock('../../utils/logger', () => ({
+  logger: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
+}));
 
-    it('should reject invalid email', async () => {
-      const result = await authService.validateCredentials('invalid-email', 'password');
-      expect(result.valid).toBe(false);
-      expect(result.error).toMatch(/email/i);
-    });
+const { getPostgreSQL } = require('../../database/connection');
+const { hashPassword, comparePassword } = require('../authService/passwordUtils');
 
-    it('should reject short password', async () => {
-      const result = await authService.validateCredentials('user@example.com', 'short');
-      expect(result.valid).toBe(false);
-      expect(result.error).toMatch(/password/i);
-    });
+// Cover both retained public services, including middleware/auth's actual dependency.
+describe.each([
+  ['live dual-use service', require('../dual-use/authService')],
+  ['root service', require('../authService.js')],
+])('%s authentication boundary', (_name, authService) => {
+  const user = { id: 42, email: 'farmer@example.com', role: 'farmer', status: 'active' };
+  let query;
+  let passwordHash;
+
+  beforeAll(async () => { passwordHash = await bcrypt.hash('correct-password', 4); });
+  beforeEach(() => {
+    query = jest.fn().mockResolvedValue({ rows: [] });
+    getPostgreSQL.mockReturnValue({ query });
   });
 
-  describe('generateToken', () => {
-    it('should generate valid JWT token', () => {
-      const token = authService.generateToken({ userId: 1, role: 'farmer' });
-      expect(token).toBeDefined();
-      expect(typeof token).toBe('string');
-      expect(token.split('.').length).toBe(3); // JWT has 3 parts
-    });
+  function storedUser(hash = passwordHash) {
+    query.mockResolvedValueOnce({ rows: [{ ...user, password_hash: hash }] });
+  }
 
-    it('should include user data in token', () => {
-      const userData = { userId: 42, role: 'admin' };
-      const token = authService.generateToken(userData);
-      const decoded = authService.verifyToken(token);
-      expect(decoded.userId).toBe(userData.userId);
-      expect(decoded.role).toBe(userData.role);
+  test('valid bcrypt login issues a verifiable user token', async () => {
+    storedUser();
+    const result = await authService.loginUser(user.email, 'correct-password');
+    expect(authService.verifyToken(result.accessToken)).toMatchObject({
+      userId: user.id, role: user.role, sub: String(user.id),
     });
+    expect(result.user).not.toHaveProperty('password_hash');
   });
 
-  describe('verifyToken', () => {
-    it('should verify valid token', () => {
-      const token = authService.generateToken({ userId: 1 });
-      const decoded = authService.verifyToken(token);
-      expect(decoded).toBeDefined();
-      expect(decoded.userId).toBe(1);
-    });
-
-    it('should reject invalid token', () => {
-      expect(() => authService.verifyToken('invalid.token.here')).toThrow();
-    });
-
-    it('should reject expired token', () => {
-      const expiredToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjA0MDAwMDB9.invalid';
-      expect(() => authService.verifyToken(expiredToken)).toThrow();
-    });
+  test('rejects an incorrect password and records the failed attempt', async () => {
+    storedUser();
+    await expect(authService.loginUser(user.email, 'wrong')).rejects.toThrow('Invalid credentials');
+    expect(query).toHaveBeenLastCalledWith(expect.stringContaining('failed_login_attempts'), [1, user.id]);
   });
 
-  describe('hashPassword', () => {
-    it('should hash password', async () => {
-      const password = 'secure_password_123';
-      const hash = await authService.hashPassword(password);
-      expect(hash).toBeDefined();
-      expect(hash).not.toBe(password);
-      expect(hash.length).toBeGreaterThan(20);
-    });
-
-    it('should produce different hash for same password', async () => {
-      const password = 'test_password';
-      const hash1 = await authService.hashPassword(password);
-      const hash2 = await authService.hashPassword(password);
-      expect(hash1).not.toBe(hash2);
-    });
+  test('rejects the stored bcrypt hash as a login password', async () => {
+    storedUser();
+    await expect(authService.loginUser(user.email, passwordHash)).rejects.toThrow('Invalid credentials');
   });
 
-  describe('comparePassword', () => {
-    it('should match correct password', async () => {
-      const password = 'test_password';
-      const hash = await authService.hashPassword(password);
-      const match = await authService.comparePassword(password, hash);
-      expect(match).toBe(true);
-    });
-
-    it('should reject incorrect password', async () => {
-      const password = 'test_password';
-      const hash = await authService.hashPassword(password);
-      const match = await authService.comparePassword('wrong_password', hash);
-      expect(match).toBe(false);
-    });
+  test.each([
+    ['password', '$2a$10$test'],
+    ['plaintext-password', 'plaintext-password'],
+    ['password', null],
+  ])('rejects unsupported password storage (%s)', async (password, hash) => {
+    storedUser(hash);
+    await expect(authService.loginUser(user.email, password)).rejects.toThrow('Invalid credentials');
   });
+
+  test('rejects missing users', async () => {
+    await expect(authService.loginUser(user.email, 'wrong')).rejects.toThrow('Invalid credentials');
+  });
+
+  test.each([
+    { issuer: 'wrong-issuer' },
+    { audience: 'wrong-audience' },
+    { algorithm: 'HS384' },
+    { expiresIn: -1 },
+  ])('rejects invalid token constraints %j', overrides => {
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
+      issuer: process.env.JWT_ISSUER || 'afrera-platform',
+      audience: process.env.JWT_AUDIENCE || 'afrera-users',
+      expiresIn: '15m', ...overrides,
+    });
+    expect(() => authService.verifyToken(token)).toThrow();
+  });
+
+  test('rejects tokens missing issuer and audience', () => {
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+    expect(() => authService.verifyToken(token)).toThrow('Invalid token');
+  });
+});
+
+describe('shared password verification', () => {
+  test('hashes with independent salts and verifies only the matching password', async () => {
+    const first = await hashPassword('a-real-password');
+    const second = await hashPassword('a-real-password');
+    expect(first).not.toBe(second);
+    await expect(comparePassword('a-real-password', first)).resolves.toBe(true);
+    await expect(comparePassword('wrong', first)).resolves.toBe(false);
+    await expect(comparePassword(first, first)).resolves.toBe(false);
+  });
+
+  test.each([[null, null], [{}, 'password'], ['password', '$2a$10$test'], ['password', 'password']])(
+    'fails closed for invalid credentials %j / %j', async (password, hash) => {
+      await expect(comparePassword(password, hash)).resolves.toBe(false);
+    },
+  );
 });

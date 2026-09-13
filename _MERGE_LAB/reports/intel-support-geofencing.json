@@ -1,0 +1,42 @@
+[
+  {
+    "stem": "geofencingroutes.js",
+    "candidateCount": 5,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 7,
+    "uniquePerSource": {
+      "claude": [
+        "boundedPage",
+        "route:PUT:/zones/:id",
+        "route:DELETE:/zones/:id",
+        "route:POST:/zones/:id/check",
+        "route:GET:/zones/:id/events",
+        "route:GET:/zones/:id/current",
+        "route:POST:/check-polygon"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  },
+  {
+    "stem": "geofencingservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 2,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M560100_GEOFENCING\\backend\\service.js",
+      "backend\\src\\routes\\geofencingRoutes.js",
+      "backend\\src\\services\\geofencingService.js"
+    ]
+  }
+]

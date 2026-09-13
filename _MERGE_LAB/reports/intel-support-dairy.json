@@ -1,0 +1,39 @@
+[
+  {
+    "stem": "dairyservice.js",
+    "candidateCount": 4,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 15,
+    "uniquePerSource": {},
+    "wiredReferences": [
+      "backend\\src\\modules\\M102_DAIRY_MANAGEMENT\\backend\\service.js",
+      "backend\\src\\services\\dairyService.js"
+    ]
+  },
+  {
+    "stem": "dairyroutes.js",
+    "candidateCount": 6,
+    "sources": [
+      "backup",
+      "claude",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 12,
+    "uniquePerSource": {
+      "claude": [
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:POST:/",
+        "route:PUT:/:id",
+        "route:DELETE:/:id"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

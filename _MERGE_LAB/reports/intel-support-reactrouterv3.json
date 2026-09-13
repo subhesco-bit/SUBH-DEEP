@@ -1,0 +1,18 @@
+[
+  {
+    "stem": "reactrouterv3.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "reactRouterV3BrowserTracingIntegration",
+        "normalizeTransactionName",
+        "getRouteStringFromRoutes"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

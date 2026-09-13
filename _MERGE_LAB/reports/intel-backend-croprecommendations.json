@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "croprecommendations.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/recommendations/crops",
+        "route:GET:/crops/:type/guidance",
+        "route:GET:/crops/:type/market-outlook"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

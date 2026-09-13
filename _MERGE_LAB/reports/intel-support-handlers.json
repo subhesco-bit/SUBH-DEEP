@@ -1,0 +1,28 @@
+[
+  {
+    "stem": "handlers.js",
+    "candidateCount": 4,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "wrapMethodHandler",
+        "createWrappedHandler",
+        "createErrorCapturingHandler",
+        "captureHandlerError",
+        "wrapToolHandlers",
+        "wrapResourceHandlers",
+        "wrapPromptHandlers",
+        "wrapAllMCPHandlers",
+        "wrapExistingHandlers",
+        "addHandler",
+        "resetInstrumentationHandlers",
+        "maybeInstrument",
+        "triggerHandlers"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

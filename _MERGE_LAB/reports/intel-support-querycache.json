@@ -1,0 +1,26 @@
+[
+  {
+    "stem": "querycache.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "extends"
+      ]
+    },
+    "wiredReferences": []
+  },
+  {
+    "stem": "querycache.cjs",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

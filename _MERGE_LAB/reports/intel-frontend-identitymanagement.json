@@ -1,0 +1,19 @@
+[
+  {
+    "stem": "identitymanagementpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "IdentityManagementPage"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M501100_IDENTITYMANAGEMENT\\frontend\\index.jsx",
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "stem": "medicalcodingdashboardpage.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "MedicalCodingDashboardPage",
+        "getConditionColor",
+        "getConditionIcon"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\config\\routes.js"
+    ]
+  }
+]

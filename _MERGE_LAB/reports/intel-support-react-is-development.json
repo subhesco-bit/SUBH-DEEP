@@ -1,0 +1,41 @@
+[
+  {
+    "stem": "react-is.development.js",
+    "candidateCount": 2,
+    "sources": [
+      "node-modules"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "node-modules": [
+        "isValidElementType",
+        "typeOf",
+        "isAsyncMode",
+        "isConcurrentMode",
+        "isContextConsumer",
+        "isContextProvider",
+        "isElement",
+        "isForwardRef",
+        "isFragment",
+        "isLazy",
+        "isMemo",
+        "isPortal",
+        "isProfiler",
+        "isStrictMode",
+        "isSuspense",
+        "ContextConsumer",
+        "ContextProvider",
+        "Element",
+        "ForwardRef",
+        "Fragment",
+        "Lazy",
+        "Memo",
+        "Portal",
+        "Profiler",
+        "StrictMode",
+        "Suspense"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "stem": "cables.json",
+    "candidateCount": 33,
+    "sources": [
+      "claude",
+      "modules",
+      "old-new-folder"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {},
+    "wiredReferences": []
+  }
+]

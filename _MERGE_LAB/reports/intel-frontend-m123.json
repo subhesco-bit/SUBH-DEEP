@@ -1,0 +1,32 @@
+[
+  {
+    "stem": "m123page.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M123Page"
+      ]
+    },
+    "wiredReferences": [
+      "frontend\\src\\modules\\M123\\index.jsx"
+    ]
+  },
+  {
+    "stem": "m123component.jsx",
+    "candidateCount": 1,
+    "sources": [
+      "frontend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "frontend-current": [
+        "M123Component"
+      ]
+    },
+    "wiredReferences": []
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "stem": "rolemanagementservice.js",
+    "candidateCount": 2,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "RoleManagementService"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\modules\\M209100_ROLEMANAGEMENT\\backend\\service.js",
+      "backend\\src\\routes\\roleManagementRoutes.js",
+      "backend\\src\\services\\roleManagementService.js"
+    ]
+  },
+  {
+    "stem": "rolemanagementroutes.js",
+    "candidateCount": 1,
+    "sources": [
+      "backend-current"
+    ],
+    "sharedSymbolCount": 0,
+    "uniquePerSource": {
+      "backend-current": [
+        "route:POST:/",
+        "route:GET:/",
+        "route:GET:/:id",
+        "route:PUT:/:id",
+        "route:DELETE:/:id",
+        "route:POST:/:id/permissions/:permissionId",
+        "route:DELETE:/:id/permissions/:permissionId",
+        "route:POST:/optimize",
+        "route:GET:/permissions/analysis"
+      ]
+    },
+    "wiredReferences": [
+      "backend\\src\\index.js"
+    ]
+  }
+]

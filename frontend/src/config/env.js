@@ -34,8 +34,15 @@ const configSchema = {
   // API Configuration
   API_URL: {
     required: true,
-    default: `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001'}/api/v1`,
+    // VITE_API_BASE_URL is the COMPLETE api base, matching how services/api.js
+    // reads it. This previously treated it as an origin and appended /api/v1,
+    // so the two disagreed and a configured base produced /api/v1/api/v1.
+    default: import.meta.env.VITE_API_BASE_URL || '/api/v1',
     validate: (value) => {
+      if (typeof value !== 'string' || !value) return false;
+      // A same-origin base ("/api/v1") is the default in dev, where Vite
+      // proxies /api to the backend. new URL() alone rejects those.
+      if (value.startsWith('/')) return true;
       try {
         new URL(value);
         return true;

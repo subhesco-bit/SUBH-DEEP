@@ -46,8 +46,12 @@ export default defineConfig(async () => {
     server: {
       port: 5173,
       proxy: {
+        // The dev backend port comes from backend/.env.local (PORT=5000), which
+        // dotenv loads before backend/.env. This previously targeted 3000 — the
+        // code default, not the configured port — so every /api call in dev hit
+        // a closed port. Override with VITE_PROXY_TARGET when running elsewhere.
         '/api': {
-          target: 'http://localhost:3000',
+          target: process.env.VITE_PROXY_TARGET || 'http://localhost:5000',
           changeOrigin: true,
         },
       },

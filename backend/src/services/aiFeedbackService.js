@@ -7,12 +7,28 @@ const { getPostgreSQL } = require('../database/connection');
 
 class AIFeedbackService {
   constructor() {
-    this.pool = null;
+    // Resolve the shared pool on each read. getPostgreSQL() returns null
+    // until database/connection.js has initialised it, and module init can
+    // run first — caching that null left every query dereferencing null for
+    // the life of the process.
+    Object.defineProperty(this, 'pool', {
+      configurable: true,
+      get: () => getPostgreSQL(),
+      set: () => {}, // connection.js owns the pool lifecycle
+    });
   }
 
   async getPool() {
     if (!this.pool) {
-      this.pool = await getPostgreSQL();
+      // Resolve the shared pool on each read. getPostgreSQL() returns null
+      // until database/connection.js has initialised it, and module init can
+      // run first — caching that null left every query dereferencing null for
+      // the life of the process.
+      Object.defineProperty(this, 'pool', {
+        configurable: true,
+        get: () => getPostgreSQL(),
+        set: () => {}, // connection.js owns the pool lifecycle
+      });
     }
     return this.pool;
   }

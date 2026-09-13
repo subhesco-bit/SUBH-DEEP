@@ -25,7 +25,7 @@
 
 const express = require('express');
 const router = express.Router();
-const AIBackboneService = require('../../../modules/M400_AI_BACKBONE/backend/service');
+const AIBackboneService = require('../modules/M400_AI_BACKBONE/backend/service');
 const { authMiddleware } = require('../middleware/auth');
 const { adminMiddleware } = require('../middleware/admin');
 

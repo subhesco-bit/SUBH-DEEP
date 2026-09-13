@@ -9,7 +9,15 @@ class AIBackboneService {
   constructor() {
     this.moduleId = 'M400_AI_BACKBONE';
     this.config = null;
-    this.pool = null;
+    // Resolve the shared pool on each read. getPostgreSQL() returns null
+    // until database/connection.js has initialised it, and module init can
+    // run first — caching that null left every query dereferencing null for
+    // the life of the process.
+    Object.defineProperty(this, 'pool', {
+      configurable: true,
+      get: () => getPostgreSQL(),
+      set: () => {}, // connection.js owns the pool lifecycle
+    });
     
     // AI Components
     this.decisionEngine = null;
@@ -35,7 +43,15 @@ class AIBackboneService {
       console.log(`Initializing ${this.moduleId}...`);
       
       this.config = config || {};
-      this.pool = await getPostgreSQL();
+      // Resolve the shared pool on each read. getPostgreSQL() returns null
+      // until database/connection.js has initialised it, and module init can
+      // run first — caching that null left every query dereferencing null for
+      // the life of the process.
+      Object.defineProperty(this, 'pool', {
+        configurable: true,
+        get: () => getPostgreSQL(),
+        set: () => {}, // connection.js owns the pool lifecycle
+      });
       
       // Initialize AI engines
       await this.initializeDecisionEngine();

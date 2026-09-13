@@ -10,7 +10,7 @@
  * (raw return values, not the {success,data} envelope) unchanged.
  */
 
-const PlatformCoreModule = require('../../../../modules/M001_PLATFORM_CORE/backend/service');
+const PlatformCoreModule = require('../M001_PLATFORM_CORE/backend/service');
 
 let moduleInstance = null;
 async function getModule() {

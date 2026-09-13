@@ -9,14 +9,30 @@ class RoleManagementService {
   constructor() {
     this.moduleId = 'M004_ROLE_MANAGEMENT';
     this.config = null;
-    this.pool = null;
+    // Resolve the shared pool on each read. getPostgreSQL() returns null
+    // until database/connection.js has initialised it, and module init can
+    // run first — caching that null left every query dereferencing null for
+    // the life of the process.
+    Object.defineProperty(this, 'pool', {
+      configurable: true,
+      get: () => getPostgreSQL(),
+      set: () => {}, // connection.js owns the pool lifecycle
+    });
   }
 
   async initialize(config) {
     try {
       console.log(`Initializing ${this.moduleId}...`);
       this.config = config || {};
-      this.pool = await getPostgreSQL();
+      // Resolve the shared pool on each read. getPostgreSQL() returns null
+      // until database/connection.js has initialised it, and module init can
+      // run first — caching that null left every query dereferencing null for
+      // the life of the process.
+      Object.defineProperty(this, 'pool', {
+        configurable: true,
+        get: () => getPostgreSQL(),
+        set: () => {}, // connection.js owns the pool lifecycle
+      });
       await this.initializeDatabase();
       console.log(`${this.moduleId} initialized successfully`);
       return { success: true, message: 'Module initialized successfully', moduleId: this.moduleId };

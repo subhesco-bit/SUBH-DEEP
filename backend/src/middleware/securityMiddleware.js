@@ -8,7 +8,13 @@ const rateLimit = (() => {
   const requests = new Map();
   const maxTrackedClients = 10000;
 
-  return (maxRequests = 100, windowMs = 15 * 60 * 1000) => {
+  const envMax = Number(process.env.RATE_LIMIT_MAX_REQUESTS);
+  const envWindow = Number(process.env.RATE_LIMIT_WINDOW_MS);
+
+  return (
+    maxRequests = Number.isFinite(envMax) && envMax > 0 ? envMax : 100,
+    windowMs = Number.isFinite(envWindow) && envWindow > 0 ? envWindow : 15 * 60 * 1000,
+  ) => {
     return (req, res, next) => {
       const ip = req.ip || req.connection.remoteAddress;
       const now = Date.now();

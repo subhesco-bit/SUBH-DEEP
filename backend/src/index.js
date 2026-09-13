@@ -990,10 +990,23 @@ async function startup() {
     // Step 11: Route discovery API (for debugging)
     app.get('/api/v1/system/routes', authMiddleware, requireRole('admin', 'superadmin'), async (req, res) => {
       try {
+        // This used to hardcode .slice(0, 100) with no way to ask for more, so
+        // it reported total: 648 and returned 100 — the route table could not
+        // actually be enumerated through the endpoint meant to enumerate it.
         const result = routeLoader.getMountedRoutes();
+        const offset = Math.max(0, parseInt(req.query.offset, 10) || 0);
+        const rawLimit = parseInt(req.query.limit, 10);
+        const limit = Number.isFinite(rawLimit) && rawLimit > 0
+          ? Math.min(rawLimit, 1000)
+          : 100;
+        const page = result.slice(offset, offset + limit);
         res.json({
           total: result.length,
-          routes: result.slice(0, 100),
+          offset,
+          limit,
+          returned: page.length,
+          hasMore: offset + page.length < result.length,
+          routes: page,
         });
       } catch (error) {
         res.status(500).json({ error: error.message });

@@ -54,6 +54,56 @@ const colors = {
 
 winston.addColors(colors);
 
+/**
+ * JSON.stringify that cannot throw.
+ *
+ * The formatter below used to call JSON.stringify(metadata) directly. Logging
+ * any error whose metadata carried a circular structure — an axios failure
+ * holds a ClientRequest whose `res.req` points back at itself — threw
+ * "Converting circular structure to JSON" *inside the logger*. Winston has no
+ * handler above that, so the exception reached the top and killed the process:
+ * a single loggable error was enough to take the server down.
+ *
+ * Circular references are replaced with a marker, and any residual failure
+ * degrades to a note rather than propagating. A logger must never be the thing
+ * that crashes the application.
+ */
+function safeStringify(value) {
+  const seen = new WeakSet();
+  try {
+    return JSON.stringify(value, (key, val) => {
+      if (val instanceof Error) {
+        return { name: val.name, message: val.message, stack: val.stack, code: val.code };
+      }
+      if (typeof val === 'bigint') return val.toString();
+      if (typeof val === 'function') return `[Function ${val.name || 'anonymous'}]`;
+      if (val && typeof val === 'object') {
+        if (seen.has(val)) return '[Circular]';
+        seen.add(val);
+      }
+      return val;
+    });
+  } catch (error) {
+    return JSON.stringify({ logSerializationError: error.message });
+  }
+}
+
+/**
+ * Parse back the redacted metadata. Redaction is regex-based over the
+ * serialized string, so it can leave output that is no longer valid JSON —
+ * which would throw here and crash the logger for the same reason
+ * safeStringify exists.
+ */
+function safeParse(text) {
+  if (!text) return {};
+  try {
+    const parsed = JSON.parse(text);
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch {
+    return { unparsableMeta: String(text).slice(0, 2000) };
+  }
+}
+
 // Define log format with redaction
 const logFormat = winston.format.combine(
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
@@ -61,8 +111,8 @@ const logFormat = winston.format.combine(
   winston.format.splat(),
   winston.format.printf(({ timestamp, level, message, ...metadata }) => {
     const redactedMessage = redactSensitiveData(message);
-    const redactedMeta = redactSensitiveData(JSON.stringify(metadata));
-    return JSON.stringify({ timestamp, level, message: redactedMessage, ...JSON.parse(redactedMeta || '{}') });
+    const redactedMeta = redactSensitiveData(safeStringify(metadata));
+    return JSON.stringify({ timestamp, level, message: redactedMessage, ...safeParse(redactedMeta) });
   }),
 );
 
@@ -74,7 +124,7 @@ const consoleFormat = winston.format.combine(
     const redactedMessage = redactSensitiveData(message);
     let msg = `${timestamp} [${level}]: ${redactedMessage}`;
     if (Object.keys(metadata).length > 0) {
-      const redactedMeta = redactSensitiveData(JSON.stringify(metadata));
+      const redactedMeta = redactSensitiveData(safeStringify(metadata));
       msg += ` ${redactedMeta}`;
     }
     return msg;

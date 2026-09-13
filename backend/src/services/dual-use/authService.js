@@ -374,16 +374,19 @@ async function registerUser(userData) {
 
     // Insert user profile
     const profileQuery = `
-      INSERT INTO user_profiles (user_id, first_name, last_name, phone)
-      VALUES ($1, $2, $3, $4)
+      INSERT INTO user_profiles (user_id, first_name, last_name)
+      VALUES ($1, $2, $3)
       RETURNING *
     `;
 
+    // phone is a column on users, not user_profiles, and is already written by
+    // the INSERT above. Passing it here made every registration fail with
+    // 'column "phone" of relation "user_profiles" does not exist' — so no
+    // account could be created at all.
     const profileResult = await pg.query(profileQuery, [
       user.id,
       registrationData.first_name || '',
       registrationData.last_name || '',
-      registrationData.phone || '',
     ]);
 
     // Generate tokens

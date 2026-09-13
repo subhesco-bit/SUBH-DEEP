@@ -34,8 +34,44 @@ const arg = (n, d) => {
 };
 const PORT = Number(arg('--port', 5000));
 const JSON_OUT = process.argv.includes('--json') ? process.argv[process.argv.indexOf('--json') + 1] : null;
-const TOKEN = process.env.AUDIT_TOKEN || '';
+let TOKEN = process.env.AUDIT_TOKEN || '';
 const CONCURRENCY = 10;
+
+// Access tokens live 15 minutes and a full probe of ~1,300 endpoints takes
+// longer than that, so a run started with one token dies halfway through with
+// every remaining request reporting 401. Given credentials, the tool mints its
+// own token and re-mints on expiry.
+const AUDIT_EMAIL = process.env.AUDIT_EMAIL || '';
+const AUDIT_PASSWORD = process.env.AUDIT_PASSWORD || '';
+
+function login() {
+  return new Promise((resolve) => {
+    const body = JSON.stringify({ email: AUDIT_EMAIL, password: AUDIT_PASSWORD });
+    const req = http.request(
+      {
+        host: '127.0.0.1',
+        port: PORT,
+        path: '/api/v1/auth/login',
+        method: 'POST',
+        timeout: 15000,
+        headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) },
+      },
+      (res) => {
+        let out = '';
+        res.on('data', (c) => { out += c; });
+        res.on('end', () => {
+          try {
+            const d = JSON.parse(out).data || {};
+            resolve(d.access_token || d.token || '');
+          } catch { resolve(''); }
+        });
+      },
+    );
+    req.on('timeout', () => { req.destroy(); resolve(''); });
+    req.on('error', () => resolve(''));
+    req.end(body);
+  });
+}
 
 function get(p) {
   return new Promise((resolve) => {
@@ -66,6 +102,7 @@ function walk(dir, out = []) {
 (async () => {
   console.log('\n══════════ ROUTE REACHABILITY ══════════\n');
 
+  if (!TOKEN && AUDIT_EMAIL && AUDIT_PASSWORD) TOKEN = await login();
   if (!TOKEN) {
     console.error('  AUDIT_TOKEN is not set. Without an admin token the global auth guard');
     console.error('  answers 401 before routing and every path looks mounted. Aborting.\n');
@@ -138,7 +175,16 @@ function walk(dir, out = []) {
     for (;;) {
       const t = queue.shift();
       if (!t) return;
-      const r = await get(t.path);
+      let r = await get(t.path);
+      // A 401 mid-run means the token aged out, not that the route is
+      // protected differently — re-mint once and retry before recording.
+      if (r.status === 401 && AUDIT_EMAIL && AUDIT_PASSWORD) {
+        const fresh = await login();
+        if (fresh) {
+          TOKEN = fresh;
+          r = await get(t.path);
+        }
+      }
       results.push({ ...t, status: r.status });
       if (++done % 100 === 0) process.stderr.write(`  …${done}/${uniq.length}\n`);
     }

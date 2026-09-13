@@ -141,6 +141,57 @@ const CLASSES = Object.freeze({
   },
 
   // -----------------------------------------------------------------
+  generative_media: {
+    id: 'generative_media',
+    label: 'Generative Media & Vision',
+    horizon: 'short-term',
+    applications: [
+      'product imagery for listings',
+      'farmer portal imagery',
+      'illustration and cartoon assets for tutorials',
+      'crop and disease image recognition',
+    ],
+    endpoints: [
+      '/api/v1/ai-image-generation-enhanced',
+      '/api/v1/product-image-auto-generation',
+      '/api/v1/ecommerce-image-integration',
+      '/api/v1/farmer-image-portal',
+      '/api/v1/vision',
+    ],
+    rationale:
+      'Separated from Frontier AI Models deliberately. Both call large models, ' +
+      'but the failure modes have nothing in common. A wrong sentence in a DPR ' +
+      'is caught on review; a generated product photograph is taken as evidence ' +
+      'of real goods and can misrepresent what a farmer is actually selling. ' +
+      'Vision recognition carries the mirror risk — a confident misread of crop ' +
+      'disease drives a spraying decision.',
+    backing: {
+      imageGeneration: lazy('../../services/aiImageGenerationEnhancedService'),
+      productImages: lazy('../../services/productImageAutoGenerationService'),
+      farmerPortal: lazy('../../services/farmerImagePortalService'),
+      vision: lazy('../../services/legacy/visionService'),
+      guardrails: lazy('./aiGuardrails'),
+      provenanceLabelling: null,
+    },
+    consumes: [],
+    emits: [],
+    autonomy: AUTONOMY.ADVISE,
+    state: STATE.BUILT,
+    stateNote:
+      'Five services exist and are mounted, including auto-generation hooked ' +
+      'into product pages. What is missing is provenance: nothing marks a ' +
+      'generated image as generated. A synthetic product photograph presented ' +
+      'beside a real one, on a marketplace where buyers judge quality visually, ' +
+      'is a misrepresentation risk regardless of intent — so this class stays ' +
+      'at advise until generated assets are labelled at the point of storage.',
+    risks: [
+      'a generated product image read as a photograph of real goods',
+      'confident misclassification driving a field treatment',
+      'no provenance marking on stored assets',
+    ],
+  },
+
+  // -----------------------------------------------------------------
   agentic: {
     id: 'agentic',
     label: 'Agentic AI',

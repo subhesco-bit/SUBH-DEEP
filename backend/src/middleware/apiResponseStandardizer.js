@@ -188,6 +188,36 @@ function trackResponseTime() {
           // Never let instrumentation break a response.
         }
       }
+
+      // Guard the status code itself.
+      //
+      // Node throws ERR_HTTP_INVALID_STATUS_CODE from writeHead when the code
+      // is not a valid number. That throw happens while the response is being
+      // written — outside any route's try/catch — so it reaches the top and
+      // kills the process. A handler doing res.status(someServiceMessage) is
+      // therefore a denial of service, not a 500. This crashed the server on
+      // a subsidy route with "Invalid status code: Failed to retrieve subsidy
+      // programs".
+      //
+      // Static analysis found no literal offenders, so the bad value arrives at
+      // runtime from service return shapes. Coercing here fixes every such
+      // path at once, including ones not yet written.
+      const code = Number(res.statusCode);
+      if (!Number.isInteger(code) || code < 100 || code > 599) {
+        try {
+          logger.error('Invalid HTTP status code replaced with 500', {
+            received: res.statusCode,
+            type: typeof res.statusCode,
+            path: req.originalUrl || req.url,
+            method: req.method,
+          });
+        } catch {
+          // Logging must not be able to break the response either.
+        }
+        res.statusCode = 500;
+        if (typeof args[0] !== 'undefined' && typeof args[0] !== 'object') args[0] = 500;
+      }
+
       return originalWriteHead.apply(this, args);
     };
 

@@ -922,9 +922,15 @@ async function startup() {
         const { reflexEngine } = require('./core/reflexEngine');
         const { registerEffectors } = require('./core/effectors');
 
+        const humanReviewBridge = require('./core/humanReviewBridge');
+
         decisionEngine.start();   // subscribes '*' — evaluates every signal
         reflexEngine.start();     // subscribes each reflex's declared signalTypes
         const effectorCount = registerEffectors();
+        // Decisions stamped requiresHuman were produced and then discarded;
+        // this files them into ai_proposals, which v_ai_approval_queue serves.
+        humanReviewBridge.start();
+        app.locals.humanReviewBridge = humanReviewBridge;
 
         app.locals.decisionEngine = decisionEngine;
         app.locals.reflexEngine = reflexEngine;

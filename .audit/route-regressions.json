@@ -1,0 +1,501 @@
+[
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/agriculture/farmerTrainingRoutes.js",
+    "live": "backend\\src\\routes\\farmerTrainingRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/ai/aiBackboneRoutes.js",
+    "live": "backend\\src\\routes\\aiBackboneRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/ai/aiBrainRoutes.js",
+    "live": "backend\\src\\routes\\aiBrainRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/ai/aiGatewayRoutes.js",
+    "live": "backend\\src\\routes\\aiGatewayRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/ai/aiOperationIntelligenceRoutes.js",
+    "live": "backend\\src\\routes\\aiOperationIntelligenceRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/ai/aiSelfHealingRoutes.js",
+    "live": "backend\\src\\routes\\aiSelfHealingRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/ai/completeAIIntegrationRoutes.js",
+    "live": "backend\\src\\routes\\completeAIIntegrationRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/ai/nervousSystemRoutes.js",
+    "live": "backend\\src\\routes\\nervousSystemRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/ai/visionRoutes.js",
+    "live": "backend\\src\\routes\\visionRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/commerce/ecommerceAIRoutes.js",
+    "live": "backend\\src\\routes\\ecommerceAIRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/commerce/ecommerceBusinessSalesRoutes.js",
+    "live": "backend\\src\\routes\\ecommerceBusinessSalesRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/commerce/ecommerceERPRoutes.js",
+    "live": "backend\\src\\routes\\ecommerceERPRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/commerce/ecommerceIntegrationRoutes.js",
+    "live": "backend\\src\\routes\\ecommerceIntegrationRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/commerce/ecommerceMarketingRoutes.js",
+    "live": "backend\\src\\routes\\ecommerceMarketingRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/commerce/ecommerceRoutes.js",
+    "live": "backend\\src\\routes\\ecommerceRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/commerce/nutrientValueSalesRoutes.js",
+    "live": "backend\\src\\routes\\nutrientValueSalesRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/livestock/pigRoutes.js",
+    "live": "backend\\src\\routes\\pigRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/livestock/poultryRoutes.js",
+    "live": "backend\\src\\routes\\poultryRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/livestock/sheepRoutes.js",
+    "live": "backend\\src\\routes\\sheepRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/platform/platformCoreRoutes.js",
+    "live": "backend\\src\\routes\\platformCoreRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/platform/serverManagementRoutes.js",
+    "live": "backend\\src\\routes\\serverManagementRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/platform/startupEnvironmentRoutes.js",
+    "live": "backend\\src\\routes\\startupEnvironmentRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "POST /",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/agriculture/climateAdvisoryRoutes.js",
+    "live": "backend\\src\\routes\\climateAdvisoryRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/agriculture/fertilizerRoutes.js",
+    "live": "backend\\src\\routes\\fertilizerRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/ai/aiAgentRoutes.js",
+    "live": "backend\\src\\routes\\aiAgentRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/platform/platformConfigurationRoutes.js",
+    "live": "backend\\src\\routes\\platformConfigurationRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/platform/researchAndDevelopmentRoutes.js",
+    "live": "backend\\src\\routes\\researchAndDevelopmentRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/platform/sapModuleArchitectureRoutes.js",
+    "live": "backend\\src\\routes\\sapModuleArchitectureRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/platform/systemAdministrationRoutes.js",
+    "live": "backend\\src\\routes\\systemAdministrationRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/platform/tenantManagementRoutes.js",
+    "live": "backend\\src\\routes\\tenantManagementRoutes.js",
+    "missing": [
+      "GET /",
+      "GET /:id",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/platform/projectSystemsRoutes.js",
+    "live": "backend\\src\\routes\\projectSystemsRoutes.js",
+    "missing": [
+      "GET /:id",
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/commerce/dprGenerationRoutes.js",
+    "live": "backend\\src\\routes\\dprGenerationRoutes.js",
+    "missing": [
+      "PUT /:id",
+      "DELETE /:id"
+    ],
+    "total": 5
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/agriculture/foluBenchmarkRoutes.js",
+    "live": "backend\\src\\routes\\foluBenchmarkRoutes.js",
+    "missing": [
+      "POST /"
+    ],
+    "total": 2
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/claude/unifiedAIRoutes.js",
+    "live": "backend\\src\\routes\\unifiedAIRoutes.js",
+    "missing": [
+      "POST /"
+    ],
+    "total": 2
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/commerce/demandRoutes.js",
+    "live": "backend\\src\\routes\\demandRoutes.js",
+    "missing": [
+      "POST /"
+    ],
+    "total": 2
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/commerce/glutWarningRoutes.js",
+    "live": "backend\\src\\routes\\glutWarningRoutes.js",
+    "missing": [
+      "POST /"
+    ],
+    "total": 2
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/dual-use/gdprRoutes.js",
+    "live": "backend\\src\\routes\\gdprRoutes.js",
+    "missing": [
+      "POST /"
+    ],
+    "total": 2
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/enterpriseAIRoutes.js",
+    "live": "backend\\src\\routes\\ai\\enterpriseAIRoutes.js",
+    "missing": [
+      "POST /"
+    ],
+    "total": 2
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/farmerHealthRoutes.js",
+    "live": "backend\\src\\routes\\agriculture\\farmerHealthRoutes.js",
+    "missing": [
+      "POST /"
+    ],
+    "total": 2
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/finance/recoveredFinanceRoutes.js",
+    "live": "backend\\src\\routes\\recoveredFinanceRoutes.js",
+    "missing": [
+      "POST /"
+    ],
+    "total": 2
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/finance/revenueRoutes.js",
+    "live": "backend\\src\\routes\\revenueRoutes.js",
+    "missing": [
+      "POST /"
+    ],
+    "total": 2
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/gstRoutes.js",
+    "live": "backend\\src\\routes\\finance\\gstRoutes.js",
+    "missing": [
+      "POST /"
+    ],
+    "total": 2
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/logistics/trackDartRoutes.js",
+    "live": "backend\\src\\routes\\trackDartRoutes.js",
+    "missing": [
+      "POST /"
+    ],
+    "total": 2
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/platform/wikipediaRoutes.js",
+    "live": "backend\\src\\routes\\wikipediaRoutes.js",
+    "missing": [
+      "POST /"
+    ],
+    "total": 2
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/strategic/contractFarmingRoutes.js",
+    "live": "backend\\src\\routes\\contractFarmingRoutes.js",
+    "missing": [
+      "POST /"
+    ],
+    "total": 2
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/strategic/governmentSubsidyRoutes.js",
+    "live": "backend\\src\\routes\\governmentSubsidyRoutes.js",
+    "missing": [
+      "POST /"
+    ],
+    "total": 2
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/strategic/householdProcurementRoutes.js",
+    "live": "backend\\src\\routes\\householdProcurementRoutes.js",
+    "missing": [
+      "POST /"
+    ],
+    "total": 2
+  },
+  {
+    "snap": "_ACTIVE_PROJECT/current/backend/src/routes/strategic/preSeasonPurchaseRoutes.js",
+    "live": "backend\\src\\routes\\preSeasonPurchaseRoutes.js",
+    "missing": [
+      "POST /"
+    ],
+    "total": 2
+  }
+]

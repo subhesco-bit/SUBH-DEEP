@@ -1,0 +1,84 @@
+{
+  "generated_at": "2026-09-12T14:09:15.082Z",
+  "mode": "provider-neutral-multi-agent-orchestrator",
+  "source_preservation": {
+    "originals_modified": 0,
+    "originals_deleted": 0,
+    "policy": "Source roots are immutable evidence. Cleanup applies only to the new unified project after validation."
+  },
+  "project": {
+    "source": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_ACTIVE_PROJECT\\current",
+    "target": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_UNIFIED_PROJECT\\current",
+    "copy_status": "existing-copy-preserved",
+    "baseline_files": 9398,
+    "copy_verification": {
+      "target_files": 9398,
+      "verified_identical": 9398,
+      "hash_mismatches": 0,
+      "missing_from_source": 0,
+      "passed": true
+    }
+  },
+  "scan": {
+    "totalScanned": 512239,
+    "eligibleFiles": 66518,
+    "excludedFiles": 445721,
+    "excludedByReason": {
+      "secret_or_credential": 22,
+      "generated_project_artifact": 36247,
+      "backup_or_archive": 17565,
+      "library_generated_artifact": 29,
+      "build_output": 1226,
+      "agent_workspace": 7951,
+      "dependency_cache": 359686,
+      "source_control_metadata": 22995
+    }
+  },
+  "grouping": {
+    "duplicateGroups": 4746,
+    "duplicateFiles": 64188,
+    "exactDuplicateGroups": 2229,
+    "divergentGroups": 2517,
+    "purposeConflictGroups": 1600,
+    "filesRenamedAndPlaced": 17563,
+    "redundantCandidatesCollapsed": 28214,
+    "unifiedFilesFrozen": 2229,
+    "mergeTasksQueued": 2864,
+    "placementTasksQueued": 2569,
+    "testCyclesExecuted": 2229,
+    "testPasses": 2229,
+    "testFailures": 0
+  },
+  "state": "feature-merge-batches-ready",
+  "next_action": "Merge assigned groups by feature, add behavior tests, and freeze only passing implementations.",
+  "outputs": {
+    "summary": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_UNIFIED_PROJECT\\audit\\orchestrator-summary.json",
+    "progress": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_UNIFIED_PROJECT\\audit\\orchestrator-progress.json",
+    "groups": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_UNIFIED_PROJECT\\audit\\duplicate-groups.jsonl",
+    "studies": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_UNIFIED_PROJECT\\audit\\file-feature-study.jsonl",
+    "renamePlan": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_UNIFIED_PROJECT\\audit\\rename-placement-plan.csv",
+    "mergePlan": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_UNIFIED_PROJECT\\audit\\merge-plan.jsonl",
+    "tests": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_UNIFIED_PROJECT\\audit\\test-results.jsonl",
+    "cleanup": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_UNIFIED_PROJECT\\audit\\cleanup-plan.csv",
+    "baseline": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_UNIFIED_PROJECT\\audit\\unified-project-baseline.csv",
+    "report": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_UNIFIED_PROJECT\\audit\\FINAL_INTEGRATION_REPORT.md",
+    "workspaceReadme": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_UNIFIED_PROJECT\\merge-workspace\\README.md"
+  },
+  "semantic_validation": {
+    "groupsProcessed": 5433,
+    "candidatesVerified": 17563,
+    "candidateFailures": 0,
+    "semanticEquivalentGroupsFrozen": 1316,
+    "placementOnlyTasksValidated": 2569,
+    "groupsRequiringFeatureMerge": 1520,
+    "unsupportedOrOversizeGroups": 28,
+    "completed_at": "2026-09-12T14:10:21.917Z",
+    "validation_log": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_UNIFIED_PROJECT\\audit\\semantic-validation-results.jsonl",
+    "multi_agent_assignments": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_UNIFIED_PROJECT\\audit\\multi-agent-assignments.jsonl"
+  },
+  "runtime_overlay": {
+    "integrated_at": "2026-09-12T14:10:33.355Z",
+    "files_integrated": 8,
+    "manifest": "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_UNIFIED_PROJECT\\audit\\runtime-overlay-manifest.json"
+  }
+}

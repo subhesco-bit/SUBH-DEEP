@@ -56,9 +56,17 @@ const CLASSIFIERS = [
   // explanation — different failure modes from text reasoning.
   ['generative_media', /image|photo|cartoon|avatar|vision|render|3d|media|illustrat|video|voice|speech|vernacular/i],
 
+  // Goes OUT and gathers evidence: monitors government portals, extracts
+  // structured data, tracks what universities publish, and makes predictions
+  // that can later be scored against what happened. Placed before
+  // frontier_models because the distinction is what the capability DOES, not
+  // what it runs on — both use large models, but reasoning over a document you
+  // are handed is a different job from discovering the document.
+  ['artificial_scientists', /extract|scrap|crawl|harvest|data\.gov|public.?domain|gazette|univers|icar|kvk|price.?forecast|forecast.?price|price.?predict|market.?research|price.?research|mandi|agmarknet|trial|experiment|hypothes|study|benchmark|mrv|variety.?performance|research.?and.?development|crop.?value.?research/i],
+
   // Reasoning over documents, research and advice — where an external engine
   // and current outside information are required.
-  ['frontier_models', /dpr|subsid|scheme|weather|agromet|climate|forecast|advisor|train|tutorial|educat|loan|credit|insur|nutri|dietit|therap|wellness|clinical|health|medic|engineer|research|knowledge|librar|translat|language|chat|copilot|assistant|document|report/i],
+  ['frontier_models', /dpr|subsid|scheme|weather|agromet|climate|forecast|advisor|train|tutorial|educat|loan|credit|insur|nutri|dietit|therap|wellness|clinical|health|medic|engineer|knowledge|librar|translat|language|chat|copilot|assistant|document|report/i],
 
   // Problems where every choice constrains the others.
   ['quantum_optimisation', /optimi[sz]|allocat|routing|schedul|capacity|corridor|freight|fleet|warehouse|cold.?stor|cold.?chain|logistic|transport|inventory|supply.?chain|pricing|tariff/i],
@@ -66,8 +74,6 @@ const CLASSIFIERS = [
   // Physical world in the loop.
   ['embodied', /robot|actuator|drone|iot|sensor|telemetr|device|machinery|equipment|irrigation|greenhouse/i],
 
-  // Evidence generation and validation.
-  ['artificial_scientists', /trial|experiment|hypothes|study|benchmark|mrv|variety.?performance|soil.?test|lab/i],
 
   // Everything else: its AI role is to run its own workflow, decisions,
   // communications and accounting. That is the agentic class by definition.

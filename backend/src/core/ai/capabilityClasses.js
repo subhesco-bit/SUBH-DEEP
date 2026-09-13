@@ -277,30 +277,60 @@ const CLASSES = Object.freeze({
     id: 'artificial_scientists',
     label: 'Artificial Scientists',
     horizon: 'medium-term',
-    applications: ['subsidy evidence', 'DPR validation', 'agronomy trials', 'cold-chain MRV'],
+    applications: [
+      'engineering AI and design research',
+      'subsidy layer — scheme discovery, eligibility, rate changes',
+      'GST layer — rate and rule tracking',
+      'data extraction from government websites',
+      'agricultural university notifications and publications',
+      'market research and price research',
+      'price prediction',
+      'weather prediction',
+      'cold-chain MRV — baseline against counterfactual',
+    ],
     rationale:
-      'The cold storage module already specifies the right scientific frame — ' +
-      'baseline, impact versus counterfactual, bankability. What is missing is ' +
-      'anything that executes it: a hypothesis register, trial design, and an ' +
-      'independent validation gate before a finding enters the library.',
+      'The distinction from Frontier AI Models is what the capability DOES, not ' +
+      'what it runs on. Frontier reasons over documents it is handed. This class ' +
+      'goes out and gets the evidence: monitoring government portals for scheme ' +
+      'and GST changes, extracting structured data from them, tracking what the ' +
+      'agricultural universities publish, and turning observations into ' +
+      'predictions that can later be checked against what actually happened. ' +
+      'That last part is what makes it scientific rather than merely automated — ' +
+      'a prediction nobody scores is an opinion.',
     backing: {
+      extraction: lazy('../../services/publicDomainDataExtractionService'),
+      research: lazy('../../services/legacy/researchAndDevelopmentService'),
       library: lazy('../../modules/M645100_LIBRARYKNOWLEDGE/backend/service'),
+      // outcomeResolver already scores agents on resolved predictions. The
+      // same machinery is what would score a forecast against the outturn.
       outcomes: lazy('../outcomeResolver'),
+      priceForecast: lazy('../../services/priceForecastingService'),
       hypothesisRegister: null,
-      trialDesign: null,
+      universityMonitor: null,
+      forecastScoring: null,
       validationGate: null,
     },
     consumes: [],
     emits: [],
     autonomy: AUTONOMY.OBSERVE,
-    state: STATE.ABSENT,
+    state: STATE.BUILT,
     stateNote:
-      'No implementation. The data exists (NE variety directory, agronomy ' +
-      'records) and outcomeResolver already does calibration, which is the ' +
-      'same discipline applied to agents rather than to findings. Deliberately ' +
-      'held at observe: a finding that enters the library unvalidated is worse ' +
-      'than no finding.',
-    risks: ['validation', 'ethics', 'unreplicated claims entering the corpus'],
+      'More exists than the label suggested. publicDomainDataExtractionService ' +
+      '(26 KB) already targets data.gov, government portals and research ' +
+      'institutions; researchAndDevelopment (22 KB) is wired; GST tracking is ' +
+      'live at 27 KB. What is missing is the scientific half. ' +
+      'priceForecastingService is 2.2 KB and its "forecast" is ' +
+      'recentAverage + trendPerDay x days — a straight line, not a model, and ' +
+      'it should not be presented to a farmer as a price prediction. Nothing ' +
+      'monitors agricultural university publications. Above all, no forecast is ' +
+      'ever scored against the outturn, so the platform cannot tell a good ' +
+      'prediction from a lucky one. Held at observe until it can.',
+    risks: [
+      'a linear extrapolation presented as a price prediction',
+      'unscored forecasts accumulating credibility they have not earned',
+      'scraped government data going stale without anyone noticing',
+      'unreplicated claims entering the library',
+    ],
   },
 
   // -----------------------------------------------------------------

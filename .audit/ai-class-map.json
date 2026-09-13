@@ -855,6 +855,13 @@
       "integration": "PENDING"
     },
     {
+      "name": "labourRoutes",
+      "path": "/api/v1/labour",
+      "bytes": 2972,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
       "name": "landManagementRoutes",
       "path": "/api/v1/land-management",
       "bytes": 2137,
@@ -3340,13 +3347,6 @@
       "integration": "PENDING"
     },
     {
-      "name": "publicDomainDataExtractionRoutes",
-      "path": "/api/v1/platform/public-domain-data-extraction",
-      "bytes": 25902,
-      "aiSignal": false,
-      "integration": "PARTIAL"
-    },
-    {
       "name": "platformConfigurationRoutes",
       "path": "/api/v1/platform-configuration",
       "bytes": 16406,
@@ -3441,13 +3441,6 @@
       "name": "publicDataRoutes",
       "path": "/api/v1/public-data",
       "bytes": 630,
-      "aiSignal": false,
-      "integration": "PENDING"
-    },
-    {
-      "name": "publicDomainDataExtractionRoutes_merged",
-      "path": "/api/v1/public-domain-data-extraction-routes-merged",
-      "bytes": 365,
       "aiSignal": false,
       "integration": "PENDING"
     },
@@ -3895,20 +3888,6 @@
       "integration": "PENDING"
     },
     {
-      "name": "cropValueResearchDomainRoutes",
-      "path": "/api/v1/crop-value-research-domain",
-      "bytes": 934,
-      "aiSignal": false,
-      "integration": "PENDING"
-    },
-    {
-      "name": "cropValueResearchRoutes",
-      "path": "/api/v1/crop-value-research",
-      "bytes": 7754,
-      "aiSignal": false,
-      "integration": "PARTIAL"
-    },
-    {
       "name": "dietTherapyRoutes",
       "path": "/api/v1/diet-therapy",
       "bytes": 3416,
@@ -4063,32 +4042,11 @@
       "integration": "PENDING"
     },
     {
-      "name": "priceForecasting",
-      "path": "/api/v1/price-forecasting",
-      "bytes": 2223,
-      "aiSignal": false,
-      "integration": "PENDING"
-    },
-    {
       "name": "reportingRoutes",
       "path": "/api/v1/reporting",
       "bytes": 492,
       "aiSignal": false,
       "integration": "PENDING"
-    },
-    {
-      "name": "researchAndDevelopmentDomainRoutes",
-      "path": "/api/v1/research-and-development-domain",
-      "bytes": 3341,
-      "aiSignal": false,
-      "integration": "PENDING"
-    },
-    {
-      "name": "researchAndDevelopmentRoutes",
-      "path": "/api/v1/research-and-development",
-      "bytes": 22126,
-      "aiSignal": true,
-      "integration": "WIRED"
     },
     {
       "name": "soilHealth",
@@ -4535,6 +4493,20 @@
   ],
   "artificial_scientists": [
     {
+      "name": "cropValueResearchDomainRoutes",
+      "path": "/api/v1/crop-value-research-domain",
+      "bytes": 934,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "cropValueResearchRoutes",
+      "path": "/api/v1/crop-value-research",
+      "bytes": 7754,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
       "name": "foluBenchmarkRoutes",
       "path": "/api/v1/folu-benchmark",
       "bytes": 8575,
@@ -4542,11 +4514,39 @@
       "integration": "PARTIAL"
     },
     {
-      "name": "labourRoutes",
-      "path": "/api/v1/labour",
-      "bytes": 2972,
+      "name": "publicDomainDataExtractionRoutes",
+      "path": "/api/v1/platform/public-domain-data-extraction",
+      "bytes": 25902,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "priceForecasting",
+      "path": "/api/v1/price-forecasting",
+      "bytes": 2223,
       "aiSignal": false,
       "integration": "PENDING"
+    },
+    {
+      "name": "publicDomainDataExtractionRoutes_merged",
+      "path": "/api/v1/public-domain-data-extraction-routes-merged",
+      "bytes": 365,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "researchAndDevelopmentDomainRoutes",
+      "path": "/api/v1/research-and-development-domain",
+      "bytes": 3341,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "researchAndDevelopmentRoutes",
+      "path": "/api/v1/research-and-development",
+      "bytes": 22126,
+      "aiSignal": true,
+      "integration": "WIRED"
     }
   ]
 }

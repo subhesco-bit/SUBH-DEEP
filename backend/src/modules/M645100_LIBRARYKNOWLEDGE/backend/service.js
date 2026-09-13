@@ -135,6 +135,9 @@ class LibraryKnowledgeService {
     this.modulesRoot = options.modulesRoot || path.join(this.projectRoot, 'modules');
     this.backendModulesRoot = options.backendModulesRoot || path.join(this.projectRoot, 'backend', 'src', 'modules');
     this.index = new Map();
+    // Paths already indexed, so the untracked-file sweep can test membership in
+    // O(1) instead of rescanning every entry per candidate file.
+    this.indexedPaths = new Set();
     this.contentHashes = new Map();
     this.indexingWarnings = [];
     this.initialized = false;
@@ -142,7 +145,14 @@ class LibraryKnowledgeService {
 
   async initialize(options = {}) {
     await this.buildIndex();
-    await this.computeContentHashes();
+
+    // Hashing reads every byte of the library (~3 GB, ~20s warm and more cold).
+    // Only syncToDatabase and verifyCatalogIntegrity consume the hashes, so a
+    // search or discoverModules call should not pay for them. They are computed
+    // on demand via ensureContentHashes(); pass hashContent to force it here.
+    if (options.hashContent === true) {
+      await this.computeContentHashes();
+    }
 
     if (options.syncDatabase === true) {
       await this.syncToDatabase();
@@ -164,8 +174,18 @@ class LibraryKnowledgeService {
     }
   }
 
+  /** Compute content hashes if a caller actually needs them. */
+  async ensureContentHashes() {
+    await this.ensureInitialized();
+    if (this.contentHashes.size === 0 && this.index.size > 0) {
+      await this.computeContentHashes();
+    }
+    return this.contentHashes;
+  }
+
   async buildIndex() {
     this.index.clear();
+    this.indexedPaths.clear();
     this.indexingWarnings = [];
     this.indexLibraryCatalogues();
     this.indexLibraryModuleCards();
@@ -194,7 +214,7 @@ class LibraryKnowledgeService {
 
         const relativePath = path.relative(this.libraryRoot, filePath).split(path.sep).join('/');
         const key = `LIBRARY:${relativePath}`;
-        if (this.index.has(key) || Array.from(this.index.values()).some((item) => item.path === filePath)) continue;
+        if (this.index.has(key) || this.indexedPaths.has(filePath)) continue;
 
         const extension = path.extname(entry.name).toLowerCase();
         const stat = safeStat(filePath);
@@ -240,6 +260,7 @@ class LibraryKnowledgeService {
       lastModified: stat.mtime.toISOString(),
       fileSize: stat.size
     });
+    this.indexedPaths.add(filePath);
   }
 
   indexLibraryCatalogues() {
@@ -359,6 +380,8 @@ class LibraryKnowledgeService {
   }
 
   async syncToDatabase() {
+    // Each row carries a content hash, so they must exist before writing.
+    await this.ensureContentHashes();
     const pool = optionalDatabase();
     if (!pool) {
       return { success: false, skipped: true, reason: 'Database connection is not available' };
@@ -549,7 +572,8 @@ class LibraryKnowledgeService {
   }
 
   async verifyCatalogIntegrity() {
-    await this.ensureInitialized();
+    // Integrity is checked against content hashes, so they must be present.
+    await this.ensureContentHashes();
     const issues = [];
 
     for (const [key, item] of this.index) {

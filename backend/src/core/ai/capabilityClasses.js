@@ -148,7 +148,9 @@ const CLASSES = Object.freeze({
     applications: [
       'product imagery for listings',
       'farmer portal imagery',
-      'illustration and cartoon assets for tutorials',
+      'vernacular explanation — cartoons in the viewer\'s own language, carrying '
+        + 'advertisement, education, dietitian, natural therapy and nutrition guidance '
+        + 'to villagers who will not read a document',
       'crop and disease image recognition',
     ],
     endpoints: [
@@ -172,6 +174,9 @@ const CLASSES = Object.freeze({
       vision: lazy('../../services/legacy/visionService'),
       guardrails: lazy('./aiGuardrails'),
       provenanceLabelling: null,
+      // No cartoon or vernacular-explanation generator exists in any form.
+      cartoonGeneration: null,
+      vernacularNarration: null,
     },
     consumes: [],
     emits: [],
@@ -188,6 +193,15 @@ const CLASSES = Object.freeze({
       'a generated product image read as a photograph of real goods',
       'confident misclassification driving a field treatment',
       'no provenance marking on stored assets',
+      // The vernacular case raises the stakes rather than lowering them. A
+      // cartoon explaining a diet or a therapy to someone who cannot read the
+      // source document is the ONLY version of that advice they will receive,
+      // in a form that is persuasive and hard to caveat. It also crosses into
+      // health guidance for an audience with no easy way to check it, so it
+      // needs a higher review bar than a product photograph, not a lower one
+      // because it "looks like a drawing".
+      'vernacular health or diet guidance that the viewer cannot verify against a source',
+      'a persuasive medium carrying advertisement and health advice in the same frame',
     ],
   },
 

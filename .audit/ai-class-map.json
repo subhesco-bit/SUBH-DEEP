@@ -1,3258 +1,4552 @@
 {
-  "security_trust": [
+  "agentic": [
     {
-      "name": "adminAuditDomainRoutes",
-      "path": "/api/v1/admin-audit-domain",
-      "bytes": 1166
+      "name": "adminRoutes",
+      "path": "/api/v1/admin",
+      "bytes": 480,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
-      "name": "auditLogRoutes",
-      "path": "/api/v1/audit-log",
-      "bytes": 489
+      "name": "advancedAnalyticsRoutes",
+      "path": "/api/v1/advanced-analytics",
+      "bytes": 11171,
+      "aiSignal": false,
+      "integration": "PARTIAL"
     },
     {
-      "name": "auditRoutes",
-      "path": "/api/v1/audit",
-      "bytes": 10411
+      "name": "advancedFeatures",
+      "path": "/api/v1/advanced-features",
+      "bytes": 16828,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
-      "name": "auditTrail",
-      "path": "/api/v1/audit-trail",
-      "bytes": 627
+      "name": "advancedSearchRoutes",
+      "path": "/api/v1/advanced-search",
+      "bytes": 10208,
+      "aiSignal": false,
+      "integration": "PARTIAL"
     },
     {
-      "name": "authorizationDomainRoutes",
-      "path": "/api/v1/authorization-domain",
-      "bytes": 1383
+      "name": "agriculturalIntelligenceDomainRoutes",
+      "path": "/api/v1/agricultural-intelligence-domain",
+      "bytes": 1702,
+      "aiSignal": true,
+      "integration": "PARTIAL"
     },
     {
-      "name": "blockchainVerificationDomainRoutes",
-      "path": "/api/v1/blockchain-verification-domain",
-      "bytes": 910
+      "name": "agriculturalIntelligenceRoutes",
+      "path": "/api/v1/agricultural-intelligence",
+      "bytes": 14293,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
-      "name": "blockchainVerificationRoutes",
-      "path": "/api/v1/blockchain-verification",
-      "bytes": 16109
+      "name": "enterpriseAIRoutes",
+      "path": "/api/v1/ai/enterprise-ai",
+      "bytes": 17545,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
-      "name": "complianceDomainRoutes",
-      "path": "/api/v1/compliance-domain",
-      "bytes": 1044
+      "name": "analyticsRoutes",
+      "path": "/api/v1/analytics",
+      "bytes": 21301,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
-      "name": "complianceRoutes",
-      "path": "/api/v1/compliance",
-      "bytes": 11686
+      "name": "apiCompatibilityRoutes",
+      "path": "/api/v1/api-compatibility",
+      "bytes": 648,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
-      "name": "complianceTracking",
-      "path": "/api/v1/compliance-tracking",
-      "bytes": 684
+      "name": "apicultureRoutes",
+      "path": "/api/v1/apiculture",
+      "bytes": 3753,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
-      "name": "mfaRoutes",
-      "path": "/api/v1/dual-use/mfa",
-      "bytes": 3361
+      "name": "apiWarningRoutes",
+      "path": "/api/v1/api-warning",
+      "bytes": 10332,
+      "aiSignal": false,
+      "integration": "PARTIAL"
     },
     {
-      "name": "farmerKycDomainRoutes",
-      "path": "/api/v1/farmer-kyc-domain",
-      "bytes": 1124
+      "name": "ar",
+      "path": "/api/v1/ar",
+      "bytes": 564,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
-      "name": "farmerKycRoutes",
-      "path": "/api/v1/farmer-kyc",
-      "bytes": 1645
+      "name": "assetAccountingDomainRoutes",
+      "path": "/api/v1/asset-accounting-domain",
+      "bytes": 1993,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
-      "name": "farmerVerificationDomainRoutes",
-      "path": "/api/v1/farmer-verification-domain",
-      "bytes": 1212
+      "name": "assetAccountingRoutes",
+      "path": "/api/v1/asset-accounting",
+      "bytes": 16843,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
-      "name": "farmerVerificationRoutes",
-      "path": "/api/v1/farmer-verification",
-      "bytes": 1369
+      "name": "authRoutes",
+      "path": "/api/v1/auth",
+      "bytes": 34169,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
-      "name": "gdprComplianceRoutes",
-      "path": "/api/v1/gdpr-compliance",
-      "bytes": 3603
+      "name": "automation",
+      "path": "/api/v1/automation",
+      "bytes": 677,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
-      "name": "gdprRoutes",
-      "path": "/api/v1/gdpr",
-      "bytes": 6417
+      "name": "backupRoutes",
+      "path": "/api/v1/backup",
+      "bytes": 10555,
+      "aiSignal": false,
+      "integration": "PARTIAL"
     },
     {
-      "name": "gdprRoutes_merged",
-      "path": "/api/v1/gdpr-routes-merged",
-      "bytes": 1121
+      "name": "biometric",
+      "path": "/api/v1/biometric",
+      "bytes": 656,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
-      "name": "mfaDomainRoutes",
-      "path": "/api/v1/mfa-domain",
-      "bytes": 814
+      "name": "bulkOperationRoutes",
+      "path": "/api/v1/bulk-operation",
+      "bytes": 504,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
-      "name": "permissionRoutes",
-      "path": "/api/v1/permission",
-      "bytes": 495
+      "name": "bulkOrderDomainRoutes",
+      "path": "/api/v1/bulk-order-domain",
+      "bytes": 1728,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
-      "name": "privacyDomainRoutes",
-      "path": "/api/v1/privacy-domain",
-      "bytes": 943
+      "name": "bulkOrderRoutes",
+      "path": "/api/v1/bulk-order",
+      "bytes": 14800,
+      "aiSignal": false,
+      "integration": "PARTIAL"
     },
     {
-      "name": "securityRoutes",
-      "path": "/api/v1/security",
-      "bytes": 489
+      "name": "bulkOrders",
+      "path": "/api/v1/bulk-orders",
+      "bytes": 311,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
-      "name": "sellerVerifications",
-      "path": "/api/v1/seller-verifications",
-      "bytes": 329
-    }
-  ],
-  "generative_media": [
-    {
-      "name": "ecommerceImageIntegrationRoutes",
-      "path": "/api/v1/ecommerce-image-integration",
-      "bytes": 11525
+      "name": "buyerTrust",
+      "path": "/api/v1/buyer-trust",
+      "bytes": 4894,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
-      "name": "farmerImagePortalRoutes",
-      "path": "/api/v1/farmer-image-portal",
-      "bytes": 13949
+      "name": "cacheRoutes",
+      "path": "/api/v1/cache",
+      "bytes": 4188,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
-      "name": "productImageAutoGenerationRoutes",
-      "path": "/api/v1/product-image-auto-generation",
-      "bytes": 11567
+      "name": "civilDisruptionDomainRoutes",
+      "path": "/api/v1/civil-disruption-domain",
+      "bytes": 1201,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
-      "name": "productMediaAIRoutes",
-      "path": "/api/v1/product-media-ai",
-      "bytes": 11399
+      "name": "civilDisruptionRoutes",
+      "path": "/api/v1/civil-disruption",
+      "bytes": 6164,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
-      "name": "visionRoutes",
-      "path": "/api/v1/vision",
-      "bytes": 6267
+      "name": "cloudManagementRoutes",
+      "path": "/api/v1/cloud-management",
+      "bytes": 16475,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "communityManagementDomainRoutes",
+      "path": "/api/v1/community-management-domain",
+      "bytes": 2327,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "communityManagementRoutes",
+      "path": "/api/v1/community-management",
+      "bytes": 1899,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "communityRoutes",
+      "path": "/api/v1/community",
+      "bytes": 25378,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "companyDomainRoutes",
+      "path": "/api/v1/company-domain",
+      "bytes": 1039,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "companyRoutes",
+      "path": "/api/v1/company",
+      "bytes": 2268,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "completeAIIntegrationDomainRoutes",
+      "path": "/api/v1/complete-aiintegration-domain",
+      "bytes": 2724,
+      "aiSignal": true,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "completeAIIntegrationRoutes",
+      "path": "/api/v1/complete-aiintegration",
+      "bytes": 6370,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "completeERPIntegrationDomainRoutes",
+      "path": "/api/v1/complete-erpintegration-domain",
+      "bytes": 2969,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "completeERPIntegrationRoutes",
+      "path": "/api/v1/complete-erpintegration",
+      "bytes": 33998,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "comprehensiveERPDomainRoutes",
+      "path": "/api/v1/comprehensive-erpdomain",
+      "bytes": 8115,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "comprehensiveERPRoutes",
+      "path": "/api/v1/comprehensive-erp",
+      "bytes": 65626,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "contractFarmingRoutes",
+      "path": "/api/v1/contract-farming",
+      "bytes": 5824,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "conversationalAIDomainRoutes",
+      "path": "/api/v1/conversational-aidomain",
+      "bytes": 1359,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "cooperativeShareDomainRoutes",
+      "path": "/api/v1/cooperative-share-domain",
+      "bytes": 1469,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "cooperativeShareRoutes",
+      "path": "/api/v1/cooperative-share",
+      "bytes": 8185,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "costControlDomainRoutes",
+      "path": "/api/v1/cost-control-domain",
+      "bytes": 2480,
+      "aiSignal": true,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "costControlRoutes",
+      "path": "/api/v1/cost-control",
+      "bytes": 17345,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "costRoutes",
+      "path": "/api/v1/cost",
+      "bytes": 3516,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "cropDomainRoutes",
+      "path": "/api/v1/crop-domain",
+      "bytes": 5881,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "cropManagementRoutes",
+      "path": "/api/v1/crop-management",
+      "bytes": 2638,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "cropPlanningRoutes",
+      "path": "/api/v1/crop-planning",
+      "bytes": 15481,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "cropRecommendations",
+      "path": "/api/v1/crop-recommendations",
+      "bytes": 1383,
+      "aiSignal": true,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "dairyDomainRoutes",
+      "path": "/api/v1/dairy-domain",
+      "bytes": 3670,
+      "aiSignal": true,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "dairyRoutes",
+      "path": "/api/v1/dairy",
+      "bytes": 24204,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "dashboardRoutes",
+      "path": "/api/v1/dashboard",
+      "bytes": 626,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "databaseManagementRoutes",
+      "path": "/api/v1/database-management",
+      "bytes": 18070,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "dataExportRoutes",
+      "path": "/api/v1/data-export",
+      "bytes": 495,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "dataVisualization",
+      "path": "/api/v1/data-visualization",
+      "bytes": 514,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "decisionSupportDomainRoutes",
+      "path": "/api/v1/decision-support-domain",
+      "bytes": 1860,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "decisionSupportRoutes",
+      "path": "/api/v1/decision-support",
+      "bytes": 14693,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "defenseFitnessPrepDomainRoutes",
+      "path": "/api/v1/defense-fitness-prep-domain",
+      "bytes": 1146,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "defenseFitnessPrepRoutes",
+      "path": "/api/v1/defense-fitness-prep",
+      "bytes": 3595,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "demandRoutes",
+      "path": "/api/v1/demand",
+      "bytes": 6645,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "devinRoutes",
+      "path": "/api/v1/devin",
+      "bytes": 7491,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "digitalTwinRoutes",
+      "path": "/api/v1/digital-twin",
+      "bytes": 27192,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "ecommerceAIDomainRoutes",
+      "path": "/api/v1/ecommerce-aidomain",
+      "bytes": 1835,
+      "aiSignal": true,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "ecommerceAIRoutes",
+      "path": "/api/v1/ecommerce-ai",
+      "bytes": 29834,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "ecommerceBusinessSalesDomainRoutes",
+      "path": "/api/v1/ecommerce-business-sales-domain",
+      "bytes": 1285,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "ecommerceBusinessSalesRoutes",
+      "path": "/api/v1/ecommerce-business-sales",
+      "bytes": 20655,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "ecommerceERPDomainRoutes",
+      "path": "/api/v1/ecommerce-erpdomain",
+      "bytes": 1338,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "ecommerceERPRoutes",
+      "path": "/api/v1/ecommerce-erp",
+      "bytes": 20343,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "ecommerceIntegrationDomainRoutes",
+      "path": "/api/v1/ecommerce-integration-domain",
+      "bytes": 2449,
+      "aiSignal": true,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "ecommerceIntegrationRoutes",
+      "path": "/api/v1/ecommerce-integration",
+      "bytes": 26430,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "ecommerceMarketingDomainRoutes",
+      "path": "/api/v1/ecommerce-marketing-domain",
+      "bytes": 1071,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "ecommerceMarketingRoutes",
+      "path": "/api/v1/ecommerce-marketing",
+      "bytes": 23590,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "ecommerceMarketplaceDomainRoutes",
+      "path": "/api/v1/ecommerce-marketplace-domain",
+      "bytes": 1537,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "ecommerceRoutes",
+      "path": "/api/v1/ecommerce",
+      "bytes": 20619,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "ENDPOINT_MISMATCH_FIXER",
+      "path": "/api/v1/endpoint-mismatch-fixer",
+      "bytes": 356,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "ENDPOINT_MISMATCH_FIXER_COMPLETE",
+      "path": "/api/v1/endpoint-mismatch-fixer-complete",
+      "bytes": 382,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "energyRoutes",
+      "path": "/api/v1/energy",
+      "bytes": 617,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "enterpriseControlRoutes",
+      "path": "/api/v1/enterprise-control",
+      "bytes": 22688,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "enterpriseIntegrationDomainRoutes",
+      "path": "/api/v1/enterprise-integration-domain",
+      "bytes": 1110,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "enterpriseIntegrationRoutes",
+      "path": "/api/v1/enterprise-integration",
+      "bytes": 24006,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "erpRoutes",
+      "path": "/api/v1/erp",
+      "bytes": 29327,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "errorLogRoutes",
+      "path": "/api/v1/error-log",
+      "bytes": 489,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "escrowDomainRoutes",
+      "path": "/api/v1/escrow-domain",
+      "bytes": 1026,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "escrowRoutes",
+      "path": "/api/v1/escrow",
+      "bytes": 9427,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "experienceLayerDomainRoutes",
+      "path": "/api/v1/experience-layer-domain",
+      "bytes": 1344,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "experienceRoutes",
+      "path": "/api/v1/experience",
+      "bytes": 3576,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "exportRoutes",
+      "path": "/api/v1/export",
+      "bytes": 483,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "farmAnalytics",
+      "path": "/api/v1/farm-analytics",
+      "bytes": 1561,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "farmCosting",
+      "path": "/api/v1/farm-costing",
+      "bytes": 10502,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "farmerFamilyRoutes",
+      "path": "/api/v1/farmer-family",
+      "bytes": 1172,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "farmerPortalEnhancements",
+      "path": "/api/v1/farmer-portal-enhancements",
+      "bytes": 12237,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "farmerRoutes",
+      "path": "/api/v1/farmer",
+      "bytes": 22890,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "farmerValueDomainRoutes",
+      "path": "/api/v1/farmer-value-domain",
+      "bytes": 1597,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "farmerValueRoutes",
+      "path": "/api/v1/farmer-value",
+      "bytes": 18845,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "fertilizerDomainRoutes",
+      "path": "/api/v1/fertilizer-domain",
+      "bytes": 2164,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "fertilizerRoutes",
+      "path": "/api/v1/fertilizer",
+      "bytes": 629,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "gstRoutes",
+      "path": "/api/v1/finance/gst",
+      "bytes": 27481,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "unifiedLedgerRoutes",
+      "path": "/api/v1/finance/unified-ledger",
+      "bytes": 16380,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "financeDomainRoutes",
+      "path": "/api/v1/finance-domain",
+      "bytes": 1023,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "financialAIDomainRoutes",
+      "path": "/api/v1/financial-aidomain",
+      "bytes": 855,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "financialAnalytics",
+      "path": "/api/v1/financial-analytics",
+      "bytes": 1092,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "fisheriesDomainRoutes",
+      "path": "/api/v1/fisheries-domain",
+      "bytes": 3599,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "fisheriesManagementRoutes",
+      "path": "/api/v1/fisheries-management",
+      "bytes": 3459,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "fisheriesRoutes",
+      "path": "/api/v1/fisheries",
+      "bytes": 4364,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "foluRoutes",
+      "path": "/api/v1/folu",
+      "bytes": 2877,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "foodRoutes",
+      "path": "/api/v1/food",
+      "bytes": 611,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "forestryRoutes",
+      "path": "/api/v1/forestry",
+      "bytes": 3728,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "all_routes",
+      "path": "/api/v1/generated/all-",
+      "bytes": 0,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "geofencingRoutes",
+      "path": "/api/v1/geofencing",
+      "bytes": 17325,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "glutWarningRoutes",
+      "path": "/api/v1/glut-warning",
+      "bytes": 4298,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "goatRoutes",
+      "path": "/api/v1/goat",
+      "bytes": 39156,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "governanceModule",
+      "path": "/api/v1/governance-module",
+      "bytes": 9796,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "horticulture",
+      "path": "/api/v1/horticulture",
+      "bytes": 749,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "horticultureManagementDomainRoutes",
+      "path": "/api/v1/horticulture-management-domain",
+      "bytes": 2997,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "horticultureManagementRoutes",
+      "path": "/api/v1/horticulture-management",
+      "bytes": 2749,
+      "aiSignal": true,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "hrRoutes",
+      "path": "/api/v1/hr",
+      "bytes": 31585,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "identityManagementRoutes",
+      "path": "/api/v1/identity-management",
+      "bytes": 5217,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "informationSharingRoutes",
+      "path": "/api/v1/information-sharing",
+      "bytes": 17633,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "infrastructureMonitoringRoutes",
+      "path": "/api/v1/infrastructure-monitoring",
+      "bytes": 2840,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "inputSupplyManagementRoutes",
+      "path": "/api/v1/input-supply-management",
+      "bytes": 2676,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "integrationRoutes",
+      "path": "/api/v1/integration",
+      "bytes": 948,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "integrationStatusRoutes",
+      "path": "/api/v1/integration-status",
+      "bytes": 4687,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "landManagementRoutes",
+      "path": "/api/v1/land-management",
+      "bytes": 2137,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "landRecordsDomainRoutes",
+      "path": "/api/v1/land-records-domain",
+      "bytes": 1165,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "landRecordsRoutes",
+      "path": "/api/v1/land-records",
+      "bytes": 14787,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "dairyRoutes_merged",
+      "path": "/api/v1/livestock/dairy-routes-merged",
+      "bytes": 0,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "livestock",
+      "path": "/api/v1/livestock",
+      "bytes": 695,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "livestockDomainRoutes",
+      "path": "/api/v1/livestock-domain",
+      "bytes": 4696,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "livestockManagementRoutes",
+      "path": "/api/v1/livestock-management",
+      "bytes": 3085,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M041VillageERP",
+      "path": "/api/v1/m041-village-erp",
+      "bytes": 12595,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "M100Routes",
+      "path": "/api/v1/m100",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M101Routes",
+      "path": "/api/v1/m101",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M102Routes",
+      "path": "/api/v1/m102",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M103Routes",
+      "path": "/api/v1/m103",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M104Routes",
+      "path": "/api/v1/m104",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M105Routes",
+      "path": "/api/v1/m105",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M106Routes",
+      "path": "/api/v1/m106",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M107Routes",
+      "path": "/api/v1/m107",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M108Routes",
+      "path": "/api/v1/m108",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M109Routes",
+      "path": "/api/v1/m109",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M110Routes",
+      "path": "/api/v1/m110",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M111Routes",
+      "path": "/api/v1/m111",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M112Routes",
+      "path": "/api/v1/m112",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M113Routes",
+      "path": "/api/v1/m113",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M114Routes",
+      "path": "/api/v1/m114",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M115Routes",
+      "path": "/api/v1/m115",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M116Routes",
+      "path": "/api/v1/m116",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M117Routes",
+      "path": "/api/v1/m117",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M118Routes",
+      "path": "/api/v1/m118",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M119Routes",
+      "path": "/api/v1/m119",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M120Routes",
+      "path": "/api/v1/m120",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M121Routes",
+      "path": "/api/v1/m121",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M122Routes",
+      "path": "/api/v1/m122",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M123Routes",
+      "path": "/api/v1/m123",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M124Routes",
+      "path": "/api/v1/m124",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M125Routes",
+      "path": "/api/v1/m125",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M126Routes",
+      "path": "/api/v1/m126",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M127Routes",
+      "path": "/api/v1/m127",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M128Routes",
+      "path": "/api/v1/m128",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M129Routes",
+      "path": "/api/v1/m129",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M130Routes",
+      "path": "/api/v1/m130",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M131Routes",
+      "path": "/api/v1/m131",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M132Routes",
+      "path": "/api/v1/m132",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M133Routes",
+      "path": "/api/v1/m133",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M134Routes",
+      "path": "/api/v1/m134",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M135Routes",
+      "path": "/api/v1/m135",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M136Routes",
+      "path": "/api/v1/m136",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M137Routes",
+      "path": "/api/v1/m137",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M138Routes",
+      "path": "/api/v1/m138",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M139Routes",
+      "path": "/api/v1/m139",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M140Routes",
+      "path": "/api/v1/m140",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M141Routes",
+      "path": "/api/v1/m141",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M142Routes",
+      "path": "/api/v1/m142",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M143Routes",
+      "path": "/api/v1/m143",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M144Routes",
+      "path": "/api/v1/m144",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M145Routes",
+      "path": "/api/v1/m145",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M146Routes",
+      "path": "/api/v1/m146",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M147Routes",
+      "path": "/api/v1/m147",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M148Routes",
+      "path": "/api/v1/m148",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M149Routes",
+      "path": "/api/v1/m149",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M150Routes",
+      "path": "/api/v1/m150",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M151Routes",
+      "path": "/api/v1/m151",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M152Routes",
+      "path": "/api/v1/m152",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M153Routes",
+      "path": "/api/v1/m153",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M154Routes",
+      "path": "/api/v1/m154",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M155Routes",
+      "path": "/api/v1/m155",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M156Routes",
+      "path": "/api/v1/m156",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M157Routes",
+      "path": "/api/v1/m157",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M158Routes",
+      "path": "/api/v1/m158",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M159Routes",
+      "path": "/api/v1/m159",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M160Routes",
+      "path": "/api/v1/m160",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M161Routes",
+      "path": "/api/v1/m161",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M162Routes",
+      "path": "/api/v1/m162",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M163Routes",
+      "path": "/api/v1/m163",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M164Routes",
+      "path": "/api/v1/m164",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M165Routes",
+      "path": "/api/v1/m165",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M166Routes",
+      "path": "/api/v1/m166",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M167Routes",
+      "path": "/api/v1/m167",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M168Routes",
+      "path": "/api/v1/m168",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M169Routes",
+      "path": "/api/v1/m169",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M170Routes",
+      "path": "/api/v1/m170",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M171Routes",
+      "path": "/api/v1/m171",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M172Routes",
+      "path": "/api/v1/m172",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M173Routes",
+      "path": "/api/v1/m173",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M174Routes",
+      "path": "/api/v1/m174",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M175Routes",
+      "path": "/api/v1/m175",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M176Routes",
+      "path": "/api/v1/m176",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M177Routes",
+      "path": "/api/v1/m177",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M178Routes",
+      "path": "/api/v1/m178",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M179Routes",
+      "path": "/api/v1/m179",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M180Routes",
+      "path": "/api/v1/m180",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M181Routes",
+      "path": "/api/v1/m181",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M182Routes",
+      "path": "/api/v1/m182",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M183Routes",
+      "path": "/api/v1/m183",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M184Routes",
+      "path": "/api/v1/m184",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M185Routes",
+      "path": "/api/v1/m185",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M186Routes",
+      "path": "/api/v1/m186",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M187Routes",
+      "path": "/api/v1/m187",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M188Routes",
+      "path": "/api/v1/m188",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M189Routes",
+      "path": "/api/v1/m189",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M190Routes",
+      "path": "/api/v1/m190",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M191Routes",
+      "path": "/api/v1/m191",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M192Routes",
+      "path": "/api/v1/m192",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M193Routes",
+      "path": "/api/v1/m193",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M194Routes",
+      "path": "/api/v1/m194",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M195Routes",
+      "path": "/api/v1/m195",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M196Routes",
+      "path": "/api/v1/m196",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M197Routes",
+      "path": "/api/v1/m197",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M198Routes",
+      "path": "/api/v1/m198",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M199Routes",
+      "path": "/api/v1/m199",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M200Routes",
+      "path": "/api/v1/m200",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M201Routes",
+      "path": "/api/v1/m201",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M202Routes",
+      "path": "/api/v1/m202",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M203Routes",
+      "path": "/api/v1/m203",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M204Routes",
+      "path": "/api/v1/m204",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M205Routes",
+      "path": "/api/v1/m205",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M206Routes",
+      "path": "/api/v1/m206",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M207Routes",
+      "path": "/api/v1/m207",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M208Routes",
+      "path": "/api/v1/m208",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M209Routes",
+      "path": "/api/v1/m209",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M210Routes",
+      "path": "/api/v1/m210",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M211Routes",
+      "path": "/api/v1/m211",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M212Routes",
+      "path": "/api/v1/m212",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M213Routes",
+      "path": "/api/v1/m213",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M214Routes",
+      "path": "/api/v1/m214",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M215Routes",
+      "path": "/api/v1/m215",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M216Routes",
+      "path": "/api/v1/m216",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M217Routes",
+      "path": "/api/v1/m217",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M218Routes",
+      "path": "/api/v1/m218",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M219Routes",
+      "path": "/api/v1/m219",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M220Routes",
+      "path": "/api/v1/m220",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M221Routes",
+      "path": "/api/v1/m221",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M222Routes",
+      "path": "/api/v1/m222",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M223Routes",
+      "path": "/api/v1/m223",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M224Routes",
+      "path": "/api/v1/m224",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M225Routes",
+      "path": "/api/v1/m225",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M226Routes",
+      "path": "/api/v1/m226",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M227Routes",
+      "path": "/api/v1/m227",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M228Routes",
+      "path": "/api/v1/m228",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M229Routes",
+      "path": "/api/v1/m229",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M230Routes",
+      "path": "/api/v1/m230",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M231Routes",
+      "path": "/api/v1/m231",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M232Routes",
+      "path": "/api/v1/m232",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M233Routes",
+      "path": "/api/v1/m233",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M234Routes",
+      "path": "/api/v1/m234",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M235Routes",
+      "path": "/api/v1/m235",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M236Routes",
+      "path": "/api/v1/m236",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M237Routes",
+      "path": "/api/v1/m237",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M238Routes",
+      "path": "/api/v1/m238",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M239Routes",
+      "path": "/api/v1/m239",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M240Routes",
+      "path": "/api/v1/m240",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M241Routes",
+      "path": "/api/v1/m241",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M242Routes",
+      "path": "/api/v1/m242",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M243Routes",
+      "path": "/api/v1/m243",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M244Routes",
+      "path": "/api/v1/m244",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M245Routes",
+      "path": "/api/v1/m245",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M246Routes",
+      "path": "/api/v1/m246",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M247Routes",
+      "path": "/api/v1/m247",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M248Routes",
+      "path": "/api/v1/m248",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M249Routes",
+      "path": "/api/v1/m249",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M250Routes",
+      "path": "/api/v1/m250",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M251Routes",
+      "path": "/api/v1/m251",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M252Routes",
+      "path": "/api/v1/m252",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M253Routes",
+      "path": "/api/v1/m253",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M254Routes",
+      "path": "/api/v1/m254",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M255Routes",
+      "path": "/api/v1/m255",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M256Routes",
+      "path": "/api/v1/m256",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M257Routes",
+      "path": "/api/v1/m257",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M258Routes",
+      "path": "/api/v1/m258",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M259Routes",
+      "path": "/api/v1/m259",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M260Routes",
+      "path": "/api/v1/m260",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M261Routes",
+      "path": "/api/v1/m261",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M262Routes",
+      "path": "/api/v1/m262",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M263Routes",
+      "path": "/api/v1/m263",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M264Routes",
+      "path": "/api/v1/m264",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M265Routes",
+      "path": "/api/v1/m265",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M266Routes",
+      "path": "/api/v1/m266",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M267Routes",
+      "path": "/api/v1/m267",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M268Routes",
+      "path": "/api/v1/m268",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M269Routes",
+      "path": "/api/v1/m269",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M270Routes",
+      "path": "/api/v1/m270",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M271Routes",
+      "path": "/api/v1/m271",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M272Routes",
+      "path": "/api/v1/m272",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M273Routes",
+      "path": "/api/v1/m273",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M274Routes",
+      "path": "/api/v1/m274",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M275Routes",
+      "path": "/api/v1/m275",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M276Routes",
+      "path": "/api/v1/m276",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M277Routes",
+      "path": "/api/v1/m277",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M278Routes",
+      "path": "/api/v1/m278",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M279Routes",
+      "path": "/api/v1/m279",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M280Routes",
+      "path": "/api/v1/m280",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M281Routes",
+      "path": "/api/v1/m281",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M282Routes",
+      "path": "/api/v1/m282",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M283Routes",
+      "path": "/api/v1/m283",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M284Routes",
+      "path": "/api/v1/m284",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M285Routes",
+      "path": "/api/v1/m285",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M286Routes",
+      "path": "/api/v1/m286",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M287Routes",
+      "path": "/api/v1/m287",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M288Routes",
+      "path": "/api/v1/m288",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M289Routes",
+      "path": "/api/v1/m289",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M290Routes",
+      "path": "/api/v1/m290",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M291Routes",
+      "path": "/api/v1/m291",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M292Routes",
+      "path": "/api/v1/m292",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M293Routes",
+      "path": "/api/v1/m293",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M294Routes",
+      "path": "/api/v1/m294",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M295Routes",
+      "path": "/api/v1/m295",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M296Routes",
+      "path": "/api/v1/m296",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M297Routes",
+      "path": "/api/v1/m297",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M298Routes",
+      "path": "/api/v1/m298",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M299Routes",
+      "path": "/api/v1/m299",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M300Routes",
+      "path": "/api/v1/m300",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M301Routes",
+      "path": "/api/v1/m301",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M302Routes",
+      "path": "/api/v1/m302",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M303Routes",
+      "path": "/api/v1/m303",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M304Routes",
+      "path": "/api/v1/m304",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M305Routes",
+      "path": "/api/v1/m305",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M306Routes",
+      "path": "/api/v1/m306",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M307Routes",
+      "path": "/api/v1/m307",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M308Routes",
+      "path": "/api/v1/m308",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M309Routes",
+      "path": "/api/v1/m309",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M310Routes",
+      "path": "/api/v1/m310",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M311Routes",
+      "path": "/api/v1/m311",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M312Routes",
+      "path": "/api/v1/m312",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M313Routes",
+      "path": "/api/v1/m313",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M314Routes",
+      "path": "/api/v1/m314",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M315Routes",
+      "path": "/api/v1/m315",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M316Routes",
+      "path": "/api/v1/m316",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M317Routes",
+      "path": "/api/v1/m317",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M318Routes",
+      "path": "/api/v1/m318",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M319Routes",
+      "path": "/api/v1/m319",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M31Routes",
+      "path": "/api/v1/m31",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M320Routes",
+      "path": "/api/v1/m320",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M321Routes",
+      "path": "/api/v1/m321",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M322Routes",
+      "path": "/api/v1/m322",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M323Routes",
+      "path": "/api/v1/m323",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M324Routes",
+      "path": "/api/v1/m324",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M325Routes",
+      "path": "/api/v1/m325",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M326Routes",
+      "path": "/api/v1/m326",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M327Routes",
+      "path": "/api/v1/m327",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M328Routes",
+      "path": "/api/v1/m328",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M329Routes",
+      "path": "/api/v1/m329",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M32Routes",
+      "path": "/api/v1/m32",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M330Routes",
+      "path": "/api/v1/m330",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M331Routes",
+      "path": "/api/v1/m331",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M332Routes",
+      "path": "/api/v1/m332",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M333Routes",
+      "path": "/api/v1/m333",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M334Routes",
+      "path": "/api/v1/m334",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M335Routes",
+      "path": "/api/v1/m335",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M336Routes",
+      "path": "/api/v1/m336",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M337Routes",
+      "path": "/api/v1/m337",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M338Routes",
+      "path": "/api/v1/m338",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M339Routes",
+      "path": "/api/v1/m339",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M33Routes",
+      "path": "/api/v1/m33",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M340Routes",
+      "path": "/api/v1/m340",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M341Routes",
+      "path": "/api/v1/m341",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M342Routes",
+      "path": "/api/v1/m342",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M343Routes",
+      "path": "/api/v1/m343",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M344Routes",
+      "path": "/api/v1/m344",
+      "bytes": 956,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M34Routes",
+      "path": "/api/v1/m34",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M35Routes",
+      "path": "/api/v1/m35",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M36Routes",
+      "path": "/api/v1/m36",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M37Routes",
+      "path": "/api/v1/m37",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M38Routes",
+      "path": "/api/v1/m38",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M39Routes",
+      "path": "/api/v1/m39",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "m400AiBackboneRoutes",
+      "path": "/api/v1/m400-ai-backbone",
+      "bytes": 7237,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "M40Routes",
+      "path": "/api/v1/m40",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M41Routes",
+      "path": "/api/v1/m41",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M42Routes",
+      "path": "/api/v1/m42",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M43Routes",
+      "path": "/api/v1/m43",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M44Routes",
+      "path": "/api/v1/m44",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M45Routes",
+      "path": "/api/v1/m45",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M46Routes",
+      "path": "/api/v1/m46",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M47Routes",
+      "path": "/api/v1/m47",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M48Routes",
+      "path": "/api/v1/m48",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M49Routes",
+      "path": "/api/v1/m49",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M50Routes",
+      "path": "/api/v1/m50",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M51Routes",
+      "path": "/api/v1/m51",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M52Routes",
+      "path": "/api/v1/m52",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M53Routes",
+      "path": "/api/v1/m53",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M54Routes",
+      "path": "/api/v1/m54",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M55Routes",
+      "path": "/api/v1/m55",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M56Routes",
+      "path": "/api/v1/m56",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M57Routes",
+      "path": "/api/v1/m57",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M58Routes",
+      "path": "/api/v1/m58",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M59Routes",
+      "path": "/api/v1/m59",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M60Routes",
+      "path": "/api/v1/m60",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M61Routes",
+      "path": "/api/v1/m61",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M62Routes",
+      "path": "/api/v1/m62",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M63Routes",
+      "path": "/api/v1/m63",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M64Routes",
+      "path": "/api/v1/m64",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M65Routes",
+      "path": "/api/v1/m65",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M66Routes",
+      "path": "/api/v1/m66",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M67Routes",
+      "path": "/api/v1/m67",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M68Routes",
+      "path": "/api/v1/m68",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M69Routes",
+      "path": "/api/v1/m69",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M70Routes",
+      "path": "/api/v1/m70",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M71Routes",
+      "path": "/api/v1/m71",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M72Routes",
+      "path": "/api/v1/m72",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M73Routes",
+      "path": "/api/v1/m73",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M74Routes",
+      "path": "/api/v1/m74",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M75Routes",
+      "path": "/api/v1/m75",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M76Routes",
+      "path": "/api/v1/m76",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M77Routes",
+      "path": "/api/v1/m77",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M78Routes",
+      "path": "/api/v1/m78",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M79Routes",
+      "path": "/api/v1/m79",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M80Routes",
+      "path": "/api/v1/m80",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M81Routes",
+      "path": "/api/v1/m81",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M82Routes",
+      "path": "/api/v1/m82",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M83Routes",
+      "path": "/api/v1/m83",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M84Routes",
+      "path": "/api/v1/m84",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M85Routes",
+      "path": "/api/v1/m85",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M86Routes",
+      "path": "/api/v1/m86",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M87Routes",
+      "path": "/api/v1/m87",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M88Routes",
+      "path": "/api/v1/m88",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M89Routes",
+      "path": "/api/v1/m89",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M90Routes",
+      "path": "/api/v1/m90",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M91Routes",
+      "path": "/api/v1/m91",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M92Routes",
+      "path": "/api/v1/m92",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M93Routes",
+      "path": "/api/v1/m93",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M94Routes",
+      "path": "/api/v1/m94",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M95Routes",
+      "path": "/api/v1/m95",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M96Routes",
+      "path": "/api/v1/m96",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M97Routes",
+      "path": "/api/v1/m97",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M98Routes",
+      "path": "/api/v1/m98",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "M99Routes",
+      "path": "/api/v1/m99",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "marketAnalytics",
+      "path": "/api/v1/market-analytics",
+      "bytes": 1206,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "marketDataRoutes",
+      "path": "/api/v1/market-data",
+      "bytes": 17658,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "marketplaceEnhancements",
+      "path": "/api/v1/marketplace-enhancements",
+      "bytes": 10819,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "migrationRoutes",
+      "path": "/api/v1/migration",
+      "bytes": 492,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "moduleRegistryRoutes",
+      "path": "/api/v1/module-registry",
+      "bytes": 6420,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "moduleSupportInfrastructureRoutes",
+      "path": "/api/v1/module-support-infrastructure",
+      "bytes": 18661,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "moduleSystemsRoutes",
+      "path": "/api/v1/module-systems",
+      "bytes": 1077,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "multilingualDomainRoutes",
+      "path": "/api/v1/multilingual-domain",
+      "bytes": 1652,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "mushroomRoutes",
+      "path": "/api/v1/mushroom",
+      "bytes": 3984,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "nervousSystemRoutes",
+      "path": "/api/v1/nervous-system",
+      "bytes": 8307,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "neVarietiesRoutes",
+      "path": "/api/v1/ne-varieties",
+      "bytes": 9819,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "nlp",
+      "path": "/api/v1/nlp",
+      "bytes": 573,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "notificationDomainRoutes",
+      "path": "/api/v1/notification-domain",
+      "bytes": 981,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "notificationRoutes",
+      "path": "/api/v1/notifications",
+      "bytes": 12899,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "operationsManagementRoutes",
+      "path": "/api/v1/operations-management",
+      "bytes": 2664,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "orderRoutes",
+      "path": "/api/v1/order",
+      "bytes": 28362,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "ordersDomainRoutes",
+      "path": "/api/v1/orders-domain",
+      "bytes": 2012,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "organizationDomainRoutes",
+      "path": "/api/v1/organization-domain",
+      "bytes": 1764,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "organizationManagementRoutes",
+      "path": "/api/v1/organization-management",
+      "bytes": 17116,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "paymentGatewayRoutes",
+      "path": "/api/v1/payment-gateway",
+      "bytes": 6929,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "paymentRoutes",
+      "path": "/api/v1/payments",
+      "bytes": 10227,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "performanceRoutes",
+      "path": "/api/v1/performance",
+      "bytes": 498,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "phase10",
+      "path": "/api/v1/phase10",
+      "bytes": 2563,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "phase11",
+      "path": "/api/v1/phase11",
+      "bytes": 2444,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "phase12",
+      "path": "/api/v1/phase12",
+      "bytes": 2929,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "phase8",
+      "path": "/api/v1/phase8",
+      "bytes": 2225,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "phase9",
+      "path": "/api/v1/phase9",
+      "bytes": 2914,
+      "aiSignal": true,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "pigRoutes",
+      "path": "/api/v1/pig",
+      "bytes": 39118,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "completeERPIntegrationRoutes_merged",
+      "path": "/api/v1/platform/complete-erpintegration-routes-merged",
+      "bytes": 0,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "comprehensiveERPRoutes_merged",
+      "path": "/api/v1/platform/comprehensive-erproutes-merged",
+      "bytes": 0,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "informationSharingRoutes_merged",
+      "path": "/api/v1/platform/information-sharing-routes-merged",
+      "bytes": 0,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "organizationManagementRoutes_merged",
+      "path": "/api/v1/platform/organization-management-routes-merged",
+      "bytes": 0,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "publicDomainDataExtractionRoutes",
+      "path": "/api/v1/platform/public-domain-data-extraction",
+      "bytes": 25902,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "platformConfigurationRoutes",
+      "path": "/api/v1/platform-configuration",
+      "bytes": 16406,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "platformCoreDomainRoutes",
+      "path": "/api/v1/platform-core-domain",
+      "bytes": 934,
+      "aiSignal": true,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "platformCoreRoutes",
+      "path": "/api/v1/platform-core",
+      "bytes": 9028,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "platformFoundationRoutes",
+      "path": "/api/v1/platform-foundation",
+      "bytes": 654,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "poultryDomainRoutes",
+      "path": "/api/v1/poultry-domain",
+      "bytes": 1948,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "poultryRoutes",
+      "path": "/api/v1/poultry",
+      "bytes": 37102,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "predictiveAnalytics",
+      "path": "/api/v1/predictive-analytics",
+      "bytes": 15383,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "predictiveIntelligenceRoutes",
+      "path": "/api/v1/predictive-intelligence",
+      "bytes": 15378,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "preSeasonPurchaseRoutes",
+      "path": "/api/v1/pre-season-purchase",
+      "bytes": 3951,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "preventiveMaintenanceRoutes",
+      "path": "/api/v1/preventive-maintenance",
+      "bytes": 1837,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "productReviewRoutes",
+      "path": "/api/v1/product-review",
+      "bytes": 13203,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "productRoutes",
+      "path": "/api/v1/product",
+      "bytes": 19775,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "projectSystemsRoutes",
+      "path": "/api/v1/project-systems",
+      "bytes": 20615,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "publicDataRoutes",
+      "path": "/api/v1/public-data",
+      "bytes": 630,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "publicDomainDataExtractionRoutes_merged",
+      "path": "/api/v1/public-domain-data-extraction-routes-merged",
+      "bytes": 365,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "qualityAssurance",
+      "path": "/api/v1/quality-assurance",
+      "bytes": 849,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "realtimeMonitoringDomainRoutes",
+      "path": "/api/v1/realtime-monitoring-domain",
+      "bytes": 1159,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "realtimeMonitoringRoutes",
+      "path": "/api/v1/realtime-monitoring",
+      "bytes": 15589,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "recoveredFinanceRoutes",
+      "path": "/api/v1/recovered-finance",
+      "bytes": 12193,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "regionalVarietyRoutes",
+      "path": "/api/v1/regional-variety",
+      "bytes": 5493,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "resourceRouteFactory",
+      "path": "/api/v1/resource-route-factory",
+      "bytes": 332,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "returnLoadBoardDomainRoutes",
+      "path": "/api/v1/return-load-board-domain",
+      "bytes": 1110,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "returnLoadBoardRoutes",
+      "path": "/api/v1/return-load-board",
+      "bytes": 3149,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "revenueRoutes",
+      "path": "/api/v1/revenue",
+      "bytes": 4630,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "rfqDomainRoutes",
+      "path": "/api/v1/rfq-domain",
+      "bytes": 959,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "rfqRoutes",
+      "path": "/api/v1/rfq",
+      "bytes": 10745,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "riskAssessment",
+      "path": "/api/v1/risk-assessment",
+      "bytes": 929,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "roleManagementRoutes",
+      "path": "/api/v1/role-management",
+      "bytes": 9890,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "roleRoutes",
+      "path": "/api/v1/role",
+      "bytes": 477,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "sapModuleArchitectureDomainRoutes",
+      "path": "/api/v1/sap-module-architecture-domain",
+      "bytes": 3194,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "sapModuleArchitectureRoutes",
+      "path": "/api/v1/sap-module-architecture",
+      "bytes": 13098,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "searchRoutes",
+      "path": "/api/v1/search",
+      "bytes": 483,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "seedVaultRoutes",
+      "path": "/api/v1/seed-vault",
+      "bytes": 4462,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "sellerRankingDomainRoutes",
+      "path": "/api/v1/seller-ranking-domain",
+      "bytes": 936,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "sellerRankingRoutes",
+      "path": "/api/v1/seller-ranking",
+      "bytes": 5657,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "sericultureRoutes",
+      "path": "/api/v1/sericulture",
+      "bytes": 3856,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "serverManagementRoutes",
+      "path": "/api/v1/server-management",
+      "bytes": 15710,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "settingsRoutes",
+      "path": "/api/v1/settings",
+      "bytes": 489,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "sheepDomainRoutes",
+      "path": "/api/v1/sheep-domain",
+      "bytes": 2201,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "sheepRoutes",
+      "path": "/api/v1/sheep",
+      "bytes": 40714,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "soilDomainRoutes",
+      "path": "/api/v1/soil-domain",
+      "bytes": 2759,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "soilManagementRoutes",
+      "path": "/api/v1/soil-management",
+      "bytes": 1307,
+      "aiSignal": true,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "startupEnvironmentRoutes",
+      "path": "/api/v1/startup-environment",
+      "bytes": 21892,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "stripeWebhookRoutes",
+      "path": "/api/v1/stripe-webhook",
+      "bytes": 7984,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "subscriptions",
+      "path": "/api/v1/subscriptions",
+      "bytes": 1850,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "systemAdministrationDomainRoutes",
+      "path": "/api/v1/system-administration-domain",
+      "bytes": 977,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "systemAdministrationRoutes",
+      "path": "/api/v1/system-administration",
+      "bytes": 15767,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "systemConfigRoutes",
+      "path": "/api/v1/system-config",
+      "bytes": 501,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "tenantManagementDomainRoutes",
+      "path": "/api/v1/tenant-management-domain",
+      "bytes": 949,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "tenantManagementRoutes",
+      "path": "/api/v1/tenant-management",
+      "bytes": 17211,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "trackDartRoutes",
+      "path": "/api/v1/track-dart",
+      "bytes": 3815,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "transactionDomainRoutes",
+      "path": "/api/v1/transaction-domain",
+      "bytes": 933,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "transactionRoutes",
+      "path": "/api/v1/transactions",
+      "bytes": 12178,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "unifiedAIGateway",
+      "path": "/api/v1/unified-aigateway",
+      "bytes": 325,
+      "aiSignal": true,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "unifiedAIRoutes",
+      "path": "/api/v1/unified-ai",
+      "bytes": 4617,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "unifiedLedgerRoutes_merged",
+      "path": "/api/v1/unified-ledger-routes-merged",
+      "bytes": 337,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "userRoutes",
+      "path": "/api/v1/users",
+      "bytes": 686,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "vendorProcurementRoutes",
+      "path": "/api/v1/vendor-procurement",
+      "bytes": 15676,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "vendorRoutes",
+      "path": "/api/v1/vendor",
+      "bytes": 617,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "vermicompostRoutes",
+      "path": "/api/v1/vermicompost",
+      "bytes": 3914,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "versionRoutes",
+      "path": "/api/v1/version",
+      "bytes": 486,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "vr",
+      "path": "/api/v1/vr",
+      "bytes": 593,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "walletDomainRoutes",
+      "path": "/api/v1/wallet-domain",
+      "bytes": 2023,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "walletRoutes",
+      "path": "/api/v1/wallet",
+      "bytes": 8843,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "waterManagementRoutes",
+      "path": "/api/v1/water-management",
+      "bytes": 2206,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "wearableIntegrationRoutes",
+      "path": "/api/v1/wearable-integration",
+      "bytes": 10488,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "webhookRoutes",
+      "path": "/api/v1/webhook",
+      "bytes": 486,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "wikipediaRoutes",
+      "path": "/api/v1/wikipedia",
+      "bytes": 4679,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "yieldManagement",
+      "path": "/api/v1/yield-management",
+      "bytes": 976,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "custodyEventRoutes",
+      "path": "/api/v1/custody-event",
+      "bytes": 14051,
+      "aiSignal": false,
+      "integration": "PARTIAL"
     }
   ],
   "frontier_models": [
     {
+      "name": "farmerHealthRoutes",
+      "path": "/api/v1/agriculture/farmer-health",
+      "bytes": 7489,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "analyticsReportRoutes",
+      "path": "/api/v1/analytics-report",
+      "bytes": 645,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "animalHealthDomainRoutes",
+      "path": "/api/v1/animal-health-domain",
+      "bytes": 2581,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "animalHealthRoutes",
+      "path": "/api/v1/animal-health",
+      "bytes": 21315,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "apiDocumentationRoutes",
+      "path": "/api/v1/api-documentation",
+      "bytes": 513,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
       "name": "climateAdvisory",
       "path": "/api/v1/climate-advisory",
-      "bytes": 614
+      "bytes": 614,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "climateMonitoringDomainRoutes",
       "path": "/api/v1/climate-monitoring-domain",
-      "bytes": 2364
+      "bytes": 2364,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "climateMonitoringRoutes",
       "path": "/api/v1/climate-monitoring",
-      "bytes": 2025
+      "bytes": 2025,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "cropValueResearchDomainRoutes",
       "path": "/api/v1/crop-value-research-domain",
-      "bytes": 934
+      "bytes": 934,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "cropValueResearchRoutes",
       "path": "/api/v1/crop-value-research",
-      "bytes": 7754
+      "bytes": 7754,
+      "aiSignal": false,
+      "integration": "PARTIAL"
     },
     {
       "name": "dietTherapyRoutes",
       "path": "/api/v1/diet-therapy",
-      "bytes": 3416
+      "bytes": 3416,
+      "aiSignal": true,
+      "integration": "PARTIAL"
     },
     {
       "name": "dprGenerationRoutes",
       "path": "/api/v1/dpr-generation",
-      "bytes": 21524
+      "bytes": 21524,
+      "aiSignal": false,
+      "integration": "PARTIAL"
     },
     {
       "name": "engineeringProjectDomainRoutes",
       "path": "/api/v1/engineering-project-domain",
-      "bytes": 1466
+      "bytes": 1466,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "engineeringProjectRoutes",
       "path": "/api/v1/engineering-project",
-      "bytes": 11734
+      "bytes": 11734,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "farmerHealthDomainRoutes",
+      "path": "/api/v1/farmer-health-domain",
+      "bytes": 1613,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "farmerTrainingRoutes",
       "path": "/api/v1/farmer-training",
-      "bytes": 23882
+      "bytes": 23882,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
       "name": "governmentSubsidyRoutes",
       "path": "/api/v1/government-subsidy",
-      "bytes": 5444
+      "bytes": 5444,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "healthCheckRoutes",
+      "path": "/api/v1/health-check",
+      "bytes": 530,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "healthRoutes",
+      "path": "/api/v1/health",
+      "bytes": 617,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "householdProcurementRoutes",
       "path": "/api/v1/household-procurement",
-      "bytes": 4204
+      "bytes": 4204,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "insuranceDomainRoutes",
+      "path": "/api/v1/insurance-domain",
+      "bytes": 1057,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "insuranceEnhancements",
+      "path": "/api/v1/insurance-enhancements",
+      "bytes": 9568,
+      "aiSignal": false,
+      "integration": "PARTIAL"
     },
     {
       "name": "knowledgeGraphDomainRoutes",
       "path": "/api/v1/knowledge-graph-domain",
-      "bytes": 812
+      "bytes": 812,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "knowledgeRoutes",
       "path": "/api/v1/knowledge",
-      "bytes": 23589
+      "bytes": 23589,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
       "name": "libraryAIWorkspaceRoutes",
       "path": "/api/v1/library-aiworkspace",
-      "bytes": 16267
+      "bytes": 16267,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
       "name": "libraryRoutes",
       "path": "/api/v1/library",
-      "bytes": 20851
+      "bytes": 20851,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
       "name": "libraryRoutes_merged",
       "path": "/api/v1/library-routes-merged",
-      "bytes": 1636
+      "bytes": 1636,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "loanManagement",
       "path": "/api/v1/loan-management",
-      "bytes": 4513
+      "bytes": 4513,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "nutrientValueSalesRoutes",
       "path": "/api/v1/nutrient-value-sales",
-      "bytes": 28925
+      "bytes": 28925,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
       "name": "nutritionIntelligenceRoutes",
       "path": "/api/v1/nutrition-intelligence",
-      "bytes": 45447
+      "bytes": 45447,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
       "name": "pestForecastingDomainRoutes",
       "path": "/api/v1/pest-forecasting-domain",
-      "bytes": 989
+      "bytes": 989,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "knowledgeRoutes_merged",
       "path": "/api/v1/platform/knowledge-routes-merged",
-      "bytes": 0
+      "bytes": 0,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "priceForecasting",
       "path": "/api/v1/price-forecasting",
-      "bytes": 2223
+      "bytes": 2223,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "reportingRoutes",
+      "path": "/api/v1/reporting",
+      "bytes": 492,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "researchAndDevelopmentDomainRoutes",
       "path": "/api/v1/research-and-development-domain",
-      "bytes": 3341
+      "bytes": 3341,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "researchAndDevelopmentRoutes",
       "path": "/api/v1/research-and-development",
-      "bytes": 22126
+      "bytes": 22126,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "soilHealth",
+      "path": "/api/v1/soil-health",
+      "bytes": 735,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "soilNutrientLandRoutes",
       "path": "/api/v1/soil-nutrient-land",
-      "bytes": 15289
+      "bytes": 15289,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
       "name": "weatherAdvisory",
       "path": "/api/v1/weather-advisory",
-      "bytes": 1530
+      "bytes": 1530,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "weatherDomainRoutes",
       "path": "/api/v1/weather-domain",
-      "bytes": 1816
+      "bytes": 1816,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "weatherRoutes",
       "path": "/api/v1/weather",
-      "bytes": 20446
+      "bytes": 20446,
+      "aiSignal": true,
+      "integration": "WIRED"
     }
   ],
   "quantum_optimisation": [
     {
       "name": "coldChainMonitoring",
       "path": "/api/v1/cold-chain-monitoring",
-      "bytes": 1263
+      "bytes": 1263,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "coldStorageDomainRoutes",
       "path": "/api/v1/cold-storage-domain",
-      "bytes": 2239
+      "bytes": 2239,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "coldStorageRoutes",
       "path": "/api/v1/cold-storage",
-      "bytes": 27612
+      "bytes": 27612,
+      "aiSignal": false,
+      "integration": "PARTIAL"
     },
     {
       "name": "freightPooling",
       "path": "/api/v1/freight-pooling",
-      "bytes": 7861
+      "bytes": 7861,
+      "aiSignal": false,
+      "integration": "PARTIAL"
     },
     {
       "name": "geofencingRoutes_merged",
       "path": "/api/v1/logistics/geofencing-routes-merged",
-      "bytes": 0
+      "bytes": 0,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "logisticsAIDomainRoutes",
       "path": "/api/v1/logistics-aidomain",
-      "bytes": 775
+      "bytes": 775,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "logisticsEnhancementRoutes",
       "path": "/api/v1/logistics-enhancement",
-      "bytes": 28101
+      "bytes": 28101,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
       "name": "logisticsEnhancements",
       "path": "/api/v1/logistics-enhancements",
-      "bytes": 10020
+      "bytes": 10020,
+      "aiSignal": false,
+      "integration": "PARTIAL"
     },
     {
       "name": "mlOptimization",
       "path": "/api/v1/ml-optimization",
-      "bytes": 634
+      "bytes": 634,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
-      "name": "warehouseManagement",
-      "path": "/api/v1/warehouse-management",
-      "bytes": 1684
-    }
-  ],
-  "agentic": [
-    {
-      "name": "agriculturalIntelligenceDomainRoutes",
-      "path": "/api/v1/agricultural-intelligence-domain",
-      "bytes": 1702
+      "name": "riskPricingRoutes",
+      "path": "/api/v1/risk-pricing",
+      "bytes": 18231,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
-      "name": "agriculturalIntelligenceRoutes",
-      "path": "/api/v1/agricultural-intelligence",
-      "bytes": 14293
-    },
-    {
-      "name": "enterpriseAIRoutes",
-      "path": "/api/v1/ai/enterprise-ai",
-      "bytes": 17545
-    },
-    {
-      "name": "automation",
-      "path": "/api/v1/automation",
-      "bytes": 677
-    },
-    {
-      "name": "completeERPIntegrationDomainRoutes",
-      "path": "/api/v1/complete-erpintegration-domain",
-      "bytes": 2969
-    },
-    {
-      "name": "completeERPIntegrationRoutes",
-      "path": "/api/v1/complete-erpintegration",
-      "bytes": 33998
-    },
-    {
-      "name": "comprehensiveERPDomainRoutes",
-      "path": "/api/v1/comprehensive-erpdomain",
-      "bytes": 8115
-    },
-    {
-      "name": "comprehensiveERPRoutes",
-      "path": "/api/v1/comprehensive-erp",
-      "bytes": 65626
-    },
-    {
-      "name": "cropRecommendations",
-      "path": "/api/v1/crop-recommendations",
-      "bytes": 1383
-    },
-    {
-      "name": "decisionSupportDomainRoutes",
-      "path": "/api/v1/decision-support-domain",
-      "bytes": 1860
-    },
-    {
-      "name": "decisionSupportRoutes",
-      "path": "/api/v1/decision-support",
-      "bytes": 14693
-    },
-    {
-      "name": "ecommerceAIRoutes",
-      "path": "/api/v1/ecommerce-ai",
-      "bytes": 29834
-    },
-    {
-      "name": "ecommerceERPDomainRoutes",
-      "path": "/api/v1/ecommerce-erpdomain",
-      "bytes": 1338
-    },
-    {
-      "name": "ecommerceERPRoutes",
-      "path": "/api/v1/ecommerce-erp",
-      "bytes": 20343
-    },
-    {
-      "name": "enterpriseControlRoutes",
-      "path": "/api/v1/enterprise-control",
-      "bytes": 22688
-    },
-    {
-      "name": "enterpriseIntegrationDomainRoutes",
-      "path": "/api/v1/enterprise-integration-domain",
-      "bytes": 1110
-    },
-    {
-      "name": "enterpriseIntegrationRoutes",
-      "path": "/api/v1/enterprise-integration",
-      "bytes": 24006
-    },
-    {
-      "name": "erpRoutes",
-      "path": "/api/v1/erp",
-      "bytes": 29327
-    },
-    {
-      "name": "farmerPortalEnhancements",
-      "path": "/api/v1/farmer-portal-enhancements",
-      "bytes": 12237
-    },
-    {
-      "name": "M041VillageERP",
-      "path": "/api/v1/m041-village-erp",
-      "bytes": 12595
-    },
-    {
-      "name": "m400AiBackboneRoutes",
-      "path": "/api/v1/m400-ai-backbone",
-      "bytes": 7237
-    },
-    {
-      "name": "nervousSystemRoutes",
-      "path": "/api/v1/nervous-system",
-      "bytes": 8307
-    },
-    {
-      "name": "completeERPIntegrationRoutes_merged",
-      "path": "/api/v1/platform/complete-erpintegration-routes-merged",
-      "bytes": 0
-    },
-    {
-      "name": "comprehensiveERPRoutes_merged",
-      "path": "/api/v1/platform/comprehensive-erproutes-merged",
-      "bytes": 0
-    },
-    {
-      "name": "predictiveAnalytics",
-      "path": "/api/v1/predictive-analytics",
-      "bytes": 15383
-    },
-    {
-      "name": "predictiveIntelligenceRoutes",
-      "path": "/api/v1/predictive-intelligence",
-      "bytes": 15378
+      "name": "supplyChainAnalytics",
+      "path": "/api/v1/supply-chain-analytics",
+      "bytes": 1158,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "supplyChainDecisionRoutes",
       "path": "/api/v1/supply-chain-decision",
-      "bytes": 4490
+      "bytes": 4490,
+      "aiSignal": true,
+      "integration": "PARTIAL"
     },
     {
-      "name": "unifiedAIRoutes",
-      "path": "/api/v1/unified-ai",
-      "bytes": 4617
+      "name": "supplyChainTracking",
+      "path": "/api/v1/supply-chain-tracking",
+      "bytes": 2204,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "warehouseManagement",
+      "path": "/api/v1/warehouse-management",
+      "bytes": 1684,
+      "aiSignal": false,
+      "integration": "PENDING"
     }
   ],
-  "artificial_scientists": [
+  "security_trust": [
     {
-      "name": "foluBenchmarkRoutes",
-      "path": "/api/v1/folu-benchmark",
-      "bytes": 8575
+      "name": "adminAuditDomainRoutes",
+      "path": "/api/v1/admin-audit-domain",
+      "bytes": 1166,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "auditLogRoutes",
+      "path": "/api/v1/audit-log",
+      "bytes": 489,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "auditRoutes",
+      "path": "/api/v1/audit",
+      "bytes": 10411,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "auditTrail",
+      "path": "/api/v1/audit-trail",
+      "bytes": 627,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "authorizationDomainRoutes",
+      "path": "/api/v1/authorization-domain",
+      "bytes": 1383,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "blockchainTrace",
+      "path": "/api/v1/blockchain-trace",
+      "bytes": 702,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "blockchainVerificationDomainRoutes",
+      "path": "/api/v1/blockchain-verification-domain",
+      "bytes": 910,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "blockchainVerificationRoutes",
+      "path": "/api/v1/blockchain-verification",
+      "bytes": 16109,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "certificationManagement",
+      "path": "/api/v1/certification-management",
+      "bytes": 787,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "complianceDomainRoutes",
+      "path": "/api/v1/compliance-domain",
+      "bytes": 1044,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "complianceRoutes",
+      "path": "/api/v1/compliance",
+      "bytes": 11686,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "complianceTracking",
+      "path": "/api/v1/compliance-tracking",
+      "bytes": 684,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "mfaRoutes",
+      "path": "/api/v1/dual-use/mfa",
+      "bytes": 3361,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "farmerKycDomainRoutes",
+      "path": "/api/v1/farmer-kyc-domain",
+      "bytes": 1124,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "farmerKycRoutes",
+      "path": "/api/v1/farmer-kyc",
+      "bytes": 1645,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "farmerVerificationDomainRoutes",
+      "path": "/api/v1/farmer-verification-domain",
+      "bytes": 1212,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "farmerVerificationRoutes",
+      "path": "/api/v1/farmer-verification",
+      "bytes": 1369,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "gdprComplianceRoutes",
+      "path": "/api/v1/gdpr-compliance",
+      "bytes": 3603,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "gdprRoutes",
+      "path": "/api/v1/gdpr",
+      "bytes": 6417,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "gdprRoutes_merged",
+      "path": "/api/v1/gdpr-routes-merged",
+      "bytes": 1121,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "mfaDomainRoutes",
+      "path": "/api/v1/mfa-domain",
+      "bytes": 814,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "organicTraceabilityDomainRoutes",
+      "path": "/api/v1/organic-traceability-domain",
+      "bytes": 770,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "permissionRoutes",
+      "path": "/api/v1/permission",
+      "bytes": 495,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "privacyDomainRoutes",
+      "path": "/api/v1/privacy-domain",
+      "bytes": 943,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "productCertifications",
+      "path": "/api/v1/product-certifications",
+      "bytes": 333,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "securityRoutes",
+      "path": "/api/v1/security",
+      "bytes": 489,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "sellerVerifications",
+      "path": "/api/v1/seller-verifications",
+      "bytes": 329,
+      "aiSignal": false,
+      "integration": "PENDING"
+    }
+  ],
+  "generative_media": [
+    {
+      "name": "ecommerceImageIntegrationRoutes",
+      "path": "/api/v1/ecommerce-image-integration",
+      "bytes": 11525,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "farmerImagePortalRoutes",
+      "path": "/api/v1/farmer-image-portal",
+      "bytes": 13949,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "productImageAutoGenerationRoutes",
+      "path": "/api/v1/product-image-auto-generation",
+      "bytes": 11567,
+      "aiSignal": false,
+      "integration": "PARTIAL"
+    },
+    {
+      "name": "productMediaAIRoutes",
+      "path": "/api/v1/product-media-ai",
+      "bytes": 11399,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "videoAnalytics",
+      "path": "/api/v1/video-analytics",
+      "bytes": 757,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "visionRoutes",
+      "path": "/api/v1/vision",
+      "bytes": 6267,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "voiceAIDomainRoutes",
+      "path": "/api/v1/voice-aidomain",
+      "bytes": 1367,
+      "aiSignal": false,
+      "integration": "PENDING"
     }
   ],
   "embodied": [
     {
       "name": "equipmentExchangeRoutes",
       "path": "/api/v1/commerce/equipment-exchange",
-      "bytes": 4929
+      "bytes": 4929,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "equipmentExchangeDomainRoutes",
       "path": "/api/v1/equipment-exchange-domain",
-      "bytes": 1433
-    },
-    {
-      "name": "iotIntegrationRoutes",
-      "path": "/api/v1/iot-integration",
-      "bytes": 19587
-    },
-    {
-      "name": "iotSensors",
-      "path": "/api/v1/iot-sensors",
-      "bytes": 716
-    },
-    {
-      "name": "machineryVillageOpsRoutes",
-      "path": "/api/v1/machinery-village-ops",
-      "bytes": 14906
-    },
-    {
-      "name": "platformTelemetryRoutes",
-      "path": "/api/v1/platform-telemetry",
-      "bytes": 3793
-    }
-  ],
-  "none": [
-    {
-      "name": "adminRoutes",
-      "path": "/api/v1/admin",
-      "bytes": 480
-    },
-    {
-      "name": "advancedAnalyticsRoutes",
-      "path": "/api/v1/advanced-analytics",
-      "bytes": 11171
-    },
-    {
-      "name": "advancedFeatures",
-      "path": "/api/v1/advanced-features",
-      "bytes": 16828
-    },
-    {
-      "name": "advancedSearchRoutes",
-      "path": "/api/v1/advanced-search",
-      "bytes": 10208
-    },
-    {
-      "name": "farmerHealthRoutes",
-      "path": "/api/v1/agriculture/farmer-health",
-      "bytes": 7489
-    },
-    {
-      "name": "analyticsReportRoutes",
-      "path": "/api/v1/analytics-report",
-      "bytes": 645
-    },
-    {
-      "name": "analyticsRoutes",
-      "path": "/api/v1/analytics",
-      "bytes": 21301
-    },
-    {
-      "name": "animalHealthDomainRoutes",
-      "path": "/api/v1/animal-health-domain",
-      "bytes": 2581
-    },
-    {
-      "name": "animalHealthRoutes",
-      "path": "/api/v1/animal-health",
-      "bytes": 21315
-    },
-    {
-      "name": "apiCompatibilityRoutes",
-      "path": "/api/v1/api-compatibility",
-      "bytes": 648
-    },
-    {
-      "name": "apicultureRoutes",
-      "path": "/api/v1/apiculture",
-      "bytes": 3753
-    },
-    {
-      "name": "apiDocumentationRoutes",
-      "path": "/api/v1/api-documentation",
-      "bytes": 513
-    },
-    {
-      "name": "apiWarningRoutes",
-      "path": "/api/v1/api-warning",
-      "bytes": 10332
-    },
-    {
-      "name": "ar",
-      "path": "/api/v1/ar",
-      "bytes": 564
-    },
-    {
-      "name": "assetAccountingDomainRoutes",
-      "path": "/api/v1/asset-accounting-domain",
-      "bytes": 1993
-    },
-    {
-      "name": "assetAccountingRoutes",
-      "path": "/api/v1/asset-accounting",
-      "bytes": 16843
-    },
-    {
-      "name": "authRoutes",
-      "path": "/api/v1/auth",
-      "bytes": 34169
-    },
-    {
-      "name": "backupRoutes",
-      "path": "/api/v1/backup",
-      "bytes": 10555
-    },
-    {
-      "name": "biometric",
-      "path": "/api/v1/biometric",
-      "bytes": 656
-    },
-    {
-      "name": "blockchainTrace",
-      "path": "/api/v1/blockchain-trace",
-      "bytes": 702
-    },
-    {
-      "name": "bulkOperationRoutes",
-      "path": "/api/v1/bulk-operation",
-      "bytes": 504
-    },
-    {
-      "name": "bulkOrderDomainRoutes",
-      "path": "/api/v1/bulk-order-domain",
-      "bytes": 1728
-    },
-    {
-      "name": "bulkOrderRoutes",
-      "path": "/api/v1/bulk-order",
-      "bytes": 14800
-    },
-    {
-      "name": "bulkOrders",
-      "path": "/api/v1/bulk-orders",
-      "bytes": 311
-    },
-    {
-      "name": "buyerTrust",
-      "path": "/api/v1/buyer-trust",
-      "bytes": 4894
-    },
-    {
-      "name": "cacheRoutes",
-      "path": "/api/v1/cache",
-      "bytes": 4188
-    },
-    {
-      "name": "certificationManagement",
-      "path": "/api/v1/certification-management",
-      "bytes": 787
-    },
-    {
-      "name": "civilDisruptionDomainRoutes",
-      "path": "/api/v1/civil-disruption-domain",
-      "bytes": 1201
-    },
-    {
-      "name": "civilDisruptionRoutes",
-      "path": "/api/v1/civil-disruption",
-      "bytes": 6164
-    },
-    {
-      "name": "cloudManagementRoutes",
-      "path": "/api/v1/cloud-management",
-      "bytes": 16475
-    },
-    {
-      "name": "communityManagementDomainRoutes",
-      "path": "/api/v1/community-management-domain",
-      "bytes": 2327
-    },
-    {
-      "name": "communityManagementRoutes",
-      "path": "/api/v1/community-management",
-      "bytes": 1899
-    },
-    {
-      "name": "communityRoutes",
-      "path": "/api/v1/community",
-      "bytes": 25378
-    },
-    {
-      "name": "companyDomainRoutes",
-      "path": "/api/v1/company-domain",
-      "bytes": 1039
-    },
-    {
-      "name": "companyRoutes",
-      "path": "/api/v1/company",
-      "bytes": 2268
-    },
-    {
-      "name": "completeAIIntegrationDomainRoutes",
-      "path": "/api/v1/complete-aiintegration-domain",
-      "bytes": 2724
-    },
-    {
-      "name": "completeAIIntegrationRoutes",
-      "path": "/api/v1/complete-aiintegration",
-      "bytes": 6370
-    },
-    {
-      "name": "contractFarmingRoutes",
-      "path": "/api/v1/contract-farming",
-      "bytes": 5824
-    },
-    {
-      "name": "conversationalAIDomainRoutes",
-      "path": "/api/v1/conversational-aidomain",
-      "bytes": 1359
-    },
-    {
-      "name": "cooperativeShareDomainRoutes",
-      "path": "/api/v1/cooperative-share-domain",
-      "bytes": 1469
-    },
-    {
-      "name": "cooperativeShareRoutes",
-      "path": "/api/v1/cooperative-share",
-      "bytes": 8185
-    },
-    {
-      "name": "costControlDomainRoutes",
-      "path": "/api/v1/cost-control-domain",
-      "bytes": 2480
-    },
-    {
-      "name": "costControlRoutes",
-      "path": "/api/v1/cost-control",
-      "bytes": 17345
-    },
-    {
-      "name": "costRoutes",
-      "path": "/api/v1/cost",
-      "bytes": 3516
-    },
-    {
-      "name": "cropDomainRoutes",
-      "path": "/api/v1/crop-domain",
-      "bytes": 5881
-    },
-    {
-      "name": "cropManagementRoutes",
-      "path": "/api/v1/crop-management",
-      "bytes": 2638
-    },
-    {
-      "name": "cropPlanningRoutes",
-      "path": "/api/v1/crop-planning",
-      "bytes": 15481
-    },
-    {
-      "name": "dairyDomainRoutes",
-      "path": "/api/v1/dairy-domain",
-      "bytes": 3670
-    },
-    {
-      "name": "dairyRoutes",
-      "path": "/api/v1/dairy",
-      "bytes": 24204
-    },
-    {
-      "name": "dashboardRoutes",
-      "path": "/api/v1/dashboard",
-      "bytes": 626
-    },
-    {
-      "name": "databaseManagementRoutes",
-      "path": "/api/v1/database-management",
-      "bytes": 18070
-    },
-    {
-      "name": "dataExportRoutes",
-      "path": "/api/v1/data-export",
-      "bytes": 495
-    },
-    {
-      "name": "dataVisualization",
-      "path": "/api/v1/data-visualization",
-      "bytes": 514
-    },
-    {
-      "name": "defenseFitnessPrepDomainRoutes",
-      "path": "/api/v1/defense-fitness-prep-domain",
-      "bytes": 1146
-    },
-    {
-      "name": "defenseFitnessPrepRoutes",
-      "path": "/api/v1/defense-fitness-prep",
-      "bytes": 3595
-    },
-    {
-      "name": "demandRoutes",
-      "path": "/api/v1/demand",
-      "bytes": 6645
-    },
-    {
-      "name": "devinRoutes",
-      "path": "/api/v1/devin",
-      "bytes": 7491
-    },
-    {
-      "name": "digitalTwinRoutes",
-      "path": "/api/v1/digital-twin",
-      "bytes": 27192
-    },
-    {
-      "name": "ecommerceAIDomainRoutes",
-      "path": "/api/v1/ecommerce-aidomain",
-      "bytes": 1835
-    },
-    {
-      "name": "ecommerceBusinessSalesDomainRoutes",
-      "path": "/api/v1/ecommerce-business-sales-domain",
-      "bytes": 1285
-    },
-    {
-      "name": "ecommerceBusinessSalesRoutes",
-      "path": "/api/v1/ecommerce-business-sales",
-      "bytes": 20655
-    },
-    {
-      "name": "ecommerceIntegrationDomainRoutes",
-      "path": "/api/v1/ecommerce-integration-domain",
-      "bytes": 2449
-    },
-    {
-      "name": "ecommerceIntegrationRoutes",
-      "path": "/api/v1/ecommerce-integration",
-      "bytes": 26430
-    },
-    {
-      "name": "ecommerceMarketingDomainRoutes",
-      "path": "/api/v1/ecommerce-marketing-domain",
-      "bytes": 1071
-    },
-    {
-      "name": "ecommerceMarketingRoutes",
-      "path": "/api/v1/ecommerce-marketing",
-      "bytes": 23590
-    },
-    {
-      "name": "ecommerceMarketplaceDomainRoutes",
-      "path": "/api/v1/ecommerce-marketplace-domain",
-      "bytes": 1537
-    },
-    {
-      "name": "ecommerceRoutes",
-      "path": "/api/v1/ecommerce",
-      "bytes": 20619
-    },
-    {
-      "name": "ENDPOINT_MISMATCH_FIXER",
-      "path": "/api/v1/endpoint-mismatch-fixer",
-      "bytes": 356
-    },
-    {
-      "name": "ENDPOINT_MISMATCH_FIXER_COMPLETE",
-      "path": "/api/v1/endpoint-mismatch-fixer-complete",
-      "bytes": 382
-    },
-    {
-      "name": "energyRoutes",
-      "path": "/api/v1/energy",
-      "bytes": 617
-    },
-    {
-      "name": "errorLogRoutes",
-      "path": "/api/v1/error-log",
-      "bytes": 489
-    },
-    {
-      "name": "escrowDomainRoutes",
-      "path": "/api/v1/escrow-domain",
-      "bytes": 1026
-    },
-    {
-      "name": "escrowRoutes",
-      "path": "/api/v1/escrow",
-      "bytes": 9427
-    },
-    {
-      "name": "experienceLayerDomainRoutes",
-      "path": "/api/v1/experience-layer-domain",
-      "bytes": 1344
-    },
-    {
-      "name": "experienceRoutes",
-      "path": "/api/v1/experience",
-      "bytes": 3576
-    },
-    {
-      "name": "exportRoutes",
-      "path": "/api/v1/export",
-      "bytes": 483
-    },
-    {
-      "name": "farmAnalytics",
-      "path": "/api/v1/farm-analytics",
-      "bytes": 1561
-    },
-    {
-      "name": "farmCosting",
-      "path": "/api/v1/farm-costing",
-      "bytes": 10502
-    },
-    {
-      "name": "farmerFamilyRoutes",
-      "path": "/api/v1/farmer-family",
-      "bytes": 1172
-    },
-    {
-      "name": "farmerHealthDomainRoutes",
-      "path": "/api/v1/farmer-health-domain",
-      "bytes": 1613
-    },
-    {
-      "name": "farmerRoutes",
-      "path": "/api/v1/farmer",
-      "bytes": 22890
-    },
-    {
-      "name": "farmerValueDomainRoutes",
-      "path": "/api/v1/farmer-value-domain",
-      "bytes": 1597
-    },
-    {
-      "name": "farmerValueRoutes",
-      "path": "/api/v1/farmer-value",
-      "bytes": 18845
-    },
-    {
-      "name": "fertilizerDomainRoutes",
-      "path": "/api/v1/fertilizer-domain",
-      "bytes": 2164
-    },
-    {
-      "name": "fertilizerRoutes",
-      "path": "/api/v1/fertilizer",
-      "bytes": 629
-    },
-    {
-      "name": "gstRoutes",
-      "path": "/api/v1/finance/gst",
-      "bytes": 27481
-    },
-    {
-      "name": "unifiedLedgerRoutes",
-      "path": "/api/v1/finance/unified-ledger",
-      "bytes": 16380
-    },
-    {
-      "name": "financeDomainRoutes",
-      "path": "/api/v1/finance-domain",
-      "bytes": 1023
-    },
-    {
-      "name": "financialAIDomainRoutes",
-      "path": "/api/v1/financial-aidomain",
-      "bytes": 855
-    },
-    {
-      "name": "financialAnalytics",
-      "path": "/api/v1/financial-analytics",
-      "bytes": 1092
-    },
-    {
-      "name": "fisheriesDomainRoutes",
-      "path": "/api/v1/fisheries-domain",
-      "bytes": 3599
-    },
-    {
-      "name": "fisheriesManagementRoutes",
-      "path": "/api/v1/fisheries-management",
-      "bytes": 3459
-    },
-    {
-      "name": "fisheriesRoutes",
-      "path": "/api/v1/fisheries",
-      "bytes": 4364
-    },
-    {
-      "name": "foluRoutes",
-      "path": "/api/v1/folu",
-      "bytes": 2877
-    },
-    {
-      "name": "foodRoutes",
-      "path": "/api/v1/food",
-      "bytes": 611
-    },
-    {
-      "name": "forestryRoutes",
-      "path": "/api/v1/forestry",
-      "bytes": 3728
-    },
-    {
-      "name": "all_routes",
-      "path": "/api/v1/generated/all-",
-      "bytes": 0
-    },
-    {
-      "name": "geofencingRoutes",
-      "path": "/api/v1/geofencing",
-      "bytes": 17325
-    },
-    {
-      "name": "glutWarningRoutes",
-      "path": "/api/v1/glut-warning",
-      "bytes": 4298
-    },
-    {
-      "name": "goatRoutes",
-      "path": "/api/v1/goat",
-      "bytes": 39156
-    },
-    {
-      "name": "governanceModule",
-      "path": "/api/v1/governance-module",
-      "bytes": 9796
+      "bytes": 1433,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "greenhouse",
       "path": "/api/v1/greenhouse",
-      "bytes": 16424
+      "bytes": 16424,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
-      "name": "healthCheckRoutes",
-      "path": "/api/v1/health-check",
-      "bytes": 530
+      "name": "iotIntegrationRoutes",
+      "path": "/api/v1/iot-integration",
+      "bytes": 19587,
+      "aiSignal": true,
+      "integration": "WIRED"
     },
     {
-      "name": "healthRoutes",
-      "path": "/api/v1/health",
-      "bytes": 617
-    },
-    {
-      "name": "horticulture",
-      "path": "/api/v1/horticulture",
-      "bytes": 749
-    },
-    {
-      "name": "horticultureManagementDomainRoutes",
-      "path": "/api/v1/horticulture-management-domain",
-      "bytes": 2997
-    },
-    {
-      "name": "horticultureManagementRoutes",
-      "path": "/api/v1/horticulture-management",
-      "bytes": 2749
-    },
-    {
-      "name": "hrRoutes",
-      "path": "/api/v1/hr",
-      "bytes": 31585
-    },
-    {
-      "name": "identityManagementRoutes",
-      "path": "/api/v1/identity-management",
-      "bytes": 5217
-    },
-    {
-      "name": "informationSharingRoutes",
-      "path": "/api/v1/information-sharing",
-      "bytes": 17633
-    },
-    {
-      "name": "infrastructureMonitoringRoutes",
-      "path": "/api/v1/infrastructure-monitoring",
-      "bytes": 2840
-    },
-    {
-      "name": "inputSupplyManagementRoutes",
-      "path": "/api/v1/input-supply-management",
-      "bytes": 2676
-    },
-    {
-      "name": "insuranceDomainRoutes",
-      "path": "/api/v1/insurance-domain",
-      "bytes": 1057
-    },
-    {
-      "name": "insuranceEnhancements",
-      "path": "/api/v1/insurance-enhancements",
-      "bytes": 9568
-    },
-    {
-      "name": "integrationRoutes",
-      "path": "/api/v1/integration",
-      "bytes": 948
-    },
-    {
-      "name": "integrationStatusRoutes",
-      "path": "/api/v1/integration-status",
-      "bytes": 4687
+      "name": "iotSensors",
+      "path": "/api/v1/iot-sensors",
+      "bytes": 716,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "irrigationManagementRoutes",
       "path": "/api/v1/irrigation-management",
-      "bytes": 1388
-    },
-    {
-      "name": "labourRoutes",
-      "path": "/api/v1/labour",
-      "bytes": 2972
-    },
-    {
-      "name": "landManagementRoutes",
-      "path": "/api/v1/land-management",
-      "bytes": 2137
-    },
-    {
-      "name": "landRecordsDomainRoutes",
-      "path": "/api/v1/land-records-domain",
-      "bytes": 1165
-    },
-    {
-      "name": "landRecordsRoutes",
-      "path": "/api/v1/land-records",
-      "bytes": 14787
-    },
-    {
-      "name": "dairyRoutes_merged",
-      "path": "/api/v1/livestock/dairy-routes-merged",
-      "bytes": 0
-    },
-    {
-      "name": "livestock",
-      "path": "/api/v1/livestock",
-      "bytes": 695
-    },
-    {
-      "name": "livestockDomainRoutes",
-      "path": "/api/v1/livestock-domain",
-      "bytes": 4696
-    },
-    {
-      "name": "livestockManagementRoutes",
-      "path": "/api/v1/livestock-management",
-      "bytes": 3085
-    },
-    {
-      "name": "M100Routes",
-      "path": "/api/v1/m100",
-      "bytes": 956
-    },
-    {
-      "name": "M101Routes",
-      "path": "/api/v1/m101",
-      "bytes": 956
-    },
-    {
-      "name": "M102Routes",
-      "path": "/api/v1/m102",
-      "bytes": 956
-    },
-    {
-      "name": "M103Routes",
-      "path": "/api/v1/m103",
-      "bytes": 956
-    },
-    {
-      "name": "M104Routes",
-      "path": "/api/v1/m104",
-      "bytes": 956
-    },
-    {
-      "name": "M105Routes",
-      "path": "/api/v1/m105",
-      "bytes": 956
-    },
-    {
-      "name": "M106Routes",
-      "path": "/api/v1/m106",
-      "bytes": 956
-    },
-    {
-      "name": "M107Routes",
-      "path": "/api/v1/m107",
-      "bytes": 956
-    },
-    {
-      "name": "M108Routes",
-      "path": "/api/v1/m108",
-      "bytes": 956
-    },
-    {
-      "name": "M109Routes",
-      "path": "/api/v1/m109",
-      "bytes": 956
-    },
-    {
-      "name": "M110Routes",
-      "path": "/api/v1/m110",
-      "bytes": 956
-    },
-    {
-      "name": "M111Routes",
-      "path": "/api/v1/m111",
-      "bytes": 956
-    },
-    {
-      "name": "M112Routes",
-      "path": "/api/v1/m112",
-      "bytes": 956
-    },
-    {
-      "name": "M113Routes",
-      "path": "/api/v1/m113",
-      "bytes": 956
-    },
-    {
-      "name": "M114Routes",
-      "path": "/api/v1/m114",
-      "bytes": 956
-    },
-    {
-      "name": "M115Routes",
-      "path": "/api/v1/m115",
-      "bytes": 956
-    },
-    {
-      "name": "M116Routes",
-      "path": "/api/v1/m116",
-      "bytes": 956
-    },
-    {
-      "name": "M117Routes",
-      "path": "/api/v1/m117",
-      "bytes": 956
-    },
-    {
-      "name": "M118Routes",
-      "path": "/api/v1/m118",
-      "bytes": 956
-    },
-    {
-      "name": "M119Routes",
-      "path": "/api/v1/m119",
-      "bytes": 956
-    },
-    {
-      "name": "M120Routes",
-      "path": "/api/v1/m120",
-      "bytes": 956
-    },
-    {
-      "name": "M121Routes",
-      "path": "/api/v1/m121",
-      "bytes": 956
-    },
-    {
-      "name": "M122Routes",
-      "path": "/api/v1/m122",
-      "bytes": 956
-    },
-    {
-      "name": "M123Routes",
-      "path": "/api/v1/m123",
-      "bytes": 956
-    },
-    {
-      "name": "M124Routes",
-      "path": "/api/v1/m124",
-      "bytes": 956
-    },
-    {
-      "name": "M125Routes",
-      "path": "/api/v1/m125",
-      "bytes": 956
-    },
-    {
-      "name": "M126Routes",
-      "path": "/api/v1/m126",
-      "bytes": 956
-    },
-    {
-      "name": "M127Routes",
-      "path": "/api/v1/m127",
-      "bytes": 956
-    },
-    {
-      "name": "M128Routes",
-      "path": "/api/v1/m128",
-      "bytes": 956
-    },
-    {
-      "name": "M129Routes",
-      "path": "/api/v1/m129",
-      "bytes": 956
-    },
-    {
-      "name": "M130Routes",
-      "path": "/api/v1/m130",
-      "bytes": 956
-    },
-    {
-      "name": "M131Routes",
-      "path": "/api/v1/m131",
-      "bytes": 956
-    },
-    {
-      "name": "M132Routes",
-      "path": "/api/v1/m132",
-      "bytes": 956
-    },
-    {
-      "name": "M133Routes",
-      "path": "/api/v1/m133",
-      "bytes": 956
-    },
-    {
-      "name": "M134Routes",
-      "path": "/api/v1/m134",
-      "bytes": 956
-    },
-    {
-      "name": "M135Routes",
-      "path": "/api/v1/m135",
-      "bytes": 956
-    },
-    {
-      "name": "M136Routes",
-      "path": "/api/v1/m136",
-      "bytes": 956
-    },
-    {
-      "name": "M137Routes",
-      "path": "/api/v1/m137",
-      "bytes": 956
-    },
-    {
-      "name": "M138Routes",
-      "path": "/api/v1/m138",
-      "bytes": 956
-    },
-    {
-      "name": "M139Routes",
-      "path": "/api/v1/m139",
-      "bytes": 956
-    },
-    {
-      "name": "M140Routes",
-      "path": "/api/v1/m140",
-      "bytes": 956
-    },
-    {
-      "name": "M141Routes",
-      "path": "/api/v1/m141",
-      "bytes": 956
-    },
-    {
-      "name": "M142Routes",
-      "path": "/api/v1/m142",
-      "bytes": 956
-    },
-    {
-      "name": "M143Routes",
-      "path": "/api/v1/m143",
-      "bytes": 956
-    },
-    {
-      "name": "M144Routes",
-      "path": "/api/v1/m144",
-      "bytes": 956
-    },
-    {
-      "name": "M145Routes",
-      "path": "/api/v1/m145",
-      "bytes": 956
-    },
-    {
-      "name": "M146Routes",
-      "path": "/api/v1/m146",
-      "bytes": 956
-    },
-    {
-      "name": "M147Routes",
-      "path": "/api/v1/m147",
-      "bytes": 956
-    },
-    {
-      "name": "M148Routes",
-      "path": "/api/v1/m148",
-      "bytes": 956
-    },
-    {
-      "name": "M149Routes",
-      "path": "/api/v1/m149",
-      "bytes": 956
-    },
-    {
-      "name": "M150Routes",
-      "path": "/api/v1/m150",
-      "bytes": 956
-    },
-    {
-      "name": "M151Routes",
-      "path": "/api/v1/m151",
-      "bytes": 956
-    },
-    {
-      "name": "M152Routes",
-      "path": "/api/v1/m152",
-      "bytes": 956
-    },
-    {
-      "name": "M153Routes",
-      "path": "/api/v1/m153",
-      "bytes": 956
-    },
-    {
-      "name": "M154Routes",
-      "path": "/api/v1/m154",
-      "bytes": 956
-    },
-    {
-      "name": "M155Routes",
-      "path": "/api/v1/m155",
-      "bytes": 956
-    },
-    {
-      "name": "M156Routes",
-      "path": "/api/v1/m156",
-      "bytes": 956
-    },
-    {
-      "name": "M157Routes",
-      "path": "/api/v1/m157",
-      "bytes": 956
-    },
-    {
-      "name": "M158Routes",
-      "path": "/api/v1/m158",
-      "bytes": 956
-    },
-    {
-      "name": "M159Routes",
-      "path": "/api/v1/m159",
-      "bytes": 956
-    },
-    {
-      "name": "M160Routes",
-      "path": "/api/v1/m160",
-      "bytes": 956
-    },
-    {
-      "name": "M161Routes",
-      "path": "/api/v1/m161",
-      "bytes": 956
-    },
-    {
-      "name": "M162Routes",
-      "path": "/api/v1/m162",
-      "bytes": 956
-    },
-    {
-      "name": "M163Routes",
-      "path": "/api/v1/m163",
-      "bytes": 956
-    },
-    {
-      "name": "M164Routes",
-      "path": "/api/v1/m164",
-      "bytes": 956
-    },
-    {
-      "name": "M165Routes",
-      "path": "/api/v1/m165",
-      "bytes": 956
-    },
-    {
-      "name": "M166Routes",
-      "path": "/api/v1/m166",
-      "bytes": 956
-    },
-    {
-      "name": "M167Routes",
-      "path": "/api/v1/m167",
-      "bytes": 956
-    },
-    {
-      "name": "M168Routes",
-      "path": "/api/v1/m168",
-      "bytes": 956
-    },
-    {
-      "name": "M169Routes",
-      "path": "/api/v1/m169",
-      "bytes": 956
-    },
-    {
-      "name": "M170Routes",
-      "path": "/api/v1/m170",
-      "bytes": 956
-    },
-    {
-      "name": "M171Routes",
-      "path": "/api/v1/m171",
-      "bytes": 956
-    },
-    {
-      "name": "M172Routes",
-      "path": "/api/v1/m172",
-      "bytes": 956
-    },
-    {
-      "name": "M173Routes",
-      "path": "/api/v1/m173",
-      "bytes": 956
-    },
-    {
-      "name": "M174Routes",
-      "path": "/api/v1/m174",
-      "bytes": 956
-    },
-    {
-      "name": "M175Routes",
-      "path": "/api/v1/m175",
-      "bytes": 956
-    },
-    {
-      "name": "M176Routes",
-      "path": "/api/v1/m176",
-      "bytes": 956
-    },
-    {
-      "name": "M177Routes",
-      "path": "/api/v1/m177",
-      "bytes": 956
-    },
-    {
-      "name": "M178Routes",
-      "path": "/api/v1/m178",
-      "bytes": 956
-    },
-    {
-      "name": "M179Routes",
-      "path": "/api/v1/m179",
-      "bytes": 956
-    },
-    {
-      "name": "M180Routes",
-      "path": "/api/v1/m180",
-      "bytes": 956
-    },
-    {
-      "name": "M181Routes",
-      "path": "/api/v1/m181",
-      "bytes": 956
-    },
-    {
-      "name": "M182Routes",
-      "path": "/api/v1/m182",
-      "bytes": 956
-    },
-    {
-      "name": "M183Routes",
-      "path": "/api/v1/m183",
-      "bytes": 956
-    },
-    {
-      "name": "M184Routes",
-      "path": "/api/v1/m184",
-      "bytes": 956
-    },
-    {
-      "name": "M185Routes",
-      "path": "/api/v1/m185",
-      "bytes": 956
-    },
-    {
-      "name": "M186Routes",
-      "path": "/api/v1/m186",
-      "bytes": 956
-    },
-    {
-      "name": "M187Routes",
-      "path": "/api/v1/m187",
-      "bytes": 956
-    },
-    {
-      "name": "M188Routes",
-      "path": "/api/v1/m188",
-      "bytes": 956
-    },
-    {
-      "name": "M189Routes",
-      "path": "/api/v1/m189",
-      "bytes": 956
-    },
-    {
-      "name": "M190Routes",
-      "path": "/api/v1/m190",
-      "bytes": 956
-    },
-    {
-      "name": "M191Routes",
-      "path": "/api/v1/m191",
-      "bytes": 956
-    },
-    {
-      "name": "M192Routes",
-      "path": "/api/v1/m192",
-      "bytes": 956
-    },
-    {
-      "name": "M193Routes",
-      "path": "/api/v1/m193",
-      "bytes": 956
-    },
-    {
-      "name": "M194Routes",
-      "path": "/api/v1/m194",
-      "bytes": 956
-    },
-    {
-      "name": "M195Routes",
-      "path": "/api/v1/m195",
-      "bytes": 956
-    },
-    {
-      "name": "M196Routes",
-      "path": "/api/v1/m196",
-      "bytes": 956
-    },
-    {
-      "name": "M197Routes",
-      "path": "/api/v1/m197",
-      "bytes": 956
-    },
-    {
-      "name": "M198Routes",
-      "path": "/api/v1/m198",
-      "bytes": 956
-    },
-    {
-      "name": "M199Routes",
-      "path": "/api/v1/m199",
-      "bytes": 956
-    },
-    {
-      "name": "M200Routes",
-      "path": "/api/v1/m200",
-      "bytes": 956
-    },
-    {
-      "name": "M201Routes",
-      "path": "/api/v1/m201",
-      "bytes": 956
-    },
-    {
-      "name": "M202Routes",
-      "path": "/api/v1/m202",
-      "bytes": 956
-    },
-    {
-      "name": "M203Routes",
-      "path": "/api/v1/m203",
-      "bytes": 956
-    },
-    {
-      "name": "M204Routes",
-      "path": "/api/v1/m204",
-      "bytes": 956
-    },
-    {
-      "name": "M205Routes",
-      "path": "/api/v1/m205",
-      "bytes": 956
-    },
-    {
-      "name": "M206Routes",
-      "path": "/api/v1/m206",
-      "bytes": 956
-    },
-    {
-      "name": "M207Routes",
-      "path": "/api/v1/m207",
-      "bytes": 956
-    },
-    {
-      "name": "M208Routes",
-      "path": "/api/v1/m208",
-      "bytes": 956
-    },
-    {
-      "name": "M209Routes",
-      "path": "/api/v1/m209",
-      "bytes": 956
-    },
-    {
-      "name": "M210Routes",
-      "path": "/api/v1/m210",
-      "bytes": 956
-    },
-    {
-      "name": "M211Routes",
-      "path": "/api/v1/m211",
-      "bytes": 956
-    },
-    {
-      "name": "M212Routes",
-      "path": "/api/v1/m212",
-      "bytes": 956
-    },
-    {
-      "name": "M213Routes",
-      "path": "/api/v1/m213",
-      "bytes": 956
-    },
-    {
-      "name": "M214Routes",
-      "path": "/api/v1/m214",
-      "bytes": 956
-    },
-    {
-      "name": "M215Routes",
-      "path": "/api/v1/m215",
-      "bytes": 956
-    },
-    {
-      "name": "M216Routes",
-      "path": "/api/v1/m216",
-      "bytes": 956
-    },
-    {
-      "name": "M217Routes",
-      "path": "/api/v1/m217",
-      "bytes": 956
-    },
-    {
-      "name": "M218Routes",
-      "path": "/api/v1/m218",
-      "bytes": 956
-    },
-    {
-      "name": "M219Routes",
-      "path": "/api/v1/m219",
-      "bytes": 956
-    },
-    {
-      "name": "M220Routes",
-      "path": "/api/v1/m220",
-      "bytes": 956
-    },
-    {
-      "name": "M221Routes",
-      "path": "/api/v1/m221",
-      "bytes": 956
-    },
-    {
-      "name": "M222Routes",
-      "path": "/api/v1/m222",
-      "bytes": 956
-    },
-    {
-      "name": "M223Routes",
-      "path": "/api/v1/m223",
-      "bytes": 956
-    },
-    {
-      "name": "M224Routes",
-      "path": "/api/v1/m224",
-      "bytes": 956
-    },
-    {
-      "name": "M225Routes",
-      "path": "/api/v1/m225",
-      "bytes": 956
-    },
-    {
-      "name": "M226Routes",
-      "path": "/api/v1/m226",
-      "bytes": 956
-    },
-    {
-      "name": "M227Routes",
-      "path": "/api/v1/m227",
-      "bytes": 956
-    },
-    {
-      "name": "M228Routes",
-      "path": "/api/v1/m228",
-      "bytes": 956
-    },
-    {
-      "name": "M229Routes",
-      "path": "/api/v1/m229",
-      "bytes": 956
-    },
-    {
-      "name": "M230Routes",
-      "path": "/api/v1/m230",
-      "bytes": 956
-    },
-    {
-      "name": "M231Routes",
-      "path": "/api/v1/m231",
-      "bytes": 956
-    },
-    {
-      "name": "M232Routes",
-      "path": "/api/v1/m232",
-      "bytes": 956
-    },
-    {
-      "name": "M233Routes",
-      "path": "/api/v1/m233",
-      "bytes": 956
-    },
-    {
-      "name": "M234Routes",
-      "path": "/api/v1/m234",
-      "bytes": 956
-    },
-    {
-      "name": "M235Routes",
-      "path": "/api/v1/m235",
-      "bytes": 956
-    },
-    {
-      "name": "M236Routes",
-      "path": "/api/v1/m236",
-      "bytes": 956
-    },
-    {
-      "name": "M237Routes",
-      "path": "/api/v1/m237",
-      "bytes": 956
-    },
-    {
-      "name": "M238Routes",
-      "path": "/api/v1/m238",
-      "bytes": 956
-    },
-    {
-      "name": "M239Routes",
-      "path": "/api/v1/m239",
-      "bytes": 956
-    },
-    {
-      "name": "M240Routes",
-      "path": "/api/v1/m240",
-      "bytes": 956
-    },
-    {
-      "name": "M241Routes",
-      "path": "/api/v1/m241",
-      "bytes": 956
-    },
-    {
-      "name": "M242Routes",
-      "path": "/api/v1/m242",
-      "bytes": 956
-    },
-    {
-      "name": "M243Routes",
-      "path": "/api/v1/m243",
-      "bytes": 956
-    },
-    {
-      "name": "M244Routes",
-      "path": "/api/v1/m244",
-      "bytes": 956
-    },
-    {
-      "name": "M245Routes",
-      "path": "/api/v1/m245",
-      "bytes": 956
-    },
-    {
-      "name": "M246Routes",
-      "path": "/api/v1/m246",
-      "bytes": 956
-    },
-    {
-      "name": "M247Routes",
-      "path": "/api/v1/m247",
-      "bytes": 956
-    },
-    {
-      "name": "M248Routes",
-      "path": "/api/v1/m248",
-      "bytes": 956
-    },
-    {
-      "name": "M249Routes",
-      "path": "/api/v1/m249",
-      "bytes": 956
-    },
-    {
-      "name": "M250Routes",
-      "path": "/api/v1/m250",
-      "bytes": 956
-    },
-    {
-      "name": "M251Routes",
-      "path": "/api/v1/m251",
-      "bytes": 956
-    },
-    {
-      "name": "M252Routes",
-      "path": "/api/v1/m252",
-      "bytes": 956
-    },
-    {
-      "name": "M253Routes",
-      "path": "/api/v1/m253",
-      "bytes": 956
-    },
-    {
-      "name": "M254Routes",
-      "path": "/api/v1/m254",
-      "bytes": 956
-    },
-    {
-      "name": "M255Routes",
-      "path": "/api/v1/m255",
-      "bytes": 956
-    },
-    {
-      "name": "M256Routes",
-      "path": "/api/v1/m256",
-      "bytes": 956
-    },
-    {
-      "name": "M257Routes",
-      "path": "/api/v1/m257",
-      "bytes": 956
-    },
-    {
-      "name": "M258Routes",
-      "path": "/api/v1/m258",
-      "bytes": 956
-    },
-    {
-      "name": "M259Routes",
-      "path": "/api/v1/m259",
-      "bytes": 956
-    },
-    {
-      "name": "M260Routes",
-      "path": "/api/v1/m260",
-      "bytes": 956
-    },
-    {
-      "name": "M261Routes",
-      "path": "/api/v1/m261",
-      "bytes": 956
-    },
-    {
-      "name": "M262Routes",
-      "path": "/api/v1/m262",
-      "bytes": 956
-    },
-    {
-      "name": "M263Routes",
-      "path": "/api/v1/m263",
-      "bytes": 956
-    },
-    {
-      "name": "M264Routes",
-      "path": "/api/v1/m264",
-      "bytes": 956
-    },
-    {
-      "name": "M265Routes",
-      "path": "/api/v1/m265",
-      "bytes": 956
-    },
-    {
-      "name": "M266Routes",
-      "path": "/api/v1/m266",
-      "bytes": 956
-    },
-    {
-      "name": "M267Routes",
-      "path": "/api/v1/m267",
-      "bytes": 956
-    },
-    {
-      "name": "M268Routes",
-      "path": "/api/v1/m268",
-      "bytes": 956
-    },
-    {
-      "name": "M269Routes",
-      "path": "/api/v1/m269",
-      "bytes": 956
-    },
-    {
-      "name": "M270Routes",
-      "path": "/api/v1/m270",
-      "bytes": 956
-    },
-    {
-      "name": "M271Routes",
-      "path": "/api/v1/m271",
-      "bytes": 956
-    },
-    {
-      "name": "M272Routes",
-      "path": "/api/v1/m272",
-      "bytes": 956
-    },
-    {
-      "name": "M273Routes",
-      "path": "/api/v1/m273",
-      "bytes": 956
-    },
-    {
-      "name": "M274Routes",
-      "path": "/api/v1/m274",
-      "bytes": 956
-    },
-    {
-      "name": "M275Routes",
-      "path": "/api/v1/m275",
-      "bytes": 956
-    },
-    {
-      "name": "M276Routes",
-      "path": "/api/v1/m276",
-      "bytes": 956
-    },
-    {
-      "name": "M277Routes",
-      "path": "/api/v1/m277",
-      "bytes": 956
-    },
-    {
-      "name": "M278Routes",
-      "path": "/api/v1/m278",
-      "bytes": 956
-    },
-    {
-      "name": "M279Routes",
-      "path": "/api/v1/m279",
-      "bytes": 956
-    },
-    {
-      "name": "M280Routes",
-      "path": "/api/v1/m280",
-      "bytes": 956
-    },
-    {
-      "name": "M281Routes",
-      "path": "/api/v1/m281",
-      "bytes": 956
-    },
-    {
-      "name": "M282Routes",
-      "path": "/api/v1/m282",
-      "bytes": 956
-    },
-    {
-      "name": "M283Routes",
-      "path": "/api/v1/m283",
-      "bytes": 956
-    },
-    {
-      "name": "M284Routes",
-      "path": "/api/v1/m284",
-      "bytes": 956
-    },
-    {
-      "name": "M285Routes",
-      "path": "/api/v1/m285",
-      "bytes": 956
-    },
-    {
-      "name": "M286Routes",
-      "path": "/api/v1/m286",
-      "bytes": 956
-    },
-    {
-      "name": "M287Routes",
-      "path": "/api/v1/m287",
-      "bytes": 956
-    },
-    {
-      "name": "M288Routes",
-      "path": "/api/v1/m288",
-      "bytes": 956
-    },
-    {
-      "name": "M289Routes",
-      "path": "/api/v1/m289",
-      "bytes": 956
-    },
-    {
-      "name": "M290Routes",
-      "path": "/api/v1/m290",
-      "bytes": 956
-    },
-    {
-      "name": "M291Routes",
-      "path": "/api/v1/m291",
-      "bytes": 956
-    },
-    {
-      "name": "M292Routes",
-      "path": "/api/v1/m292",
-      "bytes": 956
-    },
-    {
-      "name": "M293Routes",
-      "path": "/api/v1/m293",
-      "bytes": 956
-    },
-    {
-      "name": "M294Routes",
-      "path": "/api/v1/m294",
-      "bytes": 956
-    },
-    {
-      "name": "M295Routes",
-      "path": "/api/v1/m295",
-      "bytes": 956
-    },
-    {
-      "name": "M296Routes",
-      "path": "/api/v1/m296",
-      "bytes": 956
-    },
-    {
-      "name": "M297Routes",
-      "path": "/api/v1/m297",
-      "bytes": 956
-    },
-    {
-      "name": "M298Routes",
-      "path": "/api/v1/m298",
-      "bytes": 956
-    },
-    {
-      "name": "M299Routes",
-      "path": "/api/v1/m299",
-      "bytes": 956
-    },
-    {
-      "name": "M300Routes",
-      "path": "/api/v1/m300",
-      "bytes": 956
-    },
-    {
-      "name": "M301Routes",
-      "path": "/api/v1/m301",
-      "bytes": 956
-    },
-    {
-      "name": "M302Routes",
-      "path": "/api/v1/m302",
-      "bytes": 956
-    },
-    {
-      "name": "M303Routes",
-      "path": "/api/v1/m303",
-      "bytes": 956
-    },
-    {
-      "name": "M304Routes",
-      "path": "/api/v1/m304",
-      "bytes": 956
-    },
-    {
-      "name": "M305Routes",
-      "path": "/api/v1/m305",
-      "bytes": 956
-    },
-    {
-      "name": "M306Routes",
-      "path": "/api/v1/m306",
-      "bytes": 956
-    },
-    {
-      "name": "M307Routes",
-      "path": "/api/v1/m307",
-      "bytes": 956
-    },
-    {
-      "name": "M308Routes",
-      "path": "/api/v1/m308",
-      "bytes": 956
-    },
-    {
-      "name": "M309Routes",
-      "path": "/api/v1/m309",
-      "bytes": 956
-    },
-    {
-      "name": "M310Routes",
-      "path": "/api/v1/m310",
-      "bytes": 956
-    },
-    {
-      "name": "M311Routes",
-      "path": "/api/v1/m311",
-      "bytes": 956
-    },
-    {
-      "name": "M312Routes",
-      "path": "/api/v1/m312",
-      "bytes": 956
-    },
-    {
-      "name": "M313Routes",
-      "path": "/api/v1/m313",
-      "bytes": 956
-    },
-    {
-      "name": "M314Routes",
-      "path": "/api/v1/m314",
-      "bytes": 956
-    },
-    {
-      "name": "M315Routes",
-      "path": "/api/v1/m315",
-      "bytes": 956
-    },
-    {
-      "name": "M316Routes",
-      "path": "/api/v1/m316",
-      "bytes": 956
-    },
-    {
-      "name": "M317Routes",
-      "path": "/api/v1/m317",
-      "bytes": 956
-    },
-    {
-      "name": "M318Routes",
-      "path": "/api/v1/m318",
-      "bytes": 956
-    },
-    {
-      "name": "M319Routes",
-      "path": "/api/v1/m319",
-      "bytes": 956
-    },
-    {
-      "name": "M31Routes",
-      "path": "/api/v1/m31",
-      "bytes": 949
-    },
-    {
-      "name": "M320Routes",
-      "path": "/api/v1/m320",
-      "bytes": 956
-    },
-    {
-      "name": "M321Routes",
-      "path": "/api/v1/m321",
-      "bytes": 956
-    },
-    {
-      "name": "M322Routes",
-      "path": "/api/v1/m322",
-      "bytes": 956
-    },
-    {
-      "name": "M323Routes",
-      "path": "/api/v1/m323",
-      "bytes": 956
-    },
-    {
-      "name": "M324Routes",
-      "path": "/api/v1/m324",
-      "bytes": 956
-    },
-    {
-      "name": "M325Routes",
-      "path": "/api/v1/m325",
-      "bytes": 956
-    },
-    {
-      "name": "M326Routes",
-      "path": "/api/v1/m326",
-      "bytes": 956
-    },
-    {
-      "name": "M327Routes",
-      "path": "/api/v1/m327",
-      "bytes": 956
-    },
-    {
-      "name": "M328Routes",
-      "path": "/api/v1/m328",
-      "bytes": 956
-    },
-    {
-      "name": "M329Routes",
-      "path": "/api/v1/m329",
-      "bytes": 956
-    },
-    {
-      "name": "M32Routes",
-      "path": "/api/v1/m32",
-      "bytes": 949
-    },
-    {
-      "name": "M330Routes",
-      "path": "/api/v1/m330",
-      "bytes": 956
-    },
-    {
-      "name": "M331Routes",
-      "path": "/api/v1/m331",
-      "bytes": 956
-    },
-    {
-      "name": "M332Routes",
-      "path": "/api/v1/m332",
-      "bytes": 956
-    },
-    {
-      "name": "M333Routes",
-      "path": "/api/v1/m333",
-      "bytes": 956
-    },
-    {
-      "name": "M334Routes",
-      "path": "/api/v1/m334",
-      "bytes": 956
-    },
-    {
-      "name": "M335Routes",
-      "path": "/api/v1/m335",
-      "bytes": 956
-    },
-    {
-      "name": "M336Routes",
-      "path": "/api/v1/m336",
-      "bytes": 956
-    },
-    {
-      "name": "M337Routes",
-      "path": "/api/v1/m337",
-      "bytes": 956
-    },
-    {
-      "name": "M338Routes",
-      "path": "/api/v1/m338",
-      "bytes": 956
-    },
-    {
-      "name": "M339Routes",
-      "path": "/api/v1/m339",
-      "bytes": 956
-    },
-    {
-      "name": "M33Routes",
-      "path": "/api/v1/m33",
-      "bytes": 949
-    },
-    {
-      "name": "M340Routes",
-      "path": "/api/v1/m340",
-      "bytes": 956
-    },
-    {
-      "name": "M341Routes",
-      "path": "/api/v1/m341",
-      "bytes": 956
-    },
-    {
-      "name": "M342Routes",
-      "path": "/api/v1/m342",
-      "bytes": 956
-    },
-    {
-      "name": "M343Routes",
-      "path": "/api/v1/m343",
-      "bytes": 956
-    },
-    {
-      "name": "M344Routes",
-      "path": "/api/v1/m344",
-      "bytes": 956
-    },
-    {
-      "name": "M34Routes",
-      "path": "/api/v1/m34",
-      "bytes": 949
-    },
-    {
-      "name": "M35Routes",
-      "path": "/api/v1/m35",
-      "bytes": 949
-    },
-    {
-      "name": "M36Routes",
-      "path": "/api/v1/m36",
-      "bytes": 949
-    },
-    {
-      "name": "M37Routes",
-      "path": "/api/v1/m37",
-      "bytes": 949
-    },
-    {
-      "name": "M38Routes",
-      "path": "/api/v1/m38",
-      "bytes": 949
-    },
-    {
-      "name": "M39Routes",
-      "path": "/api/v1/m39",
-      "bytes": 949
-    },
-    {
-      "name": "M40Routes",
-      "path": "/api/v1/m40",
-      "bytes": 949
-    },
-    {
-      "name": "M41Routes",
-      "path": "/api/v1/m41",
-      "bytes": 949
-    },
-    {
-      "name": "M42Routes",
-      "path": "/api/v1/m42",
-      "bytes": 949
-    },
-    {
-      "name": "M43Routes",
-      "path": "/api/v1/m43",
-      "bytes": 949
-    },
-    {
-      "name": "M44Routes",
-      "path": "/api/v1/m44",
-      "bytes": 949
-    },
-    {
-      "name": "M45Routes",
-      "path": "/api/v1/m45",
-      "bytes": 949
-    },
-    {
-      "name": "M46Routes",
-      "path": "/api/v1/m46",
-      "bytes": 949
-    },
-    {
-      "name": "M47Routes",
-      "path": "/api/v1/m47",
-      "bytes": 949
-    },
-    {
-      "name": "M48Routes",
-      "path": "/api/v1/m48",
-      "bytes": 949
-    },
-    {
-      "name": "M49Routes",
-      "path": "/api/v1/m49",
-      "bytes": 949
-    },
-    {
-      "name": "M50Routes",
-      "path": "/api/v1/m50",
-      "bytes": 949
-    },
-    {
-      "name": "M51Routes",
-      "path": "/api/v1/m51",
-      "bytes": 949
-    },
-    {
-      "name": "M52Routes",
-      "path": "/api/v1/m52",
-      "bytes": 949
-    },
-    {
-      "name": "M53Routes",
-      "path": "/api/v1/m53",
-      "bytes": 949
-    },
-    {
-      "name": "M54Routes",
-      "path": "/api/v1/m54",
-      "bytes": 949
-    },
-    {
-      "name": "M55Routes",
-      "path": "/api/v1/m55",
-      "bytes": 949
-    },
-    {
-      "name": "M56Routes",
-      "path": "/api/v1/m56",
-      "bytes": 949
-    },
-    {
-      "name": "M57Routes",
-      "path": "/api/v1/m57",
-      "bytes": 949
-    },
-    {
-      "name": "M58Routes",
-      "path": "/api/v1/m58",
-      "bytes": 949
-    },
-    {
-      "name": "M59Routes",
-      "path": "/api/v1/m59",
-      "bytes": 949
-    },
-    {
-      "name": "M60Routes",
-      "path": "/api/v1/m60",
-      "bytes": 949
-    },
-    {
-      "name": "M61Routes",
-      "path": "/api/v1/m61",
-      "bytes": 949
-    },
-    {
-      "name": "M62Routes",
-      "path": "/api/v1/m62",
-      "bytes": 949
-    },
-    {
-      "name": "M63Routes",
-      "path": "/api/v1/m63",
-      "bytes": 949
-    },
-    {
-      "name": "M64Routes",
-      "path": "/api/v1/m64",
-      "bytes": 949
-    },
-    {
-      "name": "M65Routes",
-      "path": "/api/v1/m65",
-      "bytes": 949
-    },
-    {
-      "name": "M66Routes",
-      "path": "/api/v1/m66",
-      "bytes": 949
-    },
-    {
-      "name": "M67Routes",
-      "path": "/api/v1/m67",
-      "bytes": 949
-    },
-    {
-      "name": "M68Routes",
-      "path": "/api/v1/m68",
-      "bytes": 949
-    },
-    {
-      "name": "M69Routes",
-      "path": "/api/v1/m69",
-      "bytes": 949
-    },
-    {
-      "name": "M70Routes",
-      "path": "/api/v1/m70",
-      "bytes": 949
-    },
-    {
-      "name": "M71Routes",
-      "path": "/api/v1/m71",
-      "bytes": 949
-    },
-    {
-      "name": "M72Routes",
-      "path": "/api/v1/m72",
-      "bytes": 949
-    },
-    {
-      "name": "M73Routes",
-      "path": "/api/v1/m73",
-      "bytes": 949
-    },
-    {
-      "name": "M74Routes",
-      "path": "/api/v1/m74",
-      "bytes": 949
-    },
-    {
-      "name": "M75Routes",
-      "path": "/api/v1/m75",
-      "bytes": 949
-    },
-    {
-      "name": "M76Routes",
-      "path": "/api/v1/m76",
-      "bytes": 949
-    },
-    {
-      "name": "M77Routes",
-      "path": "/api/v1/m77",
-      "bytes": 949
-    },
-    {
-      "name": "M78Routes",
-      "path": "/api/v1/m78",
-      "bytes": 949
-    },
-    {
-      "name": "M79Routes",
-      "path": "/api/v1/m79",
-      "bytes": 949
-    },
-    {
-      "name": "M80Routes",
-      "path": "/api/v1/m80",
-      "bytes": 949
-    },
-    {
-      "name": "M81Routes",
-      "path": "/api/v1/m81",
-      "bytes": 949
-    },
-    {
-      "name": "M82Routes",
-      "path": "/api/v1/m82",
-      "bytes": 949
-    },
-    {
-      "name": "M83Routes",
-      "path": "/api/v1/m83",
-      "bytes": 949
-    },
-    {
-      "name": "M84Routes",
-      "path": "/api/v1/m84",
-      "bytes": 949
-    },
-    {
-      "name": "M85Routes",
-      "path": "/api/v1/m85",
-      "bytes": 949
-    },
-    {
-      "name": "M86Routes",
-      "path": "/api/v1/m86",
-      "bytes": 949
-    },
-    {
-      "name": "M87Routes",
-      "path": "/api/v1/m87",
-      "bytes": 949
-    },
-    {
-      "name": "M88Routes",
-      "path": "/api/v1/m88",
-      "bytes": 949
-    },
-    {
-      "name": "M89Routes",
-      "path": "/api/v1/m89",
-      "bytes": 949
-    },
-    {
-      "name": "M90Routes",
-      "path": "/api/v1/m90",
-      "bytes": 949
-    },
-    {
-      "name": "M91Routes",
-      "path": "/api/v1/m91",
-      "bytes": 949
-    },
-    {
-      "name": "M92Routes",
-      "path": "/api/v1/m92",
-      "bytes": 949
-    },
-    {
-      "name": "M93Routes",
-      "path": "/api/v1/m93",
-      "bytes": 949
-    },
-    {
-      "name": "M94Routes",
-      "path": "/api/v1/m94",
-      "bytes": 949
-    },
-    {
-      "name": "M95Routes",
-      "path": "/api/v1/m95",
-      "bytes": 949
-    },
-    {
-      "name": "M96Routes",
-      "path": "/api/v1/m96",
-      "bytes": 949
-    },
-    {
-      "name": "M97Routes",
-      "path": "/api/v1/m97",
-      "bytes": 949
-    },
-    {
-      "name": "M98Routes",
-      "path": "/api/v1/m98",
-      "bytes": 949
-    },
-    {
-      "name": "M99Routes",
-      "path": "/api/v1/m99",
-      "bytes": 949
-    },
-    {
-      "name": "marketAnalytics",
-      "path": "/api/v1/market-analytics",
-      "bytes": 1206
-    },
-    {
-      "name": "marketDataRoutes",
-      "path": "/api/v1/market-data",
-      "bytes": 17658
-    },
-    {
-      "name": "marketplaceEnhancements",
-      "path": "/api/v1/marketplace-enhancements",
-      "bytes": 10819
-    },
-    {
-      "name": "migrationRoutes",
-      "path": "/api/v1/migration",
-      "bytes": 492
-    },
-    {
-      "name": "moduleRegistryRoutes",
-      "path": "/api/v1/module-registry",
-      "bytes": 6420
-    },
-    {
-      "name": "moduleSupportInfrastructureRoutes",
-      "path": "/api/v1/module-support-infrastructure",
-      "bytes": 18661
-    },
-    {
-      "name": "moduleSystemsRoutes",
-      "path": "/api/v1/module-systems",
-      "bytes": 1077
-    },
-    {
-      "name": "multilingualDomainRoutes",
-      "path": "/api/v1/multilingual-domain",
-      "bytes": 1652
-    },
-    {
-      "name": "mushroomRoutes",
-      "path": "/api/v1/mushroom",
-      "bytes": 3984
-    },
-    {
-      "name": "neVarietiesRoutes",
-      "path": "/api/v1/ne-varieties",
-      "bytes": 9819
-    },
-    {
-      "name": "nlp",
-      "path": "/api/v1/nlp",
-      "bytes": 573
-    },
-    {
-      "name": "notificationDomainRoutes",
-      "path": "/api/v1/notification-domain",
-      "bytes": 981
-    },
-    {
-      "name": "notificationRoutes",
-      "path": "/api/v1/notifications",
-      "bytes": 12899
-    },
-    {
-      "name": "operationsManagementRoutes",
-      "path": "/api/v1/operations-management",
-      "bytes": 2664
-    },
-    {
-      "name": "orderRoutes",
-      "path": "/api/v1/order",
-      "bytes": 28362
-    },
-    {
-      "name": "ordersDomainRoutes",
-      "path": "/api/v1/orders-domain",
-      "bytes": 2012
-    },
-    {
-      "name": "organicTraceabilityDomainRoutes",
-      "path": "/api/v1/organic-traceability-domain",
-      "bytes": 770
-    },
-    {
-      "name": "organizationDomainRoutes",
-      "path": "/api/v1/organization-domain",
-      "bytes": 1764
-    },
-    {
-      "name": "organizationManagementRoutes",
-      "path": "/api/v1/organization-management",
-      "bytes": 17116
-    },
-    {
-      "name": "paymentGatewayRoutes",
-      "path": "/api/v1/payment-gateway",
-      "bytes": 6929
-    },
-    {
-      "name": "paymentRoutes",
-      "path": "/api/v1/payments",
-      "bytes": 10227
-    },
-    {
-      "name": "performanceRoutes",
-      "path": "/api/v1/performance",
-      "bytes": 498
-    },
-    {
-      "name": "phase10",
-      "path": "/api/v1/phase10",
-      "bytes": 2563
-    },
-    {
-      "name": "phase11",
-      "path": "/api/v1/phase11",
-      "bytes": 2444
-    },
-    {
-      "name": "phase12",
-      "path": "/api/v1/phase12",
-      "bytes": 2929
-    },
-    {
-      "name": "phase8",
-      "path": "/api/v1/phase8",
-      "bytes": 2225
-    },
-    {
-      "name": "phase9",
-      "path": "/api/v1/phase9",
-      "bytes": 2914
-    },
-    {
-      "name": "pigRoutes",
-      "path": "/api/v1/pig",
-      "bytes": 39118
-    },
-    {
-      "name": "informationSharingRoutes_merged",
-      "path": "/api/v1/platform/information-sharing-routes-merged",
-      "bytes": 0
-    },
-    {
-      "name": "organizationManagementRoutes_merged",
-      "path": "/api/v1/platform/organization-management-routes-merged",
-      "bytes": 0
-    },
-    {
-      "name": "publicDomainDataExtractionRoutes",
-      "path": "/api/v1/platform/public-domain-data-extraction",
-      "bytes": 25902
-    },
-    {
-      "name": "platformConfigurationRoutes",
-      "path": "/api/v1/platform-configuration",
-      "bytes": 16406
-    },
-    {
-      "name": "platformCoreDomainRoutes",
-      "path": "/api/v1/platform-core-domain",
-      "bytes": 934
-    },
-    {
-      "name": "platformCoreRoutes",
-      "path": "/api/v1/platform-core",
-      "bytes": 9028
-    },
-    {
-      "name": "platformFoundationRoutes",
-      "path": "/api/v1/platform-foundation",
-      "bytes": 654
-    },
-    {
-      "name": "poultryDomainRoutes",
-      "path": "/api/v1/poultry-domain",
-      "bytes": 1948
-    },
-    {
-      "name": "poultryRoutes",
-      "path": "/api/v1/poultry",
-      "bytes": 37102
-    },
-    {
-      "name": "preSeasonPurchaseRoutes",
-      "path": "/api/v1/pre-season-purchase",
-      "bytes": 3951
-    },
-    {
-      "name": "preventiveMaintenanceRoutes",
-      "path": "/api/v1/preventive-maintenance",
-      "bytes": 1837
-    },
-    {
-      "name": "productCertifications",
-      "path": "/api/v1/product-certifications",
-      "bytes": 333
-    },
-    {
-      "name": "productReviewRoutes",
-      "path": "/api/v1/product-review",
-      "bytes": 13203
-    },
-    {
-      "name": "productRoutes",
-      "path": "/api/v1/product",
-      "bytes": 19775
-    },
-    {
-      "name": "projectSystemsRoutes",
-      "path": "/api/v1/project-systems",
-      "bytes": 20615
-    },
-    {
-      "name": "publicDataRoutes",
-      "path": "/api/v1/public-data",
-      "bytes": 630
-    },
-    {
-      "name": "publicDomainDataExtractionRoutes_merged",
-      "path": "/api/v1/public-domain-data-extraction-routes-merged",
-      "bytes": 365
-    },
-    {
-      "name": "qualityAssurance",
-      "path": "/api/v1/quality-assurance",
-      "bytes": 849
-    },
-    {
-      "name": "realtimeMonitoringDomainRoutes",
-      "path": "/api/v1/realtime-monitoring-domain",
-      "bytes": 1159
-    },
-    {
-      "name": "realtimeMonitoringRoutes",
-      "path": "/api/v1/realtime-monitoring",
-      "bytes": 15589
-    },
-    {
-      "name": "recoveredFinanceRoutes",
-      "path": "/api/v1/recovered-finance",
-      "bytes": 12193
-    },
-    {
-      "name": "regionalVarietyRoutes",
-      "path": "/api/v1/regional-variety",
-      "bytes": 5493
-    },
-    {
-      "name": "reportingRoutes",
-      "path": "/api/v1/reporting",
-      "bytes": 492
-    },
-    {
-      "name": "resourceRouteFactory",
-      "path": "/api/v1/resource-route-factory",
-      "bytes": 332
-    },
-    {
-      "name": "returnLoadBoardDomainRoutes",
-      "path": "/api/v1/return-load-board-domain",
-      "bytes": 1110
-    },
-    {
-      "name": "returnLoadBoardRoutes",
-      "path": "/api/v1/return-load-board",
-      "bytes": 3149
-    },
-    {
-      "name": "revenueRoutes",
-      "path": "/api/v1/revenue",
-      "bytes": 4630
-    },
-    {
-      "name": "rfqDomainRoutes",
-      "path": "/api/v1/rfq-domain",
-      "bytes": 959
-    },
-    {
-      "name": "rfqRoutes",
-      "path": "/api/v1/rfq",
-      "bytes": 10745
-    },
-    {
-      "name": "riskAssessment",
-      "path": "/api/v1/risk-assessment",
-      "bytes": 929
-    },
-    {
-      "name": "riskPricingRoutes",
-      "path": "/api/v1/risk-pricing",
-      "bytes": 18231
-    },
-    {
-      "name": "roleManagementRoutes",
-      "path": "/api/v1/role-management",
-      "bytes": 9890
-    },
-    {
-      "name": "roleRoutes",
-      "path": "/api/v1/role",
-      "bytes": 477
-    },
-    {
-      "name": "sapModuleArchitectureDomainRoutes",
-      "path": "/api/v1/sap-module-architecture-domain",
-      "bytes": 3194
-    },
-    {
-      "name": "sapModuleArchitectureRoutes",
-      "path": "/api/v1/sap-module-architecture",
-      "bytes": 13098
-    },
-    {
-      "name": "searchRoutes",
-      "path": "/api/v1/search",
-      "bytes": 483
-    },
-    {
-      "name": "seedVaultRoutes",
-      "path": "/api/v1/seed-vault",
-      "bytes": 4462
-    },
-    {
-      "name": "sellerRankingDomainRoutes",
-      "path": "/api/v1/seller-ranking-domain",
-      "bytes": 936
-    },
-    {
-      "name": "sellerRankingRoutes",
-      "path": "/api/v1/seller-ranking",
-      "bytes": 5657
-    },
-    {
-      "name": "sericultureRoutes",
-      "path": "/api/v1/sericulture",
-      "bytes": 3856
-    },
-    {
-      "name": "serverManagementRoutes",
-      "path": "/api/v1/server-management",
-      "bytes": 15710
-    },
-    {
-      "name": "settingsRoutes",
-      "path": "/api/v1/settings",
-      "bytes": 489
-    },
-    {
-      "name": "sheepDomainRoutes",
-      "path": "/api/v1/sheep-domain",
-      "bytes": 2201
-    },
-    {
-      "name": "sheepRoutes",
-      "path": "/api/v1/sheep",
-      "bytes": 40714
-    },
-    {
-      "name": "soilDomainRoutes",
-      "path": "/api/v1/soil-domain",
-      "bytes": 2759
-    },
-    {
-      "name": "soilHealth",
-      "path": "/api/v1/soil-health",
-      "bytes": 735
-    },
-    {
-      "name": "soilManagementRoutes",
-      "path": "/api/v1/soil-management",
-      "bytes": 1307
-    },
-    {
-      "name": "startupEnvironmentRoutes",
-      "path": "/api/v1/startup-environment",
-      "bytes": 21892
-    },
-    {
-      "name": "stripeWebhookRoutes",
-      "path": "/api/v1/stripe-webhook",
-      "bytes": 7984
-    },
-    {
-      "name": "subscriptions",
-      "path": "/api/v1/subscriptions",
-      "bytes": 1850
-    },
-    {
-      "name": "supplyChainAnalytics",
-      "path": "/api/v1/supply-chain-analytics",
-      "bytes": 1158
-    },
-    {
-      "name": "supplyChainTracking",
-      "path": "/api/v1/supply-chain-tracking",
-      "bytes": 2204
-    },
-    {
-      "name": "systemAdministrationDomainRoutes",
-      "path": "/api/v1/system-administration-domain",
-      "bytes": 977
-    },
-    {
-      "name": "systemAdministrationRoutes",
-      "path": "/api/v1/system-administration",
-      "bytes": 15767
-    },
-    {
-      "name": "systemConfigRoutes",
-      "path": "/api/v1/system-config",
-      "bytes": 501
-    },
-    {
-      "name": "tenantManagementDomainRoutes",
-      "path": "/api/v1/tenant-management-domain",
-      "bytes": 949
-    },
-    {
-      "name": "tenantManagementRoutes",
-      "path": "/api/v1/tenant-management",
-      "bytes": 17211
-    },
-    {
-      "name": "trackDartRoutes",
-      "path": "/api/v1/track-dart",
-      "bytes": 3815
-    },
-    {
-      "name": "transactionDomainRoutes",
-      "path": "/api/v1/transaction-domain",
-      "bytes": 933
-    },
-    {
-      "name": "transactionRoutes",
-      "path": "/api/v1/transactions",
-      "bytes": 12178
-    },
-    {
-      "name": "unifiedAIGateway",
-      "path": "/api/v1/unified-aigateway",
-      "bytes": 325
-    },
-    {
-      "name": "unifiedLedgerRoutes_merged",
-      "path": "/api/v1/unified-ledger-routes-merged",
-      "bytes": 337
-    },
-    {
-      "name": "userRoutes",
-      "path": "/api/v1/users",
-      "bytes": 686
-    },
-    {
-      "name": "vendorProcurementRoutes",
-      "path": "/api/v1/vendor-procurement",
-      "bytes": 15676
-    },
-    {
-      "name": "vendorRoutes",
-      "path": "/api/v1/vendor",
-      "bytes": 617
-    },
-    {
-      "name": "vermicompostRoutes",
-      "path": "/api/v1/vermicompost",
-      "bytes": 3914
-    },
-    {
-      "name": "versionRoutes",
-      "path": "/api/v1/version",
-      "bytes": 486
-    },
-    {
-      "name": "videoAnalytics",
-      "path": "/api/v1/video-analytics",
-      "bytes": 757
-    },
-    {
-      "name": "voiceAIDomainRoutes",
-      "path": "/api/v1/voice-aidomain",
-      "bytes": 1367
-    },
-    {
-      "name": "vr",
-      "path": "/api/v1/vr",
-      "bytes": 593
-    },
-    {
-      "name": "walletDomainRoutes",
-      "path": "/api/v1/wallet-domain",
-      "bytes": 2023
-    },
-    {
-      "name": "walletRoutes",
-      "path": "/api/v1/wallet",
-      "bytes": 8843
+      "bytes": 1388,
+      "aiSignal": false,
+      "integration": "PENDING"
+    },
+    {
+      "name": "machineryVillageOpsRoutes",
+      "path": "/api/v1/machinery-village-ops",
+      "bytes": 14906,
+      "aiSignal": true,
+      "integration": "WIRED"
+    },
+    {
+      "name": "platformTelemetryRoutes",
+      "path": "/api/v1/platform-telemetry",
+      "bytes": 3793,
+      "aiSignal": false,
+      "integration": "PENDING"
     },
     {
       "name": "waterIrrigationRoutes",
       "path": "/api/v1/water-irrigation",
-      "bytes": 17611
+      "bytes": 17611,
+      "aiSignal": true,
+      "integration": "WIRED"
+    }
+  ],
+  "artificial_scientists": [
+    {
+      "name": "foluBenchmarkRoutes",
+      "path": "/api/v1/folu-benchmark",
+      "bytes": 8575,
+      "aiSignal": false,
+      "integration": "PARTIAL"
     },
     {
-      "name": "waterManagementRoutes",
-      "path": "/api/v1/water-management",
-      "bytes": 2206
-    },
-    {
-      "name": "wearableIntegrationRoutes",
-      "path": "/api/v1/wearable-integration",
-      "bytes": 10488
-    },
-    {
-      "name": "webhookRoutes",
-      "path": "/api/v1/webhook",
-      "bytes": 486
-    },
-    {
-      "name": "wikipediaRoutes",
-      "path": "/api/v1/wikipedia",
-      "bytes": 4679
-    },
-    {
-      "name": "yieldManagement",
-      "path": "/api/v1/yield-management",
-      "bytes": 976
-    },
-    {
-      "name": "custodyEventRoutes",
-      "path": "/api/v1/custody-event",
-      "bytes": 14051
+      "name": "labourRoutes",
+      "path": "/api/v1/labour",
+      "bytes": 2972,
+      "aiSignal": false,
+      "integration": "PENDING"
     }
   ]
 }

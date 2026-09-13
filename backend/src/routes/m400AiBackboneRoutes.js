@@ -10,8 +10,22 @@
  * see their own file headers), and not the same thing as the already-live
  * backend/src/routes/aiBackboneRoutes.js (that one wraps
  * services/legacy/aiBackboneService.js, a different, real multi-provider
- * AI call router already mounted at /api/v1/ai-backbone) - genuinely
- * orphaned code, mounted here under its own non-colliding path.
+ * AI call router) - genuinely orphaned code, mounted here under its own
+ * non-colliding path.
+ *
+ * THE TWO BACKBONES ARE INTENTIONALLY SEPARATE:
+ *
+ *   this one (INTERNAL)  /api/v1/m400-ai-backbone
+ *     cross-module decision, strategy, learning, prediction, coordination
+ *
+ *   aiBackboneRoutes     /api/aibackbone      <- NOT /api/v1/ai-backbone
+ *     the EXTERNAL provider call router: Claude, OpenAI, Gemini, Azure
+ *
+ * They are interdependent through the shared ai_decisions and ai_strategies
+ * tables, not by calling each other. This header previously gave the external
+ * one's path as /api/v1/ai-backbone, which 404s — the real mount is
+ * app.use('/api/aibackbone', ...) in index.js. That wrong path cost an audit
+ * an hour, so it is stated explicitly here.
  *
  * The service self-creates its own tables (ai_decisions, ai_strategies,
  * ai_intelligence_cache, ai_metrics) idempotently in initialize(), so no

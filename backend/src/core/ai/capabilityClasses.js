@@ -79,6 +79,11 @@ const CLASSES = Object.freeze({
       'Reasoning over them is the strongest near-term fit because the corpus ' +
       'already exists: the library service indexes 1,532 items including 830 raw files.',
     backing: {
+      // The EXTERNAL backbone: the multi-provider call router that reaches
+      // Claude, OpenAI, Gemini and Azure. Mounted at /api/aibackbone.
+      // This is deliberately a separate service from the internal M400
+      // backbone used by the agentic class — see that class's note.
+      externalBackbone: lazy('../../services/legacy/aiBackboneService'),
       orchestrator: lazy('../aiOrchestrator'),
       registry: lazy('./aiEngineRegistry'),
       providers: lazy('./aiProviderAdapters'),
@@ -93,11 +98,13 @@ const CLASSES = Object.freeze({
     autonomy: AUTONOMY.ADVISE,
     state: STATE.BUILT,
     stateNote:
-      'Engines, adapters, guardrails and cost control are present and the ' +
-      'library corpus is indexed, but no provider API key is configured, so ' +
-      'no frontier model can actually be called. Generation must also be ' +
-      'grounded in the library index before it is trusted: an ungrounded DPR ' +
-      'clause is a liability, not a feature.',
+      'The external provider backbone is live at /api/aibackbone and answers ' +
+      'its status endpoint. Claude reports configured: true (model ' +
+      'claude-opus-5) but enabled: false; OpenAI and Gemini are neither. So ' +
+      'the routing, guardrails, cost control and library corpus are all in ' +
+      'place, and no frontier model is actually reachable until a provider is ' +
+      'enabled. Generation must also be grounded in the library index before ' +
+      'it is trusted: an ungrounded DPR clause is a liability, not a feature.',
     risks: ['bias', 'energy use', 'ungrounded generation'],
   },
 
@@ -119,6 +126,13 @@ const CLASSES = Object.freeze({
       mcda: lazy('../mcda'),
       humanReview: lazy('../humanReviewBridge'),
       outcomes: lazy('../outcomeResolver'),
+      // The INTERNAL backbone: cross-module decision, strategy, learning,
+      // prediction and coordination engines. Mounted at
+      // /api/v1/m400-ai-backbone. Distinct from the external provider router
+      // backing frontier_models, by design — the two are interdependent
+      // through the shared ai_decisions and ai_strategies tables rather than
+      // by calling each other.
+      internalBackbone: lazy('../../modules/M400_AI_BACKBONE/backend/service'),
     },
     consumes: ['*'],
     emits: ['platform.decision.made'],

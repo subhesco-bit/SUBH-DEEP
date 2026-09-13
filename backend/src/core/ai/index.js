@@ -16,6 +16,8 @@ const aiConfidenceEngine = require('./aiConfidenceEngine');
 const aiCostController = require('./aiCostController');
 const aiGuardrails = require('./aiGuardrails');
 const aiAuditLogger = require('./aiAuditLogger');
+// Which KIND of AI serves which application, and how far each may act alone.
+const capabilityClasses = require('./capabilityClasses');
 
 // Module Registry
 const AI_MODULE_REGISTRY = require('./AI_MODULE_REGISTRY.json');
@@ -50,6 +52,10 @@ function getAIStatus() {
     providers: aiProviderAdapters.listConfiguredProviders(),
     engines: aiEngineRegistry.listReadyEngines(),
     cost: aiCostController.getCostState(),
+    // Capability classes answer a different question from engines: not "what
+    // model can we call" but "what kind of AI serves which part of the
+    // business, and how far is it trusted to act".
+    capabilities: capabilityClasses.summary(),
   };
 }
 
@@ -87,6 +93,7 @@ module.exports = {
   aiCostController,
   aiGuardrails,
   aiAuditLogger,
+  capabilityClasses,
 
   // Module Registry
   AI_MODULE_REGISTRY,

@@ -302,9 +302,45 @@ async function districtConfidence(state, district, cropKey) {
 }
 
 /** Compute an advance rate. Does not persist — see publish(). */
+/**
+ * Resolve the weather this district actually had, rather than a constant.
+ *
+ * WEATHER_FALLBACK is 1800 mm and 26 C — a plausible national-ish average and
+ * the wrong number almost everywhere. Every forward price this engine
+ * published rested on it, because nothing ever passed real weather in.
+ * services/agriculture/weatherService.js was written to close exactly this gap
+ * and its weatherForArp() has sat unconsumed since.
+ *
+ * The fallback is kept, but a price computed from it is now explicitly
+ * uncalibrated. An advance rate is a number a farmer may commit an unharvested
+ * crop against; it must not look equally confident whether or not the platform
+ * knows what the monsoon did.
+ */
+async function resolveWeather({ weather, state, district }) {
+  if (weather) return { w: weather, source: 'supplied', weatherCalibrated: weather.calibrated !== false };
+  if (!state || !district) {
+    return { w: WEATHER_FALLBACK, source: 'fallback-no-location', weatherCalibrated: false };
+  }
+  try {
+    const { weatherForArp } = require('../agriculture/weatherService');
+    const observed = await weatherForArp({ state, district, days: 120 });
+    if (observed && observed.observations > 0) {
+      return { w: observed, source: 'observed', weatherCalibrated: observed.calibrated !== false };
+    }
+    return { w: WEATHER_FALLBACK, source: 'fallback-no-observations', weatherCalibrated: false };
+  } catch (error) {
+    // A weather lookup that fails must not silently produce a confident price.
+    logger.warn('riskPricing: weather lookup failed, pricing uncalibrated', {
+      state, district, error: error.message,
+    });
+    return { w: WEATHER_FALLBACK, source: 'fallback-lookup-failed', weatherCalibrated: false };
+  }
+}
+
 async function computeAdvanceRate({ cropKey, monthsAhead, spotPerKg, weather, state, district }) {
   const c = await cropParams(cropKey);
-  const w = weather || WEATHER_FALLBACK;
+  const { w, source: weatherSource, weatherCalibrated } =
+    await resolveWeather({ weather, state, district });
   const cal = await districtConfidence(state, district, cropKey);
   const y = yieldIndex(c, w);
   const fwd = forwardCurve(c, { spotPerKg, monthsAhead, yieldIdx: y.index });
@@ -321,14 +357,28 @@ async function computeAdvanceRate({ cropKey, monthsAhead, spotPerKg, weather, st
     components: fwd.components,
     yieldIndex: y.index,
     confidence: cal.confidence,
-    calibrated: cal.calibrated,
+    // Calibrated means BOTH that the district has seasons of yield history and
+    // that the weather driving this yield index was actually observed. A price
+    // built on the fallback constant is not calibrated however much crop
+    // history exists.
+    calibrated: cal.calibrated && weatherCalibrated,
+    weatherSource,
+    weatherCalibrated,
+    weatherUsed: {
+      rainfallMm: w.rainfallMm, meanTempC: w.meanTempC,
+      heatDaysAboveThresh: w.heatDaysAboveThresh, observations: w.observations ?? null,
+    },
     // An advance is only safe against the LOW end of the band, discounted again.
     advanceCeiling: r2(fwd.low * 0.80),
-    warning: !cal.calibrated ?
-      `Confidence ${Math.round(cal.confidence * 100)}% — this district has ` +
-      `${cal.seasonsObserved} season(s) of data. This rate is indicative only and ` +
-      'must not be used to set a binding advance.' :
-      fwd.warning,
+    warning: !weatherCalibrated ?
+      'No observed weather for this district, so the yield index rests on a national ' +
+      'fallback of 1800 mm and 26 C. Treat this as indicative only: it does not know ' +
+      'what the monsoon actually did here, and must not set a binding advance.' :
+      (!cal.calibrated ?
+        `Confidence ${Math.round(cal.confidence * 100)}% — this district has ` +
+        `${cal.seasonsObserved} season(s) of data. This rate is indicative only and ` +
+        'must not be used to set a binding advance.' :
+        fwd.warning),
     parameterProvenance: c.provenance,
   };
 }

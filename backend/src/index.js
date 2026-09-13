@@ -918,29 +918,28 @@ async function startup() {
     // platform with the bus purely observational.
     if (process.env.DECISION_LAYER_ENABLED !== 'false') {
       try {
-        const { decisionEngine } = require('./core/decisionEngine');
-        const { reflexEngine } = require('./core/reflexEngine');
-        const { registerEffectors } = require('./core/effectors');
+        // core/ai/aiSystem.js is the single composition point for every AI
+        // part: signal bus, decision and reflex engines, effectors, the human
+        // review bridge, the intelligence fabric and the M400 backbone. They
+        // were previously started in different places or not at all — the
+        // backbone reported every engine "failed" because nothing called its
+        // initialize(). aiSystem starts them in dependency order and contains
+        // a failure in any one, so a degraded AI subsystem cannot stop the
+        // platform from serving requests.
+        const aiSystem = require('./core/ai/aiSystem');
+        const aiResult = await aiSystem.start();
+        app.locals.aiSystem = aiSystem;
 
-        const humanReviewBridge = require('./core/humanReviewBridge');
-
-        decisionEngine.start();   // subscribes '*' — evaluates every signal
-        reflexEngine.start();     // subscribes each reflex's declared signalTypes
-        const effectorCount = registerEffectors();
-        // Decisions stamped requiresHuman were produced and then discarded;
-        // this files them into ai_proposals, which v_ai_approval_queue serves.
-        humanReviewBridge.start();
-        app.locals.humanReviewBridge = humanReviewBridge;
-
-        app.locals.decisionEngine = decisionEngine;
-        app.locals.reflexEngine = reflexEngine;
-        logger.info('✅ Decision layer attached to signal bus', {
-          rules: decisionEngine.rules.length,
-          reflexes: reflexEngine.reflexes.size,
-          effectors: effectorCount,
-        });
+        if (aiResult.healthy) {
+          logger.info('✅ AI system started', { components: aiResult.summary.started });
+        } else {
+          logger.warn('⚠️  AI system started with degraded components', {
+            started: aiResult.summary.started,
+            degraded: aiResult.summary.degraded,
+          });
+        }
       } catch (error) {
-        logger.warn('⚠️  Decision layer not attached', { error: error.message });
+        logger.warn('⚠️  AI system not started', { error: error.message });
       }
     } else {
       logger.info('Decision layer disabled by DECISION_LAYER_ENABLED=false');

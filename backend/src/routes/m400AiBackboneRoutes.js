@@ -29,10 +29,37 @@ const AIBackboneService = require('../modules/M400_AI_BACKBONE/backend/service')
 const { authMiddleware } = require('../middleware/auth');
 const { adminMiddleware } = require('../middleware/admin');
 
-const backbone = new AIBackboneService();
+/**
+ * Use the instance core/ai/aiSystem.js initialised at boot, and only fall back
+ * to a private one if the AI system did not start.
+ *
+ * This file used to unconditionally `new AIBackboneService()`. Once aiSystem
+ * began initialising a backbone of its own there were two live instances: the
+ * system's, with all five engines operational, and this route's, still lazily
+ * uninitialised. The health endpoint reported every engine "failed" while the
+ * platform's own status reported them healthy — both were telling the truth
+ * about different objects.
+ */
+let fallbackBackbone = null;
+
+function getBackbone() {
+  try {
+    const shared = require('../core/ai/aiSystem').backbone();
+    if (shared) return shared;
+  } catch {
+    // aiSystem unavailable — fall through to a private instance.
+  }
+  if (!fallbackBackbone) fallbackBackbone = new AIBackboneService();
+  return fallbackBackbone;
+}
+
 let initPromise = null;
 
 function ensureInitialized() {
+  const backbone = getBackbone();
+  // The shared instance is already initialised by aiSystem.start().
+  if (backbone.decisionEngine) return Promise.resolve({ success: true, shared: true });
+
   if (!initPromise) {
     initPromise = backbone.initialize({}).then((result) => {
       if (!result || result.success === false) {
@@ -49,7 +76,7 @@ function ensureInitialized() {
 // GET /api/v1/m400-ai-backbone/health - health check, safe to call before full init
 router.get('/health', async (req, res) => {
   try {
-    const health = await backbone.healthCheck();
+    const health = await getBackbone().healthCheck();
     res.status(health.status === 'healthy' ? 200 : 503).json(health);
   } catch (error) {
     res.status(500).json({ status: 'unhealthy', error: error.message });
@@ -66,7 +93,7 @@ router.post('/execute', authMiddleware, adminMiddleware, async (req, res) => {
     if (!operation) {
       return res.status(400).json({ success: false, error: 'operation is required' });
     }
-    const result = await backbone.execute(operation, parameters || {}, context || {});
+    const result = await getBackbone().execute(operation, parameters || {}, context || {});
     res.json(result);
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
@@ -77,7 +104,7 @@ router.post('/execute', authMiddleware, adminMiddleware, async (req, res) => {
 router.post('/coordinate', authMiddleware, adminMiddleware, async (req, res) => {
   try {
     await ensureInitialized();
-    const result = await backbone.coordinateAIRequest(req.body || {});
+    const result = await getBackbone().coordinateAIRequest(req.body || {});
     res.json(result);
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
@@ -89,7 +116,7 @@ router.post('/decide', authMiddleware, adminMiddleware, async (req, res) => {
   try {
     await ensureInitialized();
     const { parameters, context } = req.body || {};
-    const result = await backbone.makeEnterpriseDecision(parameters || {}, context || {});
+    const result = await getBackbone().makeEnterpriseDecision(parameters || {}, context || {});
     res.json(result);
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
@@ -101,7 +128,7 @@ router.post('/strategize', authMiddleware, adminMiddleware, async (req, res) => 
   try {
     await ensureInitialized();
     const { parameters, context } = req.body || {};
-    const result = await backbone.generateEnterpriseStrategy(parameters || {}, context || {});
+    const result = await getBackbone().generateEnterpriseStrategy(parameters || {}, context || {});
     res.json(result);
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
@@ -112,7 +139,7 @@ router.post('/strategize', authMiddleware, adminMiddleware, async (req, res) => 
 router.get('/intelligence', authMiddleware, adminMiddleware, async (req, res) => {
   try {
     await ensureInitialized();
-    const result = await backbone.getCrossModuleIntelligence(req.query || {});
+    const result = await getBackbone().getCrossModuleIntelligence(req.query || {});
     res.json(result);
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
@@ -123,7 +150,7 @@ router.get('/intelligence', authMiddleware, adminMiddleware, async (req, res) =>
 router.post('/modules', authMiddleware, adminMiddleware, async (req, res) => {
   try {
     await ensureInitialized();
-    const result = await backbone.registerModule(req.body || {});
+    const result = await getBackbone().registerModule(req.body || {});
     res.json(result);
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
@@ -134,7 +161,7 @@ router.post('/modules', authMiddleware, adminMiddleware, async (req, res) => {
 router.delete('/modules/:moduleId', authMiddleware, adminMiddleware, async (req, res) => {
   try {
     await ensureInitialized();
-    const result = await backbone.unregisterModule({ moduleId: req.params.moduleId });
+    const result = await getBackbone().unregisterModule({ moduleId: req.params.moduleId });
     res.json(result);
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });

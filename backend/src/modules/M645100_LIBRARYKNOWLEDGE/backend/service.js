@@ -34,6 +34,80 @@ const VENDOR_DIRECTORIES = new Set(['node_modules', '.git']);
  * backend/src, so the library was never found and nothing got indexed).
  * Searching for the marker survives the next move too.
  */
+/**
+ * Zones: the project itself, plus any sibling directory that belongs to it.
+ * A git worktree or a backup copy of this repository sits next to it rather
+ * than inside it, so it is invisible to a sweep rooted at the project.
+ */
+function discoverSiblingRoots(projectRoot) {
+  if (['0', 'false', 'off'].includes(String(process.env.LIBRARY_MAP_SIBLINGS || '').toLowerCase())) {
+    return [];
+  }
+
+  const explicit = String(process.env.LIBRARY_EXTERNAL_ROOTS || '').trim();
+  if (explicit) {
+    return explicit.split(',').map((entry) => entry.trim()).filter(Boolean).map((dir, position) => ({
+      id: `EXT${position + 1}`,
+      path: path.resolve(dir)
+    }));
+  }
+
+  const parent = path.dirname(projectRoot);
+  const base = path.basename(projectRoot);
+  const candidates = [
+    { id: 'WORKTREES', path: path.join(parent, `${base}.worktrees`) },
+    { id: 'BACKUPS', path: path.join(parent, `${base}.local-backups`) }
+  ];
+
+  return candidates.filter((candidate) => {
+    try {
+      return fs.statSync(candidate.path).isDirectory();
+    } catch (error) {
+      return false;
+    }
+  });
+}
+
+/**
+ * A file's zone and path within it. Files under a sibling root are addressed
+ * by that root's id, so nothing collides with the project's own tree.
+ */
+function locateInZones(filePath, projectRoot, externalRoots) {
+  for (const root of externalRoots) {
+    const relative = path.relative(root.path, filePath);
+    if (relative && !relative.startsWith('..') && !path.isAbsolute(relative)) {
+      return { zone: root.id, relativePath: relative.split(path.sep).join('/') };
+    }
+  }
+
+  const relative = path.relative(projectRoot, filePath);
+  if (!relative || relative.startsWith('..') || path.isAbsolute(relative)) return null;
+  return { zone: 'PRJ', relativePath: relative.split(path.sep).join('/') };
+}
+
+/**
+ * A stable call number, in the spirit of a shelf mark or a parking bay:
+ *
+ *   PRJ-BACKEND-1a2b3c4d
+ *   |   |       |
+ *   |   |       slot: first 8 hex of sha1(zone/path) - unique, collision-checked
+ *   |   section: the top-level directory the file sits under
+ *   zone: project, worktrees, backups
+ *
+ * It is derived only from the file's address, so it survives a rebuild, a
+ * restart and a reindex unchanged - which is what makes it usable as a
+ * durable handle for something else to store and come back with.
+ */
+function buildLocationId(zone, relativePath) {
+  const segments = relativePath.split('/').filter(Boolean);
+  const section = (segments.length > 1 ? segments[0] : '(root)')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, '')
+    .slice(0, 10) || 'ROOT';
+  const slot = crypto.createHash('sha1').update(`${zone}/${relativePath}`).digest('hex').slice(0, 8);
+  return `${zone}-${section}-${slot}`;
+}
+
 function findProjectRoot(startDir = __dirname) {
   let dir = startDir;
   for (let i = 0; i < 10; i += 1) {
@@ -206,6 +280,14 @@ class LibraryKnowledgeService {
     // path -> keys, so removing a deleted file costs a lookup rather than a
     // scan of every entry in the index.
     this._pathToKeys = new Map();
+    // Sibling checkouts and backups live beside the project, not inside it, so
+    // a sweep of projectRoot alone never sees them. Each gets a zone id; keys
+    // and location ids are namespaced by it so a file in a worktree can never
+    // be confused with its twin in the project.
+    this.externalRoots = options.externalRoots || discoverSiblingRoots(this.projectRoot);
+    // locationId -> key, so a caller holding a call number resolves it in one
+    // lookup instead of scanning the index.
+    this.locationIndex = new Map();
     this.contentHashes = new Map();
     this.indexingWarnings = [];
     this.initialized = false;
@@ -251,7 +333,7 @@ class LibraryKnowledgeService {
     // One recursive watch on the project root covers every mapped file; the
     // narrower roots are only used when whole-project mapping is off.
     const roots = this.indexEverything
-      ? [this.projectRoot]
+      ? [this.projectRoot, ...this.externalRoots.map((root) => root.path)]
       : [this.libraryRoot, this.modulesRoot, this.backendModulesRoot];
     return roots.filter((root) => root && fs.existsSync(root));
   }
@@ -297,6 +379,11 @@ class LibraryKnowledgeService {
   removeIndexedPath(filePath) {
     let removed = 0;
     for (const key of this._pathToKeys.get(filePath) || []) {
+      // Read the call number before the entry goes, or the binding leaks and
+      // the number stays pointing at a file that no longer exists.
+      const entry = this.index.get(key);
+      const locationId = entry && entry.data && entry.data.locationId;
+      if (locationId) this.locationIndex.delete(locationId);
       if (this.index.delete(key)) removed += 1;
       this.contentHashes.delete(key);
     }
@@ -382,7 +469,8 @@ class LibraryKnowledgeService {
       // rather than rebuilding the index for every npm write.
       this.watchStats.ignored = (this.watchStats.ignored || 0) + 1;
       return;
-    } else if (this._isUnderLibraryRoot(filePath) || this.indexEverything) {
+    } else if (this._isUnderLibraryRoot(filePath)
+      || (this.indexEverything && locateInZones(filePath, this.projectRoot, this.externalRoots))) {
       // Every mapped file has a key derivable from its path, so a change to
       // any of them is applied incrementally. Without this a single edit
       // anywhere in the project would rebuild all 70k entries.
@@ -674,6 +762,7 @@ class LibraryKnowledgeService {
     this.index.clear();
     this.indexedPaths.clear();
     this._pathToKeys.clear();
+    this.locationIndex.clear();
     this.indexingWarnings = [];
     this.indexLibraryCatalogues();
     this.indexLibraryModuleCards();
@@ -720,11 +809,12 @@ class LibraryKnowledgeService {
    * read, so the cost is one stat per file rather than 6 GB of I/O.
    */
   indexAllProjectFiles() {
-    const root = this.projectRoot;
-    if (!root || !fs.existsSync(root)) return 0;
+    const zones = [this.projectRoot, ...this.externalRoots.map((root) => root.path)]
+      .filter((root) => root && fs.existsSync(root));
+    if (zones.length === 0) return 0;
 
     let mapped = 0;
-    const stack = [root];
+    const stack = [...zones];
 
     while (stack.length > 0) {
       const directory = stack.pop();
@@ -760,19 +850,53 @@ class LibraryKnowledgeService {
     const stat = safeStat(filePath);
     if (!stat || !stat.isFile()) return null;
 
-    const relativePath = path.relative(this.projectRoot, filePath).split(path.sep).join('/');
-    if (!relativePath || relativePath.startsWith('..')) return null;
+    const located = locateInZones(filePath, this.projectRoot, this.externalRoots);
+    if (!located) return null;
 
-    const key = `FILE:${relativePath}`;
+    const { zone, relativePath } = located;
+    const key = zone === 'PRJ' ? `FILE:${relativePath}` : `FILE:@${zone}/${relativePath}`;
     const name = path.basename(filePath);
+    const locationId = buildLocationId(zone, relativePath);
+
     this.indexFile(key, 'project-file', filePath, {
       name,
+      zone,
       relativePath,
+      locationId,
       extension: path.extname(name).toLowerCase(),
       fileSize: stat.size,
       metadataOnly: true
     });
+    this.registerLocation(locationId, key);
     return key;
+  }
+
+  /**
+   * Bind a call number to an index key. A collision would make two files
+   * answer to the same number, so it is recorded as a warning rather than
+   * silently overwriting the earlier binding.
+   */
+  registerLocation(locationId, key) {
+    const existing = this.locationIndex.get(locationId);
+    if (existing && existing !== key) {
+      this.indexingWarnings.push({
+        key,
+        type: 'location',
+        warning: 'location_id_collision',
+        message: `${locationId} already bound to ${existing}`
+      });
+      return false;
+    }
+    this.locationIndex.set(locationId, key);
+    return true;
+  }
+
+  /** Resolve a call number straight to its entry. */
+  getByLocationId(locationId) {
+    const key = this.locationIndex.get(String(locationId || '').trim());
+    if (!key) return null;
+    const entry = this.index.get(key);
+    return entry ? { ...entry, locationId } : null;
   }
 
   /**

@@ -10,10 +10,14 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const orgChart = require('./orgChart');
 
 const MODULE_ID = 'M645100_LIBRARYKNOWLEDGE';
 const MODULE_NAME = 'Library Knowledge';
 const TEXT_PREVIEW_BYTES = Number(process.env.LIBRARY_TEXT_PREVIEW_BYTES || 65536);
+// Ledgers can hold hundreds of thousands of rows. Index a bounded head of them
+// so a large .jsonl stays searchable without holding the whole file in memory.
+const JSONL_MAX_RECORDS = Number(process.env.LIBRARY_JSONL_MAX_RECORDS || 500);
 
 /**
  * Locate the repository root by walking up for the library directory itself.
@@ -61,6 +65,53 @@ function readJson(filePath) {
       indexedWithWarning: true
     };
   }
+}
+
+/**
+ * Parse a JSON Lines file: one JSON document per line.
+ *
+ * .jsonl was previously handed to readJson(), which JSON.parse()s the entire
+ * file as a single document. Any ledger with more than one line therefore
+ * failed outright and was indexed as a parse error with no usable data, so
+ * every record in it was invisible to search — enterprise-file-activity-ledger
+ * .jsonl among them. Parsing per line also means one malformed row no longer
+ * hides the valid rows around it.
+ */
+function readJsonl(filePath) {
+  const content = stripBom(fs.readFileSync(filePath, 'utf8'));
+  const records = [];
+  const lineErrors = [];
+
+  content.split(/\r?\n/).forEach((line, offset) => {
+    const trimmed = line.trim();
+    if (!trimmed) return;
+
+    try {
+      if (records.length < JSONL_MAX_RECORDS) {
+        records.push(JSON.parse(trimmed));
+      } else {
+        JSON.parse(trimmed);
+      }
+    } catch (error) {
+      if (lineErrors.length < 20) {
+        lineErrors.push({ line: offset + 1, message: error.message });
+      }
+    }
+  });
+
+  const data = {
+    name: path.basename(filePath),
+    format: 'jsonl',
+    recordCount: records.length,
+    records
+  };
+
+  if (lineErrors.length > 0) {
+    data.lineErrors = lineErrors;
+    data.indexedWithWarning = true;
+  }
+
+  return data;
 }
 
 function parseCsvHeaderLine(line) {
@@ -141,6 +192,403 @@ class LibraryKnowledgeService {
     this.contentHashes = new Map();
     this.indexingWarnings = [];
     this.initialized = false;
+
+    // Live indexing. The index is built once at initialize() and would then
+    // drift from disk until a restart, so files added, changed, moved or
+    // deleted afterwards were invisible to search. Watching the roots keeps it
+    // current; changes are coalesced over a short window so a bulk copy or a
+    // git checkout costs one update rather than thousands.
+    this.watchDebounceMs = options.watchDebounceMs
+      || Number(process.env.LIBRARY_WATCH_DEBOUNCE_MS)
+      || 300;
+    // Live by default. The index is only trustworthy if it matches disk, and
+    // the server calls initialize() without asking for a watcher, so making
+    // this opt-in meant the running platform served a snapshot that silently
+    // aged. Set LIBRARY_WATCH=0 to disable (batch jobs, one-shot CLI runs).
+    this.watchEnabled = options.watch === true
+      || !['0', 'false', 'off'].includes(String(process.env.LIBRARY_WATCH || '').toLowerCase());
+    this._watchers = [];
+    this._watchTimer = null;
+    this._pendingPaths = new Set();
+    this._pendingFullReindex = false;
+    this.watching = false;
+    // Bumped on every index mutation so derived views (the org chart, the
+    // manifest, the name lookup) know when they are stale without diffing.
+    this.indexVersion = 0;
+    this._chartCache = null;
+    this._chartVersion = -1;
+    this.watchStats = {
+      events: 0,
+      batches: 0,
+      added: 0,
+      updated: 0,
+      removed: 0,
+      fullReindexes: 0,
+      lastChangeAt: null,
+      lastError: null
+    };
+  }
+
+  /** Roots whose contents are represented in the index. */
+  watchRoots() {
+    return [this.libraryRoot, this.modulesRoot, this.backendModulesRoot]
+      .filter((root) => root && fs.existsSync(root));
+  }
+
+  /**
+   * Index (or re-index) a single library file, so a change to one file costs
+   * one read instead of a full sweep of the library.
+   */
+  indexLibraryFileAt(filePath, options = {}) {
+    const stat = safeStat(filePath);
+    if (!stat || !stat.isFile()) return null;
+
+    const relativePath = path.relative(this.libraryRoot, filePath).split(path.sep).join('/');
+    if (relativePath.startsWith('..')) return null;
+
+    const key = `LIBRARY:${relativePath}`;
+    if (options.skipIfIndexed === true && (this.index.has(key) || this.indexedPaths.has(filePath))) {
+      return null;
+    }
+
+    const name = path.basename(filePath);
+    const extension = path.extname(name).toLowerCase();
+    const data = {
+      name,
+      relativePath,
+      extension,
+      fileSize: stat.size
+    };
+
+    if (extension === '.jsonl') {
+      Object.assign(data, readJsonl(filePath));
+    } else if (extension === '.json') {
+      Object.assign(data, readJson(filePath));
+    } else if (['.md', '.txt', '.csv', '.yaml', '.yml', '.xml'].includes(extension)) {
+      data.content = readTextPreview(filePath).slice(0, 12000);
+    }
+
+    this.indexFile(key, 'library-file', filePath, data);
+    return key;
+  }
+
+  /** Drop every index entry that pointed at a path which no longer exists. */
+  removeIndexedPath(filePath) {
+    let removed = 0;
+    for (const [key, entry] of this.index) {
+      if (entry.path === filePath) {
+        this.index.delete(key);
+        this.contentHashes.delete(key);
+        removed += 1;
+      }
+    }
+    this.indexedPaths.delete(filePath);
+    if (removed > 0) this.indexVersion += 1;
+    return removed;
+  }
+
+  /**
+   * Rebuild the whole index without a restart. Content hashes are dropped so
+   * they are recomputed on demand rather than served stale.
+   */
+  async reindex() {
+    await this.buildIndex();
+    this.contentHashes.clear();
+    this.initialized = true;
+    this.watchStats.fullReindexes += 1;
+    return {
+      success: true,
+      moduleId: MODULE_ID,
+      indexedItems: this.index.size,
+      indexingWarnings: this.indexingWarnings.length,
+      reindexedAt: new Date().toISOString()
+    };
+  }
+
+  /**
+   * Start watching the indexed roots. Node's recursive fs.watch is
+   * best-effort (platform limits, network drives), so a failure to watch one
+   * root is recorded and the others still run — the manual reindex() path is
+   * always available as the fallback.
+   */
+  startWatching() {
+    if (this.watching) return { success: true, alreadyWatching: true, roots: this.watchedRoots || [] };
+
+    const watched = [];
+    for (const root of this.watchRoots()) {
+      try {
+        const watcher = fs.watch(root, { recursive: true, persistent: false }, (eventType, filename) => {
+          if (!filename) {
+            // No name means the platform could not attribute the change;
+            // fall back to a full rebuild rather than miss it.
+            this._queueChange(null, true);
+            return;
+          }
+          this._queueChange(path.join(root, filename.toString()), false);
+        });
+        watcher.on('error', (error) => { this.watchStats.lastError = error.message; });
+        this._watchers.push(watcher);
+        watched.push(root);
+      } catch (error) {
+        this.watchStats.lastError = `${root}: ${error.message}`;
+      }
+    }
+
+    this.watching = this._watchers.length > 0;
+    this.watchedRoots = watched;
+    return { success: this.watching, roots: watched, debounceMs: this.watchDebounceMs };
+  }
+
+  stopWatching() {
+    for (const watcher of this._watchers) {
+      try { watcher.close(); } catch (error) { /* already closed */ }
+    }
+    this._watchers = [];
+    if (this._watchTimer) { clearTimeout(this._watchTimer); this._watchTimer = null; }
+    this._pendingPaths.clear();
+    this._pendingFullReindex = false;
+    this.watching = false;
+    return { success: true, watching: false };
+  }
+
+  /** Record a change and (re)arm the debounce window. */
+  _queueChange(filePath, forceFull) {
+    this.watchStats.events += 1;
+    this.watchStats.lastChangeAt = new Date().toISOString();
+
+    if (forceFull) {
+      this._pendingFullReindex = true;
+    } else if (this._isUnderLibraryRoot(filePath)) {
+      this._pendingPaths.add(filePath);
+    } else {
+      // Module trees feed several catalogue-driven indexers whose keys are not
+      // derivable from a path alone, so those changes need a full rebuild.
+      this._pendingFullReindex = true;
+    }
+
+    if (this._watchTimer) clearTimeout(this._watchTimer);
+    this._watchTimer = setTimeout(() => {
+      this._watchTimer = null;
+      this._flushChanges().catch((error) => { this.watchStats.lastError = error.message; });
+    }, this.watchDebounceMs);
+    if (typeof this._watchTimer.unref === 'function') this._watchTimer.unref();
+  }
+
+  _isUnderLibraryRoot(filePath) {
+    const relative = path.relative(this.libraryRoot, filePath);
+    return Boolean(relative) && !relative.startsWith('..') && !path.isAbsolute(relative);
+  }
+
+  /**
+   * Apply one coalesced batch of changes. A path that still exists is
+   * re-indexed; one that does not is removed. A rename arrives as both, so
+   * moves are handled without any special case.
+   */
+  async _flushChanges() {
+    const paths = [...this._pendingPaths];
+    const needsFull = this._pendingFullReindex;
+    this._pendingPaths.clear();
+    this._pendingFullReindex = false;
+    this.watchStats.batches += 1;
+
+    if (needsFull) {
+      await this.reindex();
+      return { fullReindex: true, indexedItems: this.index.size };
+    }
+
+    let added = 0;
+    let updated = 0;
+    let removed = 0;
+
+    for (const filePath of paths) {
+      const stat = safeStat(filePath);
+
+      if (!stat) {
+        removed += this.removeIndexedPath(filePath);
+        continue;
+      }
+      if (stat.isDirectory()) {
+        // A new or renamed directory can bring in many files at once.
+        this._indexDirectoryTree(filePath);
+        added += 1;
+        continue;
+      }
+
+      const existed = this.indexedPaths.has(filePath);
+      if (this.indexLibraryFileAt(filePath)) {
+        if (existed) updated += 1; else added += 1;
+      }
+    }
+
+    this.watchStats.added += added;
+    this.watchStats.updated += updated;
+    this.watchStats.removed += removed;
+    return { fullReindex: false, added, updated, removed };
+  }
+
+  _indexDirectoryTree(directory) {
+    let entries;
+    try {
+      entries = fs.readdirSync(directory, { withFileTypes: true });
+    } catch (error) {
+      return;
+    }
+    for (const entry of entries) {
+      const entryPath = path.join(directory, entry.name);
+      if (entry.isDirectory()) this._indexDirectoryTree(entryPath);
+      else this.indexLibraryFileAt(entryPath);
+    }
+  }
+
+  /**
+   * The org chart, rebuilt only when the index has actually changed. Every
+   * live add/change/delete bumps indexVersion, so the chart a caller sees is
+   * never older than the last filesystem event.
+   */
+  orgChartData() {
+    if (!this._chartCache || this._chartVersion !== this.indexVersion) {
+      this._chartCache = orgChart.build(this.index);
+      this._chartVersion = this.indexVersion;
+    }
+    return this._chartCache;
+  }
+
+  getOrgChart(options = {}) {
+    return orgChart.toTree(this.orgChartData(), options);
+  }
+
+  /**
+   * The manifest: every indexed file with its position, qualified name and
+   * org path. Filterable so a controller or system can be pulled on its own.
+   */
+  getManifest(options = {}) {
+    const chart = this.orgChartData();
+    const limit = Math.min(Number(options.limit) || 200, 5000);
+    const offset = Number(options.offset) || 0;
+
+    let records = [...chart.manifest.values()];
+    if (options.controller) records = records.filter((r) => r.controller === options.controller);
+    if (options.system) records = records.filter((r) => r.system === options.system);
+    if (options.module) records = records.filter((r) => r.module === options.module);
+    if (options.ambiguousOnly === true) records = records.filter((r) => r.ambiguousName === true);
+
+    return {
+      project: orgChart.PROJECT,
+      total: records.length,
+      indexedItems: this.index.size,
+      offset,
+      limit,
+      records: records.slice(offset, offset + limit)
+    };
+  }
+
+  /** Names shared by more than one file, with each occurrence's org path. */
+  getDuplicateNames(options = {}) {
+    const chart = this.orgChartData();
+    const limit = Math.min(Number(options.limit) || 50, 1000);
+    return {
+      total: chart.duplicates.length,
+      duplicates: chart.duplicates.slice(0, limit)
+    };
+  }
+
+  /**
+   * Find files by name. Exact basename hits are O(1); a partial name falls
+   * back to a scan. Context (controller/system/module) does not filter the
+   * results, it ranks them, so a wrong hint degrades the order rather than
+   * hiding the answer.
+   */
+  findFile(name, context = {}) {
+    const chart = this.orgChartData();
+    const needle = String(name || '').trim().toLowerCase();
+    if (!needle) return { query: name, matchCount: 0, matches: [] };
+
+    const keys = new Set(chart.byBasename.get(needle) || []);
+    if (keys.size === 0) {
+      // Partial match: filename contains the needle, or the org path does.
+      for (const [basename, candidateKeys] of chart.byBasename) {
+        if (basename.includes(needle)) candidateKeys.forEach((k) => keys.add(k));
+      }
+    }
+    if (keys.size === 0) {
+      for (const [key, record] of chart.manifest) {
+        if (record.orgPath.toLowerCase().includes(needle)) keys.add(key);
+      }
+    }
+
+    const scored = [...keys].map((key) => {
+      const record = chart.manifest.get(key);
+      let score = 0;
+      if (record.file.toLowerCase() === needle) score += 100;
+      else if (record.file.toLowerCase().startsWith(needle)) score += 40;
+      else score += 10;
+      if (context.controller && record.controller === context.controller) score += 30;
+      if (context.system && record.system === context.system) score += 20;
+      if (context.module && record.module === context.module) score += 25;
+      return { ...record, score };
+    }).sort((a, b) => b.score - a.score);
+
+    return {
+      query: name,
+      context,
+      matchCount: scored.length,
+      ambiguous: scored.length > 1,
+      matches: scored.slice(0, Number(context.limit) || 25)
+    };
+  }
+
+  /**
+   * Resolve one file and hand it over in a single call: position, org path and
+   * content, so a system that needs a file does not have to find it, then read
+   * it, then work out which of six same-named copies it got.
+   */
+  resolveFile(name, context = {}) {
+    const found = this.findFile(name, context);
+    if (found.matchCount === 0) {
+      return { success: false, query: name, error: 'not_found', matches: [] };
+    }
+
+    const best = found.matches[0];
+    const alternatives = found.matches.slice(1, 10);
+    const result = {
+      success: true,
+      query: name,
+      resolved: best,
+      ambiguous: found.ambiguous,
+      alternativeCount: found.matchCount - 1,
+      alternatives
+    };
+
+    if (context.includeContent !== false) {
+      const entry = this.index.get(best.key);
+      const stat = safeStat(best.path);
+      if (stat && stat.size <= (Number(context.maxContentBytes) || TEXT_PREVIEW_BYTES)) {
+        try {
+          result.content = stripBom(fs.readFileSync(best.path, 'utf8'));
+          result.contentTruncated = false;
+        } catch (error) {
+          result.contentError = error.message;
+        }
+      } else if (stat) {
+        result.content = readTextPreview(best.path);
+        result.contentTruncated = true;
+        result.fileSize = stat.size;
+      }
+      if (entry && entry.data) result.indexedData = entry.data;
+    }
+
+    return result;
+  }
+
+  getWatchStatus() {
+    return {
+      watching: this.watching,
+      roots: this.watchedRoots || [],
+      debounceMs: this.watchDebounceMs,
+      pending: this._pendingPaths.size,
+      indexedItems: this.index.size,
+      ...this.watchStats
+    };
   }
 
   async initialize(options = {}) {
@@ -159,9 +607,16 @@ class LibraryKnowledgeService {
     }
 
     this.initialized = true;
+
+    // Keep the index live from here on, unless the caller opted out.
+    if (options.watch === true || (this.watchEnabled && options.watch !== false)) {
+      this.startWatching();
+    }
+
     return {
       success: true,
       moduleId: MODULE_ID,
+      watching: this.watching,
       indexedItems: this.index.size,
       contentHashes: this.contentHashes.size,
       indexingWarnings: this.indexingWarnings.length
@@ -193,6 +648,7 @@ class LibraryKnowledgeService {
     this.indexUntrackedLibraryFiles();
     this.indexRuntimeModules();
     this.indexBackendModules();
+    this.indexVersion += 1;
     return this.index;
   }
 
@@ -212,26 +668,9 @@ class LibraryKnowledgeService {
           continue;
         }
 
-        const relativePath = path.relative(this.libraryRoot, filePath).split(path.sep).join('/');
-        const key = `LIBRARY:${relativePath}`;
-        if (this.index.has(key) || this.indexedPaths.has(filePath)) continue;
-
-        const extension = path.extname(entry.name).toLowerCase();
-        const stat = safeStat(filePath);
-        const data = {
-          name: entry.name,
-          relativePath,
-          extension,
-          fileSize: stat ? stat.size : 0
-        };
-
-        if (['.json', '.jsonl'].includes(extension)) {
-          Object.assign(data, readJson(filePath));
-        } else if (['.md', '.txt', '.csv', '.yaml', '.yml', '.xml'].includes(extension)) {
-          data.content = readTextPreview(filePath).slice(0, 12000);
-        }
-
-        this.indexFile(key, 'library-file', filePath, data);
+        // Same per-file work the watcher does, so the sweep and the live
+        // updates can never disagree about how a file is indexed.
+        this.indexLibraryFileAt(filePath, { skipIfIndexed: true });
       }
     };
 
@@ -250,6 +689,16 @@ class LibraryKnowledgeService {
         warning: 'invalid_json',
         message: data.parseError
       });
+    } else if (Array.isArray(data.lineErrors) && data.lineErrors.length > 0) {
+      // The file itself indexed fine; only some rows were unparseable, so the
+      // valid records stay searchable and the bad rows are reported.
+      this.indexingWarnings.push({
+        key,
+        type,
+        path: filePath,
+        warning: 'invalid_jsonl_lines',
+        message: `${data.lineErrors.length} unparseable line(s); ${data.recordCount} record(s) indexed`
+      });
     }
 
     this.index.set(key, {
@@ -261,6 +710,7 @@ class LibraryKnowledgeService {
       fileSize: stat.size
     });
     this.indexedPaths.add(filePath);
+    this.indexVersion += 1;
   }
 
   indexLibraryCatalogues() {
@@ -336,9 +786,13 @@ class LibraryKnowledgeService {
     for (const dir of fs.readdirSync(this.backendModulesRoot, { withFileTypes: true })) {
       if (!dir.isDirectory() || !/^M\d{3}$/.test(dir.name)) continue;
       const modulePath = path.join(this.backendModulesRoot, dir.name);
+      const doc = this.readBackendModuleDoc(modulePath);
       this.indexFile(`BACKEND:${dir.name}`, 'backend-module', modulePath, {
         moduleId: dir.name,
-        name: this.inferBackendModuleName(dir.name),
+        name: doc.title || this.inferBackendModuleName(dir.name),
+        domain: doc.domain,
+        description: doc.summary,
+        docStatus: doc.status,
         hasBackend: fs.existsSync(path.join(modulePath, 'service.js')),
         hasRoutes: fs.existsSync(path.join(modulePath, 'routes.js')),
         hasController: fs.existsSync(path.join(modulePath, 'controller.js')),
@@ -347,6 +801,54 @@ class LibraryKnowledgeService {
         apiBase: `/api/v1/modules/${dir.name.toLowerCase()}`
       });
     }
+  }
+
+  /**
+   * Read a backend module's README for its real title and declared domain.
+   *
+   * The directory name alone (M006) says nothing about what the module does,
+   * so every bare module was unclassifiable and the org chart had to file 339
+   * of them under Unassigned. The README states both: "# M006 - System
+   * Administration" and "Domain: Platform Foundation".
+   */
+  readBackendModuleDoc(modulePath) {
+    const readmePath = path.join(modulePath, 'README.md');
+    if (!fs.existsSync(readmePath)) return {};
+
+    const raw = readTextPreview(readmePath, 8192);
+
+    // Some generated READMEs were written with literal "\n" escape sequences
+    // instead of real newlines, so the whole document sits on one line. Left
+    // as-is, the title match swallows the entire file and the module ends up
+    // named after its own README body.
+    const text = !raw.includes('\n') && raw.includes('\\n')
+      ? raw.replace(/\\r\\n|\\n/g, '\n')
+      : raw;
+
+    const doc = {};
+
+    const title = text.match(/^\uFEFF?#\s*M\d+\s*[-\u2013\u2014:]\s*(.+)$/m);
+    if (title) doc.title = title[1].trim();
+
+    const domain = text.match(/^Domain:\s*(.+)$/m);
+    if (domain) {
+      const value = domain[1].trim();
+      // Some READMEs carry a placeholder or a wrapped sentence rather than a
+      // label, so only a short, plausible value is taken as a real domain.
+      if (value.length <= 60 && !/^TBD/i.test(value)) doc.domain = value;
+    }
+
+    const status = text.match(/^Status:\s*(.+)$/m);
+    if (status) doc.status = status[1].trim();
+
+    // First prose line, for keyword classification when no domain is declared.
+    const prose = text.split(/\r?\n/).find((line) => {
+      const trimmed = line.trim();
+      return trimmed && !trimmed.startsWith('#') && !/^(Domain|Status):/.test(trimmed);
+    });
+    if (prose) doc.summary = prose.trim().slice(0, 300);
+
+    return doc;
   }
 
   inferBackendModuleName(moduleId) {
@@ -659,6 +1161,30 @@ class LibraryKnowledgeService {
         case 'statistics':
           await this.ensureInitialized();
           return { success: true, data: this.getStatistics() };
+        case 'orgChart':
+          await this.ensureInitialized();
+          return { success: true, data: this.getOrgChart(parameters) };
+        case 'manifest':
+          await this.ensureInitialized();
+          return { success: true, data: this.getManifest(parameters) };
+        case 'duplicateNames':
+          await this.ensureInitialized();
+          return { success: true, data: this.getDuplicateNames(parameters) };
+        case 'findFile':
+          await this.ensureInitialized();
+          return { success: true, data: this.findFile(parameters.name || parameters.query, parameters) };
+        case 'resolveFile':
+          await this.ensureInitialized();
+          return { success: true, data: this.resolveFile(parameters.name || parameters.query, parameters) };
+        case 'reindex':
+          return { success: true, data: await this.reindex() };
+        case 'startWatching':
+          await this.ensureInitialized();
+          return { success: true, data: this.startWatching() };
+        case 'stopWatching':
+          return { success: true, data: this.stopWatching() };
+        case 'watchStatus':
+          return { success: true, data: this.getWatchStatus() };
         case 'syncDatabase':
           await this.ensureInitialized();
           return { success: true, data: await this.syncToDatabase() };

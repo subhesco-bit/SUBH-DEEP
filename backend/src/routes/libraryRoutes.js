@@ -683,4 +683,97 @@ router.post('/sync-database', requireLibraryAdmin, async (_req, res) => {
   return sendResult(res, result);
 });
 
+/**
+ * Org chart: Project -> Controllers -> Systems -> Modules -> Files.
+ * Pass ?includeFiles=true to expand the leaf level.
+ */
+router.get('/org-chart', optionalAuth, async (req, res) => {
+  const result = await execute('orgChart', {
+    includeFiles: req.query.includeFiles === 'true',
+  });
+  return sendResult(res, result);
+});
+
+/**
+ * The manifest: every indexed file with its position and qualified name.
+ * Filterable by controller/system/module, or to ambiguous names only.
+ */
+router.get('/manifest', optionalAuth, async (req, res) => {
+  const result = await execute('manifest', {
+    controller: req.query.controller,
+    system: req.query.system,
+    module: req.query.module,
+    ambiguousOnly: req.query.ambiguousOnly === 'true',
+    limit: req.query.limit,
+    offset: req.query.offset,
+  });
+  return sendResult(res, result);
+});
+
+/** Names shared by more than one file, each with its org path. */
+router.get('/meta/duplicate-names', optionalAuth, async (req, res) => {
+  const result = await execute('duplicateNames', { limit: req.query.limit });
+  return sendResult(res, result);
+});
+
+/**
+ * Find files by name. Context ranks the results rather than filtering them,
+ * so a wrong hint reorders the answer instead of hiding it.
+ */
+router.get('/find', optionalAuth, async (req, res) => {
+  const result = await execute('findFile', {
+    name: req.query.name || req.query.q,
+    controller: req.query.controller,
+    system: req.query.system,
+    module: req.query.module,
+    limit: req.query.limit,
+  });
+  return sendResult(res, result);
+});
+
+/**
+ * Resolve one file and hand it over: position, org path and content in a
+ * single call, so a caller never has to find, then read, then work out which
+ * same-named copy it received.
+ */
+router.get('/resolve', optionalAuth, async (req, res) => {
+  const result = await execute('resolveFile', {
+    name: req.query.name || req.query.q,
+    controller: req.query.controller,
+    system: req.query.system,
+    module: req.query.module,
+    includeContent: req.query.includeContent !== 'false',
+    maxContentBytes: req.query.maxContentBytes,
+  });
+  return sendResult(res, result);
+});
+
+/** Dependencies of one indexed module. */
+router.get('/dependencies/:id', optionalAuth, async (req, res) => {
+  const result = await execute('resolveDependencies', { moduleId: req.params.id, id: req.params.id });
+  return sendResult(res, result);
+});
+
+/** Rebuild the index without restarting the server. */
+router.post('/meta/reindex', requireLibraryAdmin, async (_req, res) => {
+  const result = await execute('reindex');
+  return sendResult(res, result);
+});
+
+/** Live-index status: what is watched, and what it has applied. */
+router.get('/meta/watch', optionalAuth, async (_req, res) => {
+  const result = await execute('watchStatus');
+  return sendResult(res, result);
+});
+
+router.post('/meta/watch/start', requireLibraryAdmin, async (_req, res) => {
+  const result = await execute('startWatching');
+  return sendResult(res, result);
+});
+
+router.post('/meta/watch/stop', requireLibraryAdmin, async (_req, res) => {
+  const result = await execute('stopWatching');
+  return sendResult(res, result);
+});
+
 module.exports = router;

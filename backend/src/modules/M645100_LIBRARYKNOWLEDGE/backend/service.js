@@ -43,6 +43,20 @@ const WIRELINE_EXTENSIONS = {
   manifest: new Set(['.json', '.yml', '.yaml'])
 };
 
+/**
+ * Which relationships mean "this file is part of that system".
+ *
+ * A document that names M041 is *about* M041; a manifest that describes its
+ * directory says nothing about where its neighbours belong. Treating either as
+ * membership pulls documentation into the module it discusses. Kept explicit
+ * so a consumer asking "where does this belong" and one asking "what is
+ * related to this" get different, correct answers.
+ */
+const MEMBERSHIP_KINDS = new Set(['code', 'style', 'markup', 'tests', 'discovers', 'schema', 'sequence']);
+
+/** Relationships that state aboutness rather than membership. */
+const REFERENCE_KINDS = new Set(['mention', 'describes', 'doc']);
+
 function wirelineKindFor(extension) {
   for (const [kind, set] of Object.entries(WIRELINE_EXTENSIONS)) {
     if (set.has(extension)) return kind;
@@ -1606,6 +1620,10 @@ class LibraryKnowledgeService {
     let external = 0;
     let unreadable = 0;
 
+    // from -> to -> kind. The kind was previously counted and discarded, so
+    // every consumer of the graph saw an untyped edge and could not tell a
+    // citation from a dependency.
+    const edgeKind = new Map();
     const link = (from, to, kind) => {
       if (!to || from === to) return;
       let out = edges.get(from);
@@ -1615,6 +1633,7 @@ class LibraryKnowledgeService {
       let into = reverse.get(to);
       if (!into) { into = new Set(); reverse.set(to, into); }
       into.add(from);
+      edgeKind.set(`${from}\u0000${to}`, kind);
       byKind[kind] = (byKind[kind] || 0) + 1;
       resolved += 1;
     };
@@ -1839,8 +1858,96 @@ class LibraryKnowledgeService {
       coverageByMaterial: kindCounts
     };
 
-    this._wirelineGraph = { edges, reverse, shelves, tableCreator };
+    this._wirelineGraph = { edges, reverse, shelves, tableCreator, edgeKind };
     return this._wirelines;
+  }
+
+  /** The relationship on one edge, or null if the two are not linked. */
+  edgeKindBetween(from, to) {
+    const graph = this._wirelineGraph;
+    return graph ? (graph.edgeKind.get(`${from}\u0000${to}`) || null) : null;
+  }
+
+  /**
+   * A file's neighbours, typed and filterable.
+   *
+   * @param key            the file
+   * @param options.kinds  'membership' | 'reference' | 'all' (default all)
+   * @param options.sameZone  ignore neighbours in another zone. A live file
+   *                          linked to a backup copy of a migration is related
+   *                          to it, but does not belong with it, and letting
+   *                          that edge vote pulls live files into backups.
+   */
+  neighboursOf(key, options = {}) {
+    const graph = this._wirelineGraph;
+    if (!graph) return [];
+
+    const entry = this.index.get(key);
+    const zone = entry && entry.data ? entry.data.zone : null;
+    const wanted = options.kinds === 'membership' ? MEMBERSHIP_KINDS
+      : options.kinds === 'reference' ? REFERENCE_KINDS
+        : null;
+
+    const out = [];
+    for (const other of graph.edges.get(key) || []) {
+      const kind = this.edgeKindBetween(key, other);
+      if (wanted && !wanted.has(kind)) continue;
+      const otherEntry = this.index.get(other);
+      if (options.sameZone && otherEntry && otherEntry.data && otherEntry.data.zone !== zone) continue;
+      out.push({ key: other, kind, direction: 'out', entry: otherEntry });
+    }
+    for (const other of graph.reverse.get(key) || []) {
+      const kind = this.edgeKindBetween(other, key);
+      if (wanted && !wanted.has(kind)) continue;
+      const otherEntry = this.index.get(other);
+      if (options.sameZone && otherEntry && otherEntry.data && otherEntry.data.zone !== zone) continue;
+      out.push({ key: other, kind, direction: 'in', entry: otherEntry });
+    }
+    return out;
+  }
+
+  /**
+   * Where a file's wiring says it belongs, judged only on relationships that
+   * mean membership and only within its own zone.
+   *
+   * Returns null when the evidence does not support an answer - no typed
+   * neighbours, or a pull split across systems. A file used evenly by two
+   * systems is shared infrastructure, and moving it would only change which
+   * side is inconvenienced.
+   */
+  placementFor(key, options = {}) {
+    const entry = this.index.get(key);
+    if (!entry || !entry.data) return null;
+
+    const neighbours = this.neighboursOf(key, { kinds: 'membership', sameZone: true });
+    if (neighbours.length === 0) return { key, verdict: 'no-evidence', currentSystem: entry.data.system };
+
+    const votes = new Map();
+    for (const neighbour of neighbours) {
+      const system = neighbour.entry && neighbour.entry.data ? neighbour.entry.data.system : null;
+      if (system) votes.set(system, (votes.get(system) || 0) + 1);
+    }
+    if (votes.size === 0) return { key, verdict: 'no-evidence', currentSystem: entry.data.system };
+
+    const ranked = [...votes.entries()].sort((a, b) => b[1] - a[1]);
+    const [topSystem, topVotes] = ranked[0];
+    const share = topVotes / neighbours.length;
+    const minimumVotes = Number(options.minimumVotes) || 3;
+    const minimumShare = Number(options.minimumShare) || 0.75;
+
+    const base = {
+      key,
+      locationId: entry.data.locationId,
+      currentSystem: entry.data.system,
+      proposedSystem: topSystem,
+      confidence: +(share * 100).toFixed(0),
+      neighbours: neighbours.length,
+      votes: ranked.slice(0, 3).map(([system, count]) => ({ system, count }))
+    };
+
+    if (topSystem === entry.data.system) return { ...base, verdict: 'in-place' };
+    if (share < minimumShare || topVotes < minimumVotes) return { ...base, verdict: 'shared' };
+    return { ...base, verdict: 'misplaced' };
   }
 
   /**
@@ -1915,10 +2022,11 @@ class LibraryKnowledgeService {
     const entry = this.index.get(key);
     if (!entry) return { success: false, error: 'not_found', query: target };
 
-    const describe = (otherKey) => {
+    const describe = (otherKey, kind) => {
       const other = this.index.get(otherKey);
       return {
         key: otherKey,
+        kind: kind || null,
         locationId: other && other.data && other.data.locationId,
         relativePath: other && other.data && other.data.relativePath
       };
@@ -1929,8 +2037,8 @@ class LibraryKnowledgeService {
       key,
       locationId: entry.data && entry.data.locationId,
       system: entry.data && entry.data.system,
-      uses: [...(outbound.get(key) || [])].map(describe),
-      usedBy: [...(inbound.get(key) || [])].map(describe),
+      uses: [...(outbound.get(key) || [])].map((other) => describe(other, this.edgeKindBetween(key, other))),
+      usedBy: [...(inbound.get(key) || [])].map((other) => describe(other, this.edgeKindBetween(other, key))),
       danglingReferences: (this._wiring.dangling.find((row) => row.key === key) || {}).missing || []
     };
   }
@@ -2458,6 +2566,15 @@ class LibraryKnowledgeService {
         case 'resolveFile':
           await this.ensureInitialized();
           return { success: true, data: this.resolveFile(parameters.name || parameters.query, parameters) };
+        case 'placement':
+          await this.buildWirelines(parameters);
+          return { success: true, data: this.placementFor(parameters.key, parameters) };
+        case 'neighbours':
+          await this.buildWirelines(parameters);
+          return { success: true, data: this.neighboursOf(parameters.key, parameters).map((n) => ({
+            key: n.key, kind: n.kind, direction: n.direction,
+            locationId: n.entry && n.entry.data && n.entry.data.locationId
+          })) };
         case 'wirelines':
           return { success: true, data: await this.buildWirelines(parameters) };
         case 'shelvedOnly':

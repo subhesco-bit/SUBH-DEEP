@@ -25,6 +25,42 @@ const JSONL_MAX_RECORDS = Number(process.env.LIBRARY_JSONL_MAX_RECORDS || 500);
 // Set LIBRARY_INDEX_VENDOR=1 to map them too.
 const VENDOR_DIRECTORIES = new Set(['node_modules', '.git']);
 
+// Source files whose references can be read statically.
+const WIRED_EXTENSIONS = new Set(['.js', '.jsx', '.mjs', '.cjs', '.ts', '.tsx']);
+
+// Suffixes tried when a reference omits the extension, in Node's own order.
+const RESOLUTION_SUFFIXES = [
+  '', '.js', '.jsx', '.ts', '.tsx', '.json', '.mjs', '.cjs',
+  '/index.js', '/index.jsx', '/index.ts', '/index.tsx'
+];
+
+/**
+ * Reference specifiers in one source file: require('x'), import ... from 'x',
+ * import('x'), export ... from 'x'. Deliberately a scan rather than a parse -
+ * this runs over tens of thousands of files, and a reference that a regex
+ * misses costs a missing edge, while a parser that throws costs the whole file.
+ */
+function extractReferences(source) {
+  const found = new Set();
+  const patterns = [
+    /require\(\s*['"`]([^'"`]+)['"`]\s*\)/g,
+    /import\s+[^;]*?from\s*['"`]([^'"`]+)['"`]/g,
+    /import\s*\(\s*['"`]([^'"`]+)['"`]\s*\)/g,
+    /export\s+[^;]*?from\s*['"`]([^'"`]+)['"`]/g,
+    /import\s*['"`]([^'"`]+)['"`]/g
+  ];
+
+  for (const pattern of patterns) {
+    let match = pattern.exec(source);
+    while (match) {
+      found.add(match[1]);
+      match = pattern.exec(source);
+    }
+  }
+
+  return [...found];
+}
+
 /**
  * Locate the repository root by walking up for the library directory itself.
  *
@@ -1248,6 +1284,207 @@ class LibraryKnowledgeService {
     };
   }
 
+  /**
+   * Build the wiring layer: which file references which, what nothing
+   * references, and what references something that is not there.
+   *
+   * The last of those is the point. A require() pointing at a path that no
+   * longer exists is the fingerprint of a module removed while its callers
+   * stayed behind - the residue worth recovering rather than tidying away.
+   * And a file with no edges in either direction is not junk by that fact
+   * alone; it is simply not yet connected, which is a task, not a verdict.
+   *
+   * Read-only: nothing is moved, rewritten or removed.
+   */
+  async buildWiring(options = {}) {
+    await this.ensureInitialized();
+
+    if (this._wiring && this._wiring.indexVersion === this.indexVersion && options.refresh !== true) {
+      return this._wiring;
+    }
+
+    const startedAt = Date.now();
+
+    // Absolute path -> index key, for resolving a reference to a mapped file.
+    const keyForPath = new Map();
+    for (const [filePath, keys] of this._pathToKeys) {
+      const [first] = keys;
+      if (first) keyForPath.set(path.normalize(filePath), first);
+    }
+
+    const sources = [];
+    for (const entry of this.index.values()) {
+      if (entry.type !== 'project-file' || !entry.data) continue;
+      if (!WIRED_EXTENSIONS.has(entry.data.extension)) continue;
+      sources.push(entry);
+    }
+
+    const outbound = new Map();   // key -> Set(key)
+    const inbound = new Map();    // key -> Set(key)
+    const dangling = new Map();   // key -> [specifier]
+    let externalReferences = 0;
+    let resolvedEdges = 0;
+    let unreadable = 0;
+
+    const link = (from, to) => {
+      let out = outbound.get(from);
+      if (!out) { out = new Set(); outbound.set(from, out); }
+      out.add(to);
+      let into = inbound.get(to);
+      if (!into) { into = new Set(); inbound.set(to, into); }
+      into.add(from);
+      resolvedEdges += 1;
+    };
+
+    for (let position = 0; position < sources.length; position += 1) {
+      const entry = sources[position];
+
+      let source;
+      try {
+        source = fs.readFileSync(entry.path, 'utf8');
+      } catch (error) {
+        unreadable += 1;
+        continue;
+      }
+
+      const directory = path.dirname(entry.path);
+      for (const specifier of extractReferences(source)) {
+        // A bare specifier is a package, not a file in this project.
+        if (!specifier.startsWith('.') && !specifier.startsWith('/')) {
+          externalReferences += 1;
+          continue;
+        }
+
+        const base = path.resolve(directory, specifier);
+        let target = null;
+        for (const suffix of RESOLUTION_SUFFIXES) {
+          const candidate = keyForPath.get(path.normalize(base + suffix));
+          if (candidate) { target = candidate; break; }
+        }
+
+        if (target) link(entry.key, target);
+        else {
+          const list = dangling.get(entry.key) || [];
+          if (list.length < 25) list.push(specifier);
+          dangling.set(entry.key, list);
+        }
+      }
+
+      if (position % 400 === 0) await new Promise((resolve) => setImmediate(resolve));
+    }
+
+    // Anything with no edge in either direction is unconnected - including
+    // files that are not source at all, which is why the whole index is
+    // counted here and not just the files that could be parsed.
+    const unconnected = [];
+    for (const entry of this.index.values()) {
+      if (entry.type !== 'project-file' || !entry.data) continue;
+      if (outbound.has(entry.key) || inbound.has(entry.key)) continue;
+      unconnected.push(entry);
+    }
+
+    const danglingList = [...dangling.entries()]
+      .map(([key, specifiers]) => {
+        const entry = this.index.get(key);
+        return {
+          key,
+          locationId: entry && entry.data && entry.data.locationId,
+          zone: entry && entry.data && entry.data.zone,
+          system: entry && entry.data && entry.data.system,
+          relativePath: entry && entry.data && entry.data.relativePath,
+          missing: specifiers
+        };
+      })
+      .sort((a, b) => b.missing.length - a.missing.length);
+
+    const limit = Number(options.limit) || 100;
+    this._wiring = {
+      readOnly: true,
+      indexVersion: this.indexVersion,
+      generatedAt: new Date().toISOString(),
+      durationMs: Date.now() - startedAt,
+      totals: {
+        sourceFiles: sources.length,
+        mappedFiles: this.locationIndex.size,
+        resolvedEdges,
+        externalReferences,
+        filesWithOutbound: outbound.size,
+        filesWithInbound: inbound.size,
+        filesWithDanglingRefs: dangling.size,
+        danglingReferences: [...dangling.values()].reduce((sum, list) => sum + list.length, 0),
+        unconnectedFiles: unconnected.length,
+        unreadable
+      },
+      dangling: danglingList.slice(0, limit)
+    };
+
+    this._wiringGraph = { outbound, inbound };
+    return this._wiring;
+  }
+
+  /** Files nothing references and which reference nothing - work to be done. */
+  async listUnconnected(options = {}) {
+    await this.buildWiring(options);
+    const { outbound, inbound } = this._wiringGraph;
+
+    const rows = [];
+    for (const entry of this.index.values()) {
+      if (entry.type !== 'project-file' || !entry.data) continue;
+      if (outbound.has(entry.key) || inbound.has(entry.key)) continue;
+      if (options.zone && entry.data.zone !== options.zone) continue;
+      if (options.extension && entry.data.extension !== options.extension) continue;
+      rows.push({
+        locationId: entry.data.locationId,
+        zone: entry.data.zone,
+        system: entry.data.system,
+        relativePath: entry.data.relativePath,
+        extension: entry.data.extension,
+        fileSize: entry.fileSize
+      });
+    }
+
+    // Group by extension so the shape of the unconnected set is visible at a
+    // glance rather than needing to be read row by row.
+    const byExtension = {};
+    for (const row of rows) byExtension[row.extension || '(none)'] = (byExtension[row.extension || '(none)'] || 0) + 1;
+
+    const limit = Number(options.limit) || 200;
+    return { total: rows.length, byExtension, files: rows.slice(0, limit) };
+  }
+
+  /** What one file is wired to, in both directions. */
+  async getConnections(target, options = {}) {
+    await this.buildWiring(options);
+    const { outbound, inbound } = this._wiringGraph;
+
+    let key = target;
+    if (!this.index.has(key)) {
+      const byLocation = this.locationIndex.get(String(target || '').trim());
+      if (byLocation) key = byLocation;
+    }
+    const entry = this.index.get(key);
+    if (!entry) return { success: false, error: 'not_found', query: target };
+
+    const describe = (otherKey) => {
+      const other = this.index.get(otherKey);
+      return {
+        key: otherKey,
+        locationId: other && other.data && other.data.locationId,
+        relativePath: other && other.data && other.data.relativePath
+      };
+    };
+
+    return {
+      success: true,
+      key,
+      locationId: entry.data && entry.data.locationId,
+      system: entry.data && entry.data.system,
+      uses: [...(outbound.get(key) || [])].map(describe),
+      usedBy: [...(inbound.get(key) || [])].map(describe),
+      danglingReferences: (this._wiring.dangling.find((row) => row.key === key) || {}).missing || []
+    };
+  }
+
   /** Resolve a call number straight to its entry. */
   getByLocationId(locationId) {
     const key = this.locationIndex.get(String(locationId || '').trim());
@@ -1771,6 +2008,12 @@ class LibraryKnowledgeService {
         case 'resolveFile':
           await this.ensureInitialized();
           return { success: true, data: this.resolveFile(parameters.name || parameters.query, parameters) };
+        case 'wiring':
+          return { success: true, data: await this.buildWiring(parameters) };
+        case 'unconnected':
+          return { success: true, data: await this.listUnconnected(parameters) };
+        case 'connections':
+          return await this.getConnections(parameters.key || parameters.locationId, parameters);
         case 'studySystems':
           return { success: true, data: await this.studySystems(parameters) };
         case 'getSystem':

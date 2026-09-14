@@ -12,7 +12,7 @@ Every figure below was measured against the running index, not estimated.
 
 | Batch | Track | Depends on | Status |
 |---|---|---|---|
-| A1 Rebuild 13 models from surviving DDL | Recovery | — | **Ready** |
+| A1 Rebuild 13 models from surviving DDL | Recovery | — | **Cancelled — the premise was a false positive** |
 | A2 Restore the 13 tables to live migrations | Recovery | A1 spec | Ready |
 | A3 Repair 182 references that point at the wrong path | Recovery | — | **Ready** |
 | A4 Triage the 354 targets that exist nowhere | Recovery | — | Ready |
@@ -31,7 +31,46 @@ Track A and Track B are independent and run in parallel. Track C follows.
 
 ## Track A — Recovery
 
-### A1. Rebuild 13 models from surviving DDL
+### A1. Rebuild 13 models from surviving DDL — CANCELLED
+
+**Do not do this.** The batch was written on a false positive and carrying it out
+would have undone a deliberate engineering decision.
+
+Two things were misread:
+
+1. **The 13 requires are commented out.** `backend/_removed_2026-08-04/models/index.js`
+   lists them under the heading `// Import other models (to be created)`:
+   ```js
+   // const UserProfile = require('./UserProfile');
+   ```
+   The reference extractor did not strip comments, so it read thirteen
+   commented-out lines as live dependencies on missing files. The models were
+   never removed by mistake — they were never written, and the file says so.
+
+2. **The three surviving models are marked dead on purpose.** `User.js`,
+   `Product.js` and `Order.js` each carry:
+   > DEAD CODE — DO NOT USE. Verified unreachable: 0 importers outside this
+   > directory … NOT completed deliberately. Finishing it would create a second,
+   > competing persistence layer — two ORMs means two sources of truth for the
+   > schema, which is exactly what the 17 duplicate table definitions already cost.
+
+   The platform persists through raw `pg` SQL via `database/pool.js`; Sequelize
+   is never initialised. Writing 13 Sequelize models would create precisely the
+   competing layer that note exists to prevent.
+
+**Fixed as a result.** `stripComments` now runs before reference extraction for
+code, styles and SQL. Dangling references fell 33,246 → 32,690, and live targets
+536 → 516. The false-positive rate was small and concentrated: 8 files, 20
+targets, 13 of them this one file.
+
+**What remains true.** The tables `user_profiles`, `addresses`, `categories`,
+`states`, `order_items`, `cart`, `farmers`, `fpos`, `loans`, `policies`,
+`shipments`, `contracts` and `assets` are defined only in backup migrations and
+in none of the 923 live `.sql` files. Whether the live schema should carry them
+is a real question — but it is a schema question, answered in SQL, and has
+nothing to do with the Sequelize models. Tracked as A2.
+
+### A1-original. Rebuild 13 models from surviving DDL
 
 **Evidence.** `backend/_removed_2026-08-04/models/index.js` requires 16 models.
 Three were recreated and are live at `backend/src/database/models/`: `User`,

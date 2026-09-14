@@ -66,6 +66,7 @@ function wirelineKindFor(extension) {
 
 /** url(...) and @import in a stylesheet. */
 function extractStyleReferences(source) {
+  source = stripComments(source);
   const found = new Set();
   const patterns = [
     /url\(\s*['"]?([^'")]+)['"]?\s*\)/g,
@@ -149,6 +150,8 @@ function isTestFile(relativePath, fileName) {
 
 /** Tables a migration creates, and tables it depends on. */
 function extractSchemaReferences(source) {
+  // -- line comments in SQL, and /* */ blocks.
+  source = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/--[^\n]*/g, '');
   const creates = new Set();
   const uses = new Set();
 
@@ -183,7 +186,26 @@ const RESOLUTION_SUFFIXES = [
  * this runs over tens of thousands of files, and a reference that a regex
  * misses costs a missing edge, while a parser that throws costs the whole file.
  */
+/**
+ * Remove comments before reading references.
+ *
+ * A commented-out require is not a dependency, and counting one reports a file
+ * as depending on something absent when the code says the opposite. It was
+ * reading `// const UserProfile = require('./UserProfile');` - under a heading
+ * that says "to be created" - as thirteen models removed by mistake.
+ *
+ * Deliberately a scrub rather than a parse: the goal is to stop reading dead
+ * lines, and a mangled string literal costs one edge where a thrown parser
+ * costs the whole file. The ':' guard keeps http:// in a URL intact.
+ */
+function stripComments(source) {
+  return source
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/(^|[^:])\/\/[^\n]*/g, '$1');
+}
+
 function extractReferences(source) {
+  source = stripComments(source);
   const found = new Set();
   const patterns = [
     /require\(\s*['"`]([^'"`]+)['"`]\s*\)/g,

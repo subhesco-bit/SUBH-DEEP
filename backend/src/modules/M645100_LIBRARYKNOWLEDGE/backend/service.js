@@ -96,6 +96,43 @@ function extractModuleMentions(source) {
   return [...found];
 }
 
+/**
+ * Directories a file scans at runtime. This project mounts routes by reading a
+ * directory rather than importing each file, so the mounted files have no
+ * static importer and look unreferenced while being very much in use. Finding
+ * the scan is what makes that linkage visible, and it is derived from the code
+ * rather than hardcoded, so it holds wherever the pattern is used.
+ */
+function extractScannedDirectories(source) {
+  const found = new Set();
+  const patterns = [
+    /readdirSync\(\s*(?:path\.(?:join|resolve)\(\s*)?([^)]*?)\)/g,
+    /require\.context\(\s*['"`]([^'"`]+)['"`]/g
+  ];
+  for (const pattern of patterns) {
+    let match = pattern.exec(source);
+    while (match) {
+      // Keep the quoted fragments; a directory built from variables cannot be
+      // resolved here and is skipped rather than guessed at.
+      const literals = String(match[1]).match(/['"`]([^'"`]+)['"`]/g);
+      if (literals) found.add(literals.map((piece) => piece.slice(1, -1)).join('/'));
+      match = pattern.exec(source);
+    }
+  }
+  return [...found];
+}
+
+/** The file a test is about: foo.test.js -> foo.js, __tests__/foo.js -> ../foo.js */
+function subjectsUnderTest(relativePath, fileName) {
+  const stem = fileName.replace(/\.(test|spec)\.[a-z]+$/i, '').replace(/\.[a-z]+$/i, '');
+  if (!stem || stem === fileName) return [];
+  return [stem];
+}
+
+function isTestFile(relativePath, fileName) {
+  return /\.(test|spec)\.[a-z]+$/i.test(fileName) || /(^|\/)__tests__\//.test(relativePath);
+}
+
 /** Tables a migration creates, and tables it depends on. */
 function extractSchemaReferences(source) {
   const creates = new Set();
@@ -1593,6 +1630,16 @@ class LibraryKnowledgeService {
       return null;
     };
 
+    // What sits in each directory, needed both by the runtime-scan wireline
+    // below and by the manifest wireline further down.
+    const directoryContents = new Map();
+    for (const entry of files) {
+      const directory = path.dirname(entry.path);
+      const bucket = directoryContents.get(directory) || [];
+      bucket.push(entry.key);
+      directoryContents.set(directory, bucket);
+    }
+
     // ---- first pass: which migration creates which table
     const migrations = files.filter((entry) => entry.data.extension === '.sql');
     for (let i = 0; i < migrations.length; i += 1) {
@@ -1643,6 +1690,19 @@ class LibraryKnowledgeService {
             }
           }
 
+          // A file that reads a directory at runtime reaches everything in it.
+          // Checked here rather than in a pass of its own: re-reading all
+          // 80,336 source files to find this cost four times the runtime of
+          // the entire wireline build for a fraction of a percent of coverage.
+          if (kind === 'code' && /readdirSync|require\.context/.test(source)) {
+            for (const specifier of extractScannedDirectories(source)) {
+              const scanned = path.resolve(directory, specifier);
+              for (const mounted of directoryContents.get(scanned) || []) {
+                link(entry.key, mounted, 'discovers');
+              }
+            }
+          }
+
           // A migration depends on whatever created the tables it touches.
           if (kind === 'schema') {
             const schema = extractSchemaReferences(source);
@@ -1655,6 +1715,46 @@ class LibraryKnowledgeService {
       }
 
       if (i % 400 === 0) await new Promise((resolve) => setImmediate(resolve));
+    }
+
+    // ---- code that is discovered, not imported.
+    //
+    // A test is never required by anything - a runner finds it - and a route
+    // file mounted by a directory scan has no importer either. Both are in
+    // active use, so filing them as unreached states something untrue about
+    // the project. Each is linked to what actually reaches it.
+    const byStem = new Map();
+    for (const entry of files) {
+      if (!WIRELINE_EXTENSIONS.code.has(entry.data.extension || '')) continue;
+      const stem = path.parse(entry.data.name || '').name.toLowerCase();
+      if (!stem) continue;
+      const bucket = byStem.get(stem) || [];
+      bucket.push(entry);
+      byStem.set(stem, bucket);
+    }
+
+    for (const entry of files) {
+      const name = entry.data.name || '';
+      if (!isTestFile(entry.data.relativePath || '', name)) continue;
+      const directory = path.dirname(entry.path);
+
+      for (const stem of subjectsUnderTest(entry.data.relativePath || '', name)) {
+        const candidates = byStem.get(stem.toLowerCase()) || [];
+        // Prefer a subject beside the test, or one directory up from __tests__,
+        // before falling back to any file of that name in the same system.
+        const scored = candidates
+          .filter((candidate) => candidate.key !== entry.key)
+          .map((candidate) => {
+            const candidateDir = path.dirname(candidate.path);
+            let rank = 3;
+            if (candidateDir === directory) rank = 0;
+            else if (candidateDir === path.dirname(directory)) rank = 1;
+            else if (candidate.data.system === entry.data.system) rank = 2;
+            return { candidate, rank };
+          })
+          .sort((a, b) => a.rank - b.rank);
+        if (scored.length > 0 && scored[0].rank < 3) link(entry.key, scored[0].candidate.key, 'tests');
+      }
     }
 
     // ---- migrations run in order, and that order is a real dependency.
@@ -1677,23 +1777,16 @@ class LibraryKnowledgeService {
     // ---- a manifest describes the directory it sits in. module.json is the
     // discovery contract for everything beneath it, package.json the same for
     // its package, so the files around it are what it is about.
-    const filesByDirectory = new Map();
-    for (const entry of files) {
-      const directory = path.dirname(entry.path);
-      const bucket = filesByDirectory.get(directory) || [];
-      bucket.push(entry);
-      filesByDirectory.set(directory, bucket);
-    }
     for (const entry of files) {
       if (!WIRELINE_EXTENSIONS.manifest.has(entry.data.extension || '')) continue;
-      const siblings = filesByDirectory.get(path.dirname(entry.path)) || [];
+      const siblings = directoryContents.get(path.dirname(entry.path)) || [];
       // Bounded: a manifest beside a thousand files describes a directory, and
       // a thousand edges would say less than the first few dozen do.
       let issued = 0;
-      for (const sibling of siblings) {
+      for (const siblingKey of siblings) {
         if (issued >= 40) break;
-        if (sibling.key === entry.key) continue;
-        link(entry.key, sibling.key, 'describes');
+        if (siblingKey === entry.key) continue;
+        link(entry.key, siblingKey, 'describes');
         issued += 1;
       }
     }

@@ -2470,13 +2470,63 @@ class LibraryKnowledgeService {
     }
   }
 
+  /**
+   * Context for a model, sized to actually be sent.
+   *
+   * This returned raw index entries. Twelve of them came to 47 MB for a single
+   * query - because one entry can carry a 500-record ledger, a 12,000-character
+   * preview or a parsed CSV - which no model can accept and no caller should
+   * pay for. Each match is now projected to an excerpt plus the address needed
+   * to fetch the rest on demand, and the whole payload is bounded.
+   */
   async buildAIContext(query = '', context = {}) {
     const results = await this.searchLibrary(query, context);
+    const limit = Number(context.limit) || 12;
+    const excerptBytes = Number(context.excerptBytes) || 800;
+    const budget = Number(context.maxBytes) || 120000;
+
+    const excerptOf = (entry) => {
+      const data = entry.data || {};
+      if (typeof data.content === 'string' && data.content.trim()) return data.content.slice(0, excerptBytes);
+      if (data.description) return String(data.description).slice(0, excerptBytes);
+      if (data.aiContext) return String(data.aiContext).slice(0, excerptBytes);
+      if (data.format === 'jsonl') return `${data.recordCount || 0} records; first: ${JSON.stringify(data.records && data.records[0] || {}).slice(0, excerptBytes)}`;
+      // Last resort: a shallow shape of the object, never the object itself.
+      return Object.keys(data).slice(0, 25).join(', ');
+    };
+
+    const matches = [];
+    let used = 0;
+    for (const entry of results.slice(0, limit)) {
+      const match = {
+        key: entry.key,
+        type: entry.type,
+        name: (entry.data && entry.data.name) || entry.key,
+        locationId: entry.data && entry.data.locationId,
+        relativePath: entry.data && entry.data.relativePath,
+        relevance: entry.relevance,
+        excerpt: excerptOf(entry)
+      };
+      const size = JSON.stringify(match).length;
+      // Stop before the budget rather than after it, so the caller never
+      // receives something larger than it asked for.
+      if (used + size > budget && matches.length > 0) break;
+      used += size;
+      matches.push(match);
+    }
+
     return {
       moduleId: MODULE_ID,
       query,
       context,
-      matches: results.slice(0, Number(context.limit) || 12),
+      matchCount: matches.length,
+      totalCandidates: results.length,
+      approxBytes: used,
+      matches,
+      retrieval: {
+        note: 'Excerpts only. Fetch full content by key or locationId when needed.',
+        operation: 'handover'
+      },
       guardrails: {
         claudeCompatible: true,
         sourceAuthority: '_EBDESIGN_LIBRARY and runtime module manifests',

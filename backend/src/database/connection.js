@@ -99,10 +99,18 @@ async function initPostgreSQL() {
 
 /**
  * Initialize MongoDB connection
+ * MongoDB is optional - if not configured or unavailable, the system continues without it
  */
 async function initMongoDB() {
   try {
-    const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/afrera_mongo';
+    const uri = process.env.MONGO_URI;
+    
+    // If no MongoDB URI is configured, skip silently
+    if (!uri) {
+      logger.info('MongoDB not configured (MONGO_URI not set) - skipping MongoDB initialization');
+      return null;
+    }
+    
     const Client = loadMongoDriver();
     mongoClient = new Client(uri, {
       maxPoolSize: 20,
@@ -118,8 +126,11 @@ async function initMongoDB() {
     return mongoClient;
   } catch (error) {
     mongoConnected = false;
-    logger.error('MongoDB connection failed', { error: error.message, stack: error.stack });
-    throw error;
+    // Only log as warning since MongoDB is optional
+    logger.warn('MongoDB connection failed - continuing without MongoDB (optional datastore)', { 
+      error: error.message 
+    });
+    return null;
   }
 }
 
@@ -173,18 +184,23 @@ function getPostgreSQL() {
 
 /**
  * Get MongoDB client
+ * Returns null if MongoDB is not configured or not connected
  */
 function getMongoDB() {
-  if (!mongoClient) {
-    throw new Error('MongoDB not initialized. Call initialize() first.');
+  if (!mongoClient || !mongoConnected) {
+    return null;
   }
   return mongoClient;
 }
 
 /**
  * Get MongoDB database
+ * Returns null if MongoDB is not configured or not connected
  */
 function getMongoDatabase() {
+  if (!mongoClient || !mongoConnected) {
+    return null;
+  }
   const dbName = process.env.MONGO_DATABASE || 'afrera_mongo';
   return mongoClient.db(dbName);
 }

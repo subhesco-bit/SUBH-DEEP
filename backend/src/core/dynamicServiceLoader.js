@@ -69,6 +69,7 @@ class DynamicServiceLoader {
   /**
    * Register a service (don't load yet)
    * Extract metadata from filename and path
+   * Handles duplicates by preferring more specific paths
    */
   _registerService(filePath, basePath) {
     try {
@@ -78,10 +79,46 @@ class DynamicServiceLoader {
       const category = this._extractCategory(relativePath);
       const subfolder = this._extractSubfolder(relativePath);
 
-      // Check if service already registered
+      // Check if service already registered - handle duplicates intelligently
       if (this.services.has(serviceName)) {
-        logger.warn(`Duplicate service name: ${serviceName}`);
-        return;
+        const existing = this.services.get(serviceName);
+        
+        // Prefer more specific paths (subfolders over root)
+        // Prefer claude/ subfolder for AI services
+        // Prefer agriculture/ subfolder for agriculture services
+        const existingPath = existing.relativePath;
+        const newPath = relativePath;
+        
+        const existingDepth = existingPath.split(path.sep).length;
+        const newDepth = newPath.split(path.sep).length;
+        
+        // Priority order: claude/ > ai/ > agriculture/ > other subfolders > root
+        const getPriority = (path) => {
+          if (path.startsWith('claude' + path.sep)) return 4;
+          if (path.startsWith('ai' + path.sep)) return 3;
+          if (path.startsWith('agriculture' + path.sep)) return 2;
+          if (path.includes(path.sep)) return 1;
+          return 0;
+        };
+        
+        const existingPriority = getPriority(existingPath);
+        const newPriority = getPriority(newPath);
+        
+        // Only replace if new path has higher priority or same priority but deeper
+        if (newPriority > existingPriority || 
+            (newPriority === existingPriority && newDepth > existingDepth)) {
+          logger.debug(`Replacing duplicate service: ${serviceName} (${existingPath} → ${newPath})`);
+          // Remove old entry from indexes
+          this.byCategory.get(existing.category)?.splice(
+            this.byCategory.get(existing.category).indexOf(serviceName), 1
+          );
+          this.bySubfolder.get(existing.subfolder)?.splice(
+            this.bySubfolder.get(existing.subfolder).indexOf(serviceName), 1
+          );
+        } else {
+          // Skip this duplicate, keep existing
+          return;
+        }
       }
 
       // Register service entry

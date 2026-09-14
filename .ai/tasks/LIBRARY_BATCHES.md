@@ -20,7 +20,7 @@ Every figure below was measured against the running index, not estimated.
 | B1 Placement plan (read-only proposal) | Arrangement | — | **Ready** |
 | B2 Register 347 undiscoverable modules | Arrangement | — | Ready |
 | B3 Consolidate 14,031 identical data groups | Arrangement | B1 | Blocked on B1 |
-| B4 Raise wireline coverage above 61.4% | Arrangement | — | Ready |
+| B4 Raise wireline coverage above 61.4% | Arrangement | — | **Paused** — resumes after B1 |
 | C1 Bring the database into the library | Platform | B4 | Blocked on B4 |
 | C2 Decide index storage: memory vs PostgreSQL | Platform | C1 | Deferred by owner |
 | C3 Push 95 commits, merge the debug-scan branch | Platform | — | **Ready** |
@@ -145,6 +145,27 @@ npm rather than required.
 **Done when.** Every material is above 75%, or the shortfall is explained by a
 mechanism that genuinely carries no static reference, and that explanation is
 recorded here.
+
+**Paused mid-batch — resumes after B1.** Done so far: tests and
+dynamically-mounted files are wired (`tests` 1,579 edges, `discovers` 2,148),
+taking code to 58.4% and total coverage to 61.8% over 421,509 edges.
+
+Two things were learned and should shape the rest of the batch rather than be
+rediscovered:
+
+1. **The remaining shortfall is largely a gap, not a wiring failure.** Tests
+   such as `backend/src/__tests__/critical-phase1.test.js` are unwired because
+   the code they import does not exist — `../services/financeService`,
+   `../routes/marketplace…`. Those belong to Track A, not here. Chasing them as
+   a coverage problem would hide a real one.
+2. **Runtime is the constraint, not cleverness.** A second pass over 80,336
+   source files cost 71s → 279s for +0.4%. Folded back, it is 171s. Any further
+   wireline must reuse the source already in hand.
+
+Next when resumed: index test candidates by directory instead of scanning every
+same-stem match (stems like `service` and `index` match thousands, so ~9,000
+tests each walk a long list), then reassess `other` at 15.5% — 3,645 assets that
+are only ever reached when something references them.
 
 ---
 

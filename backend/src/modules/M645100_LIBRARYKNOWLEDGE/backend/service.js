@@ -891,6 +891,183 @@ class LibraryKnowledgeService {
     return true;
   }
 
+  /**
+   * Study the mapped files by content, so the difference between "the same
+   * file twice" and "two files that drifted apart" is measured rather than
+   * assumed.
+   *
+   * Only files whose size matches another file's are hashed - content that is
+   * a different length cannot be identical - which turns 126,642 files into a
+   * bounded read. Nothing is moved, renamed or deleted here: the output is
+   * evidence for those decisions, not the decision itself.
+   */
+  async studyContent(options = {}) {
+    await this.ensureInitialized();
+
+    if (this._contentStudy && this._contentStudy.indexVersion === this.indexVersion && options.refresh !== true) {
+      return this._contentStudy;
+    }
+
+    const maxBytes = Number(options.maxBytes) || 268435456; // 256MB
+    const startedAt = Date.now();
+
+    // 1. Group by size. A size seen once cannot have a twin.
+    const bySize = new Map();
+    for (const entry of this.index.values()) {
+      if (entry.type !== 'project-file') continue;
+      const size = entry.fileSize || 0;
+      const bucket = bySize.get(size);
+      if (bucket) bucket.push(entry);
+      else bySize.set(size, [entry]);
+    }
+
+    const uniqueBySize = [];
+    const candidates = [];
+    for (const [, bucket] of bySize) {
+      if (bucket.length === 1) uniqueBySize.push(bucket[0]);
+      else candidates.push(...bucket);
+    }
+
+    // 2. Hash the candidates, yielding periodically so a study running on a
+    //    live server does not stall every other request behind it.
+    const byHash = new Map();
+    let hashed = 0;
+    let unreadable = 0;
+    let skippedLarge = 0;
+
+    for (let position = 0; position < candidates.length; position += 1) {
+      const entry = candidates[position];
+
+      if ((entry.fileSize || 0) > maxBytes) { skippedLarge += 1; continue; }
+
+      let digest;
+      try {
+        digest = crypto.createHash('sha1').update(fs.readFileSync(entry.path)).digest('hex');
+      } catch (error) {
+        unreadable += 1;
+        continue;
+      }
+
+      hashed += 1;
+      const bucket = byHash.get(digest);
+      if (bucket) bucket.push(entry);
+      else byHash.set(digest, [entry]);
+
+      if (position % 500 === 0) await new Promise((resolve) => setImmediate(resolve));
+    }
+
+    // 3. Split into identical sets and content that turned out to be unique.
+    const identical = [];
+    let uniqueByContent = uniqueBySize.length;
+    let redundantCopies = 0;
+    let reclaimableBytes = 0;
+
+    for (const [digest, members] of byHash) {
+      if (members.length === 1) { uniqueByContent += 1; continue; }
+      redundantCopies += members.length - 1;
+      reclaimableBytes += (members[0].fileSize || 0) * (members.length - 1);
+      identical.push({
+        contentHash: digest,
+        fileSize: members[0].fileSize || 0,
+        count: members.length,
+        name: members[0].data && members[0].data.name,
+        members: members.map((entry) => ({
+          key: entry.key,
+          locationId: entry.data && entry.data.locationId,
+          zone: entry.data && entry.data.zone,
+          relativePath: entry.data && entry.data.relativePath
+        }))
+      });
+    }
+    identical.sort((a, b) => (b.fileSize * (b.count - 1)) - (a.fileSize * (a.count - 1)));
+
+    // 4. Same designation, different content: the files that must be merged
+    //    rather than deduplicated, because each side holds something.
+    const byName = new Map();
+    for (const entry of this.index.values()) {
+      if (entry.type !== 'project-file') continue;
+      const name = ((entry.data && entry.data.name) || '').toLowerCase();
+      if (!name) continue;
+      const bucket = byName.get(name);
+      if (bucket) bucket.push(entry);
+      else byName.set(name, [entry]);
+    }
+
+    const hashOf = new Map();
+    for (const [digest, members] of byHash) for (const entry of members) hashOf.set(entry.key, digest);
+
+    const divergent = [];
+    for (const [name, members] of byName) {
+      if (members.length < 2) continue;
+      const digests = new Set(members.map((entry) => hashOf.get(entry.key) || `size:${entry.fileSize}:${entry.key}`));
+      if (digests.size < 2) continue;
+      divergent.push({
+        name,
+        count: members.length,
+        distinctVersions: digests.size,
+        members: members.slice(0, 12).map((entry) => ({
+          key: entry.key,
+          locationId: entry.data && entry.data.locationId,
+          zone: entry.data && entry.data.zone,
+          fileSize: entry.fileSize,
+          contentHash: hashOf.get(entry.key) || null
+        }))
+      });
+    }
+    divergent.sort((a, b) => b.distinctVersions - a.distinctVersions || b.count - a.count);
+
+    const limit = Number(options.limit) || 100;
+    this._contentStudy = {
+      indexVersion: this.indexVersion,
+      generatedAt: new Date().toISOString(),
+      durationMs: Date.now() - startedAt,
+      readOnly: true,
+      totals: {
+        studied: candidates.length + uniqueBySize.length,
+        hashed,
+        uniqueBySize: uniqueBySize.length,
+        uniqueByContent,
+        identicalGroups: identical.length,
+        redundantCopies,
+        reclaimableBytes,
+        divergentNameGroups: divergent.length,
+        unreadable,
+        skippedLarge
+      },
+      identical: identical.slice(0, limit),
+      divergent: divergent.slice(0, limit)
+    };
+
+    return this._contentStudy;
+  }
+
+  /**
+   * Every file whose content appears exactly once: the set that cannot be
+   * merged away and therefore has to be placed somewhere on its own merits.
+   */
+  async listUniqueFiles(options = {}) {
+    const study = await this.studyContent(options);
+    const duplicated = new Set();
+    for (const group of study.identical) for (const member of group.members) duplicated.add(member.key);
+
+    const unique = [];
+    for (const entry of this.index.values()) {
+      if (entry.type !== 'project-file') continue;
+      if (duplicated.has(entry.key)) continue;
+      if (options.zone && (entry.data && entry.data.zone) !== options.zone) continue;
+      unique.push({
+        key: entry.key,
+        locationId: entry.data && entry.data.locationId,
+        zone: entry.data && entry.data.zone,
+        relativePath: entry.data && entry.data.relativePath,
+        fileSize: entry.fileSize
+      });
+    }
+
+    const limit = Number(options.limit) || 200;
+    return { total: unique.length, sampled: Math.min(limit, unique.length), files: unique.slice(0, limit) };
+  }
+
   /** Resolve a call number straight to its entry. */
   getByLocationId(locationId) {
     const key = this.locationIndex.get(String(locationId || '').trim());
@@ -1414,6 +1591,12 @@ class LibraryKnowledgeService {
         case 'resolveFile':
           await this.ensureInitialized();
           return { success: true, data: this.resolveFile(parameters.name || parameters.query, parameters) };
+        case 'studyContent':
+          return { success: true, data: await this.studyContent(parameters) };
+        case 'uniqueFiles':
+          return { success: true, data: await this.listUniqueFiles(parameters) };
+        case 'byLocationId':
+          return { success: true, data: this.getByLocationId(parameters.locationId) };
         case 'reindex':
           return { success: true, data: await this.reindex() };
         case 'startWatching':

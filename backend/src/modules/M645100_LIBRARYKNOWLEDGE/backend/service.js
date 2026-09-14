@@ -98,14 +98,72 @@ function locateInZones(filePath, projectRoot, externalRoots) {
  * restart and a reindex unchanged - which is what makes it usable as a
  * durable handle for something else to store and come back with.
  */
-function buildLocationId(zone, relativePath) {
+function tidy(value, length) {
+  return String(value || '').toUpperCase().replace(/[^A-Z0-9]+/g, '').slice(0, length);
+}
+
+/**
+ * Which system owns this file, and which component of it the file is part of.
+ *
+ * A module identifier anywhere in the path is the strongest signal: under a
+ * plug-and-play model the module is the unit that plugs in, so it owns
+ * everything beneath it regardless of where the tree it sits in was checked
+ * out. Without one, the system is the top-level area (backend, frontend, the
+ * library section) and the component is the area below that.
+ */
+function systemOf(zone, relativePath) {
   const segments = relativePath.split('/').filter(Boolean);
-  const section = (segments.length > 1 ? segments[0] : '(root)')
-    .toUpperCase()
-    .replace(/[^A-Z0-9]+/g, '')
-    .slice(0, 10) || 'ROOT';
+  const moduleAt = segments.findIndex((segment) => /^M\d{3,}(_.+)?$/.test(segment));
+
+  if (moduleAt >= 0) {
+    const moduleId = segments[moduleAt];
+    return {
+      system: moduleId,
+      systemKind: 'module',
+      component: segments[moduleAt + 1] && moduleAt + 2 < segments.length
+        ? segments[moduleAt + 1]
+        : '(root)',
+      componentPath: segments.slice(moduleAt + 1).join('/') || segments[segments.length - 1]
+    };
+  }
+
+  if (segments[0] === '_EBDESIGN_LIBRARY') {
+    return {
+      system: segments[1] || '(root)',
+      systemKind: 'library-section',
+      component: segments.length > 3 ? segments[2] : '(section root)',
+      componentPath: segments.slice(1).join('/')
+    };
+  }
+
+  return {
+    system: segments[0] || '(root)',
+    systemKind: 'area',
+    component: segments.length > 2 ? segments[1] : '(root)',
+    componentPath: segments.slice(1).join('/') || segments[0] || ''
+  };
+}
+
+/**
+ * A call number that says where a file belongs, not merely where it sits:
+ *
+ *   PRJ.M645100.BACKEND.7f3a2b1c
+ *   |   |        |       |
+ *   |   |        |       slot: 8 hex of sha1(zone/path), collision-checked
+ *   |   |        component within the system
+ *   |   the system that owns it - the thing that plugs in
+ *   zone: which checkout of the tree
+ *
+ * Reading left to right narrows from tree to system to component to file, so
+ * a caller holding a number knows what it belongs to before resolving it, and
+ * two systems that merely share a filename never share a prefix.
+ */
+function buildLocationId(zone, relativePath) {
+  const owner = systemOf(zone, relativePath);
+  const system = tidy(owner.system, 16) || 'ROOT';
+  const component = tidy(owner.component, 10) || 'ROOT';
   const slot = crypto.createHash('sha1').update(`${zone}/${relativePath}`).digest('hex').slice(0, 8);
-  return `${zone}-${section}-${slot}`;
+  return `${zone}.${system}.${component}.${slot}`;
 }
 
 function findProjectRoot(startDir = __dirname) {
@@ -858,11 +916,16 @@ class LibraryKnowledgeService {
     const name = path.basename(filePath);
     const locationId = buildLocationId(zone, relativePath);
 
+    const owner = systemOf(zone, relativePath);
     this.indexFile(key, 'project-file', filePath, {
       name,
       zone,
       relativePath,
       locationId,
+      system: owner.system,
+      systemKind: owner.systemKind,
+      component: owner.component,
+      componentPath: owner.componentPath,
       extension: path.extname(name).toLowerCase(),
       fileSize: stat.size,
       metadataOnly: true
@@ -995,6 +1058,10 @@ class LibraryKnowledgeService {
 
     const hashOf = new Map();
     for (const [digest, members] of byHash) for (const entry of members) hashOf.set(entry.key, digest);
+    // Retained in full: studySystems fingerprints every member of a system,
+    // and a capped report would have it comparing placeholders instead of
+    // content, which reads as "nothing is duplicated" rather than as an error.
+    this._contentHashByKey = hashOf;
 
     const divergent = [];
     for (const [name, members] of byName) {
@@ -1066,6 +1133,119 @@ class LibraryKnowledgeService {
 
     const limit = Number(options.limit) || 200;
     return { total: unique.length, sampled: Math.min(limit, unique.length), files: unique.slice(0, limit) };
+  }
+
+  /**
+   * Judge duplication at the level that can actually plug in: the system.
+   *
+   * Two files sharing a name in different systems are not copies of each
+   * other - they are that system's own component, doing that system's work,
+   * the way two branches each have their own sales executive. Comparing them
+   * file by file reports tens of thousands of false duplicates and hides the
+   * real one, which is an entire system existing twice.
+   *
+   * So each system is reduced to a fingerprint over its members - every
+   * component path paired with its content hash - and systems are compared as
+   * wholes. Identical fingerprint means the same system twice. A shared
+   * member between otherwise different systems means nothing.
+   */
+  async studySystems(options = {}) {
+    const study = await this.studyContent(options);
+
+    const contentHashOf = this._contentHashByKey || new Map();
+
+    // Group every mapped file under the system that owns it.
+    const systems = new Map();
+    for (const entry of this.index.values()) {
+      if (entry.type !== 'project-file' || !entry.data) continue;
+      const zone = entry.data.zone || 'PRJ';
+      const system = entry.data.system || '(root)';
+      const id = `${zone}::${system}`;
+
+      const bucket = systems.get(id)
+        || systems.set(id, { id, zone, system, systemKind: entry.data.systemKind, members: [] }).get(id);
+      bucket.members.push(entry);
+    }
+
+    // Fingerprint each system over its members, so the comparison is of the
+    // whole rather than of any one file inside it.
+    for (const bucket of systems.values()) {
+      const lines = bucket.members
+        .map((entry) => `${entry.data.componentPath}:${contentHashOf.get(entry.key) || 'u' + entry.key}`)
+        .sort();
+      bucket.fileCount = bucket.members.length;
+      bucket.totalBytes = bucket.members.reduce((sum, entry) => sum + (entry.fileSize || 0), 0);
+      bucket.fingerprint = crypto.createHash('sha1').update(lines.join('\n')).digest('hex');
+      delete bucket.members;
+    }
+
+    const byFingerprint = new Map();
+    for (const bucket of systems.values()) {
+      const group = byFingerprint.get(bucket.fingerprint);
+      if (group) group.push(bucket);
+      else byFingerprint.set(bucket.fingerprint, [bucket]);
+    }
+
+    const duplicateSystems = [];
+    let redundantSystems = 0;
+    let reclaimableBytes = 0;
+    for (const [fingerprint, group] of byFingerprint) {
+      if (group.length < 2) continue;
+      redundantSystems += group.length - 1;
+      reclaimableBytes += group[0].totalBytes * (group.length - 1);
+      duplicateSystems.push({
+        fingerprint,
+        copies: group.length,
+        fileCount: group[0].fileCount,
+        totalBytes: group[0].totalBytes,
+        systems: group.map((bucket) => ({ zone: bucket.zone, system: bucket.system, kind: bucket.systemKind }))
+      });
+    }
+    duplicateSystems.sort((a, b) => (b.totalBytes * (b.copies - 1)) - (a.totalBytes * (a.copies - 1)));
+
+    const limit = Number(options.limit) || 50;
+    return {
+      readOnly: true,
+      generatedAt: new Date().toISOString(),
+      totals: {
+        systems: systems.size,
+        distinctFingerprints: byFingerprint.size,
+        duplicateSystemGroups: duplicateSystems.length,
+        redundantSystems,
+        reclaimableBytes
+      },
+      duplicateSystems: duplicateSystems.slice(0, limit)
+    };
+  }
+
+  /** Everything one system owns, addressed by call number. */
+  async getSystem(systemId, options = {}) {
+    await this.ensureInitialized();
+    const wanted = String(systemId || '').trim().toLowerCase();
+    if (!wanted) return { success: false, error: 'A system id is required' };
+
+    const members = [];
+    for (const entry of this.index.values()) {
+      if (entry.type !== 'project-file' || !entry.data) continue;
+      if (String(entry.data.system || '').toLowerCase() !== wanted) continue;
+      if (options.zone && entry.data.zone !== options.zone) continue;
+      members.push({
+        locationId: entry.data.locationId,
+        zone: entry.data.zone,
+        component: entry.data.component,
+        componentPath: entry.data.componentPath,
+        fileSize: entry.fileSize
+      });
+    }
+
+    const limit = Number(options.limit) || 500;
+    return {
+      success: members.length > 0,
+      system: systemId,
+      fileCount: members.length,
+      zones: [...new Set(members.map((member) => member.zone))],
+      members: members.slice(0, limit)
+    };
   }
 
   /** Resolve a call number straight to its entry. */
@@ -1591,6 +1771,10 @@ class LibraryKnowledgeService {
         case 'resolveFile':
           await this.ensureInitialized();
           return { success: true, data: this.resolveFile(parameters.name || parameters.query, parameters) };
+        case 'studySystems':
+          return { success: true, data: await this.studySystems(parameters) };
+        case 'getSystem':
+          return await this.getSystem(parameters.system || parameters.systemId, parameters);
         case 'studyContent':
           return { success: true, data: await this.studyContent(parameters) };
         case 'uniqueFiles':

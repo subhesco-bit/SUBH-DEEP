@@ -28,6 +28,98 @@ const VENDOR_DIRECTORIES = new Set(['node_modules', '.git']);
 // Source files whose references can be read statically.
 const WIRED_EXTENSIONS = new Set(['.js', '.jsx', '.mjs', '.cjs', '.ts', '.tsx']);
 
+/**
+ * A library catalogues the two-page journal as surely as the bound volume.
+ * Reading only require() and import speaks one language - JavaScript's - and
+ * everything written in another is filed as unconnected when in truth it was
+ * never asked. Each material gets the rule that suits it.
+ */
+const WIRELINE_EXTENSIONS = {
+  code: new Set(['.js', '.jsx', '.mjs', '.cjs', '.ts', '.tsx']),
+  style: new Set(['.css', '.scss', '.less']),
+  markup: new Set(['.html', '.htm', '.vue', '.svg']),
+  doc: new Set(['.md', '.mdx', '.markdown', '.txt', '.rst']),
+  schema: new Set(['.sql']),
+  manifest: new Set(['.json', '.yml', '.yaml'])
+};
+
+function wirelineKindFor(extension) {
+  for (const [kind, set] of Object.entries(WIRELINE_EXTENSIONS)) {
+    if (set.has(extension)) return kind;
+  }
+  return 'other';
+}
+
+/** url(...) and @import in a stylesheet. */
+function extractStyleReferences(source) {
+  const found = new Set();
+  const patterns = [
+    /url\(\s*['"]?([^'")]+)['"]?\s*\)/g,
+    /@import\s+(?:url\()?\s*['"]([^'"]+)['"]/g
+  ];
+  for (const pattern of patterns) {
+    let match = pattern.exec(source);
+    while (match) { found.add(match[1]); match = pattern.exec(source); }
+  }
+  return [...found];
+}
+
+/** src and href in markup. */
+function extractMarkupReferences(source) {
+  const found = new Set();
+  const pattern = /(?:src|href)\s*=\s*['"]([^'"#?]+)['"]/g;
+  let match = pattern.exec(source);
+  while (match) { found.add(match[1]); match = pattern.exec(source); }
+  return [...found];
+}
+
+/** Markdown links and inline code that names a path. */
+function extractDocReferences(source) {
+  const found = new Set();
+  const patterns = [
+    /\]\(\s*([^)\s]+?)\s*(?:"[^"]*")?\)/g,
+    /^\s*\[[^\]]+\]:\s*(\S+)/gm
+  ];
+  for (const pattern of patterns) {
+    let match = pattern.exec(source);
+    while (match) { found.add(match[1]); match = pattern.exec(source); }
+  }
+  return [...found];
+}
+
+/** Module identifiers a document names, so prose about M041 reaches M041. */
+function extractModuleMentions(source) {
+  const found = new Set();
+  const pattern = /\bM\d{3,}(?:_[A-Z0-9_]+)?\b/g;
+  let match = pattern.exec(source);
+  while (match && found.size < 60) { found.add(match[0]); match = pattern.exec(source); }
+  return [...found];
+}
+
+/** Tables a migration creates, and tables it depends on. */
+function extractSchemaReferences(source) {
+  const creates = new Set();
+  const uses = new Set();
+
+  const createPattern = /CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?["`']?([A-Za-z0-9_.]+)["`']?/gi;
+  let match = createPattern.exec(source);
+  while (match) { creates.add(match[1].toLowerCase()); match = createPattern.exec(source); }
+
+  const usePatterns = [
+    /REFERENCES\s+["`']?([A-Za-z0-9_.]+)["`']?/gi,
+    /(?:ALTER|DROP)\s+TABLE\s+(?:IF\s+EXISTS\s+)?["`']?([A-Za-z0-9_.]+)["`']?/gi,
+    /(?:FROM|JOIN|INTO|UPDATE)\s+["`']?([A-Za-z0-9_.]+)["`']?/gi,
+    /CREATE\s+INDEX[^;]*?\sON\s+["`']?([A-Za-z0-9_.]+)["`']?/gi
+  ];
+  for (const pattern of usePatterns) {
+    let hit = pattern.exec(source);
+    while (hit) { uses.add(hit[1].toLowerCase()); hit = pattern.exec(source); }
+  }
+
+  for (const table of creates) uses.delete(table);
+  return { creates: [...creates], uses: [...uses] };
+}
+
 // Suffixes tried when a reference omits the extension, in Node's own order.
 const RESOLUTION_SUFFIXES = [
   '', '.js', '.jsx', '.ts', '.tsx', '.json', '.mjs', '.cjs',
@@ -1422,6 +1514,271 @@ class LibraryKnowledgeService {
     return this._wiring;
   }
 
+  /**
+   * Wirelines: every file connected by the rule that fits its material, and
+   * then by containment regardless, so no file can fall out of the catalogue.
+   *
+   * A stylesheet is wired by url() and @import, markup by src and href, a
+   * document by its links and by the module identifiers it names, a migration
+   * by the tables it creates and the tables it depends on, a manifest by the
+   * directory it describes. And every file, whatever it is, belongs to a
+   * system - the shelf it sits on - which is a real relationship and the one
+   * that guarantees complete coverage.
+   *
+   * Read-only.
+   */
+  async buildWirelines(options = {}) {
+    await this.ensureInitialized();
+
+    if (this._wirelines && this._wirelines.indexVersion === this.indexVersion && options.refresh !== true) {
+      return this._wirelines;
+    }
+
+    const startedAt = Date.now();
+    const maxBytes = Number(options.maxBytes) || 4194304; // 4MB: past this a file is data, not prose
+
+    const keyForPath = new Map();
+    for (const [filePath, keys] of this._pathToKeys) {
+      const [first] = keys;
+      if (first) keyForPath.set(path.normalize(filePath), first);
+    }
+
+    // Module id -> the keys that constitute it, so a document naming M041
+    // reaches the module rather than a file that happens to share the string.
+    const moduleKeys = new Map();
+    // Table name -> the migration key that creates it.
+    const tableCreator = new Map();
+
+    const files = [];
+    for (const entry of this.index.values()) {
+      if (entry.type !== 'project-file' || !entry.data) continue;
+      files.push(entry);
+      const system = entry.data.system;
+      if (system && /^M\d{3,}/.test(system)) {
+        const bucket = moduleKeys.get(system) || [];
+        if (bucket.length < 4) bucket.push(entry.key);
+        moduleKeys.set(system, bucket);
+      }
+    }
+
+    const edges = new Map();      // key -> Set(key)
+    const reverse = new Map();    // key -> Set(key)
+    const byKind = {};
+    const dangling = new Map();
+    let resolved = 0;
+    let external = 0;
+    let unreadable = 0;
+
+    const link = (from, to, kind) => {
+      if (!to || from === to) return;
+      let out = edges.get(from);
+      if (!out) { out = new Set(); edges.set(from, out); }
+      if (out.has(to)) return;
+      out.add(to);
+      let into = reverse.get(to);
+      if (!into) { into = new Set(); reverse.set(to, into); }
+      into.add(from);
+      byKind[kind] = (byKind[kind] || 0) + 1;
+      resolved += 1;
+    };
+
+    const resolvePath = (directory, specifier) => {
+      if (!specifier || /^[a-z]+:/i.test(specifier)) return null;
+      if (!specifier.startsWith('.') && !specifier.startsWith('/')) return null;
+      const base = path.resolve(directory, specifier);
+      for (const suffix of RESOLUTION_SUFFIXES) {
+        const candidate = keyForPath.get(path.normalize(base + suffix));
+        if (candidate) return candidate;
+      }
+      return null;
+    };
+
+    // ---- first pass: which migration creates which table
+    const migrations = files.filter((entry) => entry.data.extension === '.sql');
+    for (let i = 0; i < migrations.length; i += 1) {
+      const entry = migrations[i];
+      if ((entry.fileSize || 0) > maxBytes) continue;
+      let source;
+      try { source = fs.readFileSync(entry.path, 'utf8'); } catch (error) { continue; }
+      for (const table of extractSchemaReferences(source).creates) {
+        if (!tableCreator.has(table)) tableCreator.set(table, entry.key);
+      }
+      if (i % 400 === 0) await new Promise((resolve) => setImmediate(resolve));
+    }
+
+    // ---- second pass: wire every file by its own material
+    for (let i = 0; i < files.length; i += 1) {
+      const entry = files[i];
+      const extension = entry.data.extension || '';
+      const kind = wirelineKindFor(extension);
+      const directory = path.dirname(entry.path);
+
+      if (kind !== 'other' && (entry.fileSize || 0) <= maxBytes) {
+        let source;
+        try { source = fs.readFileSync(entry.path, 'utf8'); } catch (error) { unreadable += 1; source = null; }
+
+        if (source !== null) {
+          let specifiers = [];
+          if (kind === 'code') specifiers = extractReferences(source);
+          else if (kind === 'style') specifiers = extractStyleReferences(source);
+          else if (kind === 'markup') specifiers = extractMarkupReferences(source);
+          else if (kind === 'doc') specifiers = extractDocReferences(source);
+          else if (kind === 'manifest') specifiers = extractDocReferences(source);
+
+          for (const specifier of specifiers) {
+            if (!specifier.startsWith('.') && !specifier.startsWith('/')) { external += 1; continue; }
+            const target = resolvePath(directory, specifier);
+            if (target) link(entry.key, target, kind);
+            else {
+              const list = dangling.get(entry.key) || [];
+              if (list.length < 25) list.push(specifier);
+              dangling.set(entry.key, list);
+            }
+          }
+
+          // A document that names a module is about that module.
+          if (kind === 'doc') {
+            for (const mention of extractModuleMentions(source)) {
+              for (const target of moduleKeys.get(mention) || []) link(entry.key, target, 'mention');
+            }
+          }
+
+          // A migration depends on whatever created the tables it touches.
+          if (kind === 'schema') {
+            const schema = extractSchemaReferences(source);
+            for (const table of schema.uses) {
+              const creator = tableCreator.get(table);
+              if (creator) link(entry.key, creator, 'schema');
+            }
+          }
+        }
+      }
+
+      if (i % 400 === 0) await new Promise((resolve) => setImmediate(resolve));
+    }
+
+    // ---- migrations run in order, and that order is a real dependency.
+    // A migration that creates no foreign key still cannot run before the one
+    // in front of it, so the sequence is the wireline for a standalone one.
+    const migrationsByDirectory = new Map();
+    for (const entry of migrations) {
+      const directory = path.dirname(entry.path);
+      const bucket = migrationsByDirectory.get(directory) || [];
+      bucket.push(entry);
+      migrationsByDirectory.set(directory, bucket);
+    }
+    for (const bucket of migrationsByDirectory.values()) {
+      bucket.sort((a, b) => String(a.data.name).localeCompare(String(b.data.name), 'en', { numeric: true }));
+      for (let i = 1; i < bucket.length; i += 1) {
+        link(bucket[i].key, bucket[i - 1].key, 'sequence');
+      }
+    }
+
+    // ---- a manifest describes the directory it sits in. module.json is the
+    // discovery contract for everything beneath it, package.json the same for
+    // its package, so the files around it are what it is about.
+    const filesByDirectory = new Map();
+    for (const entry of files) {
+      const directory = path.dirname(entry.path);
+      const bucket = filesByDirectory.get(directory) || [];
+      bucket.push(entry);
+      filesByDirectory.set(directory, bucket);
+    }
+    for (const entry of files) {
+      if (!WIRELINE_EXTENSIONS.manifest.has(entry.data.extension || '')) continue;
+      const siblings = filesByDirectory.get(path.dirname(entry.path)) || [];
+      // Bounded: a manifest beside a thousand files describes a directory, and
+      // a thousand edges would say less than the first few dozen do.
+      let issued = 0;
+      for (const sibling of siblings) {
+        if (issued >= 40) break;
+        if (sibling.key === entry.key) continue;
+        link(entry.key, sibling.key, 'describes');
+        issued += 1;
+      }
+    }
+
+    // ---- containment: the shelf a file sits on is a real relationship
+    const shelves = new Map();
+    for (const entry of files) {
+      const shelf = `${entry.data.zone}::${entry.data.system}`;
+      const bucket = shelves.get(shelf) || [];
+      bucket.push(entry.key);
+      shelves.set(shelf, bucket);
+    }
+
+    let semanticallyWired = 0;
+    for (const entry of files) {
+      if (edges.has(entry.key) || reverse.has(entry.key)) semanticallyWired += 1;
+    }
+
+    const kindCounts = {};
+    for (const entry of files) {
+      const k = wirelineKindFor(entry.data.extension || '');
+      kindCounts[k] = kindCounts[k] || { total: 0, wired: 0 };
+      kindCounts[k].total += 1;
+      if (edges.has(entry.key) || reverse.has(entry.key)) kindCounts[k].wired += 1;
+    }
+    for (const value of Object.values(kindCounts)) {
+      value.coverage = value.total ? +(100 * value.wired / value.total).toFixed(1) : 0;
+    }
+
+    this._wirelines = {
+      readOnly: true,
+      indexVersion: this.indexVersion,
+      generatedAt: new Date().toISOString(),
+      durationMs: Date.now() - startedAt,
+      totals: {
+        files: files.length,
+        semanticEdges: resolved,
+        edgesByKind: byKind,
+        externalReferences: external,
+        semanticallyWired,
+        shelvedOnly: files.length - semanticallyWired,
+        shelves: shelves.size,
+        cataloguedFiles: files.length,
+        uncatalogued: 0,
+        danglingFiles: dangling.size,
+        danglingReferences: [...dangling.values()].reduce((sum, list) => sum + list.length, 0),
+        tablesCreated: tableCreator.size,
+        unreadable
+      },
+      coverageByMaterial: kindCounts
+    };
+
+    this._wirelineGraph = { edges, reverse, shelves, tableCreator };
+    return this._wirelines;
+  }
+
+  /**
+   * Every file's linkage, including the ones only their shelf reaches. A file
+   * is never absent from this - that is the point of it.
+   */
+  async listShelvedOnly(options = {}) {
+    await this.buildWirelines(options);
+    const { edges, reverse } = this._wirelineGraph;
+
+    const rows = [];
+    const byExtension = {};
+    for (const entry of this.index.values()) {
+      if (entry.type !== 'project-file' || !entry.data) continue;
+      if (edges.has(entry.key) || reverse.has(entry.key)) continue;
+      const extension = entry.data.extension || '(none)';
+      byExtension[extension] = (byExtension[extension] || 0) + 1;
+      if (options.extension && extension !== options.extension) continue;
+      if (options.zone && entry.data.zone !== options.zone) continue;
+      rows.push({
+        locationId: entry.data.locationId,
+        shelf: `${entry.data.zone}::${entry.data.system}`,
+        relativePath: entry.data.relativePath,
+        extension
+      });
+    }
+
+    const limit = Number(options.limit) || 200;
+    return { total: rows.length, byExtension, files: rows.slice(0, limit) };
+  }
+
   /** Files nothing references and which reference nothing - work to be done. */
   async listUnconnected(options = {}) {
     await this.buildWiring(options);
@@ -2008,6 +2365,10 @@ class LibraryKnowledgeService {
         case 'resolveFile':
           await this.ensureInitialized();
           return { success: true, data: this.resolveFile(parameters.name || parameters.query, parameters) };
+        case 'wirelines':
+          return { success: true, data: await this.buildWirelines(parameters) };
+        case 'shelvedOnly':
+          return { success: true, data: await this.listShelvedOnly(parameters) };
         case 'wiring':
           return { success: true, data: await this.buildWiring(parameters) };
         case 'unconnected':

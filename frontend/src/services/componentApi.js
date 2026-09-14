@@ -57,3 +57,52 @@ export const farmerPortalAPI = {
   addLandRecord: (data) => api.post('/farmer-portal/land-records', data),
   syncGovernmentLandRecords: () => api.post('/farmer-portal/land-records/sync-government'),
 };
+
+/**
+ * Clients that components import but the backend does not yet serve.
+ *
+ * Each of these was imported by a component and exported by nothing, so the
+ * frontend build failed outright - which is why 404 pages could not be routed
+ * and the app could not be built at all.
+ *
+ * The methods below do NOT call invented endpoints. Every candidate route file
+ * for these domains either does not exist (consumerHealth, foodSafety, custody,
+ * laboratoryERP, arVr, giIntelligence) or carries only `/health` and a generic
+ * `/` (iotIntegration, notification, food). Pointing a client at a URL nobody
+ * serves would turn a build error into a silent runtime failure and put paths
+ * into the codebase that no route backs.
+ *
+ * So each returns an explicit unavailable result. Components that check it can
+ * render an empty state; components that do not will see null data rather than
+ * a crash. When a real endpoint lands, replace the body here - the import sites
+ * need no change.
+ */
+const notServed = (client, method) => Promise.resolve({
+  data: null,
+  unavailable: true,
+  reason: `${client}.${method}: no backend endpoint is served for this yet`,
+});
+
+const pendingClient = (name, methods) =>
+  Object.fromEntries(methods.map((m) => [m, () => notServed(name, m)]));
+
+export const arVrAPI = pendingClient('arVrAPI', ['getExperiences', 'getInteractionPoints']);
+
+export const consumerHealthAPI = pendingClient('consumerHealthAPI', [
+  'getHealthProfiles', 'getHealthMetrics', 'getHealthGoals',
+  'getDietaryRecommendations', 'getBMI',
+]);
+
+export const foodIntelligenceAPI = pendingClient('foodIntelligenceAPI', ['getActiveRecalls']);
+
+export const giIntelligenceAPI = pendingClient('giIntelligenceAPI', ['verifyAuthentication']);
+
+export const iotAPI = pendingClient('iotAPI', [
+  'getDevices', 'getUnacknowledgedAlerts', 'getSensorData',
+]);
+
+export const laboratoryERPAPI = pendingClient('laboratoryERPAPI', [
+  'getLaboratories', 'getTestCategories', 'getTestMethods', 'registerSample',
+]);
+
+export const custodyAPI = pendingClient('custodyAPI', ['getChain']);

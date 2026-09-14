@@ -3555,6 +3555,9 @@ export const sweepRoutes = [
 ];
 
 export function getAllRoutes() {
+  // discoveredRoutes and sweepRoutes are rendered by App.jsx but were missing
+  // here, so everything reading this list - the preloader, route metadata, the
+  // analytics lookup - was blind to them and treated live pages as unknown.
   return [
     ...publicRoutes,
     ...protectedRoutes,
@@ -3562,6 +3565,8 @@ export function getAllRoutes() {
     ...adminRoutes,
     ...dashboardRoutes,
     ...managementRoutes,
+    ...discoveredRoutes,
+    ...sweepRoutes,
   ];
 }
 

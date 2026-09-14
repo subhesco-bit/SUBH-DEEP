@@ -6953,3 +6953,26 @@ export const yieldAPI = {
 };
 
 export default api;
+
+/**
+ * Push notification subscription.
+ *
+ * utils/pushNotifications.js imports this and nothing exported it, so the
+ * frontend build failed. notificationRoutes.js serves only `/health` and a
+ * generic `/`, with no subscription endpoint, so these do not call an invented
+ * path - they report that the backend does not serve this yet and let the
+ * caller decide. Replace the bodies when a real endpoint exists.
+ */
+export const pushNotificationsAPI = {
+  subscribe: (subscription) => Promise.resolve({
+    data: null,
+    unavailable: true,
+    reason: 'pushNotificationsAPI.subscribe: no backend endpoint is served for this yet',
+    attempted: subscription ? 'subscription supplied' : 'no subscription supplied',
+  }),
+  unsubscribe: () => Promise.resolve({
+    data: null,
+    unavailable: true,
+    reason: 'pushNotificationsAPI.unsubscribe: no backend endpoint is served for this yet',
+  }),
+};

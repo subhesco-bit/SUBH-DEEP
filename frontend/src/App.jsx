@@ -13,6 +13,7 @@ import { ErrorPage, NotFoundPage, UnauthorizedPage } from './components/RouteErr
 import { RouteSuspense } from './components/RouteLoading';
 import { RoutePreloader } from './utils/routePreloader';
 import { publicRoutes, protectedRoutes, farmerRoutes, adminRoutes, dashboardRoutes, managementRoutes, discoveredRoutes, sweepRoutes, getRouteByPath, getAllRoutes } from './config/routes';
+import { getAutoPageRoutes } from './config/autoPageRoutes';
 import config from './config/env';
 import monitoring from './utils/monitoring';
 import analytics from './utils/analytics';
@@ -22,6 +23,20 @@ import ModuleRuntimePage from './pages/ModuleRuntimePage';
 
 // Lazy load EconomicDashboard (not in centralized routes yet)
 const EconomicDashboard = lazy(() => import('./pages/economic/EconomicDashboard'));
+
+// Every path any array already declares. Passed to the auto-discovery pass so a
+// generated route can never shadow a hand-written one; computed at module load
+// because all of these arrays are static.
+const declaredPaths = new Set(
+  [
+    ...publicRoutes, ...protectedRoutes, ...farmerRoutes, ...adminRoutes,
+    ...dashboardRoutes, ...managementRoutes, ...discoveredRoutes, ...sweepRoutes
+  ].map((route) => route.path)
+);
+declaredPaths.add('/economic');
+declaredPaths.add('/module/:moduleId');
+
+const autoPageRoutes = getAutoPageRoutes(declaredPaths);
 
 function App() {
   const { user, checkAuth } = useAuthStore();
@@ -92,6 +107,15 @@ function App() {
                 {sweepRoutes.map((route) => (
                   <Route key={route.path} path={route.path} element={route.isPublic ? <PageTransition transition={route.transition}><RouteSuspense route={route}><route.component /></RouteSuspense></PageTransition> : <ProtectedRoute><PageTransition transition={route.transition}><RouteSuspense route={route}><route.component /></RouteSuspense></PageTransition></ProtectedRoute>} />
                 ))}
+                {/* Every page file that no array above already claims.
+                    404 of the 793 pages on disk had no route at all, so they
+                    existed and could not be opened. getAutoPageRoutes derives a
+                    path from each filename and skips any path already declared,
+                    so hand-written routes always win and nothing is shadowed. */}
+                {autoPageRoutes.map((route) => (
+                  <Route key={route.path} path={route.path} element={route.role ? <RoleRoute allowedRoles={[route.role]}><PageTransition transition={route.transition}><RouteSuspense route={route}><route.component /></RouteSuspense></PageTransition></RoleRoute> : <ProtectedRoute><PageTransition transition={route.transition}><RouteSuspense route={route}><route.component /></RouteSuspense></PageTransition></ProtectedRoute>} />
+                ))}
+
                 <Route path="/economic" element={<ProtectedRoute requiredRole="admin"><PageTransition transition="fade"><RouteSuspense><EconomicDashboard /></RouteSuspense></PageTransition></ProtectedRoute>} />
 
                 {/* All numbered modules use the same production runtime contract.

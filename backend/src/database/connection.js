@@ -63,12 +63,31 @@ async function initPostgreSQL() {
     // when the log states which host/database was attempted.
     logger.info(`PostgreSQL target: ${describePostgresTarget()}`);
 
-    pgPool = new Pool(resolvePoolConfig());
+    pgPool = new Pool({
+      ...resolvePoolConfig(),
+      connectionTimeoutMillis: 10000,
+      idleTimeoutMillis: 30000,
+    });
 
-    // Test connection
-    const client = await pgPool.connect();
-    await client.query('SELECT NOW()');
-    client.release();
+    // Test connection with retry logic
+    let retries = 3;
+    let connected = false;
+    while (retries > 0 && !connected) {
+      try {
+        const client = await pgPool.connect();
+        await client.query('SELECT NOW()');
+        client.release();
+        connected = true;
+      } catch (retryError) {
+        retries--;
+        if (retries > 0) {
+          logger.warn(`PostgreSQL connection attempt failed, retrying... (${retries} attempts left)`);
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        } else {
+          throw retryError;
+        }
+      }
+    }
 
     logger.info('PostgreSQL connection established successfully');
     return pgPool;

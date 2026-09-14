@@ -229,6 +229,15 @@ const NervousSystemPage = lazy(() => import('../pages/NervousSystemPage'));
 const LogisticsEnhancementPage = lazy(() => import('../pages/LogisticsEnhancementPage'));
 const EnterpriseAIPage = lazy(() => import('../pages/EnterpriseAIPage'));
 const PlatformManagementPage = lazy(() => import('../pages/PlatformManagementPage'));
+const PlatformCoreDashboard = lazy(() => import('../components/PlatformCoreDashboard'));
+const AICollaborationDashboard = lazy(() => import('../components/AI/AICollaborationDashboard'));
+const AutoGenerationDashboard = lazy(() => import('../components/Admin/AutoGenerationDashboard'));
+const GDPRConsent = lazy(() => import('../components/GDPR/GDPRConsent'));
+const MFASetup = lazy(() => import('../components/MFA/MFASetup'));
+const LibraryBrowser = lazy(() => import('../components/Library/LibraryBrowser'));
+const TraceabilityViewer = lazy(() => import('../components/BlockchainTraceability/TraceabilityViewer'));
+const HealthDashboard = lazy(() => import('../components/ConsumerHealth/HealthDashboard'));
+const ChatInterface = lazy(() => import('../components/ConversationalAI/ChatInterface'));
 
 // Strategic Services Pages
 const PreSeasonPurchasePage = lazy(() => import('../pages/PreSeasonPurchasePage'));
@@ -1793,6 +1802,81 @@ export const managementRoutes = [
     title: 'AI Collaboration - AFRERA',
     description: 'AI-Devin collaboration activity dashboard',
     keywords: 'ai, collaboration, devin, activity',
+    transition: 'fade',
+  },
+  {
+    path: '/platform/core',
+    component: PlatformCoreDashboard,
+    title: 'Platform Core Dashboard - AFRERA',
+    description: 'Platform core management and monitoring dashboard',
+    keywords: 'platform, core, dashboard, management',
+    transition: 'fade',
+    role: 'admin',
+  },
+  {
+    path: '/ai/collaboration-dashboard',
+    component: AICollaborationDashboard,
+    title: 'AI Collaboration Dashboard - AFRERA',
+    description: 'Monitor and manage Devin-Claude AI collaboration',
+    keywords: 'ai, collaboration, dashboard, devin, claude',
+    transition: 'fade',
+    role: 'admin',
+  },
+  {
+    path: '/admin/auto-generation',
+    component: AutoGenerationDashboard,
+    title: 'Auto Generation Dashboard - AFRERA',
+    description: 'Monitor and manage automatic image generation',
+    keywords: 'auto, generation, dashboard, admin',
+    transition: 'fade',
+    role: 'admin',
+  },
+  {
+    path: '/account/mfa-setup',
+    component: MFASetup,
+    title: 'MFA Setup - AFRERA',
+    description: 'Set up multi-factor authentication',
+    keywords: 'mfa, setup, security, authentication',
+    transition: 'fade',
+  },
+  {
+    path: '/account/gdpr-consent',
+    component: GDPRConsent,
+    title: 'GDPR Consent - AFRERA',
+    description: 'Manage GDPR privacy consent',
+    keywords: 'gdpr, consent, privacy, compliance',
+    transition: 'fade',
+  },
+  {
+    path: '/library/browser',
+    component: LibraryBrowser,
+    title: 'Library Browser - AFRERA',
+    description: 'Browse and search the project library',
+    keywords: 'library, browser, search, knowledge',
+    transition: 'fade',
+  },
+  {
+    path: '/blockchain/traceability',
+    component: TraceabilityViewer,
+    title: 'Blockchain Traceability - AFRERA',
+    description: 'View blockchain traceability information',
+    keywords: 'blockchain, traceability, supply chain',
+    transition: 'fade',
+  },
+  {
+    path: '/health/dashboard',
+    component: HealthDashboard,
+    title: 'Health Dashboard - AFRERA',
+    description: 'Health and wellness dashboard',
+    keywords: 'health, wellness, dashboard',
+    transition: 'fade',
+  },
+  {
+    path: '/ai/chat-interface',
+    component: ChatInterface,
+    title: 'AI Chat Interface - AFRERA',
+    description: 'Conversational AI chat interface',
+    keywords: 'ai, chat, conversational, interface',
     transition: 'fade',
   },
   {

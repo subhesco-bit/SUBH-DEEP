@@ -568,6 +568,7 @@ const systemAdministrationDomainRoutes = require('./routes/systemAdministrationD
 const logisticsAIDomainRoutes = require('./routes/logisticsAIDomainRoutes.js');
 const blockchainVerificationDomainRoutes = require('./routes/blockchainVerificationDomainRoutes.js');
 const knowledgeGraphDomainRoutes = require('./routes/knowledgeGraphDomainRoutes.js');
+const aiDomainAdapterRoutes = require('./routes/aiDomainAdapterRoutes.js');
 const cropValueResearchDomainRoutes = require('./routes/cropValueResearchDomainRoutes.js');
 const tenantManagementDomainRoutes = require('./routes/tenantManagementDomainRoutes.js');
 const platformCoreDomainRoutes = require('./routes/platformCoreDomainRoutes.js');
@@ -591,6 +592,7 @@ const householdProcurementRoutes = require('./routes/householdProcurementRoutes.
 const moduleRegistryRoutes = require('./routes/moduleRegistryRoutes.js');
 const preSeasonPurchaseRoutes = require('./routes/preSeasonPurchaseRoutes.js');
 const gdprRoutes = require('./routes/gdprRoutes.js');
+const mfaRoutes = require('./routes/dual-use/mfaRoutes.js');
 const governmentSubsidyRoutes = require('./routes/governmentSubsidyRoutes.js');
 const mushroomRoutes = require('./routes/mushroomRoutes.js');
 const databaseManagementRoutes = require('./routes/databaseManagementRoutes.js');
@@ -635,6 +637,15 @@ const aiSelfHealingRoutes = require('./routes/aiSelfHealingRoutes.js');
 const aiOperationIntelligenceRoutes = require('./routes/aiOperationIntelligenceRoutes.js');
 const aiGatewayRoutes = require('./routes/aiGatewayRoutes.js');
 const aiCollaborationRoutes = require('./routes/aiCollaborationRoutes.js');
+const aiCoordinationRoutes = require('./routes/claude/aiCoordinationRoutes.js');
+const aiCopilotRoutes = require('./routes/claude/aiCopilotRoutes.js');
+const aiDecisionRoutes = require('./routes/claude/aiDecisionRoutes.js');
+const aiProviderRoutes = require('./routes/claude/aiProviderRoutes.js');
+const aiStrategyRoutes = require('./routes/claude/aiStrategyRoutes.js');
+const insuranceAIRoutes = require('./routes/claude/insuranceAIRoutes.js');
+const logisticsAIRoutes = require('./routes/claude/logisticsAIRoutes.js');
+const orderAIRoutes = require('./routes/claude/orderAIRoutes.js');
+const productAIRoutes = require('./routes/claude/productAIRoutes.js');
 const aiBrainRoutes = require('./routes/aiBrainRoutes.js');
 const aiBackboneRoutes = require('./routes/aiBackboneRoutes.js');
 const aiApprovalRoutes = require('./routes/aiApprovalRoutes.js');
@@ -700,6 +711,13 @@ const { autoGenerateOnPageViewMiddleware, triggerAutoGenAfterCreateMiddleware } 
 const loggingService = require('./services/loggingService');
 const productImageAutoGenerationService = require('./services/productImageAutoGenerationService');
 const libraryKnowledgeService = require('./services/libraryKnowledgeService');
+const aiCollaborationService = require('./services/claude/aiCollaborationService');
+const claudeAICoordinator = require('./core/claudeAICoordinator');
+const mfaService = require('./services/dual-use/mfaService');
+const gdprService = require('./services/dual-use/gdprService');
+const aiAgentService = require('./services/claude/aiAgentService');
+const aiDecisionService = require('./services/claude/aiDecisionService');
+const aiStrategyService = require('./services/claude/aiStrategyService');
 const websocketService = require('./services/websocketService');
 const aiCopilotFramework = require('./services/legacy/aiCopilotService.js');
 const { initializeAI } = require('./core/ai');
@@ -823,6 +841,71 @@ async function startup() {
     } catch (error) {
       logger.warn('⚠️  Library knowledge initialization deferred', { error: error.message });
       app.locals.libraryKnowledgeService = libraryKnowledgeService;
+    }
+
+    // Initialize AI collaboration service for Devin-Claude coordination
+    try {
+      // Service doesn't have initialize method, just make it available
+      app.locals.aiCollaborationService = aiCollaborationService;
+      logger.info('✅ AI collaboration service available');
+    } catch (error) {
+      logger.warn('⚠️  AI collaboration service initialization deferred', { error: error.message });
+      app.locals.aiCollaborationService = aiCollaborationService;
+    }
+
+    // Initialize Claude AI coordinator
+    try {
+      // Coordinator doesn't have initialize method, just make it available
+      app.locals.claudeAICoordinator = claudeAICoordinator;
+      logger.info('✅ Claude AI coordinator available');
+    } catch (error) {
+      logger.warn('⚠️  Claude AI coordinator initialization deferred', { error: error.message });
+      app.locals.claudeAICoordinator = claudeAICoordinator;
+    }
+
+    // Initialize MFA service
+    try {
+      app.locals.mfaService = mfaService;
+      logger.info('✅ MFA service available');
+    } catch (error) {
+      logger.warn('⚠️  MFA service initialization deferred', { error: error.message });
+      app.locals.mfaService = mfaService;
+    }
+
+    // Initialize GDPR service
+    try {
+      app.locals.gdprService = gdprService;
+      logger.info('✅ GDPR service available');
+    } catch (error) {
+      logger.warn('⚠️  GDPR service initialization deferred', { error: error.message });
+      app.locals.gdprService = gdprService;
+    }
+
+    // Initialize AI agent service
+    try {
+      app.locals.aiAgentService = aiAgentService;
+      logger.info('✅ AI agent service available');
+    } catch (error) {
+      logger.warn('⚠️  AI agent service initialization deferred', { error: error.message });
+      app.locals.aiAgentService = aiAgentService;
+    }
+
+    // Initialize AI decision service
+    try {
+      app.locals.aiDecisionService = aiDecisionService;
+      logger.info('✅ AI decision service available');
+    } catch (error) {
+      logger.warn('⚠️  AI decision service initialization deferred', { error: error.message });
+      app.locals.aiDecisionService = aiDecisionService;
+    }
+
+    // Initialize AI strategy service
+    try {
+      app.locals.aiStrategyService = aiStrategyService;
+      logger.info('✅ AI strategy service available');
+    } catch (error) {
+      logger.warn('⚠️  AI strategy service initialization deferred', { error: error.message });
+      app.locals.aiStrategyService = aiStrategyService;
     }
 
     // Step 5: Load critical services (fast boot)
@@ -1580,6 +1663,15 @@ async function startup() {
     app.use('/api/v1', cropDomainRoutes);
     app.use('/api/v1/seed-vault', seedVaultRoutesMerged);
     app.use('/api/v1/financial-ai', financialAIRoutes);
+    app.use('/api/v1/insurance-ai', insuranceAIRoutes);
+    app.use('/api/v1/logistics-ai', logisticsAIRoutes);
+    app.use('/api/v1/order-ai', orderAIRoutes);
+    app.use('/api/v1/product-ai', productAIRoutes);
+    app.use('/api/v1/ai-coordination', aiCoordinationRoutes);
+    app.use('/api/v1/ai-copilot', aiCopilotRoutes);
+    app.use('/api/v1/ai-decision', aiDecisionRoutes);
+    app.use('/api/v1/ai-provider', aiProviderRoutes);
+    app.use('/api/v1/ai-strategy', aiStrategyRoutes);
     app.use('/api/v1', livestockDomainRoutes);
     app.use('/api/v1', soilDomainRoutes);
     app.use('/api/v1', dairyDomainRoutes);
@@ -1646,6 +1738,7 @@ async function startup() {
     app.use('/api/v1', logisticsAIDomainRoutes);
     app.use('/api/v1', blockchainVerificationDomainRoutes);
     app.use('/api/v1', knowledgeGraphDomainRoutes);
+    app.use('/api/v1', aiDomainAdapterRoutes);
     app.use('/api/v1', cropValueResearchDomainRoutes);
     app.use('/api/v1', tenantManagementDomainRoutes);
     app.use('/api/v1', platformCoreDomainRoutes);
@@ -1669,6 +1762,7 @@ async function startup() {
     app.use('/api/v1/module-registry', moduleRegistryRoutes);
     app.use('/api/v1/strategic/pre-season', preSeasonPurchaseRoutes);
     app.use('/api/v1/privacy', gdprRoutes);
+    app.use('/api/v1/mfa', mfaRoutes);
     app.use('/api/v1/strategic/government', governmentSubsidyRoutes);
     app.use('/api/v1/mushroom', mushroomRoutes);
     app.use('/api/database-management', databaseManagementRoutes);

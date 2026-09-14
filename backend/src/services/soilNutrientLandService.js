@@ -23,7 +23,7 @@ const db = require('../database/pool');
 const { logger } = require('../utils/logger');
 const { AppError } = require('../utils/errors');
 const claudeAICoordinator = require('../core/claudeAICoordinator');
-const aiCollaborationService = require('./aiCollaborationService');
+const aiCollaborationService = require('./claude/aiCollaborationService');
 
 class SoilNutrientLandService {
   /**

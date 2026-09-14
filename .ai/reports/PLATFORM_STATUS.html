@@ -28,12 +28,12 @@
   --accent:#6C9BEF;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:14.5px;line-height:1.6}
-.wrap{max-width:1060px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:14.5px;line-height:1.65}
+.wrap{max-width:1080px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
 h1,h2{margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
 h1{font-size:1.9rem}
 h2{font-size:1.05rem;margin-bottom:.15rem}
-p{margin:0 0 .9rem;color:var(--ink-2);max-width:70ch}
+p{margin:0 0 .9rem;color:var(--ink-2);max-width:72ch}
 code{font-family:var(--mono);font-size:.86em;background:var(--ground);border:1px solid var(--rule);border-radius:3px;padding:.08em .35em}
 .eyebrow{font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
 
@@ -42,57 +42,53 @@ header .eyebrow{display:block;margin-bottom:.5rem}
 .stamp{display:flex;flex-wrap:wrap;gap:1.2rem;margin-top:.7rem;font-family:var(--mono);font-size:.74rem;color:var(--ink-3)}
 .stamp b{color:var(--ink-2);font-weight:600}
 
-/* status strip */
-.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:2.2rem}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:2.2rem}
 .cell{background:var(--panel);padding:.9rem 1rem}
-.cell .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
-.cell .v{font-family:var(--mono);font-size:1.5rem;font-weight:600;line-height:1.15;margin-top:.3rem;font-variant-numeric:tabular-nums}
-.cell .s{font-size:.75rem;color:var(--ink-2);margin-top:.15rem}
+.cell .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.cell .v{font-family:var(--mono);font-size:1.45rem;font-weight:600;line-height:1.15;margin-top:.3rem;font-variant-numeric:tabular-nums}
+.cell .s{font-size:.73rem;color:var(--ink-2);margin-top:.15rem}
 .v.ok{color:var(--ok)} .v.warn{color:var(--warn)} .v.bad{color:var(--bad)}
 
 section{margin-bottom:2.4rem}
 .shead{display:flex;align-items:baseline;gap:.7rem;border-bottom:1px solid var(--rule-2);padding-bottom:.4rem;margin-bottom:.9rem}
 .shead .n{font-family:var(--mono);font-size:.72rem;color:var(--ink-3)}
 
-.chip{display:inline-block;font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.16rem .45rem;border:1px solid currentColor;border-radius:2px;white-space:nowrap}
+.chip{display:inline-block;font-family:var(--mono);font-size:.63rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.16rem .45rem;border:1px solid currentColor;border-radius:2px;white-space:nowrap}
 .chip.ok{color:var(--ok);background:var(--ok-bg)}
 .chip.warn{color:var(--warn);background:var(--warn-bg)}
 .chip.bad{color:var(--bad);background:var(--bad-bg)}
 
 .tw{overflow-x:auto}
-table{border-collapse:collapse;width:100%;font-size:.86rem;min-width:480px}
-th{text-align:left;font-family:var(--mono);font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--rule-2);padding:0 .8rem .45rem 0}
+table{border-collapse:collapse;width:100%;font-size:.86rem;min-width:520px}
+th{text-align:left;font-family:var(--mono);font-size:.64rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--rule-2);padding:0 .8rem .45rem 0}
 td{padding:.5rem .8rem .5rem 0;border-bottom:1px solid var(--rule);vertical-align:top}
 tr:last-child td{border-bottom:none}
 .num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.was{color:var(--ink-3);text-decoration:line-through;text-decoration-thickness:1px}
+.now{color:var(--ok);font-weight:600}
 
-/* defect rows */
+.bar{display:flex;height:20px;border:1px solid var(--rule-2);overflow:hidden;margin:.5rem 0 .3rem}
+.legend{display:flex;flex-wrap:wrap;gap:1rem;font-family:var(--mono);font-size:.7rem;color:var(--ink-2)}
+.legend i{display:inline-block;width:9px;height:9px;margin-right:.35rem}
+
 .rows{border-top:1px solid var(--rule)}
-.row{display:grid;grid-template-columns:1.4rem 1fr;gap:.85rem;padding:.8rem 0;border-bottom:1px solid var(--rule)}
-.row .idx{font-family:var(--mono);font-size:.72rem;color:var(--ink-3);padding-top:.15rem}
-.row .t{font-weight:600;font-size:.92rem;margin-bottom:.2rem}
-.row .d{font-size:.85rem;color:var(--ink-2);max-width:78ch}
+.row{display:grid;grid-template-columns:8.5rem 1fr;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--rule)}
+.row .t{font-weight:600;font-size:.9rem;margin-bottom:.15rem}
+.row .d{font-size:.84rem;color:var(--ink-2);max-width:80ch}
 .row .d em{color:var(--ink);font-style:normal;font-weight:500}
 
-/* correction callouts */
-.corr{border-left:3px solid var(--warn);background:var(--warn-bg);padding:.9rem 1.1rem;margin-bottom:.9rem}
-.corr .h{font-weight:600;font-size:.9rem;margin-bottom:.25rem}
-.corr p{margin:0;font-size:.85rem;color:var(--ink-2);max-width:78ch}
+.callout{border-left:3px solid var(--warn);background:var(--warn-bg);padding:.85rem 1.1rem;margin:1rem 0}
+.callout.bad{border-left-color:var(--bad);background:var(--bad-bg)}
+.callout p{margin:0;font-size:.86rem;max-width:80ch}
+.callout .h{font-weight:600;font-size:.88rem;margin-bottom:.25rem}
 
-/* bar */
-.bar{display:flex;height:22px;border:1px solid var(--rule-2);overflow:hidden;margin:.5rem 0 .3rem}
-.bar span{display:block}
-.legend{display:flex;flex-wrap:wrap;gap:1.1rem;font-family:var(--mono);font-size:.72rem;color:var(--ink-2)}
-.legend i{display:inline-block;width:9px;height:9px;margin-right:.35rem;vertical-align:baseline}
-
-.cmd{font-family:var(--mono);font-size:.8rem;background:var(--panel);border:1px solid var(--rule-2);padding:.7rem .9rem;overflow-x:auto;white-space:pre;color:var(--ink)}
+.cmd{font-family:var(--mono);font-size:.78rem;background:var(--panel);border:1px solid var(--rule-2);padding:.7rem .9rem;overflow-x:auto;white-space:pre;color:var(--ink);margin:.6rem 0}
 
 footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--rule-2);font-family:var(--mono);font-size:.72rem;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:1.3rem;justify-content:space-between}
 
 @media (max-width:640px){
   .wrap{padding:1.6rem 1rem 3rem}
   .row{grid-template-columns:1fr}
-  .row .idx{display:none}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -101,168 +97,140 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--rule-2);font-
 
 <header>
   <span class="eyebrow">Subhesco / EBDESIGN &middot; Agricultural Digital Operating System</span>
-  <h1>Platform Status</h1>
+  <h1>Platform Status &amp; Remaining Work</h1>
   <div class="stamp">
-    <span><b>Measured</b> 13 Sept 2026, 09:5x IST</span>
+    <span><b>Measured</b> 13 Sept 2026</span>
     <span><b>Branch</b> checkpoint/pre-clean-rebuild-20260913</span>
-    <span><b>Head</b> c392a760</span>
-    <span><b>Session commits</b> 7</span>
+    <span><b>Head</b> fbf6a815</span>
+    <span><b>Commits</b> 23 this session</span>
   </div>
 </header>
 
 <div class="strip">
-  <div class="cell"><div class="k">Backend API</div><div class="v ok">UP</div><div class="s">:5000, was dead</div></div>
-  <div class="cell"><div class="k">Routes responding</div><div class="v ok">93.4%</div><div class="s">553 of 592</div></div>
-  <div class="cell"><div class="k">Datastores</div><div class="v ok">3/3</div><div class="s">pg&nbsp;15 · redis&nbsp;7 · mongo&nbsp;7</div></div>
-  <div class="cell"><div class="k">Tables</div><div class="v">1,395</div><div class="s">384 migrations applied</div></div>
-  <div class="cell"><div class="k">Frontend</div><div class="v ok">OK</div><div class="s">:5173, build passes</div></div>
-  <div class="cell"><div class="k">Disk free</div><div class="v bad">15 GB</div><div class="s">98% used — see §5</div></div>
+  <div class="cell"><div class="k">Backend API</div><div class="v ok">UP</div><div class="s">:5000</div></div>
+  <div class="cell"><div class="k">Endpoints OK</div><div class="v ok">92%</div><div class="s">1,232 / 1,346</div></div>
+  <div class="cell"><div class="k">Datastores</div><div class="v ok">3/3</div><div class="s">pg&middot;redis&middot;mongo</div></div>
+  <div class="cell"><div class="k">Tables</div><div class="v">1,745</div><div class="s">724 migrations</div></div>
+  <div class="cell"><div class="k">AI system</div><div class="v ok">8/8</div><div class="s">zero degraded</div></div>
+  <div class="cell"><div class="k">Auth</div><div class="v ok">REAL</div><div class="s">was a mock</div></div>
+  <div class="cell"><div class="k">Disk free</div><div class="v bad">12 GB</div><div class="s">98% used</div></div>
 </div>
 
 <section>
-  <div class="shead"><span class="n">01</span><h2>What changed</h2></div>
-  <p>The platform did not run at the start of this session. The backend exited on startup, no endpoint had ever served a request, and the frontend had never reached the API. All three now work.</p>
+  <div class="shead"><span class="n">01</span><h2>Where it started, where it is</h2></div>
   <div class="tw">
     <table>
-      <thead><tr><th>Layer</th><th>Before</th><th>Now</th><th>Evidence</th></tr></thead>
+      <thead><tr><th>Measure</th><th class="num">Session start</th><th class="num">Now</th></tr></thead>
       <tbody>
-        <tr><td>Backend process</td><td>exit 1 on boot</td><td>listening on :5000</td><td><code>/health</code> → 200</td></tr>
-        <tr><td>API surface</td><td>never served a request</td><td>553/592 routes respond</td><td><code>tools/smoke-routes.js</code></td></tr>
-        <tr><td>PostgreSQL</td><td>down</td><td>healthy, 1,395 tables</td><td><code>pg_isready</code></td></tr>
-        <tr><td>Redis / MongoDB</td><td>down</td><td>healthy</td><td>container healthchecks</td></tr>
-        <tr><td>Frontend dev</td><td>proxy to closed port</td><td>proxies to backend</td><td>401 from real backend</td></tr>
-        <tr><td>Frontend build</td><td>unverified</td><td>passes, 402 chunks</td><td><code>vite build</code> exit 0</td></tr>
-        <tr><td>Library index</td><td>192 items</td><td>1,532 items, 6 types</td><td>service statistics</td></tr>
+        <tr><td>Backend process</td><td class="num was">exit 1 on boot</td><td class="num now">listening</td></tr>
+        <tr><td>Endpoints answering correctly</td><td class="num was">21%</td><td class="num now">92%</td></tr>
+        <tr><td><code>200 OK</code> responses</td><td class="num was">216</td><td class="num now">1,172</td></tr>
+        <tr><td>Database tables</td><td class="num was">1,395</td><td class="num now">1,745</td></tr>
+        <tr><td>Migrations applied</td><td class="num was">384</td><td class="num now">724</td></tr>
+        <tr><td>Migration failures</td><td class="num was">337</td><td class="num now">28</td></tr>
+        <tr><td>Authentication</td><td class="num was">mock, plaintext</td><td class="num now">real JWT</td></tr>
+        <tr><td>AI components running</td><td class="num was">0</td><td class="num now">8</td></tr>
+        <tr><td>Server under full probe</td><td class="num was">crashed</td><td class="num now">stable</td></tr>
       </tbody>
     </table>
   </div>
 </section>
 
 <section>
-  <div class="shead"><span class="n">02</span><h2>Route response profile</h2></div>
+  <div class="shead"><span class="n">02</span><h2>Endpoint profile</h2></div>
   <div class="bar">
-    <span style="width:18.1%;background:var(--ok)"></span>
-    <span style="width:75.3%;background:var(--accent)"></span>
-    <span style="width:5.7%;background:var(--ink-3)"></span>
-    <span style="width:0.9%;background:var(--bad)"></span>
+    <span style="width:87.1%;background:var(--ok)"></span>
+    <span style="width:3.9%;background:var(--accent)"></span>
+    <span style="width:3.6%;background:var(--ink-3)"></span>
+    <span style="width:3.3%;background:var(--bad)"></span>
+    <span style="width:2.1%;background:var(--warn)"></span>
   </div>
   <div class="legend">
-    <span><i style="background:var(--ok)"></i>200 &mdash; 107</span>
-    <span><i style="background:var(--accent)"></i>401 auth enforced &mdash; 446</span>
-    <span><i style="background:var(--ink-3)"></i>404 not mounted &mdash; 34</span>
-    <span><i style="background:var(--bad)"></i>500 &mdash; 5</span>
-  </div>
-  <p style="margin-top:.9rem">A 401 counts as working: the route exists and authentication is enforcing. The five 500s are the probe requesting <code>/health</code> on routers that mount <code>GET /:id</code>, so <code>health</code> is parsed as a UUID &mdash; those modules should answer 400, not 500, for a malformed id.</p>
-</section>
-
-<section>
-  <div class="shead"><span class="n">03</span><h2>Defects fixed</h2></div>
-  <p>None of these appeared in any existing status document.</p>
-  <div class="rows">
-    <div class="row"><span class="idx">01</span><div><div class="t">Seven stale route paths blocked boot</div><div class="d">An earlier reorganisation moved route files without updating <code>index.js</code>. The deleted <code>_merged</code> originals were recovered from git and diffed first &mdash; the surviving files are strict supersets, each adding <code>/health</code>, so <em>no route was lost</em> in repointing.</div></div></div>
-    <div class="row"><span class="idx">02</span><div><div class="t">255 unresolved imports across 212 files</div><div class="d">Repaired by resolver. It refuses cross-tree repairs: 63 cases where a backend file's only name match lives in <code>frontend/</code> are reported, not rewritten &mdash; that is an architecture decision, not a typo.</div></div></div>
-    <div class="row"><span class="idx">03</span><div><div class="t">Content negotiation rejected every browser</div><div class="d"><code>contentNegotiation</code> substring-tested <code>Accept</code> for <code>application/json</code>, so it rejected <code>*/*</code> <em>and</em> the standard browser header. Every browser request would have returned 406.</div></div></div>
-    <div class="row"><span class="idx">04</span><div><div class="t">Response-time header killed responses</div><div class="d"><code>trackResponseTime</code> set a header inside <code>res.on('finish')</code> &mdash; after the response is flushed. The <code>ERR_HTTP_HEADERS_SENT</code> throw escaped into the emitter and destroyed the response instead of surfacing as an error.</div></div></div>
-    <div class="row"><span class="idx">05</span><div><div class="t">Rate limiting was never active</div><div class="d"><code>rateLimit</code> and <code>standardizeErrorResponse</code> are factories that were registered uncalled. Both have <code>.length === 0</code>, so Express treated the factory as middleware, took the returned handler as a return value, and never received <code>next()</code>. Requests reaching either layer hung forever &mdash; and <em>no rate limit was ever applied</em>.</div></div></div>
-    <div class="row"><span class="idx">06</span><div><div class="t">Nine services cached a null database pool</div><div class="d"><code>this.pool = await getPostgreSQL()</code> at construction returns null before the shared pool initialises, and several of those services' <code>initialize()</code> is never called at all. The cached null then failed every query for the process lifetime.</div></div></div>
-    <div class="row"><span class="idx">07</span><div><div class="t">A stale duplicate module tree was being loaded</div><div class="d">Four requires escaped <code>backend/</code> into an Aug-30 copy at <code>EBDESIGN/modules/</code>, whose own relative paths then resolved outside the backend tree. Repointed after verifying the backend copies were supersets.</div></div></div>
-    <div class="row"><span class="idx">08</span><div><div class="t">Library service could never find the library</div><div class="d"><code>path.resolve(__dirname,'../../..')</code> is the repo root from <code>modules/</code> but <code>backend/src</code> from <code>backend/src/modules/</code>. It searched <code>backend/src/_EBDESIGN_LIBRARY</code>, found nothing, and indexed zero library files. Now resolves by walking up for the marker directory.</div></div></div>
-    <div class="row"><span class="idx">09</span><div><div class="t">Frontend pointed at four wrong ports</div><div class="d">No <code>.env</code> existed, so defaults applied &mdash; and five files named four different ports, none of them the one in use. <code>config/env.js</code> also treated the base URL as an origin while <code>services/api.js</code> treated it as the full base, so setting it produced <code>/api/v1/api/v1</code>.</div></div></div>
-    <div class="row"><span class="idx">10</span><div><div class="t">Library indexing was O(n²) and hashed 3 GB per cold start</div><div class="d">A membership test rebuilt a 1,500-element array for each of 830 files (129s → 70s once fixed), and every first request hashed the entire library for hashes only two methods read. Hashing is now deferred.</div></div></div>
+    <span><i style="background:var(--ok)"></i>200 &mdash; 1,172</span>
+    <span><i style="background:var(--accent)"></i>400 route works &mdash; 53</span>
+    <span><i style="background:var(--ink-3)"></i>404 &mdash; 49</span>
+    <span><i style="background:var(--bad)"></i>500 &mdash; 44</span>
+    <span><i style="background:var(--warn)"></i>other &mdash; 28</span>
   </div>
 </section>
 
 <section>
-  <div class="shead"><span class="n">04</span><h2>Corrections to prior reporting</h2></div>
-
-  <div class="corr">
-    <div class="h">“Zero migrations executed” &mdash; wrong</div>
-    <p>Every project document, and my own first report, stated the database had never been migrated. In fact <b>384 migrations were applied on 2026-09-05</b>, creating 1,390 tables. The database was never empty.</p>
-  </div>
-
-  <div class="corr">
-    <div class="h">“Snapshot folders are byte-identical copies” &mdash; wrong</div>
-    <p>Asserted here and in <code>_UNIFIED_PROJECT/audit/FINAL_INTEGRATION_REPORT.md</code>. Measurement found <b>23,554 genuinely unique files (683 MB)</b>, including ~15,500 source files. Deleting on that advice would have destroyed the unmerged work in <code>_MERGE_LAB</code> and the separate clones under <code>New folder/</code>.</p>
-  </div>
-
-  <div class="corr">
-    <div class="h">“163 lost API endpoints” &mdash; wrong, and nearly acted on</div>
-    <p>A route diff suggested the live tree had lost 163 endpoints across 48 files. It had not: the snapshots hold a uniform five-route generated CRUD scaffold that the live tree <em>replaced</em> with 12&ndash;14 real domain endpoints each. Restoring them would have overwritten working implementations with stubs.</p>
-  </div>
-
-  <div class="corr">
-    <div class="h">“96% complete” &mdash; not reproducible</div>
-    <p>That figure counted files that exist. Measuring whether files contain behaviour gives: backend services 48% substantive, backend routes 7%, frontend pages 14%, and <b>tests 3% &mdash; 1,040 of 1,122 test files are stubs that assert nothing.</b></p>
-  </div>
-</section>
-
-<section>
-  <div class="shead"><span class="n">05</span><h2>Open &mdash; ranked</h2></div>
+  <div class="shead"><span class="n">03</span><h2>The AI system</h2></div>
+  <p>Eight components, started together in dependency order, zero degraded. Two backbones, intentionally separate and interdependent through the shared <code>ai_decisions</code> and <code>ai_strategies</code> tables.</p>
   <div class="tw">
     <table>
-      <thead><tr><th>Item</th><th style="width:6.5rem">State</th><th>Detail</th></tr></thead>
+      <thead><tr><th>Capability class</th><th>Serves</th><th>Autonomy</th><th>State</th></tr></thead>
       <tbody>
-        <tr><td><b>Disk at 98%</b></td><td><span class="chip bad">blocking</span></td><td>15 GB free. 773 MB verified safe to reclaim; deletion needs your hand (see below).</td></tr>
-        <tr><td>Truthpack empty</td><td><span class="chip bad">blocking</span></td><td><code>.vibecheck/truthpack/</code> holds zero of 13 required files, so the project's own Rule 6 cannot be satisfied.</td></tr>
-        <tr><td>Test suite is hollow</td><td><span class="chip bad">high</span></td><td>1,040 stub tests. Worse than no coverage &mdash; it reads as coverage in a file count.</td></tr>
-        <tr><td>2,864 merges never executed</td><td><span class="chip warn">high</span></td><td>Queued by the earlier run; candidate variants live in <code>_MERGE_LAB</code> and must not be deleted until resolved.</td></tr>
-        <tr><td>34 routes declared, not mounted</td><td><span class="chip warn">medium</span></td><td>Return 404.</td></tr>
-        <tr><td>Port config still inconsistent</td><td><span class="chip warn">medium</span></td><td>Only the dev proxy path was fixed; five files still disagree.</td></tr>
-        <tr><td>Library cold index ~15&ndash;45s</td><td><span class="chip warn">medium</span></td><td>Rebuilt per process. Belongs behind a persisted index.</td></tr>
-        <tr><td>Malformed id returns 500</td><td><span class="chip warn">low</span></td><td>Five modules; should be 400.</td></tr>
-        <tr><td>M400 engines report failed</td><td><span class="chip warn">low</span></td><td>Database now connected; <code>initialize()</code> is still never called by its route.</td></tr>
+        <tr><td><b>Agentic AI</b></td><td>commerce, ERP workflows, logistics</td><td><code>act</code></td><td><span class="chip ok">Live</span></td></tr>
+        <tr><td><b>AI Security &amp; Trust</b></td><td>finance, compliance, health data</td><td><code>reflex</code></td><td><span class="chip ok">Live</span></td></tr>
+        <tr><td><b>Frontier AI Models</b></td><td>weather, tutorials, DPR, loans, subsidy</td><td><code>advise</code></td><td><span class="chip warn">Built</span></td></tr>
+        <tr><td>Artificial Scientists</td><td>subsidy evidence, agronomy trials</td><td><code>observe</code></td><td><span class="chip bad">Absent</span></td></tr>
+        <tr><td>Humanoid / Embodied</td><td>warehouse, cold chain, manufacturing</td><td><code>observe</code></td><td><span class="chip bad">Absent</span></td></tr>
+        <tr><td>Quantum + AI</td><td>cost, order allocation, routing</td><td><code>advise</code></td><td><span class="chip bad">Absent</span></td></tr>
       </tbody>
     </table>
   </div>
-
-  <p style="margin-top:1.1rem">Verified safe to delete &mdash; audit artifacts already harvested to <code>.audit/unified-project-2026-09-12/</code>:</p>
-  <div class="cmd">rm -rf _ACTIVE_PROJECT _UNIFIED_PROJECT   # 773 MB, superseded copies</div>
-  <p style="margin-top:.7rem"><code>_MERGE_LAB</code> and <code>New folder/</code> (~1.6 GB) are <b>not</b> safe &mdash; they hold the only copies of unmerged work.</p>
+  <p style="margin-top:1rem">Proven working: three module signals correlate into one auditable decision (<code>hold_shipment, trigger_inspection, reprioritise_logistics, open_claim</code>, confidence 1, requiresHuman true), fraud probability 0.97 freezes an account while 0.42 does not, and unfreezing without naming an authoriser is refused.</p>
 </section>
 
 <section>
-  <div class="shead"><span class="n">06</span><h2>Session commits</h2></div>
+  <div class="shead"><span class="n">04</span><h2>Remaining work</h2></div>
   <div class="tw">
     <table>
-      <thead><tr><th style="width:6rem">Commit</th><th>Subject</th></tr></thead>
+      <thead><tr><th>Item</th><th style="width:6rem">Priority</th><th>Why it matters</th></tr></thead>
       <tbody>
-        <tr><td class="num">e5ee63e7</td><td>checkpoint &mdash; full working-tree restore point (49,598 files)</td></tr>
-        <tr><td class="num">b8a62c58</td><td>integrate Strategic Architecture Enhancement Plan with measured reality</td></tr>
-        <tr><td class="num">2c561820</td><td>bring the API up &mdash; boot blockers, dead middleware chain, infra</td></tr>
-        <tr><td class="num">0909b016</td><td>resolve null database pool and stale duplicate module tree</td></tr>
-        <tr><td class="num">8d00fbd3</td><td>connect the frontend to the running API</td></tr>
-        <tr><td class="num">d4c14079</td><td>verify snapshot folders before reclaim, harvest what is unique</td></tr>
-        <tr><td class="num">1eba2195</td><td>merge M645100_LIBRARYKNOWLEDGE and fix its library root resolution</td></tr>
-        <tr><td class="num">c392a760</td><td>library index no longer O(n²); stop hashing 3 GB on cold start</td></tr>
+        <tr><td><b>PR cannot be pushed</b></td><td><span class="chip bad">blocking</span></td><td>Three 194&nbsp;MB CSVs in <code>_MERGE_LAB</code> exceed GitHub's hard 100&nbsp;MB limit. Needs a history rewrite &mdash; see below.</td></tr>
+        <tr><td><b>Test suite is 93% stubs</b></td><td><span class="chip bad">blocking</span></td><td>1,040 of 1,122 files assert nothing. Nothing on this page should be called "verified" on that basis.</td></tr>
+        <tr><td><b>Disk at 98%</b></td><td><span class="chip bad">blocking</span></td><td>12&nbsp;GB free. 773&nbsp;MB verified safe to reclaim.</td></tr>
+        <tr><td>No AI provider enabled</td><td><span class="chip warn">high</span></td><td>Claude is <code>configured: true, enabled: false</code>. No frontier model is reachable &mdash; configuration, not development.</td></tr>
+        <tr><td>28 migrations still failing</td><td><span class="chip warn">high</span></td><td>See the schema-ownership note below; 8 of them are one defect.</td></tr>
+        <tr><td>44 &times; 500, 49 &times; 404</td><td><span class="chip warn">medium</span></td><td>Count unchanged across runs &mdash; some fixed, others regress under load. Investigate before treating 92% as stable.</td></tr>
+        <tr><td>Truthpack empty</td><td><span class="chip warn">medium</span></td><td>0 of 13 files, so the project's own Rule 6 cannot be satisfied.</td></tr>
+        <tr><td>44 signals produce no action</td><td><span class="chip warn">medium</span></td><td>All 55 reach the engine; only 11 act. Rule authorship needs domain input.</td></tr>
+        <tr><td>Squash 745 migrations</td><td><span class="chip warn">low</span></td><td>58 are repair/collision files. Do it after the 28 pass. Never drop the database.</td></tr>
       </tbody>
     </table>
   </div>
 </section>
 
 <section>
-  <div class="shead"><span class="n">07</span><h2>Tooling introduced</h2></div>
-  <p>One canonical inventory replaces roughly sixty overlapping scanner scripts, each of which previously emitted its own CSV or JSON.</p>
-  <div class="tw">
-    <table>
-      <thead><tr><th>Tool</th><th>Purpose</th></tr></thead>
-      <tbody>
-        <tr><td><code>deep-scan.js</code></td><td>Whole-tree inventory into SQLite &mdash; 68,952 files, import graph, routes, SQL objects</td></tr>
-        <tr><td><code>inventory-report.js</code></td><td>Reconciliation report from that database</td></tr>
-        <tr><td><code>fix-broken-imports.js</code></td><td>Repoints unresolved relative imports; refuses cross-tree repairs</td></tr>
-        <tr><td><code>check-route-mounts.js</code></td><td>Loads all 672 mounts, reports what Express cannot use</td></tr>
-        <tr><td><code>check-middleware-arity.js</code></td><td>Finds factories registered uncalled</td></tr>
-        <tr><td><code>bisect-middleware.js</code></td><td>Mounts the chain layer by layer to locate a request-blocking middleware</td></tr>
-        <tr><td><code>smoke-routes.js</code></td><td>Exercises every mounted GET route and classifies responses</td></tr>
-        <tr><td><code>snapshot-unique-check.js</code></td><td>Proves by hash and path whether a copy holds anything unique</td></tr>
-        <tr><td><code>fix-lazy-pool.js</code></td><td>Codemod for the cached-null-pool pattern</td></tr>
-      </tbody>
-    </table>
+  <div class="shead"><span class="n">05</span><h2>Two findings worth acting on</h2></div>
+
+  <div class="callout bad">
+    <div class="h">The migration backlog is a schema-ownership problem, not a list of bugs</div>
+    <p>Eight migrations failed on <code>deleted_at</code>. Adding it moved all eight to <code>user_id</code>. They open with <code>CREATE TABLE IF NOT EXISTS</code> against tables an earlier migration already created with a different shape, so creation is skipped and every subsequent column reference fails in turn. Patching column by column chases a cascade. Someone has to decide which definition is authoritative &mdash; the earlier table or the later migration.</p>
   </div>
+
+  <div class="callout">
+    <div class="h">The reference data now has one backup, and it is in git</div>
+    <p>3,327 curated rows &mdash; the NE variety directory, HSN/GST mappings, nutrients, government schemes, the chart of accounts &mdash; existed only inside one Docker volume. <code>backend/src/database/seeds/001_reference_data.sql</code> reproduces 1,135 of them and restores clean into an empty database. Wage and payroll tables were checked specifically and are empty. Note that <code>_MERGE_LAB</code>, which holds the only copies of ~9,000 unmerged source variants, still has no backup at all.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="n">06</span><h2>To unblock the PR</h2></div>
+  <p>Strips 1,616&nbsp;MB of local scratch from git history. Files stay on disk.</p>
+  <div class="cmd">printf '\n_MERGE_LAB/\n_UNIFIED_PROJECT/\n_ACTIVE_PROJECT/\n.ai/inventory/\n' &gt;&gt; .gitignore
+git add .gitignore &amp;&amp; git commit -m "chore: exclude local scratch dirs from git"
+FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch -f --index-filter \
+  'git rm -r --cached --ignore-unmatch "_MERGE_LAB" "_UNIFIED_PROJECT" "_ACTIVE_PROJECT" ".ai/inventory"' \
+  --prune-empty $(git rev-parse e5ee63e7^)..HEAD
+git push -u origin checkpoint/pre-clean-rebuild-20260913</div>
+</section>
+
+<section>
+  <div class="shead"><span class="n">07</span><h2>How these numbers were obtained</h2></div>
+  <p>Every figure is probed against the running server or queried from the database. Static analysis was wrong six times during this work &mdash; reading <code>index.js</code> for route mounts, probing without a token, reading a truncated route listing, missing dynamically-registered effectors, quoting <code>pg_stat_user_tables</code> without <code>ANALYZE</code>, and guessing endpoint URLs. Regenerate rather than trusting anything written here:</p>
+  <div class="cmd">node tools/route-reachability-audit.js    # endpoint health, with auth
+node tools/route-map-by-concept.js       # what is mounted, by business concept
+node tools/signal-graph-audit.js         # signal publish/subscribe graph
+node tools/domain-chain-audit.js         # table to service to route to page
+node src/database/migrate.js --continue  # every migration failure in one pass</div>
 </section>
 
 <footer>
-  <span>Every figure measured, not asserted</span>
-  <span>Evidence: .ai/inventory/inventory.db</span>
+  <span>Measured, not asserted</span>
+  <span>23 commits &middot; head fbf6a815</span>
   <span>13 Sept 2026</span>
 </footer>
 

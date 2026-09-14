@@ -19,6 +19,12 @@ const TEXT_PREVIEW_BYTES = Number(process.env.LIBRARY_TEXT_PREVIEW_BYTES || 6553
 // so a large .jsonl stays searchable without holding the whole file in memory.
 const JSONL_MAX_RECORDS = Number(process.env.LIBRARY_JSONL_MAX_RECORDS || 500);
 
+// Directories excluded from the whole-project sweep by default. node_modules
+// is third-party code and .git is opaque object storage; neither is project
+// content, and together they are four times the size of everything else.
+// Set LIBRARY_INDEX_VENDOR=1 to map them too.
+const VENDOR_DIRECTORIES = new Set(['node_modules', '.git']);
+
 /**
  * Locate the repository root by walking up for the library directory itself.
  *
@@ -189,6 +195,17 @@ class LibraryKnowledgeService {
     // Paths already indexed, so the untracked-file sweep can test membership in
     // O(1) instead of rescanning every entry per candidate file.
     this.indexedPaths = new Set();
+    // Map everything the project owns, junk included, so nothing on disk is
+    // invisible to the library. Bulk files are held at a metadata tier (path,
+    // size, mtime, extension) with no content preview: 70k content previews
+    // would cost gigabytes of memory, and /resolve reads content on demand.
+    this.indexEverything = options.indexEverything !== false
+      && !['0', 'false', 'off'].includes(String(process.env.LIBRARY_INDEX_ALL || '').toLowerCase());
+    this.indexVendor = options.indexVendor === true
+      || ['1', 'true', 'on'].includes(String(process.env.LIBRARY_INDEX_VENDOR || '').toLowerCase());
+    // path -> keys, so removing a deleted file costs a lookup rather than a
+    // scan of every entry in the index.
+    this._pathToKeys = new Map();
     this.contentHashes = new Map();
     this.indexingWarnings = [];
     this.initialized = false;
@@ -231,8 +248,12 @@ class LibraryKnowledgeService {
 
   /** Roots whose contents are represented in the index. */
   watchRoots() {
-    return [this.libraryRoot, this.modulesRoot, this.backendModulesRoot]
-      .filter((root) => root && fs.existsSync(root));
+    // One recursive watch on the project root covers every mapped file; the
+    // narrower roots are only used when whole-project mapping is off.
+    const roots = this.indexEverything
+      ? [this.projectRoot]
+      : [this.libraryRoot, this.modulesRoot, this.backendModulesRoot];
+    return roots.filter((root) => root && fs.existsSync(root));
   }
 
   /**
@@ -275,13 +296,11 @@ class LibraryKnowledgeService {
   /** Drop every index entry that pointed at a path which no longer exists. */
   removeIndexedPath(filePath) {
     let removed = 0;
-    for (const [key, entry] of this.index) {
-      if (entry.path === filePath) {
-        this.index.delete(key);
-        this.contentHashes.delete(key);
-        removed += 1;
-      }
+    for (const key of this._pathToKeys.get(filePath) || []) {
+      if (this.index.delete(key)) removed += 1;
+      this.contentHashes.delete(key);
     }
+    this._pathToKeys.delete(filePath);
     this.indexedPaths.delete(filePath);
     if (removed > 0) this.indexVersion += 1;
     return removed;
@@ -358,7 +377,15 @@ class LibraryKnowledgeService {
 
     if (forceFull) {
       this._pendingFullReindex = true;
-    } else if (this._isUnderLibraryRoot(filePath)) {
+    } else if (!this.indexVendor && this._isVendorPath(filePath)) {
+      // Dependency and git-object churn is not project content; ignore it
+      // rather than rebuilding the index for every npm write.
+      this.watchStats.ignored = (this.watchStats.ignored || 0) + 1;
+      return;
+    } else if (this._isUnderLibraryRoot(filePath) || this.indexEverything) {
+      // Every mapped file has a key derivable from its path, so a change to
+      // any of them is applied incrementally. Without this a single edit
+      // anywhere in the project would rebuild all 70k entries.
       this._pendingPaths.add(filePath);
     } else {
       // Module trees feed several catalogue-driven indexers whose keys are not
@@ -372,6 +399,11 @@ class LibraryKnowledgeService {
       this._flushChanges().catch((error) => { this.watchStats.lastError = error.message; });
     }, this.watchDebounceMs);
     if (typeof this._watchTimer.unref === 'function') this._watchTimer.unref();
+  }
+
+  _isVendorPath(filePath) {
+    const relative = path.relative(this.projectRoot, filePath).split(path.sep);
+    return relative.some((segment) => VENDOR_DIRECTORIES.has(segment));
   }
 
   _isUnderLibraryRoot(filePath) {
@@ -415,7 +447,7 @@ class LibraryKnowledgeService {
       }
 
       const existed = this.indexedPaths.has(filePath);
-      if (this.indexLibraryFileAt(filePath)) {
+      if (this.indexPathAt(filePath)) {
         if (existed) updated += 1; else added += 1;
       }
     }
@@ -436,7 +468,7 @@ class LibraryKnowledgeService {
     for (const entry of entries) {
       const entryPath = path.join(directory, entry.name);
       if (entry.isDirectory()) this._indexDirectoryTree(entryPath);
-      else this.indexLibraryFileAt(entryPath);
+      else this.indexPathAt(entryPath);
     }
   }
 
@@ -641,6 +673,7 @@ class LibraryKnowledgeService {
   async buildIndex() {
     this.index.clear();
     this.indexedPaths.clear();
+    this._pathToKeys.clear();
     this.indexingWarnings = [];
     this.indexLibraryCatalogues();
     this.indexLibraryModuleCards();
@@ -648,6 +681,9 @@ class LibraryKnowledgeService {
     this.indexUntrackedLibraryFiles();
     this.indexRuntimeModules();
     this.indexBackendModules();
+    // Last, so the richer indexers above keep ownership of the files they
+    // already understand and this only picks up what they left behind.
+    if (this.indexEverything) this.indexAllProjectFiles();
     this.indexVersion += 1;
     return this.index;
   }
@@ -675,6 +711,81 @@ class LibraryKnowledgeService {
     };
 
     visit(this.libraryRoot);
+  }
+
+  /**
+   * Sweep the entire project and map every file the other indexers did not
+   * already claim - including backup folders, merge scratch, stray copies and
+   * anything else that would otherwise be invisible. Metadata only: no file is
+   * read, so the cost is one stat per file rather than 6 GB of I/O.
+   */
+  indexAllProjectFiles() {
+    const root = this.projectRoot;
+    if (!root || !fs.existsSync(root)) return 0;
+
+    let mapped = 0;
+    const stack = [root];
+
+    while (stack.length > 0) {
+      const directory = stack.pop();
+      let entries;
+      try {
+        entries = fs.readdirSync(directory, { withFileTypes: true });
+      } catch (error) {
+        continue;
+      }
+
+      for (const entry of entries) {
+        const entryPath = path.join(directory, entry.name);
+
+        if (entry.isSymbolicLink()) continue;
+        if (entry.isDirectory()) {
+          if (!this.indexVendor && VENDOR_DIRECTORIES.has(entry.name)) continue;
+          stack.push(entryPath);
+          continue;
+        }
+        if (this.indexedPaths.has(entryPath)) continue;
+        if (this.indexProjectFileAt(entryPath)) mapped += 1;
+      }
+    }
+
+    return mapped;
+  }
+
+  /**
+   * Map one file at the metadata tier. Returns the key, or null if the path
+   * is not a readable file.
+   */
+  indexProjectFileAt(filePath) {
+    const stat = safeStat(filePath);
+    if (!stat || !stat.isFile()) return null;
+
+    const relativePath = path.relative(this.projectRoot, filePath).split(path.sep).join('/');
+    if (!relativePath || relativePath.startsWith('..')) return null;
+
+    const key = `FILE:${relativePath}`;
+    const name = path.basename(filePath);
+    this.indexFile(key, 'project-file', filePath, {
+      name,
+      relativePath,
+      extension: path.extname(name).toLowerCase(),
+      fileSize: stat.size,
+      metadataOnly: true
+    });
+    return key;
+  }
+
+  /**
+   * Index a path with whichever tier owns it: the library keeps its rich
+   * entries, everything else is mapped as a project file.
+   */
+  indexPathAt(filePath, options = {}) {
+    if (this._isUnderLibraryRoot(filePath)) {
+      const key = this.indexLibraryFileAt(filePath, options);
+      if (key) return key;
+    }
+    if (options.skipIfIndexed === true && this.indexedPaths.has(filePath)) return null;
+    return this.indexEverything ? this.indexProjectFileAt(filePath) : null;
   }
 
   indexFile(key, type, filePath, data = {}) {
@@ -710,6 +821,9 @@ class LibraryKnowledgeService {
       fileSize: stat.size
     });
     this.indexedPaths.add(filePath);
+    const keysForPath = this._pathToKeys.get(filePath);
+    if (keysForPath) keysForPath.add(key);
+    else this._pathToKeys.set(filePath, new Set([key]));
     this.indexVersion += 1;
   }
 

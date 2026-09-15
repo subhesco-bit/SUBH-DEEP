@@ -1,5 +1,7 @@
 # 📋 ACTIVE TASKS — REAL-TIME TRACKING
 
+**15 September Claude Code work handoff:** see `.ai/handoffs/CLAUDE_WORK_HANDOFF_2026-09-15.md` for the current all-India integrated commerce baseline, concrete work packages, tests, blockers and 19 September return target. The older Northeast-only project summaries are superseded by the user's national sell-and-buy mandate.
+
 **Last Updated:** 2026-09-12
 **Active Roster:** Claude Code, ChatGPT, GitHub (Copilot default). Devin: historical source only, not active roster — see `.ai/AGENT_PROTOCOL.md`.
 

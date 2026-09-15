@@ -2,6 +2,8 @@
 
 This is the controlling engineering backlog for the reconstruction. User mandates are requirements, while completion decisions are based on executable evidence. A capability is complete only when its canonical implementation, persistence, security, lifecycle, audit/provenance, user or operator workflow, failure behavior, and acceptance tests all pass.
 
+Whole-project boundaries, source authority, national sell/buy flows, AI/ERP integration, and duplicate policy are reconciled in `PROJECT_CONCEPT_RECONCILIATION_20260915.md`. Use that map before adding another domain implementation.
+
 ## P0 — release integrity
 
 - [x] Establish one canonical authentication service and retire parallel implementations.

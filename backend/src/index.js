@@ -598,6 +598,7 @@ const vermicompostRoutes = require('./routes/vermicompostRoutes.js');
 const sericultureRoutes = require('./routes/sericultureRoutes.js');
 const fisheriesRoutes = require('./routes/fisheriesRoutes.js');
 const householdProcurementRoutes = require('./routes/householdProcurementRoutes.js');
+const farmerProcurementQuoteRoutes = require('./routes/farmerProcurementQuoteRoutes.js');
 const moduleRegistryRoutes = require('./routes/moduleRegistryRoutes.js');
 const preSeasonPurchaseRoutes = require('./routes/preSeasonPurchaseRoutes.js');
 const gdprRoutes = require('./routes/gdprRoutes.js');
@@ -1774,6 +1775,7 @@ async function startup() {
     app.use('/api/v1/sericulture', sericultureRoutes);
     app.use('/api/v1/fisheries', fisheriesRoutes);
     app.use('/api/v1/strategic/household', householdProcurementRoutes);
+    app.use('/api/v1/farmer-procurement', farmerProcurementQuoteRoutes);
     app.use('/api/v1/module-registry', moduleRegistryRoutes);
     app.use('/api/v1/strategic/pre-season', preSeasonPurchaseRoutes);
     app.use('/api/v1/privacy', gdprRoutes);

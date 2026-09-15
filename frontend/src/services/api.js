@@ -1831,7 +1831,11 @@ export const ecommerceAPI = {
   getListings: (params) => api.get('/ecommerce-marketplace/listings', { params }),
   getPriceTrends: (categoryId, period) => api.get(`/ecommerce-marketplace/price-trends/${categoryId}`, { params: { period } }),
   getSellerAnalytics: (period) => api.get('/ecommerce-marketplace/seller-analytics', { params: { period } }),
+  getSellerOrigins: () => api.get('/ecommerce-marketplace/seller-origins'),
+  getSellerListings: () => api.get('/ecommerce-marketplace/seller-listings'),
   createListing: (data) => api.post('/ecommerce-marketplace/listing', data),
+  updateListing: (id, data) => api.put(`/ecommerce-marketplace/listing/${id}`, data),
+  deleteListing: (id) => api.delete(`/ecommerce-marketplace/listing/${id}`),
 };
 
 export const ecommerceMarketingAPI = {

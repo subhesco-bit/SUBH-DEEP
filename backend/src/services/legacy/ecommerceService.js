@@ -27,6 +27,15 @@ async function createProductListing(sellerId, listingData) {
   const pg = getPostgreSQL();
 
   try {
+    const origin = await pg.query(`SELECT a.id,s.name FROM addresses a
+      JOIN states s ON LOWER(s.name)=LOWER(a.state)
+      JOIN india_jurisdiction_coverage c ON LOWER(c.name)=LOWER(s.name) AND c.market_launch_scope=TRUE
+      WHERE a.id=$1 AND a.user_id=$2 AND s.id=$3 AND LOWER(COALESCE(a.country,'India'))='india'`,
+    [listingData.location_id,sellerId,listingData.state_id]);
+    if (!origin.rows[0]) throw Object.assign(new Error('Verified seller origin address and national state are required'), { statusCode: 400 });
+    if (listingData.shelf_life_hours != null && (!Number.isInteger(Number(listingData.shelf_life_hours)) || Number(listingData.shelf_life_hours) <= 0)) {
+      throw Object.assign(new Error('shelf_life_hours must be a positive integer'), { statusCode: 400 });
+    }
     // AI-powered price recommendation
     const priceRecommendation = await getAIPriceRecommendation(listingData);
 
@@ -50,6 +59,10 @@ async function createProductListing(sellerId, listingData) {
         demand_prediction,
         harvest_date,
         location_id,
+        state_id,
+        market_reach,
+        cold_chain_required,
+        shelf_life_hours,
         certifications,
         images,
         gi_tagged,
@@ -57,7 +70,7 @@ async function createProductListing(sellerId, listingData) {
         listing_status,
         visibility_score,
         created_at
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, NOW())
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, NOW())
       RETURNING *
     `, [
       sellerId,
@@ -72,6 +85,10 @@ async function createProductListing(sellerId, listingData) {
       demandPrediction.demand_level,
       listingData.harvest_date,
       listingData.location_id,
+      listingData.state_id,
+      'india',
+      Boolean(listingData.cold_chain_required),
+      listingData.shelf_life_hours == null ? null : Number(listingData.shelf_life_hours),
       JSON.stringify(listingData.certifications || []),
       JSON.stringify(listingData.images || []),
       listingData.gi_tagged || false,
@@ -105,6 +122,7 @@ async function createProductListing(sellerId, listingData) {
       success: true,
       listing,
       ai_insights: {
+        method: 'deterministic_heuristics_not_model_prediction',
         price_recommendation: priceRecommendation,
         quality_score: qualityScore,
         demand_prediction: demandPrediction,
@@ -142,7 +160,9 @@ async function getMarketplaceListings(filters = {}, pagination = {}) {
       sort_order = 'DESC',
     } = pagination;
 
-    const offset = (page - 1) * limit;
+    const safePage = Number.isInteger(Number(page)) ? Math.max(1, Math.min(10000, Number(page))) : 1;
+    const safeLimit = Number.isInteger(Number(limit)) ? Math.max(1, Math.min(100, Number(limit))) : 24;
+    const offset = (safePage - 1) * safeLimit;
 
     let query = `
       SELECT 
@@ -238,10 +258,11 @@ async function getMarketplaceListings(filters = {}, pagination = {}) {
     };
 
     const sortColumn = sortMap[sort_by] || 'pl.visibility_score';
-    query += ` ORDER BY ${sortColumn} ${sort_order}`;
+    const safeOrder = String(sort_order).toUpperCase() === 'ASC' ? 'ASC' : 'DESC';
+    query += ` ORDER BY ${sortColumn} ${safeOrder}`;
 
     query += ` LIMIT $${paramCount + 1} OFFSET $${paramCount + 2}`;
-    params.push(limit, offset);
+    params.push(safeLimit, offset);
 
     const result = await pg.query(query, params);
 
@@ -257,8 +278,8 @@ async function getMarketplaceListings(filters = {}, pagination = {}) {
       success: true,
       products: result.rows,
       pagination: {
-        page,
-        limit,
+        page: safePage,
+        limit: safeLimit,
         total,
         totalPages: Math.ceil(total / limit),
       },
@@ -294,8 +315,9 @@ async function getAIPriceRecommendation(listingData) {
     if (historicalPrices.rows.length === 0) {
       return {
         recommended_price: listingData.base_price,
-        confidence: 0.5,
-        reasoning: 'No historical data available',
+        confidence: null,
+        method: 'seller_price_without_comparable_sales',
+        reasoning: 'No comparable sold listings; seller price is retained',
       };
     }
 
@@ -337,8 +359,9 @@ async function getAIPriceRecommendation(listingData) {
 
     return {
       recommended_price: Math.round(recommendedPrice * 100) / 100,
-      confidence: 0.85,
-      reasoning: 'Based on historical prices, quality, demand, and certifications',
+      confidence: null,
+      method: 'deterministic_historical_price_rule',
+      reasoning: 'Rule estimate from sold-listing prices and declared attributes; not a validated AI forecast',
       market_data: {
         average_price: Math.round(avgPrice * 100) / 100,
         min_price: minPrice,
@@ -350,8 +373,9 @@ async function getAIPriceRecommendation(listingData) {
     logger.error('Error getting AI price recommendation', { error: error.message });
     return {
       recommended_price: listingData.base_price,
-      confidence: 0.3,
-      reasoning: 'Error in price analysis',
+      confidence: null,
+      method: 'seller_price_fallback',
+      reasoning: 'Comparable-price analysis unavailable; seller price retained',
     };
   }
 }
@@ -400,6 +424,8 @@ async function assessProductQuality(listingData) {
   return {
     score: Math.round(score * 100) / 100,
     level: score >= 0.8 ? 'high' : score >= 0.5 ? 'medium' : 'low',
+    method: 'declared_listing_completeness_heuristic',
+    note: 'Certification and image counts do not prove product quality; laboratory and batch verification are separate.',
     factors,
   };
 }
@@ -428,26 +454,26 @@ async function predictMarketDemand(listingData) {
     const monthData = seasonalData.rows.find(r => parseInt(r.month) === currentMonth);
 
     let demandLevel = 'medium';
-    let confidence = 0.6;
+    const confidence = null;
 
     if (monthData && monthData.avg_quantity > 100) {
       demandLevel = 'high';
-      confidence = 0.8;
     } else if (monthData && monthData.avg_quantity < 20) {
       demandLevel = 'low';
-      confidence = 0.7;
     }
 
     return {
       demand_level: demandLevel,
       confidence,
+      method: 'seasonal_listing_volume_rule',
       seasonal_data: monthData || null,
     };
   } catch (error) {
     logger.error('Error predicting market demand', { error: error.message });
     return {
       demand_level: 'medium',
-      confidence: 0.4,
+      confidence: null,
+      method: 'unavailable_history_fallback',
       seasonal_data: null,
     };
   }
@@ -693,10 +719,51 @@ async function getMarketDemandAnalysis(categoryId) {
 // EXPORTS
 // ============================================================================
 
+async function getSellerOrigins(sellerId) {
+  const pg = getPostgreSQL();
+  const { rows } = await pg.query(`SELECT a.id AS location_id,a.city,a.state,a.pincode,s.id AS state_id
+    FROM addresses a JOIN states s ON LOWER(s.name)=LOWER(a.state)
+    JOIN india_jurisdiction_coverage c ON LOWER(c.name)=LOWER(s.name) AND c.market_launch_scope=TRUE
+    WHERE a.user_id=$1 AND LOWER(COALESCE(a.country,'India'))='india' ORDER BY a.is_default DESC,a.city`, [sellerId]);
+  return { success: true, origins: rows };
+}
+
+async function getSellerListings(sellerId) {
+  const { rows } = await getPostgreSQL().query(`SELECT pl.*,s.name AS state_name FROM product_listings pl
+    LEFT JOIN states s ON s.id=pl.state_id WHERE pl.seller_id=$1 AND pl.listing_status<>'deleted' ORDER BY pl.created_at DESC`, [sellerId]);
+  return { success: true, listings: rows };
+}
+
+async function updateSellerListing(id, sellerId, input) {
+  const allowed = ['product_name','description','quantity','base_price','harvest_date','cold_chain_required','shelf_life_hours'];
+  const fields = allowed.filter((key) => input[key] !== undefined);
+  if (!fields.length) throw Object.assign(new Error('No editable listing fields supplied'), { statusCode: 400 });
+  if (input.quantity !== undefined && !(Number(input.quantity) > 0)) throw Object.assign(new Error('Quantity must be positive'), { statusCode: 400 });
+  if (input.base_price !== undefined && !(Number(input.base_price) > 0)) throw Object.assign(new Error('Price must be positive'), { statusCode: 400 });
+  if (input.shelf_life_hours != null && (!Number.isInteger(Number(input.shelf_life_hours)) || Number(input.shelf_life_hours) <= 0)) throw Object.assign(new Error('Shelf life must be a positive integer'), { statusCode: 400 });
+  const values = fields.map((key) => input[key]);
+  const assignments = fields.map((key, i) => `${key}=$${i+1}`).join(',');
+  const { rows } = await getPostgreSQL().query(`UPDATE product_listings SET ${assignments},updated_at=NOW()
+    WHERE id=$${values.length+1} AND seller_id=$${values.length+2} AND listing_status='active' RETURNING *`, [...values,id,sellerId]);
+  if (!rows[0]) throw Object.assign(new Error('Active seller listing not found'), { statusCode: 404 });
+  return { success: true, listing: rows[0] };
+}
+
+async function deleteSellerListing(id, sellerId) {
+  const { rows } = await getPostgreSQL().query(`UPDATE product_listings SET listing_status='deleted',updated_at=NOW()
+    WHERE id=$1 AND seller_id=$2 AND listing_status<>'deleted' RETURNING id`, [id,sellerId]);
+  if (!rows[0]) throw Object.assign(new Error('Seller listing not found'), { statusCode: 404 });
+  return { success: true, listing_id: rows[0].id, status: 'deleted' };
+}
+
 module.exports = {
   // Product Listing Management
   createProductListing,
   getMarketplaceListings,
+  getSellerOrigins,
+  getSellerListings,
+  updateSellerListing,
+  deleteSellerListing,
 
   // AI-Powered Pricing & Recommendations
   getAIPriceRecommendation,

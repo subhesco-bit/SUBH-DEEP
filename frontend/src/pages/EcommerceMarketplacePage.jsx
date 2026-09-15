@@ -8,13 +8,8 @@ import { northEastVarietyProducts } from '../data/northEastVarietyProducts';
 
 const emptyListing = {
   product_name: '', category_id: '', quantity: '', unit: '', base_price: '', harvest_date: '', description: '',
+  state_id: '', location_id: '', cold_chain_required: false, shelf_life_hours: '',
 };
-
-// Seller actions (create/edit/delete listing, analytics, my-listings) need
-// req.user.id on the backend (authMiddleware). No global auth/session
-// store exists yet in this codebase's frontend for pages built outside
-// the login flow (checked - same gap noted on BulkOrderPage.jsx), so the
-// seller id is entered manually here until real auth wiring exists.
 function EcommerceMarketplacePage() {
   const queryClient = useQueryClient();
   const [tab, setTab] = useState('browse');
@@ -44,6 +39,11 @@ function EcommerceMarketplacePage() {
     queryKey: ['ecommerce-seller-listings'],
     queryFn: async () => (await ecommerceAPI.getSellerListings()).data?.listings ?? [],
     enabled: tab === 'my-listings',
+  });
+  const { data: sellerOrigins = [], error: originsError } = useQuery({
+    queryKey: ['ecommerce-seller-origins'],
+    queryFn: async () => (await ecommerceAPI.getSellerOrigins()).data?.origins ?? [],
+    enabled: tab === 'my-listings' || showForm,
   });
 
   const { data: analytics, isLoading: analyticsLoading, error: analyticsError } = useQuery({
@@ -84,6 +84,7 @@ function EcommerceMarketplacePage() {
     setForm({
       product_name: l.product_name || '', category_id: l.category_id || '', quantity: l.quantity || '',
       unit: l.unit || '', base_price: l.base_price || '', harvest_date: l.harvest_date?.slice(0, 10) || '', description: l.description || '',
+      state_id: l.state_id || '', location_id: l.location_id || '', cold_chain_required: Boolean(l.cold_chain_required), shelf_life_hours: l.shelf_life_hours || '',
     });
     setEditingId(l.id);
     setShowForm(true);
@@ -429,11 +430,11 @@ function EcommerceMarketplacePage() {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  if (!form.product_name || !form.category_id || !form.quantity || !form.unit || !form.base_price || !form.harvest_date) {
-                    toast.error('All fields except description are required');
+                  if (!form.product_name || !form.category_id || !form.quantity || !form.unit || !form.base_price || !form.harvest_date || (!editingId && !form.location_id)) {
+                    toast.error('Enter product details and select a verified dispatch address');
                     return;
                   }
-                  saveMutation.mutate(form);
+                  saveMutation.mutate({ ...form, shelf_life_hours: form.shelf_life_hours === '' ? null : Number(form.shelf_life_hours) });
                 }}
                 className="space-y-4"
               >
@@ -470,6 +471,24 @@ function EcommerceMarketplacePage() {
                   <label className="block text-sm font-medium text-v42-ink2 mb-1">Harvest date *</label>
                   <input type="date" value={form.harvest_date} onChange={(e) => setForm({ ...form, harvest_date: e.target.value })}
                     className="w-full px-3 py-2 border border-v42-line rounded-lg focus:outline-none focus:ring-2 focus:ring-v42-turmeric" />
+                </div>
+                {!editingId && <div>
+                  <label htmlFor="seller-origin" className="block text-sm font-medium text-v42-ink2 mb-1">Verified dispatch address *</label>
+                  <select id="seller-origin" value={form.location_id} onChange={(e) => {
+                    const origin = sellerOrigins.find((item) => item.location_id === e.target.value);
+                    setForm({ ...form, location_id: e.target.value, state_id: origin?.state_id || '' });
+                  }} className="w-full px-3 py-2 border border-v42-line rounded-lg" required>
+                    <option value="">Select an address linked to your account</option>
+                    {sellerOrigins.map((item) => <option key={item.location_id} value={item.location_id}>{item.city}, {item.state} · {item.pincode}</option>)}
+                  </select>
+                  {originsError && <p className="mt-1 text-sm text-v42-chilli" role="alert">Dispatch addresses are unavailable. Add or verify your address before listing.</p>}
+                  {!originsError && sellerOrigins.length === 0 && <p className="mt-1 text-sm text-v42-mut">Add an account address with its state before publishing nationwide.</p>}
+                </div>}
+                <div className="grid grid-cols-2 gap-4">
+                  <label className="flex items-center gap-2 text-sm text-v42-ink2"><input type="checkbox" checked={form.cold_chain_required} onChange={(e) => setForm({ ...form, cold_chain_required: e.target.checked })} />Cold chain required</label>
+                  <label className="text-sm text-v42-ink2">Shelf life (hours)
+                    <input type="number" min="1" value={form.shelf_life_hours} onChange={(e) => setForm({ ...form, shelf_life_hours: e.target.value })} className="mt-1 w-full px-3 py-2 border border-v42-line rounded-lg" placeholder="If perishable" />
+                  </label>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-v42-ink2 mb-1">Description</label>

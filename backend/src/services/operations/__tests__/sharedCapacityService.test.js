@@ -20,4 +20,16 @@ describe('shared infrastructure and fulfillment ranking', () => {
     expect(result.recommendation).toBeNull();
     expect(result.evaluated[0].reason).toBe('misses_delivery_window');
   });
+
+  test('North East supplier to North India buyer requires a served corridor and enough shelf life', () => {
+    const corridorDemand = { ...demand, originState: 'Nagaland', destinationState: 'Delhi', remainingShelfLifeHours: 36 };
+    const result = service.optimize(corridorDemand, [
+      { id: 'wrong-destination', originState: 'Nagaland', destinationState: 'Assam', availableCapacity: 50, coldChain: true, landedCost: 10, transitHours: 8 },
+      { id: 'too-slow', originState: 'Nagaland', destinationState: 'Delhi', availableCapacity: 50, coldChain: true, landedCost: 20, transitHours: 48 },
+      { id: 'air-cold-chain', originState: 'Nagaland', destinationState: 'Delhi', availableCapacity: 50, coldChain: true, landedCost: 500, transitHours: 18, reliability: 0.95, risk: 0.05 },
+    ]);
+    expect(result.recommendation.optionId).toBe('air-cold-chain');
+    expect(result.evaluated.find((x) => x.optionId === 'wrong-destination').reason).toBe('destination_not_served');
+    expect(result.evaluated.find((x) => x.optionId === 'too-slow').reason).toBe('shelf_life_exceeded');
+  });
 });

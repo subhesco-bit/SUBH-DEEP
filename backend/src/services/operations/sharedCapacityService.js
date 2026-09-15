@@ -8,6 +8,8 @@ const r4 = (n) => Math.round((Number(n) + Number.EPSILON) * 10000) / 10000;
 const nonnegative = (value, field) => { const n=Number(value); if(!Number.isFinite(n)||n<0){const e=new Error(`${field} must be non-negative`);e.statusCode=400;throw e;} return n; };
 
 function scoreOption(option, demand) {
+  if (demand.originState && option.originState !== demand.originState) return { eligible:false, reason:'origin_not_served' };
+  if (demand.destinationState && option.destinationState !== demand.destinationState) return { eligible:false, reason:'destination_not_served' };
   const capacity = nonnegative(option.availableCapacity, 'availableCapacity');
   const quantity = nonnegative(demand.quantity, 'quantity');
   if (capacity < quantity) return { eligible:false, reason:'insufficient_capacity' };
@@ -15,6 +17,7 @@ function scoreOption(option, demand) {
   if (option.departureAt && demand.readyAt && new Date(option.departureAt) < new Date(demand.readyAt)) return { eligible:false, reason:'departs_before_ready' };
   if (option.arrivalAt && demand.deliverBy && new Date(option.arrivalAt) > new Date(demand.deliverBy)) return { eligible:false, reason:'misses_delivery_window' };
   const hours = nonnegative(option.transitHours, 'transitHours');
+  if (demand.remainingShelfLifeHours != null && hours > nonnegative(demand.remainingShelfLifeHours, 'remainingShelfLifeHours')) return { eligible:false, reason:'shelf_life_exceeded' };
   const cost = nonnegative(option.landedCost, 'landedCost');
   const reliability = Math.min(1, Math.max(0, Number(option.reliability ?? 0)));
   const risk = Math.min(1, Math.max(0, Number(option.risk ?? 1)));

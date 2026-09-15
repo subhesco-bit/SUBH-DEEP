@@ -48,7 +48,11 @@ This is the controlling engineering backlog for the reconstruction. User mandate
 
 ## P1 — rural value-chain and industry engines
 
-- [ ] Use Nagaland as the first launch geography. Model verified district coverage, languages, customary institutions, local foods, seasonal supply, road/cold-chain constraints, schemes, and operator-assisted channels; never infer individual religion from geography.
+- [ ] Launch the premium marketplace across all 28 states and 8 union territories: North East farmers and producers must reach buyers throughout India, while suppliers from every state can onboard. Model verified district coverage, languages, institutions, local foods, seasonality, transport corridors, schemes, and assisted channels per jurisdiction; never infer individual religion from geography.
+- [x] Add a national coverage registry that separates all-India market scope from locally verified services and gives the North East early validation priority.
+- [x] Extend the seller state dimension nationally and secure the e-commerce listing origin against the seller's account-linked address; wire browse, origin selection, seller listing, edit and soft-delete on the shared marketplace page.
+- [ ] Complete the reverse marketplace for farmers and verified family members: household products, machinery, seeds, fertilizers, pipes, drip systems, pumps and repair/second-life options with supplier-funded discounts, subsidy separation, stock, delivery, finance, tax, accounting and claims/returns.
+- [ ] Connect national product discovery, buyer delivery addresses, cross-state fulfillment feasibility, GST place-of-supply, payment, claims, returns, and farmer earnings in one verified order journey.
 - [ ] Complete MasterChef recipe lifecycle: verified ingredients, substitution, yield, nutrient and cost calculation, batch/serving basis, local availability, seasonal menus, allergens, culturally respectful preferences, occasion bundles, and marketplace publication.
 - [ ] Complete dietitian, natural therapy, NutriTest, supportive veterinary, poultry and fish guidance with evidence, uncertainty, escalation to licensed clinicians/veterinarians, and no autonomous diagnosis, prescribing or treatment.
 - [ ] Complete AI engineer for MEP with source standards, site loads, versioned design calculations, coordinated drawings/BOM/cost, safety constraints, and licensed-engineer approval before construction.

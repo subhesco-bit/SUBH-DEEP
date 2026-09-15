@@ -23,7 +23,7 @@ async function createListing(req, res) {
     const listingData = req.body;
 
     // Validate required fields
-    const requiredFields = ['product_name', 'category_id', 'quantity', 'unit', 'base_price', 'harvest_date'];
+    const requiredFields = ['product_name', 'category_id', 'quantity', 'unit', 'base_price', 'harvest_date', 'state_id', 'location_id'];
     for (const field of requiredFields) {
       if (!listingData[field]) {
         return res.status(400).json({
@@ -38,9 +38,9 @@ async function createListing(req, res) {
     res.status(201).json(result);
   } catch (error) {
     logger.error('Error in createListing controller', { error: error.message });
-    res.status(500).json({
+    res.status(error.statusCode || 500).json({
       success: false,
-      error: error.message || 'Failed to create listing',
+      error: error.statusCode ? error.message : 'Failed to create listing',
     });
   }
 }

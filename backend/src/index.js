@@ -433,6 +433,7 @@ const nervousSystemRoutes = require('./routes/nervousSystemRoutes.js');
 const mlOptimization = require('./routes/mlOptimization.js');
 const optimizationRoutes = require('./routes/optimizationRoutes.js');
 const sharedCapacityRoutes = require('./routes/sharedCapacityRoutes.js');
+const indiaCoverageRoutes = require('./routes/indiaCoverageRoutes.js');
 const marketplaceEnhancements = require('./routes/marketplaceEnhancements.js');
 const marketDataRoutes = require('./routes/marketDataRoutes.js');
 const marketAnalytics = require('./routes/marketAnalytics.js');
@@ -1592,6 +1593,7 @@ async function startup() {
     app.use('/api/mloptimization', mlOptimization);
     app.use('/api/v1/optimization', optimizationRoutes);
     app.use('/api/v1/shared-capacity', sharedCapacityRoutes);
+    app.use('/api/v1/india-coverage', indiaCoverageRoutes);
     app.use('/api/marketplaceenhancements', marketplaceEnhancements);
     app.use('/api/marketdata', marketDataRoutes);
     app.use('/api/marketanalytics', marketAnalytics);

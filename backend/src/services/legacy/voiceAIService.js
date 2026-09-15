@@ -4,6 +4,7 @@
  */
 
 const express = require('express');
+const crypto = require('crypto');
 const { Pool } = require('pg');
 const { logger } = require('../../utils/logger');
 const { authMiddleware } = require('../../middleware/auth');
@@ -23,7 +24,7 @@ const pool = require('../../database/pool');
  */
 async function createVoiceSession(userId, language = 'en') {
   try {
-    const sessionId = `VOICE-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const sessionId = `VOICE-${crypto.randomUUID()}`;
 
     const result = await pool.query(
       `INSERT INTO voice_sessions 
@@ -57,18 +58,19 @@ router.post('/voice-sessions', authMiddleware, async (req, res) => {
 /**
  * End voice session
  */
-async function endVoiceSession(sessionId) {
+async function endVoiceSession(sessionId, userId) {
   try {
+    if (!sessionId || !userId) throw new Error('Session and actor are required');
     const result = await pool.query(
       `UPDATE voice_sessions 
        SET ended_at = CURRENT_TIMESTAMP, 
            status = 'ended',
            duration_seconds = calculate_session_duration(id)
-       WHERE id = $1
+       WHERE session_id = $1 AND user_id = $2 AND status = 'active'
        RETURNING *`,
-      [sessionId],
+      [sessionId, userId],
     );
-
+    if (!result.rows[0]) throw new Error('Active voice session not found');
     return result.rows[0];
   } catch (error) {
     logger.error('End voice session error', { error: error.message, stack: error.stack });
@@ -81,7 +83,7 @@ async function endVoiceSession(sessionId) {
  */
 router.post('/voice-sessions/:sessionId/end', authMiddleware, async (req, res) => {
   try {
-    const result = await endVoiceSession(req.params.sessionId);
+    const result = await endVoiceSession(req.params.sessionId, req.user.id);
     res.json(result);
   } catch (error) {
     logger.error('End voice session API error', { error: error.message, stack: error.stack });
@@ -96,18 +98,23 @@ router.post('/voice-sessions/:sessionId/end', authMiddleware, async (req, res) =
 /**
  * Process voice command
  */
-async function processVoiceCommand(sessionId, transcript, commandType, parameters) {
+async function processVoiceCommand(sessionId, transcript, commandType, parameters, userId) {
   try {
-    // Simple intent detection (in production, use ML model)
+    if (!sessionId || !userId || typeof transcript !== 'string' || !transcript.trim() || transcript.length > 2000) {
+      throw new Error('Active session, actor, and bounded transcript are required');
+    }
+    const session = await pool.query('SELECT id FROM voice_sessions WHERE session_id = $1 AND user_id = $2 AND status = $3', [sessionId, userId, 'active']);
+    if (!session.rows[0]) throw new Error('Active voice session not found');
     const intent = detectIntentFromTranscript(transcript);
-    const confidence = 0.85;
+    // Keyword routing is deterministic; it does not justify a model confidence score.
+    const confidence = null;
 
     const result = await pool.query(
       `INSERT INTO voice_commands 
-       (session_id, command_type, transcript, intent, confidence_score, parameters, execution_status)
-       VALUES ($1, $2, $3, $4, $5, $6, 'executed')
+       (session_id, user_id, command, command_type, transcript, intent, confidence_score, parameters, execution_status, executed_at)
+       VALUES ($1, $2, $3, $4, $3, $5, $6, $7, 'pending', NULL)
        RETURNING *`,
-      [sessionId, commandType, transcript, intent, confidence, JSON.stringify(parameters)],
+      [session.rows[0].id, userId, transcript, commandType || intent, JSON.stringify({ name: intent, detector: 'keywords', autonomous: false }), confidence, JSON.stringify(parameters || {})],
     );
 
     return result.rows[0];

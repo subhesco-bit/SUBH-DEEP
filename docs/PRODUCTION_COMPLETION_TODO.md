@@ -16,6 +16,9 @@ This is the controlling engineering backlog for the reconstruction. User mandate
 
 ## P0 — AI platform separation and trust
 
+- [x] Define seven governance classes and domain-specific autonomy/evidence bindings for food, health guidance, weather, MEP engineering, pricing, ERP, science, robotics, and quantum.
+- [ ] Enforce these bindings at each mutation and generated advisory endpoint, with calibrated signal evidence and named authority where ACT is permitted.
+
 - [x] Keep AI Backbone isolated behind a versioned gateway contract.
 - [x] Prevent ERP modules and clients from receiving provider credentials.
 - [x] Enforce authentication, role checks for administration, rate limits, provider allow-listing, bounded timeouts, and sanitized failures.
@@ -44,6 +47,16 @@ This is the controlling engineering backlog for the reconstruction. User mandate
 - [ ] Add period-end workflows for receivables, payables, bank reconciliation, inventory valuation, depreciation, payroll, GST reconciliation, close, consolidation, and audit export.
 
 ## P1 — rural value-chain and industry engines
+
+- [ ] Use Nagaland as the first launch geography. Model verified district coverage, languages, customary institutions, local foods, seasonal supply, road/cold-chain constraints, schemes, and operator-assisted channels; never infer individual religion from geography.
+- [ ] Complete MasterChef recipe lifecycle: verified ingredients, substitution, yield, nutrient and cost calculation, batch/serving basis, local availability, seasonal menus, allergens, culturally respectful preferences, occasion bundles, and marketplace publication.
+- [ ] Complete dietitian, natural therapy, NutriTest, supportive veterinary, poultry and fish guidance with evidence, uncertainty, escalation to licensed clinicians/veterinarians, and no autonomous diagnosis, prescribing or treatment.
+- [ ] Complete AI engineer for MEP with source standards, site loads, versioned design calculations, coordinated drawings/BOM/cost, safety constraints, and licensed-engineer approval before construction.
+- [ ] Complete AI agriculturist/scientist and weather advisories with source time/location, observation-vs-grid provenance, forecast verification against outturn, thresholds, alerts, and action ownership.
+- [ ] Implement shared API/UI contracts across responsive web, Capacitor Android/mobile, Tauri desktop, PWA and basic-phone IVR/SMS; verify the same account, permissions, state and workflow on each surface.
+- [ ] Finish institutional village commerce lifecycle; current profile/demand scoring foundation lacks RFQ, quotations, milestones, quality, escrow, fulfillment and operator UI.
+- [ ] Finish shared-capacity lifecycle; current reservation/ranking foundation lacks slot conflict detection, expiry/waitlist promotion, cancellation policy, multimodal carrier integration and operator UI.
+- [ ] Finish rural insurance lifecycle; current quote/FNOL foundation lacks secured routes, issuance, endorsements, premium accounting, claim stages, settlement, grievance and operator UI.
 
 - [ ] Create a shared knowledge-flow contract: source authority, effective date, geography, season, language, consent, confidence, decision owner, operational action, financial effect, and measured outcome.
 - [ ] Apply cost optimization to procurement, production, storage, processing, packaging, finance, insurance, marketing, fulfillment, returns, shared assets, energy, and labour without sacrificing safety or statutory constraints.

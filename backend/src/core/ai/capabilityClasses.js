@@ -1,5 +1,5 @@
 /**
- * AI capability classes — the six kinds of AI this platform uses, and where
+ * AI capability classes — the seven kinds of AI this platform uses, and where
  * each one actually plugs in.
  *
  * The platform already had AI parts: an engine registry, provider adapters,

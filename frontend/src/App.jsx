@@ -24,6 +24,7 @@ import ModuleRuntimePage from './pages/ModuleRuntimePage';
 // Lazy load EconomicDashboard (not in centralized routes yet)
 const EconomicDashboard = lazy(() => import('./pages/economic/EconomicDashboard'));
 const IndiaCoveragePage = lazy(() => import('./pages/IndiaCoveragePage'));
+const FarmerProcurementPage = lazy(() => import('./pages/FarmerProcurementPage'));
 
 // Every path any array already declares. Passed to the auto-discovery pass so a
 // generated route can never shadow a hand-written one; computed at module load
@@ -36,6 +37,7 @@ const declaredPaths = new Set(
 );
 declaredPaths.add('/economic');
 declaredPaths.add('/india-coverage');
+declaredPaths.add('/farmer-procurement');
 declaredPaths.add('/module/:moduleId');
 
 const autoPageRoutes = getAutoPageRoutes(declaredPaths);
@@ -120,6 +122,7 @@ function App() {
 
                 <Route path="/economic" element={<ProtectedRoute requiredRole="admin"><PageTransition transition="fade"><RouteSuspense><EconomicDashboard /></RouteSuspense></PageTransition></ProtectedRoute>} />
                 <Route path="/india-coverage" element={<ProtectedRoute><PageTransition transition="fade"><RouteSuspense><IndiaCoveragePage /></RouteSuspense></PageTransition></ProtectedRoute>} />
+                <Route path="/farmer-procurement" element={<ProtectedRoute><PageTransition transition="fade"><RouteSuspense><FarmerProcurementPage /></RouteSuspense></PageTransition></ProtectedRoute>} />
 
                 {/* All numbered modules use the same production runtime contract.
                     This removes brittle per-module dynamic imports while retaining

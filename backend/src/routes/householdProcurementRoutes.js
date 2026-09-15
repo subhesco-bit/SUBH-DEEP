@@ -25,10 +25,20 @@ const authorize = (roles) => requireRole(...roles);
 const apiResponseHandler = require('../middleware/apiResponseHandler');
 
 const service = new HouseholdProcurementService();
+// Household reads use the authenticated actor rather than a caller-supplied ID.
+router.get('/procurement-plans', authenticate, async (req, res) => {
+  try { res.json({ success: true, data: await service.listProcurementPlans(req.user.id) }); }
+  catch { res.status(503).json({ success: false, error: 'Household plans unavailable' }); }
+});
+
+router.get('/subscriptions', authenticate, async (req, res) => {
+  try { res.json({ success: true, data: await service.listSubscriptions(req.user.id) }); }
+  catch { res.status(503).json({ success: false, error: 'Household subscriptions unavailable' }); }
+});
 
 router.post('/procurement-plans', authenticate, async (req, res) => {
   try {
-    const result = await service.createProcurementPlan(req.body);
+    const result = await service.createProcurementPlan(req.body, req.user.id);
     apiResponseHandler.sendSuccess(res, result, 'Procurement plan created successfully');
   } catch (error) {
     apiResponseHandler.sendError(res, error.message, 'Failed to create procurement plan');
@@ -37,9 +47,8 @@ router.post('/procurement-plans', authenticate, async (req, res) => {
 
 router.get('/procurement-plans/:id', authenticate, async (req, res) => {
   try {
-    // NOTE (pre-existing): not implemented in the service yet - kept as an
-    // honest empty result rather than invented data.
-    const result = { plan: null, message: 'Procurement plan details retrieval' };
+    const result = await service.getProcurementPlan(req.params.id, req.user.id);
+    if (!result) return res.status(404).json({ success: false, error: 'Plan not found' });
     apiResponseHandler.sendSuccess(res, result, 'Procurement plan retrieved successfully');
   } catch (error) {
     apiResponseHandler.sendError(res, error.message, 'Failed to retrieve procurement plan');
@@ -84,9 +93,8 @@ router.post('/aggregate-orders', authenticate, authorize(['admin', 'logistics'])
 
 router.get('/aggregation-groups/:id', authenticate, authorize(['admin', 'logistics']), async (req, res) => {
   try {
-    // NOTE (pre-existing): not implemented in the service yet - kept as an
-    // honest empty result rather than invented data.
-    const result = { group: null, message: 'Aggregation group details retrieval' };
+    const result = await service.getAggregationGroup(req.params.id);
+    if (!result) return res.status(404).json({ success: false, error: 'Aggregation group not found' });
     apiResponseHandler.sendSuccess(res, result, 'Aggregation group retrieved successfully');
   } catch (error) {
     apiResponseHandler.sendError(res, error.message, 'Failed to retrieve aggregation group');

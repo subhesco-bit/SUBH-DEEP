@@ -21,7 +21,8 @@ class HouseholdProcurementService {
    * @param {Object} planData - Procurement plan details
    * @returns {Object} Created procurement plan
    */
-  async createProcurementPlan(planData) {
+  async createProcurementPlan(planData, actorId) {
+    if (!actorId || !planData?.household_id) throw new Error('Household and actor are required');
     const client = await this.pool.connect();
 
     try {
@@ -29,12 +30,12 @@ class HouseholdProcurementService {
 
       // Validate household exists
       const householdResult = await client.query(
-        'SELECT * FROM households WHERE id = $1',
-        [planData.household_id],
+        'SELECT * FROM households WHERE id = $1 AND head_of_household_id = $2',
+        [planData.household_id, actorId],
       );
 
       if (householdResult.rows.length === 0) {
-        throw new Error('Household not found');
+        throw new Error('Household not found or purchase access denied');
       }
 
       const household = householdResult.rows[0];
@@ -126,6 +127,41 @@ class HouseholdProcurementService {
     } finally {
       client.release();
     }
+  }
+
+  async getProcurementPlan(planId, actorId) {
+    const { rows } = await this.pool.query(
+      `SELECT hp.* FROM household_procurement_plans hp
+       JOIN households h ON h.id=hp.household_id
+       WHERE hp.id=$1 AND h.head_of_household_id=$2`, [planId, actorId],
+    );
+    return rows[0] || null;
+  }
+
+  async listProcurementPlans(actorId) {
+    const { rows } = await this.pool.query(
+      `SELECT hp.id,hp.household_id,hp.family_size,hp.consumption_period_start,hp.consumption_period_end,
+              hp.budget_limit,hp.delivery_frequency,hp.status,hp.aggregation_group_id,hp.created_at
+       FROM household_procurement_plans hp JOIN households h ON h.id=hp.household_id
+       WHERE h.head_of_household_id=$1 ORDER BY hp.created_at DESC LIMIT 100`, [actorId],
+    );
+    return rows;
+  }
+
+  async listSubscriptions(actorId) {
+    const { rows } = await this.pool.query(
+      `SELECT hs.id,hs.household_id,hs.product_id,hs.quantity,hs.frequency,hs.start_date,hs.end_date,hs.status
+       FROM household_subscriptions hs JOIN households h ON h.id=hs.household_id
+       WHERE h.head_of_household_id=$1 ORDER BY hs.start_date DESC LIMIT 100`, [actorId],
+    );
+    return rows;
+  }
+
+  async getAggregationGroup(groupId) {
+    const { rows } = await this.pool.query(
+      'SELECT * FROM household_aggregation_groups WHERE id=$1', [groupId],
+    );
+    return rows[0] || null;
   }
 
   /**

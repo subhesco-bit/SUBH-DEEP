@@ -37,7 +37,9 @@ export default function AIChat() {
   ];
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (typeof bottomRef.current?.scrollIntoView === 'function') {
+      bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   }, [messages]);
 
   const _loadChatHistory = async () => {
@@ -49,12 +51,13 @@ export default function AIChat() {
     }
   };
 
-  const sendMessage = async () => {
-    if (!input.trim()) return;
+  const sendMessage = async (messageOverride) => {
+    const messageText = typeof messageOverride === 'string' ? messageOverride.trim() : input.trim();
+    if (!messageText) return;
 
     const userMessage = {
       role: 'user',
-      content: input,
+      content: messageText,
       attachments,
       timestamp: new Date().toISOString(),
     };
@@ -64,30 +67,41 @@ export default function AIChat() {
     setLoading(true);
 
     try {
-      const response = await api.post('/ai/unified', {
-        requestType: 'conversational',
-        query: userMessage.content,
-        agentPreference: selectedAgent,
-        context,
-        attachments,
+      const response = await api.post('/ai-gateway/chat', {
+        moduleId: selectedAgent,
+        capability: 'governed-conversation',
+        prompt: userMessage.content,
+        context: {
+          ...context,
+          attachmentMetadata: attachments.map(file => ({
+            name: file.name,
+            type: file.type,
+            size: file.size,
+          })),
+        },
       });
 
       const aiMessage = {
         role: 'assistant',
-        content: response.data.data.response,
-        agent: response.data.data.agent,
-        metadata: response.data.data.metadata,
-        decision: response.data.data.decision,
+        content: response.data.content,
+        agent: selectedAgent,
+        metadata: {
+          provider: response.data.provider,
+          model: response.data.model,
+          provenance: response.data.provenance,
+          confidence: response.data.confidence,
+        },
         timestamp: new Date().toISOString(),
       };
       setMessages(prev => [...prev, aiMessage]);
-      setContext(response.data.data.context);
-      setDecision(response.data.data.decision);
     } catch (err) {
       console.error('AI chat error:', err);
+      const unavailable = err.response?.data?.error ||
+        'No AI provider is available. Check the AI gateway configuration and try again.';
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: 'Sorry, I encountered an error. Please try again.',
+        content: unavailable,
+        unavailable: true,
         timestamp: new Date().toISOString(),
       }]);
     } finally {
@@ -111,7 +125,7 @@ export default function AIChat() {
 
   const handleSuggestionClick = (suggestion) => {
     setInput(suggestion);
-    sendMessage();
+    sendMessage(suggestion);
   };
 
   const handleDecisionAction = async (action) => {

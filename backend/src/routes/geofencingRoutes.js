@@ -17,7 +17,7 @@
  */
 const express = require('express');
 const router = express.Router();
-const geofencingService = require('../services/legacy/geofencingService');
+const geofencingService = require('../services/geofencingService');
 const { authMiddleware } = require('../middleware/auth');
 
 const fail = (res, e) => res

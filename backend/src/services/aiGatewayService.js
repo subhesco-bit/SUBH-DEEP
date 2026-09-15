@@ -3,6 +3,7 @@
 const aiBackbone = require('./legacy/aiBackboneService');
 const libraryKnowledge = require('./libraryKnowledgeService');
 const { logger } = require('../utils/logger');
+const generationRuns = require('./aiGenerationRunStore');
 
 const MAX_PROMPT_LENGTH = 10000;
 const MAX_CONTEXT_ITEMS = 12;
@@ -49,7 +50,7 @@ async function loadLibraryContext(prompt, moduleId, context = {}) {
   }
 }
 
-async function run({ moduleId, capability, prompt, context = {}, provider, maxTokens, ...options } = {}) {
+async function run({ moduleId, capability, prompt, context = {}, provider, maxTokens, companyId, actorId, ...options } = {}) {
   const normalizedModuleId = normalizeText(moduleId, 'moduleId');
   const normalizedCapability = normalizeText(capability, 'capability');
   const normalizedPrompt = normalizeText(prompt, 'prompt');
@@ -60,6 +61,8 @@ async function run({ moduleId, capability, prompt, context = {}, provider, maxTo
     normalizedCapability,
     libraryContext,
   );
+  const generationRun = await generationRuns.start({ companyId, actorId, moduleId: normalizedModuleId,
+    capability: normalizedCapability, prompt: normalizedPrompt, context });
 
   try {
     const result = await aiBackbone.callAI(governedPrompt, {
@@ -68,7 +71,7 @@ async function run({ moduleId, capability, prompt, context = {}, provider, maxTo
       ...(maxTokens ? { maxTokens } : {}),
     });
 
-    return {
+    const response = {
       success: true,
       status: 'generated',
       moduleId: normalizedModuleId,
@@ -93,12 +96,14 @@ async function run({ moduleId, capability, prompt, context = {}, provider, maxTo
         externalActionsTaken: false,
       },
     };
+    await generationRuns.finish(generationRun, { ...response, usage: result.usage }, response.provenance.libraryMatches);
+    return response;
   } catch (error) {
     const status = /not configured|not available|no ai provider/i.test(error.message) ?
       'not_configured' :
       'provider_error';
     logger.warn('Governed AI request unavailable', { moduleId: normalizedModuleId, capability: normalizedCapability, status });
-    return {
+    const response = {
       success: false,
       status,
       moduleId: normalizedModuleId,
@@ -109,6 +114,8 @@ async function run({ moduleId, capability, prompt, context = {}, provider, maxTo
       },
       safety: { humanReviewRequired: true, externalActionsTaken: false },
     };
+    await generationRuns.finish(generationRun, response, response.provenance.libraryMatches);
+    return response;
   }
 }
 

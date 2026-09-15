@@ -97,3 +97,11 @@ describe('shared password verification', () => {
     },
   );
 });
+
+describe('canonical authentication module', () => {
+  test('legacy entry points delegate to the same service instance', () => {
+    const canonical = require('../authService.js');
+    expect(require('../dual-use/authService')).toBe(canonical);
+    expect(require('../authService/index')).toBe(canonical);
+  });
+});

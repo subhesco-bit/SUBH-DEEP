@@ -156,8 +156,11 @@ export const aiAPI = {
 };
 
 export const aiGatewayAPI = {
-  getGatewayStatus: () => api.get('/ai/gateway/status'),
-  routeRequest: (data) => api.post('/ai/gateway/route', data),
+  getGatewayStatus: () => api.get('/ai-gateway/health'),
+  getProviders: () => api.get('/ai-gateway/providers'),
+  getStatistics: () => api.get('/ai-gateway/statistics'),
+  getModels: (provider) => api.get(`/ai-gateway/models/${encodeURIComponent(provider)}`),
+  routeRequest: (data) => api.post('/ai-gateway/chat', data),
 };
 
 export const aiClusterAPI = {
@@ -4320,8 +4323,20 @@ export const roadAPI = {
 };
 
 export const roboticsAPI = {
-  getRobotics: () => api.get('/robotics'),
-  manageRobotics: (data) => api.post('/robotics/manage', data),
+  registerDevice: (data) => api.post('/robotics/devices', data),
+  certifyDevice: (id, data) => api.post(`/robotics/devices/${id}/certification`, data),
+  publishTelemetry: (id, data) => api.post(`/robotics/devices/${id}/telemetry`, data),
+  getTelemetry: (id, limit = 100) => api.get(`/robotics/devices/${id}/telemetry`, { params: { limit } }),
+  emergencyStop: (id, reason) => api.post(`/robotics/devices/${id}/emergency-stop`, { reason }),
+  clearEmergencyStop: (id, inspection) => api.post(`/robotics/devices/${id}/emergency-stop/clear`, { inspection }),
+  createMission: (data) => api.post('/robotics/missions', data),
+  getMission: (id) => api.get(`/robotics/missions/${id}`),
+  approveMission: (id, data) => api.post(`/robotics/missions/${id}/approval`, data),
+  startMission: (id) => api.post(`/robotics/missions/${id}/start`),
+  pauseMission: (id, reason) => api.post(`/robotics/missions/${id}/pause`, { reason }),
+  completeMission: (id, reason) => api.post(`/robotics/missions/${id}/complete`, { reason }),
+  abortMission: (id, reason) => api.post(`/robotics/missions/${id}/abort`, { reason }),
+  planAdvisory: (data) => api.post('/robotics/planning/advisory', data),
 };
 
 export const rotationAPI = {

@@ -1,0 +1,123 @@
+{
+  "schema": "ebdesign.library.merge-transaction.v1",
+  "id": "MERGE-20260915-AUTH-GEO",
+  "recorded_at": "2026-09-14T18:55:12.9319802Z",
+  "policy": "one canonical implementation; compatibility delegates contain no business logic; historical source retained by Git and this ledger",
+  "sources": [
+    {
+      "path": "C:\\Users\\DIYA GOEL\\Documents\\deep seek.txt",
+      "bytes": 2262552,
+      "sha256": "caa1d64ccc915db4b6ff390fb7bc3a19429480625de1417ebee579704fa8d8cb",
+      "authority": "design evidence only"
+    },
+    {
+      "path": "C:\\Users\\DIYA GOEL\\Documents\\coding 1.txt",
+      "bytes": 1510246,
+      "sha256": "882f0dfbf1e1d29ebffcaf9f670efc5afc3fd1ef08863571edbedd42329c031c",
+      "authority": "design evidence only"
+    },
+    {
+      "path": "C:\\Users\\DIYA GOEL\\Documents\\coding 2.txt",
+      "bytes": 370516,
+      "sha256": "6fdc7769ae78bb0a33cbd7f65c1529f307f807f36c9e9770be4440799e1ec924",
+      "authority": "design evidence only"
+    },
+    {
+      "path": "C:\\Users\\DIYA GOEL\\Documents\\coding 3.txt",
+      "bytes": 391198,
+      "sha256": "2223e8e1560eb01b6c2ac2afdf79c86ecb8445a2966e5609a68f2f679dfb183b",
+      "authority": "design evidence only"
+    }
+  ],
+  "canonical_outputs": [
+    {
+      "path": "backend/src/services/authService.js",
+      "sha256": "0aca36c7fc8729b32616eff3786a357d2ce0c35b733f260d38d44c273e1f3d3e"
+    },
+    {
+      "path": "backend/src/services/geofencingService.js",
+      "sha256": "1e1590e2092a1a1049edba9684032e4ad073532a8edb98262691c912a11aa47c"
+    }
+  ],
+  "compatibility_delegates": [
+    "backend/src/services/dual-use/authService.js",
+    "backend/src/services/authService/index.js",
+    "backend/src/services/legacy/geofencingService.js"
+  ],
+  "retired_implementations": [
+    {
+      "path": "backend/src/services/authService/config.js",
+      "head_blob": "6905618c9549048d9a79345f2280443837311bdb",
+      "disposition": "retired after hardened canonical service absorbed the public behavior"
+    },
+    {
+      "path": "backend/src/services/authService/oauth.js",
+      "head_blob": "9a5ef0c346934671ac9b491ed6563017b7b6d84b",
+      "disposition": "retired after hardened canonical service absorbed the public behavior"
+    },
+    {
+      "path": "backend/src/services/authService/permissions.js",
+      "head_blob": "207a90c7071e8e9a2649cbf92e320c21a332c76d",
+      "disposition": "retired after hardened canonical service absorbed the public behavior"
+    },
+    {
+      "path": "backend/src/services/authService/router.js",
+      "head_blob": "bbabad8b3af5233dc7c622dadbc6ba79e728c04c",
+      "disposition": "retired after hardened canonical service absorbed the public behavior"
+    },
+    {
+      "path": "backend/src/services/authService/store.js",
+      "head_blob": "cb53c331b68b9ab336c012c137ad9ec43b0c136e",
+      "disposition": "retired after hardened canonical service absorbed the public behavior"
+    },
+    {
+      "path": "backend/src/services/authService/tokens.js",
+      "head_blob": "4c756befa1f8c014dd45c4c704f8f4a082c662a2",
+      "disposition": "retired after hardened canonical service absorbed the public behavior"
+    },
+    {
+      "path": "backend/src/services/authService/totp.js",
+      "head_blob": "3275b29db8f81d0e3c155fab2149b3af167e2ad0",
+      "disposition": "retired after hardened canonical service absorbed the public behavior"
+    },
+    {
+      "path": "backend/src/services/authService/twoFactor.js",
+      "head_blob": "74c0a3fcd4ad7c841fe39d428473c32360cb8132",
+      "disposition": "retired after hardened canonical service absorbed the public behavior"
+    },
+    {
+      "path": "backend/src/services/authService/userAuth.js",
+      "head_blob": "8ddc19a1af5864c00ed5f68267bf8b0c94ffbd31",
+      "disposition": "retired after hardened canonical service absorbed the public behavior"
+    }
+  ],
+  "retained_auth_capabilities": [
+    "JWT access and refresh tokens",
+    "OAuth2",
+    "MFA/TOTP",
+    "role permissions",
+    "production fallback refusal",
+    "public registration role enforcement",
+    "auth rate limiting",
+    "signed OAuth state",
+    "bcrypt-only password verification"
+  ],
+  "retained_geo_capabilities": [
+    "circular geofence CRUD",
+    "entry and exit event detection",
+    "manual location check-in",
+    "current occupancy",
+    "driver arrival verification",
+    "accuracy-aware results",
+    "signal bus alerts"
+  ],
+  "verification": {
+    "focused_tests": "107 passed, 0 failed across focused suites",
+    "authentication_identity": "canonical = dual-use delegate = split-index delegate",
+    "geofencing_identity": "canonical = legacy delegate = M560100 adapter",
+    "mounted_route_loads": true,
+    "frontend_production_build": "passed",
+    "repository_production_gate": "failed: 390 broken imports; 1623 placeholder files"
+  },
+  "evidence_document": "docs/source-concept-reconciliation-20260915.md"
+}

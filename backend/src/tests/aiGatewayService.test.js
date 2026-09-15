@@ -6,9 +6,15 @@ jest.mock('../services/libraryKnowledgeService', () => ({
   buildAIContext: jest.fn(),
 }));
 
+jest.mock('../services/aiGenerationRunStore', () => ({
+  start: jest.fn().mockResolvedValue({ id: 'run-1', startedAt: 1 }),
+  finish: jest.fn().mockResolvedValue(undefined),
+}));
+
 const aiBackbone = require('../services/legacy/aiBackboneService');
 const libraryKnowledge = require('../services/libraryKnowledgeService');
 const aiGateway = require('../services/aiGatewayService');
+const generationRuns = require('../services/aiGenerationRunStore');
 
 describe('governed AI gateway', () => {
   beforeEach(() => {
@@ -33,6 +39,8 @@ describe('governed AI gateway', () => {
     expect(result.confidence.score).toBeNull();
     expect(result.provenance.libraryMatches[0].key).toBe('M030');
     expect(result.safety.externalActionsTaken).toBe(false);
+    expect(generationRuns.finish).toHaveBeenCalledWith(expect.objectContaining({ id: 'run-1' }),
+      expect.objectContaining({ status: 'generated' }), expect.any(Array));
   });
 
   test('returns an honest unavailable envelope without leaking provider errors', async () => {

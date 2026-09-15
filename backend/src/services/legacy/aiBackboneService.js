@@ -15,28 +15,41 @@
 const { logger } = require('../../utils/logger');
 const fetch = require('node-fetch');
 
+const DEFAULT_AI_TIMEOUT_MS = 60_000;
+
+async function fetchWithTimeout(url, options = {}, timeoutMs = DEFAULT_AI_TIMEOUT_MS) {
+  const boundedTimeout = Math.min(Math.max(Number(timeoutMs) || DEFAULT_AI_TIMEOUT_MS, 1_000), 120_000);
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), boundedTimeout);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 // ============================================================================
 // AI PROVIDER CONFIGURATIONS
 // ============================================================================
 
 const AI_PROVIDERS = {
   claude: {
-    enabled: process.env.CLAUDE_ENABLED === 'true',
-    apiKey: process.env.CLAUDE_API_KEY,
+    enabled: process.env.CLAUDE_ENABLED !== 'false' && Boolean(process.env.ANTHROPIC_API_KEY || process.env.CLAUDE_API_KEY),
+    apiKey: process.env.ANTHROPIC_API_KEY || process.env.CLAUDE_API_KEY,
     baseUrl: 'https://api.anthropic.com/v1',
     model: process.env.CLAUDE_MODEL || 'claude-3-5-sonnet-20241022',
     maxTokens: parseInt(process.env.CLAUDE_MAX_TOKENS) || 4096,
   },
   openai: {
-    enabled: process.env.OPENAI_ENABLED === 'true',
+    enabled: process.env.OPENAI_ENABLED !== 'false' && Boolean(process.env.OPENAI_API_KEY),
     apiKey: process.env.OPENAI_API_KEY,
     baseUrl: process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1',
-    model: process.env.OPENAI_MODEL || 'gpt-4-turbo',
+    model: process.env.OPENAI_MODEL || 'gpt-5.4-mini',
     maxTokens: parseInt(process.env.OPENAI_MAX_TOKENS) || 4096,
   },
   gemini: {
-    enabled: process.env.GEMINI_ENABLED === 'true',
-    apiKey: process.env.GEMINI_API_KEY,
+    enabled: process.env.GEMINI_ENABLED !== 'false' && Boolean(process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY),
+    apiKey: process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY,
     baseUrl: 'https://generativelanguage.googleapis.com/v1beta',
     model: process.env.GEMINI_MODEL || 'gemini-pro',
     maxTokens: parseInt(process.env.GEMINI_MAX_TOKENS) || 4096,
@@ -98,7 +111,7 @@ async function callClaudeAI(prompt, options = {}) {
 
   while (retryCount < maxRetries) {
     try {
-      const response = await fetch(`${AI_PROVIDERS.claude.baseUrl}/messages`, {
+      const response = await fetchWithTimeout(`${AI_PROVIDERS.claude.baseUrl}/messages`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -114,9 +127,10 @@ async function callClaudeAI(prompt, options = {}) {
               content: prompt,
             },
           ],
-          ...options,
+          ...(options.system ? { system: options.system } : {}),
+          ...(options.temperature !== undefined ? { temperature: Number(options.temperature) } : {}),
         }),
-      });
+      }, options.timeoutMs);
 
       if (!response.ok) {
         const error = await response.text();
@@ -179,7 +193,7 @@ async function callOpenAI(prompt, options = {}) {
 
   while (retryCount < maxRetries) {
     try {
-      const response = await fetch(`${AI_PROVIDERS.openai.baseUrl}/chat/completions`, {
+      const response = await fetchWithTimeout(`${AI_PROVIDERS.openai.baseUrl}/responses`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -187,52 +201,60 @@ async function callOpenAI(prompt, options = {}) {
         },
         body: JSON.stringify({
           model: options.model || AI_PROVIDERS.openai.model,
-          messages: [
-            {
-              role: 'user',
-              content: prompt,
-            },
-          ],
-          max_tokens: options.maxTokens || AI_PROVIDERS.openai.maxTokens,
-          temperature: options.temperature || 0.7,
-          ...options,
+          input: prompt,
+          max_output_tokens: options.maxTokens || AI_PROVIDERS.openai.maxTokens,
+          ...(options.system ? { instructions: options.system } : {}),
         }),
-      });
+      }, options.timeoutMs);
 
       if (!response.ok) {
-        const error = await response.text();
-        if (response.status === 429 && retryCount < maxRetries - 1) {
+        const responseBody = await response.text();
+        const nonRetryableQuota = /insufficient_quota|credit_balance_exhausted/i.test(responseBody);
+        if (response.status === 429 && !nonRetryableQuota && retryCount < maxRetries - 1) {
           retryCount++;
           const delay = Math.pow(2, retryCount) * 1000;
           logger.warn(`OpenAI API rate limited, retrying in ${delay}ms (attempt ${retryCount}/${maxRetries})`);
           await new Promise(resolve => setTimeout(resolve, delay));
           continue;
         }
-        throw new Error(`OpenAI API error: ${response.status} - ${error}`);
+        const error = new Error(nonRetryableQuota ?
+          'OpenAI API quota is exhausted' :
+          `OpenAI API request failed with status ${response.status}`);
+        error.retryable = !nonRetryableQuota && response.status >= 500;
+        throw error;
       }
 
       const data = await response.json();
+
+      const content = data.output_text || data.output
+        ?.flatMap(item => item.content || [])
+        .find(item => item.type === 'output_text')?.text;
+      if (!content) {
+        const error = new Error('OpenAI returned no text output');
+        error.retryable = false;
+        throw error;
+      }
 
       aiRequestTracker.successfulRequests++;
       aiRequestTracker.providerStats.openai.success++;
 
       logger.info('OpenAI request successful', {
-        model: AI_PROVIDERS.openai.model,
+        model: data.model || options.model || AI_PROVIDERS.openai.model,
         tokens: data.usage?.total_tokens,
       });
 
       return {
         provider: 'openai',
-        model: AI_PROVIDERS.openai.model,
-        content: data.choices[0].message.content,
+        model: data.model || options.model || AI_PROVIDERS.openai.model,
+        content,
         usage: data.usage,
-        finishReason: data.choices[0].finish_reason,
+        finishReason: data.status || data.incomplete_details?.reason || 'completed',
       };
     } catch (error) {
-      aiRequestTracker.failedRequests++;
-      aiRequestTracker.providerStats.openai.failed++;
       logger.error('OpenAI request failed', { error: error.message, retryCount });
-      if (retryCount >= maxRetries - 1) {
+      if (error.retryable === false || retryCount >= maxRetries - 1) {
+        aiRequestTracker.failedRequests++;
+        aiRequestTracker.providerStats.openai.failed++;
         throw error;
       }
       retryCount++;
@@ -260,7 +282,7 @@ async function callGeminiAI(prompt, options = {}) {
 
   while (retryCount < maxRetries) {
     try {
-      const response = await fetch(
+      const response = await fetchWithTimeout(
         `${AI_PROVIDERS.gemini.baseUrl}/${AI_PROVIDERS.gemini.model}:generateContent?key=${AI_PROVIDERS.gemini.apiKey}`,
         {
           method: 'POST',
@@ -279,10 +301,11 @@ async function callGeminiAI(prompt, options = {}) {
             ],
             generationConfig: {
               maxOutputTokens: options.maxTokens || AI_PROVIDERS.gemini.maxTokens,
-              temperature: options.temperature || 0.7,
+              temperature: options.temperature ?? 0.7,
             },
           }),
         },
+        options.timeoutMs,
       );
 
       if (!response.ok) {
@@ -341,7 +364,7 @@ async function callAzureOpenAI(prompt, options = {}) {
   aiRequestTracker.providerStats.azure.total++;
 
   try {
-    const response = await fetch(
+    const response = await fetchWithTimeout(
       `${AI_PROVIDERS.azure.endpoint}/openai/deployments/${AI_PROVIDERS.azure.deployment}/chat/completions?api-version=${AI_PROVIDERS.azure.apiVersion}`,
       {
         method: 'POST',
@@ -357,9 +380,10 @@ async function callAzureOpenAI(prompt, options = {}) {
             },
           ],
           max_tokens: options.maxTokens || 4096,
-          temperature: options.temperature || 0.7,
+          temperature: options.temperature ?? 0.7,
         }),
       },
+      options.timeoutMs,
     );
 
     if (!response.ok) {
@@ -409,7 +433,7 @@ async function callHuggingFace(prompt, options = {}) {
   while (retryCount < maxRetries) {
     try {
       const model = options.model || AI_PROVIDERS.huggingface.defaultModel;
-      const response = await fetch(`${AI_PROVIDERS.huggingface.baseUrl}/models/${model}`, {
+      const response = await fetchWithTimeout(`${AI_PROVIDERS.huggingface.baseUrl}/models/${model}`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${AI_PROVIDERS.huggingface.apiKey}`,
@@ -419,11 +443,11 @@ async function callHuggingFace(prompt, options = {}) {
           inputs: prompt,
           parameters: {
             max_new_tokens: options.maxTokens || 512,
-            temperature: options.temperature || 0.7,
+            temperature: options.temperature ?? 0.7,
             return_full_text: false,
           },
         }),
-      });
+      }, options.timeoutMs);
 
       if (!response.ok) {
         const error = await response.text();
@@ -483,7 +507,7 @@ async function callOllamaAI(prompt, options = {}) {
 
   while (retryCount < maxRetries) {
     try {
-      const response = await fetch(`${AI_PROVIDERS.ollama.baseUrl}/api/chat`, {
+      const response = await fetchWithTimeout(`${AI_PROVIDERS.ollama.baseUrl}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -500,10 +524,10 @@ async function callOllamaAI(prompt, options = {}) {
           stream: false,
           options: {
             num_predict: options.maxTokens || AI_PROVIDERS.ollama.maxTokens,
-            temperature: options.temperature || 0.7,
+            temperature: options.temperature ?? 0.7,
           },
         }),
-      });
+      }, options.timeoutMs);
 
       if (!response.ok) {
         const error = await response.text();
@@ -561,6 +585,9 @@ async function callOllamaAI(prompt, options = {}) {
  */
 async function callAI(prompt, options = {}) {
   const provider = options.provider || getPreferredProvider();
+  if (provider && !AI_PROVIDERS[provider]) {
+    throw new Error(`Unknown AI provider: ${provider}`);
+  }
 
   switch (provider) {
     case 'claude':
@@ -603,7 +630,7 @@ function getPreferredProvider() {
   if (AI_PROVIDERS.azure.enabled) return 'azure';
   if (AI_PROVIDERS.huggingface.enabled) return 'huggingface';
   if (AI_PROVIDERS.ollama.enabled) return 'ollama';
-  return 'claude'; // Default fallback
+  return null;
 }
 
 // ============================================================================
@@ -898,5 +925,6 @@ module.exports = {
   // Configuration
   AI_PROVIDERS,
   aiRequestTracker,
+  fetchWithTimeout,
 };
 

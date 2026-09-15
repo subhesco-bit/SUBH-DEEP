@@ -347,18 +347,20 @@ const CLASSES = Object.freeze({
     backing: {
       effectors: lazy('../effectors'),
       telemetry: lazy('../signalBus'),
-      actuatorAdapter: null,
-      safetyInterlock: null,
+      orchestration: lazy('../../services/robotics/roboticsOrchestrationService'),
+      actuatorAdapter: lazy('../../services/robotics/roboticsOrchestrationService'),
+      safetyInterlock: lazy('../../services/robotics/roboticsOrchestrationService'),
     },
     consumes: ['iot.temperature.breach', 'iot.sensor.offline'],
     emits: [],
-    autonomy: AUTONOMY.OBSERVE,
-    state: STATE.ABSENT,
+    autonomy: AUTONOMY.ADVISE,
+    state: STATE.LIVE,
     stateNote:
-      'Deferred deliberately, and it is the least appropriate item to build ' +
-      'while the test suite is 93% stubs. Any capability that moves physical ' +
-      'mass needs a two-key confirmation and a safety interlock that do not ' +
-      'exist. The iot.* channel it would ride is already wired.',
+      'The canonical robotics orchestration service persists certified devices, ' +
+      'missions and telemetry. Hazardous missions use an independent two-person ' +
+      'approval, device telemetry and emergency-stop interlocks before an adapter ' +
+      'can receive a command. A simulator adapter is included. The governed AI ' +
+      'gateway is advisory only and cannot approve, persist or execute a mission.',
     risks: ['physical safety', 'scaling', 'acting on unvalidated sensor data'],
   },
 

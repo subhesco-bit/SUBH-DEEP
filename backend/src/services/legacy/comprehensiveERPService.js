@@ -12,6 +12,7 @@ const { logger } = require('../../utils/logger');
 const { getPostgreSQL } = require('../../database/connection');
 const { signalBus } = require('../../core/signalBus');
 const aiBackbone = require('./aiBackboneService');
+const canonicalAccounting = require('../finance/enterpriseAccountingService');
 
 // ============================================================================
 // MODULE 1: FINANCIAL ACCOUNTING (FI) / GENERAL LEDGER (GL)
@@ -277,6 +278,30 @@ const generalLedger = {
     }
   },
 };
+
+// Financial accounting is owned by the canonical 996 ledger. Keep the public
+// comprehensive-ERP method names as compatibility adapters so callers cannot
+// create a second, conflicting ledger in the older erp_* tables.
+Object.assign(generalLedger, {
+  createChartOfAccounts: canonicalAccounting.provisionChart,
+  createGLAccount: canonicalAccounting.createAccount,
+  postJournalEntry: canonicalAccounting.createAndPostJournal,
+  createDraftJournal: canonicalAccounting.createDraftJournal,
+  postJournal: canonicalAccounting.postJournal,
+  reverseJournal: canonicalAccounting.reverseJournal,
+  setPeriodStatus: canonicalAccounting.setPeriodStatus,
+  generateTrialBalance: (filters = {}, toDate, companyId) => canonicalAccounting.trialBalance(
+    typeof filters === 'object' ? filters : { fromDate: filters, toDate, companyId },
+  ),
+  generateBalanceSheet: async (filters = {}, companyId) => {
+    const normalized = typeof filters === 'object' ? filters : { toDate: filters, companyId };
+    return (await canonicalAccounting.financialStatements(normalized)).balanceSheet;
+  },
+  generateProfitLoss: async (filters = {}, toDate, companyId) => {
+    const normalized = typeof filters === 'object' ? filters : { fromDate: filters, toDate, companyId };
+    return (await canonicalAccounting.financialStatements(normalized)).profitAndLoss;
+  },
+});
 
 // ============================================================================
 // MODULE 2: CONTROLLING (CO) / COST ACCOUNTING

@@ -262,6 +262,27 @@ const BACKENDS = {
   },
 };
 
+function registerBackend(name, adapter) {
+  if (!/^[a-z][a-z0-9_-]{1,39}$/.test(String(name)) || typeof adapter !== 'function') {
+    throw new Error('A solver backend needs a safe name and an executable adapter');
+  }
+  if (name === 'classical') throw new Error('The classical baseline cannot be replaced at runtime');
+  BACKENDS[name] = adapter;
+}
+
+function validateInstance(objectiveId, instance) {
+  const obj = OBJECTIVES.get(objectiveId);
+  if (!obj) throw new Error(`Unknown objective: ${objectiveId}`);
+  if (!instance || typeof instance !== 'object' || Array.isArray(instance)) throw new Error('instance must be an object');
+  const items = obj.items(instance); const slots = obj.slots(instance);
+  if (!Array.isArray(items) || !Array.isArray(slots) || items.length === 0 || slots.length === 0) {
+    throw new Error('instance must contain at least one item and one slot');
+  }
+  if (items.length > 10000 || slots.length > 10000) throw new Error('instance exceeds the 10,000 item/slot execution limit');
+  if (new Set(items).size !== items.length || new Set(slots).size !== slots.length) throw new Error('item and slot identifiers must be unique');
+  return { itemCount: items.length, slotCount: slots.length };
+}
+
 // ---------------------------------------------------------------- entry point
 
 /**
@@ -274,6 +295,7 @@ const BACKENDS = {
 function solve(objectiveId, instance, { backend = 'classical', ...opts } = {}) {
   const obj = OBJECTIVES.get(objectiveId);
   if (!obj) throw new Error(`Unknown objective: ${objectiveId}`);
+  validateInstance(objectiveId, instance);
   const run = BACKENDS[backend];
   if (!run) throw new Error(`Unknown solver backend: ${backend}`);
 
@@ -314,6 +336,29 @@ function solve(objectiveId, instance, { backend = 'classical', ...opts } = {}) {
   return out;
 }
 
+/** Async variant for remote/provider adapters; classical behavior is identical. */
+async function solveAsync(objectiveId, instance, { backend = 'classical', ...opts } = {}) {
+  const obj = OBJECTIVES.get(objectiveId);
+  if (!obj) throw new Error(`Unknown objective: ${objectiveId}`);
+  validateInstance(objectiveId, instance);
+  const run = BACKENDS[backend];
+  if (!run) throw new Error(`Unknown solver backend: ${backend}`);
+  const started = Date.now();
+  const result = await run(obj, instance, opts);
+  if (!result || typeof result.assignment !== 'object' || !Number.isFinite(Number(result.cost))) {
+    throw new Error(`Solver backend ${backend} returned an invalid result contract`);
+  }
+  const violations = Object.entries(result.assignment).filter(([item, slot]) => !obj.feasible(item, slot, instance))
+    .map(([item, slot]) => ({ item, slot, reason: 'hard constraint not satisfied' }));
+  const unplaced = Array.isArray(result.unplaced) ? result.unplaced : [];
+  return { objectiveId, backend, assignment: result.assignment, cost: Number(result.cost),
+    greedyCost: result.greedyCost ?? null, improvement: result.improvement ?? null,
+    improvementPct: result.greedyCost ? Math.round((result.improvement / result.greedyCost) * 1000) / 10 : null,
+    iterations: result.iterations ?? null, unplaced, feasible: violations.length === 0 && unplaced.length === 0,
+    violations, elapsedMs: Date.now() - started,
+    guarantee: result.guarantee || 'backend result — feasibility verified; optimality not independently proven' };
+}
+
 function listObjectives() {
   return [...OBJECTIVES.values()].map((o) => ({
     id: o.id, description: o.description, applications: o.applications,
@@ -321,7 +366,7 @@ function listObjectives() {
 }
 
 module.exports = {
-  registerObjective, listObjectives, solve,
+  registerObjective, registerBackend, validateInstance, listObjectives, solve, solveAsync,
   OBJECTIVES, BACKENDS,
   _internal: { greedy, localSearch },
 };

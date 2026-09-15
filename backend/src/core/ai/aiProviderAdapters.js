@@ -16,10 +16,12 @@ const { logger } = require('../../utils/logger');
  * Maps provider keys to their required environment variables
  */
 const PROVIDER_ENV = {
-  claude: { primary: 'ANTHROPIC_API_KEY' },
+  claude: { primary: 'ANTHROPIC_API_KEY', alt: 'CLAUDE_API_KEY' },
   openai: { primary: 'OPENAI_API_KEY' },
   gemini: { primary: 'GEMINI_API_KEY', alt: 'GOOGLE_API_KEY' },
-  deepseek: { primary: 'DEEPSEEK_API_KEY' },
+  azure: { primary: 'AZURE_OPENAI_API_KEY' },
+  huggingface: { primary: 'HUGGINGFACE_API_KEY' },
+  ollama: { primary: 'OLLAMA_BASE_URL', keyless: true },
 };
 
 /**
@@ -30,7 +32,8 @@ function providerStatus(providerKey) {
   const env = PROVIDER_ENV[providerKey];
   if (!env) return { provider: providerKey, known: false, configured: false };
 
-  const configured = Boolean(process.env[env.primary] || (env.alt && process.env[env.alt]));
+  const configured = env.keyless ? process.env.OLLAMA_ENABLED === 'true' :
+    Boolean(process.env[env.primary] || (env.alt && process.env[env.alt]));
   return {
     provider: providerKey,
     known: true,
@@ -71,6 +74,11 @@ function validateProviderConfig(providerKey) {
 
   const hasPrimary = Boolean(process.env[env.primary]);
   const hasAlt = env.alt && Boolean(process.env[env.alt]);
+
+  if (env.keyless) {
+    return process.env.OLLAMA_ENABLED === 'true' ? { valid: true, keyless: true } :
+      { valid: false, reason: 'Provider is not enabled' };
+  }
 
   if (!hasPrimary && !hasAlt) {
     return { valid: false, reason: 'No API key configured' };

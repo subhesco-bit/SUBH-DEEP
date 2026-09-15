@@ -5,7 +5,7 @@
 
 const express = require('express');
 const { logger } = require('../../utils/logger');
-const { authMiddleware } = require('../../middleware/auth');
+const { authMiddleware, requireRole } = require('../../middleware/auth');
 const GSTService = require('../../services/finance/gstService');
 
 const router = express.Router();
@@ -16,6 +16,10 @@ router.get('/health', (req, res) => {
 });
 
 const gstService = GSTService;
+const financeRole = requireRole('admin', 'super_admin', 'finance', 'accountant');
+const fail = (res, error, fallback) => res.status(error.statusCode || 500).json({
+  error: error.statusCode ? error.message : fallback,
+});
 
 // ============================================================================
 // GST CALCULATION ROUTES
@@ -39,7 +43,7 @@ router.post('/calculate/order/:orderId', authMiddleware, async (req, res) => {
  */
 router.post('/calculate/product', authMiddleware, async (req, res) => {
   try {
-    const result = gstService.calculateProductGST(req.body);
+    const result = await gstService.calculateProductGST(req.body);
     res.json(result);
   } catch (error) {
     logger.error('Calculate product GST API error', { error: error.message, stack: error.stack });
@@ -71,9 +75,12 @@ router.get('/summary', authMiddleware, async (req, res) => {
 /**
  * Generate GST invoice for an order
  */
-router.post('/invoice/:orderId', authMiddleware, async (req, res) => {
+router.post('/invoice/:orderId', authMiddleware, financeRole, async (req, res) => {
   try {
-    const result = await gstService.generateGSTInvoice(req.params.orderId);
+    const result = await gstService.generateGSTInvoice(req.params.orderId, {
+      companyId: req.body.companyId,
+      actorId: req.user?.id,
+    });
     res.json(result);
   } catch (error) {
     logger.error('Generate GST invoice API error', { error: error.message, stack: error.stack });
@@ -84,7 +91,7 @@ router.post('/invoice/:orderId', authMiddleware, async (req, res) => {
 /**
  * Update order with GST details
  */
-router.put('/order/:orderId/gst', authMiddleware, async (req, res) => {
+router.put('/order/:orderId/gst', authMiddleware, financeRole, async (req, res) => {
   try {
     const result = await gstService.updateOrderGST(req.params.orderId, req.body);
     res.json(result);
@@ -135,6 +142,16 @@ router.get('/rate/:category', async (req, res) => {
   }
 });
 
+router.post('/calculate/components', authMiddleware, async (req, res) => {
+  try { res.json(gstService.calculateTaxComponents(req.body)); }
+  catch (error) { fail(res, error, 'Failed to calculate GST components'); }
+});
+
+router.get('/rate/hsn/:hsnCode', authMiddleware, async (req, res) => {
+  try { res.json(await gstService.resolveEffectiveRate({ ...req.query, hsnCode: req.params.hsnCode })); }
+  catch (error) { fail(res, error, 'Failed to resolve GST rate'); }
+});
+
 // ============================================================================
 // GST RATES MANAGEMENT ROUTES
 // ============================================================================
@@ -158,29 +175,25 @@ router.get('/rates', authMiddleware, async (req, res) => {
 /**
  * Add or update GST rate
  */
-router.post('/rates', authMiddleware, async (req, res) => {
+router.post('/rates', authMiddleware, financeRole, async (req, res) => {
   try {
     const { productCategory, gstRate, hsnCode, description, effectiveDate } = req.body;
     
-    if (!productCategory || !gstRate || !effectiveDate) {
+    if (!productCategory || !/^\d{2,8}$/.test(String(hsnCode || '')) || gstRate === undefined ||
+        !effectiveDate || Number(gstRate) < 0 || Number(gstRate) > 100) {
       return res.status(400).json({ 
-        error: 'productCategory, gstRate, and effectiveDate are required' 
+        error: 'productCategory, a 2-8 digit hsnCode, gstRate (0-100), and effectiveDate are required'
       });
     }
 
     const pool = gstService.pool;
     const result = await pool.query(
-      `INSERT INTO gst_rates 
+      `INSERT INTO gst_rates
        (product_category, gst_rate, hsn_code, description, effective_date, is_active)
        VALUES ($1, $2, $3, $4, $5, true)
-       ON CONFLICT (product_category) 
-       DO UPDATE SET 
-         gst_rate = EXCLUDED.gst_rate,
-         hsn_code = EXCLUDED.hsn_code,
-         description = EXCLUDED.description,
-         effective_date = EXCLUDED.effective_date,
-         is_active = true,
-         updated_at = CURRENT_TIMESTAMP
+       ON CONFLICT (product_category, hsn_code, effective_date)
+       DO UPDATE SET gst_rate=EXCLUDED.gst_rate, description=EXCLUDED.description,
+         is_active=TRUE, updated_at=CURRENT_TIMESTAMP
        RETURNING *`,
       [productCategory, gstRate, hsnCode, description, effectiveDate]
     );
@@ -195,7 +208,7 @@ router.post('/rates', authMiddleware, async (req, res) => {
 /**
  * Deactivate GST rate
  */
-router.delete('/rates/:category', authMiddleware, async (req, res) => {
+router.delete('/rates/:category', authMiddleware, financeRole, async (req, res) => {
   try {
     const pool = gstService.pool;
     const result = await pool.query(
@@ -221,7 +234,7 @@ router.delete('/rates/:category', authMiddleware, async (req, res) => {
 /**
  * Create GST return
  */
-router.post('/returns', authMiddleware, async (req, res) => {
+router.post('/returns', authMiddleware, financeRole, async (req, res) => {
   try {
     const {
       returnPeriod,
@@ -234,21 +247,11 @@ router.post('/returns', authMiddleware, async (req, res) => {
       totalTaxLiability
     } = req.body;
 
-    const pool = gstService.pool;
-    const result = await pool.query(
-      `INSERT INTO gst_returns 
-       (return_period, return_type, taxpayer_gst_number, taxpayer_name, taxpayer_state, 
-        due_date, total_turnover, total_tax_liability, return_status)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'pending')
-       RETURNING *`,
-      [returnPeriod, returnType, taxpayerGstNumber, taxpayerName, taxpayerState, 
-       dueDate, totalTurnover, totalTaxLiability]
-    );
-
-    res.status(201).json(result.rows[0]);
+    res.status(201).json(await gstService.createReturn({ returnPeriod, returnType, taxpayerGstNumber,
+      taxpayerName, taxpayerState, dueDate, totalTurnover, totalTaxLiability }, req.user?.id));
   } catch (error) {
     logger.error('Create GST return API error', { error: error.message, stack: error.stack });
-    res.status(500).json({ error: 'Failed to create GST return' });
+    fail(res, error, 'Failed to create GST return');
   }
 });
 
@@ -307,31 +310,15 @@ router.get('/returns', authMiddleware, async (req, res) => {
 /**
  * Update GST return status
  */
-router.put('/returns/:returnId/status', authMiddleware, async (req, res) => {
+router.put('/returns/:returnId/status', authMiddleware, financeRole, async (req, res) => {
   try {
     const { returnStatus, acknowledgmentNumber, filedBy } = req.body;
 
-    const pool = gstService.pool;
-    const result = await pool.query(
-      `UPDATE gst_returns 
-       SET return_status = $1, 
-           acknowledgment_number = $2,
-           filed_by = $3,
-           filing_date = CURRENT_DATE,
-           updated_at = CURRENT_TIMESTAMP
-       WHERE id = $4
-       RETURNING *`,
-      [returnStatus, acknowledgmentNumber, filedBy, req.params.returnId]
-    );
-
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'GST return not found' });
-    }
-
-    res.json(result.rows[0]);
+    res.json(await gstService.transitionReturn(req.params.returnId, returnStatus,
+      { acknowledgmentNumber, filedBy }, req.user?.id));
   } catch (error) {
     logger.error('Update GST return status API error', { error: error.message, stack: error.stack });
-    res.status(500).json({ error: 'Failed to update GST return status' });
+    fail(res, error, 'Failed to update GST return status');
   }
 });
 
@@ -342,7 +329,7 @@ router.put('/returns/:returnId/status', authMiddleware, async (req, res) => {
 /**
  * Create GST payment
  */
-router.post('/payments', authMiddleware, async (req, res) => {
+router.post('/payments', authMiddleware, financeRole, async (req, res) => {
   try {
     const {
       returnId,
@@ -354,19 +341,11 @@ router.post('/payments', authMiddleware, async (req, res) => {
       transactionId
     } = req.body;
 
-    const pool = gstService.pool;
-    const result = await pool.query(
-      `INSERT INTO gst_payments 
-       (return_id, payment_type, tax_type, amount, payment_date, payment_method, transaction_id, payment_status)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, 'pending')
-       RETURNING *`,
-      [returnId, paymentType, taxType, amount, paymentDate, paymentMethod, transactionId]
-    );
-
-    res.status(201).json(result.rows[0]);
+    res.status(201).json(await gstService.createPayment({ returnId, paymentType, taxType, amount,
+      paymentDate, paymentMethod, transactionId }, req.user?.id));
   } catch (error) {
     logger.error('Create GST payment API error', { error: error.message, stack: error.stack });
-    res.status(500).json({ error: 'Failed to create GST payment' });
+    fail(res, error, 'Failed to create GST payment');
   }
 });
 
@@ -425,31 +404,15 @@ router.get('/payments', authMiddleware, async (req, res) => {
 /**
  * Update GST payment status
  */
-router.put('/payments/:paymentId/status', authMiddleware, async (req, res) => {
+router.put('/payments/:paymentId/status', authMiddleware, financeRole, async (req, res) => {
   try {
     const { paymentStatus, challanNumber, bankName, branchName } = req.body;
 
-    const pool = gstService.pool;
-    const result = await pool.query(
-      `UPDATE gst_payments 
-       SET payment_status = $1,
-           challan_number = $2,
-           bank_name = $3,
-           branch_name = $4,
-           updated_at = CURRENT_TIMESTAMP
-       WHERE id = $5
-       RETURNING *`,
-      [paymentStatus, challanNumber, bankName, branchName, req.params.paymentId]
-    );
-
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'GST payment not found' });
-    }
-
-    res.json(result.rows[0]);
+    res.json(await gstService.transitionPayment(req.params.paymentId, paymentStatus,
+      { challanNumber, bankName, branchName }));
   } catch (error) {
     logger.error('Update GST payment status API error', { error: error.message, stack: error.stack });
-    res.status(500).json({ error: 'Failed to update GST payment status' });
+    fail(res, error, 'Failed to update GST payment status');
   }
 });
 

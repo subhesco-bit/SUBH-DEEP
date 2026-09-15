@@ -16,6 +16,7 @@
 const express = require('express');
 const router = express.Router();
 const erp = require('../services/legacy/comprehensiveERPService');
+const accounting = require('../services/finance/enterpriseAccountingService');
 
 try {
   const { authMiddleware } = require('../middleware/auth');
@@ -23,6 +24,34 @@ try {
 } catch (e) {
   // Auth optional
 }
+
+// Explicit journal lifecycle endpoints. The action-card compatibility routes
+// below continue to work, while these expose draft review, controlled posting,
+// reversal, period close and complete financial statements.
+router.post('/accounting/journals', async (req, res) => {
+  try { res.status(201).json({ success: true, data: await accounting.createDraftJournal(req.body) }); }
+  catch (error) { res.status(400).json({ success: false, error: error.message }); }
+});
+router.get('/accounting/journals/:id', async (req, res) => {
+  try { res.json({ success: true, data: await accounting.getJournal(req.params.id) }); }
+  catch (error) { res.status(404).json({ success: false, error: error.message }); }
+});
+router.post('/accounting/journals/:id/post', async (req, res) => {
+  try { res.json({ success: true, data: await accounting.postJournal(req.params.id, req.body.actorId) }); }
+  catch (error) { res.status(400).json({ success: false, error: error.message }); }
+});
+router.post('/accounting/journals/:id/reverse', async (req, res) => {
+  try { res.status(201).json({ success: true, data: await accounting.reverseJournal(req.params.id, req.body) }); }
+  catch (error) { res.status(400).json({ success: false, error: error.message }); }
+});
+router.put('/accounting/periods/:id/status', async (req, res) => {
+  try { res.json({ success: true, data: await accounting.setPeriodStatus(req.params.id, req.body.status, req.body.actorId) }); }
+  catch (error) { res.status(400).json({ success: false, error: error.message }); }
+});
+router.get('/accounting/statements', async (req, res) => {
+  try { res.json({ success: true, data: await accounting.financialStatements(req.query) }); }
+  catch (error) { res.status(400).json({ success: false, error: error.message }); }
+});
 
 // { pageMethod, subModule, realMethod, argShape }
 // argShape: 'body' = fn(req.body); 'query' = fn(req.query);

@@ -10,7 +10,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE IF NOT EXISTS gst_rates (
     id SERIAL PRIMARY KEY,
-    product_category VARCHAR(100) UNIQUE NOT NULL,
+    product_category VARCHAR(100) NOT NULL,
     gst_rate DECIMAL(5,2) NOT NULL,
     hsn_code VARCHAR(50),
     description TEXT,
@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS gst_rates (
 CREATE INDEX idx_gst_rates_category ON gst_rates(product_category);
 CREATE INDEX idx_gst_rates_active ON gst_rates(is_active);
 CREATE INDEX idx_gst_rates_hsn ON gst_rates(hsn_code);
+CREATE UNIQUE INDEX IF NOT EXISTS uq_gst_rates_effective_version ON gst_rates(product_category, hsn_code, effective_date);
 
 -- ============================================================================
 -- GST CALCULATIONS
@@ -134,7 +135,7 @@ CREATE TABLE IF NOT EXISTS gst_returns (
     due_date DATE NOT NULL,
     return_status VARCHAR(50) DEFAULT 'pending',
     total_turnover DECIMAL(15,2),
-    total_tax liability DECIMAL(15,2),
+    total_tax_liability DECIMAL(15,2),
     total_tax_paid DECIMAL(15,2),
     refund_claimed DECIMAL(15,2),
     acknowledgment_number VARCHAR(100),

@@ -1,6 +1,10 @@
 // Load environment variables FIRST, before any other requires
 require('dotenv').config({ path: require('path').resolve(__dirname, '../.env.local') });
 require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
+// Codex and repository-level tooling store shared secrets at the workspace
+// root. dotenv does not overwrite values already loaded from backend-local
+// files, so service-specific configuration keeps precedence.
+require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env.local') });
 
 const index = require('./routes/index.js');
 const devinRoutes = require('./routes/devinRoutes');
@@ -8,6 +12,7 @@ const yieldManagement = require('./routes/yieldManagement.js');
 const wikipediaRoutes = require('./routes/wikipediaRoutes.js');
 const weatherRoutes = require('./routes/weatherRoutes.js');
 const weatherAdvisory = require('./routes/weatherAdvisory.js');
+const smsAuthService = require('./services/platform/smsAuthService');
 const wearableIntegrationRoutes = require('./routes/wearableIntegrationRoutes.js');
 const waterManagementRoutes = require('./routes/waterManagementRoutes.js');
 const warehouseManagement = require('./routes/warehouseManagement.js');
@@ -426,6 +431,7 @@ const nutrientValueSalesRoutes = require('./routes/nutrientValueSalesRoutes.js')
 const nlp = require('./routes/nlp.js');
 const nervousSystemRoutes = require('./routes/nervousSystemRoutes.js');
 const mlOptimization = require('./routes/mlOptimization.js');
+const optimizationRoutes = require('./routes/optimizationRoutes.js');
 const marketplaceEnhancements = require('./routes/marketplaceEnhancements.js');
 const marketDataRoutes = require('./routes/marketDataRoutes.js');
 const marketAnalytics = require('./routes/marketAnalytics.js');
@@ -512,6 +518,7 @@ const organizationDomainRoutes = require('./routes/organizationDomainRoutes.js')
 const fisheriesDomainRoutes = require('./routes/fisheriesDomainRoutes.js');
 const comprehensiveERPDomainRoutes = require('./routes/comprehensiveERPDomainRoutes.js');
 const researchAndDevelopmentDomainRoutes = require('./routes/researchAndDevelopmentDomainRoutes.js');
+const artificialScientistRoutes = require('./routes/artificialScientistRoutes.js');
 const sapModuleArchitectureDomainRoutes = require('./routes/sapModuleArchitectureDomainRoutes.js');
 const animalHealthDomainRoutes = require('./routes/animalHealthDomainRoutes.js');
 const completeAIIntegrationDomainRoutes = require('./routes/completeAIIntegrationDomainRoutes.js');
@@ -636,6 +643,7 @@ const analyticsReportRoutes = require('./routes/analyticsReportRoutes.js');
 const aiSelfHealingRoutes = require('./routes/aiSelfHealingRoutes.js');
 const aiOperationIntelligenceRoutes = require('./routes/aiOperationIntelligenceRoutes.js');
 const aiGatewayRoutes = require('./routes/aiGatewayRoutes.js');
+const roboticsRoutes = require('./routes/roboticsRoutes.js');
 const aiCollaborationRoutes = require('./routes/aiCollaborationRoutes.js');
 const aiCoordinationRoutes = require('./routes/claude/aiCoordinationRoutes.js');
 const aiCopilotRoutes = require('./routes/claude/aiCopilotRoutes.js');
@@ -1457,6 +1465,7 @@ async function startup() {
     app.use('/api/wikipedia', wikipediaRoutes);
     app.use('/api/weather', weatherRoutes);
     app.use('/api/weatheradvisory', weatherAdvisory);
+    app.use('/api/v1/sms-auth', smsAuthService.router);
     app.use('/api/wearableintegration', wearableIntegrationRoutes);
     app.use('/api/watermanagement', waterManagementRoutes);
     app.use('/api/warehousemanagement', warehouseManagement);
@@ -1580,6 +1589,7 @@ async function startup() {
     app.use('/api/nlp', nlp);
     app.use('/api/nervoussystem', nervousSystemRoutes);
     app.use('/api/mloptimization', mlOptimization);
+    app.use('/api/v1/optimization', optimizationRoutes);
     app.use('/api/marketplaceenhancements', marketplaceEnhancements);
     app.use('/api/marketdata', marketDataRoutes);
     app.use('/api/marketanalytics', marketAnalytics);
@@ -1682,6 +1692,7 @@ async function startup() {
     app.use('/api/v1', fisheriesDomainRoutes);
     app.use('/api/v1', comprehensiveERPDomainRoutes);
     app.use('/api/v1', researchAndDevelopmentDomainRoutes);
+    app.use('/api/v1/artificial-scientist', artificialScientistRoutes);
     app.use('/api/v1', sapModuleArchitectureDomainRoutes);
     app.use('/api/v1', animalHealthDomainRoutes);
     app.use('/api/v1', completeAIIntegrationDomainRoutes);
@@ -1805,6 +1816,8 @@ async function startup() {
     app.use('/api/aiselfhealing', aiSelfHealingRoutes);
     app.use('/api/aioperationintelligence', aiOperationIntelligenceRoutes);
     app.use('/api/aigateway', aiGatewayRoutes);
+    app.use('/api/v1/ai-gateway', aiGatewayRoutes);
+    app.use('/api/v1/robotics', roboticsRoutes);
     app.use('/api/aicollaboration', aiCollaborationRoutes);
     app.use('/api/devin', devinRoutes);
     app.use('/api/aibrain', aiBrainRoutes);

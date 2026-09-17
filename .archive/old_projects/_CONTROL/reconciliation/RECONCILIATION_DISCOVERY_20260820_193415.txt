@@ -1,0 +1,1053 @@
+﻿==================================================================================================
+EBDESIGN CONTROLLED RECONCILIATION DISCOVERY
+TIMESTAMP: 2026-08-20 19:34:16
+ROOT: C:\Users\DIYA GOEL\Downloads\EBDESIGN
+LIBRARY: C:\Users\DIYA GOEL\Downloads\EBDESIGN\_EBDESIGN_LIBRARY
+==================================================================================================
+
+[01] ROOT VALIDATION
+OK   C:\Users\DIYA GOEL\Downloads\EBDESIGN
+OK   C:\Users\DIYA GOEL\Downloads\EBDESIGN\_EBDESIGN_LIBRARY
+OK   C:\Users\DIYA GOEL\Downloads\EBDESIGN\_EBDESIGN_LIBRARY\_CONTROL
+
+[02] EXISTING CONTROL ARTIFACTS
+CONTROL FILES: 16
+  \_EBDESIGN_LIBRARY\_CONTROL\diagnostics\ID_COLUMN_REVIEW_REQUIRED_20260820_115958.txt
+  \_EBDESIGN_LIBRARY\_CONTROL\diagnostics\IDENTITY_REGISTRY_READ_SUMMARY_20260820_120932.csv
+  \_EBDESIGN_LIBRARY\_CONTROL\diagnostics\IDENTITY_SCHEMA_20260820_120932.csv
+  \_EBDESIGN_LIBRARY\_CONTROL\diagnostics\LIBRARY_RECOVERY_SUMMARY_20260820_115958.json
+  \_EBDESIGN_LIBRARY\_CONTROL\diagnostics\REGISTRY_COLUMNS_20260820_115958.txt
+  \_EBDESIGN_LIBRARY\_CONTROL\diagnostics\SAFETY_BASELINE_20260820_120932.json
+  \_EBDESIGN_LIBRARY\_CONTROL\logs\LIBRARY_RECOVERY_20260820_115958.log
+  \_EBDESIGN_LIBRARY\_CONTROL\logs\MASTER_BULK_RECONCILIATION_20260820_120932.log
+  \_EBDESIGN_LIBRARY\_CONTROL\manifests\IDENTITY_REGISTRY_INVENTORY_20260820_120932.csv
+  \_EBDESIGN_LIBRARY\_CONTROL\manifests\LIBRARY_PHYSICAL_INVENTORY_20260820_115958.csv
+  \_EBDESIGN_LIBRARY\_CONTROL\manifests\MASTER_LIBRARY_PHYSICAL_INVENTORY_20260820_120932.csv
+  \_EBDESIGN_LIBRARY\_CONTROL\reconciliation\RECONCILIATION_DISCOVERY_20260820_193415.txt
+  \_EBDESIGN_LIBRARY\_CONTROL\SAFETY_CONTRACT.md
+  \_EBDESIGN_LIBRARY\_CONTROL\search\LIBRARY_FIRST_SEARCH_INDEX.csv
+  \_EBDESIGN_LIBRARY\_CONTROL\snapshots\BASELINE_20260820_103119.json
+  \_EBDESIGN_LIBRARY\_CONTROL\validation\VALIDATION_20260820_103119.csv
+
+[03] AUTHORITY INVENTORY
+AUTHORITY FILES: 152
+  01_FORENSIC_SOURCE_AUTHORITY_MATRIX.csv
+  02_EVIDENCE_PRIORITY_MATRIX.csv
+  03_INCOMPLETE_EVIDENCE_REGISTER.csv
+  ACTIVE_MODULE_AUTHORITY_EVIDENCE.csv
+  PHYSICAL_AREA_INDEX.csv
+  PHYSICAL_CONTENT_INDEX.csv
+  PHYSICAL_FILENAME_INDEX.csv
+  PHYSICAL_ITEM_IDENTITY_REGISTRY.csv
+  PHYSICAL_MODULE_INDEX.csv
+  PHYSICAL_PATH_INDEX.csv
+  EBD_IDENTITY_STANDARD_v1.json
+  IDENTITY_REGISTRY_MANIFEST.json
+  BATCH_000001_PHYSICAL.csv
+  BATCH_000002_PHYSICAL.csv
+  BATCH_000003_PHYSICAL.csv
+  BATCH_000004_PHYSICAL.csv
+  BATCH_000005_PHYSICAL.csv
+  BATCH_000006_PHYSICAL.csv
+  BATCH_000007_PHYSICAL.csv
+  BATCH_000008_PHYSICAL.csv
+  BATCH_000009_PHYSICAL.csv
+  BATCH_000010_PHYSICAL.csv
+  BATCH_000011_PHYSICAL.csv
+  BATCH_000012_PHYSICAL.csv
+  BATCH_000013_PHYSICAL.csv
+  BATCH_000014_PHYSICAL.csv
+  BATCH_000015_PHYSICAL.csv
+  BATCH_000016_PHYSICAL.csv
+  BATCH_000017_PHYSICAL.csv
+  BATCH_000018_PHYSICAL.csv
+  BATCH_000019_PHYSICAL.csv
+  BATCH_000020_PHYSICAL.csv
+  BATCH_000021_PHYSICAL.csv
+  BATCH_000022_PHYSICAL.csv
+  BATCH_000023_PHYSICAL.csv
+  BATCH_000024_PHYSICAL.csv
+  BATCH_000025_PHYSICAL.csv
+  BATCH_000026_PHYSICAL.csv
+  BATCH_000027_PHYSICAL.csv
+  BATCH_000028_PHYSICAL.csv
+  BATCH_000029_PHYSICAL.csv
+  BATCH_000030_PHYSICAL.csv
+  BATCH_000031_PHYSICAL.csv
+  BATCH_000032_PHYSICAL.csv
+  BATCH_000033_PHYSICAL.csv
+  BATCH_000034_PHYSICAL.csv
+  BATCH_000035_PHYSICAL.csv
+  BATCH_000036_PHYSICAL.csv
+  BATCH_000037_PHYSICAL.csv
+  BATCH_000038_PHYSICAL.csv
+  BATCH_000039_PHYSICAL.csv
+  BATCH_000040_PHYSICAL.csv
+  BATCH_000041_PHYSICAL.csv
+  BATCH_000042_PHYSICAL.csv
+  BATCH_000043_PHYSICAL.csv
+  BATCH_000044_PHYSICAL.csv
+  BATCH_000045_PHYSICAL.csv
+  BATCH_000046_PHYSICAL.csv
+  BATCH_000047_PHYSICAL.csv
+  BATCH_000048_PHYSICAL.csv
+  BATCH_000049_PHYSICAL.csv
+  BATCH_000050_PHYSICAL.csv
+  BATCH_000051_PHYSICAL.csv
+  BATCH_000052_PHYSICAL.csv
+  BATCH_000053_PHYSICAL.csv
+  BATCH_000054_PHYSICAL.csv
+  BATCH_000055_PHYSICAL.csv
+  BATCH_000056_PHYSICAL.csv
+  BATCH_000057_PHYSICAL.csv
+  BATCH_000058_PHYSICAL.csv
+  BATCH_000059_PHYSICAL.csv
+  BATCH_000060_PHYSICAL.csv
+  BATCH_000061_PHYSICAL.csv
+  BATCH_000062_PHYSICAL.csv
+  BATCH_000063_PHYSICAL.csv
+  BATCH_000064_PHYSICAL.csv
+  BATCH_000065_PHYSICAL.csv
+  BATCH_000066_PHYSICAL.csv
+  BATCH_000001.COMMITTED
+  BATCH_000002.COMMITTED
+  BATCH_000003.COMMITTED
+  BATCH_000004.COMMITTED
+  BATCH_000005.COMMITTED
+  BATCH_000006.COMMITTED
+  BATCH_000007.COMMITTED
+  BATCH_000008.COMMITTED
+  BATCH_000009.COMMITTED
+  BATCH_000010.COMMITTED
+  BATCH_000011.COMMITTED
+  BATCH_000012.COMMITTED
+  BATCH_000013.COMMITTED
+  BATCH_000014.COMMITTED
+  BATCH_000015.COMMITTED
+  BATCH_000016.COMMITTED
+  BATCH_000017.COMMITTED
+  BATCH_000018.COMMITTED
+  BATCH_000019.COMMITTED
+  BATCH_000020.COMMITTED
+  BATCH_000021.COMMITTED
+  BATCH_000022.COMMITTED
+  BATCH_000023.COMMITTED
+  BATCH_000024.COMMITTED
+  BATCH_000025.COMMITTED
+  BATCH_000026.COMMITTED
+  BATCH_000027.COMMITTED
+  BATCH_000028.COMMITTED
+  BATCH_000029.COMMITTED
+  BATCH_000030.COMMITTED
+  BATCH_000031.COMMITTED
+  BATCH_000032.COMMITTED
+  BATCH_000033.COMMITTED
+  BATCH_000034.COMMITTED
+  BATCH_000035.COMMITTED
+  BATCH_000036.COMMITTED
+  BATCH_000037.COMMITTED
+  BATCH_000038.COMMITTED
+  BATCH_000039.COMMITTED
+  BATCH_000040.COMMITTED
+  BATCH_000041.COMMITTED
+  BATCH_000042.COMMITTED
+  BATCH_000043.COMMITTED
+  BATCH_000044.COMMITTED
+  BATCH_000045.COMMITTED
+  BATCH_000046.COMMITTED
+  BATCH_000047.COMMITTED
+  BATCH_000048.COMMITTED
+  BATCH_000049.COMMITTED
+  BATCH_000050.COMMITTED
+  BATCH_000051.COMMITTED
+  BATCH_000052.COMMITTED
+  BATCH_000053.COMMITTED
+  BATCH_000054.COMMITTED
+  BATCH_000055.COMMITTED
+  BATCH_000056.COMMITTED
+  BATCH_000057.COMMITTED
+  BATCH_000058.COMMITTED
+  BATCH_000059.COMMITTED
+  BATCH_000060.COMMITTED
+  BATCH_000061.COMMITTED
+  BATCH_000062.COMMITTED
+  BATCH_000063.COMMITTED
+  BATCH_000064.COMMITTED
+  BATCH_000065.COMMITTED
+  BATCH_000066.COMMITTED
+  IDENTITY_REGISTRY_COMPLETE.flag
+  15_MODULE_IDENTITY_CENSUS.md
+  16_MODULE_IMPLEMENTATION_MAP.md
+  17_MODULE_CONTENT_FINGERPRINT.md
+  18_MODULE_VARIANT_LINEAGE.md
+  22_MODULE_FUNCTION_FORENSICS.md
+  25_MODULE_AUTHORITY.md
+  27_TIER1_VARIANT_COMPARE.md
+
+[04] CANONICAL CARD COUNTS
+  01_MODULE_CARDS | FILES=150 | DIRECTORIES=0
+  05_RECOVERY_CARDS | FILES=150 | DIRECTORIES=0
+  04_VARIANT_CARDS | FILES=171 | DIRECTORIES=0
+  10_UNRESOLVED | FILES=53 | DIRECTORIES=0
+  13_RECONCILIATION | FILES=6 | DIRECTORIES=4
+
+[05] IDENTITY / UNIQUE-ID EVIDENCE
+IDENTITY-RELATED FILES: 37
+  \_EBDESIGN_LIBRARY\_CONTROL\diagnostics\ID_COLUMN_REVIEW_REQUIRED_20260820_115958.txt
+  \_EBDESIGN_LIBRARY\_CONTROL\diagnostics\IDENTITY_REGISTRY_READ_SUMMARY_20260820_120932.csv
+  \_EBDESIGN_LIBRARY\_CONTROL\diagnostics\IDENTITY_SCHEMA_20260820_120932.csv
+  \_EBDESIGN_LIBRARY\_CONTROL\manifests\IDENTITY_REGISTRY_INVENTORY_20260820_120932.csv
+  \_EBDESIGN_LIBRARY\_CONTROL\validation\VALIDATION_20260820_103119.csv
+  \_EBDESIGN_LIBRARY\00_CATALOG\MODULE_CARD_INDEX.csv
+  \_EBDESIGN_LIBRARY\02_MODULES\MODULE_ARTIFACT_MATRIX.csv
+  \_EBDESIGN_LIBRARY\03_CATALOGUE\MASTER_REGISTRY\00_ID_NAMESPACES.csv
+  \_EBDESIGN_LIBRARY\03_CATALOGUE\MASTER_REGISTRY\01_ID_COUNTERS.csv
+  \_EBDESIGN_LIBRARY\03_CATALOGUE\MASTER_REGISTRY\08_ALIAS_AUTHORITY_REGISTER.csv
+  \_EBDESIGN_LIBRARY\03_CATALOGUE\MODULE_CATALOGUE.csv
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\01_FORENSIC_SOURCE_AUTHORITY_MATRIX.csv
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\02_EVIDENCE_PRIORITY_MATRIX.csv
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\03_INCOMPLETE_EVIDENCE_REGISTER.csv
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\ACTIVE_MODULE_AUTHORITY_EVIDENCE.csv
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\IDENTITY_REGISTRY\AUDIT\EBD_IDENTITY_STANDARD_v1.json
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\IDENTITY_REGISTRY\AUDIT\IDENTITY_REGISTRY_MANIFEST.json
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\IDENTITY_REGISTRY\PHYSICAL_ITEM_IDENTITY_REGISTRY.csv
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\IDENTITY_REGISTRY\PHYSICAL_MODULE_INDEX.csv
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\IDENTITY_REGISTRY\STATE\IDENTITY_REGISTRY_COMPLETE.flag
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\SOURCE_CARDS\15_MODULE_IDENTITY_CENSUS.md
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\SOURCE_CARDS\16_MODULE_IMPLEMENTATION_MAP.md
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\SOURCE_CARDS\17_MODULE_CONTENT_FINGERPRINT.md
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\SOURCE_CARDS\18_MODULE_VARIANT_LINEAGE.md
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\SOURCE_CARDS\22_MODULE_FUNCTION_FORENSICS.md
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\SOURCE_CARDS\25_MODULE_AUTHORITY.md
+  \_EBDESIGN_LIBRARY\09_MODULES\MODULE_CANDIDATE_REGISTER.csv
+  \_EBDESIGN_LIBRARY\10_SERVICES\FUNCTIONAL_EVIDENCE\FUNCTIONAL_EVIDENCE_REGISTER.csv
+  \_EBDESIGN_LIBRARY\12_AUDITS\UNIQUE_ID_INTEGRITY_20260820_120932.json
+  \_EBDESIGN_LIBRARY\13_RECONCILIATION\DUPLICATE_CANDIDATES.csv
+  \_EBDESIGN_LIBRARY\13_RECONCILIATION\IDENTITY_FORENSIC_V2_20260820_134326\IDENTITY_FORENSIC_V2.log
+  \_EBDESIGN_LIBRARY\15_RELATIONSHIPS\RELATIONSHIP_CANDIDATE_REGISTER.csv
+  \_EBDESIGN_LIBRARY\17_VARIANTS\IMPLEMENTATIONS\IMPLEMENTATION_CANDIDATE_REGISTER.csv
+  \_EBDESIGN_LIBRARY\19_SKELETON_COLLECTION\SKELETON_CANDIDATE_REGISTER.csv
+  \_EBDESIGN_LIBRARY\20_GAP_COLLECTION\GAP_CANDIDATE_REGISTER.csv
+  \_EBDESIGN_LIBRARY\22_UNKNOWN_REVIEW\UNRESOLVED_IDENTITY_RECORDS_20260820_120932.csv
+  \_EBDESIGN_LIBRARY\99_AUDIT\02_LIBRARY_INTEGRITY_AUDIT\06_DUPLICATE_CARD_IDS.csv
+
+[06] PROJECT SOURCE AREAS
+  backend | FILES=30476
+  frontend | FILES=33879
+  afrera | FILES=31
+  database | FILES=9
+  infra | FILES=10
+  scripts | FILES=2
+  tools | FILES=18
+  workflows | FILES=6
+  docs | FILES=73
+  DOCUMENTATION | FILES=30
+
+[07] ARCHIVE / QUARANTINE / FORENSIC AREAS
+  _JUNK_QUARANTINE | FILES=374
+  _POWERSHELL_FORENSIC_DEBUGGER | FILES=20
+  _SUBH_FORENSIC_REBUILD | FILES=69
+  _SUBH_MASTER_EXECUTION | FILES=4
+  _CANONICAL_AUDIT | FILES=1
+  _EBDESIGN_FORENSIC_INDEX | FILES=162
+  AI_FORENSIC_REPAIR | FILES=12
+  DEEP_FORENSIC_REPAIR | FILES=528
+  NODE_FORENSIC_REPAIR | FILES=21
+
+[08] EXISTING INVENTORY / MANIFESTS
+MATCHING CONTROL FILES: 36
+  \_EBDESIGN_LIBRARY\_CONTROL\diagnostics\IDENTITY_REGISTRY_READ_SUMMARY_20260820_120932.csv
+  \_EBDESIGN_LIBRARY\_CONTROL\diagnostics\IDENTITY_SCHEMA_20260820_120932.csv
+  \_EBDESIGN_LIBRARY\_CONTROL\logs\MASTER_BULK_RECONCILIATION_20260820_120932.log
+  \_EBDESIGN_LIBRARY\_CONTROL\manifests\IDENTITY_REGISTRY_INVENTORY_20260820_120932.csv
+  \_EBDESIGN_LIBRARY\_CONTROL\manifests\LIBRARY_PHYSICAL_INVENTORY_20260820_115958.csv
+  \_EBDESIGN_LIBRARY\_CONTROL\manifests\MASTER_LIBRARY_PHYSICAL_INVENTORY_20260820_120932.csv
+  \_EBDESIGN_LIBRARY\_CONTROL\reconciliation\RECONCILIATION_DISCOVERY_20260820_193415.txt
+  \_EBDESIGN_LIBRARY\00_CATALOG\LIBRARY_MANIFEST.json
+  \_EBDESIGN_LIBRARY\00_CATALOG\MASTER_LIBRARY_CATALOG.csv
+  \_EBDESIGN_LIBRARY\00_MASTER\MASTER_LIBRARY_MANIFEST.json
+  \_EBDESIGN_LIBRARY\01_ACQUISITION\SOURCES\00_FORENSIC_SOURCE_INVENTORY.csv
+  \_EBDESIGN_LIBRARY\03_CATALOGUE\IMPLEMENTATION_CATALOGUE.csv
+  \_EBDESIGN_LIBRARY\03_CATALOGUE\LOGICAL_ENTITY_CATALOGUE.csv
+  \_EBDESIGN_LIBRARY\03_CATALOGUE\MASTER_REGISTRY\08_ALIAS_AUTHORITY_REGISTER.csv
+  \_EBDESIGN_LIBRARY\03_CATALOGUE\MODULE_CATALOGUE.csv
+  \_EBDESIGN_LIBRARY\03_CATALOGUE\ROUTE_CATALOGUE.csv
+  \_EBDESIGN_LIBRARY\03_CATALOGUE\SERVICE_CATALOGUE.csv
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\01_FORENSIC_SOURCE_AUTHORITY_MATRIX.csv
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\ACTIVE_MODULE_AUTHORITY_EVIDENCE.csv
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\IDENTITY_REGISTRY\AUDIT\EBD_IDENTITY_STANDARD_v1.json
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\IDENTITY_REGISTRY\AUDIT\IDENTITY_REGISTRY_MANIFEST.json
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\IDENTITY_REGISTRY\PHYSICAL_ITEM_IDENTITY_REGISTRY.csv
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\IDENTITY_REGISTRY\STATE\IDENTITY_REGISTRY_COMPLETE.flag
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\SOURCE_CARDS\15_MODULE_IDENTITY_CENSUS.md
+  \_EBDESIGN_LIBRARY\04_AUTHORITY\SOURCE_CARDS\25_MODULE_AUTHORITY.md
+  \_EBDESIGN_LIBRARY\05_CLASSIFICATION\CONTENT_FAMILY_CATALOGUE.csv
+  \_EBDESIGN_LIBRARY\07_INVENTORY\PHYSICAL_ITEMS\MASTER_PHYSICAL_ITEM_CATALOGUE.csv
+  \_EBDESIGN_LIBRARY\10_SERVICES\ACTIVE_SERVICE_INVENTORY.csv
+  \_EBDESIGN_LIBRARY\12_AUDITS\UNIQUE_ID_INTEGRITY_20260820_120932.json
+  \_EBDESIGN_LIBRARY\13_RECONCILIATION\IDENTITY_FORENSIC_V2_20260820_134326\IDENTITY_FORENSIC_V2.log
+  \_EBDESIGN_LIBRARY\22_UNKNOWN_REVIEW\UNRESOLVED_DEPENDENCIES_20260820_120932.csv
+  \_EBDESIGN_LIBRARY\22_UNKNOWN_REVIEW\UNRESOLVED_IDENTITY_RECORDS_20260820_120932.csv
+  \_EBDESIGN_LIBRARY\30_REPORTS\LIBRARY_BUILDER_RUN\01_FORENSIC_DATASET_INVENTORY.csv
+  \_EBDESIGN_LIBRARY\30_REPORTS\LIBRARY_BUILDER_RUN\MASTER_LIBRARY_MANIFEST.json
+  \_EBDESIGN_LIBRARY\99_AUDIT\02_LIBRARY_INTEGRITY_AUDIT\00_AUDIT_MANIFEST.json
+  \_EBDESIGN_LIBRARY\99_AUDIT\CATALOGUE_V1_QUALITY_AUDIT.csv
+
+[09] GIT STATE
+GIT STATUS LINES: 750
+   M .github/workflows/ci.yml
+   M .gitignore
+   M .vibecheck/last-score.json
+   M .vibecheck/provenance/edits.jsonl
+   M .vibecheck/registry-cache.json
+   M .vibecheck/sync-queue.json
+   M backend/Dockerfile
+   M backend/package.json
+   M backend/src/database/migrate.js
+   M backend/src/database/migrations/000_base_schema.sql
+   M backend/src/database/migrations/9999_zzzzzzzzzz_unified_ledger_schema.sql
+   M backend/src/database/migrations/enhanced_migrate.js
+   M backend/src/database/pool.js
+   M backend/src/index.js
+   M backend/src/middleware/compliance.js
+   M backend/src/middleware/errorHandler.js
+   M backend/src/middleware/inputValidation.js
+   M backend/src/middleware/rateLimit.js
+   M backend/src/middleware/rateLimiter.js
+   M backend/src/middleware/requestLogger.js
+   M backend/src/middleware/responseFormatter.js
+   D backend/src/middleware/security.js
+   M backend/src/middleware/securityHeaders.js
+   M backend/src/middleware/validation.js
+   M backend/src/modules/M012/controller.js
+   M backend/src/modules/M012/routes.js
+   M backend/src/modules/M012/service.js
+   M backend/src/modules/M017/routes.js
+   M backend/src/modules/M018/service.js
+   M backend/src/modules/M019/routes.js
+   M backend/src/modules/M019/service.js
+   M backend/src/modules/M020/service.js
+   M backend/src/modules/M021/routes.js
+   M backend/src/modules/M021/service.js
+   M backend/src/modules/M022/service.js
+   M backend/src/modules/M023/service.js
+   M backend/src/modules/M030/routes.js
+   M backend/src/modules/M031/service.js
+   M backend/src/modules/M043/routes.js
+   M backend/src/modules/M045/routes.js
+   M backend/src/modules/M087/index.js
+   M backend/src/modules/M087/routes.js
+   M backend/src/modules/M087/service.js
+   M backend/src/modules/M101/service.js
+   M backend/src/modules/M102/service.js
+   M backend/src/modules/M103/service.js
+   M backend/src/modules/M104/service.js
+   M backend/src/modules/M105/service.js
+   M backend/src/modules/M107/service.js
+   M backend/src/modules/M108/service.js
+   M backend/src/modules/M109/service.js
+   M backend/src/modules/M110/controller.js
+   M backend/src/modules/M110/index.js
+   M backend/src/modules/M110/routes.js
+   M backend/src/modules/M110/service.js
+   M backend/src/modules/M123/service.js
+   M backend/src/modules/M127/service.js
+   M backend/src/modules/M144/service.js
+   M backend/src/platforms/platformDetector.js
+   M backend/src/routes/climateAdvisoryRoutes.js
+   M backend/src/routes/coldStorageRoutes.js
+   M backend/src/routes/dairyRoutes.js
+   M backend/src/routes/fertilizerRoutes.js
+   M backend/src/routes/governanceModule.js
+   M backend/src/routes/gstRoutes.js
+   M backend/src/routes/insuranceEnhancements.js
+   M backend/src/routes/logisticsEnhancementRoutes.js
+   M backend/src/routes/recoveredFinanceRoutes.js
+   D backend/src/routes/unifiedLedgerRoutes.js
+   M backend/src/services/advancedFeaturesService.js
+   M backend/src/services/advancedServiceGenerator.js
+   M backend/src/services/advancedVoiceAI.js
+   M backend/src/services/aiAgenticCompanionService.js
+   M backend/src/services/aiBackboneService.js
+   M backend/src/services/aiService.js
+   M backend/src/services/arVrService.js
+   M backend/src/services/authService.js
+   M backend/src/services/biodiversityService.js
+   M backend/src/services/blockchainTraceabilityService.js
+   M backend/src/services/completeAIIntegrationService.js
+   M backend/src/services/comprehensiveERPService.js
+   M backend/src/services/consumerHealthService.js
+   M backend/src/services/ecommerceAIService.js
+   M backend/src/services/ecommerceBusinessSalesService.js
+   M backend/src/services/ecommerceERPService.js
+   M backend/src/services/ecommerceMarketingService.js
+   M backend/src/services/energy/EnergyCostCalculator.js
+   M backend/src/services/farmerTrainingService.js
+   M backend/src/services/foodIntelligenceService.js
+   M backend/src/services/foodSafetyService.js
+   M backend/src/services/formService.js
+   M backend/src/services/freightPoolingService.js
+   M backend/src/services/giIntelligenceService.js
+   M backend/src/services/governanceService.js
+   M backend/src/services/indigenousKnowledgeService.js
+   M backend/src/services/institutionalProcurementService.js
+   M backend/src/services/insurancePolicyIssuanceService.js
+   M backend/src/services/insuranceService.js
+   M backend/src/services/iotIntegrationService.js
+   M backend/src/services/knowledgeGraphService.js
+   M backend/src/services/laboratoryERPService.js
+   M backend/src/services/logisticsEnhancementService.js
+   M backend/src/services/logisticsService.js
+   M backend/src/services/multilingualService.js
+   M backend/src/services/nutrientValueSalesService.js
+   M backend/src/services/nutritionIntelligenceService.js
+   M backend/src/services/offlineSyncService.js
+   M backend/src/services/omnichannelAIService.js
+   M backend/src/services/orderService.js
+   M backend/src/services/platformCoreService.js
+   M backend/src/services/predictiveAnalyticsService.js
+   M backend/src/services/productService.js
+   M backend/src/services/recoveredFinanceService.js
+   D backend/src/services/unifiedLedgerService.js
+   M backend/src/services/valueCommerceService.js
+   M docs/registry/00_MASTER_INDEX.json
+   M docs/registry/00_MASTER_INDEX.md
+   M docs/registry/01_MODULE_INVENTORY.md
+   M docs/registry/02_API_REGISTRY.md
+   M docs/registry/03_DATABASE_REGISTRY.md
+   M docs/registry/04_AI_REGISTRY.md
+   M docs/registry/05_GAP_REGISTER.md
+   M docs/registry/06_DUPLICATION_REPORT.md
+   M docs/registry/07_TECHNICAL_DEBT.md
+   M docs/registry/08_DEPENDENCY_GRAPH.md
+   M docs/registry/09_TRACEABILITY_MATRIX.md
+   M docs/registry/10_READINESS_DASHBOARD.md
+   M frontend/.eslintrc.json
+   M frontend/index.html
+   M frontend/package.json
+   M frontend/src/components/Header.jsx
+   M frontend/src/components/RouteLoading.jsx
+   M frontend/src/config/routes.js
+   M frontend/src/modules/M002/M002Page.jsx
+   M frontend/src/modules/M012/M012Component.jsx
+   M frontend/src/modules/M012/index.jsx
+   M frontend/src/modules/M013/M013Component.jsx
+   M frontend/src/modules/M013/index.jsx
+   M frontend/src/modules/M015/M015Component.jsx
+   M frontend/src/modules/M015/index.jsx
+   M frontend/src/modules/M017/M017Component.jsx
+   M frontend/src/modules/M017/index.jsx
+   M frontend/src/modules/M021/M021Component.jsx
+   M frontend/src/modules/M021/index.jsx
+   M frontend/src/modules/M022/M022Component.jsx
+   M frontend/src/modules/M022/index.jsx
+   M frontend/src/modules/M023/M023Component.jsx
+   M frontend/src/modules/M023/index.jsx
+   M frontend/src/modules/M024/M024Component.jsx
+   M frontend/src/modules/M024/index.jsx
+   M frontend/src/modules/M025/M025Component.jsx
+   M frontend/src/modules/M025/index.jsx
+   M frontend/src/modules/M026/M026Component.jsx
+   M frontend/src/modules/M026/index.jsx
+   M frontend/src/modules/M027/M027Component.jsx
+   M frontend/src/modules/M027/index.jsx
+   M frontend/src/modules/M028/M028Component.jsx
+   M frontend/src/modules/M028/index.jsx
+   M frontend/src/modules/M029/M029Component.jsx
+   M frontend/src/modules/M029/index.jsx
+   M frontend/src/modules/M030/M030Component.jsx
+   M frontend/src/modules/M030/index.jsx
+   M frontend/src/modules/M031/M031Component.jsx
+   M frontend/src/modules/M031/index.jsx
+   M frontend/src/modules/M032/M032Component.jsx
+   M frontend/src/modules/M032/index.jsx
+   M frontend/src/modules/M033/M033Component.jsx
+   M frontend/src/modules/M033/index.jsx
+   M frontend/src/modules/M034/M034Page.jsx
+   M frontend/src/modules/M036/M036Component.jsx
+   M frontend/src/modules/M036/index.jsx
+   M frontend/src/modules/M040/M040Component.jsx
+   M frontend/src/modules/M040/index.jsx
+   M frontend/src/modules/M042/M042Component.jsx
+   M frontend/src/modules/M042/index.jsx
+   M frontend/src/modules/M043/M043Component.jsx
+   M frontend/src/modules/M043/index.jsx
+   M frontend/src/modules/M044/M044Component.jsx
+   M frontend/src/modules/M044/index.jsx
+   M frontend/src/modules/M045/M045Component.jsx
+   M frontend/src/modules/M045/index.jsx
+   M frontend/src/modules/M047/M047Component.jsx
+   M frontend/src/modules/M047/index.jsx
+   M frontend/src/modules/M048/M048Component.jsx
+   M frontend/src/modules/M048/index.jsx
+   M frontend/src/modules/M050/M050Component.jsx
+   M frontend/src/modules/M050/index.jsx
+   M frontend/src/modules/M052/M052Component.jsx
+   M frontend/src/modules/M052/index.jsx
+   M frontend/src/modules/M053/M053Component.jsx
+   M frontend/src/modules/M053/index.jsx
+   M frontend/src/modules/M054/M054Component.jsx
+   M frontend/src/modules/M054/index.jsx
+   M frontend/src/modules/M055/M055Component.jsx
+   M frontend/src/modules/M055/index.jsx
+   M frontend/src/modules/M056/M056Component.jsx
+   M frontend/src/modules/M056/index.jsx
+   M frontend/src/modules/M057/M057Component.jsx
+   M frontend/src/modules/M057/index.jsx
+   M frontend/src/modules/M058/M058Component.jsx
+   M frontend/src/modules/M058/index.jsx
+   M frontend/src/modules/M060/M060Component.jsx
+   M frontend/src/modules/M060/index.jsx
+   M frontend/src/modules/M061/M061Page.jsx
+   M frontend/src/modules/M070/M070Page.jsx
+   M frontend/src/modules/M071/M071Component.jsx
+   M frontend/src/modules/M071/index.jsx
+   M frontend/src/modules/M072/M072Component.jsx
+   M frontend/src/modules/M072/index.jsx
+   M frontend/src/modules/M073/M073Component.jsx
+   M frontend/src/modules/M073/index.jsx
+   M frontend/src/modules/M081/M081Component.jsx
+   M frontend/src/modules/M081/index.jsx
+   M frontend/src/modules/M082/M082Component.jsx
+   M frontend/src/modules/M082/index.jsx
+   M frontend/src/modules/M084/M084Component.jsx
+   M frontend/src/modules/M084/index.jsx
+   M frontend/src/modules/M085/M085Component.jsx
+   M frontend/src/modules/M085/index.jsx
+   M frontend/src/modules/M086/M086Component.jsx
+   M frontend/src/modules/M086/index.jsx
+   M frontend/src/modules/M090/M090Component.jsx
+   M frontend/src/modules/M090/index.jsx
+   M frontend/src/modules/M091/M091Component.jsx
+   M frontend/src/modules/M091/index.jsx
+   M frontend/src/modules/M092/M092Component.jsx
+   M frontend/src/modules/M092/index.jsx
+   M frontend/src/modules/M093/M093Component.jsx
+   M frontend/src/modules/M093/index.jsx
+   M frontend/src/modules/M094/M094Component.jsx
+   M frontend/src/modules/M094/index.jsx
+   M frontend/src/modules/M098/M098Component.jsx
+   M frontend/src/modules/M098/index.jsx
+   M frontend/src/modules/M099/M099Component.jsx
+   M frontend/src/modules/M099/index.jsx
+   M frontend/src/modules/M100/M100Component.jsx
+   M frontend/src/modules/M100/index.jsx
+   M frontend/src/modules/M106/M106Component.jsx
+   M frontend/src/modules/M106/index.jsx
+   M frontend/src/modules/M111/M111Component.jsx
+   M frontend/src/modules/M111/index.jsx
+   M frontend/src/modules/M114/M114Component.jsx
+   M frontend/src/modules/M114/index.jsx
+   M frontend/src/modules/M115/M115Component.jsx
+   M frontend/src/modules/M115/index.jsx
+   M frontend/src/modules/M117/M117Component.jsx
+   M frontend/src/modules/M117/index.jsx
+   M frontend/src/modules/M118/M118Component.jsx
+   M frontend/src/modules/M118/index.jsx
+   M frontend/src/modules/M119/M119Component.jsx
+   M frontend/src/modules/M119/index.jsx
+   M frontend/src/modules/M120/M120Component.jsx
+   M frontend/src/modules/M120/index.jsx
+   M frontend/src/modules/M124/M124Component.jsx
+   M frontend/src/modules/M124/index.jsx
+   M frontend/src/modules/M125/M125Component.jsx
+   M frontend/src/modules/M125/index.jsx
+   M frontend/src/modules/M126/M126Component.jsx
+   M frontend/src/modules/M126/index.jsx
+   M frontend/src/modules/M128/M128Component.jsx
+   M frontend/src/modules/M128/index.jsx
+   M frontend/src/modules/M137/M137Component.jsx
+   M frontend/src/modules/M137/index.jsx
+   M frontend/src/modules/M139/M139Component.jsx
+   M frontend/src/modules/M139/index.jsx
+   M frontend/src/modules/M144/M144Component.jsx
+   M frontend/src/modules/M144/index.jsx
+   M frontend/src/modules/M148/M148Component.jsx
+   M frontend/src/modules/M148/index.jsx
+   M frontend/src/modules/M149/M149Component.jsx
+   M frontend/src/modules/M149/index.jsx
+   M frontend/src/pages/AdminDashboardPage.jsx
+   M frontend/src/pages/AnalyticsPage.jsx
+   M frontend/src/pages/AuthorizationPage.jsx
+   M frontend/src/pages/BankerDashboardPage.jsx
+   M frontend/src/pages/CADashboardPage.jsx
+   M frontend/src/pages/CartPage.jsx
+   M frontend/src/pages/CheckoutPage.jsx
+   M frontend/src/pages/ClimateAdvisoryPage.jsx
+   M frontend/src/pages/CommunityManagementPage.jsx
+   M frontend/src/pages/ComparePage.jsx
+   M frontend/src/pages/CorporateBuyerPage.jsx
+   M frontend/src/pages/DairyManagementPage.jsx
+   M frontend/src/pages/DashboardPage.jsx
+   M frontend/src/pages/DiscoverPage.jsx
+   M frontend/src/pages/DynamicPricingPage.jsx
+   M frontend/src/pages/FPODashboardPage.jsx
+   M frontend/src/pages/FarmAdvisorPage.jsx
+   M frontend/src/pages/FarmCostingPage.jsx
+   M frontend/src/pages/FarmerFieldPage.jsx
+   M frontend/src/pages/FarmerHomePage.jsx
+   M frontend/src/pages/FarmerKycPage.jsx
+   M frontend/src/pages/FarmerPortalPage.jsx
+   M frontend/src/pages/FarmerSellPage.jsx
+   M frontend/src/pages/FertilizerInventoryPage.jsx
+   M frontend/src/pages/GovernmentDashboardPage.jsx
+   M frontend/src/pages/HarvestPlanPage.jsx
+   M frontend/src/pages/HarvestScorePage.jsx
+   M frontend/src/pages/HomePage.jsx
+   M frontend/src/pages/IrrigationManagementPage.jsx
+   M frontend/src/pages/LabourManagementPage.jsx
+   M frontend/src/pages/LandRegistryPage.jsx
+   M frontend/src/pages/LivestockManagementPage.jsx
+   M frontend/src/pages/LoginPage.jsx
+   M frontend/src/pages/LogisticsProviderPage.jsx
+   M frontend/src/pages/MarketplacePage.jsx
+   M frontend/src/pages/OrchardManagementPage.jsx
+   M frontend/src/pages/PondManagementPage.jsx
+   M frontend/src/pages/PreOrderPage.jsx
+   M frontend/src/pages/PriceBuildPage.jsx
+   M frontend/src/pages/PriceCheckPage.jsx
+   M frontend/src/pages/ProductDetailPage.jsx
+   M frontend/src/pages/RegisterPage.jsx
+   M frontend/src/pages/ResearchDashboardPage.jsx
+   M frontend/src/pages/SellTimingPage.jsx
+   M frontend/src/pages/ShgManagementPage.jsx
+   M frontend/src/pages/SowingManagementPage.jsx
+   M frontend/src/pages/SubsidyManagementPage.jsx
+   M frontend/src/pages/TractorManagementPage.jsx
+   M frontend/src/pages/UnifiedLedgerPage.jsx
+   M frontend/src/pages/VillageRegistryPage.jsx
+   M frontend/src/pages/WhatGrowPage.jsx
+   M frontend/src/services/api.js
+   M frontend/src/utils/security.js
+  ?? .dockerignore
+  ?? .env.database.example
+  ?? .env.production
+  ?? ACCOUNTING_MODULE_FRAMEWORK_SPECIFICATION.md
+  ?? ADMIN_MODULE_SPECIFICATION.md
+  ?? ADVANCED_AI_ERP_MODULES_RESEARCH.md
+  ?? AEROPONICS_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? AFRERA_BUSINESS_CELL_ANATOMY_MODULE_IMPLEMENTATION.md
+  ?? AFRERA_DEVELOPMENT_INFRASTRUCTURE_MODULE_IMPLEMENTATION.md
+  ?? AFRERA_DEVELOPMENT_OPERATING_SYSTEM_MODULE_IMPLEMENTATION.md
+  ?? AFRERA_ENGINEERING_GOVERNANCE_SYSTEM_MODULE_IMPLEMENTATION.md
+  ?? AFRERA_ENTERPRISE_PLATFORM_HIERARCHY_MODULE_IMPLEMENTATION.md
+  ?? AFRERA_FULL_PLATFORM_IMPLEMENTATION_PLAN.md
+  ?? AFRERA_INNOVATION_ARCHITECTURE_MODULE_IMPLEMENTATION.md
+  ?? AFRERA_MASTER_ARCHITECTURAL_MODULE_IMPLEMENTATION.md
+  ?? AFRERA_MODULE_ENHANCEMENT_PLAN.md
+  ?? AFRERA_MODULE_INVENTORY.md
+  ?? AFRERA_PLATFORM_MODULE_WIREFRAME_COMPREHENSIVE.md
+  ?? AFRERA_SLOGANS_CONTENT.md
+  ?? AFRERA_SOFTWARE_ANATOMY_MODULE_IMPLEMENTATION.md
+  ?? AGENTIC_AI_DECISION_ENGINE_IMPLEMENTATION.md
+  ?? AGRI_INPUT_INVENTORY_TRACKING_MODULE_IMPLEMENTATION.md
+  ?? AGRO_ERP_MODULE_FRAMEWORK_SPECIFICATION.md
+  ?? AI_BACKBONE_IMPLEMENTATION_COMPLETE.md
+  ?? AI_BASED_DPR_PREPARATION_MODULE_SPECIFICATION.md
+  ?? AI_CHATBOT_MODULE_SPECIFICATION.md
+  ?? AI_DECISION_API_ARCHITECTURE_RESEARCH.md
+  ?? AI_DIETITIAN_ADVANCED_IMPLEMENTATION_GUIDE.md
+  ?? AI_DIETITIAN_API_MODULE_IMPLEMENTATION.md
+  ?? AI_DIETITIAN_HEALTH_TRACKING_EXTENSION_SPECIFICATION.md
+  ?? AI_DIETITIAN_NATURAL_THERAPIST_API_SPECIFICATION.md
+  ?? AI_DIETITIAN_UI_UX_WIREFRAMES_SPECIFICATION.md
+  ?? AI_EMBEDDED_MODULES_ENTERPRISE_INTEGRATION_RESEARCH.md
+  ?? AI_FORENSIC_REPAIR/
+  ?? AI_INTELLIGENT_SYSTEM_ARCHITECTURE.md
+  ?? AI_MODULES_RESEARCH.md
+  ?? AI_MODULE_INTEGRATION_RESEARCH_SUMMARY.md
+  ?? AI_POWERED_SEARCH_SEO_MODULE_SPECIFICATION.md
+  ?? ALGORITHM_MODULES_RESEARCH.md
+  ?? ALL_MODULES_ENHANCEMENT_EXECUTION_PLAN.md
+  ?? ANIMAL_HEALTH_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? AQUACULTURE_ANALYTICS_MODULE_IMPLEMENTATION.md
+  ?? AQUACULTURE_SMART_FARMING_ENHANCEMENT.md
+  ?? ARCHITECTURAL_FRAMEWORK_SPECIFICATION.md
+  ?? ASSET_CAPITALIZATION_DEPRECIATION_MODULE_IMPLEMENTATION.md
+  ?? AUTOMATED_BANK_RECONCILIATION_MODULE_IMPLEMENTATION.md
+  ?? BACKEND_BLUEPRINTS.md
+  ?? BILLING_INVOICING_MODULE_SPECIFICATION.md
+  ?? BIOFERTILIZER_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? BIOFLOC_FARM_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? BIOMETRIC_AUTHENTICATION_MODULE_SPECIFICATION.md
+  ?? BOT_DETECTION_PREVENTION_MODULE_SPECIFICATION.md
+  ?? BREAKDOWN_MAINTENANCE_MODULE_IMPLEMENTATION.md
+  ?? BREAKDOWN_MAINTENANCE_MODULE_SPECIFICATION.md
+  ?? BREEDING_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? BULK_NEGOTIATION_MODULE_SPECIFICATION.md
+  ?? BUSINESS_PLAN_DEVELOPMENT_MODULE_SPECIFICATION.md
+  ?? CATTLE_REGISTRY_MODULE_IMPLEMENTATION.md
+  ?? CHAMELEON_COMMERCE_ENGINE_MODULE_IMPLEMENTATION.md
+  ?? CHAMELEON_COMMERCE_ENGINE_SPECIFICATION.md
+  ?? CLIMATE_PREDICTIVE_MODELING_ENHANCEMENT.md
+  ?? COMMODITY_PRICING_MODULE_SPECIFICATION.md
+  ?? COMMUNICATION_MODULES_RESEARCH.md
+  ?? COMMUNITY_ASSET_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? COMMUNITY_MODULE_SPECIFICATION.md
+  ?? COMPETITIVE_ANALYSIS.md
+  ?? COMPLETION_TRACKER_MATRIX.md
+  ?? COMPREHENSIVE_AI_INTEGRATION_STRATEGY.md
+  ?? COMPREHENSIVE_COMPLETION_STATUS.md
+  ?? COMPREHENSIVE_DOMAIN_ENHANCEMENT_PLAN.md
+  ?? COMPREHENSIVE_ERP_IMPLEMENTATION_COMPLETE.md
+  ?? COMPREHENSIVE_ERP_MODULE_ARCHITECTURE.md
+  ?? COMPREHENSIVE_EVALUATION_GAP_ANALYSIS.md
+  ?? COMPREHENSIVE_GAP_ANALYSIS_IMPLEMENTATION_PLAN.md
+  ?? COMPREHENSIVE_LAUNCH_LEVEL_TODO.md
+  ?? COMPREHENSIVE_MODULE_COMPLETION_PLAN.md
+  ?? COMPREHENSIVE_MODULE_ENHANCEMENT_PLAN.md
+  ?? CONSENT_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? CONSENT_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? CONTRACT_FARMING_SEASON_FARMING_MODULE_SPECIFICATION.md
+  ?? CONTRACT_LABOUR_WORKFORCE_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? COOPERATIVE_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? CORPORATE_ERP_MODULES_MASTER_IMPLEMENTATION.md
+  ?? CORPORATE_INSURANCE_INTEGRATION_RESEARCH.md
+  ?? CORPORATE_MODULE_SPECIFICATION.md
+  ?? COST_CONTROL_MODULE_SPECIFICATION.md
+  ?? COST_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? COST_OPTIMISATION_MODULE_SPECIFICATION.md
+  ?? COST_REDUCTION_MODULE_SPECIFICATION.md
+  ?? CRM_MODULE_SPECIFICATION.md
+  ?? CROP_PRODUCTION_AI_DECISION_ENGINES_ENHANCEMENT.md
+  ?? CROSS_PLATFORM_NUTRIENT_CALCULATOR_MODULE_IMPLEMENTATION.md
+  ?? CROSS_PLATFORM_NUTRIENT_CALCULATOR_SPECIFICATION.md
+  ?? CUSTOMER_CARE_MODULE_SPECIFICATION.md
+  ?? DAIRY_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? DATABASE_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? DATABASE_MANAGEMENT_RECORD_KEEPING_SYSTEMS_RESEARCH.md
+  ?? DATABASE_MODULE_DATABASE_ENTERPRISE_SPECIFICATION.md
+  ?? DATABASE_SETUP_GUIDE.md
+  ?? DATA_MINING_FILTRATION_MODULE_SPECIFICATION.md
+  ?? DATA_MINING_MODULE_SPECIFICATION.md
+  ?? DECISION_ANALYTICS_MODULE_SPECIFICATION.md
+  ?? DEEP_FORENSIC_REPAIR/
+  ?? DIETITIAN_MODULE_SPECIFICATION.md
+  ?? DISASTER_ALERTS_MODULE_IMPLEMENTATION.md
+  ?? DISASTER_ALERTS_MODULE_SPECIFICATION.md
+  ?? DISTRICT_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? DOCUMENTATION_SWEEP_FINDINGS.md
+  ?? DOMAIN_FRAMEWORK_SPECIFICATION.md
+  ?? DORA_COMPLIANCE_GAP_ANALYSIS_AND_FIXES.md
+  ?? DROUGHT_MONITORING_MODULE_IMPLEMENTATION.md
+  ?? DROUGHT_MONITORING_MODULE_SPECIFICATION.md
+  ?? DYNAMIC_PRICING_SYSTEMS_RESEARCH.md
+  ?? Dockerfile
+  ?? EBDESIGN_BUILD_INDEX.ps1
+  ?? EBDESIGN_BUILD_INDEX_BAD_BACKUP.ps1
+  ?? EBDESIGN_COMPREHENSIVE_MODULE_INDEX.md
+  ?? EBDESIGN_DEEP_MAPPING.ps1
+  ?? EBDESIGN_MODULE_CONNECTIVITY_ANALYSIS.md
+  ?? EBDESIGN_Master_Forensic_Index.ps1
+  ?? EBDESIGN_NERVOUS_SYSTEM_CONNECTIVITY.md
+  ?? EBDESIGN_ROUTE_RECONCILIATION_PASS3R.ps1
+  ?? ECOMMERCE_AI_ERP_BUSINESS_MARKETING_SUMMARY.md
+  ?? ECOMMERCE_ENHANCEMENT_SUMMARY.md
+  ?? ECOMMERCE_INTEGRATION_SUMMARY.md
+  ?? EINVOICE_IRN_GENERATION_MODULE_IMPLEMENTATION.md
+  ?? EMERGENCY_DECISION_MAKING_MODULE_SPECIFICATION.md
+  ?? EMPLOYEE_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? ENTERPRISE_AI_FRAMEWORK_IMPLEMENTATION.md
+  ?? ENTERPRISE_INSURANCE_FRAMEWORK_SPECIFICATION.md
+  ?? ENTERPRISE_MODULES_DOMAINS_UI_GAP_ANALYSIS.md
+  ?? ENTERPRISE_NERVOUS_SYSTEM_COMPLETION.md
+  ?? ENVIRONMENT_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? ENVIRONMENT_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? ENVIRONMENT_SETUP_GUIDE.md
+  ?? ERP_ASSET_MANAGEMENT_RESEARCH.md
+  ?? ERP_BI_ANALYTICS_RESEARCH.md
+  ?? ERP_COMPLIANCE_GOVERNANCE_RESEARCH.md
+  ?? ERP_CRM_RESEARCH.md
+  ?? ERP_ECOMMERCE_RESEARCH.md
+  ?? ERP_FINANCE_ACCOUNTING_RESEARCH.md
+  ?? ERP_FORMS_TEMPLATES_RESEARCH.md
+  ?? ERP_HR_MODULES_RESEARCH.md
+  ?? ERP_MANUFACTURING_PRODUCTION_RESEARCH.md
+  ?? ERP_PLANT_MAINTENANCE_RESEARCH.md
+  ?? ERP_PROJECT_MANAGEMENT_RESEARCH.md
+  ?? ERP_QUALITY_MANAGEMENT_RESEARCH.md
+  ?? ERP_SALES_DISTRIBUTION_RESEARCH.md
+  ?? ERP_SCM_MODULES_RESEARCH.md
+  ?? FARMER_AGRO_NEED_AI_ENHANCEMENT.md
+  ?? FARMER_HOUSEHOLD_REQUIREMENT_AI_ENHANCEMENT.md
+  ?? FARM_PLOT_LAND_BANK_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? FERTILITY_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? FERTILITY_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? FERTILIZER_INVENTORY_MODULE_IMPLEMENTATION.md
+  ?? FINANCIAL_SERVICES_PLATFORM_MODULE_IMPLEMENTATION.md
+  ?? FISH_FEED_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? FISH_HEALTH_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? FISH_MODULE_POND_MONITORING_SYSTEM_SPECIFICATION.md
+  ?? FISH_PROCESSING_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? FLOOD_MONITORING_MODULE_IMPLEMENTATION.md
+  ?? FLOOD_MONITORING_MODULE_SPECIFICATION.md
+  ?? FLORICULTURE_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? FOLU_MODULE_SPECIFICATION.md
+  ?? FUEL_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? FUEL_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? GEO_BOUNDARY_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? GIS_LAND_MAPPING_MODULE_IMPLEMENTATION.md
+  ?? GIS_LAND_MAPPING_MODULE_SPECIFICATION.md
+  ?? GOAT_FARMING_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? GOVERNMENT_POLICY_TRACKING_MODULE_SPECIFICATION.md
+  ?? GOVERNMENT_SCHEMES_INTEGRATION_MODULE_SPECIFICATION.md
+  ?? GSTR_AUTO_POPULATION_MODULE_IMPLEMENTATION.md
+  ?? HATCHERY_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? HORTICULTURE_ANALYTICS_MODULE_IMPLEMENTATION.md
+  ?? HYDROPONICS_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? IDENTITY_ACCESS_DOMAIN_COMPLETED.md
+  ?? IDENTITY_ACCESS_MANAGEMENT_SECURITY_ENHANCEMENT.md
+  ?? IMPLEMENT_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? IMPLEMENT_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? INSURANCE_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? IRRIGATION_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? IRRIGATION_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? ISSUE_RESOLUTION_ESCALATION_MODULE_SPECIFICATION.md
+  ?? KNOWLEDGE_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? LABOUR_MANAGEMENT_AI_ENHANCEMENT.md
+  ?? LABOUR_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? LABOUR_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? LAB_TEST_REPORTS_MODULE_SPECIFICATION.md
+  ?? LAND_PROPERTY_GIS_AI_ENHANCEMENT.md
+  ?? LAUNCH_LEVEL_IMPLEMENTATION_PLAN.md
+  ?? LAUNCH_LEVEL_PROGRESS_REPORT.md
+  ?? LAUNCH_READINESS_ULTRACOMPREHENSIVE_AUDIT.md
+  ?? LIVESTOCK_AI_HEALTH_MONITORING_ENHANCEMENT.md
+  ?? LIVESTOCK_ANALYTICS_MODULE_IMPLEMENTATION.md
+  ?? LOCALIZATION_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? LOCALIZATION_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? LOGIN_AUTHENTICATION_SYSTEMS_RESEARCH.md
+  ?? LOGISTICS_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? LOGISTICS_POLICY_SUBSIDY_OPTIMIZATION_MODULE_SPECIFICATION.md
+  ?? LONGTERM_CONTRACT_FARMING_RESEARCH.md
+  ?? MACHINERY_TELEMATICS_AI_ENHANCEMENT.md
+  ?? MARKETING_CONTENT_CREATION_AI_MODULE_SPECIFICATION.md
+  ?? MARKET_ECOMMERCE_AI_ENHANCEMENT.md
+  ?? MASTER_CHEF_MODULE_SPECIFICATION.md
+  ?? MASTER_CONFIGURATION_MODULE_IMPLEMENTATION.md
+  ?? MICRONUTRIENT_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? MOBILE_DESKTOP_APPLICATION_STRATEGY.md
+  ?? MODULE_INTEGRATION_FIXES_SUMMARY.md
+  ?? MULTI_AGENT_SYSTEMS_FRAMEWORK_SPECIFICATION.md
+  ?? NATURAL_THERAPY_SPECIALIST_MODULE_SPECIFICATION.md
+  ?? NEXT_10_DAYS_IMPLEMENTATION_STATUS.md
+  ?? NEXT_10_DAYS_TODO.md
+  ?? NEXT_GEN_WEBPAGE_SYSTEMS_RESEARCH.md
+  ?? NE_FOLDER_DOCUMENT_EXTRACTION.md
+  ?? NE_FOLDER_PROTOTYPE_EXTRACTION.md
+  ?? NODE_FORENSIC_REPAIR/
+  ?? NON_PERISHABLE_SUPPLY_CHAIN_MANAGEMENT_FRAMEWORK.md
+  ?? NURSERY_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? NURSERY_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? NUTRIENT_CALCULATOR_MODULE_SPECIFICATION.md
+  ?? NUTRITION_SPECIALIST_MODULE_SPECIFICATION.md
+  ?? OPERATION_MONITORING_MODULE_SPECIFICATION.md
+  ?? ORACLE_MODULE_ARCHITECTURE_RESEARCH.md
+  ?? ORCHARD_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? ORDER_EXECUTION_MODULE_SPECIFICATION.md
+  ?? ORGANIC_TRACKING_MODULE_SPECIFICATION.md
+  ?? ORGANIZATION_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? ORGANIZATION_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? PACKAGING_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? PANCHAYAT_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? PARCEL_MAPPING_MODULE_IMPLEMENTATION.md
+  ?? PAYMENT_MODULE_SPECIFICATION.md
+  ?? PERISHABLE_SUPPLY_CHAIN_MANAGEMENT_FRAMEWORK.md
+  ?? PERMISSION_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? PERMISSION_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? PESTICIDE_INVENTORY_MODULE_IMPLEMENTATION.md
+  ?? PESTICIDE_INVENTORY_VILLAGE_SHARED_USAGE_TECHNOLOGY_MODULE_IMPLEMENTATION.md
+  ?? PIG_FARMING_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? PLANNING_REPORT.md
+  ?? PLAN_EXECUTION_GAP_ANALYSIS.md
+  ?? PLATFORM_CONFIGURATION_MODULE_IMPLEMENTATION.md
+  ?? PLATFORM_CORE_MODULE_IMPLEMENTATION.md
+  ?? PLATFORM_CORE_MODULE_SPECIFICATION.md
+  ?? PLATFORM_FOUNDATION_AI_ENHANCEMENT.md
+  ?? PLATFORM_FOUNDATION_DOMAIN_COMPLETED.md
+  ?? PLATFORM_FRAMEWORK_SPECIFICATION.md
+  ?? PLATFORM_IMPLEMENTATION_SUMMARY.md
+  ?? POLYHOUSE_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? POND_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? POULTRY_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? PRECISION_AGRICULTURE_INTELLIGENCE_PLATFORM_MODULE_IMPLEMENTATION.md
+  ?? PRICE_EXTRACTION_UNIT_SPECIFICATION.md
+  ?? PRODUCER_GROUP_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? PRODUCTION_DEPLOYMENT_CHECKLIST.md
+  ?? PRODUCT_ADVERTISEMENT_PROMOTION_MODULE_SPECIFICATION.md
+  ?? PRODUCT_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? PRODUCT_MARKETING_MODULE_SPECIFICATION.md
+  ?? PROJECT_ANALYSIS_IMPLEMENTATION_ROADMAP.md
+  ?? PROJECT_ANALYSIS_REPORT.md
+  ?? PROJECT_STATUS_SUMMARY.md
+  ?? PUBLIC_DATA_INTELLIGENCE_PLATFORM_MODULE_IMPLEMENTATION.md
+  ?? PUBLIC_DOMAIN_DATA_EXTRACTION_RESEARCH.md
+  ?? RAINWATER_HARVESTING_MODULE_IMPLEMENTATION.md
+  ?? RAINWATER_HARVESTING_MODULE_SPECIFICATION.md
+  ?? REAL_AI_BACKBONE_SYSTEM_RESEARCH.md
+  ?? REAL_TIME_ANALYTICS_PLATFORM_IMPLEMENTATION.md
+  ?? RECIPES_EXPORT_MODULE_SPECIFICATION.md
+  ?? REGISTRATION_SYSTEMS_RESEARCH.md
+  ?? REOS_EXTENDED_RECONCILIATION.md
+  ?? REOS_MODULE_CATALOGUE_RECONCILIATION.md
+  ?? REOS_VOLUME_11_12_RECONCILIATION.md
+  ?? REOS_VOLUME_14_15_RECONCILIATION.md
+  ?? RESEARCH_CORPUS_RECONCILIATION.md
+  ?? RESOURCE_OPTIMIZATION_AI_ENHANCEMENT.md
+  ?? RESPONSIBLE_AI_FRAMEWORK_SPECIFICATION.md
+  ?? RETAIL_HOUSEHOLD_FARMER_RESEARCH.md
+  ?? RETAIL_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? RETURN_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? RFQ_DYNAMIC_NEGOTIATION_ENGINE_IMPLEMENTATION.md
+  ?? RISK_ASSESSMENT_MODULE_SPECIFICATION.md
+  ?? ROLE_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? RURAL_DEVELOPMENT_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? SAP_LIKE_COMPREHENSIVE_ERP_FRAMEWORK.md
+  ?? SAP_MODULE_ARCHITECTURE_RESEARCH.md
+  ?? SEASONAL_CONTRACT_FARMING_RESEARCH.md
+  ?? SECOND_HAND_MACHINERY_TRANSFER_MODULE.md
+  ?? SEED_INVENTORY_MODULE_IMPLEMENTATION.md
+  ?? SEED_PRODUCTION_TECHNOLOGY_INTEGRATION_MODULE_IMPLEMENTATION.md
+  ?? SEED_STORAGE_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? SELF_DECISION_MODULES_RESEARCH.md
+  ?? SESSION_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? SHEEP_FARMING_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? SHG_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? SINGLE_SIGN_ON_MODULE_IMPLEMENTATION.md
+  ?? SINGLE_SIGN_ON_MODULE_SPECIFICATION.md
+  ?? SKELETON_MODULE_ENHANCEMENT_PROGRESS.md
+  ?? SMART_SUPPLY_CHAIN_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? SOFTWARE_MODULE_SPECIFICATION.md
+  ?? SOWING_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? SOWING_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? SPARE_PARTS_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? STATE_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? STRATEGIC_GAP_AND_VISION_ANALYSIS.md
+  ?? STRUCTURED_DATA_SCHEMA_MARKUP_MODULE_SPECIFICATION.md
+  ?? SUBH_DATABASE_PREFLIGHT_STATE.txt
+  ?? SUBSCRIPTION_SIP_STAPLES_MODULE_IMPLEMENTATION.md
+  ?? SUBSIDY_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? SUPER_ULTRACOMPREHENSIVE_EVALUATION_ANALYSIS.md
+  ?? SUPER_ULTRACOMPREHENSIVE_IMPLEMENTATION_PLAN.md
+  ?? SUPPLY_CHAIN_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? SURVEY_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? SYSTEM_ADMINISTRATION_MODULE_IMPLEMENTATION.md
+  ?? System.Collections.Specialized.OrderedDictionary
+  ?? TDS_ENGINE_MODULE_IMPLEMENTATION.md
+  ?? TECHNOLOGY_ADVANCEMENT_MODULE_SPECIFICATION.md
+  ?? TECHNOLOGY_DSCR_MODULE_SPECIFICATION.md
+  ?? TECHNOLOGY_FINANCIAL_PROJECTIONS_MODULE_SPECIFICATION.md
+  ?? TECHNOLOGY_ROI_MODULE_SPECIFICATION.md
+  ?? TENANT_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? TENANT_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? TEXT_TO_VIDEO_GENERATION_MODULE_SPECIFICATION.md
+  ?? TIME_ZONE_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? TRACTOR_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? TRACTOR_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? ULTRA_COMPREHENSIVE_MODULE_ENHANCEMENT_PLAN.md
+  ?? USER_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? V43_ROUTE_PARITY_ANALYSIS.md
+  ?? VEGETABLE_PRODUCTION_MODULE_IMPLEMENTATION.md
+  ?? VEHICLE_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? VENDOR_REGISTRATION_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? VENDOR_SELECTION_MODULE_SPECIFICATION.md
+  ?? VILLAGE_COMMUNITY_PREDICTIVE_ANALYTICS_ENHANCEMENT.md
+  ?? VILLAGE_REGISTRY_MODULE_IMPLEMENTATION.md
+  ?? VISION_AI_MODULE_SPECIFICATION.md
+  ?? WATERSHED_MANAGEMENT_MODULE_IMPLEMENTATION.md
+  ?? WATERSHED_MANAGEMENT_MODULE_SPECIFICATION.md
+  ?? WATER_ANALYTICS_MODULE_IMPLEMENTATION.md
+  ?? WATER_ANALYTICS_MODULE_SPECIFICATION.md
+  ?? WATER_BUDGETING_MODULE_IMPLEMENTATION.md
+  ?? WATER_BUDGETING_MODULE_SPECIFICATION.md
+  ?? WATER_MANAGEMENT_IOT_ML_ENHANCEMENT.md
+  ?? WATER_QUALITY_CONTROL_MODULE_IMPLEMENTATION.md
+  ?? WATER_QUALITY_MONITORING_MODULE_IMPLEMENTATION.md
+  ?? WATER_QUALITY_MONITORING_MODULE_SPECIFICATION.md
+  ?? WATER_RESOURCE_MAPPING_MODULE_IMPLEMENTATION.md
+  ?? WATER_RESOURCE_MAPPING_MODULE_SPECIFICATION.md
+  ?? _AFRERA_MASTER_DISCOVERY/
+  ?? _CANONICAL_AUDIT/
+  ?? _EBDESIGN_FORENSIC_INDEX/
+  ?? _EBDESIGN_LIBRARY/
+  ?? _JUNK_QUARANTINE/
+  ?? _POWERSHELL_FORENSIC_DEBUGGER/
+  ?? _SQL_INFRA/
+  ?? _SUBH_FORENSIC_REBUILD/
+  ?? _SUBH_MASTER_EXECUTION/
+  ?? backend/api-wiring-verification-report.json
+  ?? backend/automated-fixes-report.json
+  ?? backend/db-connection-verification-report.json
+  ?? backend/integration-test-report.json
+  ?? backend/route-service-audit-report.json
+  ?? backend/scripts/BROKEN_LINKS_REPORT.csv
+  ?? backend/scripts/COMPREHENSIVE_LINK_REPORT.csv
+  ?? backend/service-init-verification-report.json
+  ?? backend/src/database/migrations/9999_zzzzzzzzzzzzzz_hidden_modules_schema_recovery.sql
+  ?? backend/src/database/migrations/9999_zzzzzzzzzzzzzzz_m012_session_security_schema.sql
+  ?? backend/src/database/migrations/9999_zzzzzzzzzzzzzzzz_alert_management_schema.sql
+  ?? backend/src/database/migrations/9999_zzzzzzzzzzzzzzzzz_climate_monitoring_schema.sql
+  ?? backend/src/database/migrations/9999_zzzzzzzzzzzzzzzzzz_operations_management_schema.sql
+  ?? backend/src/database/migrations/9999_zzzzzzzzzzzzzzzzzzz_water_management_schema.sql
+  ?? backend/src/database/migrations/9999_zzzzzzzzzzzzzzzzzzzz_soil_management_schema.sql
+  ?? backend/src/database/migrations/9999_zzzzzzzzzzzzzzzzzzzzz_community_management_schema.sql
+  ?? backend/src/database/migrations/9999_zzzzzzzzzzzzzzzzzzzzzz_input_supply_management_schema.sql
+  ?? backend/src/database/migrations/9999_zzzzzzzzzzzzzzzzzzzzzzz_livestock_management_schema.sql
+  ?? backend/src/database/migrations/9999_zzzzzzzzzzzzzzzzzzzzzzzz_farmer_land_management_schema.sql
+  ?? backend/src/database/migrations/9999_zzzzzzzzzzzzzzzzzzzzzzzzz_crop_management_schema.sql
+  ?? backend/src/database/migrations/9999_zzzzzzzzzzzzzzzzzzzzzzzzzz_asset_lifecycle_schema.sql
+  ?? backend/src/database/migrations/9999_zzzzzzzzzzzzzzzzzzzzzzzzzzz_preventive_maintenance_schema.sql
+  ?? backend/src/database/migrations/9999_zzzzzzzzzzzzzzzzzzzzzzzzzzzz_horticulture_management_schema.sql
+  ?? backend/src/database/migrations/__missing_fk_indexes.json
+  ?? backend/src/middleware/ownership.js
+  ?? backend/src/middleware/roleGroups.js
+  ?? backend/src/routes/climateMonitoringRoutes.js
+  ?? backend/src/routes/communityManagementRoutes.js
+  ?? backend/src/routes/cropManagementRoutes.js
+  ?? backend/src/routes/engineeringProjectRoutes.js
+  ?? backend/src/routes/farmerFamilyRoutes.js
+  ?? backend/src/routes/horticultureManagementRoutes.js
+  ?? backend/src/routes/inputSupplyManagementRoutes.js
+  ?? backend/src/routes/landManagementRoutes.js
+  ?? backend/src/routes/livestockManagementRoutes.js
+  ?? backend/src/routes/operationsManagementRoutes.js
+  ?? backend/src/routes/preventiveMaintenanceRoutes.js
+  ?? backend/src/routes/soilManagementRoutes.js
+  ?? backend/src/routes/waterManagementRoutes.js
+  ?? backend/src/services/climateMonitoringService.js
+  ?? backend/src/services/communityManagementService.js
+  ?? backend/src/services/cropManagementService.js
+  ?? backend/src/services/engineeringProjectService.js
+  ?? backend/src/services/farmerFamilyService.js
+  ?? backend/src/services/horticultureManagementService.js
+  ?? backend/src/services/inputSupplyManagementService.js
+  ?? backend/src/services/landManagementService.js
+  ?? backend/src/services/livestockManagementService.js
+  ?? backend/src/services/operationsManagementService.js
+  ?? backend/src/services/preventiveMaintenanceService.js
+  ?? backend/src/services/resourceCrudFactory.js
+  ?? backend/src/services/soilManagementService.js
+  ?? backend/src/services/waterManagementService.js
+  ?? backend/src/utils/testFallbackStore.js
+  ?? backend/test_summary.txt
+  ?? blobs/
+  ?? database/
+  ?? docker-compose.database.yml
+  ?? docker-compose.yml
+  ?? docs/registry/CONCEPT_DOCUMENT_GAP_ANALYSIS_V2.md
+  ?? "ersDIYA GOELDownloadsEBDESIGN\357\200\242"
+  ?? frontend-link-audit-report.json
+  ?? frontend/frontend-fixes-report.json
+  ?? frontend/frontend-link-audit-report.json
+  ?? frontend/public/robots.txt
+  ?? frontend/public/sitemap.xml
+  ?? frontend/scripts/
+  ?? frontend/src/pages/OrderDetailPage.jsx
+  ?? manifests/
+  ?? tools/route-audit.js
+
+==================================================================================================
+DISCOVERY COMPLETE
+REPORT: C:\Users\DIYA GOEL\Downloads\EBDESIGN\_EBDESIGN_LIBRARY\_CONTROL\reconciliation\RECONCILIATION_DISCOVERY_20260820_193415.txt
+CSV:    C:\Users\DIYA GOEL\Downloads\EBDESIGN\_EBDESIGN_LIBRARY\_CONTROL\reconciliation\RECONCILIATION_DISCOVERY_20260820_193415.csv
+==================================================================================================

@@ -1,0 +1,12 @@
+{
+  "runId": "20260821_125536",
+  "sourceMatrix": "C:/Users/DIYA GOEL/Downloads/EBDESIGN/_EBDESIGN_LIBRARY/_CONTROL/LIBRARY_COMPLETION_RECONCILIATION_20260820_213149/MASTER_RECONCILIATION_MATRIX.csv",
+  "totalRows": 36704,
+  "buckets": {
+    "NEW_UNREGISTERED_SAFE_TO_CREATE_IDENTITY": 368,
+    "SAFE_TO_ACCESSION_PATH_CONFIRMED": 4433,
+    "SCAN_ARTIFACT_NOT_A_FILE": 1,
+    "OUT_OF_SCOPE_WORKTREE_SNAPSHOT": 31902
+  },
+  "note": "Read-only classification pass. No project files moved, renamed, or deleted. No Authority IDs minted by this script."
+}

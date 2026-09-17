@@ -1,0 +1,199 @@
+﻿=================================================================================================
+EBDESIGN — SUBH FORENSIC ORIGIN + CONTENTS + PROVENANCE AUDIT
+=================================================================================================
+DATE        : 2026-08-20 21:25:06
+ROOT        : C:\Users\DIYA GOEL\Downloads\EBDESIGN
+SUBH        : C:\Users\DIYA GOEL\Downloads\EBDESIGN\_SUBH_FORENSIC_REBUILD
+LIBRARY     : C:\Users\DIYA GOEL\Downloads\EBDESIGN\_EBDESIGN_LIBRARY
+POWERSHELL  : 5.1.26100.9168
+.NET        : 4.0.30319.42000
+READ ONLY   : YES
+=================================================================================================
+
+[01] SUBH EXISTENCE
+SUBH STATUS: FOUND
+
+[02] SUBH ROOT METADATA
+FULL PATH       : C:\Users\DIYA GOEL\Downloads\EBDESIGN\_SUBH_FORENSIC_REBUILD
+CREATED         : 08/15/2026 00:05:47
+LAST WRITE      : 08/15/2026 01:42:13
+LAST ACCESS     : 08/20/2026 19:39:37
+ATTRIBUTES      : Directory
+
+[03] DIRECTORY INVENTORY
+SUBDIRECTORIES: 21
+
+  00_SOURCE_SNAPSHOT                                                     FILES=0
+  01_COMPLETE_FILE_INVENTORY                                             FILES=2
+  02_DIRECTORY_INVENTORY                                                 FILES=2
+  03_DUPLICATE_ANALYSIS                                                  FILES=2
+  04_NAMING_ANALYSIS                                                     FILES=1
+  05_ROUTE_ANALYSIS                                                      FILES=1
+  06_IMPORT_REFERENCE_GRAPH                                              FILES=1
+  07_UI_API_DATABASE_GRAPH                                               FILES=1
+  08_WORKFLOW_GRAPH                                                      FILES=1
+  09_SECURITY_GRAPH                                                      FILES=1
+  10_AI_INTEGRATION_GRAPH                                                FILES=1
+  11_RENAME_PLAN                                                         FILES=1
+  12_RECONCILIATION                                                      FILES=0
+  13_COVERAGE                                                            FILES=0
+  14_GAP_ANALYSIS                                                        FILES=0
+  15_MASTER_ARCHITECTURE                                                 FILES=1
+  90_LOGS                                                                FILES=18
+  99_CHECKPOINTS                                                         FILES=0
+  99_DELIVERABLES                                                        FILES=16
+  SUBH_DELIVERABLES                                                      FILES=14
+  SUBH_RECONSTRUCTION                                                    FILES=6
+
+[04] COMPLETE FILE INVENTORY
+TOTAL FILES : 69
+TOTAL BYTES : 243987520
+
+[05] FILE TYPE DISTRIBUTION
+  .csv                       42
+  .ps1                       18
+  .md                         6
+  .txt                        2
+  .json                       1
+
+[06] SIZE DISTRIBUTION
+ZERO BYTES       : 0
+<10 KB           : 31
+10 KB - 1 MB     : 21
+1 MB - 50 MB     : 15
+>=50 MB          : 2
+
+[07] POSSIBLE COPY / BACKUP / TEMPORARY ARTIFACTS
+FILES WITH COPY/BACKUP/TEMP SIGNALS: 11
+  03_DUPLICATE_ANALYSIS\EXACT_DUPLICATES.csv
+  03_DUPLICATE_ANALYSIS\NAME_DUPLICATES.csv
+  90_LOGS\analyze_duplicates.ps1
+  90_LOGS\subh_duplicate_route_reconciliation.ps1
+  90_LOGS\subh_true_duplicate_analysis.ps1
+  99_DELIVERABLES\D04_EXACT_DUPLICATES.csv
+  99_DELIVERABLES\D05_NAME_DUPLICATES.csv
+  SUBH_DELIVERABLES\SUBH_DUPLICATE_REGISTRY.csv
+  SUBH_DELIVERABLES\SUBH_DUPLICATE_ROUTES.csv
+  SUBH_RECONSTRUCTION\SUBH_DUPLICATE_ROUTES.csv
+  SUBH_RECONSTRUCTION\SUBH_TRUE_DUPLICATES.csv
+
+[08] FORENSIC / SAMR / CLEANING / REBUILD SIGNALS
+SIGNAL FILES: 20
+  01_COMPLETE_FILE_INVENTORY\COMPLETE_FILE_INVENTORY.csv
+  02_DIRECTORY_INVENTORY\DIRECTORY_INVENTORY.csv
+  03_DUPLICATE_ANALYSIS\EXACT_DUPLICATES.csv
+  03_DUPLICATE_ANALYSIS\NAME_DUPLICATES.csv
+  90_LOGS\analyze_duplicates.ps1
+  90_LOGS\generate_directory_inventory.ps1
+  90_LOGS\generate_file_inventory.ps1
+  90_LOGS\subh_duplicate_route_reconciliation.ps1
+  90_LOGS\subh_true_duplicate_analysis.ps1
+  99_DELIVERABLES\D01_COMPLETE_FILE_INVENTORY.csv
+  99_DELIVERABLES\D02_DIRECTORY_INVENTORY.csv
+  99_DELIVERABLES\D04_EXACT_DUPLICATES.csv
+  99_DELIVERABLES\D05_NAME_DUPLICATES.csv
+  99_DELIVERABLES\D16_FORENSIC_RECONSTRUCTION_SUMMARY.md
+  SUBH_DELIVERABLES\SUBH_DUPLICATE_REGISTRY.csv
+  SUBH_DELIVERABLES\SUBH_DUPLICATE_ROUTES.csv
+  SUBH_DELIVERABLES\SUBH_FINAL_RECONCILIATION_REPORT.md
+  SUBH_RECONSTRUCTION\SUBH_CANONICAL_ROUTES.csv
+  SUBH_RECONSTRUCTION\SUBH_DUPLICATE_ROUTES.csv
+  SUBH_RECONSTRUCTION\SUBH_TRUE_DUPLICATES.csv
+
+[09] SCRIPTS / COMMAND FILES
+SCRIPT-LIKE FILES: 18
+
+  90_LOGS\analyze_duplicates.ps1
+      SUBH=4 SAMR=0 LIBRARY=0 COPY=0 MOVE=0 DELETE=0 EXPORT=15
+  90_LOGS\analyze_naming_conflicts.ps1
+      SUBH=3 SAMR=0 LIBRARY=0 COPY=0 MOVE=0 DELETE=0 EXPORT=9
+  90_LOGS\build_ai_integration_graph.ps1
+      SUBH=2 SAMR=0 LIBRARY=0 COPY=0 MOVE=0 DELETE=0 EXPORT=7
+  90_LOGS\build_import_graph.ps1
+      SUBH=2 SAMR=0 LIBRARY=0 COPY=0 MOVE=0 DELETE=0 EXPORT=8
+  90_LOGS\build_master_architecture.ps1
+      SUBH=6 SAMR=0 LIBRARY=0 COPY=0 MOVE=0 DELETE=0 EXPORT=3
+  90_LOGS\build_module_registry.ps1
+      SUBH=2 SAMR=0 LIBRARY=0 COPY=0 MOVE=0 DELETE=0 EXPORT=5
+  90_LOGS\build_route_registry.ps1
+      SUBH=2 SAMR=0 LIBRARY=0 COPY=0 MOVE=0 DELETE=0 EXPORT=7
+  90_LOGS\build_security_graph.ps1
+      SUBH=3 SAMR=0 LIBRARY=0 COPY=0 MOVE=0 DELETE=0 EXPORT=9
+  90_LOGS\build_ui_api_db_graph.ps1
+      SUBH=3 SAMR=0 LIBRARY=0 COPY=0 MOVE=0 DELETE=0 EXPORT=6
+  90_LOGS\build_workflow_graph.ps1
+      SUBH=2 SAMR=0 LIBRARY=0 COPY=0 MOVE=0 DELETE=0 EXPORT=7
+  90_LOGS\generate_deliverables.ps1
+      SUBH=1 SAMR=0 LIBRARY=0 COPY=14 MOVE=0 DELETE=0 EXPORT=20
+  90_LOGS\generate_directory_inventory.ps1
+      SUBH=3 SAMR=0 LIBRARY=0 COPY=0 MOVE=0 DELETE=0 EXPORT=13
+  90_LOGS\generate_file_inventory.ps1
+      SUBH=2 SAMR=0 LIBRARY=0 COPY=0 MOVE=0 DELETE=0 EXPORT=8
+  90_LOGS\subh_classify_artifacts.ps1
+      SUBH=3 SAMR=0 LIBRARY=0 COPY=0 MOVE=0 DELETE=0 EXPORT=7
+  90_LOGS\subh_duplicate_route_reconciliation.ps1
+      SUBH=4 SAMR=0 LIBRARY=0 COPY=0 MOVE=0 DELETE=0 EXPORT=9
+  90_LOGS\subh_generate_deliverables.ps1
+      SUBH=1 SAMR=0 LIBRARY=0 COPY=5 MOVE=0 DELETE=0 EXPORT=25
+  90_LOGS\subh_route_reconstruction.ps1
+      SUBH=2 SAMR=0 LIBRARY=0 COPY=0 MOVE=0 DELETE=0 EXPORT=6
+  90_LOGS\subh_true_duplicate_analysis.ps1
+      SUBH=5 SAMR=0 LIBRARY=0 COPY=0 MOVE=0 DELETE=0 EXPORT=10
+
+[10] PROJECT-WIDE SUBH PROVENANCE SEARCH
+TEXT FILES SCANNED : 0
+REFERENCES FOUND    : 0
+
+[11] PROJECT-WIDE CREATION / COPYING COMMAND SEARCH
+CREATION/COPY SIGNALS FOUND: 0
+
+[12] SUBH ↔ LIBRARY STRUCTURAL COMPARISON
+LIBRARY TOP-LEVEL DIRECTORIES : 66
+LIBRARY FILES                 : 795
+
+SUBH FILENAMES ALSO FOUND IN LIBRARY: 0
+
+[13] ROLE CLASSIFICATION SIGNALS
+  SIGNAL: Directory name contains FORENSIC.
+  SIGNAL: Directory name contains REBUILD.
+  SIGNAL: Copy/backup/temporary naming signals detected.
+  SIGNAL: Forensic/rebuild/cleaning/identity terminology detected.
+  SIGNAL: Executable/script artifacts exist inside SUBH.
+
+[14] PROVISIONAL SUBH ROLE
+PROVISIONAL ROLE: UNKNOWN_REQUIRES_REVIEW
+
+=================================================================================================
+FINAL SUBH FORENSIC CONCLUSION
+=================================================================================================
+SUBH EXISTS                  : YES
+SUBH FILES                   : 69
+SUBH SUBDIRECTORIES          : 21
+SUBH TOTAL BYTES             : 243987520
+SCRIPT FILES                 : 18
+COPY/BACKUP SIGNAL FILES     : 11
+FORENSIC/CLEANING SIGNALS    : 20
+PROJECT CREATION SIGNALS     : 0
+PROJECT REFERENCES           : 0
+LIBRARY FILENAME OVERLAP     : 0
+
+PROVISIONAL ROLE             : UNKNOWN_REQUIRES_REVIEW
+
+IMPORTANT:
+1. This is a forensic observation only.
+2. SUBH has NOT been declared duplicate.
+3. SUBH has NOT been declared disposable.
+4. No files were moved.
+5. No files were copied.
+6. No files were deleted.
+7. No identities were generated.
+8. No library records were modified.
+
+REPORT                      : C:\Users\DIYA GOEL\Downloads\EBDESIGN\_EBDESIGN_LIBRARY\_CONTROL\SUBH_ORIGIN_AUDIT_20260820_212506\SUBH_ORIGIN_REPORT.txt
+FILE INVENTORY              : C:\Users\DIYA GOEL\Downloads\EBDESIGN\_EBDESIGN_LIBRARY\_CONTROL\SUBH_ORIGIN_AUDIT_20260820_212506\SUBH_FILE_INVENTORY.csv
+DIRECTORY INVENTORY         : C:\Users\DIYA GOEL\Downloads\EBDESIGN\_EBDESIGN_LIBRARY\_CONTROL\SUBH_ORIGIN_AUDIT_20260820_212506\SUBH_DIRECTORY_INVENTORY.csv
+SCRIPT INVENTORY            : C:\Users\DIYA GOEL\Downloads\EBDESIGN\_EBDESIGN_LIBRARY\_CONTROL\SUBH_ORIGIN_AUDIT_20260820_212506\SUBH_SCRIPTS.csv
+REFERENCE SEARCH            : C:\Users\DIYA GOEL\Downloads\EBDESIGN\_EBDESIGN_LIBRARY\_CONTROL\SUBH_ORIGIN_AUDIT_20260820_212506\SUBH_REFERENCE_SEARCH.csv
+ROLE SIGNALS                : C:\Users\DIYA GOEL\Downloads\EBDESIGN\_EBDESIGN_LIBRARY\_CONTROL\SUBH_ORIGIN_AUDIT_20260820_212506\SUBH_ROLE_SIGNALS.csv
+LIBRARY COMPARISON          : C:\Users\DIYA GOEL\Downloads\EBDESIGN\_EBDESIGN_LIBRARY\_CONTROL\SUBH_ORIGIN_AUDIT_20260820_212506\SUBH_LIBRARY_COMPARISON.csv
+=================================================================================================

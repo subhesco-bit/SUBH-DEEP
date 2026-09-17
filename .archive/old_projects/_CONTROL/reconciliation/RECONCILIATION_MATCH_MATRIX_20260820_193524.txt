@@ -1,0 +1,31 @@
+﻿==================================================================================================
+EBDESIGN RECONCILIATION MATCH MATRIX
+START: 2026-08-20 19:35:24
+==================================================================================================
+
+[01] LIBRARY FILES: 786
+[02] PROJECT SOURCE FILES: 36800
+[03] UNIQUE IDENTIFIER CANDIDATES: 355013
+
+[06] MATCH SUMMARY
+  ID_PRESENT_LIBRARY_NOT_FOUND           11200
+  MATCHED_EXISTING_ID                     5219
+  MULTIPLE_ID_MATCH                       2741
+  NO_EXISTING_ID_EVIDENCE                17640
+
+MATCHED EXISTING ID       : 5219
+MULTIPLE ID MATCH         : 2741
+ID LIBRARY RECORD MISSING : 11200
+NO ID EVIDENCE            : 17640
+
+[07] SAFETY GATE
+BLOCKED: MULTIPLE-ID MATCHES EXIST.
+BLOCKED: SOURCE FILES REFERENCE IDS NOT FOUND IN LIBRARY.
+REVIEW REQUIRED: SOURCE FILES HAVE NO EXISTING ID EVIDENCE.
+
+==================================================================================================
+RECONCILIATION READ COMPLETE
+MATRIX: C:\Users\DIYA GOEL\Downloads\EBDESIGN\_EBDESIGN_LIBRARY\_CONTROL\reconciliation\RECONCILIATION_MATCH_MATRIX_20260820_193524.csv
+REPORT: C:\Users\DIYA GOEL\Downloads\EBDESIGN\_EBDESIGN_LIBRARY\_CONTROL\reconciliation\RECONCILIATION_MATCH_MATRIX_20260820_193524.txt
+NO FILES WERE MODIFIED.
+==================================================================================================

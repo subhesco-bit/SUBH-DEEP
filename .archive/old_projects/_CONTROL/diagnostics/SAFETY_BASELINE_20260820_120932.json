@@ -1,0 +1,17 @@
+﻿{
+    "RunId":  "20260820_120932",
+    "Root":  "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN",
+    "Library":  "C:\\Users\\DIYA GOEL\\Downloads\\EBDESIGN\\_EBDESIGN_LIBRARY",
+    "DeleteOperations":  0,
+    "MoveOperations":  0,
+    "CopyOperations":  0,
+    "SourceWriteOperations":  0,
+    "GitOperations":  0,
+    "ClaudeWorktreeOperations":  0,
+    "NodeModulesOperations":  0,
+    "DatabaseWriteOperations":  0,
+    "NewUniqueIds":  0,
+    "ReplacedUniqueIds":  0,
+    "ExistingIdentityAuthorityReadOnly":  true,
+    "SourceCodeReadOnly":  true
+}

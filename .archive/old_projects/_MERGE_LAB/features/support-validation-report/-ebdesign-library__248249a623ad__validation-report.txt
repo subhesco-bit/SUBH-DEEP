@@ -1,0 +1,14 @@
+﻿VALIDATION STATUS: PASSED
+
+Original authority rows : 326495
+Staged authority rows   : 326496
+New IDs                 : 1
+Existing IDs preserved  : 0
+Blank IDs               : 0
+Duplicate ID groups     : 0
+Duplicate locations     : 0
+Invalid SHA256 rows     : 0
+Manifest rows           : 1
+Physical files          : 36704
+
+All mandatory validation gates passed.

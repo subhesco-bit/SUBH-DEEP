@@ -98,6 +98,21 @@ const PaymentProcessingPage = lazy(() => import('../pages/PaymentProcessingPage'
 const FarmerEntranceHubPage = lazy(() => import('../pages/FarmerEntranceHubPage'));
 const FarmerSellDoorPage = lazy(() => import('../pages/FarmerSellDoorPage'));
 const FarmerHouseholdDoorPage = lazy(() => import('../pages/FarmerHouseholdDoorPage'));
+
+// M001: Platform Core
+const PlatformDashboard = lazy(() => import('../components/Platform/PlatformDashboard'));
+
+// M026: MFA (Multi-Factor Authentication)
+const MFASetup = lazy(() => import('../components/MFA/MFASetup'));
+const MFAVerify = lazy(() => import('../components/MFA/MFAVerify'));
+
+// M027: GDPR (Privacy & Compliance)
+const GDPRDashboard = lazy(() => import('../components/GDPR/GDPRDashboard'));
+
+// M201-M203: AI & Collaboration
+const AIChat = lazy(() => import('../components/AI/AIChat'));
+const AICollaborationDashboard = lazy(() => import('../components/AI/AICollaborationDashboard'));
+const LibraryBrowser = lazy(() => import('../components/Library/LibraryBrowser'));
 const FarmerFieldDoorPage = lazy(() => import('../pages/FarmerFieldDoorPage'));
 const FarmerSharedDoorPage = lazy(() => import('../pages/FarmerSharedDoorPage'));
 const ForwardPricingPage = lazy(() => import('../pages/ForwardPricingPage'));
@@ -1237,6 +1252,69 @@ export const farmerRoutes = [
     title: 'Experience Layer - AFRERA',
     description: 'Your farming experience layer',
     keywords: 'experience, layer, farming',
+    transition: 'fade',
+  },
+  // M001: Platform Core
+  {
+    path: '/platform',
+    component: PlatformDashboard,
+    title: 'Platform Dashboard - AFRERA',
+    description: 'Platform administration and core services',
+    keywords: 'platform, dashboard, administration',
+    transition: 'fade',
+  },
+  // M026: MFA Setup
+  {
+    path: '/security/mfa/setup',
+    component: MFASetup,
+    title: 'Setup Two-Factor Authentication - AFRERA',
+    description: 'Enable two-factor authentication for your account',
+    keywords: 'security, mfa, 2fa, authentication',
+    transition: 'fade',
+  },
+  // M026: MFA Verify
+  {
+    path: '/security/mfa/verify',
+    component: MFAVerify,
+    title: 'Verify Two-Factor Authentication - AFRERA',
+    description: 'Verify your authentication code',
+    keywords: 'security, mfa, verify, authentication',
+    transition: 'fade',
+  },
+  // M027: GDPR & Privacy
+  {
+    path: '/privacy/gdpr',
+    component: GDPRDashboard,
+    title: 'Privacy & Data Protection - AFRERA',
+    description: 'Manage your privacy and GDPR settings',
+    keywords: 'privacy, gdpr, data protection, compliance',
+    transition: 'fade',
+  },
+  // M201: AI Chat
+  {
+    path: '/ai/chat',
+    component: AIChat,
+    title: 'AI Assistant Chat - AFRERA',
+    description: 'Chat with Claude AI for agricultural guidance',
+    keywords: 'ai, chat, assistant, guidance',
+    transition: 'fade',
+  },
+  // M203: AI Collaboration
+  {
+    path: '/ai/collaboration',
+    component: AICollaborationDashboard,
+    title: 'AI Collaboration Dashboard - AFRERA',
+    description: 'Track AI-Devin collaboration and decisions',
+    keywords: 'ai, collaboration, dashboard, decisions',
+    transition: 'fade',
+  },
+  // M202: Library Browser
+  {
+    path: '/library',
+    component: LibraryBrowser,
+    title: 'Module Library - AFRERA',
+    description: 'Browse and search the module library',
+    keywords: 'library, modules, search, knowledge base',
     transition: 'fade',
   },
 ];

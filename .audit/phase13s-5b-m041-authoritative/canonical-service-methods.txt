@@ -1,0 +1,17 @@
+addVillageResource
+createVillage
+createVillageTask
+deleteVillage
+ensureVillageFinance
+generateVillageAIInsights
+getDistrictEconomicSummary
+getVillageAnalytics
+getVillageDashboard
+getVillageFinance
+getVillageProfile
+getVillages
+postVillageJournal
+searchVillages
+updateVillage
+updateVillageTask
+upsertVillageKPI

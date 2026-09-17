@@ -1,0 +1,20 @@
+﻿PHASE 12B-1 ORIGINAL ROOT-SPECIFIC TRAVERSAL
+============================================
+
+Mounted roots                  : 668
+Unique physical dependency nodes: 1941
+Expanded root-specific edges   : 4056142
+
+Average expanded edges/root    : 6072.07
+Expanded records/node          : 2089.72
+
+Interpretation:
+Traversal completed for all mounted roots.
+The root-specific representation produces substantial duplicate graph expansion.
+A compact physical dependency graph will therefore be generated from the same parsed evidence.
+
+SOURCE MODIFICATION: NONE
+AUTO-FIX: NONE
+AUTO-MOUNT: NONE
+DELETE/MOVE/RENAME: NONE
+PROJECT MERGE: NONE

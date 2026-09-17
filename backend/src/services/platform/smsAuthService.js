@@ -31,12 +31,13 @@ const TWILIO_CONFIG = {
 // into the same catch.
 let twilioClient;
 try {
-  if (TWILIO_CONFIG.accountSid && TWILIO_CONFIG.authToken) {
+  if (TWILIO_CONFIG.accountSid && TWILIO_CONFIG.authToken && 
+      TWILIO_CONFIG.accountSid.startsWith('AC')) {
     // eslint-disable-next-line global-require
     const twilio = require('twilio');
     twilioClient = twilio(TWILIO_CONFIG.accountSid, TWILIO_CONFIG.authToken);
   } else {
-    logger.warn('Twilio credentials not configured, SMS service will run in mock mode');
+    logger.warn('Twilio credentials not configured or invalid, SMS service will run in mock mode');
   }
 } catch (error) {
   logger.error('Failed to initialize Twilio client', { error: error.message, stack: error.stack });
@@ -478,15 +479,15 @@ const express = require('express');
 // require authMiddleware — you cannot be logged in before you log in. The
 // correct control is rate limiting: an unthrottled OTP /initiate is an SMS
 // bombing vector against a citizen's phone AND a direct cost attack on the
-// SMS gateway. authRateLimit is the strictest bucket available.
-const { authRateLimit } = require('../../middleware/rateLimiter');
+// SMS gateway. authLimiter is the strictest bucket available.
+const { authLimiter } = require('../../middleware/rateLimiter');
 const router = express.Router();
 
 /**
  * POST /api/v1/sms-auth/initiate
  * Initiate SMS-based login
  */
-router.post('/initiate', authRateLimit, async (req, res) => {
+router.post('/initiate', authLimiter, async (req, res) => {
   try {
     const { phone_number, language, use_voice } = req.body;
 
@@ -510,7 +511,7 @@ router.post('/initiate', authRateLimit, async (req, res) => {
  * POST /api/v1/sms-auth/verify
  * Verify SMS OTP
  */
-router.post('/verify', authRateLimit, async (req, res) => {
+router.post('/verify', authLimiter, async (req, res) => {
   try {
     const { phone_number, otp } = req.body;
 
@@ -530,7 +531,7 @@ router.post('/verify', authRateLimit, async (req, res) => {
  * POST /api/v1/sms-auth/register
  * Register user with phone number
  */
-router.post('/register', authRateLimit, async (req, res) => {
+router.post('/register', authLimiter, async (req, res) => {
   try {
     const { phone_number, user_data, language } = req.body;
 
@@ -550,7 +551,7 @@ router.post('/register', authRateLimit, async (req, res) => {
  * POST /api/v1/sms-auth/complete-registration
  * Complete phone registration
  */
-router.post('/complete-registration', authRateLimit, async (req, res) => {
+router.post('/complete-registration', authLimiter, async (req, res) => {
   try {
     const { phone_number, otp } = req.body;
 

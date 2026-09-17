@@ -1,0 +1,17 @@
+﻿PHASE 12A SAFETY POLICY
+
+1. Every Git repository/worktree/project remains independent.
+2. Similar files are NOT duplicates merely because names/content resemble.
+3. No source file may be deleted.
+4. No source file may be moved.
+5. No source file may be renamed.
+6. No source file may be overwritten.
+7. No route may be mounted automatically.
+8. No project may be merged.
+9. No branch may be switched.
+10. No git reset/clean/rebase/merge/cherry-pick is permitted.
+11. No dependency installation/update is permitted.
+12. No database modification is permitted.
+13. Hash/signature similarity is evidence only.
+14. Every repair decision requires later semantic review.
+15. Parallel implementations remain preserved unless separately authorized.

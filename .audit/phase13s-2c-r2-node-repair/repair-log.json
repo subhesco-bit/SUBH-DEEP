@@ -1,0 +1,224 @@
+[
+  {
+    "file": "src/services/commerce/valueCommerceService.js",
+    "function": "getValueFactors",
+    "removedStart": 497,
+    "removedEnd": 580
+  },
+  {
+    "file": "src/services/commerce/valueCommerceService.js",
+    "function": "calculateProductValueScore",
+    "removedStart": 584,
+    "removedEnd": 944
+  },
+  {
+    "file": "src/services/commerce/valueCommerceService.js",
+    "function": "getProductValueScore",
+    "removedStart": 948,
+    "removedEnd": 1357
+  },
+  {
+    "file": "src/services/commerce/valueCommerceService.js",
+    "function": "calculateValueBasedPrice",
+    "removedStart": 1361,
+    "removedEnd": 1647
+  },
+  {
+    "file": "src/services/commerce/valueCommerceService.js",
+    "function": "setConsumerValuePreferences",
+    "removedStart": 1651,
+    "removedEnd": 1752
+  },
+  {
+    "file": "src/services/commerce/valueCommerceService.js",
+    "function": "getConsumerValuePreferences",
+    "removedStart": 1754,
+    "removedEnd": 1861
+  },
+  {
+    "file": "src/services/commerce/valueCommerceService.js",
+    "function": "generateValueRecommendations",
+    "removedStart": 1863,
+    "removedEnd": 1919
+  },
+  {
+    "file": "src/services/commerce/valueCommerceService.js",
+    "function": "getValueTiers",
+    "removedStart": 1921,
+    "removedEnd": 1998
+  },
+  {
+    "file": "src/services/food/nutritionIntelligenceService.js",
+    "function": "getNutrients",
+    "removedStart": 469,
+    "removedEnd": 561
+  },
+  {
+    "file": "src/services/food/nutritionIntelligenceService.js",
+    "function": "createFoodNutritionProfile",
+    "removedStart": 565,
+    "removedEnd": 651
+  },
+  {
+    "file": "src/services/food/nutritionIntelligenceService.js",
+    "function": "searchFoodProfiles",
+    "removedStart": 655,
+    "removedEnd": 782
+  },
+  {
+    "file": "src/services/food/nutritionIntelligenceService.js",
+    "function": "addProductNutrition",
+    "removedStart": 786,
+    "removedEnd": 970
+  },
+  {
+    "file": "src/services/food/nutritionIntelligenceService.js",
+    "function": "getProductNutrition",
+    "removedStart": 974,
+    "removedEnd": 1596
+  },
+  {
+    "file": "src/services/food/nutritionIntelligenceService.js",
+    "function": "calculateProductNutritionScore",
+    "removedStart": 1641,
+    "removedEnd": 1996
+  },
+  {
+    "file": "src/services/food/nutritionIntelligenceService.js",
+    "function": "getProductNutritionScore",
+    "removedStart": 2000,
+    "removedEnd": 2258
+  },
+  {
+    "file": "src/services/food/nutritionIntelligenceService.js",
+    "function": "calculateNutritionPricing",
+    "removedStart": 2262,
+    "removedEnd": 2437
+  },
+  {
+    "file": "src/services/food/nutritionIntelligenceService.js",
+    "function": "compareProductsNutrition",
+    "removedStart": 2441,
+    "removedEnd": 2884
+  },
+  {
+    "file": "src/services/food/nutritionIntelligenceService.js",
+    "function": "getDietaryProfiles",
+    "removedStart": 2888,
+    "removedEnd": 2957
+  },
+  {
+    "file": "src/services/logistics/iotIntegrationService.js",
+    "function": "registerIoTDevice",
+    "removedStart": 938,
+    "removedEnd": 1122
+  },
+  {
+    "file": "src/services/logistics/iotIntegrationService.js",
+    "function": "getIoTDevices",
+    "removedStart": 1124,
+    "removedEnd": 1159
+  },
+  {
+    "file": "src/services/logistics/iotIntegrationService.js",
+    "function": "updateDeviceStatus",
+    "removedStart": 1161,
+    "removedEnd": 1331
+  },
+  {
+    "file": "src/services/logistics/iotIntegrationService.js",
+    "function": "recordSensorData",
+    "removedStart": 1333,
+    "removedEnd": 1408
+  },
+  {
+    "file": "src/services/logistics/iotIntegrationService.js",
+    "function": "getSensorData",
+    "removedStart": 1410,
+    "removedEnd": 1445
+  },
+  {
+    "file": "src/services/logistics/iotIntegrationService.js",
+    "function": "sendDeviceCommand",
+    "removedStart": 1447,
+    "removedEnd": 1591
+  },
+  {
+    "file": "src/services/logistics/iotIntegrationService.js",
+    "function": "getDeviceCommands",
+    "removedStart": 1593,
+    "removedEnd": 1632
+  },
+  {
+    "file": "src/services/logistics/iotIntegrationService.js",
+    "function": "createDeviceAlert",
+    "removedStart": 1634,
+    "removedEnd": 1713
+  },
+  {
+    "file": "src/services/logistics/iotIntegrationService.js",
+    "function": "getUnacknowledgedAlerts",
+    "removedStart": 1715,
+    "removedEnd": 1760
+  },
+  {
+    "file": "src/services/logistics/iotIntegrationService.js",
+    "function": "checkDeviceHealth",
+    "removedStart": 1762,
+    "removedEnd": 1827
+  },
+  {
+    "file": "src/services/logistics/iotIntegrationService.js",
+    "function": "recordIoTAnalytics",
+    "removedStart": 1829,
+    "removedEnd": 1920
+  },
+  {
+    "file": "src/services/platform/multilingualService.js",
+    "function": "detectLanguage",
+    "removedStart": 834,
+    "removedEnd": 1383
+  },
+  {
+    "file": "src/services/platform/multilingualService.js",
+    "function": "translateText",
+    "removedStart": 1387,
+    "removedEnd": 1730
+  },
+  {
+    "file": "src/services/platform/multilingualService.js",
+    "function": "getAvailableLanguages",
+    "removedStart": 1734,
+    "removedEnd": 2028
+  },
+  {
+    "file": "src/services/platform/multilingualService.js",
+    "function": "getContentTranslation",
+    "removedStart": 2032,
+    "removedEnd": 2248
+  },
+  {
+    "file": "src/services/platform/multilingualService.js",
+    "function": "saveContentTranslation",
+    "removedStart": 2252,
+    "removedEnd": 2636
+  },
+  {
+    "file": "src/services/platform/multilingualService.js",
+    "function": "getUserLanguagePreferences",
+    "removedStart": 2640,
+    "removedEnd": 3022
+  },
+  {
+    "file": "src/services/platform/multilingualService.js",
+    "function": "updateUserLanguagePreferences",
+    "removedStart": 3026,
+    "removedEnd": 3528
+  },
+  {
+    "file": "src/services/platform/multilingualService.js",
+    "function": "getTranslationMemoryStats",
+    "removedStart": 3532,
+    "removedEnd": 3681
+  }
+]

@@ -1,0 +1,87 @@
+diff --git a/backend/src/routes/M041VillageERP.js b/backend/src/routes/M041VillageERP.js
+index 1a2d82be..54c73afd 100644
+--- a/backend/src/routes/M041VillageERP.js
++++ b/backend/src/routes/M041VillageERP.js
+@@ -7,32 +7,58 @@
+ const express = require('express');
+ const router = express.Router();
+ 
+-// Lazy-load M041Service to avoid circular dependencies
+-let M041Service;
+-
+-// Initialize service on first use
+-router.use((req, res, next) => {
+-  if (!M041Service) {
+-    try {
+-      M041Service = require('../modules/M041/M041Service');
+-    } catch (e) {
+-      console.warn('M041Service not available:', e.message);
+-      return res.status(503).json({ error: 'M041 service not available' });
+-    }
+-  }
+-  next();
++// Canonical M041 service composition.
++// Core village/ERP operations and project/subsidy intelligence
++// remain separate domain services and are composed here for this
++// legacy route surface.
++const M041CoreService = require('../modules/M041/service');
++const M041ProjectService = require('../modules/M041/villageProjectIntelligenceService');
++
++const getService = (req) => ({
++  ...M041CoreService,
++  ...M041ProjectService,
++
++  // Legacy route aliases -> canonical core contracts.
++  getVillage: M041CoreService.getVillageProfile,
++  districtSummary: M041CoreService.getDistrictEconomicSummary,
++  initializeFinance: M041CoreService.ensureVillageFinance,
++  getDashboard: M041CoreService.getVillageDashboard,
++  createTask: M041CoreService.createVillageTask,
++  updateTask: M041CoreService.updateVillageTask,
++  upsertKPI: M041CoreService.upsertVillageKPI,
++  generateAI: M041CoreService.generateVillageAIInsights,
++
++  // Legacy offset pagination -> canonical filter/page contract.
++  getVillages: (limit = 10, offset = 0) => {
++    const safeLimit = Math.max(parseInt(limit, 10) || 10, 1);
++    const safeOffset = Math.max(parseInt(offset, 10) || 0, 0);
++
++    return M041CoreService.getVillages({
++      limit: safeLimit,
++      page: Math.floor(safeOffset / safeLimit) + 1,
++    });
++  },
++
++  // Preserve canonical project filtering from the request query.
++  listProjects: (villageId) =>
++    M041ProjectService.listProjects(villageId, req.query || {}),
++
++  // Preserve authenticated audit attribution.
++  createProject: (villageId, data) =>
++    M041ProjectService.createProject(
++      villageId,
++      data,
++      req.user?.id
++    ),
++
++  createEstimate: (projectId, data) =>
++    M041ProjectService.createEstimate(
++      projectId,
++      data,
++      req.user?.id
++    ),
+ });
+ 
+-// Create service instance with dependencies from request context
+-const getService = (req) => {
+-  if (!req.app.locals.m041Service) {
+-    const pool = req.app.locals.db || global.db;
+-    const logger = req.app.locals.logger || console;
+-    req.app.locals.m041Service = new M041Service(pool, logger);
+-  }
+-  return req.app.locals.m041Service;
+-};
+-
+ // ==================== VILLAGE MANAGEMENT (11 endpoints) ====================
+ 
+ /**

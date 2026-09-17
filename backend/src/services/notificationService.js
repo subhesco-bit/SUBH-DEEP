@@ -145,9 +145,38 @@ class NotificationService extends EventEmitter {
    * Deliver email notification
    */
   async deliverEmail(notificationData) {
-    // Mock implementation - integrate with email service
-    logger.info('Sending email notification', notificationData);
-    return { delivered: true, method: 'email' };
+    const { userId, title, message } = notificationData || {};
+
+    if (!userId) {
+      throw new Error('Email notification requires a user id');
+    }
+
+    const userResult = await this.db.query(
+      'SELECT email FROM users WHERE id = $1',
+      [userId],
+    );
+
+    const email = userResult.rows?.[0]?.email;
+
+    if (!email) {
+      throw new Error(`Email address not found for user ${userId}`);
+    }
+
+    const { sendEmail } = require('./emailService');
+
+    const result = await sendEmail({
+      to: email,
+      subject: title || 'Notification',
+      text: message || 'Notification',
+    });
+
+    return {
+      delivered: true,
+      method: 'email',
+      messageId: result.messageId,
+      accepted: result.accepted,
+      rejected: result.rejected,
+    };
   }
 
   /**

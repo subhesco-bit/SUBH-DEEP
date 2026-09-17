@@ -1,0 +1,613 @@
+const fs = require('fs');
+const path = require('path');
+const { spawnSync } = require('child_process');
+
+const ROOT = String.raw`C:\Users\DIYA GOEL\Downloads\EBDESIGN`;
+const BACKEND = path.join(ROOT, 'backend');
+const OUT = path.join(ROOT, '.audit', 'phase13s-2c-r4-behavior-preserving');
+const BACKUP = path.join(OUT, 'backup');
+
+const PLAN = [
+  {
+    file: 'src/services/commerce/valueCommerceService.js',
+    names: [
+      'getValueFactors',
+      'calculateProductValueScore',
+      'getProductValueScore',
+      'calculateValueBasedPrice',
+      'setConsumerValuePreferences',
+      'getConsumerValuePreferences',
+      'generateValueRecommendations',
+      'getValueTiers'
+    ]
+  },
+  {
+    file: 'src/services/food/nutritionIntelligenceService.js',
+    names: [
+      'getNutrients',
+      'createFoodNutritionProfile',
+      'searchFoodProfiles',
+      'addProductNutrition',
+      'getProductNutrition',
+      'calculateProductNutritionScore',
+      'getProductNutritionScore',
+      'calculateNutritionPricing',
+      'compareProductsNutrition',
+      'getDietaryProfiles'
+    ]
+  },
+  {
+    file: 'src/services/logistics/iotIntegrationService.js',
+    names: [
+      'registerIoTDevice',
+      'getIoTDevices',
+      'updateDeviceStatus',
+      'recordSensorData',
+      'getSensorData',
+      'sendDeviceCommand',
+      'getDeviceCommands',
+      'createDeviceAlert',
+      'getUnacknowledgedAlerts',
+      'checkDeviceHealth',
+      'recordIoTAnalytics'
+    ]
+  },
+  {
+    file: 'src/services/platform/multilingualService.js',
+    names: [
+      'detectLanguage',
+      'translateText',
+      'getAvailableLanguages',
+      'getContentTranslation',
+      'saveContentTranslation',
+      'getUserLanguagePreferences',
+      'updateUserLanguagePreferences',
+      'getTranslationMemoryStats'
+    ]
+  }
+];
+
+const targets = PLAN.map(x => x.file);
+
+function esc(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function run(cmd, args, cwd = BACKEND, env = process.env) {
+  const r = spawnSync(cmd, args, {
+    cwd,
+    env,
+    encoding: 'utf8',
+    windowsHide: true
+  });
+
+  return {
+    code: r.status === null ? 999 : r.status,
+    stdout: r.stdout || '',
+    stderr: r.stderr || '',
+    error: r.error || null
+  };
+}
+
+function restore(backups) {
+  let ok = true;
+
+  for (const b of backups) {
+    try {
+      fs.copyFileSync(b.backup, b.original);
+
+      const restored = fs.readFileSync(b.original);
+      const expected = fs.readFileSync(b.backup);
+
+      if (!restored.equals(expected)) {
+        console.error(`ROLLBACK BYTE MISMATCH: ${b.file}`);
+        ok = false;
+      }
+    } catch (err) {
+      console.error(`ROLLBACK FAILURE: ${b.file}`);
+      console.error(err.message);
+      ok = false;
+    }
+  }
+
+  return ok;
+}
+
+function verifyOriginalStructure(item, source) {
+  let assignments = 0;
+  let declarations = 0;
+
+  for (const name of item.names) {
+    const e = esc(name);
+
+    const assignRe = new RegExp(
+      `^[ \\t]*${e}[ \\t]*=[ \\t]*async\\b`,
+      'gm'
+    );
+
+    const declRe = new RegExp(
+      `^[ \\t]*async[ \\t]+function[ \\t]+${e}[ \\t]*\\(`,
+      'gm'
+    );
+
+    const a = [...source.matchAll(assignRe)].length;
+    const d = [...source.matchAll(declRe)].length;
+
+    if (a !== 1) {
+      throw new Error(
+        `${item.file} :: ${name} expected 1 test assignment, found ${a}`
+      );
+    }
+
+    if (d !== 1) {
+      throw new Error(
+        `${item.file} :: ${name} expected 1 production declaration, found ${d}`
+      );
+    }
+
+    assignments += a;
+    declarations += d;
+  }
+
+  const guards =
+    [...source.matchAll(/if\s*\(\s*process\.env\.NODE_ENV\s*===\s*['"]test['"]\s*\)\s*\{/g)]
+      .length;
+
+  if (guards !== 1) {
+    throw new Error(
+      `${item.file} expected exactly one NODE_ENV test guard; found ${guards}`
+    );
+  }
+
+  return { assignments, declarations };
+}
+
+function transform(item) {
+  const abs = path.join(BACKEND, item.file);
+  let source = fs.readFileSync(abs, 'utf8');
+  const eol = source.includes('\r\n') ? '\r\n' : '\n';
+
+  verifyOriginalStructure(item, source);
+
+  const guardRe =
+    /if\s*\(\s*process\.env\.NODE_ENV\s*===\s*['"]test['"]\s*\)\s*\{/;
+
+  const guardMatch = source.match(guardRe);
+
+  if (!guardMatch) {
+    throw new Error(`Test guard missing: ${item.file}`);
+  }
+
+  const letBlock =
+    item.names.map(name => `let ${name};`).join(eol) +
+    eol + eol;
+
+  source =
+    source.slice(0, guardMatch.index) +
+    letBlock +
+    source.slice(guardMatch.index);
+
+  let renamed = 0;
+
+  for (const name of item.names) {
+    const e = esc(name);
+
+    const declRe = new RegExp(
+      `^([ \\t]*)async[ \\t]+function[ \\t]+${e}([ \\t]*\\()`,
+      'm'
+    );
+
+    const before = source;
+
+    source = source.replace(
+      declRe,
+      `$1async function ${name}Production$2`
+    );
+
+    if (source === before) {
+      throw new Error(
+        `Production declaration rename failed: ${item.file} :: ${name}`
+      );
+    }
+
+    renamed++;
+  }
+
+  const exportMarker = 'module.exports = {';
+  const exportIndex = source.indexOf(exportMarker);
+
+  if (exportIndex < 0) {
+    throw new Error(`module.exports marker missing: ${item.file}`);
+  }
+
+  const selector =
+    `// Select runtime implementations without reassigning function declarations.${eol}` +
+    `if (process.env.NODE_ENV !== 'test') {${eol}` +
+    item.names
+      .map(name => `  ${name} = ${name}Production;`)
+      .join(eol) +
+    `${eol}}${eol}${eol}`;
+
+  source =
+    source.slice(0, exportIndex) +
+    selector +
+    source.slice(exportIndex);
+
+  fs.writeFileSync(abs, source, 'utf8');
+
+  return renamed;
+}
+
+function verifyTransformed(item) {
+  const source = fs.readFileSync(
+    path.join(BACKEND, item.file),
+    'utf8'
+  );
+
+  for (const name of item.names) {
+    const e = esc(name);
+
+    const letRe = new RegExp(
+      `^[ \\t]*let[ \\t]+${e}[ \\t]*;`,
+      'm'
+    );
+
+    const testAssignmentRe = new RegExp(
+      `^[ \\t]*${e}[ \\t]*=[ \\t]*async\\b`,
+      'm'
+    );
+
+    const oldDeclRe = new RegExp(
+      `^[ \\t]*async[ \\t]+function[ \\t]+${e}[ \\t]*\\(`,
+      'm'
+    );
+
+    const prodDeclRe = new RegExp(
+      `^[ \\t]*async[ \\t]+function[ \\t]+${e}Production[ \\t]*\\(`,
+      'm'
+    );
+
+    const selectorRe = new RegExp(
+      `^[ \\t]*${e}[ \\t]*=[ \\t]*${e}Production[ \\t]*;`,
+      'm'
+    );
+
+    if (!letRe.test(source)) {
+      throw new Error(`Public binding missing: ${item.file} :: ${name}`);
+    }
+
+    if (!testAssignmentRe.test(source)) {
+      throw new Error(`Test stub lost: ${item.file} :: ${name}`);
+    }
+
+    if (oldDeclRe.test(source)) {
+      throw new Error(`Old function declaration remains: ${item.file} :: ${name}`);
+    }
+
+    if (!prodDeclRe.test(source)) {
+      throw new Error(`Production implementation missing: ${item.file} :: ${name}`);
+    }
+
+    if (!selectorRe.test(source)) {
+      throw new Error(`Production selector missing: ${item.file} :: ${name}`);
+    }
+
+    if (!source.includes(`  ${name},`) && !source.includes(`  ${name}\n`) &&
+        !source.includes(`  ${name}\r\n`)) {
+      throw new Error(`Public export appears missing: ${item.file} :: ${name}`);
+    }
+  }
+}
+
+function main() {
+  fs.mkdirSync(OUT, { recursive: true });
+  fs.mkdirSync(BACKUP, { recursive: true });
+
+  console.log('');
+  console.log('============================================================');
+  console.log(' PHASE 13S-2C-R4 - BEHAVIOR-PRESERVING REPAIR');
+  console.log('============================================================');
+
+  const total = PLAN.reduce((n, x) => n + x.names.length, 0);
+
+  if (total !== 37) {
+    throw new Error(`Repair plan expected 37 bindings; found ${total}`);
+  }
+
+  const status = run(
+    'git',
+    ['status', '--porcelain', '--', ...targets],
+    BACKEND
+  );
+
+  if (status.code !== 0) {
+    throw new Error(status.stderr || 'git status failed');
+  }
+
+  if (status.stdout.trim()) {
+    console.error(status.stdout);
+    throw new Error(
+      'SAFETY STOP: one or more target files are already modified'
+    );
+  }
+
+  console.log('Target files Git-clean                : PASS');
+
+  const eslintJs = path.join(
+    BACKEND,
+    'node_modules',
+    'eslint',
+    'bin',
+    'eslint.js'
+  );
+
+  if (!fs.existsSync(eslintJs)) {
+    throw new Error(`Local ESLint missing: ${eslintJs}`);
+  }
+
+  console.log('Local ESLint                          : FOUND');
+
+  let preAssignments = 0;
+  let preDeclarations = 0;
+
+  for (const item of PLAN) {
+    const src = fs.readFileSync(
+      path.join(BACKEND, item.file),
+      'utf8'
+    );
+
+    const v = verifyOriginalStructure(item, src);
+
+    preAssignments += v.assignments;
+    preDeclarations += v.declarations;
+  }
+
+  if (preAssignments !== 37 || preDeclarations !== 37) {
+    throw new Error(
+      `Structural precheck mismatch: assignments=${preAssignments}, declarations=${preDeclarations}`
+    );
+  }
+
+  console.log('Test implementations verified         : 37/37');
+  console.log('Production implementations verified   : 37/37');
+
+  const backups = [];
+
+  for (const item of PLAN) {
+    const original = path.join(BACKEND, item.file);
+    const backup = path.join(
+      BACKUP,
+      item.file.replace(/[\\/:*?"<>|]/g, '_')
+    );
+
+    fs.copyFileSync(original, backup);
+
+    backups.push({
+      file: item.file,
+      original,
+      backup
+    });
+  }
+
+  console.log('Byte-for-byte backups                 : CREATED');
+
+  try {
+    let renamed = 0;
+
+    for (const item of PLAN) {
+      const n = transform(item);
+      renamed += n;
+      console.log(
+        `Refactored ${String(n).padStart(2)} : ${item.file}`
+      );
+    }
+
+    if (renamed !== 37) {
+      throw new Error(`Expected 37 refactors; observed ${renamed}`);
+    }
+
+    for (const item of PLAN) {
+      verifyTransformed(item);
+    }
+
+    console.log('Behavior-preserving structure         : PASS 37/37');
+
+    console.log('');
+    console.log('[1/6] NODE SYNTAX');
+
+    for (const item of PLAN) {
+      const r = run(
+        process.execPath,
+        ['--check', path.join(BACKEND, item.file)]
+      );
+
+      if (r.stdout) process.stdout.write(r.stdout);
+      if (r.stderr) process.stderr.write(r.stderr);
+
+      if (r.code !== 0) {
+        throw new Error(`Node syntax failed: ${item.file}`);
+      }
+
+      console.log(`PASS : ${item.file}`);
+    }
+
+    console.log('');
+    console.log('[2/6] TARGETED ESLINT');
+
+    const lint = run(
+      process.execPath,
+      [eslintJs, ...targets]
+    );
+
+    fs.writeFileSync(
+      path.join(OUT, 'eslint-after.txt'),
+      lint.stdout + lint.stderr,
+      'utf8'
+    );
+
+    if (lint.stdout) process.stdout.write(lint.stdout);
+    if (lint.stderr) process.stderr.write(lint.stderr);
+
+    console.log(`ESLint exit code                     : ${lint.code}`);
+
+    if (lint.code !== 0) {
+      throw new Error(
+        `Targeted ESLint failed with exit code ${lint.code}`
+      );
+    }
+
+    console.log('Targeted ESLint                      : PASS');
+
+    console.log('');
+    console.log('[3/6] TEST-MODE EXPORT SMOKE');
+
+    for (const item of PLAN) {
+      const abs = path.join(BACKEND, item.file);
+
+      const probe =
+        `const m=require(${JSON.stringify(abs)});` +
+        `const names=${JSON.stringify(item.names)};` +
+        `for(const n of names){if(typeof m[n]!=='function'){throw new Error(n+' not exported as function')}}`;
+
+      const smoke = run(
+        process.execPath,
+        ['-e', probe],
+        BACKEND,
+        { ...process.env, NODE_ENV: 'test' }
+      );
+
+      if (smoke.stdout) process.stdout.write(smoke.stdout);
+      if (smoke.stderr) process.stderr.write(smoke.stderr);
+
+      if (smoke.code !== 0) {
+        throw new Error(
+          `Test-mode export smoke failed: ${item.file}`
+        );
+      }
+
+      console.log(`PASS : ${item.file}`);
+    }
+
+    console.log('');
+    console.log('[4/6] DIFF CHECK');
+
+    const diffCheck = run(
+      'git',
+      ['diff', '--check', '--', ...targets],
+      BACKEND
+    );
+
+    if (diffCheck.stdout) process.stdout.write(diffCheck.stdout);
+    if (diffCheck.stderr) process.stderr.write(diffCheck.stderr);
+
+    if (diffCheck.code !== 0) {
+      throw new Error('git diff --check failed');
+    }
+
+    console.log('git diff --check                     : PASS');
+
+    console.log('');
+    console.log('[5/6] CHANGE SCOPE');
+
+    const finalStatus = run(
+      'git',
+      ['status', '--short', '--', ...targets],
+      BACKEND
+    );
+
+    if (finalStatus.code !== 0) {
+      throw new Error('Final git status failed');
+    }
+
+    const rows = finalStatus.stdout
+      .trim()
+      .split(/\r?\n/)
+      .filter(Boolean);
+
+    if (rows.length !== 4) {
+      throw new Error(
+        `Expected exactly four modified target files; found ${rows.length}`
+      );
+    }
+
+    console.log(finalStatus.stdout.trim());
+    console.log('Modified target files                : 4');
+
+    console.log('');
+    console.log('[6/6] SAVE EVIDENCE');
+
+    const diff = run(
+      'git',
+      ['diff', '--', ...targets],
+      BACKEND
+    );
+
+    if (diff.code !== 0) {
+      throw new Error('Unable to capture final diff');
+    }
+
+    fs.writeFileSync(
+      path.join(OUT, 'accepted-diff.patch'),
+      diff.stdout,
+      'utf8'
+    );
+
+    fs.writeFileSync(
+      path.join(OUT, 'target-status.txt'),
+      finalStatus.stdout,
+      'utf8'
+    );
+
+    console.log('Final diff captured                  : PASS');
+
+    console.log('');
+    console.log('============================================================');
+    console.log(' PHASE 13S-2C-R4 REPAIR ACCEPTED');
+    console.log('============================================================');
+    console.log('Original ESLint bindings            : 37');
+    console.log('Test-mode implementations preserved : 37/37');
+    console.log('Production implementations preserved: 37/37');
+    console.log('Public API names preserved          : 37/37');
+    console.log('Node syntax                         : PASS x4');
+    console.log('Targeted ESLint                     : PASS');
+    console.log('Test export smoke                   : PASS x4');
+    console.log('git diff --check                    : PASS');
+    console.log('Modified target files               : 4');
+    console.log('Rollback                            : NOT REQUIRED');
+    console.log(`Evidence: ${OUT}`);
+
+    process.exitCode = 0;
+
+  } catch (err) {
+    console.error('');
+    console.error('============================================================');
+    console.error(' VALIDATION FAILED - RESTORING ORIGINALS');
+    console.error('============================================================');
+    console.error(err.stack || err.message || String(err));
+
+    const ok = restore(backups);
+
+    if (ok) {
+      console.log('Byte-for-byte rollback               : PASS');
+    }
+
+    if (!ok) {
+      console.error('Byte-for-byte rollback               : FAIL');
+    }
+
+    console.error('REPAIR ACCEPTED                      : NO');
+    process.exitCode = 1;
+  }
+}
+
+try {
+  main();
+} catch (err) {
+  console.error('');
+  console.error('============================================================');
+  console.error(' PRE-MODIFICATION SAFETY STOP');
+  console.error('============================================================');
+  console.error(err.stack || err.message || String(err));
+  console.error('APPLICATION SOURCE MODIFIED          : NO');
+  process.exitCode = 1;
+}

@@ -1,0 +1,8 @@
+﻿"PrioritySystem","MatchingInventoryRows","Layers","MatchingSystems"
+"booking","0","",""
+"policy","1","MODULES","M640100_INSURANCEPOLICYISSUANCE"
+"claim","1","MODULES","M18100_INSURANCECLAIMS"
+"logistics","2","MODULES","M100100_LOGISTICSENHANCEMENT;M615100_LOGISTICS"
+"loyalty","0","",""
+"wallet","0","",""
+"disruption","1","MODULES","M528100_CIVILDISRUPTION"

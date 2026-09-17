@@ -10,6 +10,15 @@ const { authMiddleware } = require('../../middleware/auth');
 
 const router = express.Router();
 // Test-mode lightweight stubs to avoid DB dependency during unit tests
+let getValueFactors;
+let calculateProductValueScore;
+let getProductValueScore;
+let calculateValueBasedPrice;
+let setConsumerValuePreferences;
+let getConsumerValuePreferences;
+let generateValueRecommendations;
+let getValueTiers;
+
 if (process.env.NODE_ENV === 'test') {
   const now = new Date();
   getValueFactors = async () => ([{ id: 'vf-1', name: 'nutrition', weight: 1.5 }]);
@@ -66,7 +75,7 @@ const pool = require('../../database/pool');
 /**
  * Get all value factors
  */
-async function getValueFactors() {
+async function getValueFactorsProduction() {
   try {
     const result = await pool.query(
       'SELECT * FROM value_factors WHERE is_active = true ORDER BY weight DESC'
@@ -98,7 +107,7 @@ router.get('/value-factors', async (req, res) => {
 /**
  * Calculate product value score
  */
-async function calculateProductValueScore(data) {
+async function calculateProductValueScoreProduction(data) {
   const {
     product_id,
     nutrition_score,
@@ -166,7 +175,7 @@ router.post('/product-value-scores', authMiddleware, async (req, res) => {
 /**
  * Get product value score
  */
-async function getProductValueScore(productId) {
+async function getProductValueScoreProduction(productId) {
   try {
     const result = await pool.query(
       `SELECT * FROM product_value_scores 
@@ -208,7 +217,7 @@ router.get('/product-value-scores/:productId', async (req, res) => {
 /**
  * Calculate value-based price
  */
-async function calculateValueBasedPrice(productId, basePrice) {
+async function calculateValueBasedPriceProduction(productId, basePrice) {
   try {
     const valueScore = await getProductValueScore(productId);
 
@@ -263,7 +272,7 @@ router.post('/value-pricing', authMiddleware, async (req, res) => {
 /**
  * Set consumer value preferences
  */
-async function setConsumerValuePreferences(userId, preferences) {
+async function setConsumerValuePreferencesProduction(userId, preferences) {
   try {
     const result = await pool.query(
       `INSERT INTO consumer_value_preferences 
@@ -319,7 +328,7 @@ router.post('/consumer-preferences', authMiddleware, async (req, res) => {
 /**
  * Get consumer value preferences
  */
-async function getConsumerValuePreferences(userId) {
+async function getConsumerValuePreferencesProduction(userId) {
   try {
     const result = await pool.query(
       'SELECT * FROM consumer_value_preferences WHERE user_id = $1',
@@ -365,7 +374,7 @@ router.get('/consumer-preferences', authMiddleware, async (req, res) => {
 /**
  * Generate value-based recommendations
  */
-async function generateValueRecommendations(userId, limit = 10) {
+async function generateValueRecommendationsProduction(userId, limit = 10) {
   try {
     const preferences = await getConsumerValuePreferences(userId);
 
@@ -475,7 +484,7 @@ router.get('/recommendations', authMiddleware, async (req, res) => {
 /**
  * Get value tiers
  */
-async function getValueTiers() {
+async function getValueTiersProduction() {
   try {
     const result = await pool.query(
       'SELECT * FROM value_tiers WHERE is_active = true ORDER BY min_score DESC'
@@ -506,6 +515,18 @@ router.get('/value-tiers', async (req, res) => {
 
 function isHealthy() {
   return pool.connect().then(() => true).catch(() => false);
+}
+
+// Select runtime implementations without reassigning function declarations.
+if (process.env.NODE_ENV !== 'test') {
+  getValueFactors = getValueFactorsProduction;
+  calculateProductValueScore = calculateProductValueScoreProduction;
+  getProductValueScore = getProductValueScoreProduction;
+  calculateValueBasedPrice = calculateValueBasedPriceProduction;
+  setConsumerValuePreferences = setConsumerValuePreferencesProduction;
+  getConsumerValuePreferences = getConsumerValuePreferencesProduction;
+  generateValueRecommendations = generateValueRecommendationsProduction;
+  getValueTiers = getValueTiersProduction;
 }
 
 module.exports = {

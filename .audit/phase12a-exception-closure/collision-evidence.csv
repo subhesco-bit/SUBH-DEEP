@@ -1,0 +1,7 @@
+﻿"Method","EffectiveURL","RouterFile","Variable","Prefix","LocalPath","MountLine","RouteLine","SHA256"
+"POST","/api/v1/mfa/setup","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\mfaDomainRoutes.js","mfaDomainRoutes","/api/v1","/mfa/setup","1761","23","561B8860E2205BA7891E68B5FA28CE85E5EF8B5168F3FED91C47134AED965840"
+"POST","/api/v1/mfa/setup","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\dual-use\mfaRoutes.js","mfaRoutes","/api/v1/mfa","/setup","1782","15","B9914FBB9BE5478B6A8174BB1DA5432796E2D4DE9D49C09F9E53FC659ECFAA43"
+"POST","/api/v1/mfa/verify","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\mfaDomainRoutes.js","mfaDomainRoutes","/api/v1","/mfa/verify","1761","24","561B8860E2205BA7891E68B5FA28CE85E5EF8B5168F3FED91C47134AED965840"
+"POST","/api/v1/mfa/verify","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\dual-use\mfaRoutes.js","mfaRoutes","/api/v1/mfa","/verify","1782","56","B9914FBB9BE5478B6A8174BB1DA5432796E2D4DE9D49C09F9E53FC659ECFAA43"
+"GET","/api/climateadvisory/health","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\climateAdvisoryRoutes.js","climateAdvisoryRoutes","/api/climateadvisory","/health","1803","30","3CB60A65936FC32416E9365C8B59D025F9B6C41B1E8CD084A39EBA3B63AD2377"
+"GET","/api/climateadvisory/health","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\climateAdvisory.js","climateAdvisory","/api/climateadvisory","/health","1804","12","F5BCCE84253EAC9D23C656C9DBC25F1F86D830AF11B85FF638FC716D619A524B"

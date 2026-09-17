@@ -1,0 +1,27 @@
+{
+  "malformedImportCount": 314,
+  "node": {
+    "status": 0,
+    "signal": null,
+    "error": null
+  },
+  "directNpm": {
+    "status": null,
+    "signal": null,
+    "error": {
+      "name": "Error",
+      "message": "spawnSync npm.cmd EINVAL",
+      "code": "EINVAL"
+    }
+  },
+  "cmdNpm": {
+    "status": 0,
+    "signal": null,
+    "error": null
+  },
+  "baselineBuild": {
+    "status": 0,
+    "signal": null,
+    "error": null
+  }
+}

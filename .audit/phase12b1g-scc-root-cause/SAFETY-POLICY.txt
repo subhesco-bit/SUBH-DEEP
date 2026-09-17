@@ -1,0 +1,24 @@
+﻿PHASE 12B-1G
+============
+
+MODE: READ-ONLY FORENSIC AUDIT
+
+NO source modification
+NO source deletion
+NO move / rename
+NO route mounting
+NO auto-fix
+NO package changes
+NO database changes
+NO migrations
+NO project merge
+NO branch switch
+
+PURPOSE:
+Determine why the compact backend dependency graph contains
+one very large strongly connected component.
+
+IMPORTANT:
+SCC membership is NOT automatically a defect.
+Hub status is NOT automatically a defect.
+Reverse-layer relationships are review evidence only.

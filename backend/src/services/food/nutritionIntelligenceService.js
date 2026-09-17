@@ -11,6 +11,17 @@ const { authMiddleware } = require('../../middleware/auth');
 const router = express.Router();
 
 // Test-mode lightweight stubs to avoid DB dependency during unit tests
+let getNutrients;
+let createFoodNutritionProfile;
+let searchFoodProfiles;
+let addProductNutrition;
+let getProductNutrition;
+let calculateProductNutritionScore;
+let getProductNutritionScore;
+let calculateNutritionPricing;
+let compareProductsNutrition;
+let getDietaryProfiles;
+
 if (process.env.NODE_ENV === 'test') {
   const now = new Date();
   getNutrients = async () => ([{ id: 'NUT-1', symbol: 'PRO', name: 'Protein', unit: 'g' }]);
@@ -86,7 +97,7 @@ function dataOrEmpty(x, productId) { return {}; }
 /**
  * Get all nutrients
  */
-async function getNutrients() {
+async function getNutrientsProduction() {
   try {
     const result = await pool.query(
       `SELECT n.*, nc.name as category_name 
@@ -121,7 +132,7 @@ router.get('/nutrients', async (req, res) => {
 /**
  * Create food nutrition profile
  */
-async function createFoodNutritionProfile(data) {
+async function createFoodNutritionProfileProduction(data) {
   const {
     food_name,
     scientific_name,
@@ -188,7 +199,7 @@ router.post('/food-profiles', authMiddleware, async (req, res) => {
 /**
  * Search food nutrition profiles
  */
-async function searchFoodProfiles(query, foodGroup = null) {
+async function searchFoodProfilesProduction(query, foodGroup = null) {
   try {
     let queryText = `
       SELECT * FROM food_nutrition_profiles 
@@ -235,7 +246,7 @@ router.get('/food-profiles/search', async (req, res) => {
 /**
  * Add nutrition data to product
  */
-async function addProductNutrition(data) {
+async function addProductNutritionProduction(data) {
   const {
     product_id,
     nutrition_profile_id,
@@ -298,7 +309,7 @@ router.post('/product-nutrition', authMiddleware, async (req, res) => {
 /**
  * Get product nutrition
  */
-async function getProductNutrition(productId) {
+async function getProductNutritionProduction(productId) {
   try {
     const result = await pool.query(
       `SELECT pn.*, fnp.food_name 
@@ -341,7 +352,7 @@ router.get('/product-nutrition/:productId', async (req, res) => {
 /**
  * Calculate nutrition score for product
  */
-async function calculateProductNutritionScore(productId, scoringModelId = 1) {
+async function calculateProductNutritionScoreProduction(productId, scoringModelId = 1) {
   try {
     // Get product nutrition
     const nutritionResult = await pool.query(
@@ -404,7 +415,7 @@ router.post('/product-nutrition/:productId/score', authMiddleware, async (req, r
 /**
  * Get product nutrition score
  */
-async function getProductNutritionScore(productId) {
+async function getProductNutritionScoreProduction(productId) {
   try {
     const result = await pool.query(
       `SELECT * FROM product_nutrition_scores 
@@ -445,7 +456,7 @@ router.get('/product-nutrition/:productId/score', async (req, res) => {
 /**
  * Calculate nutrition-based pricing
  */
-async function calculateNutritionPricing(productId, basePrice, pricingRuleId = 1) {
+async function calculateNutritionPricingProduction(productId, basePrice, pricingRuleId = 1) {
   try {
     // Get nutrition score
     const scoreData = await getProductNutritionScore(productId);
@@ -532,7 +543,7 @@ router.post('/product-nutrition/:productId/pricing', authMiddleware, async (req,
 /**
  * Compare nutrition between two products
  */
-async function compareProductsNutrition(productAId, productBId) {
+async function compareProductsNutritionProduction(productAId, productBId) {
   try {
     const nutritionA = await getProductNutrition(productAId);
     const nutritionB = await getProductNutrition(productBId);
@@ -594,7 +605,7 @@ router.post('/compare', async (req, res) => {
 /**
  * Get dietary profiles
  */
-async function getDietaryProfiles() {
+async function getDietaryProfilesProduction() {
   try {
     const result = await pool.query(
       'SELECT * FROM dietary_profiles ORDER BY name'
@@ -680,6 +691,20 @@ async function getWellnessPractices({ tag, category } = {}) {
 
 function isHealthy() {
   return pool.connect().then(() => true).catch(() => false);
+}
+
+// Select runtime implementations without reassigning function declarations.
+if (process.env.NODE_ENV !== 'test') {
+  getNutrients = getNutrientsProduction;
+  createFoodNutritionProfile = createFoodNutritionProfileProduction;
+  searchFoodProfiles = searchFoodProfilesProduction;
+  addProductNutrition = addProductNutritionProduction;
+  getProductNutrition = getProductNutritionProduction;
+  calculateProductNutritionScore = calculateProductNutritionScoreProduction;
+  getProductNutritionScore = getProductNutritionScoreProduction;
+  calculateNutritionPricing = calculateNutritionPricingProduction;
+  compareProductsNutrition = compareProductsNutritionProduction;
+  getDietaryProfiles = getDietaryProfilesProduction;
 }
 
 module.exports = {

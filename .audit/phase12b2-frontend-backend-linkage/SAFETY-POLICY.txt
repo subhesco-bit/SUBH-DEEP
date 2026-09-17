@@ -1,0 +1,38 @@
+﻿PHASE 12B-2 SAFETY POLICY
+=========================
+
+MODE: READ-ONLY AUDIT
+
+NO source modification
+NO source deletion
+NO move / rename
+NO route mounting
+NO generated code
+NO auto-fix
+NO dependency installation/update
+NO database modification
+NO migration execution
+NO project merging
+NO branch switching
+
+PURPOSE:
+Build evidence for:
+
+Frontend route/page/component
+        |
+        v
+hook / store / service / API client
+        |
+        v
+HTTP method + requested path
+        |
+        v
+effective mounted backend endpoint
+        |
+        v
+router / controller / service
+
+IMPORTANT:
+Static linkage does NOT prove runtime success.
+Absence of a static match does NOT automatically prove a defect.
+Dynamic/template paths must be classified separately.

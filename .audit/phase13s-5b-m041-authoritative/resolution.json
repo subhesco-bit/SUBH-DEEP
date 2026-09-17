@@ -1,0 +1,139 @@
+{
+  "routeMethods": [
+    "addFundingSource",
+    "addVillageResource",
+    "buildSubsidyAIContext",
+    "createEstimate",
+    "createProject",
+    "createTask",
+    "createVillage",
+    "deleteVillage",
+    "districtSummary",
+    "generateAI",
+    "getDashboard",
+    "getProject",
+    "getVillage",
+    "getVillageAnalytics",
+    "getVillageFinance",
+    "getVillages",
+    "initializeFinance",
+    "listProjects",
+    "matchSubsidies",
+    "postVillageJournal",
+    "updateTask",
+    "updateVillage",
+    "upsertKPI",
+    "upsertScheme"
+  ],
+  "serviceExports": [
+    "addVillageResource",
+    "createVillage",
+    "createVillageTask",
+    "deleteVillage",
+    "ensureVillageFinance",
+    "generateVillageAIInsights",
+    "getDistrictEconomicSummary",
+    "getVillageAnalytics",
+    "getVillageDashboard",
+    "getVillageFinance",
+    "getVillageProfile",
+    "getVillages",
+    "postVillageJournal",
+    "searchVillages",
+    "updateVillage",
+    "updateVillageTask",
+    "upsertVillageKPI"
+  ],
+  "resolved": [
+    {
+      "routeMethod": "addVillageResource",
+      "serviceMethod": "addVillageResource",
+      "type": "direct"
+    },
+    {
+      "routeMethod": "createTask",
+      "serviceMethod": "createVillageTask",
+      "type": "alias"
+    },
+    {
+      "routeMethod": "createVillage",
+      "serviceMethod": "createVillage",
+      "type": "direct"
+    },
+    {
+      "routeMethod": "deleteVillage",
+      "serviceMethod": "deleteVillage",
+      "type": "direct"
+    },
+    {
+      "routeMethod": "districtSummary",
+      "serviceMethod": "getDistrictEconomicSummary",
+      "type": "alias"
+    },
+    {
+      "routeMethod": "generateAI",
+      "serviceMethod": "generateVillageAIInsights",
+      "type": "alias"
+    },
+    {
+      "routeMethod": "getDashboard",
+      "serviceMethod": "getVillageDashboard",
+      "type": "alias"
+    },
+    {
+      "routeMethod": "getVillage",
+      "serviceMethod": "getVillageProfile",
+      "type": "alias"
+    },
+    {
+      "routeMethod": "getVillageAnalytics",
+      "serviceMethod": "getVillageAnalytics",
+      "type": "direct"
+    },
+    {
+      "routeMethod": "getVillageFinance",
+      "serviceMethod": "getVillageFinance",
+      "type": "direct"
+    },
+    {
+      "routeMethod": "getVillages",
+      "serviceMethod": "getVillages",
+      "type": "direct"
+    },
+    {
+      "routeMethod": "initializeFinance",
+      "serviceMethod": "ensureVillageFinance",
+      "type": "alias"
+    },
+    {
+      "routeMethod": "postVillageJournal",
+      "serviceMethod": "postVillageJournal",
+      "type": "direct"
+    },
+    {
+      "routeMethod": "updateTask",
+      "serviceMethod": "updateVillageTask",
+      "type": "alias"
+    },
+    {
+      "routeMethod": "updateVillage",
+      "serviceMethod": "updateVillage",
+      "type": "direct"
+    },
+    {
+      "routeMethod": "upsertKPI",
+      "serviceMethod": "upsertVillageKPI",
+      "type": "alias"
+    }
+  ],
+  "unresolved": [
+    "addFundingSource",
+    "buildSubsidyAIContext",
+    "createEstimate",
+    "createProject",
+    "getProject",
+    "listProjects",
+    "matchSubsidies",
+    "upsertScheme"
+  ]
+}

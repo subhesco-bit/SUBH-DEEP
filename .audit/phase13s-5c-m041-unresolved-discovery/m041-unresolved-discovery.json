@@ -1,0 +1,781 @@
+{
+  "generatedAt": "2026-09-17T17:28:08.757Z",
+  "methods": {
+    "addFundingSource": {
+      "definitions": [
+        {
+          "file": "backend/src/modules/M041/controller.js",
+          "line": 50,
+          "type": "class/object method",
+          "source": "addFundingSource(req, res) { return execute(res, 'addFundingSource', () => villageProjectService.addFundingSource(req.params.projectId, req.body), 400); }",
+          "context": "   47:   getProject(req, res) { return execute(res, 'getProject', () => villageProjectService.getProject(req.params.projectId), 404); }\n   48:   createProject(req, res) { return execute(res, 'createProject', () => villageProjectService.createProject(req.params.villageId, req.body, req.user?.id), 400); }\n   49:   createEstimate(req, res) { return execute(res, 'createEstimate', () => villageProjectService.createEstimate(req.params.projectId, req.body, req.user?.id), 400); }\n   50:   addFundingSource(req, res) { return execute(res, 'addFundingSource', () => villageProjectService.addFundingSource(req.params.projectId, req.body), 400); }\n   51:   matchSubsidies(req, res) { return execute(res, 'matchSubsidies', () => villageProjectService.matchSubsidies(req.params.projectId), 400); }\n   52:   buildSubsidyAIContext(req, res) { return execute(res, 'buildSubsidyAIContext', () => villageProjectService.buildSubsidyAIContext(req.params.projectId), 404); }\n   53:   upsertScheme(req, res) { return execute(res, 'upsertScheme', () => villageProjectService.upsertScheme(req.body), 400); }"
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "line": 185,
+          "type": "function declaration",
+          "source": "async function addFundingSource(projectId, data) {",
+          "context": "  182:   return matches.sort((a,b) => Number(b.match_score) - Number(a.match_score));\n  183: }\n  184: \n  185: async function addFundingSource(projectId, data) {\n  186:   const id = uuid(projectId, 'project_id'); await getProject(id);\n  187:   const amount = money(data?.committed_amount, 'committed_amount');\n  188:   const approved = money(data?.approved_amount, 'approved_amount');"
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "line": 185,
+          "type": "class/object method",
+          "source": "async function addFundingSource(projectId, data) {",
+          "context": "  182:   return matches.sort((a,b) => Number(b.match_score) - Number(a.match_score));\n  183: }\n  184: \n  185: async function addFundingSource(projectId, data) {\n  186:   const id = uuid(projectId, 'project_id'); await getProject(id);\n  187:   const amount = money(data?.committed_amount, 'committed_amount');\n  188:   const approved = money(data?.approved_amount, 'approved_amount');"
+        }
+      ],
+      "references": [
+        {
+          "file": "backend/src/modules/M041/controller.js",
+          "lines": [
+            50
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/index.js",
+          "lines": [
+            70
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/routes.js",
+          "lines": [
+            74
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "lines": [
+            185,
+            216
+          ]
+        },
+        {
+          "file": "backend/src/routes/M041VillageERP.js",
+          "lines": [
+            275,
+            278,
+            281,
+            284
+          ]
+        }
+      ],
+      "routeCalls": [
+        {
+          "line": 281,
+          "context": "  277:  */\n  278: router.post('/addFundingSource/:projectId', async (req, res) => {\n  279:   try {\n  280:     const service = getService(req);\n  281:     const funding = await service.addFundingSource(req.params.projectId, req.body);\n  282:     res.status(201).json(funding);\n  283:   } catch (error) {\n  284:     console.error('addFundingSource error:', error);\n  285:     res.status(400).json({ error: error.message });"
+        }
+      ]
+    },
+    "buildSubsidyAIContext": {
+      "definitions": [
+        {
+          "file": "backend/src/modules/M041/controller.js",
+          "line": 52,
+          "type": "class/object method",
+          "source": "buildSubsidyAIContext(req, res) { return execute(res, 'buildSubsidyAIContext', () => villageProjectService.buildSubsidyAIContext(req.params.projectId), 404); }",
+          "context": "   49:   createEstimate(req, res) { return execute(res, 'createEstimate', () => villageProjectService.createEstimate(req.params.projectId, req.body, req.user?.id), 400); }\n   50:   addFundingSource(req, res) { return execute(res, 'addFundingSource', () => villageProjectService.addFundingSource(req.params.projectId, req.body), 400); }\n   51:   matchSubsidies(req, res) { return execute(res, 'matchSubsidies', () => villageProjectService.matchSubsidies(req.params.projectId), 400); }\n   52:   buildSubsidyAIContext(req, res) { return execute(res, 'buildSubsidyAIContext', () => villageProjectService.buildSubsidyAIContext(req.params.projectId), 404); }\n   53:   upsertScheme(req, res) { return execute(res, 'upsertScheme', () => villageProjectService.upsertScheme(req.body), 400); }\n   54: \n   55:   getVillageGeo(req, res) { return execute(res, 'getVillageGeo', () => villageEconomyGeoService.getVillageGeo(req.params.villageId), 404); }"
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "line": 200,
+          "type": "function declaration",
+          "source": "async function buildSubsidyAIContext(projectId) {",
+          "context": "  197:   return r.rows[0];\n  198: }\n  199: \n  200: async function buildSubsidyAIContext(projectId) {\n  201:   const p = await getProject(projectId);\n  202:   const village = await ensureVillage(p.village_id);\n  203:   const latest = p.estimates[0] || null;"
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "line": 200,
+          "type": "class/object method",
+          "source": "async function buildSubsidyAIContext(projectId) {",
+          "context": "  197:   return r.rows[0];\n  198: }\n  199: \n  200: async function buildSubsidyAIContext(projectId) {\n  201:   const p = await getProject(projectId);\n  202:   const village = await ensureVillage(p.village_id);\n  203:   const latest = p.estimates[0] || null;"
+        }
+      ],
+      "references": [
+        {
+          "file": "backend/src/modules/M041/controller.js",
+          "lines": [
+            52
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/index.js",
+          "lines": [
+            72
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/routes.js",
+          "lines": [
+            76
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "lines": [
+            200,
+            216
+          ]
+        },
+        {
+          "file": "backend/src/routes/M041VillageERP.js",
+          "lines": [
+            290,
+            293,
+            296,
+            299
+          ]
+        }
+      ],
+      "routeCalls": [
+        {
+          "line": 296,
+          "context": "  292:  */\n  293: router.get('/buildSubsidyAIContext/:projectId', async (req, res) => {\n  294:   try {\n  295:     const service = getService(req);\n  296:     const context = await service.buildSubsidyAIContext(req.params.projectId);\n  297:     res.json(context);\n  298:   } catch (error) {\n  299:     console.error('buildSubsidyAIContext error:', error);\n  300:     res.status(500).json({ error: error.message });"
+        }
+      ]
+    },
+    "createEstimate": {
+      "definitions": [
+        {
+          "file": "backend/src/modules/M041/controller.js",
+          "line": 49,
+          "type": "class/object method",
+          "source": "createEstimate(req, res) { return execute(res, 'createEstimate', () => villageProjectService.createEstimate(req.params.projectId, req.body, req.user?.id), 400); }",
+          "context": "   46:   listProjects(req, res) { return execute(res, 'listProjects', () => villageProjectService.listProjects(req.params.villageId, req.query), 404); }\n   47:   getProject(req, res) { return execute(res, 'getProject', () => villageProjectService.getProject(req.params.projectId), 404); }\n   48:   createProject(req, res) { return execute(res, 'createProject', () => villageProjectService.createProject(req.params.villageId, req.body, req.user?.id), 400); }\n   49:   createEstimate(req, res) { return execute(res, 'createEstimate', () => villageProjectService.createEstimate(req.params.projectId, req.body, req.user?.id), 400); }\n   50:   addFundingSource(req, res) { return execute(res, 'addFundingSource', () => villageProjectService.addFundingSource(req.params.projectId, req.body), 400); }\n   51:   matchSubsidies(req, res) { return execute(res, 'matchSubsidies', () => villageProjectService.matchSubsidies(req.params.projectId), 400); }\n   52:   buildSubsidyAIContext(req, res) { return execute(res, 'buildSubsidyAIContext', () => villageProjectService.buildSubsidyAIContext(req.params.projectId), 404); }"
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "line": 112,
+          "type": "function declaration",
+          "source": "async function createEstimate(projectId, data, userId) {",
+          "context": "  109:   return { boq, subtotal, contingency: c, taxes: t, total_cost: Math.round((subtotal + c + t) * 100) / 100 };\n  110: }\n  111: \n  112: async function createEstimate(projectId, data, userId) {\n  113:   const id = uuid(projectId, 'project_id');\n  114:   await getProject(id);\n  115:   const versionR = await pool.query('SELECT COALESCE(MAX(version),0)+1 AS next FROM village_project_estimates WHERE project_id=$1', [id]);"
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "line": 112,
+          "type": "class/object method",
+          "source": "async function createEstimate(projectId, data, userId) {",
+          "context": "  109:   return { boq, subtotal, contingency: c, taxes: t, total_cost: Math.round((subtotal + c + t) * 100) / 100 };\n  110: }\n  111: \n  112: async function createEstimate(projectId, data, userId) {\n  113:   const id = uuid(projectId, 'project_id');\n  114:   await getProject(id);\n  115:   const versionR = await pool.query('SELECT COALESCE(MAX(version),0)+1 AS next FROM village_project_estimates WHERE project_id=$1', [id]);"
+        }
+      ],
+      "references": [
+        {
+          "file": "backend/src/modules/M041/controller.js",
+          "lines": [
+            49
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/index.js",
+          "lines": [
+            69
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/routes.js",
+          "lines": [
+            73
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "lines": [
+            112,
+            216
+          ]
+        },
+        {
+          "file": "backend/src/routes/M041VillageERP.js",
+          "lines": [
+            260,
+            263,
+            266,
+            269
+          ]
+        }
+      ],
+      "routeCalls": [
+        {
+          "line": 266,
+          "context": "  262:  */\n  263: router.post('/createEstimate/:projectId', async (req, res) => {\n  264:   try {\n  265:     const service = getService(req);\n  266:     const estimate = await service.createEstimate(req.params.projectId, req.body);\n  267:     res.status(201).json(estimate);\n  268:   } catch (error) {\n  269:     console.error('createEstimate error:', error);\n  270:     res.status(400).json({ error: error.message });"
+        }
+      ]
+    },
+    "createProject": {
+      "definitions": [
+        {
+          "file": "backend/src/modules/M041/controller.js",
+          "line": 48,
+          "type": "class/object method",
+          "source": "createProject(req, res) { return execute(res, 'createProject', () => villageProjectService.createProject(req.params.villageId, req.body, req.user?.id), 400); }",
+          "context": "   45: \n   46:   listProjects(req, res) { return execute(res, 'listProjects', () => villageProjectService.listProjects(req.params.villageId, req.query), 404); }\n   47:   getProject(req, res) { return execute(res, 'getProject', () => villageProjectService.getProject(req.params.projectId), 404); }\n   48:   createProject(req, res) { return execute(res, 'createProject', () => villageProjectService.createProject(req.params.villageId, req.body, req.user?.id), 400); }\n   49:   createEstimate(req, res) { return execute(res, 'createEstimate', () => villageProjectService.createEstimate(req.params.projectId, req.body, req.user?.id), 400); }\n   50:   addFundingSource(req, res) { return execute(res, 'addFundingSource', () => villageProjectService.addFundingSource(req.params.projectId, req.body), 400); }\n   51:   matchSubsidies(req, res) { return execute(res, 'matchSubsidies', () => villageProjectService.matchSubsidies(req.params.projectId), 400); }"
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "line": 52,
+          "type": "function declaration",
+          "source": "async function createProject(villageIdValue, data, userId) {",
+          "context": "   49:   return r.rows[0];\n   50: }\n   51: \n   52: async function createProject(villageIdValue, data, userId) {\n   53:   const vid = villageId(villageIdValue);\n   54:   await ensureVillage(vid);\n   55:   const p = data || {};"
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "line": 52,
+          "type": "class/object method",
+          "source": "async function createProject(villageIdValue, data, userId) {",
+          "context": "   49:   return r.rows[0];\n   50: }\n   51: \n   52: async function createProject(villageIdValue, data, userId) {\n   53:   const vid = villageId(villageIdValue);\n   54:   await ensureVillage(vid);\n   55:   const p = data || {};"
+        },
+        {
+          "file": "backend/src/services/legacy/engineeringProjectService.js",
+          "line": 46,
+          "type": "function declaration",
+          "source": "async function createProject(userId, data) {",
+          "context": "   43:   return `ENG-${y}-${rand}`;\n   44: }\n   45: \n   46: async function createProject(userId, data) {\n   47:   const { name, projectType, projectSubtype, industrySector, description,\n   48:     location, capacity, capacityUnit, budget, timeline, fpoId } = data;\n   49: "
+        },
+        {
+          "file": "backend/src/services/legacy/engineeringProjectService.js",
+          "line": 46,
+          "type": "class/object method",
+          "source": "async function createProject(userId, data) {",
+          "context": "   43:   return `ENG-${y}-${rand}`;\n   44: }\n   45: \n   46: async function createProject(userId, data) {\n   47:   const { name, projectType, projectSubtype, industrySector, description,\n   48:     location, capacity, capacityUnit, budget, timeline, fpoId } = data;\n   49: "
+        },
+        {
+          "file": "backend/src/services/legacy/projectSystemsService.js",
+          "line": 56,
+          "type": "class/object method",
+          "source": "async createProject(data) {",
+          "context": "   53:   // Projects\n   54:   // -------------------------------------------------------------------\n   55: \n   56:   async createProject(data) {\n   57:     try {\n   58:       const {\n   59:         companyId, projectCode, projectName, reuId,"
+        }
+      ],
+      "references": [
+        {
+          "file": "backend/src/modules/M041/controller.js",
+          "lines": [
+            48
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/index.js",
+          "lines": [
+            67
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/routes.js",
+          "lines": [
+            71
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "lines": [
+            52,
+            216
+          ]
+        },
+        {
+          "file": "backend/src/routes/engineeringProjectDomainRoutes.js",
+          "lines": [
+            23
+          ]
+        },
+        {
+          "file": "backend/src/routes/engineeringProjectRoutes.js",
+          "lines": [
+            12
+          ]
+        },
+        {
+          "file": "backend/src/routes/M041VillageERP.js",
+          "lines": [
+            227,
+            230,
+            233,
+            236
+          ]
+        },
+        {
+          "file": "backend/src/routes/projectSystemsRoutes.js",
+          "lines": [
+            44
+          ]
+        },
+        {
+          "file": "backend/src/services/legacy/engineeringProjectService.js",
+          "lines": [
+            46,
+            252
+          ]
+        },
+        {
+          "file": "backend/src/services/legacy/projectSystemsService.js",
+          "lines": [
+            56
+          ]
+        }
+      ],
+      "routeCalls": [
+        {
+          "line": 233,
+          "context": "  229:  */\n  230: router.post('/createProject/:villageId', async (req, res) => {\n  231:   try {\n  232:     const service = getService(req);\n  233:     const project = await service.createProject(req.params.villageId, req.body);\n  234:     res.status(201).json(project);\n  235:   } catch (error) {\n  236:     console.error('createProject error:', error);\n  237:     res.status(400).json({ error: error.message });"
+        }
+      ]
+    },
+    "getProject": {
+      "definitions": [
+        {
+          "file": "backend/src/modules/M041/controller.js",
+          "line": 47,
+          "type": "class/object method",
+          "source": "getProject(req, res) { return execute(res, 'getProject', () => villageProjectService.getProject(req.params.projectId), 404); }",
+          "context": "   44:   getERPOverview(req, res) { return execute(res, 'getERPOverview', () => villageERPService.getERPOverview(req.params.villageId), 404); }\n   45: \n   46:   listProjects(req, res) { return execute(res, 'listProjects', () => villageProjectService.listProjects(req.params.villageId, req.query), 404); }\n   47:   getProject(req, res) { return execute(res, 'getProject', () => villageProjectService.getProject(req.params.projectId), 404); }\n   48:   createProject(req, res) { return execute(res, 'createProject', () => villageProjectService.createProject(req.params.villageId, req.body, req.user?.id), 400); }\n   49:   createEstimate(req, res) { return execute(res, 'createEstimate', () => villageProjectService.createEstimate(req.params.projectId, req.body, req.user?.id), 400); }\n   50:   addFundingSource(req, res) { return execute(res, 'addFundingSource', () => villageProjectService.addFundingSource(req.params.projectId, req.body), 400); }"
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "line": 85,
+          "type": "function declaration",
+          "source": "async function getProject(projectId) {",
+          "context": "   82:   return r.rows;\n   83: }\n   84: \n   85: async function getProject(projectId) {\n   86:   const id = uuid(projectId, 'project_id');\n   87:   const project = await pool.query('SELECT * FROM village_projects WHERE id = $1', [id]);\n   88:   if (!project.rows.length) throw new NotFoundError(`Village project not found: ${id}`);"
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "line": 85,
+          "type": "class/object method",
+          "source": "async function getProject(projectId) {",
+          "context": "   82:   return r.rows;\n   83: }\n   84: \n   85: async function getProject(projectId) {\n   86:   const id = uuid(projectId, 'project_id');\n   87:   const project = await pool.query('SELECT * FROM village_projects WHERE id = $1', [id]);\n   88:   if (!project.rows.length) throw new NotFoundError(`Village project not found: ${id}`);"
+        },
+        {
+          "file": "backend/src/services/legacy/engineeringProjectService.js",
+          "line": 71,
+          "type": "function declaration",
+          "source": "async function getProject(projectId, userId, isAdmin = false) {",
+          "context": "   68:   return result.rows[0];\n   69: }\n   70: \n   71: async function getProject(projectId, userId, isAdmin = false) {\n   72:   const params = [projectId];\n   73:   let where = 'id = $1 AND deleted_at IS NULL';\n   74:   if (!isAdmin) {"
+        },
+        {
+          "file": "backend/src/services/legacy/engineeringProjectService.js",
+          "line": 71,
+          "type": "class/object method",
+          "source": "async function getProject(projectId, userId, isAdmin = false) {",
+          "context": "   68:   return result.rows[0];\n   69: }\n   70: \n   71: async function getProject(projectId, userId, isAdmin = false) {\n   72:   const params = [projectId];\n   73:   let where = 'id = $1 AND deleted_at IS NULL';\n   74:   if (!isAdmin) {"
+        },
+        {
+          "file": "backend/src/services/legacy/projectSystemsService.js",
+          "line": 130,
+          "type": "class/object method",
+          "source": "async getProject(projectId) {",
+          "context": "  127:     }\n  128:   }\n  129: \n  130:   async getProject(projectId) {\n  131:     try {\n  132:       const result = await this.pool.query('SELECT * FROM projects WHERE id = $1', [projectId]);\n  133:       if (result.rows.length === 0) throw new Error('Project not found');"
+        }
+      ],
+      "references": [
+        {
+          "file": "backend/src/modules/M041/controller.js",
+          "lines": [
+            47
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/index.js",
+          "lines": [
+            68
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/routes.js",
+          "lines": [
+            72
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "lines": [
+            85,
+            114,
+            159,
+            186,
+            201,
+            216
+          ]
+        },
+        {
+          "file": "backend/src/routes/engineeringProjectDomainRoutes.js",
+          "lines": [
+            24
+          ]
+        },
+        {
+          "file": "backend/src/routes/engineeringProjectRoutes.js",
+          "lines": [
+            30
+          ]
+        },
+        {
+          "file": "backend/src/routes/M041VillageERP.js",
+          "lines": [
+            242,
+            245,
+            248,
+            254
+          ]
+        },
+        {
+          "file": "backend/src/routes/projectSystemsRoutes.js",
+          "lines": [
+            63
+          ]
+        },
+        {
+          "file": "backend/src/services/legacy/engineeringProjectService.js",
+          "lines": [
+            71,
+            103,
+            242,
+            253
+          ]
+        },
+        {
+          "file": "backend/src/services/legacy/projectSystemsService.js",
+          "lines": [
+            130,
+            180,
+            343,
+            372,
+            501
+          ]
+        }
+      ],
+      "routeCalls": [
+        {
+          "line": 248,
+          "context": "  244:  */\n  245: router.get('/getProject/:projectId', async (req, res) => {\n  246:   try {\n  247:     const service = getService(req);\n  248:     const project = await service.getProject(req.params.projectId);\n  249:     if (!project) {\n  250:       return res.status(404).json({ error: 'Project not found' });\n  251:     }\n  252:     res.json(project);"
+        }
+      ]
+    },
+    "listProjects": {
+      "definitions": [
+        {
+          "file": "backend/src/modules/M041/controller.js",
+          "line": 46,
+          "type": "class/object method",
+          "source": "listProjects(req, res) { return execute(res, 'listProjects', () => villageProjectService.listProjects(req.params.villageId, req.query), 404); }",
+          "context": "   43:   listBudgets(req, res) { return execute(res, 'listBudgets', () => villageERPService.listBudgets(req.params.villageId), 404); }\n   44:   getERPOverview(req, res) { return execute(res, 'getERPOverview', () => villageERPService.getERPOverview(req.params.villageId), 404); }\n   45: \n   46:   listProjects(req, res) { return execute(res, 'listProjects', () => villageProjectService.listProjects(req.params.villageId, req.query), 404); }\n   47:   getProject(req, res) { return execute(res, 'getProject', () => villageProjectService.getProject(req.params.projectId), 404); }\n   48:   createProject(req, res) { return execute(res, 'createProject', () => villageProjectService.createProject(req.params.villageId, req.body, req.user?.id), 400); }\n   49:   createEstimate(req, res) { return execute(res, 'createEstimate', () => villageProjectService.createEstimate(req.params.projectId, req.body, req.user?.id), 400); }"
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "line": 73,
+          "type": "function declaration",
+          "source": "async function listProjects(villageIdValue, filters = {}) {",
+          "context": "   70:   return result.rows[0];\n   71: }\n   72: \n   73: async function listProjects(villageIdValue, filters = {}) {\n   74:   const vid = villageId(villageIdValue);\n   75:   await ensureVillage(vid);\n   76:   const params = [vid];"
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "line": 73,
+          "type": "class/object method",
+          "source": "async function listProjects(villageIdValue, filters = {}) {",
+          "context": "   70:   return result.rows[0];\n   71: }\n   72: \n   73: async function listProjects(villageIdValue, filters = {}) {\n   74:   const vid = villageId(villageIdValue);\n   75:   await ensureVillage(vid);\n   76:   const params = [vid];"
+        },
+        {
+          "file": "backend/src/services/legacy/engineeringProjectService.js",
+          "line": 83,
+          "type": "function declaration",
+          "source": "async function listProjects(userId, { status, projectType, page = 1, limit = 20 } = {}) {",
+          "context": "   80:   return result.rows[0];\n   81: }\n   82: \n   83: async function listProjects(userId, { status, projectType, page = 1, limit = 20 } = {}) {\n   84:   const conditions = ['user_id = $1', 'deleted_at IS NULL'];\n   85:   const params = [userId];\n   86:   if (status) { params.push(status); conditions.push(`status = $${params.length}`); }"
+        },
+        {
+          "file": "backend/src/services/legacy/engineeringProjectService.js",
+          "line": 83,
+          "type": "class/object method",
+          "source": "async function listProjects(userId, { status, projectType, page = 1, limit = 20 } = {}) {",
+          "context": "   80:   return result.rows[0];\n   81: }\n   82: \n   83: async function listProjects(userId, { status, projectType, page = 1, limit = 20 } = {}) {\n   84:   const conditions = ['user_id = $1', 'deleted_at IS NULL'];\n   85:   const params = [userId];\n   86:   if (status) { params.push(status); conditions.push(`status = $${params.length}`); }"
+        }
+      ],
+      "references": [
+        {
+          "file": "backend/src/modules/M041/controller.js",
+          "lines": [
+            46
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/index.js",
+          "lines": [
+            66
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/routes.js",
+          "lines": [
+            70
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "lines": [
+            73,
+            216
+          ]
+        },
+        {
+          "file": "backend/src/routes/engineeringProjectDomainRoutes.js",
+          "lines": [
+            25
+          ]
+        },
+        {
+          "file": "backend/src/routes/engineeringProjectRoutes.js",
+          "lines": [
+            21
+          ]
+        },
+        {
+          "file": "backend/src/routes/M041VillageERP.js",
+          "lines": [
+            212,
+            215,
+            218,
+            221
+          ]
+        },
+        {
+          "file": "backend/src/services/legacy/engineeringProjectService.js",
+          "lines": [
+            83,
+            254
+          ]
+        },
+        {
+          "file": "backend/src/tests/villageIdentityCompatibility.test.js",
+          "lines": [
+            26
+          ]
+        }
+      ],
+      "routeCalls": [
+        {
+          "line": 218,
+          "context": "  214:  */\n  215: router.get('/listProjects/:villageId', async (req, res) => {\n  216:   try {\n  217:     const service = getService(req);\n  218:     const projects = await service.listProjects(req.params.villageId);\n  219:     res.json(projects);\n  220:   } catch (error) {\n  221:     console.error('listProjects error:', error);\n  222:     res.status(500).json({ error: error.message });"
+        }
+      ]
+    },
+    "matchSubsidies": {
+      "definitions": [
+        {
+          "file": "backend/src/modules/M041/controller.js",
+          "line": 51,
+          "type": "class/object method",
+          "source": "matchSubsidies(req, res) { return execute(res, 'matchSubsidies', () => villageProjectService.matchSubsidies(req.params.projectId), 400); }",
+          "context": "   48:   createProject(req, res) { return execute(res, 'createProject', () => villageProjectService.createProject(req.params.villageId, req.body, req.user?.id), 400); }\n   49:   createEstimate(req, res) { return execute(res, 'createEstimate', () => villageProjectService.createEstimate(req.params.projectId, req.body, req.user?.id), 400); }\n   50:   addFundingSource(req, res) { return execute(res, 'addFundingSource', () => villageProjectService.addFundingSource(req.params.projectId, req.body), 400); }\n   51:   matchSubsidies(req, res) { return execute(res, 'matchSubsidies', () => villageProjectService.matchSubsidies(req.params.projectId), 400); }\n   52:   buildSubsidyAIContext(req, res) { return execute(res, 'buildSubsidyAIContext', () => villageProjectService.buildSubsidyAIContext(req.params.projectId), 404); }\n   53:   upsertScheme(req, res) { return execute(res, 'upsertScheme', () => villageProjectService.upsertScheme(req.body), 400); }\n   54: "
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "line": 158,
+          "type": "function declaration",
+          "source": "async function matchSubsidies(projectId) {",
+          "context": "  155:   return { score: Math.min(score,100), reasons, conflicts };\n  156: }\n  157: \n  158: async function matchSubsidies(projectId) {\n  159:   const project = (await getProject(projectId));\n  160:   const village = await ensureVillage(project.village_id);\n  161:   const schemes = await pool.query(`SELECT * FROM village_scheme_catalogue WHERE active=TRUE AND (effective_from IS NULL OR effective_from <= CURRENT_DATE) AND (effective_to IS NULL OR effective_to >= CURRENT_DATE) ORDER BY government_level, scheme_name`);"
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "line": 158,
+          "type": "class/object method",
+          "source": "async function matchSubsidies(projectId) {",
+          "context": "  155:   return { score: Math.min(score,100), reasons, conflicts };\n  156: }\n  157: \n  158: async function matchSubsidies(projectId) {\n  159:   const project = (await getProject(projectId));\n  160:   const village = await ensureVillage(project.village_id);\n  161:   const schemes = await pool.query(`SELECT * FROM village_scheme_catalogue WHERE active=TRUE AND (effective_from IS NULL OR effective_from <= CURRENT_DATE) AND (effective_to IS NULL OR effective_to >= CURRENT_DATE) ORDER BY government_level, scheme_name`);"
+        },
+        {
+          "file": "backend/src/services/platform/publicDomainDataExtractionService.js",
+          "line": 612,
+          "type": "class/object method",
+          "source": "matchSubsidies(userProfile) {",
+          "context": "  609:   /**\n  610:    * Match user profile against subsidies\n  611:    */\n  612:   matchSubsidies(userProfile) {\n  613:     const subsidies = Array.from(this.subsidyDatabase.values());\n  614:     const matches = [];\n  615: "
+        },
+        {
+          "file": "backend/src/services/publicDomainDataExtractionService.js",
+          "line": 618,
+          "type": "class/object method",
+          "source": "matchSubsidies(userProfile) {",
+          "context": "  615:   /**\n  616:    * Match user profile against subsidies\n  617:    */\n  618:   matchSubsidies(userProfile) {\n  619:     const subsidies = Array.from(this.subsidyDatabase.values());\n  620:     const matches = [];\n  621: "
+        }
+      ],
+      "references": [
+        {
+          "file": "backend/src/modules/M041/controller.js",
+          "lines": [
+            51
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/index.js",
+          "lines": [
+            71
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/routes.js",
+          "lines": [
+            75
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "lines": [
+            158,
+            216
+          ]
+        },
+        {
+          "file": "backend/src/routes/M041VillageERP.js",
+          "lines": [
+            305,
+            308,
+            311,
+            314
+          ]
+        },
+        {
+          "file": "backend/src/services/platform/publicDomainDataExtractionService.js",
+          "lines": [
+            612
+          ]
+        },
+        {
+          "file": "backend/src/services/publicDomainDataExtractionService.js",
+          "lines": [
+            618
+          ]
+        }
+      ],
+      "routeCalls": [
+        {
+          "line": 311,
+          "context": "  307:  */\n  308: router.post('/matchSubsidies/:projectId', async (req, res) => {\n  309:   try {\n  310:     const service = getService(req);\n  311:     const subsidies = await service.matchSubsidies(req.params.projectId);\n  312:     res.json(subsidies);\n  313:   } catch (error) {\n  314:     console.error('matchSubsidies error:', error);\n  315:     res.status(500).json({ error: error.message });"
+        }
+      ]
+    },
+    "upsertScheme": {
+      "definitions": [
+        {
+          "file": "backend/src/modules/M041/controller.js",
+          "line": 53,
+          "type": "class/object method",
+          "source": "upsertScheme(req, res) { return execute(res, 'upsertScheme', () => villageProjectService.upsertScheme(req.body), 400); }",
+          "context": "   50:   addFundingSource(req, res) { return execute(res, 'addFundingSource', () => villageProjectService.addFundingSource(req.params.projectId, req.body), 400); }\n   51:   matchSubsidies(req, res) { return execute(res, 'matchSubsidies', () => villageProjectService.matchSubsidies(req.params.projectId), 400); }\n   52:   buildSubsidyAIContext(req, res) { return execute(res, 'buildSubsidyAIContext', () => villageProjectService.buildSubsidyAIContext(req.params.projectId), 404); }\n   53:   upsertScheme(req, res) { return execute(res, 'upsertScheme', () => villageProjectService.upsertScheme(req.body), 400); }\n   54: \n   55:   getVillageGeo(req, res) { return execute(res, 'getVillageGeo', () => villageEconomyGeoService.getVillageGeo(req.params.villageId), 404); }\n   56:   updateVillageGeo(req, res) { return execute(res, 'updateVillageGeo', () => villageEconomyGeoService.updateVillageGeo(req.params.villageId, req.body), 400); }"
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "line": 126,
+          "type": "function declaration",
+          "source": "async function upsertScheme(data) {",
+          "context": "  123:   return r.rows[0];\n  124: }\n  125: \n  126: async function upsertScheme(data) {\n  127:   const p = data || {};\n  128:   if (!p.scheme_code || !p.scheme_name) throw new ValidationError('scheme_code and scheme_name are required');\n  129:   if (!['central','state'].includes(p.government_level)) throw new ValidationError('government_level must be central or state');"
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "line": 126,
+          "type": "class/object method",
+          "source": "async function upsertScheme(data) {",
+          "context": "  123:   return r.rows[0];\n  124: }\n  125: \n  126: async function upsertScheme(data) {\n  127:   const p = data || {};\n  128:   if (!p.scheme_code || !p.scheme_name) throw new ValidationError('scheme_code and scheme_name are required');\n  129:   if (!['central','state'].includes(p.government_level)) throw new ValidationError('government_level must be central or state');"
+        }
+      ],
+      "references": [
+        {
+          "file": "backend/src/modules/M041/controller.js",
+          "lines": [
+            53
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/index.js",
+          "lines": [
+            73
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/routes.js",
+          "lines": [
+            77
+          ]
+        },
+        {
+          "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+          "lines": [
+            126,
+            216
+          ]
+        },
+        {
+          "file": "backend/src/routes/M041VillageERP.js",
+          "lines": [
+            320,
+            323,
+            326,
+            329
+          ]
+        }
+      ],
+      "routeCalls": [
+        {
+          "line": 326,
+          "context": "  322:  */\n  323: router.post('/upsertScheme', async (req, res) => {\n  324:   try {\n  325:     const service = getService(req);\n  326:     const scheme = await service.upsertScheme(req.body);\n  327:     res.json(scheme);\n  328:   } catch (error) {\n  329:     console.error('upsertScheme error:', error);\n  330:     res.status(400).json({ error: error.message });"
+        }
+      ]
+    }
+  },
+  "candidateFiles": [
+    {
+      "file": "backend/src/modules/M041/controller.js",
+      "coverage": 8,
+      "methods": [
+        "addFundingSource",
+        "buildSubsidyAIContext",
+        "createEstimate",
+        "createProject",
+        "getProject",
+        "listProjects",
+        "matchSubsidies",
+        "upsertScheme"
+      ]
+    },
+    {
+      "file": "backend/src/modules/M041/villageProjectIntelligenceService.js",
+      "coverage": 8,
+      "methods": [
+        "addFundingSource",
+        "buildSubsidyAIContext",
+        "createEstimate",
+        "createProject",
+        "getProject",
+        "listProjects",
+        "matchSubsidies",
+        "upsertScheme"
+      ]
+    },
+    {
+      "file": "backend/src/services/legacy/engineeringProjectService.js",
+      "coverage": 3,
+      "methods": [
+        "createProject",
+        "getProject",
+        "listProjects"
+      ]
+    },
+    {
+      "file": "backend/src/services/legacy/projectSystemsService.js",
+      "coverage": 2,
+      "methods": [
+        "createProject",
+        "getProject"
+      ]
+    },
+    {
+      "file": "backend/src/services/platform/publicDomainDataExtractionService.js",
+      "coverage": 1,
+      "methods": [
+        "matchSubsidies"
+      ]
+    },
+    {
+      "file": "backend/src/services/publicDomainDataExtractionService.js",
+      "coverage": 1,
+      "methods": [
+        "matchSubsidies"
+      ]
+    }
+  ]
+}

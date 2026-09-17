@@ -1,0 +1,96 @@
+diff --git a/backend/src/modules/M010/service.js b/backend/src/modules/M010/service.js
+index 4ab8ff84..4abbbb65 100644
+--- a/backend/src/modules/M010/service.js
++++ b/backend/src/modules/M010/service.js
+@@ -185,10 +185,41 @@ async function deliverViaChannel(notification, channel) {
+ }
+ 
+ async function deliverEmail(notification) {
+-  // Placeholder for email delivery
+-  // Would integrate with email service
+-  logger.info('Email notification queued', { notificationId: notification.id, userId: notification.user_id });
+-  return { method: 'email', status: 'queued', messageId: `email_${notification.id}_${Date.now()}` };
++  const pg = getPostgreSQL();
++  if (!pg) throw new Error('Database not initialized');
++
++  const userId = notification?.user_id || notification?.userId;
++
++  if (!userId) {
++    throw new Error('Email notification requires a user id');
++  }
++
++  const userResult = await pg.query(
++    'SELECT email FROM users WHERE id = $1',
++    [userId],
++  );
++
++  const email = userResult.rows?.[0]?.email;
++
++  if (!email) {
++    throw new Error(`Email address not found for user ${userId}`);
++  }
++
++  const { sendEmail } = require('../../services/emailService');
++
++  const result = await sendEmail({
++    to: email,
++    subject: notification.title || 'Notification',
++    text: notification.message || 'Notification',
++  });
++
++  return {
++    method: 'email',
++    status: 'sent',
++    messageId: result.messageId,
++    accepted: result.accepted,
++    rejected: result.rejected,
++  };
+ }
+ 
+ async function deliverSMS(notification) {
+diff --git a/backend/src/services/notificationService.js b/backend/src/services/notificationService.js
+index 6f1c7d47..29d740a0 100644
+--- a/backend/src/services/notificationService.js
++++ b/backend/src/services/notificationService.js
+@@ -145,9 +145,38 @@ class NotificationService extends EventEmitter {
+    * Deliver email notification
+    */
+   async deliverEmail(notificationData) {
+-    // Mock implementation - integrate with email service
+-    logger.info('Sending email notification', notificationData);
+-    return { delivered: true, method: 'email' };
++    const { userId, title, message } = notificationData || {};
++
++    if (!userId) {
++      throw new Error('Email notification requires a user id');
++    }
++
++    const userResult = await this.db.query(
++      'SELECT email FROM users WHERE id = $1',
++      [userId],
++    );
++
++    const email = userResult.rows?.[0]?.email;
++
++    if (!email) {
++      throw new Error(`Email address not found for user ${userId}`);
++    }
++
++    const { sendEmail } = require('./emailService');
++
++    const result = await sendEmail({
++      to: email,
++      subject: title || 'Notification',
++      text: message || 'Notification',
++    });
++
++    return {
++      delivered: true,
++      method: 'email',
++      messageId: result.messageId,
++      accepted: result.accepted,
++      rejected: result.rejected,
++    };
+   }
+ 
+   /**

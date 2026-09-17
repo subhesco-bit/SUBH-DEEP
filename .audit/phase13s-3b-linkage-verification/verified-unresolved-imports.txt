@@ -1,0 +1,28 @@
+PHASE 13S-3B VERIFIED UNRESOLVED IMPORTS
+Generated: 09/17/2026 22:28:47
+
+BACKEND VERIFIED: 10
+
+Layer   File                                                            Line Import                                               
+-----   ----                                                            ---- ------                                               
+BACKEND backend\src\__tests__\critical-phase1.test.js                     99 ../services/marketplaceService                       
+BACKEND backend\src\__tests__\critical-phase1.test.js                    123 ../services/financeService                           
+BACKEND backend\src\__tests__\critical-phase1.test.js                    199 ../routes/marketplaceRoutes                          
+BACKEND backend\src\core\nervousSystem.js                                734 ../services/orderProcessingService                   
+BACKEND backend\src\integrations\stripeIntegrationComplete.js              9 ../services/emailService                             
+BACKEND backend\src\modules\M645100_LIBRARYKNOWLEDGE\backend\service.js  194 ./UserProfile                                        
+BACKEND backend\src\routes\M041VillageERP.js                              17 ../modules/M041/M041Service                          
+BACKEND backend\src\services\index.js                                    111 ./sapModuleArchitectureService                       
+BACKEND backend\src\services\index.js                                    258 ./aiBrainService                                     
+BACKEND backend\src\tests\libraryKnowledgeService.test.js                 11 ./modules/M645100_LIBRARYKNOWLEDGE/backend/service.js
+
+
+
+FRONTEND VERIFIED: 1
+
+Layer    File                           Line Import                  
+-----    ----                           ---- ------                  
+FRONTEND frontend\src\router\routes.jsx   34 ../pages/PlaceholderPage
+
+
+

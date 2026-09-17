@@ -15,6 +15,15 @@ const router = express.Router();
 const pool = require('../../database/pool');
 
 // Test-mode fallbacks to avoid DB dependencies during unit tests
+let detectLanguage;
+let translateText;
+let getAvailableLanguages;
+let getContentTranslation;
+let saveContentTranslation;
+let getUserLanguagePreferences;
+let updateUserLanguagePreferences;
+let getTranslationMemoryStats;
+
 if (process.env.NODE_ENV === 'test') {
   // In-memory stores for test mode
   const _translationStore = new Map();
@@ -90,7 +99,7 @@ if (process.env.NODE_ENV === 'test') {
  * Detect language from input text
  * Uses heuristic-based detection (can be enhanced with ML model)
  */
-async function detectLanguage(text, options = {}) {
+async function detectLanguageProduction(text, options = {}) {
   const startTime = Date.now();
   
   try {
@@ -175,7 +184,7 @@ router.post('/detect', authMiddleware, async (req, res) => {
  * Translate text from source to target language
  * Uses translation memory first, then external API
  */
-async function translateText(sourceText, sourceLang, targetLang, options = {}) {
+async function translateTextProduction(sourceText, sourceLang, targetLang, options = {}) {
   const startTime = Date.now();
   
   try {
@@ -319,7 +328,7 @@ router.post('/translate', authMiddleware, async (req, res) => {
 /**
  * Get translated content for a key
  */
-async function getContentTranslation(contentKey, languageCode, entityType = null, entityId = null) {
+async function getContentTranslationProduction(contentKey, languageCode, entityType = null, entityId = null) {
   try {
     const langResult = await pool.query(
       'SELECT id FROM languages WHERE iso_code = $1',
@@ -355,7 +364,7 @@ async function getContentTranslation(contentKey, languageCode, entityType = null
 /**
  * Save content translation
  */
-async function saveContentTranslation(data) {
+async function saveContentTranslationProduction(data) {
   try {
     const { content_key, entity_type, entity_id, language_code, translated_text, context } = data;
     
@@ -461,7 +470,7 @@ router.post('/content', authMiddleware, async (req, res) => {
 /**
  * Get user language preferences
  */
-async function getUserLanguagePreferences(userId) {
+async function getUserLanguagePreferencesProduction(userId) {
   try {
     const result = await pool.query(
       `SELECT ulp.*, 
@@ -495,7 +504,7 @@ async function getUserLanguagePreferences(userId) {
 /**
  * Update user language preferences
  */
-async function updateUserLanguagePreferences(userId, preferences) {
+async function updateUserLanguagePreferencesProduction(userId, preferences) {
   try {
     const { primary_language, secondary_language, auto_detect_language, auto_translate_content, preferred_translation_service } = preferences;
     
@@ -575,7 +584,7 @@ router.put('/preferences', authMiddleware, async (req, res) => {
 /**
  * Get all available languages
  */
-async function getAvailableLanguages() {
+async function getAvailableLanguagesProduction() {
   try {
     const result = await pool.query(
       'SELECT * FROM languages WHERE is_active = true ORDER BY priority DESC, name'
@@ -758,7 +767,7 @@ router.post('/pronunciation', authMiddleware, async (req, res) => {
 /**
  * Get translation memory statistics
  */
-async function getTranslationMemoryStats() {
+async function getTranslationMemoryStatsProduction() {
   try {
     const result = await pool.query(`
       SELECT 
@@ -796,6 +805,18 @@ router.get('/memory/stats', async (req, res) => {
 
 function isHealthy() {
   return pool.connect().then(() => true).catch(() => false);
+}
+
+// Select runtime implementations without reassigning function declarations.
+if (process.env.NODE_ENV !== 'test') {
+  detectLanguage = detectLanguageProduction;
+  translateText = translateTextProduction;
+  getAvailableLanguages = getAvailableLanguagesProduction;
+  getContentTranslation = getContentTranslationProduction;
+  saveContentTranslation = saveContentTranslationProduction;
+  getUserLanguagePreferences = getUserLanguagePreferencesProduction;
+  updateUserLanguagePreferences = updateUserLanguagePreferencesProduction;
+  getTranslationMemoryStats = getTranslationMemoryStatsProduction;
 }
 
 module.exports = {

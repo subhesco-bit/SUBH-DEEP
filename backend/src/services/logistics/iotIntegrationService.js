@@ -21,6 +21,18 @@ const router = express.Router();
 const pool = require('../../database/pool');
 
 // Test-mode lightweight stubs for IoT service
+let registerIoTDevice;
+let getIoTDevices;
+let updateDeviceStatus;
+let recordSensorData;
+let getSensorData;
+let sendDeviceCommand;
+let getDeviceCommands;
+let createDeviceAlert;
+let getUnacknowledgedAlerts;
+let checkDeviceHealth;
+let recordIoTAnalytics;
+
 if (process.env.NODE_ENV === 'test') {
   registerIoTDevice = async (data) => ({ id: `dev-${Date.now()}`, device_id: data.device_id || `dev-${Date.now()}`, device_name: data.device_name || 'Test Device', status: 'active' });
   getIoTDevices = async () => ([]);
@@ -42,7 +54,7 @@ if (process.env.NODE_ENV === 'test') {
 /**
  * Register IoT device
  */
-async function registerIoTDevice(data) {
+async function registerIoTDeviceProduction(data) {
   const {
     device_id,
     device_name,
@@ -102,7 +114,7 @@ router.post('/iot-devices', authMiddleware, async (req, res) => {
 /**
  * Get IoT devices
  */
-async function getIoTDevices(filters = {}) {
+async function getIoTDevicesProduction(filters = {}) {
   try {
     let query = 'SELECT * FROM iot_devices WHERE 1=1';
     const params = [];
@@ -149,7 +161,7 @@ router.get('/iot-devices', authMiddleware, async (req, res) => {
 /**
  * Update device status
  */
-async function updateDeviceStatus(deviceId, status, batteryLevel, signalStrength) {
+async function updateDeviceStatusProduction(deviceId, status, batteryLevel, signalStrength) {
   try {
     const result = await pool.query(
       `UPDATE iot_devices 
@@ -191,7 +203,7 @@ router.patch('/iot-devices/:deviceId/status', authMiddleware, async (req, res) =
 /**
  * Record sensor data
  */
-async function recordSensorData(data) {
+async function recordSensorDataProduction(data) {
   const {
     device_id,
     sensor_type,
@@ -266,7 +278,7 @@ router.post('/sensor-data', authMiddleware, async (req, res) => {
 /**
  * Get sensor data
  */
-async function getSensorData(deviceId, sensorType = null, startDate = null, endDate = null, limit = 100) {
+async function getSensorDataProduction(deviceId, sensorType = null, startDate = null, endDate = null, limit = 100) {
   try {
     let query = 'SELECT * FROM sensor_data WHERE device_id = $1';
     const params = [deviceId];
@@ -324,7 +336,7 @@ router.get('/sensor-data/:deviceId', async (req, res) => {
 /**
  * Send device command
  */
-async function sendDeviceCommand(data) {
+async function sendDeviceCommandProduction(data) {
   const {
     device_id,
     command_type,
@@ -363,7 +375,7 @@ router.post('/device-commands', authMiddleware, async (req, res) => {
 /**
  * Get device commands
  */
-async function getDeviceCommands(deviceId, status = null) {
+async function getDeviceCommandsProduction(deviceId, status = null) {
   try {
     let query = 'SELECT * FROM device_commands WHERE device_id = $1';
     const params = [deviceId];
@@ -404,7 +416,7 @@ router.get('/device-commands/:deviceId', authMiddleware, async (req, res) => {
 /**
  * Create device alert
  */
-async function createDeviceAlert(data) {
+async function createDeviceAlertProduction(data) {
   const {
     device_id,
     alert_type,
@@ -451,7 +463,7 @@ router.post('/device-alerts', authMiddleware, async (req, res) => {
 /**
  * Get unacknowledged alerts
  */
-async function getUnacknowledgedAlerts() {
+async function getUnacknowledgedAlertsProduction() {
   try {
     const result = await pool.query(
       `SELECT da.*, d.device_name, d.device_type
@@ -488,7 +500,7 @@ router.get('/device-alerts/unacknowledged', authMiddleware, async (req, res) => 
 /**
  * Check device health
  */
-async function checkDeviceHealth(deviceId) {
+async function checkDeviceHealthProduction(deviceId) {
   try {
     const result = await pool.query(
       'SELECT check_device_health($1) as health',
@@ -522,7 +534,7 @@ router.get('/iot-devices/:deviceId/health', authMiddleware, async (req, res) => 
 /**
  * Record IoT analytics
  */
-async function recordIoTAnalytics(metrics) {
+async function recordIoTAnalyticsProduction(metrics) {
   try {
     const result = await pool.query(
       `INSERT INTO iot_analytics 
@@ -574,6 +586,21 @@ router.post('/iot-analytics', authMiddleware, async (req, res) => {
 
 function isHealthy() {
   return pool.connect().then(() => true).catch(() => false);
+}
+
+// Select runtime implementations without reassigning function declarations.
+if (process.env.NODE_ENV !== 'test') {
+  registerIoTDevice = registerIoTDeviceProduction;
+  getIoTDevices = getIoTDevicesProduction;
+  updateDeviceStatus = updateDeviceStatusProduction;
+  recordSensorData = recordSensorDataProduction;
+  getSensorData = getSensorDataProduction;
+  sendDeviceCommand = sendDeviceCommandProduction;
+  getDeviceCommands = getDeviceCommandsProduction;
+  createDeviceAlert = createDeviceAlertProduction;
+  getUnacknowledgedAlerts = getUnacknowledgedAlertsProduction;
+  checkDeviceHealth = checkDeviceHealthProduction;
+  recordIoTAnalytics = recordIoTAnalyticsProduction;
 }
 
 module.exports = {

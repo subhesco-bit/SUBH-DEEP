@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useStore } from '@/store';
-import './${className}.css';
 
 export default function M280Page() {
   const { user } = useStore();

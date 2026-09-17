@@ -1,0 +1,7 @@
+﻿"Signature","DuplicateCount","Method","EffectivePath","RouterFile"
+"POST|/api/v1/mfa/verify","2","POST","/api/v1/mfa/verify","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\mfaDomainRoutes.js"
+"POST|/api/v1/mfa/verify","2","POST","/api/v1/mfa/verify","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\dual-use\mfaRoutes.js"
+"GET|/api/climateadvisory/health","2","GET","/api/climateadvisory/health","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\climateAdvisoryRoutes.js"
+"GET|/api/climateadvisory/health","2","GET","/api/climateadvisory/health","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\climateAdvisory.js"
+"POST|/api/v1/mfa/setup","2","POST","/api/v1/mfa/setup","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\mfaDomainRoutes.js"
+"POST|/api/v1/mfa/setup","2","POST","/api/v1/mfa/setup","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\dual-use\mfaRoutes.js"

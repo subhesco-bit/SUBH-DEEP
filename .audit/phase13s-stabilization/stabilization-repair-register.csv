@@ -1,0 +1,8 @@
+﻿"Priority","Category","Issue","State","Action"
+"1","DIAGNOSTIC_INTEGRITY","Broadcasting / source misattribution","CONFIRMED","Prevent unreliable attribution from driving repairs"
+"2","IMPORT_LINKAGE","Broken imports / missing bridges","VERIFIED_POPULATION_EXISTS","Revalidate exact files, then repair root causes"
+"3","CODE_QUALITY","Known backend ESLint no-func-assign failures","CONFIRMED","Repair four known files and rerun bounded lint"
+"4","ROUTING","Exact effective endpoint collisions","CONFIRMED","Inspect ownership and remove collision cause without deleting valid functionality"
+"5","BACKEND_DEPENDENCY","Unique unresolved local dependency edges","CONFIRMED_BY_GRAPH","Resolve exact four local unresolved relationships"
+"6","FRONTEND_BACKEND_CONTRACT","Method / namespace / implementation mismatches","REQUIRES_VERIFICATION","Validate only after diagnostic broadcasting is controlled"
+"7","REGRESSION","Build / lint / runtime / linkage validation","MANDATORY_AFTER_EACH_BATCH","Verify repair did not introduce new defects"

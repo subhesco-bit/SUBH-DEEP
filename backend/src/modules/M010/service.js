@@ -185,10 +185,41 @@ async function deliverViaChannel(notification, channel) {
 }
 
 async function deliverEmail(notification) {
-  // Placeholder for email delivery
-  // Would integrate with email service
-  logger.info('Email notification queued', { notificationId: notification.id, userId: notification.user_id });
-  return { method: 'email', status: 'queued', messageId: `email_${notification.id}_${Date.now()}` };
+  const pg = getPostgreSQL();
+  if (!pg) throw new Error('Database not initialized');
+
+  const userId = notification?.user_id || notification?.userId;
+
+  if (!userId) {
+    throw new Error('Email notification requires a user id');
+  }
+
+  const userResult = await pg.query(
+    'SELECT email FROM users WHERE id = $1',
+    [userId],
+  );
+
+  const email = userResult.rows?.[0]?.email;
+
+  if (!email) {
+    throw new Error(`Email address not found for user ${userId}`);
+  }
+
+  const { sendEmail } = require('../../services/emailService');
+
+  const result = await sendEmail({
+    to: email,
+    subject: notification.title || 'Notification',
+    text: notification.message || 'Notification',
+  });
+
+  return {
+    method: 'email',
+    status: 'sent',
+    messageId: result.messageId,
+    accepted: result.accepted,
+    rejected: result.rejected,
+  };
 }
 
 async function deliverSMS(notification) {

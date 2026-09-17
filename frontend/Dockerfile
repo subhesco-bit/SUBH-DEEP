@@ -13,7 +13,7 @@ RUN apk add --no-cache python3 make g++ ca-certificates
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm install --legacy-peer-deps --omit=dev
 
 # Copy source code
 COPY public/ ./public/

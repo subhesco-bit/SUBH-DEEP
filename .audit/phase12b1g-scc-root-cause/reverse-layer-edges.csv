@@ -1,0 +1,3 @@
+﻿"Reason","FromRole","ToRole","FromFile","ToFile","ImportPath","ImportKind"
+"SERVICE_TO_ROUTE","SERVICE","ROUTE","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\services\legacy\decisionSupportService.js","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\decisionSupportRoutes.js","../../routes/decisionSupportRoutes","COMMONJS_REQUIRE"
+"SERVICE_TO_ROUTE","SERVICE","ROUTE","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\services\index.js","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\services\custodyEventRoutes.js","./custodyEventRoutes","COMMONJS_REQUIRE"

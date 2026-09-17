@@ -1,0 +1,5 @@
+﻿"FromFile","ToFile","ImportPath","ImportKind","Resolution","CycleSeen","MinDepth","Occurrences"
+"C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\core\moduleRegistry.js","","","DYNAMIC_REQUIRE","UNRESOLVED_DYNAMIC","False","1","615"
+"C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\core\dynamicServiceLoader.js","","","DYNAMIC_REQUIRE","UNRESOLVED_DYNAMIC","False","3","615"
+"C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\core\dynamicRouteLoader.js","","","DYNAMIC_REQUIRE","UNRESOLVED_DYNAMIC","False","3","615"
+"C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\core\ai\capabilityClasses.js","","","DYNAMIC_REQUIRE","UNRESOLVED_DYNAMIC","False","4","615"

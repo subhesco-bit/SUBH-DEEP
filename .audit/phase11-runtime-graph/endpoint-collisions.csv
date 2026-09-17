@@ -1,0 +1,4 @@
+﻿"Endpoint","Count","Files","Variables"
+"POST, /api/v1/mfa/setup","2","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\dual-use\mfaRoutes.js | C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\mfaDomainRoutes.js","mfaDomainRoutes | mfaRoutes"
+"POST, /api/v1/mfa/verify","2","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\dual-use\mfaRoutes.js | C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\mfaDomainRoutes.js","mfaDomainRoutes | mfaRoutes"
+"GET, /api/climateadvisory/health","2","C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\climateAdvisory.js | C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\routes\climateAdvisoryRoutes.js","climateAdvisory | climateAdvisoryRoutes"

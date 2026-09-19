@@ -326,6 +326,252 @@ pass.
       and was not searched for beyond the specific files this pass's
       net-new/orphan tracing happened to surface.
 
+---
+
+## Batch 2 — the non-`claude/*` "Claude-side" branches
+
+**Date:** 2026-09-19 (same session, continued). **Framing confirmed by the
+user:** everything in this repo except `chatgpt-clone/*` and
+`.consolidation_work/chatgpt-tree/` counts as one side (Devin baseline,
+Claude Code sessions, Copilot/VS-Code-assisted commits, misc agent
+branches) being reconciled together, kept apart from ChatGPT's side for
+now. This batch covers the 15 additional branches named separately from
+the `claude/*` sweep above, still on the same `consolidation/claude-devin-merge`
+branch, same worktree, same hard exclusions.
+
+### Triage
+
+`git rev-list --count` + `git merge-base` against `consolidation/claude-devin-merge`
+(**re-run fresh against this base, not carried over from the prior
+`consolidated/final`-based report** — its Step 4 sweep numbers do not apply
+here):
+
+**Pure ancestors — skip (3):** `checkpoint/pre-clean-rebuild-20260913`,
+`phase1-high-priority`, `recovered/eloquent-napier-660f37` (all `ahead=0`,
+`merge-base == tip`).
+
+**Branches with real unique commits (12):**
+
+| Branch | Commits ahead | Notes |
+|---|---|---|
+| `backup/pre-integration-checkpoint` | 2 | Different merge-base (`b08881d5`) than the other 11; 618 files changed vs. base |
+| `origin/feature/village-integration-2026-09-11` | 25 | Largest of this batch |
+| `origin/feat/expert-commerce-health-enhancements` | 14 | |
+| `origin/feat/library-complete-index` | 8 | |
+| `origin/codex/modular-system-batch-assembler` | 8 | |
+| `origin/feat/metro-ecommerce-ai-media` | 6 | |
+| `origin/library/production-completion` | 6 | |
+| `origin/production-wiring-hardening` | 6 | |
+| `origin/feat/m041-connectivity-mapping` | 5 | |
+| `origin/library-ai-full-production` | 3 | |
+| `origin/feat/nutrition-commerce-expert-enhancements` | 2 | |
+| `origin/subh/complete-module-development` | 2 | |
+
+11 of these 12 (all but `backup/pre-integration-checkpoint`) share the exact
+same merge-base (`0830fb71`) and, after excluding the same noise classes as
+batch 1 (`backups/` 2,523-file snapshot dump, `.system-audit/` 22 CSV/JSON
+files, and — new to this batch — an `.ai/` 89-file status-report set that
+turned out to be **byte-identical** to `origin/claude/todo-list-completion-uosl90`'s
+`.ai/` dump from batch 1, confirmed by diff), their `backend/` net-new sets
+(122-134 files each) are **byte-identical to `origin/claude/todo-list-completion-uosl90`'s
+backend/ set already declined in batch 1** (confirmed via `comm -23` against
+the saved batch-1 file list, zero unique lines). Not re-merged, not
+re-litigated — same disposition as batch 1 stands.
+
+### What was merged (commits `ed6969a3`, `28dc12eb`, `7943217d`)
+
+**`ed6969a3`** — the real per-branch deltas beyond the shared set:
+
+- **`origin/feat/m041-connectivity-mapping`**: `M041/{connectivityController,connectivityService}.js`
+  (net-new) + `M041/routes.js` (**same-path, modified** — diffed: a pure
+  9-line addition, zero lines removed, wiring the new controller in) +
+  migration `3010_m041_village_connectivity_mapping.sql` (creates exactly
+  the 4 tables the service queries; verified by grepping the service for
+  every `FROM`/`INTO`/table name and cross-checking against the migration's
+  `CREATE TABLE` list). M041 is a plain-digit module dir already required
+  directly by `index.js` (`require('./modules/M041/routes.js')`, mounted at
+  `/api/v1/backend-modules/M041`) — confirmed live.
+- **`origin/feature/village-integration-2026-09-11`**: 3 new flat routes
+  (`villageGovernanceRoutes.js`, `villageInitiativesRoutes.js`,
+  `villageIssuesRoutes.js`, auto-mounted by `dynamicRouteLoader.js`, no
+  filename collisions) + their services + `modules/M445110_VILLAGEISSUES`
+  catalog entry (same established top-level `modules/` documentation
+  pattern already in the tree) + `docs/village/*.md` + migrations
+  `054_village_governance_councils_groups.sql`, `061/062/063_village_issue*.sql`
+  (every FK type checked against its actual winning target-table
+  declaration: `village_profiles.village_id` SERIAL/INTEGER, `panchayats.id`
+  SERIAL/INTEGER, `users.id` UUID — all matched, no mismatches).
+  - **Same-path duplicate resolved:** `backend/src/services/legacy/villageProfileService.js`.
+    Both originals archived to `_archive/duplicates/2026-09-19/backend/src/services/legacy/`.
+    The branch version is a strict improvement: (1) fixes a real shadowed-route
+    bug — base registers `GET /villages/search` *after* `GET /villages/:villageId`,
+    so Express matches "search" as a villageId and the search endpoint was
+    unreachable dead code; branch reorders with an explicit comment; (2)
+    wraps a previously-bare `require()` of 3 optional legacy modules in
+    try/catch (base would crash this file's entire load if any of
+    `M019`/`M041`/`M054`'s `service.js` ever went missing); (3) adds
+    `village_name`/`avg_income` dual-field handling matching migration
+    `053_village_profile_operational_reconciliation.sql` (also merged —
+    verified it targets `village_profiles` from migration `052`, well
+    outside the `000-071` freeze's original establishing files, adds only
+    `IF NOT EXISTS` columns and sane `CHECK` constraints). Live caller
+    confirmed: `backend/src/index.js` requires this file directly by path.
+  - **Real bug found and fixed (not just flagged):**
+    `054_village_projects_schemes_ngo.sql` declares `village_initiatives.government_scheme_id
+    BIGINT REFERENCES government_schemes(id)`, but `government_schemes` is
+    only created by `9995_scheme_verification_map_protection.sql`, which
+    sorts **after** "054" in `migrate.js`'s filename-sort order (confirmed:
+    `government_schemes` has exactly one `CREATE TABLE` declaration,
+    at 9995). Merging the 054-numbered file as-is would have left
+    `villageInitiativesRoutes.js` and its service — which this same commit
+    merges — wired at the JS level but broken at the DB level: the FK
+    constraint would fail at migration time before the table it belongs to
+    even finishes being created. This is exactly the "wired but silently
+    broken" pattern the user asked to be watched for. **Fixed** by
+    renumbering to `9997_village_projects_schemes_ngo.sql` (checked for
+    collision against 6 other existing `9997_*` files with different
+    names — same duplicate-numeric-prefix convention already used
+    throughout this migrations directory; none collide). Safe to renumber
+    because this file was never merged or deployed anywhere before this
+    pass.
+- **`origin/feat/nutrition-commerce-expert-enhancements`**: `routes/nutritionCommerceIntelligence.js`
+  + `services/commerce/nutritionCommerceIntelligenceService.js` (net-new,
+  no collision, both `require()` targets confirmed present).
+
+**`28dc12eb`** — 9 standalone dev-tooling scripts (`tools/library-complete-index.js`,
+`library-product-audit.js`, `production-hardening-batch.js`,
+`library-control-plane.js`, `library-production-readiness.js`,
+`module-completeness-audit.js`, `production-wiring-audit.js`,
+`module-system-assembler.js`, `system-assembly-orchestrator.js`) + 3
+`_EBDESIGN_LIBRARY/` governance docs, from the 6 smallest branches
+(`library-complete-index`, `library-ai-full-production`,
+`library/production-completion`, `subh/complete-module-development`,
+`production-wiring-hardening`, `codex/modular-system-batch-assembler`).
+None are required by app code — manually-run CLI scripts, zero runtime
+risk. All `node --check` clean.
+
+**`7943217d`** — **same-path duplicate resolved:**
+`frontend/src/components/AIImageGenerator.jsx` and
+`frontend/src/pages/AIProductStudioPage.jsx` both import a
+`productMediaAIAPI` object, from `services/api.js`'s barrel export in base.
+Traced the actual live backend route (`backend/src/routes/productMediaAIRoutes.js`,
+a flat file auto-mounted by `dynamicRouteLoader.js`) and its exact mount-path
+derivation (`_toMountSegment()`: strip "Routes" suffix, kebab-case —
+`productMediaAI` → `product-media-ai`) to get the real, live URL:
+`/api/v1/product-media-ai/...`, with **no** `/ai/` prefix. Base's
+`services/api.js` barrel calls `/ai/product-media-ai/...` — **a pre-existing,
+real 404 bug in this tree**, not introduced by this merge.
+`origin/feat/expert-commerce-health-enhancements`'s standalone
+`services/productMediaAIAPI.js` calls the correct path. Archived both base
+and branch versions of all 3 touched files
+(`AIImageGenerator.jsx`, `AIProductStudioPage.jsx`, `FarmerSellPage.jsx`) to
+`_archive/duplicates/2026-09-19/frontend/src/...` before overwriting, then
+took the branch's versions, which also add real, additive, non-destructive
+feature completions (product-ID field + working generate buttons; post-listing
+AI image generation) — confirmed via full diff review, nothing existing was
+removed. `origin/feat/metro-ecommerce-ai-media`'s copy of `productMediaAIAPI.js`
+diffed byte-identical (exit 0) — no separate merge needed.
+
+**Also in `7943217d`: wired, not left orphaned** —
+`NutritionCommerceWorkbenchPage.jsx` (pairs with the nutritionCommerceIntelligence
+backend route from `ed6969a3`) had zero references to it, including in its
+own source branch — a page component with no route pointing to it. Rather
+than merge it orphaned (which the user explicitly asked not to let happen
+silently), added a lazy import + route entry to `frontend/src/config/routes.js`
+at `/nutrition-commerce-workbench` (matching the existing
+`AIProductStudioPage` entry's exact shape) and a barrel export in
+`frontend/src/pages/index.js`. It is now actually reachable.
+
+### What was found but NOT merged in this batch
+
+- **`backup/pre-integration-checkpoint`'s 31 unique `backend/` files**
+  (services reorganized into `agriculture/`, `ai/`, `commerce/`, `finance/`,
+  `food/`, `logistics/`, `platform/` subfolders — e.g.
+  `commerce/glutWarningService.js`, `commerce/marketDataService.js`,
+  `finance/riskPricingService.js`). Spot-checked 5 of them against existing
+  paths: `glutWarningService.js`, `marketDataService.js`, and
+  `riskPricingService.js` **already exist at both a flat path and a
+  `legacy/` path** in this base. Adding a third, subfolder-pathed copy is
+  the exact same parallel-implementation risk already declined for
+  `origin/claude/keen-gates-663i5d`'s route reorg in batch 1. **Not
+  merged** — same disposition, needs the same dedicated file-by-file
+  reconciliation pass.
+- **`backup/pre-integration-checkpoint`'s ~20 root-level `AFRERA_*.md`
+  architecture-specification documents** (`AFRERA_MASTER_ARCHITECTURAL_SPECIFICATION.md`,
+  `AFRERA_ENTERPRISE_STRUCTURE.md`, etc.) — speculative planning documents
+  for the same standalone `afrera/` scaffold merged in batch 1, zero code.
+  Treated as documentation noise, not a feature gap, consistent with batch
+  1's treatment of the `.ai/` status-report dump. Not merged.
+- **Duplicate `.ai/` 89-file dumps** across 11 of these 12 branches — all
+  confirmed identical to the one already declined in batch 1. No new
+  decision needed; noted here so it isn't mistaken for unreviewed content.
+
+### Wiring verification (batch 2)
+
+- M041: live caller confirmed via direct grep of `index.js` (shown above).
+- Village routes: confirmed auto-mount eligibility (flat files in `routes/`,
+  no filename collisions) and confirmed every `require()` target in each
+  new route/service file resolves to a real file in this tree
+  (`middleware/auth.js`, `middleware/admin.js`, `middleware/rateLimiter.js`
+  all present).
+- `villageProfileService.js`: confirmed its one real caller
+  (`backend/src/index.js`, direct path require, not a barrel) still points
+  at the same path after the merge — nothing needed repointing since the
+  merge replaced the file in place at its existing path.
+- Migration FK types verified against actual winning declarations (not just
+  the migration's own text) for every new/modified migration in this batch,
+  the same standard used in batch 1 and in the prior `FINAL_CONSOLIDATION_REPORT.md`.
+- The `9997_village_projects_schemes_ngo.sql` renumbering was itself a
+  wiring fix — see above.
+- `frontend/config/routes.js` and `pages/index.js` edits were verified with
+  `node --check` (routes.js is plain JS, passed clean); `.jsx` files can't
+  be syntax-checked with plain `node --check` (unknown extension) — visual
+  diff review was used instead, same limitation as any `.jsx` file in this
+  pass, noted rather than silently skipped.
+- `tools/check-route-mounts.js` / `check-middleware-arity.js`: re-ran after
+  this batch's commits. Same pre-existing `Cannot find module 'express'`
+  result as batch 1 (missing `backend/node_modules`) — still unrelated to
+  and unaffected by this batch's changes (none of which touch `index.js`'s
+  own route-mount list; the new routes rely on `dynamicRouteLoader.js`'s
+  auto-discovery, which the checker doesn't independently simulate either).
+  **Still no real boot verification performed.**
+
+### Duplicates archived (batch 2 additions)
+
+All under `_archive/duplicates/2026-09-19/`:
+- `backend/src/services/legacy/villageProfileService.js__base_codex-production-reconcile-auth-geo.js`
+- `backend/src/services/legacy/villageProfileService.js__origin_feature_village-integration-2026-09-11.js`
+- `frontend/src/components/AIImageGenerator.jsx__base_codex-production-reconcile-auth-geo.jsx`
+- `frontend/src/components/AIImageGenerator.jsx__origin_feat_expert-commerce-health-enhancements.jsx`
+- `frontend/src/pages/AIProductStudioPage.jsx__base_codex-production-reconcile-auth-geo.jsx`
+- `frontend/src/pages/AIProductStudioPage.jsx__origin_feat_expert-commerce-health-enhancements.jsx`
+- `frontend/src/pages/FarmerSellPage.jsx__base_codex-production-reconcile-auth-geo.jsx`
+- `frontend/src/pages/FarmerSellPage.jsx__origin_feat_expert-commerce-health-enhancements.jsx`
+
+### Honesty checklist (batch 2)
+
+- [x] All ahead-counts re-run fresh against this base, not carried over.
+- [x] Confirmed (not assumed) that 11 of 12 branches' shared `backend/`/`.ai/`
+      sets are byte-identical to batch 1's already-declined content.
+- [x] Both real same-path duplicate cases found this batch were resolved by
+      full-file reading, union-taking the strictly-better version, and
+      archiving both originals — not a blind "prefer newer" pick.
+- [x] A real, previously-undiscovered migration-order bug was found and
+      fixed (`054`→`9997` renumber), not merged blind.
+- [x] A real, previously-undiscovered frontend 404 bug (wrong API path
+      prefix) was found and fixed, not silently carried forward.
+- [x] An orphaned page component was wired into the router rather than
+      merged and left unreachable.
+- [ ] `backup/pre-integration-checkpoint`'s subfolder-reorganized services
+      were spot-checked (5 of 31) for path collisions, not exhaustively
+      diffed against their flat/legacy counterparts for content deltas —
+      same declined-pending-dedicated-pass status as batch 1's keen-gates
+      route reorg.
+- [ ] No `npm install` / boot smoke test performed this batch either —
+      same time-box limitation as batch 1.
+
+---
+
 ## What's left for a follow-up pass
 
 1. File-by-file diff of `origin/claude/keen-gates-663i5d`'s ~150-file route

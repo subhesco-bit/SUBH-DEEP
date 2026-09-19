@@ -1,8 +1,0 @@
-﻿Existing registry:
-C:\Users\DIYA GOEL\Downloads\EBDESIGN\_EBDESIGN_LIBRARY\01_ARTIFACTS\MASTER_ARTIFACT_REGISTRY.csv
-
-Actual columns:
-
-No standard identity column matched automatically.
-NO NEW ID COLUMN WAS CREATED.
-NO IDs WERE MODIFIED.

@@ -1,1 +1,0 @@
-﻿import React from 'react'; export default function M120Component() { return <div>M120 component</div>; }

@@ -1,5 +1,0 @@
-describe('Test390', () => {
-  it('should pass', () => {
-    expect(true).toBe(true);
-  });
-});

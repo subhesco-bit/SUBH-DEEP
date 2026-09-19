@@ -1,2 +1,0 @@
-﻿-- SQL model placeholder for Consent Management (M019)
--- Define tables and indexes here

@@ -1,2 +1,0 @@
-﻿-- SQL model placeholder for Asset Lifecycle Management (M110)
--- Define tables and indexes here

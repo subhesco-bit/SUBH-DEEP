@@ -46,3 +46,7 @@ docs/codex-duplicate-rename-plan.csv
 docs/codex-duplicate-filename-conflicts.csv
 .audit/chatgpt-clone-tree-comparison.jsonl
 FileAuditReport.csv
+
+# Disposable audit/archive output - never track in git
+.archive/
+.audit/

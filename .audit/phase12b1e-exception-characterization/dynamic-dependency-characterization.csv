@@ -1,5 +1,0 @@
-﻿"FromFile","ImportPath","ImportKind","Occurrences","MinDepth","SourceLines","SourceRole","SourceClass","RouteDeclarations","HasServiceText","HasControllerText","HasTODO","HasPlaceholder","ReadError"
-"C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\core\moduleRegistry.js","","DYNAMIC_REQUIRE","615","1","477","OTHER","PRODUCTION_OR_REVIEW","0","True","False","False","False",""
-"C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\core\dynamicServiceLoader.js","","DYNAMIC_REQUIRE","615","3","556","SERVICE","PRODUCTION_OR_REVIEW","0","True","False","False","False",""
-"C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\core\dynamicRouteLoader.js","","DYNAMIC_REQUIRE","615","3","600","OTHER","PRODUCTION_OR_REVIEW","1","True","False","False","False",""
-"C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\core\ai\capabilityClasses.js","","DYNAMIC_REQUIRE","615","4","587","AI_ML","PRODUCTION_OR_REVIEW","0","True","True","False","False",""

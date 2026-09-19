@@ -1,3 +1,0 @@
-﻿"File","Name","Lines","SizeBytes","EndpointCount","Signature","ServiceImports","ControllerImports","MiddlewareImports"
-"C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\modules\M645100_LIBRARYKNOWLEDGE\api\routes.js","routes.js","64","2401","7","GET /modules | GET /modules/:moduleId | GET /search | GET /statistics | GET /verify | POST /ai-context | POST /initialize","../backend/service","",""
-"C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\modules\TEMPLATES\MODULE_TEMPLATE\backend\routes.js","routes.js","224","4724","12","DELETE /delete/:id | GET /health | GET /list | GET /read/:id | POST /analyze | POST /cable/:cableId/receive | POST /cable/:cableId/send | POST /create | POST /decide | POST /execute | POST /strategize | PUT /update/:id","","",""

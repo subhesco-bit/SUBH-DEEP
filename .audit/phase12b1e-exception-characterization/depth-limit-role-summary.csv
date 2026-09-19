@@ -1,8 +1,0 @@
-﻿"Count","RolePair"
-"45","SERVICE, "
-"10","MIDDLEWARE_OR_AUTH, "
-"9","OTHER, "
-"2","ROUTE, "
-"1","DATABASE_LAYER, "
-"1","CACHE_REDIS, "
-"1","REALTIME, "

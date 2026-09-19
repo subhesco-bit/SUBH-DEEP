@@ -1,5 +1,0 @@
-﻿"Finding","Status","Reason"
-"541 completion candidates","NOT_A_DEFECT_METRIC","Physical-layer heuristic; module-local UI/service/route absence does not prove broken implementation"
-"2382 unresolved frontend/backend observations","NOT_2382_CONFIRMED_DEFECTS","Population contains genuine gaps plus namespace/parser/broadcasting effects"
-"1277 central api.js unresolved observations","NOT_1277_CONFIRMED_DEFECTS","Source attribution demonstrated broadcasting/misattribution"
-"Missing priority-flow directory-name match","NOT_PROOF_OF_ABSENCE","Shallow directory-name inventory cannot prove feature absence"

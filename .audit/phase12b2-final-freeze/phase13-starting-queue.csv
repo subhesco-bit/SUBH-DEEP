@@ -1,6 +1,0 @@
-﻿"Priority","Workstream","Action"
-"1","System completion","Inventory system -> preserve existing -> identify missing -> implement -> wire -> test"
-"2","Confirmed blockers","Repair only defects that block the system currently being completed"
-"3","Missing implementation","Complete missing UI/API/backend/DB/AI/ERP links"
-"4","Audit observations","Defer scanner-only findings unless reproduced during system testing"
-"5","Final validation","Phase 14 complete independent re-audit after project completion"

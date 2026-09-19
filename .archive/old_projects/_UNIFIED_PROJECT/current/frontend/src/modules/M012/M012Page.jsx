@@ -1,6 +1,0 @@
-﻿import ContractlessModulePage from '../ContractlessModulePage';
-import './styles.css';
-
-export default function M012Page() {
-  return <ContractlessModulePage moduleId="M012" />;
-}

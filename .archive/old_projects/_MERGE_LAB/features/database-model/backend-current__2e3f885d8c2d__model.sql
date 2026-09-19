@@ -1,2 +1,0 @@
-﻿-- SQL model placeholder for Time Zone Management (M009)
--- Define tables and indexes here

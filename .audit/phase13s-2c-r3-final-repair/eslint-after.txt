@@ -1,6 +1,0 @@
-
-C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\services\logistics\iotIntegrationService.js
-  24:38  error  Empty block statement  no-empty
-
-✖ 1 problem (1 error, 0 warnings)
-

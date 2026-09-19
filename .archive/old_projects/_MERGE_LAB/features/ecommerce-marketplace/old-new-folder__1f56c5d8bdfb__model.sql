@@ -1,2 +1,0 @@
-﻿-- SQL model placeholder for Orchard Management (M141)
--- Define tables and indexes here

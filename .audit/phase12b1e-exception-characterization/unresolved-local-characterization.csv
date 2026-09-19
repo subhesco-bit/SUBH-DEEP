@@ -1,5 +1,0 @@
-﻿"FromFile","ImportPath","ImportKind","Resolution","Occurrences","MinDepth","SourceExists","SourceLines","SourceRole","SourceClass","RouteDeclarations","HasTODO","HasPlaceholder","HasNotImplemented","ReadError"
-"C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\services\index.js","./sapModuleArchitectureService","COMMONJS_REQUIRE","LOCAL_UNRESOLVED","615","6","True","567","SERVICE","PRODUCTION_OR_REVIEW","0","False","False","False",""
-"C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\core\nervousSystem.js","../services/orderProcessingService","COMMONJS_REQUIRE","LOCAL_UNRESOLVED","615","2","True","1033","OTHER","PRODUCTION_OR_REVIEW","0","False","False","False",""
-"C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\services\index.js","./aiBrainService","COMMONJS_REQUIRE","LOCAL_UNRESOLVED","615","6","True","567","SERVICE","PRODUCTION_OR_REVIEW","0","False","False","False",""
-"C:\Users\DIYA GOEL\Downloads\EBDESIGN\backend\src\modules\M645100_LIBRARYKNOWLEDGE\backend\service.js","./UserProfile","COMMONJS_REQUIRE","LOCAL_UNRESOLVED","615","2","True","2703","SERVICE","PRODUCTION_OR_REVIEW","0","False","True","False",""

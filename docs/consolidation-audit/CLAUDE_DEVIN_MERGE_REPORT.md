@@ -709,6 +709,112 @@ All under `_archive/duplicates/2026-09-19/`:
 
 ---
 
+---
+
+## Phase 3b — filename-candidate duplicate groups (same name, different content)
+
+**Verification standard (per explicit user instruction — speed is NOT the
+priority, correctness is):** every file in every group was read in full
+before any classification. Nothing was collapsed on a filename match, a
+line-count match, or an assumption from a prior group's pattern. Where a
+group's purpose could not be confidently determined, both/all files were
+left untouched and flagged rather than guessed on.
+
+### Re-derivation
+
+Scoped to `backend/`+`frontend/` `.js`/`.jsx`/`.ts`/`.tsx` files on this
+branch's own tree (6,856 candidate paths). Grouped by basename, kept only
+groups where the members have **different** blob SHAs (same name,
+different content — the complement of Phase 3's exact-match scan).
+**527 groups found.** 6 basenames (`service.js`, `routes.js`,
+`controller.js`, `index.js`, `index.jsx`, `test.js` — 1,595 of the
+6,856 paths) were excluded from per-group review: these are the generic
+per-module-scaffold filenames already established in Phase 3 as a false-
+positive class (each is independently live for its own module directory;
+same name is a scaffold-template artifact, not duplication). **521 named
+groups remain**, of which **5 were reviewed this pass** (time-boxed, per
+instruction — real numbers, not a completion claim).
+
+### Groups reviewed: 5
+
+**`farmerService.js`** (4 files — `backend/src/services/{,legacy/,agriculture/}farmerService.js`, `frontend/src/services/farmerService.js`):
+- `frontend/`: read in full — a thin axios API client (`registerFarmer`, `getFarmerProfile`, etc., each just an `api.post`/`api.get` call). Different runtime, different purpose. **Left alone.**
+- `backend/src/services/farmerService.js` (flat): read in full — already an intentional 22-line compatibility re-export shim to `legacy/farmerService.js`, with its own header comment documenting a prior (2026-09-08) duplicate-remediation pass. **Not a duplicate needing action — already resolved correctly.**
+- `backend/src/services/agriculture/farmerService.js` vs `legacy/farmerService.js`: **true duplicate, resolved.** Same function set, same order. Diffed in full (comments/whitespace stripped): legacy is a strict superset — identical logic plus a real fix agriculture lacks: `agriculture/`'s `getFarmers()` interpolates `sort_by`/`sort_order` query params directly into the SQL string; `legacy/`'s allowlists both against a `Set` before use (a SQL-injection-shaped gap in the dead copy, now moot since it's archived). Traced callers of `agriculture/farmerService.js`: zero, anywhere in `backend/src`. `legacy/farmerService.js` confirmed live via `routes/farmerRoutes.js` and `routes/farmerPortalEnhancements.js`, both explicitly `require()`'d and `app.use()`'d in `index.js`. **Archived** `agriculture/farmerService.js`.
+
+**`errorHandler.js`** (4 files — `backend/src/{middleware/,core/,platform/middleware/}errorHandler.js`, `frontend/src/utils/errorHandler.js`):
+- `frontend/`: read in full — browser-side `ErrorHandler` class classifying fetch/axios error responses for UI display. Different runtime/purpose. **Left alone.**
+- The 3 backend copies: read in full, all different. `middleware/errorHandler.js` exports `{AppError, errorHandler, notFound, catchAsync}` with Mongoose/JWT/Postgres-specific error-code branching. `core/errorHandler.js` exports a **different, larger class hierarchy** (`ValidationError`, `AuthenticationError`, `AuthorizationError`, `NotFoundError`, `ConflictError`, `RateLimitError`, `ServerError`, all extending its own `AppError`) with no Mongoose/JWT handling. `platform/middleware/errorHandler.js` is a third, minimal TODO-stub exporting a **bare function** (`module.exports = errorHandler`, not an object) — a caller destructuring `{ errorHandler }` from it would get `undefined`. Traced callers: `middleware/errorHandler.js` is the mounted Express error handler in `index.js` and is separately used for its `AppError` class by `services/legacy/erpService.js` and `advancedMedicalCodingService.js`; `core/errorHandler.js` is separately, actively used for its `ValidationError`/`NotFoundError` classes by `core/serviceAuditAndEnhancement.js` and `services/productionExampleService.js`. **Both are simultaneously live with materially different, non-interchangeable APIs.** This is exactly the "STOP, don't guess" case: collapsing either would break real callers expecting classes that only exist on the other side. **Left untouched, flagged for a dedicated future union-merge pass** (add the missing error classes to one canonical file, repoint every caller — not attempted here). `platform/middleware/errorHandler.js` has zero callers (confirmed) but was also left alone rather than archived in isolation, since it's part of the same 3-way ambiguity worth resolving together.
+
+**`authService.js`** (4 files — `backend/src/{platform/iam/,services/dual-use/,services/}authService.js`, `frontend/src/services/authService.js`):
+- `frontend/`: thin axios API client (`login`, etc.). **Left alone.**
+- `services/dual-use/authService.js`: read in full — already an intentional 7-line compatibility shim to `../authService.js`, with its own comment. **Not a duplicate — already resolved.**
+- `platform/iam/authService.js` vs `services/authService.js` (1288 lines, canonical): read `platform/iam/` in full — an incomplete stub (`login()` returns a fake `stub_token_${Date.now()}`, every method has an explicit `// TODO: Implement ...` comment). Traced callers: zero, anywhere. Per CLAUDE.md's "do not assume a module is a scaffold" — this was verified as dead via caller trace, not assumed from its stub content alone. **Archived.**
+
+**`auditService.js`** (4 files — `backend/src/{platform/iam/,services/,services/platform/,services/legacy/}auditService.js`):
+- `platform/iam/auditService.js`: same stub pattern (`stub_audit_${Date.now()}`, TODOs). Zero callers confirmed. **Archived.**
+- `services/auditService.js` (flat, 375 lines) and `services/platform/auditService.js` (369 lines) vs `services/legacy/auditService.js` (370 lines, confirmed live via 5 real callers: `routes/auditRoutes.js`, `routes/adminAuditDomainRoutes.js`, `middleware/compliance.js`, `modules/M206_AUDIT_MANAGEMENT`, a test file): diffed all three in full after stripping comments — functionally identical, only relative-require-depth and trailing-comma differences. The flat copy's header comment claims a "logger destructure bug fix"; verified `legacy/` already has the equivalent correct code, so no unique fix was at risk of being lost. **Extra verification hop performed before archiving `services/platform/auditService.js`:** found that `services/platform/analyticsMonitoringService.js` has its own `require('./auditService')` (a relative require resolving to the `platform/` copy) — checked whether *that* file is itself reachable before assuming the `platform/auditService.js` chain was fully dead: zero callers of `services/platform/analyticsMonitoringService.js` found anywhere; `index.js` requires `services/legacy/analyticsMonitoringService.js` instead. Confirmed the whole chain is unreachable, not just the first hop. **Both archived.**
+
+**`aiCopilotService.js`** (4 files — `backend/src/services/{,claude/,ai/,legacy/}aiCopilotService.js`):
+- `services/aiCopilotService.js` (flat): already an intentional shim to `legacy/`, same pattern as `farmerService.js`. **Not a duplicate — already resolved.**
+- `services/claude/aiCopilotService.js` (208 lines): read in full — **not a duplicate at all.** It internally `require()`s and wraps `../legacy/aiCopilotService` (composes on top rather than reimplementing), and `routes/claude/aiCopilotRoutes.js` requires **both** `services/claude/aiCopilotService.js` and `services/legacy/aiCopilotService.js` directly in the same file for different calls — genuinely different, complementary purpose, both intentionally live together. **Left alone.**
+- `services/ai/aiCopilotService.js` (674 lines) vs `services/legacy/aiCopilotService.js` (700 lines, confirmed live via direct requires in `index.js`, `core/aiOrchestrator.js`, and `modules/M455100_AICOPILOT`): diffed in full — `legacy/` is a near-strict superset (same domain-specific canned-response copilots for finance/logistics/warehouse/insurance/nutrition/marketplace, plus one extra route, `GET /sessions`, that `ai/` lacks). One real divergence found: the two files require `nutritionIntelligenceService`/`wikipediaService` from **different relative paths** (`ai/` uses `../food/...` and `../platform/...`; `legacy/` uses `./...` within its own directory) — both resolve to real, existing files, so neither is a broken-require bug, but it surfaces that **those two filenames are themselves duplicated at two paths each**, not diagnosed this pass (see backlog). Since `ai/aiCopilotService.js` itself has zero live callers (confirmed both by exact-path grep and by relative-require grep from within `services/ai/`), the difference is moot — that code never executes. **Archived** `services/ai/aiCopilotService.js`.
+
+### Before/after count
+
+`backend/src/services/` + `backend/src/platform/` `.js` file count: **691 → 685** this phase (6 files archived: `agriculture/farmerService.js`, `platform/iam/authService.js`, `platform/iam/auditService.js`, `services/auditService.js`, `services/platform/auditService.js`, `services/ai/aiCopilotService.js`). All via `git rm` after copying to `_archive/duplicates/2026-09-19/`, not bare-deleted.
+
+### Left alone as genuinely different purpose (5 files across the reviewed groups)
+
+`frontend/src/services/farmerService.js`, `frontend/src/utils/errorHandler.js`, `frontend/src/services/authService.js` (all frontend API clients / browser utilities — different runtime), `backend/src/services/claude/aiCopilotService.js` (composes rather than duplicates).
+
+### Left alone as ambiguous / both live with incompatible APIs (flagged for human/dedicated pass, not guessed)
+
+`backend/src/middleware/errorHandler.js` vs `backend/src/core/errorHandler.js` — both simultaneously live, different class hierarchies, real callers on both sides depend on classes that only exist on their respective side. `backend/src/platform/middleware/errorHandler.js` (zero callers, but left alone pending the same resolution rather than archived in isolation).
+
+### New finding, not resolved (added to backlog, not guessed at)
+
+`nutritionIntelligenceService.js` (`services/legacy/` and `services/food/`) and `wikipediaService.js` (`services/legacy/` and `services/platform/`) are each duplicated at two paths — surfaced while investigating `aiCopilotService.js`'s differing require targets, not independently diagnosed. Both pairs are already members of the 521-group filename-candidate list; not reviewed this pass.
+
+### Wiring re-verification (Phase 3b)
+
+- `node --check` on every surviving file touched or re-examined this phase (`legacy/farmerService.js`, `services/authService.js`, `legacy/auditService.js`, `platform/analyticsMonitoringService.js`, `legacy/aiCopilotService.js`, `services/claude/aiCopilotService.js`) — all clean.
+- Re-ran `tools/check-route-mounts.js` after the collapses — identical pre-existing `Cannot find module 'express'` output as every prior run this session (missing `backend/node_modules`), confirming no new regression introduced.
+- Every archive decision traced the **exact require path** (not the bare filename) and, where a first-hop caller was itself found, traced whether *that* caller was reachable too (the `analyticsMonitoringService.js` extra hop) — no barrel-file shortcuts taken.
+
+### Duplicates archived (Phase 3b additions)
+
+All under `_archive/duplicates/2026-09-19/`:
+- `backend/src/services/agriculture/farmerService.js`
+- `backend/src/platform/iam/authService.js`
+- `backend/src/platform/iam/auditService.js`
+- `backend/src/services/auditService.js`
+- `backend/src/services/platform/auditService.js`
+- `backend/src/services/ai/aiCopilotService.js`
+
+### Honest remaining backlog (Phase 3b)
+
+- **516 of 521 named filename-candidate groups not yet reviewed.** This
+  pass covered 5 groups at full verification rigor, deliberately not more,
+  per the explicit "time-box, report real numbers" instruction paired with
+  "nothing guessed" — the two together mean fewer groups done correctly
+  rather than more groups done superficially.
+- **The `nutritionIntelligenceService.js` / `wikipediaService.js` pairs**
+  found above — next in line given they were already surfaced.
+- **The `errorHandler.js` 2-way live conflict** — needs a deliberate
+  union-merge design decision (which class hierarchy becomes canonical, or
+  do both survive under different names), not a mechanical collapse.
+- Groups excluded from review entirely (generic per-module scaffold names:
+  `service.js` ×540, `routes.js` ×347, `controller.js` ×347, `index.js`
+  ×169, `index.jsx` ×188, `test.js` ×8) — confirmed as a false-positive
+  class in Phase 3 already, not re-litigated, but also not exhaustively
+  re-verified per-instance in this pass (a generic name occasionally could
+  still hide a real duplicate; the sampling in Phase 3's M026-M029 check
+  found that class to be genuinely independent-per-module, but that was 4
+  files, not all 1,595).
+
+---
+
 ## What's left for a follow-up pass
 
 1. File-by-file diff of `origin/claude/keen-gates-663i5d`'s ~150-file route

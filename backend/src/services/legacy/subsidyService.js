@@ -5,7 +5,16 @@
  */
 
 const { logger } = require('../../utils/logger');
-const { aiAPI } = require('./aiBackboneService');
+// FIX (2026-09-19, duplicate-collapse pass, see
+// docs/consolidation-audit/CLAUDE_DEVIN_MERGE_REPORT.md Phase 3b): this
+// used to require('./aiBackboneService'), i.e.
+// services/legacy/aiBackboneService.js, which does not export `aiAPI` at
+// all (it exports callClaudeAI/callOpenAI/callAI/etc. individually) - so
+// aiAPI was `undefined` and every call to aiAPI.generateRecommendation()
+// below threw at runtime. services/finance/subsidyService.js (an
+// otherwise-redundant duplicate of this file) had the correct import;
+// ported that fix here instead of keeping it only in the dead duplicate.
+const { aiAPI } = require('../aiService/index');
 const { authMiddleware } = require('../../middleware/auth');
 
 /**

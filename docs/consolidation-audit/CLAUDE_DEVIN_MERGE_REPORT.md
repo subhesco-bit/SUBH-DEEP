@@ -865,6 +865,102 @@ All under `_archive/duplicates/2026-09-19/`:
 
 ---
 
+---
+
+## Phase 3b, continued — filename-candidate groups, batches 3-4, and a methodology correction
+
+### Parallelization note
+
+Starting from this point, the remaining filename-candidate backlog is being
+worked in 3 parallel lanes on separate branches/worktrees off this
+branch's tip, split by disjoint directory so there is no file-overlap risk
+between lanes (merged back into `consolidation/claude-devin-merge` as each
+lane completes a batch):
+- **Lane A (this report's continued work):** `backend/src/services/**` + `backend/src/platform/**`.
+- **Lane B:** `backend/src/routes/**` + `backend/src/modules/**`.
+- **Lane C:** `frontend/src/**` + everything else (root-level, scripts, migrations, docs).
+
+Same verification standard in every lane — this is a throughput change
+(parallelism), not a rigor change.
+
+### Methodology correction: renames for "different purpose, same name"
+
+A real gap was caught and fixed: the original task methodology says a
+"different purpose, same filename" pair should have one file **renamed**
+to disambiguate, not just be left alone. Earlier in this pass,
+`whatsappService.js` and `services/claude/aiCopilotService.js` (both
+genuinely-different-purpose cases) were left alone without a rename. Fixed
+retroactively:
+
+| Old path | New path | Real callers updated |
+|---|---|---|
+| `backend/src/services/platform/whatsappService.js` | `backend/src/services/platform/whatsappOutboundMessagingService.js` | None (zero real callers, confirmed both before and after) |
+| `backend/src/core/errorHandler.js` | `backend/src/core/errorClasses.js` | `backend/src/services/productionExampleService.js`, `backend/src/core/serviceAuditAndEnhancement.js` (both only ever destructured its error classes, never its `errorHandler` function — confirmed by grep, hence the new name), plus a string-literal reference in `backend/src/core/fileConnectivityAudit.js`'s import-detection heuristic |
+| `backend/src/platform/middleware/errorHandler.js` | `backend/src/platform/middleware/errorHandlerStub.js` | None (zero real callers) |
+| `backend/src/services/claude/aiCopilotService.js` | `backend/src/services/claude/aiCopilotEnhancementService.js` | `backend/src/routes/claude/aiCopilotRoutes.js` (which requires both this file and `services/legacy/aiCopilotService.js` together — kept the same filename despite one wrapping the other, since two live, simultaneously-required files sharing an exact filename in one require graph was still worth disambiguating on disk) |
+
+**`legacy/whatsappService.js` was deliberately NOT renamed** — it has real
+production callers referencing it by that exact path (a compatibility
+shim, a module) and is the canonical name; renaming the zero-caller
+`platform/` side achieved full disambiguation at much lower risk. A
+symmetric naming note was added to its header for future readers.
+
+**Judged, not silently skipped — cross-runtime cases needing no rename:**
+`frontend/src/services/{farmerService,authService}.js` and
+`frontend/src/utils/errorHandler.js` vs their backend namesakes were left
+unrenamed by explicit judgment, documented here rather than as a bare
+"left alone" note: frontend/ is bundled by Vite/webpack as an entirely
+separate application from backend/src's Node `require()` graph — there is
+no mechanism by which either could ever resolve to the other, so the
+directory root itself is already a hard boundary a rename would not
+strengthen.
+
+**Standing rule from here on:** every future "different purpose, same
+basename" classification in this report must include an explicit rename
+decision — either rename one side and list every updated caller, or state
+why a rename adds no value for that specific pair (as above) — not a bare
+"left alone" note.
+
+### Groups reviewed: 6 more (villageProfileService, valueCommerceService, subsidyService, soilTestingService, seedVaultService, sharedInfrastructureService/sharedInfraService)
+
+- **`villageProfileService.js`** — `agriculture/` copy was a "minimal in-memory scaffold" per its own comment (in-memory array, permanently-disabled DB path via `if (pg && false)`), zero callers, archived; the live `legacy/` copy (already reconciled in an earlier batch-2 commit) is the real implementation.
+- **`valueCommerceService.js`** — **flagged ambiguous.** Independently re-verified the shim's "confirmed-live copy" claim rather than trusting it (a lesson from this same batch): **neither** `commerce/valueCommerceService.js` nor `legacy/valueCommerceService.js` is reachable from any mounted route (only the dead `services/index.js` barrel and the dead, never-loaded `M474100_VALUECOMMERCE` module reference either). `scripts/find-orphan-services.js` doesn't flag them either — confirming its own documented "reference, not reachability" limitation rather than contradicting this finding. The two also differ by more than formatting: `commerce/` uses `*Production`-suffixed function names (`getValueFactorsProduction`), `legacy/` doesn't. Since neither is live, there's no caller signal to resolve which naming convention should survive. **Left both untouched, flagged for human review.**
+- **`subsidyService.js`** — **found and fixed a real bug in the live copy**, not just archived a dead one. `legacy/subsidyService.js` (confirmed live via `routes/ORPHANED_SERVICES_MOUNT.js`, confirmed mounted) does `const { aiAPI } = require('./aiBackboneService')`, which resolves to `services/legacy/aiBackboneService.js` — a module that does **not** export `aiAPI` at all (only individual provider functions). All 3 of this service's main entry points (`checkProjectSubsidyEligibility`, `checkEquipmentSubsidyEligibility`, `checkLogisticsSubsidyEligibility`) would throw `Cannot read properties of undefined` whenever called. The dead `finance/subsidyService.js` duplicate had the correct import (`require('../aiService/index')`, verified to export `aiAPI.generateRecommendation`). **Ported the fix into the live file**, verified with `node --check`, then archived the now-genuinely-redundant `finance/` copy.
+- **`soilTestingService.js`** — `agriculture/` copy vs the live `legacy/` copy (confirmed via the same `ORPHANED_SERVICES_MOUNT.js`): legacy is a superset (one extra function, `getOrganicInputPlan`). Specifically checked legacy's own `aiAPI` import for the same bug class just found in `subsidyService.js` — this one resolves correctly (`require('./aiService')` → `legacy/aiService.js`, itself a shim to the real `services/aiService/index.js`, confirmed to export `aiAPI`). No bug here. Zero callers of `agriculture/`. Archived.
+- **`seedVaultService.js`** — `agriculture/` copy vs the live `legacy/` copy (confirmed via `routes/seedVaultRoutes.js`, mounted): identical core logic, legacy additionally merges in `modules/M045/service`. Zero callers of `agriculture/`. Archived.
+- **`sharedInfrastructureService.js`** vs **`sharedInfraService.js`** (two distinct filename groups, easily confused with each other): `platform/sharedInfrastructureService.js` vs the live `legacy/` copy (confirmed via `ORPHANED_SERVICES_MOUNT.js` — that file imports it under a local variable literally named `sharedInfraService`, which could be misread as importing the *other*, differently-named file; traced the actual require path on that exact line, not the variable name) — functionally identical, zero callers of `platform/`, archived. **`sharedInfraService.js` (the actually-differently-named file) is a second "both copies dead" case**: traced every reference to `platform/sharedInfraService.js` and `legacy/sharedInfraService.js` — only the dead barrel, the dead `M663100_SHAREDINFRA` module, and two comment-only mentions (not real requires) in unrelated files. `ORPHANED_SERVICES_MOUNT.js` does not mount this one. Neither reachable. **Left both untouched, flagged.**
+
+### Before/after count
+
+`backend/src/services/` + `backend/src/platform/` `.js` file count: **682 → 677** this round (5 files archived: `villageProfileService.js`, `subsidyService.js` [dead copy only — live copy fixed in place], `soilTestingService.js`, `seedVaultService.js`, `sharedInfrastructureService.js`). Running total since Phase 3b began: **691 → 677** (14 files archived across 4 batches).
+
+### Wiring re-verification
+
+`node --check` on every surviving/edited file each batch (all clean, listed in each commit message). `tools/check-route-mounts.js` and `tools/check-middleware-arity.js` re-run after every batch and after the renames — same pre-existing missing-`express` limitation throughout, 0 factories registered uncalled, no regression introduced at any point. Every rename was followed by a repo-wide grep for the old path to confirm zero stale references before moving on.
+
+### Duplicates archived (batches 3-4)
+
+All under `_archive/duplicates/2026-09-19/`:
+- `backend/src/services/agriculture/villageProfileService.js`
+- `backend/src/services/finance/subsidyService.js`
+- `backend/src/services/agriculture/soilTestingService.js`
+- `backend/src/services/agriculture/seedVaultService.js`
+- `backend/src/services/platform/sharedInfrastructureService.js`
+
+### Honest remaining backlog (Lane A scope: `backend/src/services/**` + `backend/src/platform/**` only)
+
+**~506 of 521 originally-counted named groups remain** across the whole
+repo (this count predates the 3-lane split and includes groups now being
+worked by Lanes B and C outside this lane's remit). Within Lane A's own
+scope, continuing in the same small, fully-verified batches. Two
+ambiguous "both copies dead" findings so far (`valueCommerceService.js`,
+`sharedInfraService.js`) suggest the shims' 2026-09-08 "confirmed-live
+copy" comments should not be trusted without independent re-verification
+per file — worth keeping in mind for whoever picks up the remaining
+`services/`/`platform/` groups.
+
+---
+
 ## What's left for a follow-up pass
 
 1. File-by-file diff of `origin/claude/keen-gates-663i5d`'s ~150-file route

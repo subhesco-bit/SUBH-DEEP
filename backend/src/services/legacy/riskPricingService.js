@@ -308,8 +308,10 @@ async function districtConfidence(state, district, cropKey) {
  * WEATHER_FALLBACK is 1800 mm and 26 C — a plausible national-ish average and
  * the wrong number almost everywhere. Every forward price this engine
  * published rested on it, because nothing ever passed real weather in.
- * services/agriculture/weatherService.js was written to close exactly this gap
- * and its weatherForArp() has sat unconsumed since.
+ * weatherForArp() (now consolidated into this same services/legacy/
+ * weatherService.js, formerly a separate services/agriculture/weatherService.js
+ * duplicate - see docs/consolidation-audit/CLAUDE_DEVIN_MERGE_REPORT.md,
+ * Phase 3b) was written to close exactly this gap.
  *
  * The fallback is kept, but a price computed from it is now explicitly
  * uncalibrated. An advance rate is a number a farmer may commit an unharvested
@@ -322,7 +324,7 @@ async function resolveWeather({ weather, state, district }) {
     return { w: WEATHER_FALLBACK, source: 'fallback-no-location', weatherCalibrated: false };
   }
   try {
-    const { weatherForArp } = require('../agriculture/weatherService');
+    const { weatherForArp } = require('./weatherService');
     const observed = await weatherForArp({ state, district, days: 120 });
     if (observed && observed.observations > 0) {
       return { w: observed, source: 'observed', weatherCalibrated: observed.calibrated !== false };

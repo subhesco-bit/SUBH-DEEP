@@ -1,5 +1,25 @@
 # Claude/Devin Branch Reconciliation — `consolidation/claude-devin-merge`
 
+**This document covers "Version A" only.** The user's confirmed end goal is
+two separate, clean, fully self-contained project versions, kept apart
+until a later, explicit decision to merge them (not in scope now):
+
+- **Version A — Claude AI side** (this branch, `consolidation/claude-devin-merge`):
+  Devin's baseline + every Claude Code branch + Copilot/VS-Code-assisted
+  commits + misc agent branches, consolidated and deduplicated together as
+  one side. This is what this report documents.
+- **Version B — ChatGPT side** (`chatgpt-clone/*` branches,
+  `.consolidation_work/chatgpt-tree/`, `consolidated/final`): left
+  **completely untouched** as its own intact tree. Nothing in this report's
+  work has read from, merged from, or modified anything in Version B — see
+  the exclusions restated below.
+
+No merge between Version A and Version B has happened, is planned, or is
+in scope anywhere in this document. That is a distinct future decision for
+the user to make once both sides are independently trustworthy.
+
+---
+
 **Date:** 2026-09-19
 **Base:** `codex/production-reconcile-auth-geo` (5fa477f0)
 **New branch:** `consolidation/claude-devin-merge`
@@ -572,6 +592,123 @@ All under `_archive/duplicates/2026-09-19/`:
 
 ---
 
+---
+
+## Phase 3 — real duplicate-file collapse (Claude side only)
+
+**Goal (per user):** actually reduce redundant files already coexisting
+within this branch's own tree — a different problem from batches 1-2 (which
+were about pulling in missing branch content). Scoped to files already on
+`consolidation/claude-devin-merge`'s working tree, which by construction
+contains nothing from `.consolidation_work/chatgpt-tree/` or any
+`chatgpt-clone/*` branch — no separate exclusion filtering was needed
+because ChatGPT content was never merged into this tree in the first place.
+
+### Method
+
+The original whole-repo inventory (17,217 exact-content-duplicate groups /
+27,152 filename-candidate groups across 60 branches) is `consolidated/final`-scoped
+and not directly re-usable here (different tree, different branch set), so
+this pass re-derived exact-content duplicates fresh against this branch's
+own blobs: `git ls-tree -r HEAD`, grouped by blob SHA, restricted to
+`backend/` and `frontend/` paths (code, not docs/audit-report noise) and
+excluding binary/lockfile extensions. **9,584 candidate code paths → 11
+exact-content-match groups.** This is a first pass covering only
+exact-content duplicates in live app code — the larger filename-candidate
+category (same name, different content — needs full reads per file, much
+higher-risk and slower) was not attempted this pass; see backlog below.
+
+### Groups reviewed: 11 total
+
+**6 false positives — left alone, not real duplication to collapse:**
+
+| Group | Why it's not a real duplicate |
+|---|---|
+| `.vibecheck/registry-cache.json` (16 copies across `M001`/`M013`/`M025`/`M029`/`M031`/`M032`/`M051`/`M054`/`M132`/`M141`/`M144` module dirs + `routes/`/`services/`) | Auto-generated per-directory cache artifact; each is independently regenerated for its own directory, coincidentally identical content, not hand-duplicated source. |
+| `M026/routes.js`, `M027/routes.js`, `M028/routes.js`, `M029/routes.js` | Identical content, but each is a live, independently-required `routes.js` for its own module (`index.js` requires `./modules/M026/routes.js` etc. individually) — currently the same generated scaffold template, but collapsing to one file would break 3 of the 4 modules' independent require paths. Not mergeable; flagged as "currently-identical scaffolds," not duplicates. |
+| `M82100_GOAT/cables.json`, `M858100_PIG/cables.json`, `M87100_ANIMALHEALTH/cables.json` | Same reasoning — per-module generated metadata, coincidentally identical, each independently owned by its module. |
+| `backend/integration-test-report.json`, `backend/module_analysis.csv` | Both are empty files (git's well-known empty-blob SHA `e69de29b...`). Trivial, not a real duplication case. |
+| `frontend/android/.../ic_launcher.xml` + `ic_launcher_round.xml` | Standard Android adaptive-icon resource pair — two files that are supposed to exist side-by-side under different resource names, not a redundant copy. |
+
+**5 real dead-copy duplicates — resolved, `git rm`'d (archived, not bare-deleted):**
+
+For each, traced every real `require()` of the exact path (not the bare
+filename) across `backend/src`, the same no-barrel-shortcut standard as
+batches 1-2:
+
+| Live copy (kept) | Dead copy (archived) | Live caller traced |
+|---|---|---|
+| `services/serverManagementService.js` | `services/platform/serverManagementService.js` | `routes/serverManagementRoutes.js` requires the flat path; zero requires of the `platform/` path anywhere |
+| `services/databaseManagementService.js` | `services/platform/databaseManagementService.js` | `routes/databaseManagementRoutes.js` |
+| `services/moduleSupportInfrastructureService.js` | `services/platform/moduleSupportInfrastructureService.js` | `routes/moduleSupportInfrastructureRoutes.js` |
+| `services/startupEnvironmentService.js` | `services/platform/startupEnvironmentService.js` | `routes/startupEnvironmentRoutes.js` |
+| `services/ai/enterpriseAIService.js` | `services/enterpriseAIService.js` (flat) | `routes/ai/enterpriseAIRoutes.js` requires the `ai/` subfolder path — **note this is the reverse pattern from the other 4** (subfolder live, flat dead), confirmed individually rather than assumed from the other 4's pattern |
+
+Plus one migration: `backend/src/database/migrations/repairs/repaired_3029_phase10_integrations.sql`
+was byte-identical to the live `3029_phase10_integrations.sql`. Confirmed
+`backend/src/database/migrate.js`'s `readdirSync` only reads the top-level
+`migrations/` directory (no subdirectory recursion, no `repairs/`
+special-case) — the `repairs/` copy was never executed, now fully
+redundant. Archived.
+
+**Before/after count:** 6 files removed from their live-tree locations this
+phase (all via `git rm`, not raw filesystem delete — full bytes preserved
+under `_archive/duplicates/2026-09-19/` at their original relative paths,
+so nothing is destroyed, only relocated). Total tracked-file count in the
+repo is unchanged (the archive copies are still tracked), which is
+expected and intentional under the archive-not-delete policy — the
+reduction is in *live, potentially-confusing duplicate paths under
+`backend/src/`*, not in total git objects.
+
+### Wiring re-verification
+
+- `node --check` passed on all 5 surviving service files after the
+  collapse.
+- Re-grepped the entire tree for any remaining reference to each of the 6
+  archived paths before removing them. All hits were in
+  `docs/`/`.archive/`/`.audit` CSV/JSON report files (data listing
+  filenames, not live `require()` calls) — confirmed, not assumed.
+- Re-ran `tools/check-route-mounts.js` after the collapse: identical output
+  to the pre-collapse run (same pre-existing `Cannot find module 'express'`
+  condition on every static `index.js` require, since `backend/node_modules`
+  still isn't installed) — confirms this phase introduced no new mount
+  regressions detectable by this tool, though the tool's own limitation
+  (missing `node_modules`) still blocks a real end-to-end check.
+- None of the 5 resolved groups were a "both copies live" case (which would
+  have required the union-merge + repoint-every-caller treatment instead of
+  a simple archive) — every one had exactly one real caller.
+
+### Duplicates archived (Phase 3 additions)
+
+All under `_archive/duplicates/2026-09-19/`:
+- `backend/src/services/platform/serverManagementService.js`
+- `backend/src/services/platform/databaseManagementService.js`
+- `backend/src/services/platform/moduleSupportInfrastructureService.js`
+- `backend/src/services/platform/startupEnvironmentService.js`
+- `backend/src/services/enterpriseAIService.js`
+- `backend/src/database/migrations/repairs/repaired_3029_phase10_integrations.sql`
+
+### Honest remaining backlog (Phase 3)
+
+- **Filename-candidate groups (same name, different content) — not started.**
+  This is the larger, higher-risk category from the original inventory and
+  the one most likely to contain real "two people fixed the same bug
+  differently" cases worth union-merging. This pass only covered
+  exact-content matches.
+- **Scope was `backend/`+`frontend/` only.** `.ai/`, `docs/`, `.archive/`,
+  `_EBDESIGN_LIBRARY/`, and root-level docs were excluded from the blob-hash
+  scan entirely — there is very likely duplicate documentation content
+  there too, not assessed this pass (and lower priority than code).
+- **11 groups reviewed is a small sample.** The task's own guidance
+  ("tens to low-hundreds of files per pass, not thousands") was followed
+  deliberately — this is one short pass, not a claim of having found "all"
+  duplication in the tree, only what a blob-SHA-exact-match scan of
+  `backend/`+`frontend/` surfaces. A byte-for-byte scan cannot find
+  near-duplicates (same purpose, slightly different content) at all; those
+  require the filename-candidate-group approach above.
+
+---
+
 ## What's left for a follow-up pass
 
 1. File-by-file diff of `origin/claude/keen-gates-663i5d`'s ~150-file route
@@ -592,3 +729,12 @@ All under `_archive/duplicates/2026-09-19/`:
 6. Systematic same-path duplicate-content scan across the full tree (this
    pass's methodology step 2), not just the collisions this pass happened
    to stumble into while tracing net-new files.
+7. Phase 3's filename-candidate-group scan (same name, different content)
+   across `backend/`+`frontend/` — not started; likely the highest-value
+   remaining duplicate-collapse work.
+8. Phase 3's blob-hash scan restricted to `backend/`+`frontend/` only;
+   `.ai/`, `docs/`, `_EBDESIGN_LIBRARY/` and root-level docs not scanned
+   for duplicate content.
+9. `backup/pre-integration-checkpoint`'s 31 subfolder-reorganized backend
+   services (batch 2) still need the same file-by-file reconciliation as
+   item 1 above before a merge/no-merge decision.

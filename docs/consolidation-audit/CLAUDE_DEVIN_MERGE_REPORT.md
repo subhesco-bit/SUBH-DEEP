@@ -961,6 +961,88 @@ per file — worth keeping in mind for whoever picks up the remaining
 
 ---
 
+---
+
+## Phase 3b, continued — filename-candidate groups, batch 5 (Lane A)
+
+### Groups reviewed: 6 more (freightPoolingService, gstService, rfqService, revenueService, marketAccessService, insuranceClaimsService)
+
+- **`freightPoolingService.js`** (3 copies) — the flat copy broke the
+  established "flat = shim" pattern seen in every prior group: it's a real
+  but far more primitive implementation using a Knex-style `db()` query
+  builder (only 2 methods). Read all 3 in full. The live `legacy/` copy
+  (confirmed via `routes/freightPoolingRoutes.js`, mounted) has a **real
+  safety feature `logistics/` lacks**: joining a pool window is wrapped in
+  `withTransaction` with `SELECT ... FOR UPDATE` row locks plus a
+  double-pooling guard; `logistics/` does the same read-then-write with
+  plain queries and no locks — a real race condition (concurrent joins
+  could jointly overshoot vehicle capacity, or the same shipment could be
+  pooled twice). Zero callers of either dead copy. Both archived.
+- **`marketAccessService.js`** — `commerce/` copy was another "minimal
+  in-memory scaffold" (same dead-stub template as `villageProfileService.js`
+  from an earlier batch). The live `legacy/` copy's liveness was confirmed
+  via a **second orphaned-services mount mechanism** found this batch:
+  `backend/src/index.js` itself contains a `moreOrphanedServices` array
+  (around line 1554) that loops `svc.setupRoutes(app)` for each entry —
+  distinct from `routes/ORPHANED_SERVICES_MOUNT.js` found earlier. Worth
+  checking both mechanisms for any remaining group claiming to be an
+  "orphaned service." Zero callers of `commerce/`. Archived.
+- **`rfqService.js`**, **`revenueService.js`** — `commerce/`/`finance/`
+  copies vs their live `legacy/` counterparts (confirmed via
+  `routes/rfqRoutes.js`+`routes/rfqDomainRoutes.js` and
+  `routes/revenueRoutes.js` respectively): diffed in full, functionally
+  identical (formatting/quote-style only — one apparent line-count gap in
+  `rfqService.js`'s QC-hold-release function turned out to be pure
+  operator-placement style, not a real difference). Zero callers of either
+  dead copy. Archived.
+- **`insuranceClaimsService.js`** — flat **and** `finance/` copies (both
+  real, non-shim, 586/615 lines) vs the live `legacy/` copy (607 lines,
+  confirmed via `routes/ORPHANED_SERVICES_MOUNT.js`): `legacy/` has an
+  extra `signalBus` import the other two lack, confirming it's the
+  superset. Specifically re-checked all three `aiAPI` import paths for the
+  same bug class just found in `subsidyService.js` — all three resolve
+  correctly here. Zero callers of either dead copy. Both archived.
+
+**Not a duplicate, already clean — noted, not re-flagged:**
+`gstService.js` (3 copies): `legacy/gstService.js` is itself an
+intentional 5-line shim to `finance/gstService.js` — the reverse of this
+codebase's usual "legacy is canonical" pattern, confirmed intentional and
+tested (`backend/src/tests/unit/gstService.test.js` explicitly asserts the
+shim identity). No action needed.
+
+### Before/after count
+
+`backend/src/services/` + `backend/src/platform/` `.js` file count:
+**677 → 670** this batch (7 files archived). Running total since Phase 3b
+began: **691 → 670** (21 files archived across 5 batches).
+
+### Wiring re-verification
+
+`node --check` on all 4 surviving `legacy/` files this batch (clean).
+`tools/check-route-mounts.js` and `tools/check-middleware-arity.js`
+re-run — same pre-existing missing-`express` result, 0 factories
+registered uncalled, no regression.
+
+### Duplicates archived (batch 5)
+
+All under `_archive/duplicates/2026-09-19/`:
+- `backend/src/services/freightPoolingService.js`
+- `backend/src/services/logistics/freightPoolingService.js`
+- `backend/src/services/commerce/marketAccessService.js`
+- `backend/src/services/commerce/rfqService.js`
+- `backend/src/services/finance/revenueService.js`
+- `backend/src/services/insuranceClaimsService.js`
+- `backend/src/services/finance/insuranceClaimsService.js`
+
+### Honest remaining backlog (Lane A)
+
+Roughly 140+ `count=3` groups remain unreviewed within Lane A's
+`backend/src/services/**` + `backend/src/platform/**` scope alone (the
+original 521-group count spans the whole repo and is now split across the
+3 parallel lanes). Continuing in the same small, fully-verified batches.
+
+---
+
 ## What's left for a follow-up pass
 
 1. File-by-file diff of `origin/claude/keen-gates-663i5d`'s ~150-file route

@@ -11,7 +11,7 @@
 
 const express = require('express');
 const router = express.Router();
-const service = require('../../services/claude/aiCopilotService.js');
+const service = require('../../services/claude/aiCopilotEnhancementService.js');
 const originalService = require('../../services/legacy/aiCopilotService.js');
 const { authMiddleware } = require('../../middleware/auth.js');
 

@@ -134,7 +134,7 @@ class FileConnectivityAudit {
       // Check if file imports/requires Claude core systems
       const claudeRequires = [
         'core/index',
-        'core/errorHandler',
+        'core/errorClasses',
         'core/cache',
         'core/validation',
         'core/monitoring',

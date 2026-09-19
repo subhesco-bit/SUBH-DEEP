@@ -1,9 +1,23 @@
 /**
- * WhatsApp Integration Service
+ * WhatsApp Conversational Bot Service (canonical name kept as
+ * whatsappService.js - see note below).
  *
  * Real outbound messaging + real inbound webhook handling over Twilio's
  * WhatsApp channel. This did not exist anywhere in the codebase before this
  * change (grepped `whatsapp` across backend/src — no hits).
+ *
+ * NAMING NOTE (2026-09-19, duplicate-collapse pass, see
+ * docs/consolidation-audit/CLAUDE_DEVIN_MERGE_REPORT.md Phase 3b): this
+ * file shared the filename whatsappService.js with a genuinely different
+ * feature, backend/src/services/platform/whatsappOutboundMessagingService.js
+ * (a template-based outbound messenger, no conversational/intent-routing
+ * logic). That file was renamed to disambiguate since it had zero live
+ * callers; this file kept its historical name because
+ * backend/src/services/whatsappService.js (a compatibility shim) and
+ * backend/src/modules/M639100_WHATSAPP/backend/service.js both reference
+ * it by this exact path already - renaming this one would have required
+ * updating those real callers for no added clarity benefit. Functionally,
+ * think of this file as "whatsappConversationalBotService".
  *
  * HONESTY PATTERN THIS FILE MATCHES
  *

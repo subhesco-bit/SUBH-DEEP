@@ -1,5 +1,18 @@
 /**
- * WhatsApp Service — outbound template/text sends + inbound webhook.
+ * WhatsApp Outbound Messaging Service — outbound template/text sends +
+ * inbound delivery-log webhook.
+ *
+ * Renamed 2026-09-19 (duplicate-collapse pass, see
+ * docs/consolidation-audit/CLAUDE_DEVIN_MERGE_REPORT.md Phase 3b) from
+ * whatsappService.js. It shared that filename with
+ * backend/src/services/legacy/whatsappService.js, a genuinely different,
+ * unrelated feature (a conversational inbound-intent-routing chatbot -
+ * see WhatsappConversationalBotService note there). Renamed this one
+ * rather than that one because this file has zero live callers and
+ * renaming it alone fully removes the filename collision with no require()
+ * updates needed anywhere (verified); the legacy/ file is the canonical,
+ * widely-referenced one (a compatibility shim and a module both point at
+ * it by that name), so leaving its name alone was the lower-risk choice.
  *
  * Strategy Card
  * Purpose:  Give the platform a real WhatsApp send/receive interface with

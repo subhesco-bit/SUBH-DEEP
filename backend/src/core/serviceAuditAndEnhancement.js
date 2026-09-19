@@ -142,7 +142,7 @@ class ServiceAuditEngine {
 
 const EnhancedServiceFramework = require('../core/enhancedServiceFramework');
 const { Validator } = require('../core/validation');
-const { ValidationError, NotFoundError } = require('../core/errorHandler');
+const { ValidationError, NotFoundError } = require('../core/errorClasses');
 
 class ${this.toPascalCase(serviceName)} extends EnhancedServiceFramework {
   constructor(db) {

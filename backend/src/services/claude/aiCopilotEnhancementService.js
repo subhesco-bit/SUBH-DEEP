@@ -22,6 +22,18 @@
  * - Original copilot generation logic maintained
  * - Original API endpoints preserved
  * - Original database operations preserved
+ *
+ * Renamed from aiCopilotService.js to aiCopilotEnhancementService.js on
+ * 2026-09-19 (duplicate-collapse pass, see
+ * docs/consolidation-audit/CLAUDE_DEVIN_MERGE_REPORT.md Phase 3b). It
+ * shared that basename with backend/src/services/legacy/aiCopilotService.js,
+ * which this file requires and wraps (see `originalAICopilotService`
+ * below) rather than duplicating - the two are related by design, not a
+ * coincidental collision, but sharing an exact filename across two live,
+ * simultaneously-required files in the same require graph
+ * (routes/claude/aiCopilotRoutes.js requires both) was still worth
+ * disambiguating on disk, not just at the require-site's local variable
+ * names.
  */
 
 const { logger } = require('../../utils/logger');

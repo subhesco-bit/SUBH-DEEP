@@ -1,6 +1,6 @@
 // Production-Hardened Service Template - World Class Quality
 const ProductionService = require('../core/productionService');
-const { ValidationError, NotFoundError } = require('../core/errorHandler');
+const { ValidationError, NotFoundError } = require('../core/errorClasses');
 const { Validator } = require('../core/validation');
 
 class ProductionExampleService extends ProductionService {

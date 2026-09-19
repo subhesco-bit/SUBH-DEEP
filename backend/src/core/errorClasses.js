@@ -1,4 +1,14 @@
-// Enterprise Error Handler - Production Grade
+// Enterprise Error Classes - Production Grade
+//
+// Renamed from errorHandler.js 2026-09-19 (duplicate-collapse pass, see
+// docs/consolidation-audit/CLAUDE_DEVIN_MERGE_REPORT.md Phase 3b). It
+// shared that filename with backend/src/middleware/errorHandler.js (the
+// actual globally-mounted Express error middleware - kept its idiomatic
+// name) and backend/src/platform/middleware/errorHandlerStub.js (a dead
+// stub). Both real callers of this file only ever destructure its error
+// CLASSES (ValidationError, NotFoundError, etc.) - nobody consumes the
+// `errorHandler` middleware function this file also exports - so
+// "errorClasses" better reflects what this file is actually used for.
 const logger = require('../utils/logger');
 
 class AppError extends Error {

@@ -815,6 +815,56 @@ All under `_archive/duplicates/2026-09-19/`:
 
 ---
 
+---
+
+## Phase 3b, continued — filename-candidate groups, batch 2
+
+Same standard as batch 1: full read of every file before classification,
+every collapse traced by exact require path (not filename), archive before
+overwrite, ambiguous cases left untouched and flagged.
+
+### Groups reviewed: 4 (the 2 pairs flagged from the previous batch, plus 2 more from the same "count=3" tier)
+
+**`nutritionIntelligenceService.js`** (3 backend files —
+`services/{,legacy/,food/}nutritionIntelligenceService.js`):
+- flat: already an intentional shim to `legacy/` (same 2026-09-08 remediation-pass pattern as `farmerService.js`/`aiCopilotService.js` in the previous batch). No action.
+- `food/nutritionIntelligenceService.js` (724 lines) vs the live `legacy/nutritionIntelligenceService.js` (1212 lines, confirmed live via `routes/nutritionIntelligenceRoutes.js`, mounted at 3 paths in `index.js`): read both in full. `legacy/` exports every function `food/` exports plus 5 more (`calculateNutrientTotals`, `calculateValuePerNutrient`, `getDietaryProfileById`, `getPersonalizedProductRecommendations`, `generateDietBasedRecipe`). `food/` is an older generation with its own embedded router and test-mode stubs. Traced every require of the exact `food/` path and every relative require from within `services/food/` itself — zero callers anywhere. **Archived.**
+
+**`wikipediaService.js`** (3 backend files — `services/{,legacy/,platform/}wikipediaService.js`):
+- flat: already a shim. No action.
+- `platform/wikipediaService.js` vs the live `legacy/wikipediaService.js` (required by `routes/wikipediaRoutes.js`, mounted at `/api/wikipedia`): read both in full — **functionally byte-identical** (only a trailing blank line and one comment-wording difference). Zero callers of `platform/` anywhere. **Archived.**
+
+**`weatherService.js`** (3 backend files — `services/{,legacy/,agriculture/}weatherService.js`) — **the first "both copies simultaneously live" case found this pass:**
+- flat: already a shim. No action.
+- `agriculture/weatherService.js` (251 lines, real climate/forecast/dispatch-block/pest-forecast module for domain M081-M090) vs `legacy/weatherService.js` (460 lines, confirmed live via `routes/weatherRoutes.js` + `routes/weatherDomainRoutes.js`, both mounted): read both in full. Initial grep for callers of the exact `agriculture/` path found a real hit: `services/legacy/riskPricingService.js` (itself confirmed live via the mounted `routes/riskPricingRoutes.js`) does `require('../agriculture/weatherService')` inside `resolveWeather()` to get `weatherForArp()`. **Both files were simultaneously live** — the multi-caller case the task explicitly calls out, not a simple dead-copy archive. Diffed `weatherForArp()` between both files in full: functionally identical (only trailing-comma/quote-style/operator-placement formatting differs). Repointed `riskPricingService.js`'s require to `./weatherService` (its own `services/legacy/` sibling, verified to hold the identical function) **before** archiving, updated a stale comment that still named the old path, verified with `node --check`, then archived `agriculture/weatherService.js`.
+
+**`whatsappService.js`** (3 backend files — `services/{,legacy/,platform/}whatsappService.js`) — **left alone, genuinely different purpose:**
+- flat: already a shim. No action.
+- `platform/whatsappService.js` vs `legacy/whatsappService.js`: read both in full. `platform/` is a template-based **outbound** messaging service (`sendTemplateMessage`, `createOrUpdateTemplate`, `listTemplates`, `getMessageHistory`, Twilio template variables, order-confirmation/price-alert/OTP templates) with simple inbound-logging. `legacy/` is a **conversational inbound-intent-routing chatbot** (`classifyIntent`, `handleSubsidyQuery`, `handleShipmentQuery`, `handleFarmerQuery`, `routeInboundMessage`, `lookupFarmerByPhone`). Zero exported-function-name overlap beyond `isHealthy()`. Genuinely different features sharing a channel and filename, not a duplicate. `platform/` has zero live callers (checked for completeness) but was **left alone rather than archived** — since it isn't a duplicate, removing it would be a dead-code decision, not a duplicate-collapse one, and is out of this pass's scope (already covered by the general orphaned-service backlog from `scripts/find-orphan-services.js`, batch 1).
+
+### Before/after count
+
+`backend/src/services/` + `backend/src/platform/` `.js` file count: **685 → 682** this batch (3 files archived). Combined with the previous Phase 3b batch: **691 → 682** total so far.
+
+### Wiring re-verification
+
+- `node --check` on every surviving/edited file (`legacy/nutritionIntelligenceService.js`, `legacy/wikipediaService.js`, `legacy/weatherService.js`, `legacy/riskPricingService.js`) — all clean.
+- Re-ran `tools/check-route-mounts.js` (same pre-existing missing-`express` result, unaffected) and `tools/check-middleware-arity.js` (0 factories registered uncalled, 7/7 bare registrations traced to a module) — clean, confirms this batch didn't disturb middleware wiring.
+- The `weatherService.js` repoint is this pass's first actual "repoint a caller before archiving" case (previous archives were all zero-caller dead copies) — handled per the task's step 3: verify the survivor has the identical function, repoint, verify, archive, in that order.
+
+### Duplicates archived (this batch)
+
+All under `_archive/duplicates/2026-09-19/`:
+- `backend/src/services/food/nutritionIntelligenceService.js`
+- `backend/src/services/platform/wikipediaService.js`
+- `backend/src/services/agriculture/weatherService.js`
+
+### Honest remaining backlog
+
+**512 of 521 named filename-candidate groups still not reviewed** (521 total − 5 from the first Phase 3b batch − 4 from this batch). Continuing in the same small-batch style per instruction — no rush, no batching beyond what's fully verified.
+
+---
+
 ## What's left for a follow-up pass
 
 1. File-by-file diff of `origin/claude/keen-gates-663i5d`'s ~150-file route

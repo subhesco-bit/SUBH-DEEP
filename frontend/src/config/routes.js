@@ -199,6 +199,7 @@ const MarketingCenter = lazy(() => import('../pages/MarketingCenter'));
 const NutrientValueMarketplace = lazy(() => import('../pages/NutrientValueMarketplace'));
 const AIProductStudioPage = lazy(() => import('../pages/AIProductStudioPage'));
 const PublicDataExtractorPage = lazy(() => import('../pages/PublicDataExtractorPage'));
+const NutritionCommerceWorkbenchPage = lazy(() => import('../pages/NutritionCommerceWorkbenchPage'));
 
 // Additional management pages
 const FarmerProfilePage = lazy(() => import('../pages/FarmerProfilePage'));
@@ -2052,6 +2053,14 @@ export const managementRoutes = [
     title: 'AI Product Studio - AFRERA',
     description: 'Image generation, cartoon storytelling, nutrient diagnosis, and natural therapist guidance for product marketing and wellness',
     keywords: 'ai, product image, cartoon generator, nutrient diagnosis, wellness, therapist',
+    transition: 'fade',
+  },
+  {
+    path: '/nutrition-commerce-workbench',
+    component: NutritionCommerceWorkbenchPage,
+    title: 'Nutrition Commerce Workbench - AFRERA',
+    description: 'Per-unit product value, household basket, and market offer normalization using nutrition commerce intelligence',
+    keywords: 'nutrition, commerce, product value, basket, market offer',
     transition: 'fade',
   },
   {

@@ -432,3 +432,5 @@ export { default as WhatGrowPage } from './WhatGrowPage';
 export * from './WhatGrowPage';
 export { default as YieldManagementPage } from './YieldManagementPage';
 export * from './YieldManagementPage';
+export { default as NutritionCommerceWorkbenchPage } from './NutritionCommerceWorkbenchPage';
+export * from './NutritionCommerceWorkbenchPage';

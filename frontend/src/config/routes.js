@@ -103,16 +103,16 @@ const FarmerHouseholdDoorPage = lazy(() => import('../pages/FarmerHouseholdDoorP
 const PlatformDashboard = lazy(() => import('../components/Platform/PlatformDashboard'));
 
 // M026: MFA (Multi-Factor Authentication)
-const MFASetup = lazy(() => import('../components/MFA/MFASetup'));
 const MFAVerify = lazy(() => import('../components/MFA/MFAVerify'));
+const MFASetup = lazy(() => import('../pages/MFASetupPage'));
 
 // M027: GDPR (Privacy & Compliance)
 const GDPRDashboard = lazy(() => import('../components/GDPR/GDPRDashboard'));
 
 // M201-M203: AI & Collaboration
 const AIChat = lazy(() => import('../components/AI/AIChat'));
-const AICollaborationDashboard = lazy(() => import('../components/AI/AICollaborationDashboard'));
-const LibraryBrowser = lazy(() => import('../components/Library/LibraryBrowser'));
+const AICollaborationDashboard = lazy(() => import('../pages/AICollaborationPage'));
+const LibraryBrowser = lazy(() => import('../pages/LibraryBrowserPage'));
 const FarmerFieldDoorPage = lazy(() => import('../pages/FarmerFieldDoorPage'));
 const FarmerSharedDoorPage = lazy(() => import('../pages/FarmerSharedDoorPage'));
 const ForwardPricingPage = lazy(() => import('../pages/ForwardPricingPage'));
@@ -161,11 +161,7 @@ const HorticultureManagementPage = lazy(() => import('../pages/HorticultureManag
 const FisheriesManagementPage = lazy(() => import('../pages/FisheriesManagementPage'));
 const IdentityManagementPage = lazy(() => import('../pages/IdentityManagementPage'));
 const PlatformFoundationPage = lazy(() => import('../pages/PlatformFoundationPage'));
-const MFASetupPage = lazy(() => import('../pages/MFASetupPage'));
-const GDPRConsentPage = lazy(() => import('../pages/GDPRConsentPage'));
-const LibraryBrowserPage = lazy(() => import('../pages/LibraryBrowserPage'));
-const AIChatPage = lazy(() => import('../pages/AIChatPage'));
-const AICollaborationPage = lazy(() => import('../pages/AICollaborationPage'));
+// Duplicate definitions removed - use MFASetup, GDPRConsentPage, LibraryBrowser, AIChat, AICollaborationDashboard instead
 const FPORegistrationPage = lazy(() => import('../pages/FPORegistrationPage'));
 const CattleRegistryPage = lazy(() => import('../pages/CattleRegistryPage'));
 const ImplementManagementPage = lazy(() => import('../pages/ImplementManagementPage'));
@@ -245,11 +241,8 @@ const LogisticsEnhancementPage = lazy(() => import('../pages/LogisticsEnhancemen
 const EnterpriseAIPage = lazy(() => import('../pages/EnterpriseAIPage'));
 const PlatformManagementPage = lazy(() => import('../pages/PlatformManagementPage'));
 const PlatformCoreDashboard = lazy(() => import('../components/PlatformCoreDashboard'));
-const AICollaborationDashboard = lazy(() => import('../components/AI/AICollaborationDashboard'));
 const AutoGenerationDashboard = lazy(() => import('../components/Admin/AutoGenerationDashboard'));
 const GDPRConsent = lazy(() => import('../components/GDPR/GDPRConsent'));
-const MFASetup = lazy(() => import('../components/MFA/MFASetup'));
-const LibraryBrowser = lazy(() => import('../components/Library/LibraryBrowser'));
 const TraceabilityViewer = lazy(() => import('../components/BlockchainTraceability/TraceabilityViewer'));
 const HealthDashboard = lazy(() => import('../components/ConsumerHealth/HealthDashboard'));
 const ChatInterface = lazy(() => import('../components/ConversationalAI/ChatInterface'));
@@ -1263,15 +1256,7 @@ export const farmerRoutes = [
     keywords: 'platform, dashboard, administration',
     transition: 'fade',
   },
-  // M026: MFA Setup
-  {
-    path: '/security/mfa/setup',
-    component: MFASetup,
-    title: 'Setup Two-Factor Authentication - AFRERA',
-    description: 'Enable two-factor authentication for your account',
-    keywords: 'security, mfa, 2fa, authentication',
-    transition: 'fade',
-  },
+  // M026: MFA Setup (duplicates removed)
   // M026: MFA Verify
   {
     path: '/security/mfa/verify',
@@ -1299,24 +1284,9 @@ export const farmerRoutes = [
     keywords: 'ai, chat, assistant, guidance',
     transition: 'fade',
   },
-  // M203: AI Collaboration
-  {
-    path: '/ai/collaboration',
-    component: AICollaborationDashboard,
-    title: 'AI Collaboration Dashboard - AFRERA',
-    description: 'Track AI-Devin collaboration and decisions',
-    keywords: 'ai, collaboration, dashboard, decisions',
-    transition: 'fade',
-  },
-  // M202: Library Browser
-  {
-    path: '/library',
-    component: LibraryBrowser,
-    title: 'Module Library - AFRERA',
-    description: 'Browse and search the module library',
-    keywords: 'library, modules, search, knowledge base',
-    transition: 'fade',
-  },
+  // M203: AI Collaboration (duplicates removed)
+  // M202: Library Browser (see public routes for /library path)
+  // Duplicate removed - defined in public routes only
 ];
 
 /**

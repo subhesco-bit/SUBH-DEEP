@@ -14,6 +14,36 @@
 **7. Inspect source before changing it** - Never modify blindly
 **8. Inspect Git history for major changes** - Understand evolution
 
+## TOKEN OPTIMIZATION PROTOCOL (DEFAULT FOR ALL AGENTS)
+
+All agents (Claude, Devin, ChatGPT) default to the token-optimized workflow
+documented in `.ai/workflows/` instead of doing coding, audits, testing, or
+enhancement discovery the naive/manual way. This is standing project policy,
+not a one-off session preference.
+
+**Read before starting non-trivial work:**
+- `.ai/workflows/COMPLETE_TOKEN_OPTIMIZATION_SYSTEM.md` — master reference (3 layers)
+- `.ai/workflows/UNIVERSAL_TOKEN_OPTIMIZATION.md` — coding/patterns/generators
+- `.ai/workflows/PLUGIN_TOKEN_OPTIMIZATION.md` — zero-token audits/E2E via `.ai/plugins/`
+- `.ai/workflows/ENHANCEMENT_DISCOVERY_TOKEN_OPTIMIZATION.md` — gap analysis, missing-concept
+  detection, and feature/enhancement proposals (work beyond coding)
+
+**On Windows/PowerShell sessions**, use the PowerShell entry points instead of
+invoking node directly:
+```powershell
+Import-Module .ai/plugins/ps/TokenOptimization.psm1 -Force
+Invoke-AuditChain            # zero-token dependency + vulnerability audit
+Invoke-BrowserTestBatch -TestCasesFile <path>   # zero-token E2E batch
+Get-LatestPluginResult -Prefix dep-audit        # read cache instead of re-running
+```
+One-time setup: `pwsh .ai/plugins/ps/Install-PluginHooks.ps1`
+
+**Rule of thumb:** prefer cached results (`.ai/plugins/results/`,
+`.ai/decisions/MEMOIZED.json`) over re-deriving analysis; prefer plugins over
+manual token-heavy reasoning for audits/testing; prefer patterns/generators
+over hand-writing repetitive code; apply the same discipline to enhancement
+and missing-feature discovery, not just coding.
+
 ## CRITICAL RULES
 
 ### DO NOT REBUILD EXISTING DEVIN WORK

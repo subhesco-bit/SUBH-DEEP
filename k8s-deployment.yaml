@@ -1,0 +1,502 @@
+---
+# EBDESIGN Platform - Kubernetes Production Deployment
+# Deploy with: kubectl apply -f k8s-deployment.yaml
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ebdesign
+  labels:
+    name: ebdesign
+
+---
+# ConfigMap: Application Configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ebdesign-config
+  namespace: ebdesign
+data:
+  NODE_ENV: "production"
+  LOG_LEVEL: "info"
+  POSTGRES_DB: "ebdesign"
+  POSTGRES_USER: "ebdesign_user"
+  POSTGRES_PORT: "5432"
+  REDIS_PORT: "6379"
+  PORT: "3001"
+
+---
+# Secret: Sensitive Data (create with: kubectl create secret generic ebdesign-secrets ...)
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ebdesign-secrets
+  namespace: ebdesign
+type: Opaque
+stringData:
+  DATABASE_URL: "postgresql://ebdesign_user:PASSWORD@postgres:5432/ebdesign"
+  REDIS_URL: "redis://redis:6379"
+  JWT_SECRET: "CHANGE_THIS_TO_A_RANDOM_32_CHAR_STRING"
+  STRIPE_SECRET_KEY: "sk_live_YOUR_KEY"
+  ANTHROPIC_API_KEY: "sk-ant-YOUR_KEY"
+  AWS_SECRET_ACCESS_KEY: "YOUR_AWS_SECRET"
+
+---
+# PersistentVolume: PostgreSQL Data
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-pv
+  namespace: ebdesign
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  hostPath:
+    path: "/data/postgres"
+
+---
+# PersistentVolumeClaim: PostgreSQL
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+  namespace: ebdesign
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 50Gi
+
+---
+# PersistentVolumeClaim: Redis
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-pvc
+  namespace: ebdesign
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+# Service: PostgreSQL
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: ebdesign
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  clusterIP: None
+
+---
+# Deployment: PostgreSQL
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: ebdesign
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15-alpine
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: ebdesign-config
+              key: POSTGRES_DB
+        - name: POSTGRES_USER
+          valueFrom:
+            configMapKeyRef:
+              name: ebdesign-config
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ebdesign-secrets
+              key: DATABASE_URL
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+          subPath: postgres
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - pg_isready -U $POSTGRES_USER
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - pg_isready -U $POSTGRES_USER
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: postgres-pvc
+
+---
+# Service: Redis
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: ebdesign
+spec:
+  selector:
+    app: redis
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
+  clusterIP: None
+
+---
+# Deployment: Redis
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: ebdesign
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        command:
+          - redis-server
+          - "--appendonly"
+          - "yes"
+        ports:
+        - containerPort: 6379
+        volumeMounts:
+        - name: redis-storage
+          mountPath: /data
+        livenessProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+      volumes:
+      - name: redis-storage
+        persistentVolumeClaim:
+          claimName: redis-pvc
+
+---
+# Service: Backend API
+apiVersion: v1
+kind: Service
+metadata:
+  name: ebdesign-api
+  namespace: ebdesign
+  labels:
+    app: ebdesign-app
+spec:
+  type: ClusterIP
+  selector:
+    app: ebdesign-app
+  ports:
+    - protocol: TCP
+      port: 3001
+      targetPort: 3001
+      name: http
+
+---
+# Deployment: EBDESIGN Application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ebdesign-app
+  namespace: ebdesign
+  labels:
+    app: ebdesign-app
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: ebdesign-app
+  template:
+    metadata:
+      labels:
+        app: ebdesign-app
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - ebdesign-app
+              topologyKey: kubernetes.io/hostname
+      
+      containers:
+      - name: app
+        image: ebdesign-app:latest
+        imagePullPolicy: IfNotPresent
+        
+        env:
+        - name: NODE_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: ebdesign-config
+              key: NODE_ENV
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: ebdesign-config
+              key: PORT
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: ebdesign-secrets
+              key: DATABASE_URL
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: ebdesign-secrets
+              key: REDIS_URL
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: ebdesign-secrets
+              key: JWT_SECRET
+        - name: STRIPE_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ebdesign-secrets
+              key: STRIPE_SECRET_KEY
+        - name: ANTHROPIC_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ebdesign-secrets
+              key: ANTHROPIC_API_KEY
+        
+        ports:
+        - name: http
+          containerPort: 3001
+          protocol: TCP
+        
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: http
+          initialDelaySeconds: 40
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: http
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1001
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          capabilities:
+            drop:
+            - ALL
+
+---
+# Service: Nginx Ingress
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: ebdesign
+  labels:
+    app: nginx
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      name: http
+    - protocol: TCP
+      port: 443
+      targetPort: 443
+      name: https
+
+---
+# Deployment: Nginx Reverse Proxy
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: ebdesign
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        imagePullPolicy: IfNotPresent
+        
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        - containerPort: 443
+          protocol: TCP
+        
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+          readOnly: true
+        - name: certs
+          mountPath: /etc/nginx/certs
+          readOnly: true
+        
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+      
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-config
+      - name: certs
+        secret:
+          secretName: tls-certs
+
+---
+# HorizontalPodAutoscaler: Auto-scale app
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: ebdesign-hpa
+  namespace: ebdesign
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: ebdesign-app
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80

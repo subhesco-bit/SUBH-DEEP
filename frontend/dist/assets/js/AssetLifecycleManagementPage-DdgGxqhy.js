@@ -1,0 +1,1 @@
+import{N as e,nc as t}from"./components-CxwyDabQ.js";var s=t();function n(){return(0,s.jsx)(e,{moduleId:"M110",title:"Asset Lifecycle Management",description:"Asset lifecycle tracking, depreciation, and disposal."})}export{n as default};

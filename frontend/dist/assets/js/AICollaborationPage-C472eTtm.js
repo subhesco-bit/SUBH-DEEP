@@ -1,0 +1,1 @@
+import{Y as a,nc as s}from"./components-CxwyDabQ.js";var n=s();function m(){return(0,n.jsx)("main",{className:"mx-auto max-w-5xl px-4 py-8",children:(0,n.jsx)(a,{})})}export{m as default};

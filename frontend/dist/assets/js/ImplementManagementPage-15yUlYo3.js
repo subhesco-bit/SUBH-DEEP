@@ -1,0 +1,1 @@
+import{N as n,nc as e}from"./components-CxwyDabQ.js";var t=e();function a(){return(0,t.jsx)(n,{moduleId:"M102",title:"Implement Management",description:"Agricultural implement inventory and maintenance."})}export{a as default};

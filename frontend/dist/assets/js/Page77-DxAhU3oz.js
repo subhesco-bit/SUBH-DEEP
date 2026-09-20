@@ -1,0 +1,1 @@
+import{i as r}from"./rolldown-runtime-hjZ9CfxI.js";import{u as o}from"./charts-vendor-BIr7NwVg.js";import{nc as s}from"./components-CxwyDabQ.js";o();var a=s();function t(){return(0,a.jsx)("div",{className:"page"})}export{t as default};

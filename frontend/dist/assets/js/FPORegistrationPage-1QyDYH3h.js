@@ -1,0 +1,1 @@
+import{N as r,nc as t}from"./components-CxwyDabQ.js";var n=t();function a(){return(0,n.jsx)(r,{moduleId:"M051",title:"FPO Registration",description:"Farmer Producer Organization registration and management."})}export{a as default};

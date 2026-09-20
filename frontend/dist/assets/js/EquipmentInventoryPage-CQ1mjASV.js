@@ -1,0 +1,1 @@
+import{N as n,nc as t}from"./components-CxwyDabQ.js";var i=t();function o(){return(0,i.jsx)(n,{moduleId:"M103",title:"Equipment Inventory",description:"Equipment inventory tracking and optimization."})}export{o as default};

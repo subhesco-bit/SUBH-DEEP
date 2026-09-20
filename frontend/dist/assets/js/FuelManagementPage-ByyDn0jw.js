@@ -1,0 +1,1 @@
+import{N as n,nc as t}from"./components-CxwyDabQ.js";var e=t();function o(){return(0,e.jsx)(n,{moduleId:"M108",title:"Fuel Management",description:"Fuel inventory and consumption tracking."})}export{o as default};

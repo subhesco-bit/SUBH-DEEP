@@ -1,0 +1,1 @@
+'use strict'; const r=require('express').Router(),c=require('./controller'); const {authMiddleware}=require('../../middleware/auth'); r.use(authMiddleware); r.get('/',c.list); r.get('/:id',c.get); r.post('/',c.create); r.patch('/:id',c.update); r.delete('/:id',c.remove); module.exports=r;

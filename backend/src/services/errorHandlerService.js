@@ -1,31 +1,27 @@
-// Professional Service: Dependency injection, repository pattern, error handling
-export class errorHandlerService {
-  constructor(repository) {
-    this.repository = repository;
+/**
+ * Error Handler Service Stub
+ * Placeholder for error handling functionality
+ */
+const logger = require('../utils/logger');
+
+class ErrorHandlerService {
+  constructor() {
+    this.initialized = false;
   }
 
-  async getAll(page = 1, limit = 20) {
-    const offset = (page - 1) * limit;
-    const [items, total] = await Promise.all([
-      this.repository.find({ offset, limit }),
-      this.repository.count()
-    ]);
-    return { items, total, page, limit };
+  async initialize() {
+    this.initialized = true;
+    logger.info('ErrorHandlerService initialized (stub)');
   }
 
-  async getById(id) {
-    return this.repository.findById(id);
+  async handleError(error, context = {}) {
+    logger.error('Error handled:', { error, context });
+    return { handled: true };
   }
 
-  async create(data) {
-    return this.repository.create(data);
-  }
-
-  async update(id, data) {
-    return this.repository.update(id, data);
-  }
-
-  async delete(id) {
-    return this.repository.delete(id);
+  async logError(error, context = {}) {
+    logger.error('Error logged:', { error, context });
   }
 }
+
+module.exports = new ErrorHandlerService();

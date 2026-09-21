@@ -1,1 +1,0 @@
-import{N as t,nc as e}from"./components-CxwyDabQ.js";var n=e();function a(){return(0,n.jsx)(t,{moduleId:"M104",title:"Equipment Rental",description:"Equipment rental marketplace and booking."})}export{a as default};

@@ -1,1 +1,0 @@
-import{N as e,nc as n}from"./components-CxwyDabQ.js";var r=n();function a(){return(0,r.jsx)(e,{moduleId:"M107",title:"Breakdown Maintenance",description:"Equipment breakdown and emergency repair tracking."})}export{a as default};

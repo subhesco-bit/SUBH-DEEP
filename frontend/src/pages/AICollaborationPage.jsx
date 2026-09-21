@@ -1,21 +1,9 @@
-import { memo } from 'react';
+import AICollaborationDashboard from '../components/AI/AICollaborationDashboard';
 
-// Professional Page: Semantic HTML, ARIA labels, accessibility
-const AICollaborationPage = memo(() => {
+export default function AICollaborationPage() {
   return (
-    <div role="main" className="page-container" aria-label="AICollaborationPage page">
-      <header aria-label="Page header">
-        <h1>AICollaborationPage</h1>
-      </header>
-      <main aria-label="Main content">
-        {/* Professional implementation */}
-      </main>
-      <footer aria-label="Page footer">
-        {/* Footer content */}
-      </footer>
-    </div>
+    <main className="mx-auto max-w-5xl px-4 py-8">
+      <AICollaborationDashboard />
+    </main>
   );
-});
-
-AICollaborationPage.displayName = 'AICollaborationPage';
-export default AICollaborationPage;
+}

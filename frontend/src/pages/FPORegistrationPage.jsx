@@ -1,21 +1,16 @@
-import { memo } from 'react';
+import ModuleOperationPanel from '../components/common/ModuleOperationPanel';
 
-// Professional Page: Semantic HTML, ARIA labels, accessibility
-const FPORegistrationPage = memo(() => {
+/**
+ * FPO Registration (backend/src/modules/M051). Generic operation panel -
+ * see ModuleOperationPanel.jsx for why; no bespoke form has been built for
+ * this module yet, but its real backend operations are fully callable here.
+ */
+export default function FPORegistrationPage() {
   return (
-    <div role="main" className="page-container" aria-label="FPORegistrationPage page">
-      <header aria-label="Page header">
-        <h1>FPORegistrationPage</h1>
-      </header>
-      <main aria-label="Main content">
-        {/* Professional implementation */}
-      </main>
-      <footer aria-label="Page footer">
-        {/* Footer content */}
-      </footer>
-    </div>
+    <ModuleOperationPanel
+      moduleId="M051"
+      title="FPO Registration"
+      description="Farmer Producer Organization registration and management."
+    />
   );
-});
-
-FPORegistrationPage.displayName = 'FPORegistrationPage';
-export default FPORegistrationPage;
+}

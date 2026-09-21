@@ -1,62 +1,47 @@
-// Professional Controller: REST best practices, error handling, validation
-export class cropValueResearchController {
-  constructor(repository) {
-    this.repository = repository;
-  }
+const cropValueResearchService = require('../services/legacy/cropValueResearchService');
+const { logger } = require('../utils/logger');
 
-  async getAll(req, res) {
+const cropValueResearchController = {
+  getProviderStatus: async (req, res) => {
     try {
-      const { page = 1, limit = 20 } = req.query;
-      const offset = (page - 1) * limit;
-      const [items, total] = await Promise.all([
-        this.repository.find({ offset, limit }),
-        this.repository.count()
-      ]);
-      res.json({
-        success: true,
-        data: items,
-        meta: { total, page, limit, pages: Math.ceil(total / limit) }
-      });
-    } catch (err) {
-      res.status(500).json({ success: false, error: err.message });
+      res.json({ success: true, data: cropValueResearchService.listSearchProviders() });
+    } catch (error) {
+      res.status(500).json({ success: false, error: error.message });
     }
-  }
+  },
 
-  async getById(req, res) {
+  research: async (req, res) => {
     try {
-      const item = await this.repository.findById(req.params.id);
-      if (!item) return res.status(404).json({ success: false, error: 'Not found' });
-      res.json({ success: true, data: item });
-    } catch (err) {
-      res.status(500).json({ success: false, error: err.message });
+      const { variety_name, compound_key } = req.body;
+      const result = await cropValueResearchService.researchValueCompound(variety_name, compound_key);
+      res.json({ success: true, data: result });
+    } catch (error) {
+      const status = error.code === 'not_configured' ? 200 : 500;
+      res.status(status).json({ success: false, code: error.code, error: error.message });
     }
-  }
+  },
 
-  async create(req, res) {
+  getPending: async (req, res) => {
     try {
-      const item = await this.repository.create(req.body);
-      res.status(201).json({ success: true, data: item });
-    } catch (err) {
-      res.status(400).json({ success: false, error: err.message });
+      const pending = await cropValueResearchService.getPendingSuggestions();
+      res.json({ success: true, data: pending });
+    } catch (error) {
+      logger.error('Error getting pending crop value suggestions', { error: error.message });
+      res.status(500).json({ success: false, error: error.message });
     }
-  }
+  },
 
-  async update(req, res) {
+  review: async (req, res) => {
     try {
-      const item = await this.repository.update(req.params.id, req.body);
-      if (!item) return res.status(404).json({ success: false, error: 'Not found' });
-      res.json({ success: true, data: item });
-    } catch (err) {
-      res.status(400).json({ success: false, error: err.message });
+      const { id } = req.params;
+      const { approve } = req.body;
+      const result = await cropValueResearchService.reviewSuggestion(id, Boolean(approve), req.user.id);
+      res.json({ success: true, data: result });
+    } catch (error) {
+      logger.error('Error reviewing crop value suggestion', { error: error.message });
+      res.status(400).json({ success: false, error: error.message });
     }
-  }
+  },
+};
 
-  async delete(req, res) {
-    try {
-      await this.repository.delete(req.params.id);
-      res.json({ success: true });
-    } catch (err) {
-      res.status(500).json({ success: false, error: err.message });
-    }
-  }
-}
+module.exports = cropValueResearchController;

@@ -1,21 +1,16 @@
-import { memo } from 'react';
+import ModuleOperationPanel from '../components/common/ModuleOperationPanel';
 
-// Professional Page: Semantic HTML, ARIA labels, accessibility
-const EnvironmentManagementPage = memo(() => {
+/**
+ * Environment Management (backend/src/modules/M005). Generic operation panel -
+ * see ModuleOperationPanel.jsx for why; no bespoke form has been built for
+ * this module yet, but its real backend operations are fully callable here.
+ */
+export default function EnvironmentManagementPage() {
   return (
-    <div role="main" className="page-container" aria-label="EnvironmentManagementPage page">
-      <header aria-label="Page header">
-        <h1>EnvironmentManagementPage</h1>
-      </header>
-      <main aria-label="Main content">
-        {/* Professional implementation */}
-      </main>
-      <footer aria-label="Page footer">
-        {/* Footer content */}
-      </footer>
-    </div>
+    <ModuleOperationPanel
+      moduleId="M005"
+      title="Environment Management"
+      description="Environment configuration, staging, and deployment."
+    />
   );
-});
-
-EnvironmentManagementPage.displayName = 'EnvironmentManagementPage';
-export default EnvironmentManagementPage;
+}

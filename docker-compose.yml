@@ -3,17 +3,15 @@ version: '3.8'
 services:
   # PostgreSQL Database
   postgres:
-    image: postgres:20-alpine
+    image: postgres:16-alpine
     container_name: afrera-postgres
     environment:
       POSTGRES_DB: afrera_production
       POSTGRES_USER: afrera
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD must be set}
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./backend/src/database/migrations:/docker-entrypoint-initdb.d
-    ports:
-      - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U afrera"]
       interval: 10s
@@ -26,13 +24,13 @@ services:
   redis:
     image: redis:7-alpine
     container_name: afrera-redis
-    command: redis-server --appendonly yes
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?REDIS_PASSWORD must be set}
+    command: sh -c 'redis-server --appendonly yes --requirepass "$$REDIS_PASSWORD"'
     volumes:
       - redis_data:/data
-    ports:
-      - "6379:6379"
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD-SHELL", "redis-cli -a \"$${REDIS_PASSWORD}\" ping"]
       interval: 10s
       timeout: 3s
       retries: 5
@@ -47,10 +45,12 @@ services:
     container_name: afrera-backend
     environment:
       NODE_ENV: production
-      DATABASE_URL: postgresql://afrera:${DB_PASSWORD:-changeme}@postgres:5432/afrera_production
-      REDIS_URL: redis://redis:6379
-      FRONTEND_URL: ${FRONTEND_URL:-https://afrera.platform}
-      JWT_SECRET: ${JWT_SECRET:-changeme}
+      DATABASE_URL: postgresql://afrera:${DB_PASSWORD:?DB_PASSWORD must be set}@postgres:5432/afrera_production
+      REDIS_URL: redis://:${REDIS_PASSWORD:?REDIS_PASSWORD must be set}@redis:6379
+      FRONTEND_URL: ${FRONTEND_URL:?FRONTEND_URL must be set}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:?ALLOWED_ORIGINS must be set}
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:?ENCRYPTION_KEY must be set}
       TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
       TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
       TWILIO_PHONE_NUMBER: ${TWILIO_PHONE_NUMBER}

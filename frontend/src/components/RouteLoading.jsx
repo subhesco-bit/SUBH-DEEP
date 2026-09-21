@@ -20,7 +20,7 @@ import { LoadingSpinner, PageSkeleton, CardSkeleton } from './ui/Skeleton'
  */
 export function RouteLoadingFallback() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900" role="status" aria-live="polite" aria-busy="true">
       <div className="text-center">
         <LoadingSpinner size="xl" />
         <p className="mt-4 text-gray-600 dark:text-gray-400">Loading...</p>
@@ -35,7 +35,7 @@ export function RouteLoadingFallback() {
  */
 export function PageLoadingFallback({ route }) {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4" role="status" aria-live="polite" aria-busy="true">
       <PageSkeleton />
     </div>
   )

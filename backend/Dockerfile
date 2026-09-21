@@ -26,6 +26,11 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/src ./src
 
+# Run as the unprivileged Node user and provide writable application
+# directories for the mounted upload/log volumes.
+RUN mkdir -p /app/uploads /app/logs && chown -R node:node /app
+USER node
+
 # Expose port
 EXPOSE 3001
 

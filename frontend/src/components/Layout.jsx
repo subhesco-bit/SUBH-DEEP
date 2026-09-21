@@ -32,7 +32,7 @@ function Layout({ children }) {
       <Header />
       <div className="flex-1 max-w-7xl mx-auto w-full flex">
         <Sidebar />
-        <main id="main-content" tabIndex={-1} className="flex-1 p-4">
+        <main id="main-content" tabIndex={-1} className="flex-1 min-w-0 p-4 pb-24 lg:pb-4">
           {children || <Outlet />}
         </main>
       </div>

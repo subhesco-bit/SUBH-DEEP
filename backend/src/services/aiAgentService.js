@@ -11,6 +11,53 @@
  */
 
 const axios = require('axios');
+const { URL } = require('url');
+
+function evaluateArithmetic(expression) {
+  if (typeof expression !== 'string' || expression.length > 200 || !/^[\d\s()+\-*/%.]+$/.test(expression)) {
+    throw new Error('Only bounded arithmetic expressions are supported');
+  }
+
+  const tokens = expression.match(/\d+(?:\.\d+)?|[()+\-*/%]/g) || [];
+  if (tokens.join('') !== expression.replace(/\s+/g, '')) {
+    throw new Error('Invalid arithmetic expression');
+  }
+
+  const values = [];
+  const operators = [];
+  const precedence = { '+': 1, '-': 1, '*': 2, '/': 2, '%': 2 };
+  const apply = () => {
+    const operator = operators.pop();
+    const right = values.pop();
+    const left = values.pop();
+    if (left === undefined || right === undefined || (operator === '/' && right === 0)) {
+      throw new Error('Invalid arithmetic expression');
+    }
+    values.push(operator === '+' ? left + right : operator === '-' ? left - right
+      : operator === '*' ? left * right : operator === '/' ? left / right : left % right);
+  };
+
+  for (const token of tokens) {
+    if (!Number.isNaN(Number(token))) {
+      values.push(Number(token));
+    } else if (token === '(') {
+      operators.push(token);
+    } else if (token === ')') {
+      while (operators.length && operators[operators.length - 1] !== '(') apply();
+      if (operators.pop() !== '(') throw new Error('Invalid arithmetic expression');
+    } else {
+      while (operators.length && operators[operators.length - 1] !== '('
+        && precedence[operators[operators.length - 1]] >= precedence[token]) apply();
+      operators.push(token);
+    }
+  }
+  while (operators.length) {
+    if (operators[operators.length - 1] === '(') throw new Error('Invalid arithmetic expression');
+    apply();
+  }
+  if (values.length !== 1 || !Number.isFinite(values[0])) throw new Error('Invalid arithmetic expression');
+  return values[0];
+}
 
 // These three SDKs are not in package.json (no live LLM credentials exist in this
 // environment, by design — see core/aiOrchestrator.js's PROVIDER_ENV/callProvider()
@@ -103,10 +150,21 @@ class AIAgentService {
         required: ['url', 'method']
       },
       handler: async (params) => {
+        const target = new URL(params.url);
+        const allowedHosts = (process.env.AI_AGENT_ALLOWED_API_HOSTS || '')
+          .split(',').map(host => host.trim()).filter(Boolean);
+        if (!['http:', 'https:'].includes(target.protocol)
+          || (process.env.NODE_ENV === 'production' && !allowedHosts.includes(target.hostname))) {
+          throw new Error('API destination is not allowlisted');
+        }
         const response = await axios({
           method: params.method,
-          url: params.url,
-          data: params.data
+          url: target.toString(),
+          data: params.data,
+          timeout: Math.min(Number(params.timeout) || 10000, 10000),
+          maxContentLength: 1024 * 1024,
+          maxBodyLength: 1024 * 1024,
+          maxRedirects: 0
         });
         return { success: true, data: response.data };
       }
@@ -124,7 +182,7 @@ class AIAgentService {
       },
       handler: async (params) => {
         try {
-          const result = eval(params.expression);
+          const result = evaluateArithmetic(params.expression);
           return { success: true, result };
         } catch (error) {
           return { success: false, error: error.message };

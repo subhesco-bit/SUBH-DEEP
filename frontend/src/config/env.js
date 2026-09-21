@@ -34,7 +34,10 @@ const configSchema = {
   // API Configuration
   API_URL: {
     required: true,
-    default: 'import.meta.env.VITE_API_BASE_URL/api/v1',
+    // Keep the default usable in local development.  The previous value was
+    // a literal JavaScript expression, so URL validation always failed when
+    // VITE_API_URL was not set.
+    default: 'http://localhost:3001/api/v1',
     validate: (value) => {
       try {
         new URL(value)

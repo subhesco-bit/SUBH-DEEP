@@ -1,8 +1,12 @@
 import axios from 'axios'
 
 // API_BASE_URL defaults to localhost for development
-// Production should set VITE_API_URL environment variable
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api/v1'
+// Production may provide either variable (the setup guide historically used
+// VITE_API_BASE_URL while the app used VITE_API_URL). Both values are expected
+// to include the /api/v1 prefix.
+const API_BASE_URL = import.meta.env.VITE_API_URL
+  || import.meta.env.VITE_API_BASE_URL
+  || 'http://localhost:3001/api/v1'
 
 // Create axios instance
 const api = axios.create({
@@ -348,6 +352,8 @@ export const analyticsAPI = {
   getOverview: () => api.get('/analytics/overview'),
   getInsights: () => api.get('/analytics/insights'),
   getPlatformStats: () => api.get('/analytics/platform-stats'),
+  getPlatform: (params) => api.get('/analytics/platform', { params }),
+  getMarketTrends: (params) => api.get('/analytics/market/trends', { params }),
 }
 
 // ERP API

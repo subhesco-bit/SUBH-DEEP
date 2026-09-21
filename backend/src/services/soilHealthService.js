@@ -1,31 +1,20 @@
-// Professional Service: Dependency injection, repository pattern, error handling
-export class soilHealthService {
-  constructor(repository) {
-    this.repository = repository;
-  }
+const db = require('../database/dbConnection');
+const logger = require('../utils/logger');
 
-  async getAll(page = 1, limit = 20) {
-    const offset = (page - 1) * limit;
-    const [items, total] = await Promise.all([
-      this.repository.find({ offset, limit }),
-      this.repository.count()
-    ]);
-    return { items, total, page, limit };
-  }
+class SoilHealthService {
+  async recordSoilTest(farmId, ph, nitrogen, phosphorus, potassium) {
+  // Validate inputs
+    if (!farmId) throw new Error('Missing required parameter');
 
-  async getById(id) {
-    return this.repository.findById(id);
-  }
-
-  async create(data) {
-    return this.repository.create(data);
-  }
-
-  async update(id, data) {
-    return this.repository.update(id, data);
-  }
-
-  async delete(id) {
-    return this.repository.delete(id);
+    try {
+      const id = require('uuid').v4();
+      await db('soil_tests').insert({
+        id, farm_id: farmId, ph, nitrogen, phosphorus, potassium, tested_at: new Date(),
+      });
+      logger.info(`Soil test recorded: ${id}`);
+      return { test_id: id, ph, nitrogen, phosphorus, potassium };
+    } catch (error) { logger.error(`Record test failed: ${error.message}`); throw error; }
   }
 }
+
+module.exports = new SoilHealthService();

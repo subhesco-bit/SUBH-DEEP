@@ -1,21 +1,9 @@
-import { memo } from 'react';
+import MFASetup from '../components/MFA/MFASetup';
 
-// Professional Page: Semantic HTML, ARIA labels, accessibility
-const MFASetupPage = memo(() => {
+export default function MFASetupPage() {
   return (
-    <div role="main" className="page-container" aria-label="MFASetupPage page">
-      <header aria-label="Page header">
-        <h1>MFASetupPage</h1>
-      </header>
-      <main aria-label="Main content">
-        {/* Professional implementation */}
-      </main>
-      <footer aria-label="Page footer">
-        {/* Footer content */}
-      </footer>
-    </div>
+    <main className="mx-auto max-w-2xl px-4 py-8">
+      <MFASetup />
+    </main>
   );
-});
-
-MFASetupPage.displayName = 'MFASetupPage';
-export default MFASetupPage;
+}

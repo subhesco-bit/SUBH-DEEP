@@ -1,31 +1,23 @@
-// Professional Service: Dependency injection, repository pattern, error handling
-export class libraryKnowledgeService {
-  constructor(repository) {
-    this.repository = repository;
-  }
+/**
+ * Root compatibility service for Claude coordinator library enrichment.
+ */
 
-  async getAll(page = 1, limit = 20) {
-    const offset = (page - 1) * limit;
-    const [items, total] = await Promise.all([
-      this.repository.find({ offset, limit }),
-      this.repository.count()
-    ]);
-    return { items, total, page, limit };
-  }
+'use strict';
 
-  async getById(id) {
-    return this.repository.findById(id);
-  }
+const { singleton: libraryKnowledgeService } = require('../../../modules/M645100_LIBRARYKNOWLEDGE/backend/service');
 
-  async create(data) {
-    return this.repository.create(data);
-  }
-
-  async update(id, data) {
-    return this.repository.update(id, data);
-  }
-
-  async delete(id) {
-    return this.repository.delete(id);
-  }
+async function queryLibraryKnowledge(query, options = {}) {
+  const results = await libraryKnowledgeService.searchLibrary(query, options);
+  return results.slice(0, options.limit || 10).map((item) => ({
+    id: item.key,
+    type: item.type,
+    name: item.data?.name || item.data?.moduleId || item.key,
+    description: item.data?.description || item.data?.aiContext || item.path,
+    relevance: item.relevance,
+    path: item.path,
+  }));
 }
+
+module.exports = Object.assign(libraryKnowledgeService, {
+  queryLibraryKnowledge,
+});

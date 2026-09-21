@@ -1,21 +1,16 @@
-import { memo } from 'react';
+import ModuleOperationPanel from '../components/common/ModuleOperationPanel';
 
-// Professional Page: Semantic HTML, ARIA labels, accessibility
-const CattleRegistryPage = memo(() => {
+/**
+ * Cattle Registry (backend/src/modules/M122). Generic operation panel -
+ * see ModuleOperationPanel.jsx for why; no bespoke form has been built for
+ * this module yet, but its real backend operations are fully callable here.
+ */
+export default function CattleRegistryPage() {
   return (
-    <div role="main" className="page-container" aria-label="CattleRegistryPage page">
-      <header aria-label="Page header">
-        <h1>CattleRegistryPage</h1>
-      </header>
-      <main aria-label="Main content">
-        {/* Professional implementation */}
-      </main>
-      <footer aria-label="Page footer">
-        {/* Footer content */}
-      </footer>
-    </div>
+    <ModuleOperationPanel
+      moduleId="M122"
+      title="Cattle Registry"
+      description="Comprehensive livestock cattle registry."
+    />
   );
-});
-
-CattleRegistryPage.displayName = 'CattleRegistryPage';
-export default CattleRegistryPage;
+}

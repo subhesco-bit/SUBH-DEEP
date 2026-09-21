@@ -11,7 +11,7 @@
 
 'use strict';
 
-const aiFabric = require('../../../core/ai/index');
+const aiFabric = require('../../../backend/src/core/ai/index');
 
 class AIIntelligenceFabricModule {
   constructor() {

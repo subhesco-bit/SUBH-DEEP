@@ -1,62 +1,54 @@
-// Professional Controller: REST best practices, error handling, validation
-export class transactionController {
-  constructor(repository) {
-    this.repository = repository;
-  }
+/**
+ * Transaction Controller
+ * Handles transaction processing and management
+ */
 
-  async getAll(req, res) {
-    try {
-      const { page = 1, limit = 20 } = req.query;
-      const offset = (page - 1) * limit;
-      const [items, total] = await Promise.all([
-        this.repository.find({ offset, limit }),
-        this.repository.count()
-      ]);
-      res.json({
-        success: true,
-        data: items,
-        meta: { total, page, limit, pages: Math.ceil(total / limit) }
-      });
-    } catch (err) {
-      res.status(500).json({ success: false, error: err.message });
-    }
-  }
+const { logger } = require('../utils/logger');
+const transactionService = require('../services/transactionService');
 
-  async getById(req, res) {
+const transactionController = {
+  async createTransaction(req, res) {
     try {
-      const item = await this.repository.findById(req.params.id);
-      if (!item) return res.status(404).json({ success: false, error: 'Not found' });
-      res.json({ success: true, data: item });
-    } catch (err) {
-      res.status(500).json({ success: false, error: err.message });
+      const transaction = await transactionService.createTransaction(req.body);
+      res.json({ success: true, data: transaction });
+    } catch (error) {
+      logger.error('Create transaction failed', error);
+      res.status(500).json({ success: false, error: error.message });
     }
-  }
+  },
 
-  async create(req, res) {
+  async getTransaction(req, res) {
     try {
-      const item = await this.repository.create(req.body);
-      res.status(201).json({ success: true, data: item });
-    } catch (err) {
-      res.status(400).json({ success: false, error: err.message });
+      const { transactionId } = req.params;
+      const transaction = await transactionService.getTransaction(transactionId);
+      res.json({ success: true, data: transaction });
+    } catch (error) {
+      logger.error('Get transaction failed', error);
+      res.status(500).json({ success: false, error: error.message });
     }
-  }
+  },
 
-  async update(req, res) {
+  async getUserTransactions(req, res) {
     try {
-      const item = await this.repository.update(req.params.id, req.body);
-      if (!item) return res.status(404).json({ success: false, error: 'Not found' });
-      res.json({ success: true, data: item });
-    } catch (err) {
-      res.status(400).json({ success: false, error: err.message });
+      const { userId } = req.params;
+      const transactions = await transactionService.getUserTransactions(userId);
+      res.json({ success: true, data: transactions });
+    } catch (error) {
+      logger.error('Get user transactions failed', error);
+      res.status(500).json({ success: false, error: error.message });
     }
-  }
+  },
 
-  async delete(req, res) {
+  async updateTransactionStatus(req, res) {
     try {
-      await this.repository.delete(req.params.id);
-      res.json({ success: true });
-    } catch (err) {
-      res.status(500).json({ success: false, error: err.message });
+      const { transactionId } = req.params;
+      const result = await transactionService.updateStatus(transactionId, req.body);
+      res.json({ success: true, data: result });
+    } catch (error) {
+      logger.error('Update transaction status failed', error);
+      res.status(500).json({ success: false, error: error.message });
     }
-  }
-}
+  },
+};
+
+module.exports = transactionController;

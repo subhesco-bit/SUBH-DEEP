@@ -1,1 +1,0 @@
-import{nc as n}from"./components-CxwyDabQ.js";import r from"./InsuranceManagementPage-B3uNgkpo.js";var a=n();function e(){return(0,a.jsx)(r,{})}export{e as default};

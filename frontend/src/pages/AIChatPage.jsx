@@ -1,21 +1,9 @@
-import { memo } from 'react';
+import AIChat from '../components/AI/AIChat';
 
-// Professional Page: Semantic HTML, ARIA labels, accessibility
-const AIChatPage = memo(() => {
+export default function AIChatPage() {
   return (
-    <div role="main" className="page-container" aria-label="AIChatPage page">
-      <header aria-label="Page header">
-        <h1>AIChatPage</h1>
-      </header>
-      <main aria-label="Main content">
-        {/* Professional implementation */}
-      </main>
-      <footer aria-label="Page footer">
-        {/* Footer content */}
-      </footer>
-    </div>
+    <main className="mx-auto max-w-3xl px-4 py-8">
+      <AIChat />
+    </main>
   );
-});
-
-AIChatPage.displayName = 'AIChatPage';
-export default AIChatPage;
+}

@@ -1,13 +1,16 @@
 import api from './api';
 
 /**
- * Village ERP Control Center (API Client)
- * Backs GET /api/v1/gap-closure-operational/villages/:villageId/readiness
- * (backend/src/routes/gapClosureOperationalRoutes.js)
+ * Village ERP Control Center API
+ *
+ * Wires to the real backend endpoint mounted by DynamicRouteLoader from
+ * backend/src/routes/gapClosureOperationalRoutes.js ("gapClosureOperationalRoutes"
+ * -> "gap-closure-operational"), which returns
+ * { success, readiness: { readiness_score, dimensions, methodology, generated_at } }.
+ * This file was missing entirely (broke the production build); created to match
+ * that real, already-implemented backend contract rather than fabricating data.
  */
-export const getVillageReadiness = async (villageId) => {
-  const { data } = await api.get(`/gap-closure-operational/villages/${villageId}/readiness`);
-  return data.readiness;
-};
-
-export default { getVillageReadiness };
+export async function getVillageReadiness(villageId) {
+  const response = await api.get(`/gap-closure-operational/villages/${encodeURIComponent(villageId)}/readiness`);
+  return response.data.readiness;
+}

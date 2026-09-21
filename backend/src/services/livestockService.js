@@ -1,31 +1,20 @@
-// Professional Service: Dependency injection, repository pattern, error handling
-export class livestockService {
-  constructor(repository) {
-    this.repository = repository;
-  }
+const db = require('../database/dbConnection');
+const logger = require('../utils/logger');
 
-  async getAll(page = 1, limit = 20) {
-    const offset = (page - 1) * limit;
-    const [items, total] = await Promise.all([
-      this.repository.find({ offset, limit }),
-      this.repository.count()
-    ]);
-    return { items, total, page, limit };
-  }
+class LivestockService {
+  async registerLivestock(farmId, type, count, breed) {
+  // Validate inputs
+    if (!farmId) throw new Error('Missing required parameter');
 
-  async getById(id) {
-    return this.repository.findById(id);
-  }
-
-  async create(data) {
-    return this.repository.create(data);
-  }
-
-  async update(id, data) {
-    return this.repository.update(id, data);
-  }
-
-  async delete(id) {
-    return this.repository.delete(id);
+    try {
+      const id = require('uuid').v4();
+      await db('livestock').insert({
+        id, farm_id: farmId, type, count, breed, registered_at: new Date(),
+      });
+      logger.info(`Livestock registered: ${id}`);
+      return { livestock_id: id, type, count };
+    } catch (error) { logger.error(`Register livestock failed: ${error.message}`); throw error; }
   }
 }
+
+module.exports = new LivestockService();

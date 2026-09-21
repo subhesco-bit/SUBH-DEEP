@@ -1,21 +1,16 @@
-import { memo } from 'react';
+import ModuleOperationPanel from '../components/common/ModuleOperationPanel';
 
-// Professional Page: Semantic HTML, ARIA labels, accessibility
-const ImplementManagementPage = memo(() => {
+/**
+ * Implement Management (backend/src/modules/M102). Generic operation panel -
+ * see ModuleOperationPanel.jsx for why; no bespoke form has been built for
+ * this module yet, but its real backend operations are fully callable here.
+ */
+export default function ImplementManagementPage() {
   return (
-    <div role="main" className="page-container" aria-label="ImplementManagementPage page">
-      <header aria-label="Page header">
-        <h1>ImplementManagementPage</h1>
-      </header>
-      <main aria-label="Main content">
-        {/* Professional implementation */}
-      </main>
-      <footer aria-label="Page footer">
-        {/* Footer content */}
-      </footer>
-    </div>
+    <ModuleOperationPanel
+      moduleId="M102"
+      title="Implement Management"
+      description="Agricultural implement inventory and maintenance."
+    />
   );
-});
-
-ImplementManagementPage.displayName = 'ImplementManagementPage';
-export default ImplementManagementPage;
+}

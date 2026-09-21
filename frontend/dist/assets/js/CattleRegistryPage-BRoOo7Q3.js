@@ -1,1 +1,0 @@
-import{N as t,nc as e}from"./components-CxwyDabQ.js";var r=e();function s(){return(0,r.jsx)(t,{moduleId:"M122",title:"Cattle Registry",description:"Comprehensive livestock cattle registry."})}export{s as default};

@@ -1,1 +1,0 @@
-import{N as n,nc as t}from"./components-CxwyDabQ.js";var a=t();function r(){return(0,a.jsx)(n,{moduleId:"M109",title:"Spare Parts Management",description:"Spare parts inventory and consumption tracking."})}export{r as default};

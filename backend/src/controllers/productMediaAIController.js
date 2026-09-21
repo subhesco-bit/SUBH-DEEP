@@ -1,62 +1,71 @@
-// Professional Controller: REST best practices, error handling, validation
-export class productMediaAIController {
-  constructor(repository) {
-    this.repository = repository;
-  }
+/**
+ * Product Media AI Controller — thin HTTP layer over productMediaAIService.
+ * See that file's header for the honest not_configured provider discipline.
+ */
 
-  async getAll(req, res) {
+const productMediaAIService = require('../services/legacy/productMediaAIService');
+const { logger } = require('../utils/logger');
+
+const productMediaAIController = {
+  getProviderStatus: async (req, res) => {
     try {
-      const { page = 1, limit = 20 } = req.query;
-      const offset = (page - 1) * limit;
-      const [items, total] = await Promise.all([
-        this.repository.find({ offset, limit }),
-        this.repository.count()
-      ]);
       res.json({
         success: true,
-        data: items,
-        meta: { total, page, limit, pages: Math.ceil(total / limit) }
+        data: {
+          imageProviders: productMediaAIService.listImageProviders(),
+          videoProviders: productMediaAIService.listVideoProviders(),
+        },
       });
-    } catch (err) {
-      res.status(500).json({ success: false, error: err.message });
+    } catch (error) {
+      logger.error('Error getting product media AI provider status', { error: error.message });
+      res.status(500).json({ success: false, error: error.message });
     }
-  }
+  },
 
-  async getById(req, res) {
+  generateProductImage: async (req, res) => {
     try {
-      const item = await this.repository.findById(req.params.id);
-      if (!item) return res.status(404).json({ success: false, error: 'Not found' });
-      res.json({ success: true, data: item });
-    } catch (err) {
-      res.status(500).json({ success: false, error: err.message });
+      const { productId } = req.params;
+      const { prompt } = req.body;
+      const result = await productMediaAIService.requestProductImageGeneration(productId, prompt);
+      res.json({ success: true, data: result });
+    } catch (error) {
+      logger.error('Error requesting product image generation', { error: error.message });
+      res.status(500).json({ success: false, error: error.message });
     }
-  }
+  },
 
-  async create(req, res) {
+  generateProductCartoon: async (req, res) => {
     try {
-      const item = await this.repository.create(req.body);
-      res.status(201).json({ success: true, data: item });
-    } catch (err) {
-      res.status(400).json({ success: false, error: err.message });
+      const result = await productMediaAIService.requestProductCartoonGeneration(req.params.productId, req.body?.prompt);
+      res.json({ success: true, data: result });
+    } catch (error) {
+      logger.error('Error requesting product cartoon generation', { error: error.message });
+      res.status(500).json({ success: false, error: error.message });
     }
-  }
+  },
 
-  async update(req, res) {
+  buildNutrientVideoScript: async (req, res) => {
     try {
-      const item = await this.repository.update(req.params.id, req.body);
-      if (!item) return res.status(404).json({ success: false, error: 'Not found' });
-      res.json({ success: true, data: item });
-    } catch (err) {
-      res.status(400).json({ success: false, error: err.message });
+      const { productId } = req.params;
+      const script = await productMediaAIService.buildNutrientComparisonScript(productId);
+      res.json({ success: true, data: script });
+    } catch (error) {
+      logger.error('Error building nutrient comparison script', { error: error.message });
+      res.status(500).json({ success: false, error: error.message });
     }
-  }
+  },
 
-  async delete(req, res) {
+  generateProductVideo: async (req, res) => {
     try {
-      await this.repository.delete(req.params.id);
-      res.json({ success: true });
-    } catch (err) {
-      res.status(500).json({ success: false, error: err.message });
+      const { productId } = req.params;
+      const result = await productMediaAIService.requestProductVideoGeneration(productId);
+      res.json({ success: true, data: result });
+    } catch (error) {
+      logger.error('Error requesting product video generation', { error: error.message });
+      res.status(500).json({ success: false, error: error.message });
     }
-  }
-}
+  },
+};
+
+module.exports = productMediaAIController;
+

@@ -1,21 +1,16 @@
-import { memo } from 'react';
+import ModuleOperationPanel from '../components/common/ModuleOperationPanel';
 
-// Professional Page: Semantic HTML, ARIA labels, accessibility
-const BreakdownMaintenancePage = memo(() => {
+/**
+ * Breakdown Maintenance (backend/src/modules/M107). Generic operation panel -
+ * see ModuleOperationPanel.jsx for why; no bespoke form has been built for
+ * this module yet, but its real backend operations are fully callable here.
+ */
+export default function BreakdownMaintenancePage() {
   return (
-    <div role="main" className="page-container" aria-label="BreakdownMaintenancePage page">
-      <header aria-label="Page header">
-        <h1>BreakdownMaintenancePage</h1>
-      </header>
-      <main aria-label="Main content">
-        {/* Professional implementation */}
-      </main>
-      <footer aria-label="Page footer">
-        {/* Footer content */}
-      </footer>
-    </div>
+    <ModuleOperationPanel
+      moduleId="M107"
+      title="Breakdown Maintenance"
+      description="Equipment breakdown and emergency repair tracking."
+    />
   );
-});
-
-BreakdownMaintenancePage.displayName = 'BreakdownMaintenancePage';
-export default BreakdownMaintenancePage;
+}

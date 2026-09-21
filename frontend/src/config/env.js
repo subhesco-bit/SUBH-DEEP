@@ -1,309 +1,141 @@
 /**
- * Enterprise-Grade Environment Configuration
- *
- * Production-ready configuration management with:
- * - Environment-specific settings
- * - Type-safe configuration access
- * - Validation of required environment variables
- * - Feature flags support
- * - Runtime configuration updates
- * - Secure configuration handling
+ * Frontend Environment Configuration - FIXED
+ * Centralized configuration management
  */
 
-/**
- * Environment types
- */
-const Environment = {
-  DEVELOPMENT: 'development',
-  STAGING: 'staging',
-  PRODUCTION: 'production',
-  TEST: 'test',
-};
-
-/**
- * Get current environment
- */
-function getCurrentEnvironment() {
-  return import.meta.env.MODE || Environment.DEVELOPMENT;
-}
-
-/**
- * Configuration schema with validation
- */
-const configSchema = {
+const config = {
   // API Configuration
-  API_URL: {
-    required: true,
-    // VITE_API_BASE_URL is the COMPLETE api base, matching how services/api.js
-    // reads it. This previously treated it as an origin and appended /api/v1,
-    // so the two disagreed and a configured base produced /api/v1/api/v1.
-    default: import.meta.env.VITE_API_BASE_URL || '/api/v1',
-    validate: (value) => {
-      if (typeof value !== 'string' || !value) return false;
-      // A same-origin base ("/api/v1") is the default in dev, where Vite
-      // proxies /api to the backend. new URL() alone rejects those.
-      if (value.startsWith('/')) return true;
-      try {
-        new URL(value);
-        return true;
-      } catch {
-        return false;
-      }
-    },
-  },
-  API_TIMEOUT: {
-    required: false,
-    default: 30000,
-    validate: (value) => Number.isInteger(value) && value > 0,
-  },
+  API_URL: import.meta.env.VITE_API_URL || 'http://localhost:3001/api',
+  API_BASE_URL: import.meta.env.VITE_API_BASE_URL || '/api',
+  API_VERSION: 'v1',
+  API_TIMEOUT: 30000,
 
-  // Authentication Configuration
-  TOKEN_REFRESH_THRESHOLD: {
-    required: false,
-    default: 300000, // 5 minutes
-    validate: (value) => Number.isInteger(value) && value > 0,
-  },
+  // App Configuration
+  APP_NAME: 'EBDESIGN Platform',
+  APP_VERSION: '1.0.0',
+  ENVIRONMENT: import.meta.env.MODE || 'development',
+  NODE_ENV: import.meta.env.MODE || 'development',
 
   // Feature Flags
-  ENABLE_ANALYTICS: {
-    required: false,
-    default: false,
-    validate: (value) => typeof value === 'boolean',
-  },
-  ENABLE_ERROR_REPORTING: {
-    required: false,
-    default: false,
-    validate: (value) => typeof value === 'boolean',
-  },
-  ENABLE_PERFORMANCE_MONITORING: {
-    required: false,
-    default: false,
-    validate: (value) => typeof value === 'boolean',
-  },
-  ENABLE_PWA: {
-    required: false,
-    default: true,
-    validate: (value) => typeof value === 'boolean',
-  },
+  ENABLE_PWA: import.meta.env.VITE_ENABLE_PWA === 'true',
+  ENABLE_ANALYTICS: import.meta.env.VITE_ENABLE_ANALYTICS === 'true',
+  ENABLE_ERROR_REPORTING: import.meta.env.VITE_ENABLE_ERROR_REPORTING === 'true',
+  ENABLE_SENTRY: import.meta.env.VITE_ENABLE_SENTRY === 'true',
 
   // UI Configuration
-  DEFAULT_LANGUAGE: {
-    required: false,
-    default: 'en',
-    validate: (value) => typeof value === 'string' && value.length === 2,
+  THEME: import.meta.env.VITE_THEME || 'light',
+  LANG: import.meta.env.VITE_LANGUAGE || 'en',
+  DATE_FORMAT: 'DD/MM/YYYY',
+  TIME_FORMAT: 'HH:mm:ss',
+
+  // Security
+  JWT_TOKEN_KEY: 'access_token',
+  REFRESH_TOKEN_KEY: 'refresh_token',
+  USER_KEY: 'user',
+  TOKEN_REFRESH_INTERVAL: 5 * 60 * 1000, // 5 minutes
+
+  // WebSocket
+  WS_URL: import.meta.env.VITE_WS_URL || 'http://localhost:3001',
+  WS_RECONNECT_DELAY: 3000,
+  WS_RECONNECT_MAX_ATTEMPTS: 10,
+
+  // Logging
+  DEBUG: import.meta.env.DEV,
+  LOG_LEVEL: import.meta.env.VITE_LOG_LEVEL || 'info',
+
+  // Cache
+  CACHE_DURATION: 1000 * 60 * 60, // 1 hour
+  SESSION_TIMEOUT: 1000 * 60 * 30, // 30 minutes
+
+  // Module Discovery
+  AUTO_DISCOVER_MODULES: import.meta.env.VITE_AUTO_DISCOVER_MODULES !== 'false',
+  MODULE_PATH: '/modules',
+
+  // Storage
+  USE_LOCAL_STORAGE: import.meta.env.VITE_USE_LOCAL_STORAGE !== 'false',
+  USE_SESSION_STORAGE: import.meta.env.VITE_USE_SESSION_STORAGE !== 'false',
+  USE_INDEXED_DB: import.meta.env.VITE_USE_INDEXED_DB === 'true',
+
+  // Analytics
+  ANALYTICS_ENABLED: import.meta.env.VITE_ANALYTICS_ENABLED === 'true',
+  TRACKING_ID: import.meta.env.VITE_TRACKING_ID || '',
+
+  // Error Reporting
+  SENTRY_DSN: import.meta.env.VITE_SENTRY_DSN || '',
+  ERROR_REPORTING_ENABLED: import.meta.env.VITE_ERROR_REPORTING_ENABLED === 'true',
+
+  // API Endpoints
+  endpoints: {
+    auth: {
+      login: '/auth/login',
+      register: '/auth/register',
+      logout: '/auth/logout',
+      refresh: '/auth/refresh',
+      me: '/auth/me',
+    },
+    user: {
+      profile: '/users/profile',
+      settings: '/users/settings',
+      preferences: '/users/preferences',
+    },
+    farmer: {
+      dashboard: '/farmer/dashboard',
+      fields: '/farmer/fields',
+      crops: '/farmer/crops',
+      sales: '/farmer/sales',
+    },
+    marketplace: {
+      products: '/marketplace/products',
+      listings: '/marketplace/listings',
+      categories: '/marketplace/categories',
+    },
+    admin: {
+      users: '/admin/users',
+      analytics: '/admin/analytics',
+      settings: '/admin/settings',
+    },
   },
-  THEME: {
-    required: false,
-    default: 'light',
-    validate: (value) => ['light', 'dark', 'system'].includes(value),
+
+  // Helper methods
+  isProduction() {
+    return this.ENVIRONMENT === 'production';
   },
 
-  // Rate Limiting
-  RATE_LIMIT_MAX_REQUESTS: {
-    required: false,
-    default: 100,
-    validate: (value) => Number.isInteger(value) && value > 0,
-  },
-  RATE_LIMIT_WINDOW_MS: {
-    required: false,
-    default: 60000,
-    validate: (value) => Number.isInteger(value) && value > 0,
+  isDevelopment() {
+    return this.ENVIRONMENT === 'development';
   },
 
-  // Cache Configuration
-  CACHE_ENABLED: {
-    required: false,
-    default: true,
-    validate: (value) => typeof value === 'boolean',
-  },
-  CACHE_TTL_MS: {
-    required: false,
-    default: 300000, // 5 minutes
-    validate: (value) => Number.isInteger(value) && value > 0,
+  isTest() {
+    return this.ENVIRONMENT === 'test';
   },
 
-  // Monitoring Configuration
-  SENTRY_DSN: {
-    required: false,
-    default: '',
-    validate: (value) => typeof value === 'string',
-  },
-  SENTRY_ENVIRONMENT: {
-    required: false,
-    default: getCurrentEnvironment(),
-    validate: (value) => typeof value === 'string',
+  getApiUrl(path = '') {
+    const baseUrl = this.API_URL || `${window.location.origin}${this.API_BASE_URL}`;
+    return path ? `${baseUrl}${path}` : baseUrl;
   },
 
-  // Analytics Configuration
-  ANALYTICS_ID: {
-    required: false,
-    default: '',
-    validate: (value) => typeof value === 'string',
+  getWsUrl() {
+    return this.WS_URL || window.location.origin;
   },
 
-  // External Services
-  MAPS_API_KEY: {
-    required: false,
-    default: '',
-    validate: (value) => typeof value === 'string',
-  },
-  PAYMENT_GATEWAY_KEY: {
-    required: false,
-    default: '',
-    validate: (value) => typeof value === 'string',
-  },
-};
-
-/**
- * Get configuration value with validation
- */
-function getConfigValue(key) {
-  const schema = configSchema[key];
-  if (!schema) {
-
-    return null;
-  }
-
-  // Try to get from environment variables
-  const envValue = import.meta.env[`VITE_${key}`];
-
-  // Use default if not provided
-  const value = envValue !== undefined ? envValue : schema.default;
-
-  // Type conversion
-  let convertedValue;
-  if (typeof schema.default === 'boolean') {
-    convertedValue = value === 'true' || value === true;
-  } else if (typeof schema.default === 'number') {
-    convertedValue = Number(value);
-  } else {
-    convertedValue = value;
-  }
-
-  // Validation
-  if (schema.validate && !schema.validate(convertedValue)) {
-
-    return schema.default;
-  }
-
-  // Check required
-  if (schema.required && (convertedValue === undefined || convertedValue === null || convertedValue === '')) {
-
-    if (getCurrentEnvironment() === Environment.PRODUCTION) {
-      throw new Error(`Required configuration key ${key} is missing`);
+  log(...args) {
+    if (this.DEBUG) {
+      console.log('[DEBUG]', ...args);
     }
-  }
-
-  return convertedValue;
-}
-
-/**
- * Get all configuration
- */
-function getAllConfig() {
-  const config = {};
-
-  for (const key of Object.keys(configSchema)) {
-    config[key] = getConfigValue(key);
-  }
-
-  return {
-    ...config,
-    ENVIRONMENT: getCurrentEnvironment(),
-    IS_DEVELOPMENT: getCurrentEnvironment() === Environment.DEVELOPMENT,
-    IS_STAGING: getCurrentEnvironment() === Environment.STAGING,
-    IS_PRODUCTION: getCurrentEnvironment() === Environment.PRODUCTION,
-    IS_TEST: getCurrentEnvironment() === Environment.TEST,
-  };
-}
-
-/**
- * Validate all required configuration
- */
-function validateConfig() {
-  const errors = [];
-
-  for (const [key, schema] of Object.entries(configSchema)) {
-    if (schema.required) {
-      let value = getConfigValue(key);
-      if (!value || value === schema.default) {
-        errors.push(key);
-      }
-    }
-  }
-
-  return {
-    isValid: errors.length === 0,
-    errors,
-  };
-}
-
-/**
- * Feature flags helper
- */
-const features = {
-  isEnabled(featureKey) {
-    const key = `ENABLE_${featureKey.toUpperCase()}`;
-    return getConfigValue(key);
   },
 
-  analytics() {
-    return this.isEnabled('analytics');
+  error(...args) {
+    console.error('[ERROR]', ...args);
   },
 
-  errorReporting() {
-    return this.isEnabled('error_reporting');
-  },
-
-  performanceMonitoring() {
-    return this.isEnabled('performance_monitoring');
-  },
-
-  pwa() {
-    return this.isEnabled('pwa');
+  warn(...args) {
+    console.warn('[WARN]', ...args);
   },
 };
 
-/**
- * Public API
- */
-let config = {
-  Environment,
-  getCurrentEnvironment,
-  getConfigValue,
-  getAllConfig,
-  validateConfig,
-  features,
-  API_URL: getConfigValue('API_URL'),
-  API_TIMEOUT: getConfigValue('API_TIMEOUT'),
-  TOKEN_REFRESH_THRESHOLD: getConfigValue('TOKEN_REFRESH_THRESHOLD'),
-  DEFAULT_LANGUAGE: getConfigValue('DEFAULT_LANGUAGE'),
-  THEME: getConfigValue('THEME'),
-  RATE_LIMIT_MAX_REQUESTS: getConfigValue('RATE_LIMIT_MAX_REQUESTS'),
-  RATE_LIMIT_WINDOW_MS: getConfigValue('RATE_LIMIT_WINDOW_MS'),
-  CACHE_ENABLED: getConfigValue('CACHE_ENABLED'),
-  CACHE_TTL_MS: getConfigValue('CACHE_TTL_MS'),
-  SENTRY_DSN: getConfigValue('SENTRY_DSN'),
-  SENTRY_ENVIRONMENT: getConfigValue('SENTRY_ENVIRONMENT'),
-  ANALYTICS_ID: getConfigValue('ANALYTICS_ID'),
-  MAPS_API_KEY: getConfigValue('MAPS_API_KEY'),
-  PAYMENT_GATEWAY_KEY: getConfigValue('PAYMENT_GATEWAY_KEY'),
-};
-
-// Export individual config values for convenience
-export const API_URL = getConfigValue('API_URL');
-export const API_TIMEOUT = getConfigValue('API_TIMEOUT');
-export const TOKEN_REFRESH_THRESHOLD = getConfigValue('TOKEN_REFRESH_THRESHOLD');
-export const DEFAULT_LANGUAGE = getConfigValue('DEFAULT_LANGUAGE');
-export const THEME = getConfigValue('THEME');
-export const RATE_LIMIT_MAX_REQUESTS = getConfigValue('RATE_LIMIT_MAX_REQUESTS');
-export const RATE_LIMIT_WINDOW_MS = getConfigValue('RATE_LIMIT_WINDOW_MS');
-export const CACHE_ENABLED = getConfigValue('CACHE_ENABLED');
-export const CACHE_TTL_MS = getConfigValue('CACHE_TTL_MS');
-export const SENTRY_DSN = getConfigValue('SENTRY_DSN');
-export const SENTRY_ENVIRONMENT = getConfigValue('SENTRY_ENVIRONMENT');
-export const ANALYTICS_ID = getConfigValue('ANALYTICS_ID');
-export const MAPS_API_KEY = getConfigValue('MAPS_API_KEY');
-export const PAYMENT_GATEWAY_KEY = getConfigValue('PAYMENT_GATEWAY_KEY');
+// Validate configuration
+if (!config.API_URL && !config.API_BASE_URL) {
+  console.warn('⚠️  No API configuration found');
+}
 
 export default config;

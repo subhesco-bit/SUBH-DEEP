@@ -1,182 +1,277 @@
 /**
- * Database Connection Manager
- * Supports PostgreSQL (relational) and MongoDB (document) databases
+ * Database Connection Manager - FIXED
+ * Properly handles PostgreSQL, MongoDB, and Redis connections
  */
+
+'use strict';
 
 const { Pool } = require('pg');
 const { logger } = require('../utils/logger');
-const { resolvePoolConfig, describePostgresTarget } = require('../config/database');
 
-/**
- * The MongoDB driver is loaded on first use, not at import time.
- *
- * WHY THIS IS NOT A MICRO-OPTIMISATION
- *
- * `require('mongodb')` pulls in ~130 files and costs about twelve seconds on
- * this machine. Twenty-two services import this module for `getPostgreSQL`
- * alone; MongoDB is touched by exactly one (`aiBackboneService`, for fraud patterns).
- * So every one of them — and every process that loads any of them — paid the
- * full driver cost to use PostgreSQL.
- *
- * In the test suite that is the dominant cost of the whole run: fifteen suites
- * each `require('../index')`, each boot takes ~29s, and 12s of that is a Mongo
- * driver the tests explicitly mock to `null` and never connect. Roughly three
- * minutes per run spent loading a database nobody is talking to.
- *
- * Deferring the require does not change behaviour. `initMongoDB()` is the only
- * thing that constructs a client, and it now loads the driver immediately
- * before doing so — a connection that used to work still works, and it fails
- * the same way if the driver is genuinely missing. What changes is that a
- * process which never opens a Mongo connection never pays for the driver.
- */
-let MongoClient = null;
-function loadMongoDriver() {
-  if (!MongoClient) {
-    // eslint-disable-next-line global-require
-    ({ MongoClient } = require('mongodb'));
-  }
-  return MongoClient;
-}
+// ============================================================================
+// DATABASE CONFIGURATION
+// ============================================================================
 
-// PostgreSQL connection pool
+const DB_CONFIG = {
+  postgresql: {
+    host: process.env.DB_HOST || process.env.PG_HOST || 'localhost',
+    port: parseInt(process.env.DB_PORT || process.env.PG_PORT || 5432),
+    database: process.env.DB_NAME || process.env.PG_DATABASE || 'afrera',
+    user: process.env.DB_USER || process.env.PG_USER || 'postgres',
+    password: process.env.DB_PASSWORD || process.env.PG_PASSWORD || 'password',
+    ssl: process.env.PG_SSL === 'true' ? { rejectUnauthorized: false } : false,
+  },
+  mongodb: {
+    uri: process.env.MONGO_URI || null,
+    database: process.env.MONGO_DATABASE || 'afrera_mongo',
+  },
+  redis: {
+    host: process.env.REDIS_HOST || 'localhost',
+    port: parseInt(process.env.REDIS_PORT || 6379),
+    password: process.env.REDIS_PASSWORD || null,
+    db: parseInt(process.env.REDIS_DB || 0),
+  },
+};
+
+// ============================================================================
+// CONNECTION POOL STATE
+// ============================================================================
+
 let pgPool = null;
-
-// MongoDB client
 let mongoClient = null;
+let redisClient = null;
 let mongoConnected = false;
+let redisConnected = false;
+let dbInitialized = false;
 let initializationError = null;
-let mongoInitializationError = null;
-let initializationCompleted = false;
+
+// ============================================================================
+// POSTGRESQL CONNECTION
+// ============================================================================
 
 /**
- * Initialize PostgreSQL connection
+ * Initialize PostgreSQL connection pool with retry logic
  */
 async function initPostgreSQL() {
   try {
-    // Target resolution (DATABASE_URL > PG_* > DB_* > canonical defaults) and
-    // pool sizing both live in ../config/database, so that this process and the
-    // migration runner cannot disagree about which database they are using.
-    // They previously did: the app read DATABASE_URL while migrate.js read DB_*,
-    // pointing them at different databases on different ports.
-    //
-    // Say the target out loud. A connection failure is far cheaper to diagnose
-    // when the log states which host/database was attempted.
-    logger.info(`PostgreSQL target: ${describePostgresTarget()}`);
-
-    pgPool = new Pool({
-      ...resolvePoolConfig(),
-      connectionTimeoutMillis: 10000,
-      idleTimeoutMillis: 30000,
+    const config = DB_CONFIG.postgresql;
+    logger.info('🔗 Connecting to PostgreSQL...', {
+      host: config.host,
+      port: config.port,
+      database: config.database,
+      user: config.user,
     });
 
-    // Test connection with retry logic
+    pgPool = new Pool({
+      host: config.host,
+      port: config.port,
+      database: config.database,
+      user: config.user,
+      password: config.password,
+      ssl: config.ssl,
+      max: 20,
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 10000,
+      statement_timeout: 30000,
+    });
+
+    // Test connection
     let retries = 3;
     let connected = false;
+
     while (retries > 0 && !connected) {
       try {
         const client = await pgPool.connect();
-        await client.query('SELECT NOW()');
+        const result = await client.query('SELECT NOW()');
         client.release();
         connected = true;
-      } catch (retryError) {
+        logger.info('✅ PostgreSQL connected successfully');
+      } catch (error) {
         retries--;
         if (retries > 0) {
-          logger.warn(`PostgreSQL connection attempt failed, retrying... (${retries} attempts left)`);
+          logger.warn(`⚠️  PostgreSQL connection failed, retrying... (${retries} attempts left)`);
           await new Promise(resolve => setTimeout(resolve, 2000));
         } else {
-          throw retryError;
+          throw error;
         }
       }
     }
 
-    logger.info('PostgreSQL connection established successfully');
+    // Handle pool errors
+    pgPool.on('error', (error) => {
+      logger.error('❌ Unexpected PostgreSQL pool error:', error);
+    });
+
     return pgPool;
   } catch (error) {
-    logger.error('PostgreSQL connection failed', { error: error.message, stack: error.stack });
+    logger.error('❌ PostgreSQL connection failed:', error.message);
     throw error;
   }
 }
 
+// ============================================================================
+// MONGODB CONNECTION
+// ============================================================================
+
+let MongoClient = null;
+
+function loadMongoDriver() {
+  if (!MongoClient) {
+    try {
+      const mongodb = require('mongodb');
+      MongoClient = mongodb.MongoClient;
+    } catch (error) {
+      logger.warn('⚠️  MongoDB driver not available:', error.message);
+      return null;
+    }
+  }
+  return MongoClient;
+}
+
 /**
- * Initialize MongoDB connection
- * MongoDB is optional - if not configured or unavailable, the system continues without it
+ * Initialize MongoDB connection (optional)
  */
 async function initMongoDB() {
   try {
-    const uri = process.env.MONGO_URI;
-    
-    // If no MongoDB URI is configured, skip silently
+    const uri = DB_CONFIG.mongodb.uri;
+
     if (!uri) {
-      logger.info('MongoDB not configured (MONGO_URI not set) - skipping MongoDB initialization');
+      logger.info('ℹ️  MongoDB not configured (MONGO_URI not set)');
       return null;
     }
-    
+
     const Client = loadMongoDriver();
+    if (!Client) {
+      logger.warn('⚠️  MongoDB driver not available');
+      return null;
+    }
+
+    logger.info('🔗 Connecting to MongoDB...');
+
     mongoClient = new Client(uri, {
       maxPoolSize: 20,
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
+      retryWrites: true,
     });
 
     await mongoClient.connect();
     await mongoClient.db('admin').command({ ping: 1 });
 
     mongoConnected = true;
-    logger.info('MongoDB connection established successfully');
+    logger.info('✅ MongoDB connected successfully');
+
     return mongoClient;
   } catch (error) {
     mongoConnected = false;
-    // Only log as warning since MongoDB is optional
-    logger.warn('MongoDB connection failed - continuing without MongoDB (optional datastore)', { 
-      error: error.message 
-    });
+    logger.warn('⚠️  MongoDB connection failed (optional):', error.message);
     return null;
   }
 }
 
+// ============================================================================
+// REDIS CONNECTION
+// ============================================================================
+
 /**
- * Initialize all database connections.
- *
- * PostgreSQL is the authoritative datastore for most of the platform, so its
- * failure is treated as a real initialization error. MongoDB is used by
- * exactly one service (aiBackboneService, for fraud patterns) and is
- * deliberately optional: a Mongo failure is logged and tracked on its own
- * (mongoInitializationError / isHealthy().mongodb) without flipping
- * initializationError or fallback mode for the whole platform.
+ * Initialize Redis connection (optional)
+ */
+async function initRedis() {
+  try {
+    let redis;
+    try {
+      redis = require('redis');
+    } catch (error) {
+      logger.warn('⚠️  Redis client not available');
+      return null;
+    }
+
+    const config = DB_CONFIG.redis;
+    logger.info('🔗 Connecting to Redis...');
+
+    redisClient = redis.createClient({
+      host: config.host,
+      port: config.port,
+      password: config.password,
+      db: config.db,
+      socket: {
+        reconnectStrategy: (retries) => {
+          if (retries > 10) {
+            logger.error('Redis max retries exceeded');
+            return new Error('Max retries exceeded');
+          }
+          return retries * 100;
+        },
+      },
+    });
+
+    redisClient.on('error', (error) => {
+      logger.error('Redis error:', error.message);
+      redisConnected = false;
+    });
+
+    redisClient.on('connect', () => {
+      logger.info('✅ Redis connected');
+      redisConnected = true;
+    });
+
+    await redisClient.connect();
+    return redisClient;
+  } catch (error) {
+    logger.warn('⚠️  Redis connection failed (optional):', error.message);
+    return null;
+  }
+}
+
+// ============================================================================
+// MASTER INITIALIZATION
+// ============================================================================
+
+/**
+ * Initialize all database connections
  */
 async function initialize() {
-  if (initializationCompleted) {
-    return { pgPool, mongoClient };
+  if (dbInitialized) {
+    return { pgPool, mongoClient, redisClient };
   }
 
   try {
-    await initPostgreSQL();
-    initializationError = null;
-  } catch (error) {
-    initializationError = error;
-    logger.warn('PostgreSQL initialization failed; continuing in fallback mode', { error: error.message });
-  }
+    // PostgreSQL is mandatory
+    try {
+      await initPostgreSQL();
+      initializationError = null;
+    } catch (error) {
+      initializationError = error;
+      logger.warn('⚠️  PostgreSQL initialization failed');
+      // Don't throw - we'll continue with fallback mode
+    }
 
-  try {
+    // MongoDB is optional
     await initMongoDB();
-    mongoInitializationError = null;
-  } catch (error) {
-    mongoInitializationError = error;
-    logger.warn('MongoDB initialization failed; continuing without MongoDB (optional datastore)', { error: error.message });
-  }
 
-  initializationCompleted = true;
-  if (!initializationError && !mongoInitializationError) {
-    logger.info('All database connections initialized');
+    // Redis is optional
+    await initRedis();
+
+    dbInitialized = true;
+    logger.info('✅ Database initialization complete');
+
+    return { pgPool, mongoClient, redisClient };
+  } catch (error) {
+    logger.error('Fatal database initialization error:', error);
+    throw error;
   }
-  return { pgPool, mongoClient };
 }
+
+// ============================================================================
+// GETTERS
+// ============================================================================
 
 /**
  * Get PostgreSQL pool
  */
 function getPostgreSQL() {
   if (!pgPool) {
+    logger.error('PostgreSQL pool not initialized');
     return null;
   }
   return pgPool;
@@ -184,7 +279,6 @@ function getPostgreSQL() {
 
 /**
  * Get MongoDB client
- * Returns null if MongoDB is not configured or not connected
  */
 function getMongoDB() {
   if (!mongoClient || !mongoConnected) {
@@ -195,31 +289,44 @@ function getMongoDB() {
 
 /**
  * Get MongoDB database
- * Returns null if MongoDB is not configured or not connected
  */
 function getMongoDatabase() {
   if (!mongoClient || !mongoConnected) {
     return null;
   }
-  const dbName = process.env.MONGO_DATABASE || 'afrera_mongo';
-  return mongoClient.db(dbName);
+  return mongoClient.db(DB_CONFIG.mongodb.database);
 }
 
 /**
- * Health check for databases
+ * Get Redis client
+ */
+function getRedis() {
+  if (!redisClient || !redisConnected) {
+    return null;
+  }
+  return redisClient;
+}
+
+// ============================================================================
+// HEALTH CHECK
+// ============================================================================
+
+/**
+ * Check database health
  */
 function isHealthy() {
-  const pgHealthy = pgPool !== null && initializationError === null;
-  const mongoHealthy = mongoClient !== null && mongoConnected;
   return {
-    postgresql: pgHealthy,
-    mongodb: mongoHealthy,
-    // PostgreSQL is the authoritative datastore; MongoDB is optional (used by
-    // exactly one service), so overall health does not depend on it.
-    overall: pgHealthy,
+    postgresql: pgPool !== null && initializationError === null,
+    mongodb: mongoClient !== null && mongoConnected,
+    redis: redisClient !== null && redisConnected,
+    overall: pgPool !== null && initializationError === null,
     fallback: initializationError !== null,
   };
 }
+
+// ============================================================================
+// CLEANUP
+// ============================================================================
 
 /**
  * Close all database connections
@@ -228,32 +335,46 @@ async function close() {
   try {
     if (pgPool) {
       await pgPool.end();
-      logger.info('PostgreSQL connection closed');
+      logger.info('✓ PostgreSQL pool closed');
     }
+
     if (mongoClient) {
       await mongoClient.close();
       mongoConnected = false;
-      logger.info('MongoDB connection closed');
+      logger.info('✓ MongoDB connection closed');
+    }
+
+    if (redisClient) {
+      await redisClient.quit();
+      redisConnected = false;
+      logger.info('✓ Redis connection closed');
     }
   } catch (error) {
-    logger.error('Error closing database connections', { error: error.message, stack: error.stack });
-    throw error;
+    logger.error('Error closing database connections:', error);
   }
 }
 
-// Initialize on module load if not in test mode
+// ============================================================================
+// AUTO-INITIALIZATION (if not in test mode)
+// ============================================================================
+
 if (process.env.NODE_ENV !== 'test') {
   initialize().catch(error => {
-    logger.warn('Database initialization deferred to fallback mode', { error: error.message });
+    logger.warn('Database initialization deferred to fallback mode:', error.message);
   });
 }
+
+// ============================================================================
+// EXPORTS
+// ============================================================================
 
 module.exports = {
   initialize,
   getPostgreSQL,
   getMongoDB,
   getMongoDatabase,
+  getRedis,
   isHealthy,
   close,
+  DB_CONFIG,
 };
-

@@ -1,0 +1,12 @@
+'use strict';
+const express = require('express');
+const { authMiddleware, requireRole } = require('../../middleware/auth');
+const controller = require('./controller');
+const router = express.Router();
+router.get('/', authMiddleware, controller.list);
+router.post('/recommendation', authMiddleware, controller.recommendation);
+router.get('/:id', authMiddleware, controller.get);
+router.post('/', authMiddleware, requireRole('farmer', 'admin', 'horticulture_manager'), controller.create);
+router.put('/:id', authMiddleware, requireRole('farmer', 'admin', 'horticulture_manager'), controller.update);
+router.delete('/:id', authMiddleware, requireRole('admin', 'horticulture_manager'), controller.remove);
+module.exports = router;

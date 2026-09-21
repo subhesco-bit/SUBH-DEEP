@@ -1,0 +1,30 @@
+[
+  {
+    "path": "frontend/src/pages/AnalyticsPage.jsx",
+    "headStatus": "real",
+    "headLines": 143,
+    "currentStatus": "skeleton",
+    "currentLines": 2
+  },
+  {
+    "path": "frontend/src/pages/DashboardPage.jsx",
+    "headStatus": "real",
+    "headLines": 221,
+    "currentStatus": "skeleton",
+    "currentLines": 2
+  },
+  {
+    "path": "frontend/src/pages/Generated/Page0.jsx",
+    "headStatus": "real",
+    "headLines": 129,
+    "currentStatus": "partial",
+    "currentLines": 129
+  },
+  {
+    "path": "frontend/src/pages/Generated/Page2.jsx",
+    "headStatus": "real",
+    "headLines": 96,
+    "currentStatus": "partial",
+    "currentLines": 96
+  }
+]

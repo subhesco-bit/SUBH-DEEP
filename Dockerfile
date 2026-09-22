@@ -2,18 +2,21 @@
 # Production-ready deployment with optimization
 
 # Stage 1: Build
-FROM node:20-alpine AS builder
+FROM node:18-alpine AS builder
 
 WORKDIR /app
 
-# Copy package files first for layer caching. This repository has no root
-# package manifest; frontend and backend are independent workspaces.
+# Copy package files
+COPY package*.json ./
 COPY frontend/package*.json ./frontend/
 COPY backend/package*.json ./backend/
+
+# Install dependencies
+RUN npm ci --only=production
 WORKDIR /app/frontend
-RUN npm ci
+RUN npm ci --only=production
 WORKDIR /app/backend
-RUN npm ci --omit=dev
+RUN npm ci --only=production
 
 # Copy source code
 COPY . .
@@ -23,7 +26,7 @@ WORKDIR /app/frontend
 RUN npm run build
 
 # Stage 2: Production
-FROM node:20-alpine AS production
+FROM node:18-alpine AS production
 
 WORKDIR /app
 
@@ -35,9 +38,11 @@ RUN addgroup -g 1001 -S afrera && \
     adduser -S afrera -u 1001
 
 # Copy dependencies and built frontend
+COPY --from=builder --chown=afrera:afrera /app/node_modules ./node_modules
 COPY --from=builder --chown=afrera:afrera /app/backend/node_modules ./backend/node_modules
 COPY --from=builder --chown=afrera:afrera /app/backend ./backend
 COPY --from=builder --chown=afrera:afrera /app/frontend/dist ./frontend/dist
+COPY --from=builder --chown=afrera:afrera /app/package*.json ./
 
 # Create necessary directories
 RUN mkdir -p uploads logs && \

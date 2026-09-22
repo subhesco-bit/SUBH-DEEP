@@ -1,36 +1,10 @@
 ---
 agent: api-tester
-status: warn
+status: fail
 findings: 14
 ---
 
 # API Linkage Audit — Backend ↔ Frontend Cross-Reference
-
-## 2026-09-02 follow-up
-
-This follow-up rechecked the current tree and fixed four high-confidence
-frontend linkage defects:
-
-- `frontend/src/config/env.js`: replaced the invalid literal API URL default.
-- `frontend/src/services/api.js`: accepts the documented
-  `VITE_API_BASE_URL` as well as `VITE_API_URL`; added analytics platform and
-  market-trend methods.
-- `frontend/src/pages/AdvancedAnalyticsDashboard.jsx`: replaced raw
-  `/api/analytics/*` fetches with authenticated `analyticsAPI` calls targeting
-  the mounted `/api/v1/analytics/*` routes.
-- `frontend/src/modules/M149/M149Page.jsx`: replaced the non-existent root
-  `/api/v1/` fetch with the real `/api/v1/protected-cultivation` CRUD endpoint.
-
-Remaining blockers include the previously documented unmatched endpoint
-families (platform-core, animal-health verbs, breeding outcome paths, pig FCR,
-and M056 CRUD), 59 generated module stubs that still fetch `/api/v1/`, and raw
-notification/error-log calls with no backend route. These require product or
-backend decisions and were not “fixed” by guessing routes.
-
-Targeted checks: backend API wiring verification completed (1,879 wired
-endpoints, 131 heuristic warnings); route-service audit completed. Frontend
-build could not run because `frontend/node_modules` is absent (`vite` not
-found).
 
 **Scope:** `backend/src/index.js` (215 mount statements, 3 distinct mounting
 patterns) cross-referenced against every real backend route

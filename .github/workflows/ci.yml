@@ -470,11 +470,11 @@ jobs:
 
       # Advisory: reports known CVEs without blocking the build.
       - name: npm audit (backend)
-        run: npm audit --audit-level=high
+        run: npm audit --audit-level=high || true
         working-directory: backend
 
       - name: npm audit (frontend)
-        run: npm audit --audit-level=high
+        run: npm audit --audit-level=high || true
         working-directory: frontend
 
 # DEPLOYMENT

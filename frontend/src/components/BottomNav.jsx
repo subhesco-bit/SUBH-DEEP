@@ -11,8 +11,8 @@ const NAV_ITEMS = [
 export default function BottomNav() {
   const { pathname } = useLocation()
   return (
-    <nav aria-label="Primary" className="fixed bottom-0 left-0 right-0 z-sticky bg-white border-t border-gray-200 lg:hidden pb-[env(safe-area-inset-bottom)]">
-      <div className="max-w-4xl mx-auto flex justify-around px-2 py-2">
+    <nav aria-label="Primary" className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 lg:hidden">
+      <div className="max-w-4xl mx-auto flex justify-around py-2">
         {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.to
           return (

@@ -9,7 +9,6 @@ import { Card } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { LoadingSkeleton } from '../components/ui/enhancedComponents';
 import { EnhancedErrorBoundary } from '../components/ErrorBoundary/EnhancedErrorBoundary';
-import { analyticsAPI } from '../services/api';
 
 const AdvancedAnalyticsDashboard = () => {
   const [timeRange, setTimeRange] = useState('30d');
@@ -18,20 +17,18 @@ const AdvancedAnalyticsDashboard = () => {
   // Fetch platform analytics
   const { data: platformData, isLoading: platformLoading, error: platformError } = useQuery({
     queryKey: ['platformAnalytics', timeRange],
-    queryFn: async () => {
-      const response = await analyticsAPI.getPlatform({ timeRange });
-      return response.data.data;
-    },
+    queryFn: () => fetch(`/api/analytics/platform?timeRange=${timeRange}`)
+      .then(res => res.json())
+      .then(res => res.data),
     refetchInterval: 300000 // 5 minutes
   });
 
   // Fetch market trends
   const { data: marketData, isLoading: marketLoading } = useQuery({
     queryKey: ['marketTrends', 'rice', timeRange],
-    queryFn: async () => {
-      const response = await analyticsAPI.getMarketTrends({ cropType: 'rice', timeRange });
-      return response.data.data;
-    },
+    queryFn: () => fetch(`/api/analytics/market/trends?cropType=rice&timeRange=${timeRange}`)
+      .then(res => res.json())
+      .then(res => res.data),
     enabled: !!platformData
   });
 

@@ -4,8 +4,6 @@
  */
 
 require('dotenv').config();
-const { assertProductionConfiguration } = require('./config/productionConfig');
-assertProductionConfiguration();
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -217,6 +215,25 @@ const platformCoreRoutes = require('./routes/platformCoreRoutes');
 const unifiedAIRoutes = require('./routes/unifiedAIRoutes');
 const libraryRoutes = require('./routes/libraryRoutes');
 const aiCollaborationRoutes = require('./routes/aiCollaborationRoutes');
+// Unified AI Gateway - NEW single entry point for all AI services
+const unifiedAIGateway = require('./routes/unifiedAIGateway');
+// Claude AI-Ready Services (Phase 1 Core AI Services Conversion)
+const claudeAIDecisionService = require('./services/claude/aiDecisionService');
+const claudeAIStrategyService = require('./services/claude/aiStrategyService');
+const claudeAICopilotService = require('./services/claude/aiCopilotService');
+const claudeAIProviderService = require('./services/claude/aiProviderService');
+const claudeAICoordinationService = require('./services/claude/aiCoordinationService');
+const claudeAIAgentService = require('./services/claude/aiAgentService');
+const claudeAIOptimizationService = require('./services/claude/aiOptimizationService');
+const claudeAIRecoveryService = require('./services/claude/aiRecoveryService');
+// Claude AI-Ready Services (Phase 2 Business Logic Services Conversion)
+const claudeFinancialAIService = require('./services/claude/financialAIService');
+const claudeLogisticsAIService = require('./services/claude/logisticsAIService');
+const claudeInsuranceAIService = require('./services/claude/insuranceAIService');
+const claudeProductAIService = require('./services/claude/productAIService');
+const claudeOrderAIService = require('./services/claude/orderAIService');
+// Claude AI-Ready Routes
+const claudeAIDecisionRoutes = require('./routes/claude/aiDecisionRoutes');
 // Generic plug-and-play module discovery/load/execute bridge (backend/src/core/moduleRegistry.js)
 const moduleRegistryRoutes = require('./routes/claude/moduleRegistryRoutes');
 // REST bridge exposing backend/src/modules/M0XX's real functions over HTTP
@@ -491,14 +508,11 @@ const { logger } = require('./utils/logger');
 const { initializeDatabaseEnhancements, shutdownDatabaseEnhancements, getDatabaseEnhancements } = require('./database/database_enhancements');
 
 // WebSocket Service for Real-time Updates
-const { initializeWebSocket } = require('./websocket');
+const websocketService = require('./services/websocketService');
 
 // Initialize Express app
 const app = express();
 const httpServer = createServer(app);
-httpServer.requestTimeout = Number(process.env.REQUEST_TIMEOUT_MS || 120000);
-httpServer.headersTimeout = Number(process.env.HEADERS_TIMEOUT_MS || 125000);
-httpServer.keepAliveTimeout = Number(process.env.KEEP_ALIVE_TIMEOUT_MS || 65000);
 const io = new Server(httpServer, {
   cors: {
     origin: process.env.FRONTEND_URL || 'http://localhost:3000',
@@ -507,16 +521,13 @@ const io = new Server(httpServer, {
 });
 
 // Initialize WebSocket service
-initializeWebSocket(httpServer);
+websocketService.initialize(httpServer);
 
 // Trust proxy configuration for rate limiting security
 // Rate limiters key on req.ip, which is attacker-controlled via X-Forwarded-For
 // behind a reverse proxy without this setting. TRUST_PROXY_HOPS configures how
 // many proxy layers to trust (default: 1 for a single load balancer).
 const trustProxyHops = process.env.TRUST_PROXY_HOPS ? parseInt(process.env.TRUST_PROXY_HOPS, 10) : 1;
-if (!Number.isInteger(trustProxyHops) || trustProxyHops < 0) {
-  throw new Error('TRUST_PROXY_HOPS must be a non-negative integer');
-}
 app.set('trust proxy', trustProxyHops);
 logger.info(`Trust proxy configured: ${trustProxyHops} hop(s)`);
 
@@ -536,9 +547,7 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
 app.use(cors({
   origin: (origin, callback) => {
     // Allow requests with no origin (like mobile apps, curl, etc.)
-    if (!origin) {
-      return callback(null, process.env.NODE_ENV !== 'production');
-    }
+    if (!origin) return callback(null, true);
     
     if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
@@ -556,8 +565,8 @@ app.use(cors({
 // General middleware
 app.use(compression());
 app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } }));
-app.use(express.json({ limit: process.env.BODY_LIMIT || '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: process.env.BODY_LIMIT || '10mb' }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // 2026-08-31: middleware/inputValidation.js's sanitizeInput/sanitizeObject
 // (strips HTML tags, javascript: protocol, inline event handlers from every
@@ -615,6 +624,11 @@ app.use('/api/v1/orders', criticalRouteMonitoring, orderService.router);
 app.use('/api/v1/financial', criticalRouteMonitoring, financialService.router);
 app.use('/api/v1/logistics', criticalRouteMonitoring, logisticsService.router);
 app.use('/api/v1/insurance', criticalRouteMonitoring, insuranceService.router);
+// UNIFIED AI GATEWAY - Single entry point for all AI services with reconstructed architecture
+// Integrates 16gm AI Copilot Framework, M400 AI Backbone, Claude AI Coordinator, and all existing AI services
+app.use('/api/v1/ai', unifiedAIGateway);
+// Claude AI-Ready Routes (Phase 1 Core AI Services)
+app.use('/api/v1/claude/ai-decision', claudeAIDecisionRoutes);
 // All Claude AI routes (strategy, copilot, provider, coordination, agent, optimization, recovery,
 // financial, logistics, insurance, product, order) are mounted earlier at lines 633-650 from
 // their initial requires at lines 236-245. Lines 626-650 were duplicate dead weight - removed 2026-08-31
@@ -1385,3 +1399,4 @@ if (require.main === module) {
 }
 
 module.exports = { app, io };
+

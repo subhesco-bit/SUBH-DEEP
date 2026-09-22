@@ -18,18 +18,18 @@ function Footer() {
               Empowering farmers and connecting rural India through technology and fair trade practices.
             </p>
             <div className="flex space-x-4">
-              <span aria-label="AFRERA Facebook presence coming soon" title="Coming soon" className="text-gray-600">
+              <a href="#" className="text-gray-400 hover:text-white transition">
                 <Facebook className="w-5 h-5" />
-              </span>
-              <span aria-label="AFRERA Twitter presence coming soon" title="Coming soon" className="text-gray-600">
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition">
                 <Twitter className="w-5 h-5" />
-              </span>
-              <span aria-label="AFRERA Instagram presence coming soon" title="Coming soon" className="text-gray-600">
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition">
                 <Instagram className="w-5 h-5" />
-              </span>
-              <span aria-label="AFRERA LinkedIn presence coming soon" title="Coming soon" className="text-gray-600">
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition">
                 <Linkedin className="w-5 h-5" />
-              </span>
+              </a>
             </div>
           </div>
 

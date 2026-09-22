@@ -227,12 +227,6 @@
   * {
     @apply border-border;
   }
-
-  :focus-visible {
-    outline: 3px solid hsl(var(--ring));
-    outline-offset: 2px;
-  }
-
   body {
     @apply bg-background text-foreground;
   }

@@ -19,6 +19,7 @@ import {
   Warehouse,
   Wheat,
   Workflow,
+  Orbit,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatRupee } from "@/lib/erp/money";
@@ -49,6 +50,7 @@ const NAV = [
   { to: "/companion", label: "Companion", icon: Ear },
   { to: "/modules", label: "Modules", icon: Workflow },
   { to: "/charter", label: "Charter", icon: Scale },
+  { to: "/os", label: "OS", icon: Orbit },
   { to: "/systems", label: "Systems", icon: Cpu },
 ] as const;
 

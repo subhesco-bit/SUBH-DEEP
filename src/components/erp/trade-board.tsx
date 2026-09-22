@@ -212,6 +212,32 @@ export function TradeBoard() {
       </section>
 
       <section className="rounded-2xl border border-border bg-surface p-5">
+        <h3 className="font-display text-xl">FUS shelf</h3>
+        <p className="mt-1 text-sm text-muted">
+          Ranked by FUS-v1 on declared food axes. Affordability stays blank. No SKU affinity.
+        </p>
+        {!(books?.fus ?? []).length ? (
+          <p className="mt-3 text-sm text-muted">No declared FUS axes yet.</p>
+        ) : (
+          <ul className="mt-3 divide-y divide-border">
+            {[...(books?.fus ?? [])]
+              .sort((a, b) => b.score - a.score)
+              .map((f) => (
+                <li key={f.variety} className="flex flex-wrap items-center justify-between gap-2 py-3">
+                  <div>
+                    <p className="text-sm">{f.variety}</p>
+                    <p className="font-mono text-[11px] text-muted">
+                      n{f.nutrition} · s{f.satiety} · t{f.taste} · c{f.culture} · v{f.convenience}
+                    </p>
+                  </div>
+                  <Badge variant="partial">FUS {f.score}</Badge>
+                </li>
+              ))}
+          </ul>
+        )}
+      </section>
+
+      <section className="rounded-2xl border border-border bg-surface p-5">
         <h3 className="font-display text-xl">Kitchen memory</h3>
         <p className="mt-1 text-sm text-muted">Dishes imply varieties. Magh is not a residual.</p>
         {kitchen.length === 0 ? (

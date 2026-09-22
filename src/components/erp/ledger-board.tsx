@@ -157,6 +157,24 @@ export function LedgerBoard() {
             </ul>
           )}
         </section>
+        <section className="rounded-2xl border border-border bg-surface p-5">
+          <h3 className="font-display text-xl">Schemes</h3>
+          <p className="mt-1 text-sm text-muted">Eligibility is a cell fact. Amount stays undeclared.</p>
+          {(books?.schemes ?? []).length === 0 ? (
+            <p className="mt-3 text-sm text-muted">No scheme offers yet.</p>
+          ) : (
+            <ul className="mt-3 space-y-2">
+              {(books?.schemes ?? []).slice(0, 12).map((s) => (
+                <li key={s.id} className="flex flex-wrap items-center justify-between gap-2 text-sm">
+                  <span>
+                    {s.cellName} · {s.scheme}
+                  </span>
+                  <Badge variant={s.eligible ? "live" : "gap"}>{s.eligible ? "eligible · ₹ blank" : "not eligible"}</Badge>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
       </aside>
     </div>
   );

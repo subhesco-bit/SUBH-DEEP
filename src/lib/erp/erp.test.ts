@@ -15,6 +15,8 @@ import {
   kitchenImplies,
   offerNextSeason,
   LANGTHASA_MASTER_POLICY,
+  LANGTHASA_WEATHER_POLICY,
+  LANGTHASA_HERD_POLICY,
   NEXT_SEASON,
   remainingAfterSpoilage,
   mintGiBirth,
@@ -24,6 +26,14 @@ import {
   weightedAverageCostPaisePerKg,
   intakeWac,
   issueAtWac,
+  foodUtilityScore,
+  fusForVariety,
+  evaluateWeatherCover,
+  evaluateHerdCover,
+  weatherReflex,
+  energyProcessGate,
+  schemeEligible,
+  assertDeclaredReading,
 } from "./kernel.ts";
 import { exceptions, fpoPnl, processMass, trialBalance } from "./platform.ts";
 
@@ -75,6 +85,63 @@ describe("pulse remainder", () => {
     assert.equal(post.qtyGrams, 40000);
     assert.equal(declaredCostPerKg(68800, 840000), 82);
     assert.equal(declaredCostPerKg(0, 840000), null);
+  });
+});
+
+describe("named remainder", () => {
+  it("scores FUS-v1 on declared food axes and never invents affordability", () => {
+    const chakhao = fusForVariety("Chakhao Poireiton");
+    assert.ok(chakhao);
+    assert.equal(chakhao.complete, false);
+    assert.equal(chakhao.version, "FUS-v1");
+    assert.equal(chakhao.score, Math.round((78 + 72 + 84 + 94 + 42) / 5));
+    assert.equal(fusForVariety("unknown millet"), null);
+    const withRupee = foodUtilityScore({
+      nutrition: 78, satiety: 72, taste: 84, culture: 94, convenience: 42, affordability: 50,
+    });
+    assert.equal(withRupee.complete, true);
+    assert.throws(() => foodUtilityScore({ nutrition: 101, satiety: 0, taste: 0, culture: 0, convenience: 0, affordability: null }));
+  });
+
+  it("binds weather and herd cover without inventing a premium", () => {
+    const w = evaluateWeatherCover("Langthasa");
+    assert.equal(w.status, "bound");
+    assert.equal(w.policyId, LANGTHASA_WEATHER_POLICY);
+    assert.equal(evaluateWeatherCover("unknown village").status, "gap");
+    const h = evaluateHerdCover(2);
+    assert.equal(h.status, "bound");
+    assert.equal(h.policyId, LANGTHASA_HERD_POLICY);
+    assert.equal(evaluateHerdCover(0).status, "gap");
+  });
+
+  it("opens a weather claim window and refuses to freeze EMI", () => {
+    const r = weatherReflex("unseasonal Magh rain");
+    assert.equal(r.claimWindow, true);
+    assert.equal(r.freezeEmi, false);
+    assert.equal(r.moratorium, "propose");
+    assert.throws(() => weatherReflex("  "));
+  });
+
+  it("blocks the mill on an active outage and leaves kWh undeclared", () => {
+    assert.equal(energyProcessGate({ status: "outage", kwh: null, active: true }).decision, "block");
+    assert.equal(energyProcessGate({ status: "ok", kwh: null, active: true }).decision, "defer");
+    assert.equal(energyProcessGate({ status: "ok", kwh: 40, active: true }).decision, "pass");
+  });
+
+  it("computes scheme eligibility with a blank rupee", () => {
+    const kisan = schemeEligible("PM-KISAN", { acresCenti: 240, plantingCount: 1, horticulture: false });
+    assert.equal(kisan.eligible, true);
+    assert.equal(kisan.amountPaise, null);
+    const midh = schemeEligible("MIDH", { acresCenti: 180, plantingCount: 1, horticulture: true });
+    assert.equal(midh.eligible, true);
+    const none = schemeEligible("PMFBY", { acresCenti: 120, plantingCount: 0, horticulture: false });
+    assert.equal(none.eligible, false);
+  });
+
+  it("refuses an undeclared IoT reading", () => {
+    assert.doesNotThrow(() => assertDeclaredReading({ entityId: "Langthasa godown", kind: "temperature", value: 31.4, unit: "C" }));
+    assert.throws(() => assertDeclaredReading({ entityId: "", kind: "temperature", value: 31.4, unit: "C" }));
+    assert.throws(() => assertDeclaredReading({ entityId: "godown", kind: "temperature", value: Number.NaN, unit: "C" }));
   });
 });
 

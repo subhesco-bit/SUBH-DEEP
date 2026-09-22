@@ -77,7 +77,7 @@ export const WORKFLOWS: WorkflowDef[] = [
       step("T2", "fabric", "AI cannot write price", "decision", "rupee", "ai-firewall", "fabric.allow"),
       step("T3", "erp-agents", "Price declared", "erp", "marketplace", "price-declared", "orders.price"),
       step("T4", "decision", "Price waterfall", "algorithm", "rupee", "price-waterfall", "decision.waterfall"),
-      step("T5", "ecommerce", "Rank by farmer rupee", "ai", "marketplace", "fvie-rank", "ecom.rank"),
+      step("T5", "ecommerce", "Rank by declared FUS", "ai", "marketplace", "fvie-rank", "ecom.rank"),
       step("T6", "brain", "Name the organ moved", "ai", "rupee", "fvie-rank", "brain.decide"),
       step("T7", "backbone", "Journal balance", "algorithm", "rupee", "journal-balance", "backbone.journal"),
       step("T8", "erp-agents", "paymentRef", "gate", "orders", "payment-ref", "orders.settle"),
@@ -110,10 +110,10 @@ export const WORKFLOWS: WorkflowDef[] = [
     enterprise: "intelligence",
     steps: [
       step("D1", "agricultural", "Genome organ", "domain", "crop", "library-consult", "agri.advise"),
-      step("D2", "advisory", "Weather reflex", "ai", "soil", "library-consult", "advisory.weather"),
+      step("D2", "advisory", "Weather reflex", "ai", "soil", "weather-reflex", "advisory.weather"),
       step("D3", "advanced", "Forecast as positioning", "ai", "ai", "ai-firewall", "advanced.score"),
       step("D4", "fabric", "No invented ₹", "decision", "rupee", "ai-firewall", "fabric.allow"),
-      step("D5", "decision", "Act or hide", "decision", "reflex", "copilot-next", "decision.act"),
+      step("D5", "decision", "Scheme eligibility, rupees blank", "decision", "finance", "scheme-eligible", "decision.act"),
     ],
   },
 ];

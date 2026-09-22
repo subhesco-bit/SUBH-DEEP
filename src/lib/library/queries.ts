@@ -128,6 +128,24 @@ export const CANONICAL_QUERIES: CanonicalQuery[] = [
     title: "Token economy",
     query: "How does the token economy pack library hits instead of dumping GitHub modules into an LLM?",
   },
+  {
+    id: "q20",
+    organId: "os",
+    title: "Super-organism registry",
+    query: "How does the digital super-organism classify every concept to runtime without inventing rupees?",
+  },
+  {
+    id: "q21",
+    organId: "os",
+    title: "Four-level enhance",
+    query: "How does AFRERA enhance each concept at component industry rural and future levels without inventing rupees?",
+  },
+  {
+    id: "q22",
+    organId: "fvie",
+    title: "FUS ranks the shelf",
+    query: "How does FUS-v1 food utility score rank Chakhao and ginger on declared nutrition satiety taste culture without inventing rupees?",
+  },
 ];
 
 export const CANONICAL_QUERY_COUNT = CANONICAL_QUERIES.length;

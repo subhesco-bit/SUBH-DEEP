@@ -27,7 +27,7 @@ async function applyAll(): Promise<PGlite> {
 }
 
 describe("database migrations", () => {
-  it("applies 0002–0011 on a fresh database and locks remaining mass", async () => {
+  it("applies 0002–0012 on a fresh database and locks remaining mass", async () => {
     const pg = await applyAll();
     const applied = await pg.query<{ name: string }>("select name from _migrations order by name");
     const names = applied.rows.map((r) => r.name);
@@ -40,6 +40,7 @@ describe("database migrations", () => {
     assert.ok(names.includes("0008_erp_platform.sql"));
     assert.ok(names.includes("0010_three_stalls.sql"));
     assert.ok(names.includes("0011_pulse_remainder.sql"));
+    assert.ok(names.includes("0012_named_remainder.sql"));
 
     const lots = await pg.query<{ is_nullable: string; column_default: string | null }>(
       `select is_nullable, column_default from information_schema.columns
@@ -94,7 +95,7 @@ describe("database migrations", () => {
     const text = await readFile(join(migrationsDir, "0006_schema_integrity.sql"), "utf8");
     await pg.exec(text);
     const n = await pg.query<{ n: number }>("select count(*)::int as n from _migrations");
-    assert.equal(n.rows[0]?.n, 9);
+    assert.equal(n.rows[0]?.n, 10);
     await pg.close();
   });
 });

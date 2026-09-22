@@ -41,7 +41,7 @@ describe("AI-integrated library", () => {
     assert.ok(d.bindings > 0);
     assert.ok(d.missingLigaments > 0, "the GitHub body is still unintegrated");
     assert.match(d.verdict, /Auto-operation can fire/);
-    assert.ok(d.priority.length >= 1, "FUS, weather, energy cloud still stall");
+    assert.ok(d.priority.length >= 1, "lifetime energy, live IoT, household baskets still stall");
     assert.equal(d.reflexesAnswered, CANONICAL_QUERY_COUNT);
     assert.equal(d.reflexesMissing, 0);
   });
@@ -65,7 +65,7 @@ describe("library auto-op integrates with the systems rack", () => {
     for (const q of CANONICAL_QUERIES) {
       assert.ok(known.has(q.organId), `${q.id} names unknown organ ${q.organId}`);
     }
-    assert.equal(CANONICAL_QUERY_COUNT, 19);
+    assert.equal(CANONICAL_QUERY_COUNT, 22);
   });
 
   it("q16 agentic reflex hits the skeleton card the systems rack names", () => {

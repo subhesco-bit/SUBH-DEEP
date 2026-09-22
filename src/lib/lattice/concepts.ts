@@ -35,7 +35,7 @@ export const CONCEPTS: Concept[] = [
     thesis:
       "The question is not how many megawatts to install. It is how to cut the lifetime cost of energy for the village economy, measured in ₹ per kg, litre, and hour.",
     silo:
-      "Named RECIE in the missing-platforms analysis. This organism books declared kWh onto the village ledger. No village energy cloud, no lifetime ₹/kg engine.",
+      "Named RECIE in the missing-platforms analysis. This organism books declared kWh onto the village ledger and holds an energy window. No lifetime ₹/kg engine.",
     prosperity:
       "Every kWh that spoils grain, idles a pump, or overprices logistics is a rupee taken from a farmer cell.",
     x: 78,
@@ -47,11 +47,11 @@ export const CONCEPTS: Concept[] = [
     short: "Food value",
     dora: "Tongue / taste",
     layer: "missing-organ",
-    status: "missing",
+    status: "partial",
     thesis:
       "Food is scored on nutrition, satiety, taste, affordability, culture, digestibility, and convenience — not calories in a catalog row.",
     silo:
-      "Named FVIE. Marketplace ranks GI products as SKUs. No Food Utility Score, no goal-based basket, no household nutrition loop.",
+      "This organism: FUS-v1 scores Chakhao and ginger on declared food axes. Affordability, household baskets, and FVIE culture still missing.",
     prosperity:
       "A GI crop that people will actually cook, stay full on, and afford is the only crop that repeats as demand.",
     x: 922,
@@ -163,7 +163,7 @@ export const CONCEPTS: Concept[] = [
     thesis:
       "Animals are a second genome of the rural cell: milk, meat, draught, risk, and veterinary cost.",
     silo:
-      "livestockService and veterinary specs exist beside crop, not through it. Chilling energy and fodder cost never meet RECIE or RCOP.",
+      "livestockService and veterinary specs exist beside crop, not through it. This organism: Ronghang herd is a cell fact under POL-LANGTHASA-HERD. Chilling energy and milk rupees still missing.",
     prosperity:
       "₹ per litre chilled is the honest livestock KPI — not headcount.",
     x: 678,
@@ -211,7 +211,7 @@ export const CONCEPTS: Concept[] = [
     thesis:
       "Sensors, weather, and soil health are the organism’s feet on the ground. They should trigger muscle, not dashboards.",
     silo:
-      "weatherAdvisory, soilHealth, IoT, and digitalTwin all exist. Ownership is unresolved (farmer_id vs entity_id). Two IoT systems are live and unreconciled.",
+      "This organism: Magh rain opens a claim window. A clerk-declared godown temperature lands on the twin. Live sensors and EMI freeze still missing.",
     prosperity:
       "A weather alert that does not freeze credit, open a claim window, or retask logistics is just a notification.",
     x: 322,
@@ -558,5 +558,23 @@ export const CONCEPTS: Concept[] = [
       "A companion that cannot mint a lot or name a rupee is not a second mind. It is another file next to the cell.",
     x: 618,
     y: 28,
+  },
+  {
+    id: "os",
+    name: "Digital Super-Organism",
+    short: "OS",
+    dora: "Whole body / operating system",
+    layer: "structure",
+    status: "living",
+    role: "bridge",
+    binds: ["ai", "erp", "farmer", "lot", "spine", "rupee"],
+    thesis:
+      "AFRERA is an India-first economic operating system, not an agriculture website. Concept → module → feature → user → workflow → rules → database → service → API → authorization → AI → ERP → page → component → test → telemetry is one chain. Four-level enhance follows classification.",
+    silo:
+      "This organism: Stage 0 catalog classifies every named concept. GitHub still has competing COMPLETE reports and mock JWT. Dual-truth: kernel vs platform.",
+    prosperity:
+      "A concept that cannot name a cell, a remaining gram, or a farmer rupee is documentation. Classification is the first ligament.",
+    x: 500,
+    y: 300,
   },
 ];

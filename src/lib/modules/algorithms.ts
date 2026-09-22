@@ -7,6 +7,12 @@ import {
   settlementAmounts,
   splitQtyWeighted,
   weightedAverageCostPaisePerKg,
+  fusForVariety,
+  weatherReflex,
+  energyProcessGate,
+  schemeEligible,
+  evaluateHerdCover,
+  evaluateWeatherCover,
 } from "../erp/kernel.ts";
 import { queryLibraryKnowledge } from "../library/match.ts";
 import { composeLibraryReading, diagnose } from "../library/diagnose.ts";
@@ -231,14 +237,18 @@ export function giFrame(ctx: RunContext): AlgorithmResult {
 }
 
 export function fvieRank(ctx: RunContext): AlgorithmResult {
-  const price = ctx.pricePaisePerKg ?? 0;
-  if (price <= 0) {
-    return { decision: "defer", reason: "Nothing honest to rank until a clerk declares farmgate.", payload: {} };
+  const fus = fusForVariety(ctx.variety ?? "");
+  if (!fus) {
+    return {
+      decision: "defer",
+      reason: "No declared FUS axes for this variety. Affordability stays blank.",
+      payload: { foodValue: null },
+    };
   }
   return {
-    decision: "propose",
-    reason: "Rank by declared farmer rupee, not SKU affinity.",
-    payload: { farmerPaisePerKg: price, energyPerKg: null, foodValue: null },
+    decision: "pass",
+    reason: `FUS-v1 ${fus.score} on declared food axes. Affordability blank.`,
+    payload: { foodValue: fus.score, fusVersion: fus.version, complete: fus.complete },
   };
 }
 
@@ -324,4 +334,61 @@ export function spoilageMass(ctx: RunContext): AlgorithmResult {
       payload: { remaining, qty },
     };
   }
+}
+
+export function weatherAlert(ctx: RunContext): AlgorithmResult {
+  const hazard = (ctx.query ?? "").trim() || "unseasonal Magh rain";
+  try {
+    const reflex = weatherReflex(hazard);
+    const cover = evaluateWeatherCover("Langthasa");
+    return {
+      decision: "pass",
+      reason: `weather.alert opens a claim window on ${cover.policyId ?? "gap"}. EMI freeze is refused.`,
+      payload: { hazard: reflex.hazard, claimWindow: true, freezeEmi: false, policyId: cover.policyId },
+    };
+  } catch (err) {
+    return {
+      decision: "block",
+      reason: err instanceof Error ? err.message : "Weather refused.",
+      payload: {},
+    };
+  }
+}
+
+export function herdCoverGate(ctx: RunContext): AlgorithmResult {
+  const head = ctx.qtyGrams && ctx.qtyGrams > 0 ? Math.round(ctx.qtyGrams) : 0;
+  if (head <= 0) {
+    return { decision: "defer", reason: "No declared headcount. Herd cover stays a gap.", payload: {} };
+  }
+  const cover = evaluateHerdCover(head);
+  return {
+    decision: cover.status === "bound" ? "pass" : "defer",
+    reason: cover.policyId ? `Herd binds ${cover.policyId}. Premium undeclared.` : "Herd cover gap.",
+    payload: { policyId: cover.policyId, head },
+  };
+}
+
+export function energyCloudGate(ctx: RunContext): AlgorithmResult {
+  const gate = energyProcessGate({
+    status: ctx.status === "outage" ? "outage" : "ok",
+    kwh: ctx.costPaise == null ? null : ctx.costPaise,
+    active: ctx.status === "outage",
+  });
+  return {
+    decision: gate.decision,
+    reason: gate.reason,
+    payload: { kwh: ctx.costPaise ?? null },
+  };
+}
+
+export function schemeGate(ctx: RunContext): AlgorithmResult {
+  const acres = ctx.grams ?? 0;
+  const plantings = ctx.giChainLength ?? 0;
+  const hort = /ginger|horticulture/i.test(ctx.variety ?? ctx.commodity ?? "");
+  const kisan = schemeEligible("PM-KISAN", { acresCenti: acres, plantingCount: plantings, horticulture: hort });
+  return {
+    decision: "pass",
+    reason: `${kisan.reason} Amount stays undeclared.`,
+    payload: { eligible: kisan.eligible, amountPaise: null },
+  };
 }

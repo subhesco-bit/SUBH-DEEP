@@ -108,6 +108,16 @@ export type StepPayload = {
   mintCount?: number;
   costPaise?: number;
   wacPaisePerKg?: number;
+  fusVersion?: string;
+  complete?: boolean;
+  hazard?: string;
+  claimWindow?: boolean;
+  freezeEmi?: boolean;
+  policyId?: string | null;
+  kwh?: number | null;
+  eligible?: boolean;
+  amountPaise?: number | null;
+  head?: number;
 };
 
 export type StepResult = {

@@ -1,0 +1,34 @@
+/** Suitability layer. Refuse harmful or invented offers before recommending. */
+
+import type { SuitabilityOffer, SuitabilityVerdict } from "./types.ts";
+
+export function assessSuitability(
+  offer: SuitabilityOffer,
+  opts: { declared?: boolean; premiumKnown?: boolean } = {},
+): SuitabilityVerdict {
+  if (offer === "loan") {
+    return { offer, suitable: false, refuse: true, reason: "No underwriting on this kernel. Do not invent a credit score." };
+  }
+  if (offer === "travel") {
+    return { offer, suitable: false, refuse: true, reason: "Travel is not this village. Do not clone agriculture UX." };
+  }
+  if (offer === "scheme") {
+    return { offer, suitable: false, refuse: true, reason: "Schemes are blood, not PDFs. Eligibility is not effective-dated yet." };
+  }
+  if (offer === "insurance-quote") {
+    return { offer, suitable: false, refuse: true, reason: "Do not invent a premium." };
+  }
+  if (offer === "price") {
+    if (!opts.declared) {
+      return { offer, suitable: false, refuse: true, reason: "salePricePerUnit is declared. AI never writes it." };
+    }
+    return { offer, suitable: true, refuse: false, reason: "Price is declared by the clerk." };
+  }
+  if (offer === "cover") {
+    if (opts.premiumKnown) {
+      return { offer, suitable: true, refuse: false, reason: "Cover and premium both declared." };
+    }
+    return { offer, suitable: true, refuse: false, reason: "Cover may bind. Premium stays unknown — never invented." };
+  }
+  return { offer, suitable: false, refuse: true, reason: "Unknown offer. Refuse." };
+}

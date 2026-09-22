@@ -8,6 +8,7 @@ import { HarvestForm } from "./harvest-form";
 import { LotActions } from "./lot-actions";
 import { useModuleOs } from "@/lib/modules/store";
 import { CompanionPanel } from "@/components/app/companion-panel";
+import { NeedNav } from "@/components/app/need-nav";
 import { exceptions } from "@/lib/erp/platform";
 import { proposeCompanion } from "@/lib/modules/companion";
 
@@ -64,6 +65,11 @@ export function BooksHome() {
           <p className="mt-3 rounded-xl border border-live/30 bg-background px-4 py-3 text-sm text-live">
             Copilot · {copilot}
           </p>
+        ) : null}
+        {books ? (
+          <div className="mt-5">
+            <NeedNav books={books} />
+          </div>
         ) : null}
         <ol className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-5">
           {FLOW.map((step) => (

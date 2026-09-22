@@ -51,6 +51,13 @@ export function CellsBoard() {
                         {p.variety} · {p.season} · {p.status} · {p.plotName}
                       </p>
                     ))}
+                  {(books?.herd ?? [])
+                    .filter((h) => h.cellId === c.id)
+                    .map((h) => (
+                      <p key={h.id} className="mt-1 font-mono text-[11px] text-live">
+                        {h.kind} · {h.head} head · {h.policyId ?? "cover gap"}
+                      </p>
+                    ))}
                 </div>
                 <div>
                   <Badge>{c.lotCount} lots</Badge>

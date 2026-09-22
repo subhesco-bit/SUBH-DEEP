@@ -97,6 +97,11 @@ function ProposalCard({ proposal }: { proposal: CompanionProposal }) {
       </div>
       <p className="mt-2 text-sm font-medium">{proposal.title}</p>
       <p className="mt-1 text-[13px] leading-relaxed text-muted">{proposal.body}</p>
+      {proposal.envelope ? (
+        <p className="mt-2 font-mono text-[11px] text-partial">
+          {proposal.envelope.actionBoundary} · {proposal.envelope.humanApproval} · {proposal.envelope.confidence}
+        </p>
+      ) : null}
       {done ? (
         <p className="mt-3 text-sm text-live">Clerk approved. Books moved.</p>
       ) : (

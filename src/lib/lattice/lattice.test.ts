@@ -98,12 +98,29 @@ describe("AFRERA lattice", () => {
       "b-spoilage-cascade",
       "b-thought-village",
       "b-thought-gi",
+      "b-os-registry",
+      "b-os-passport",
+      "b-os-intent",
+      "b-os-enhance",
+      "b-os-constitution",
+      "b-os-suit",
+      "b-os-grief",
+      "b-os-event",
+      "b-os-journey",
+      "b-fus-rank",
     ]) {
       assert.equal(byId[id]?.status, "living", id);
     }
     assert.equal(byId["b-harvest-insure"]?.status, "living");
     assert.equal(byId["b-demand-contract"]?.status, "living");
-    assert.equal(byId["b-fus-rank"]?.status, "partial", "FUS scores are not invented");
+    assert.equal(byId["b-weather-cascade"]?.status, "partial", "weather opens a window, does not retask logistics");
+    assert.equal(byId["b-livestock-cover"]?.status, "partial", "herd binds, milk claims still missing");
+    assert.equal(byId["b-gov-scheme"]?.status, "partial", "eligibility computed, rupees blank");
+    assert.equal(byId["b-iot-twin"]?.status, "partial", "live sensors are not invented");
+    assert.equal(byId["b-energy-process"]?.status, "partial", "kWh stays undeclared");
+    assert.equal(byId["b-energy-logistics"]?.status, "missing", "₹ per cold km is not painted living");
+    assert.equal(byId["b-thought-energy"]?.status, "missing", "lifetime energy intelligence stays named");
+    assert.equal(byId["b-household-basket"]?.status, "missing", "household FUS baskets stay named");
   });
 
   it("Living then Missing is the catalog order — Partial sits last", () => {

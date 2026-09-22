@@ -302,3 +302,147 @@ export function declaredCostPerKg(amountPaise: number, grams: number): number | 
   if (amountPaise <= 0 || grams <= 0) return null;
   return Math.round(amountPaise / (grams / 1000));
 }
+
+/** Declared weather and herd master policies. Premium unknown — never invented. */
+export const LANGTHASA_WEATHER_POLICY = "POL-LANGTHASA-WEATHER";
+export const LANGTHASA_HERD_POLICY = "POL-LANGTHASA-HERD";
+export const FUS_VERSION = "FUS-v1";
+
+export type FusAxes = {
+  nutrition: number;
+  satiety: number;
+  taste: number;
+  culture: number;
+  convenience: number;
+  affordability: number | null;
+};
+
+/** Organism-declared food axes. Not a lab, not an LLM, not a rupee. */
+export const DECLARED_FUS: Record<string, Omit<FusAxes, "affordability">> = {
+  chakhao: { nutrition: 78, satiety: 72, taste: 84, culture: 94, convenience: 42 },
+  ginger: { nutrition: 62, satiety: 38, taste: 70, culture: 76, convenience: 68 },
+};
+
+export function fusKey(variety: string): string | null {
+  const s = variety.trim().toLowerCase();
+  if (!s) return null;
+  if (s.includes("chakhao")) return "chakhao";
+  if (s.includes("ginger")) return "ginger";
+  return null;
+}
+
+export function foodUtilityScore(axes: FusAxes): { score: number; complete: boolean; version: string } {
+  const food = [axes.nutrition, axes.satiety, axes.taste, axes.culture, axes.convenience];
+  for (const n of food) {
+    if (!Number.isFinite(n) || n < 0 || n > 100) throw new Error("FUS axes are declared 0–100.");
+  }
+  if (axes.affordability != null && (!Number.isFinite(axes.affordability) || axes.affordability < 0 || axes.affordability > 100)) {
+    throw new Error("Affordability is declared 0–100 or blank.");
+  }
+  const parts = axes.affordability == null ? food : [...food, axes.affordability];
+  const score = Math.round(parts.reduce((a, b) => a + b, 0) / parts.length);
+  return { score, complete: axes.affordability != null, version: FUS_VERSION };
+}
+
+export function fusForVariety(variety: string): { score: number; complete: boolean; version: string } | null {
+  const key = fusKey(variety);
+  if (!key) return null;
+  const axes = DECLARED_FUS[key];
+  if (!axes) return null;
+  return foodUtilityScore({ ...axes, affordability: null });
+}
+
+export function evaluateWeatherCover(village: string, policyId?: string | null): CoverVerdict {
+  const named = (policyId ?? "").trim();
+  if (named) return { status: "bound", signal: "storage.covered", policyId: named };
+  if (/langthasa/i.test(village)) {
+    return { status: "bound", signal: "storage.covered", policyId: LANGTHASA_WEATHER_POLICY };
+  }
+  return { status: "gap", signal: "cover.gap", policyId: null };
+}
+
+export function evaluateHerdCover(head: number, policyId?: string | null): CoverVerdict {
+  if (head <= 0) return { status: "gap", signal: "cover.gap", policyId: null };
+  const named = (policyId ?? "").trim();
+  if (named) return { status: "bound", signal: "storage.covered", policyId: named };
+  return { status: "bound", signal: "storage.covered", policyId: LANGTHASA_HERD_POLICY };
+}
+
+export type WeatherReflex = {
+  signal: "weather.alert";
+  claimWindow: true;
+  moratorium: "propose";
+  freezeEmi: false;
+  hazard: string;
+};
+
+export function weatherReflex(hazard: string): WeatherReflex {
+  const named = hazard.trim();
+  if (!named) throw new Error("A weather hazard must be declared.");
+  return {
+    signal: "weather.alert",
+    claimWindow: true,
+    moratorium: "propose",
+    freezeEmi: false,
+    hazard: named,
+  };
+}
+
+export type EnergyWindowInput = {
+  status: "surplus" | "ok" | "outage";
+  kwh: number | null;
+  active: boolean;
+};
+
+export function energyProcessGate(window: EnergyWindowInput): { decision: "pass" | "block" | "defer"; reason: string } {
+  if (window.active && window.status === "outage") {
+    return { decision: "block", reason: "Active outage. Mill waits. kWh undeclared." };
+  }
+  if (window.kwh == null) {
+    return { decision: "defer", reason: "Window open. kWh still undeclared." };
+  }
+  if (window.kwh < 0) throw new Error("Declared kWh cannot be negative.");
+  return { decision: "pass", reason: `Declared ${window.kwh} kWh.` };
+}
+
+export function assertDeclaredReading(input: {
+  entityId: string;
+  kind: string;
+  value: number;
+  unit: string;
+}): void {
+  if (!input.entityId.trim()) throw new Error("Sensor entity is required.");
+  if (!input.kind.trim()) throw new Error("Reading kind is required.");
+  if (!input.unit.trim()) throw new Error("Unit is required.");
+  if (!Number.isFinite(input.value)) throw new Error("A clerk must declare the reading.");
+}
+
+export type SchemeCode = "PM-KISAN" | "PMFBY" | "MIDH";
+
+export function schemeEligible(
+  scheme: SchemeCode,
+  cell: { acresCenti: number; plantingCount: number; horticulture: boolean },
+): { eligible: boolean; amountPaise: null; reason: string } {
+  if (scheme === "PM-KISAN") {
+    const ok = cell.acresCenti > 0;
+    return {
+      eligible: ok,
+      amountPaise: null,
+      reason: ok ? "Acres on the cell. Amount stays undeclared." : "No acres on the cell.",
+    };
+  }
+  if (scheme === "PMFBY") {
+    const ok = cell.plantingCount > 0;
+    return {
+      eligible: ok,
+      amountPaise: null,
+      reason: ok ? "Magh planting on the cell. Premium stays undeclared." : "No planted-crop fact.",
+    };
+  }
+  const ok = cell.horticulture;
+  return {
+    eligible: ok,
+    amountPaise: null,
+    reason: ok ? "Horticulture on the cell. Subsidy rupees stay undeclared." : "No horticulture crop.",
+  };
+}

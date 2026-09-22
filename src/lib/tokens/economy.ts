@@ -8,9 +8,10 @@ import { DECISION_LAWS } from "../modules/charter.ts";
 import { MODULE_RUNTIME } from "../modules/registry.ts";
 import { WORKFLOWS } from "../modules/workflows.ts";
 import { AI_SYSTEMS } from "../systems/catalog.ts";
+import { composeOs } from "../os/compose.ts";
 import type { BooksSnapshot } from "../erp/types.ts";
 
-export type PluginId = "library" | "books" | "charter" | "systems" | "batch" | "llm-gate" | "cache";
+export type PluginId = "library" | "books" | "charter" | "systems" | "batch" | "llm-gate" | "cache" | "os";
 
 export type PluginPack = {
   id: PluginId;
@@ -96,8 +97,14 @@ function packSystems(): PluginPack {
   return { id: "systems", label: "Systems rack", tokens: estimateTokens(body), body };
 }
 
+function packOs(): PluginPack {
+  const os = composeOs();
+  const body = `${os.classified}c ${os.kernelVerified}v ${os.open}o`;
+  return { id: "os", label: "OS registry", tokens: estimateTokens(body), body };
+}
+
 export function compactEnvelope(query: string, books?: BooksSnapshot | null): { text: string; plugins: PluginPack[] } {
-  const plugins = [packLibrary(query), packBooks(books), packCharter(), packSystems()];
+  const plugins = [packLibrary(query), packBooks(books), packCharter(), packSystems(), packOs()];
   const text = `Q ${query.slice(0, 80)}|${plugins.map((p) => `${p.id}:${p.body}`).join("|")}|GATE0`;
   return { text, plugins };
 }

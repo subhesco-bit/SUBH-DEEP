@@ -19,6 +19,18 @@ import {
   settlementJournal,
   villageCostPost,
   villageSpoilagePost,
+  evaluateWeatherCover,
+  evaluateHerdCover,
+  weatherReflex,
+  assertDeclaredReading,
+  schemeEligible,
+  fusForVariety,
+  foodUtilityScore,
+  DECLARED_FUS,
+  FUS_VERSION,
+  LANGTHASA_MASTER_POLICY,
+  LANGTHASA_WEATHER_POLICY,
+  LANGTHASA_HERD_POLICY,
 } from "./kernel";
 import type {
   BooksKpis,
@@ -41,6 +53,12 @@ import type {
   PlantingRow,
   GiLinkRow,
   VillageLedgerRow,
+  HerdRow,
+  WeatherAlertRow,
+  EnergyWindowRow,
+  IotReadingRow,
+  SchemeOfferRow,
+  FusRow,
 } from "./types";
 
 let seedChain: Promise<void> | null = null;
@@ -1019,6 +1037,43 @@ export async function recordSpoilage(
   );
 }
 
+export async function recordWeatherAlert(sql: Sql, input: { village: string; hazard: string; windowNote: string }): Promise<void> {
+  const reflex = weatherReflex(input.hazard);
+  const village = input.village.trim() || FPO.village;
+  await sql.query(
+    `insert into erp_weather_alerts (id, village, hazard, window_note, claim_open, moratorium)
+     values ($1,$2,$3,$4,true,$5)`,
+    [nid("wx"), village, reflex.hazard, input.windowNote.trim().slice(0, 160) || reflex.hazard, reflex.moratorium],
+  );
+  await sql.query(
+    `insert into spine_events (signal, organ_id, ligament_id, payload)
+     values ($1,'soil','b-weather-cascade',$2::jsonb)`,
+    [
+      "weather.alert",
+      JSON.stringify({ villageId: village, hazard: reflex.hazard, claimWindow: true, freezeEmi: false }),
+    ],
+  );
+}
+
+export async function recordIotReading(
+  sql: Sql,
+  input: { entityId: string; cellId: string | null; kind: string; value: number; unit: string; note: string },
+): Promise<void> {
+  assertDeclaredReading({ entityId: input.entityId, kind: input.kind, value: input.value, unit: input.unit });
+  await sql.query(
+    `insert into erp_iot_readings (id, entity_id, cell_id, kind, value_num, unit, note)
+     values ($1,$2,$3,$4,$5,$6,$7)`,
+    [nid("iot"), input.entityId.trim(), input.cellId, input.kind.trim(), input.value, input.unit.trim(), input.note.trim().slice(0, 160)],
+  );
+}
+
+export async function declareEnergyKwh(sql: Sql, input: { windowId: string; kwh: number }): Promise<void> {
+  if (!Number.isFinite(input.kwh) || input.kwh < 0) throw new Error("Declared kWh cannot be negative.");
+  const row = await sql.query<{ id: string }>("select id from erp_energy_windows where id = $1", [input.windowId]);
+  if (!row[0]) throw new Error("Unknown energy window.");
+  await sql.query("update erp_energy_windows set kwh = $2 where id = $1", [input.windowId, Math.round(input.kwh)]);
+}
+
 async function seedPulseRemainder(sql: Sql): Promise<void> {
   try {
     await sql.query("select 1 from erp_plantings limit 1");
@@ -1132,6 +1187,150 @@ async function seedPulseRemainder(sql: Sql): Promise<void> {
         cause: "power cut",
       });
     }
+  }
+
+  await seedNamedRemainder(sql);
+}
+
+async function seedNamedRemainder(sql: Sql): Promise<void> {
+  try {
+    await sql.query("select 1 from erp_fus limit 1");
+  } catch {
+    return;
+  }
+
+  for (const [key, axes] of Object.entries(DECLARED_FUS)) {
+    const variety = key === "chakhao" ? "Chakhao Poireiton" : "Nadia ginger";
+    await sql.query(
+      `insert into erp_fus (variety, nutrition, satiety, taste, culture, convenience, version)
+       values ($1,$2,$3,$4,$5,$6,$7)
+       on conflict (variety) do nothing`,
+      [variety, axes.nutrition, axes.satiety, axes.taste, axes.culture, axes.convenience, FUS_VERSION],
+    );
+  }
+
+  await sql.query(
+    `insert into erp_policies (id, kind, village, premium_paise) values
+       ($1,'godown','Langthasa',null),
+       ($2,'weather','Langthasa',null),
+       ($3,'herd','Langthasa',null)
+     on conflict (id) do nothing`,
+    [LANGTHASA_MASTER_POLICY, LANGTHASA_WEATHER_POLICY, LANGTHASA_HERD_POLICY],
+  );
+
+  const plantings = await sql.query<{ id: string }>("select id from erp_plantings");
+  for (const p of plantings) {
+    const weather = evaluateWeatherCover("Langthasa");
+    if (weather.policyId) {
+      await sql.query(
+        `insert into erp_cover_bindings (id, subject_kind, subject_id, policy_id, status)
+         values ($1,'planting',$2,$3,'bound')
+         on conflict (subject_kind, subject_id, policy_id) do nothing`,
+        [`cv-pl-${p.id}`, p.id, weather.policyId],
+      );
+    }
+  }
+
+  const existingHerd = await sql.query<{ n: number }>("select count(*)::int as n from erp_herd");
+  if ((existingHerd[0]?.n ?? 0) === 0) {
+    const cattle = evaluateHerdCover(2);
+    const goats = evaluateHerdCover(4);
+    await sql.query(
+      `insert into erp_herd (id, cell_id, kind, head, policy_id, cover_status)
+       values ('herd-ronghang-cattle','c-ronghang','cattle',2,$1,'bound'),
+              ('herd-ronghang-goat','c-ronghang','goat',4,$2,'bound')
+       on conflict (cell_id, kind) do nothing`,
+      [cattle.policyId, goats.policyId],
+    );
+    for (const h of ["herd-ronghang-cattle", "herd-ronghang-goat"]) {
+      await sql.query(
+        `insert into erp_cover_bindings (id, subject_kind, subject_id, policy_id, status)
+         values ($1,'herd',$2,$3,'bound')
+         on conflict (subject_kind, subject_id, policy_id) do nothing`,
+        [`cv-${h}`, h, LANGTHASA_HERD_POLICY],
+      );
+    }
+    await sql.query(
+      `insert into spine_events (signal, organ_id, ligament_id, payload)
+       values ($1,'livestock','b-livestock-cover',$2::jsonb)`,
+      ["herd.covered", JSON.stringify({ cellId: "c-ronghang", policyId: LANGTHASA_HERD_POLICY, hazard: "outage" })],
+    );
+  }
+
+  const alerts = await sql.query<{ n: number }>("select count(*)::int as n from erp_weather_alerts");
+  if ((alerts[0]?.n ?? 0) === 0) {
+    const reflex = weatherReflex("unseasonal Magh rain");
+    await sql.query(
+      `insert into erp_weather_alerts (id, village, hazard, window_note, claim_open, moratorium)
+       values ('wx-langthasa-magh','Langthasa',$1,'Magh 2026 rain window on the Karbi hills',true,$2)`,
+      [reflex.hazard, reflex.moratorium],
+    );
+    await sql.query(
+      `insert into spine_events (signal, organ_id, ligament_id, payload)
+       values ($1,'soil','b-weather-cascade',$2::jsonb)`,
+      [
+        "weather.alert",
+        JSON.stringify({
+          villageId: "Langthasa",
+          hazard: reflex.hazard,
+          claimWindow: reflex.claimWindow,
+          freezeEmi: reflex.freezeEmi,
+        }),
+      ],
+    );
+  }
+
+  const windows = await sql.query<{ n: number }>("select count(*)::int as n from erp_energy_windows");
+  if ((windows[0]?.n ?? 0) === 0) {
+    await sql.query(
+      `insert into erp_energy_windows (id, village, status, kwh, note, active)
+       values
+         ('en-langthasa-cut','Langthasa','outage',null,'Power cut that spoiled 40 kg ginger',false),
+         ('en-langthasa-now','Langthasa','ok',null,'Village energy cloud — kWh undeclared',true)`,
+    );
+  }
+
+  const iot = await sql.query<{ n: number }>("select count(*)::int as n from erp_iot_readings");
+  if ((iot[0]?.n ?? 0) === 0) {
+    assertDeclaredReading({ entityId: "Langthasa godown", kind: "temperature", value: 31.4, unit: "C" });
+    await sql.query(
+      `insert into erp_iot_readings (id, entity_id, cell_id, kind, value_num, unit, note)
+       values ('iot-godown-temp','Langthasa godown','c-teron','temperature',31.4,'C','Declared godown temperature during the power cut')`,
+    );
+  }
+
+  const offers = await sql.query<{ n: number }>("select count(*)::int as n from erp_scheme_offers");
+  if ((offers[0]?.n ?? 0) === 0) {
+    const cells = await sql.query<{ id: string; acres_centi: number }>("select id, acres_centi from erp_cells");
+    const plantingCounts = await sql.query<{ cell_id: string; n: number }>(
+      "select cell_id, count(*)::int as n from erp_plantings group by cell_id",
+    );
+    const hort = await sql.query<{ cell_id: string }>(
+      "select distinct cell_id from erp_lots where commodity in ('ginger','turmeric') or variety ilike '%ginger%'",
+    );
+    const hortSet = new Set(hort.map((h) => h.cell_id));
+    const plantMap = Object.fromEntries(plantingCounts.map((p) => [p.cell_id, p.n]));
+    const schemes = ["PM-KISAN", "PMFBY", "MIDH"] as const;
+    for (const c of cells) {
+      for (const scheme of schemes) {
+        const verdict = schemeEligible(scheme, {
+          acresCenti: c.acres_centi,
+          plantingCount: plantMap[c.id] ?? 0,
+          horticulture: hortSet.has(c.id),
+        });
+        await sql.query(
+          `insert into erp_scheme_offers (id, cell_id, scheme, eligible, amount_paise, reason)
+           values ($1,$2,$3,$4,null,$5)
+           on conflict (cell_id, scheme) do nothing`,
+          [`sch-${c.id}-${scheme}`, c.id, scheme, verdict.eligible, verdict.reason],
+        );
+      }
+    }
+    await sql.query(
+      `insert into spine_events (signal, organ_id, ligament_id, payload)
+       values ($1,'ai','b-gov-scheme',$2::jsonb)`,
+      ["scheme.eligible", JSON.stringify({ village: "Langthasa", amountPaise: null })],
+    );
   }
 }
 
@@ -1247,6 +1446,8 @@ export async function readBooks(): Promise<BooksSnapshot> {
     plantingId: l.planting_id,
     giMinted: giMintedSet.has(l.id),
     mintedAt: asTime(l.minted_at),
+    fusScore: fusForVariety(l.variety)?.score ?? null,
+    fusComplete: false,
   }));
 
   const recRows = await sql.query<{
@@ -1603,5 +1804,142 @@ export async function readBooks(): Promise<BooksSnapshot> {
   kpis.villageTcoPaise = villageLedger.reduce((n, v) => n + v.amountPaise, 0);
   kpis.spoilageGrams = villageLedger.filter((v) => v.account === "spoilage").reduce((n, v) => n + v.qtyGrams, 0);
 
-  return { fpo, kpis, cells, lots, receipts, orders, journal, inputs, payouts, poolable, kitchen, contracts, plantings, giChain, villageLedger };
+  let herd: HerdRow[] = [];
+  let weatherAlerts: WeatherAlertRow[] = [];
+  let energyWindows: EnergyWindowRow[] = [];
+  let iotReadings: IotReadingRow[] = [];
+  let schemes: SchemeOfferRow[] = [];
+  let fus: FusRow[] = [];
+  try {
+    const herdRows = await sql.query<{
+      id: string;
+      cell_id: string;
+      cell_name: string;
+      kind: string;
+      head: number;
+      policy_id: string | null;
+      cover_status: CoverStatus;
+    }>(
+      `select h.id, h.cell_id, c.name as cell_name, h.kind, h.head, h.policy_id, h.cover_status
+       from erp_herd h join erp_cells c on c.id = h.cell_id
+       order by c.name, h.kind`,
+    );
+    herd = herdRows.map((h) => ({
+      id: h.id,
+      cellId: h.cell_id,
+      cellName: h.cell_name,
+      kind: h.kind,
+      head: h.head,
+      policyId: h.policy_id,
+      coverStatus: h.cover_status,
+    }));
+    const wxRows = await sql.query<{
+      id: string;
+      village: string;
+      hazard: string;
+      window_note: string;
+      claim_open: boolean;
+      moratorium: "propose" | "none";
+      created_at: string | Date;
+    }>("select id, village, hazard, window_note, claim_open, moratorium, created_at from erp_weather_alerts order by created_at desc");
+    weatherAlerts = wxRows.map((w) => ({
+      id: w.id,
+      village: w.village,
+      hazard: w.hazard,
+      windowNote: w.window_note,
+      claimOpen: w.claim_open,
+      moratorium: w.moratorium,
+      createdAt: asTime(w.created_at),
+    }));
+    const enRows = await sql.query<{
+      id: string;
+      village: string;
+      status: EnergyWindowRow["status"];
+      kwh: number | null;
+      note: string;
+      active: boolean;
+      created_at: string | Date;
+    }>("select id, village, status, kwh, note, active, created_at from erp_energy_windows order by active desc, created_at desc");
+    energyWindows = enRows.map((e) => ({
+      id: e.id,
+      village: e.village,
+      status: e.status,
+      kwh: e.kwh,
+      note: e.note,
+      active: e.active,
+      createdAt: asTime(e.created_at),
+    }));
+    const iotRows = await sql.query<{
+      id: string;
+      entity_id: string;
+      cell_id: string | null;
+      kind: string;
+      value_num: string | number;
+      unit: string;
+      note: string;
+      created_at: string | Date;
+    }>("select id, entity_id, cell_id, kind, value_num, unit, note, created_at from erp_iot_readings order by created_at desc");
+    iotReadings = iotRows.map((r) => ({
+      id: r.id,
+      entityId: r.entity_id,
+      cellId: r.cell_id,
+      kind: r.kind,
+      valueNum: Number(r.value_num),
+      unit: r.unit,
+      note: r.note,
+      createdAt: asTime(r.created_at),
+    }));
+    const schRows = await sql.query<{
+      id: string;
+      cell_id: string;
+      cell_name: string;
+      scheme: string;
+      eligible: boolean;
+      amount_paise: number | null;
+      reason: string;
+    }>(
+      `select s.id, s.cell_id, c.name as cell_name, s.scheme, s.eligible, s.amount_paise, s.reason
+       from erp_scheme_offers s join erp_cells c on c.id = s.cell_id
+       order by c.name, s.scheme`,
+    );
+    schemes = schRows.map((s) => ({
+      id: s.id,
+      cellId: s.cell_id,
+      cellName: s.cell_name,
+      scheme: s.scheme,
+      eligible: s.eligible,
+      amountPaise: s.amount_paise,
+      reason: s.reason,
+    }));
+    const fusRows = await sql.query<{
+      variety: string;
+      nutrition: number;
+      satiety: number;
+      taste: number;
+      culture: number;
+      convenience: number;
+      version: string;
+    }>("select variety, nutrition, satiety, taste, culture, convenience, version from erp_fus order by variety");
+    fus = fusRows.map((f) => ({
+      variety: f.variety,
+      nutrition: f.nutrition,
+      satiety: f.satiety,
+      taste: f.taste,
+      culture: f.culture,
+      convenience: f.convenience,
+      version: f.version,
+      score: foodUtilityScore({
+        nutrition: f.nutrition,
+        satiety: f.satiety,
+        taste: f.taste,
+        culture: f.culture,
+        convenience: f.convenience,
+        affordability: null,
+      }).score,
+    }));
+  } catch {
+    /* 0012 not applied yet — books still read. */
+  }
+
+  return { fpo, kpis, cells, lots, receipts, orders, journal, inputs, payouts, poolable, kitchen, contracts, plantings, giChain, villageLedger, herd, weatherAlerts, energyWindows, iotReadings, schemes, fus };
 }

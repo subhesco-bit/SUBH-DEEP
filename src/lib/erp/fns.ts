@@ -63,6 +63,12 @@ function fail(message: string): BooksResult {
     plantings: [],
     giChain: [],
     villageLedger: [],
+    herd: [],
+    weatherAlerts: [],
+    energyWindows: [],
+    iotReadings: [],
+    schemes: [],
+    fus: [],
   };
 }
 
@@ -444,5 +450,77 @@ export const declareSpoilage = createServerFn({ method: "POST" })
       return { ok: true, ...(await readBooks()) };
     } catch (err) {
       return fail(err instanceof Error ? err.message : "spoilage failed");
+    }
+  });
+
+export const declareWeather = createServerFn({ method: "POST" })
+  .validator((input: { village: string; hazard: string; windowNote: string }) => ({
+    village: String(input?.village ?? "Langthasa").trim().slice(0, 80),
+    hazard: String(input?.hazard ?? "").trim().slice(0, 80),
+    windowNote: String(input?.windowNote ?? "").trim().slice(0, 160),
+  }))
+  .handler(async ({ data }): Promise<BooksResult> => {
+    if (!data.hazard) return fail("A weather hazard must be declared.");
+    const { ensureBooks, recordWeatherAlert, readBooks } = await import("./boot.server");
+    await ensureBooks();
+    const sql = await getSql();
+    try {
+      await recordWeatherAlert(sql, data);
+      await pulse("weather.alert", { query: "weather.alert" });
+      return { ok: true, ...(await readBooks()) };
+    } catch (err) {
+      return fail(err instanceof Error ? err.message : "weather failed");
+    }
+  });
+
+export const declareIot = createServerFn({ method: "POST" })
+  .validator((input: { entityId: string; cellId: string; kind: string; value: string; unit: string; note: string }) => ({
+    entityId: String(input?.entityId ?? "Langthasa godown").trim().slice(0, 80),
+    cellId: String(input?.cellId ?? "").trim(),
+    kind: String(input?.kind ?? "temperature").trim().slice(0, 40),
+    value: String(input?.value ?? ""),
+    unit: String(input?.unit ?? "C").trim().slice(0, 12),
+    note: String(input?.note ?? "").trim().slice(0, 160),
+  }))
+  .handler(async ({ data }): Promise<BooksResult> => {
+    const value = Number(data.value);
+    if (!data.entityId) return fail("Sensor entity is required.");
+    if (!Number.isFinite(value)) return fail("A clerk must declare the reading.");
+    const { ensureBooks, recordIotReading, readBooks } = await import("./boot.server");
+    await ensureBooks();
+    const sql = await getSql();
+    try {
+      await recordIotReading(sql, {
+        entityId: data.entityId,
+        cellId: data.cellId || null,
+        kind: data.kind,
+        value,
+        unit: data.unit,
+        note: data.note || data.kind,
+      });
+      await pulse("sensor.reading", { query: "sensor.reading" });
+      return { ok: true, ...(await readBooks()) };
+    } catch (err) {
+      return fail(err instanceof Error ? err.message : "reading failed");
+    }
+  });
+
+export const declareWindowKwh = createServerFn({ method: "POST" })
+  .validator((input: { windowId: string; kwh: string }) => ({
+    windowId: String(input?.windowId ?? ""),
+    kwh: String(input?.kwh ?? ""),
+  }))
+  .handler(async ({ data }): Promise<BooksResult> => {
+    const kwh = Number(data.kwh);
+    if (!data.windowId) return fail("Energy window required.");
+    if (!Number.isFinite(kwh) || kwh < 0) return fail("Declared kWh cannot be negative.");
+    const { ensureBooks, declareEnergyKwh, readBooks } = await import("./boot.server");
+    await ensureBooks();
+    const sql = await getSql();
+    try {
+      await declareEnergyKwh(sql, { windowId: data.windowId, kwh });
+      return { ok: true, ...(await readBooks()) };
+    } catch (err) {
+      return fail(err instanceof Error ? err.message : "energy failed");
     }
   });

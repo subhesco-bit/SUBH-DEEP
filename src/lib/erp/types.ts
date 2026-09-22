@@ -49,6 +49,8 @@ export type LotRow = {
   plantingId: string | null;
   giMinted: boolean;
   mintedAt: string;
+  fusScore: number | null;
+  fusComplete: boolean;
 };
 
 export type ReceiptRow = {
@@ -190,6 +192,68 @@ export type PoolableRow = {
   cellCount: number;
 };
 
+export type HerdRow = {
+  id: string;
+  cellId: string;
+  cellName: string;
+  kind: string;
+  head: number;
+  policyId: string | null;
+  coverStatus: CoverStatus;
+};
+
+export type WeatherAlertRow = {
+  id: string;
+  village: string;
+  hazard: string;
+  windowNote: string;
+  claimOpen: boolean;
+  moratorium: "propose" | "none";
+  createdAt: string;
+};
+
+export type EnergyWindowRow = {
+  id: string;
+  village: string;
+  status: "surplus" | "ok" | "outage";
+  kwh: number | null;
+  note: string;
+  active: boolean;
+  createdAt: string;
+};
+
+export type IotReadingRow = {
+  id: string;
+  entityId: string;
+  cellId: string | null;
+  kind: string;
+  valueNum: number;
+  unit: string;
+  note: string;
+  createdAt: string;
+};
+
+export type SchemeOfferRow = {
+  id: string;
+  cellId: string;
+  cellName: string;
+  scheme: string;
+  eligible: boolean;
+  amountPaise: number | null;
+  reason: string;
+};
+
+export type FusRow = {
+  variety: string;
+  nutrition: number;
+  satiety: number;
+  taste: number;
+  culture: number;
+  convenience: number;
+  version: string;
+  score: number;
+};
+
 export type BooksKpis = {
   cells: number;
   lots: number;
@@ -224,6 +288,12 @@ export type BooksSnapshot = {
   plantings: PlantingRow[];
   giChain: GiLinkRow[];
   villageLedger: VillageLedgerRow[];
+  herd: HerdRow[];
+  weatherAlerts: WeatherAlertRow[];
+  energyWindows: EnergyWindowRow[];
+  iotReadings: IotReadingRow[];
+  schemes: SchemeOfferRow[];
+  fus: FusRow[];
 };
 
 export type BooksResult = BooksSnapshot & {

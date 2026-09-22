@@ -20,6 +20,10 @@ import {
   giClaimGate,
   spoilageMass,
   wacCost,
+  weatherAlert,
+  herdCoverGate,
+  energyCloudGate,
+  schemeGate,
   type AlgorithmResult,
 } from "./algorithms.ts";
 import { MODULE_RUNTIME } from "./registry.ts";
@@ -67,6 +71,14 @@ function execute(step: WorkflowStepDef, ctx: RunContext): AlgorithmResult {
       return giClaimGate(ctx);
     case "spoilage-mass":
       return spoilageMass(ctx);
+    case "weather-reflex":
+      return weatherAlert(ctx);
+    case "herd-cover":
+      return herdCoverGate(ctx);
+    case "energy-cloud":
+      return energyCloudGate(ctx);
+    case "scheme-eligible":
+      return schemeGate(ctx);
     case "fvie-rank":
       return fvieRank(ctx);
     case "hours-to-pay":

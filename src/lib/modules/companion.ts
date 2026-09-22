@@ -3,6 +3,8 @@
 import type { BooksSnapshot, LotRow, OrderRow } from "../erp/types.ts";
 import type { PlatformException } from "../erp/platform.ts";
 import { queryLibraryKnowledge } from "../library/match.ts";
+import { envelopeFor } from "../os/envelope.ts";
+import type { AiEnvelope } from "../os/types.ts";
 
 export type CompanionAction = "intake" | "settle" | "process" | "harvest" | "consult";
 
@@ -18,6 +20,7 @@ export type CompanionProposal = {
   orderId: string | null;
   cellId: string | null;
   severity: "block" | "defer" | "note";
+  envelope?: AiEnvelope;
 };
 
 export type CompanionReading = {
@@ -117,6 +120,22 @@ export function proposeCompanion(
     });
   }
 
+  if ((books.weatherAlerts ?? []).some((a) => a.claimOpen)) {
+    proposals.push({
+      id: "consult-weather",
+      moduleId: "advisory",
+      action: "consult",
+      title: "Claim window is open",
+      body: "weather.alert opened a claim on POL-LANGTHASA-WEATHER. The companion will not invent a premium or freeze EMI.",
+      href: "/warehouse",
+      organ: "insurance",
+      lotId: null,
+      orderId: null,
+      cellId: null,
+      severity: "note",
+    });
+  }
+
   const weather = gates.find((g) => g.code === "G9");
   proposals.push({
     id: "consult-firewall",
@@ -132,7 +151,10 @@ export function proposeCompanion(
     severity: "note",
   });
 
-  const ranked = proposals.slice(0, 5);
+  const ranked = proposals.slice(0, 5).map((p) => ({
+    ...p,
+    envelope: envelopeFor({ organ: p.organ, body: p.body, action: p.action }),
+  }));
   const next = ranked[0]?.title ?? "Next keystroke lives on the books.";
   const hits = queryLibraryKnowledge("agentic companion harvest lot remaining rupees", { limit: 1 });
   return {

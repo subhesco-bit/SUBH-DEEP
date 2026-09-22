@@ -13,6 +13,9 @@ import {
   settleSale,
   acceptSeason,
   declareSpoilage,
+  declareWeather,
+  declareIot,
+  declareWindowKwh,
 } from "./fns";
 import type { BooksSnapshot } from "./types";
 
@@ -61,6 +64,9 @@ type BooksClient = {
   settlePool: (poolId: string, paymentRef: string, hoursToPay: string) => Promise<boolean>;
   acceptContract: (contractId: string, pricePerKg: string) => Promise<boolean>;
   spoil: (lotId: string, kg: string, cause: string) => Promise<boolean>;
+  weather: (input: { village: string; hazard: string; windowNote: string }) => Promise<boolean>;
+  iot: (input: { entityId: string; cellId: string; kind: string; value: string; unit: string; note: string }) => Promise<boolean>;
+  energyKwh: (windowId: string, kwh: string) => Promise<boolean>;
 };
 
 function apply(
@@ -194,6 +200,33 @@ export const useBooks = create<BooksClient>((set) => ({
       return apply(set, await declareSpoilage({ data: { lotId, kg, cause } }));
     } catch (err) {
       set({ busy: false, error: err instanceof Error ? err.message : "spoilage failed" });
+      return false;
+    }
+  },
+  weather: async (input) => {
+    set({ busy: true, error: null });
+    try {
+      return apply(set, await declareWeather({ data: input }));
+    } catch (err) {
+      set({ busy: false, error: err instanceof Error ? err.message : "weather failed" });
+      return false;
+    }
+  },
+  iot: async (input) => {
+    set({ busy: true, error: null });
+    try {
+      return apply(set, await declareIot({ data: input }));
+    } catch (err) {
+      set({ busy: false, error: err instanceof Error ? err.message : "reading failed" });
+      return false;
+    }
+  },
+  energyKwh: async (windowId, kwh) => {
+    set({ busy: true, error: null });
+    try {
+      return apply(set, await declareWindowKwh({ data: { windowId, kwh } }));
+    } catch (err) {
+      set({ busy: false, error: err instanceof Error ? err.message : "energy failed" });
       return false;
     }
   },

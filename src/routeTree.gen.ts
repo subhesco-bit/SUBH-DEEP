@@ -22,6 +22,7 @@ import { Route as MeshRouteImport } from './routes/mesh'
 import { Route as ModulesRouteImport } from './routes/modules'
 import { Route as NerveRouteImport } from './routes/nerve'
 import { Route as OrganismRouteImport } from './routes/organism'
+import { Route as OsRouteImport } from './routes/os'
 import { Route as PlatformRouteImport } from './routes/platform'
 import { Route as PulseRouteImport } from './routes/pulse'
 import { Route as SystemsRouteImport } from './routes/systems'
@@ -93,6 +94,11 @@ const OrganismRoute = OrganismRouteImport.update({
   path: '/organism',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OsRoute = OsRouteImport.update({
+  id: '/os',
+  path: '/os',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlatformRoute = PlatformRouteImport.update({
   id: '/platform',
   path: '/platform',
@@ -133,6 +139,7 @@ export interface FileRoutesByFullPath {
   '/modules': typeof ModulesRoute
   '/nerve': typeof NerveRoute
   '/organism': typeof OrganismRoute
+  '/os': typeof OsRoute
   '/platform': typeof PlatformRoute
   '/pulse': typeof PulseRoute
   '/systems': typeof SystemsRoute
@@ -153,6 +160,7 @@ export interface FileRoutesByTo {
   '/modules': typeof ModulesRoute
   '/nerve': typeof NerveRoute
   '/organism': typeof OrganismRoute
+  '/os': typeof OsRoute
   '/platform': typeof PlatformRoute
   '/pulse': typeof PulseRoute
   '/systems': typeof SystemsRoute
@@ -174,6 +182,7 @@ export interface FileRoutesById {
   '/modules': typeof ModulesRoute
   '/nerve': typeof NerveRoute
   '/organism': typeof OrganismRoute
+  '/os': typeof OsRoute
   '/platform': typeof PlatformRoute
   '/pulse': typeof PulseRoute
   '/systems': typeof SystemsRoute
@@ -196,6 +205,7 @@ export interface FileRouteTypes {
     | '/modules'
     | '/nerve'
     | '/organism'
+    | '/os'
     | '/platform'
     | '/pulse'
     | '/systems'
@@ -216,6 +226,7 @@ export interface FileRouteTypes {
     | '/modules'
     | '/nerve'
     | '/organism'
+    | '/os'
     | '/platform'
     | '/pulse'
     | '/systems'
@@ -236,6 +247,7 @@ export interface FileRouteTypes {
     | '/modules'
     | '/nerve'
     | '/organism'
+    | '/os'
     | '/platform'
     | '/pulse'
     | '/systems'
@@ -257,6 +269,7 @@ export interface RootRouteChildren {
   ModulesRoute: typeof ModulesRoute
   NerveRoute: typeof NerveRoute
   OrganismRoute: typeof OrganismRoute
+  OsRoute: typeof OsRoute
   PlatformRoute: typeof PlatformRoute
   PulseRoute: typeof PulseRoute
   SystemsRoute: typeof SystemsRoute
@@ -357,6 +370,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrganismRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/os': {
+      id: '/os'
+      path: '/os'
+      fullPath: '/os'
+      preLoaderRoute: typeof OsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/platform': {
       id: '/platform'
       path: '/platform'
@@ -409,6 +429,7 @@ const rootRouteChildren: RootRouteChildren = {
   ModulesRoute: ModulesRoute,
   NerveRoute: NerveRoute,
   OrganismRoute: OrganismRoute,
+  OsRoute: OsRoute,
   PlatformRoute: PlatformRoute,
   PulseRoute: PulseRoute,
   SystemsRoute: SystemsRoute,

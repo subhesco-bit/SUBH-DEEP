@@ -4,6 +4,7 @@ import { formatKg } from "@/lib/erp/money";
 import { Badge } from "@/components/ui/badge";
 import { HarvestForm } from "./harvest-form";
 import { LotActions } from "./lot-actions";
+import { evidencePassport } from "@/lib/os/passport";
 
 export function LotsBoard() {
   const books = useVillageBooks();
@@ -24,7 +25,10 @@ export function LotsBoard() {
           <p className="mt-6 text-sm text-muted">No lots yet. Mint from the form.</p>
         ) : (
           <ul className="mt-6 divide-y divide-border">
-            {lots.map((lot) => (
+            {lots.map((lot) => {
+              const pass = books ? evidencePassport(lot, books) : null;
+              const absent = pass?.atoms.filter((a) => a.confidence === "absent").length ?? 0;
+              return (
               <li key={lot.id} className="py-4">
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div>
@@ -38,6 +42,16 @@ export function LotsBoard() {
                     <div className="mt-2 flex flex-wrap gap-1.5">
                       {lot.giMinted ? <Badge variant="live">GI mint</Badge> : lot.giMarker ? <Badge variant="gap">GI unminted</Badge> : null}
                       {lot.plantingId ? <Badge variant="partial">planting closed</Badge> : null}
+                      {lot.fusScore != null ? (
+                        <Badge variant={lot.fusComplete ? "live" : "partial"}>FUS {lot.fusScore}</Badge>
+                      ) : (
+                        <Badge variant="gap">FUS unnamed</Badge>
+                      )}
+                      {pass ? (
+                        <Badge variant={absent === 0 ? "live" : "partial"}>
+                          passport {pass.atoms.length - absent}/{pass.atoms.length}
+                        </Badge>
+                      ) : null}
                     </div>
                   </div>
                   <Badge variant={lot.status === "settled" ? "live" : lot.status === "minted" ? "gap" : "partial"}>
@@ -48,7 +62,8 @@ export function LotsBoard() {
                   <LotActions lot={lot} />
                 </div>
               </li>
-            ))}
+              );
+            })}
           </ul>
         )}
       </section>

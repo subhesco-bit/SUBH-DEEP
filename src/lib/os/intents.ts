@@ -1,0 +1,45 @@
+/** Need-based navigation. The problem is the door, not the module name. */
+
+import type { BooksSnapshot } from "../erp/types.ts";
+import type { NeedIntent } from "./types.ts";
+
+export const NEED_INTENTS: NeedIntent[] = [
+  { id: "sell-crop", label: "Sell crop", problem: "Offtake at a declared ₹/kg.", href: "/trade", workflow: "offtake-settle", organ: "orders" },
+  { id: "mint-harvest", label: "Mint harvest", problem: "Name a cell and mint one lot.", href: "/lots", workflow: "harvest-mint", organ: "lot" },
+  { id: "store-lot", label: "Store a lot", problem: "The same body inwards at the godown.", href: "/warehouse", workflow: "warehouse-intake", organ: "warehouse" },
+  { id: "claim-loss", label: "Claim spoilage", problem: "Cut remaining grams. Do not invent kWh.", href: "/warehouse", workflow: null, organ: "rcop" },
+  { id: "see-books", label: "See the books", problem: "Cells, remaining, farmgate, journal.", href: "/", workflow: null, organ: "erp" },
+  { id: "cover-gap", label: "Cover at godown", problem: "Langthasa master policy. Premium unknown.", href: "/warehouse", workflow: null, organ: "insurance" },
+  { id: "claim-weather", label: "Weather claim", problem: "Open a claim window. Do not freeze EMI.", href: "/warehouse", workflow: "domain-advise", organ: "soil" },
+  { id: "scheme-blood", label: "Scheme eligibility", problem: "Computed on the cell. Amount blank.", href: "/ledger", workflow: null, organ: "finance" },
+  { id: "next-season", label: "Offer next Magh", problem: "Last season kg. Price blank until declared.", href: "/trade", workflow: null, organ: "contract" },
+  { id: "consult-nerve", label: "Ask the nerve", problem: "Library first. No rupee write.", href: "/nerve", workflow: "nerve-consult", organ: "ai" },
+  { id: "read-charter", label: "Read the laws", problem: "L1–L12. Remaining, declared ₹, human command.", href: "/charter", workflow: null, organ: "module" },
+  { id: "os-matrix", label: "Concept matrix", problem: "Every named concept classified. Nothing removed.", href: "/os", workflow: null, organ: "os" },
+  { id: "find-loan", label: "Find a loan", problem: "Refuse. No underwriting. No invented score.", href: "/os", workflow: null, organ: "finance" },
+  { id: "file-grievance", label: "File a grievance", problem: "Village exception → ack → evidence. No fake close.", href: "/os", workflow: null, organ: "spine" },
+  { id: "book-transport", label: "Book transport", problem: "Freight is declared (zero allowed). Not a tower.", href: "/trade", workflow: null, organ: "logistics" },
+];
+
+export function rankIntents(books?: BooksSnapshot | null): NeedIntent[] {
+  if (!books) return NEED_INTENTS;
+  const minted = books.lots.filter((l) => l.status === "minted").length;
+  const remaining = books.lots.some((l) => l.remainingGrams > 0);
+  const open = books.orders.some((o) => o.status === "open");
+  const scored = NEED_INTENTS.map((i) => {
+    let n = 0;
+    if (i.id === "mint-harvest" && books.cells.length > 0) n += 2;
+    if (i.id === "store-lot" && minted > 0) n += 4;
+    if (i.id === "sell-crop" && remaining) n += 3;
+    if (i.id === "see-books") n += 1;
+    if (i.id === "claim-loss" && remaining) n += 2;
+    if (i.id === "next-season" && books.orders.some((o) => o.status === "settled")) n += 3;
+    if (i.id === "cover-gap") n += 1;
+    if (open && i.id === "sell-crop") n += 2;
+    if (i.id === "file-grievance" && open) n += 2;
+    if (i.id === "find-loan") n -= 2;
+    return { i, n };
+  });
+  scored.sort((a, b) => b.n - a.n);
+  return scored.map((s) => s.i);
+}

@@ -46,6 +46,9 @@ export type PlatformException = {
   title: string;
   body: string;
   href: string;
+  impact: "cell" | "lot" | "journal" | "policy";
+  owner: "clerk" | "companion" | "spine";
+  action: string;
 };
 
 export type ProcessKind = "drying" | "milling" | "cleaning" | "grading";
@@ -160,6 +163,9 @@ export function exceptions(input: {
       title: "Journal does not balance",
       body: "Cash in must equal farmgate + freight. Do not close the season.",
       href: "/ledger",
+      impact: "journal",
+      owner: "clerk",
+      action: "Open the ledger. Do not invent a balancing line.",
     });
   }
   const open = input.orders.filter((o) => o.status === "open");
@@ -170,6 +176,9 @@ export function exceptions(input: {
       title: `${open.length} offtake${open.length === 1 ? "" : "s"} wait on paymentRef`,
       body: "An offtake stays open until a clerk names the payment.",
       href: "/trade",
+      impact: "cell",
+      owner: "clerk",
+      action: "Name paymentRef. Companion will not invent one.",
     });
   }
   const pending = input.payouts.filter((p) => p.status === "pending");
@@ -180,6 +189,9 @@ export function exceptions(input: {
       title: `${pending.length} FPO payout${pending.length === 1 ? "" : "s"} pending`,
       body: "Qty-weighted split is posted. The cell has not been marked paid.",
       href: "/trade",
+      impact: "cell",
+      owner: "clerk",
+      action: "Mark the cell paid after the split posts.",
     });
   }
   const pledged = input.receipts.filter((r) => r.status === "pledged");
@@ -190,6 +202,9 @@ export function exceptions(input: {
       title: `${pledged.length} pledged receipt${pledged.length === 1 ? "" : "s"}`,
       body: "Clear the lien before the sack may sell.",
       href: "/warehouse",
+      impact: "lot",
+      owner: "clerk",
+      action: "Clear the lien. Do not sell a pledged sack.",
     });
   }
   const waitingGodown = input.lots.filter((l) => l.status === "minted" && l.remainingGrams > 0);
@@ -200,6 +215,9 @@ export function exceptions(input: {
       title: `${waitingGodown.length} minted lot${waitingGodown.length === 1 ? "" : "s"} not in the godown`,
       body: "The harvest named a cell. The same body has not inwards.",
       href: "/lots",
+      impact: "lot",
+      owner: "companion",
+      action: "Propose intake. Clerk approves the same lot body.",
     });
   }
   out.push({
@@ -208,6 +226,9 @@ export function exceptions(input: {
     title: "AI cannot write rupees",
     body: "Module OS may propose. A clerk declares price, freight, and loss.",
     href: "/modules",
+    impact: "policy",
+    owner: "spine",
+    action: "Keep the firewall. No rupee write from AI.",
   });
   return out;
 }

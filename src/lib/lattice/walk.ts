@@ -57,7 +57,7 @@ export const WALK: WalkHop[] = [
     organId: "insurance",
     bridgeId: "b-harvest-insure",
     signal: "storage.covered",
-    today: "This organism: Langthasa godown binds POL-LANGTHASA-GODOWN on intake. Premium is undeclared. Weather cover is still missing.",
+    today: "This organism: Langthasa godown binds POL-LANGTHASA-GODOWN on intake. Magh plantings bind weather cover. Premium is undeclared.",
     should: "Intake binds cover or raises a gap on the spine the same minute.",
   },
   {
@@ -75,7 +75,7 @@ export const WALK: WalkHop[] = [
     organId: "marketplace",
     bridgeId: "b-fus-rank",
     signal: "food.utility",
-    today: "This organism: remaining mass lists at a declared rupee per kg. FUS scores still do not exist. Satiety and energy cost still missing from the shelf.",
+    today: "This organism: remaining mass lists with a declared FUS-v1 on Chakhao and ginger. Affordability stays blank. Household baskets still missing.",
     should: "A living lot appears on the shelf with GI, FUS, and farmer cell already on it.",
   },
   {
@@ -84,7 +84,7 @@ export const WALK: WalkHop[] = [
     organId: "foodgraph",
     bridgeId: "b-graph-genome",
     signal: "graph.implies { chakhao pithas → chakhao, Magh }",
-    today: "This organism: Chakhao pithas imply Chakhao Poireiton; Magh is memory. FVIE scores still do not exist.",
+    today: "This organism: Chakhao pithas imply Chakhao Poireiton; Magh is memory. FUS-v1 scores the grain. Household FVIE baskets still do not exist.",
     should: "The memory organ already knew Magh would pull black rice. Demand is not a guess.",
   },
   {
@@ -131,5 +131,14 @@ export const WALK: WalkHop[] = [
     signal: "agentic.propose harvest.completed",
     today: "This organism: companion proposes harvest, intake, settle. GitHub M675100 is still a 1KB re-export. The clerk still must declare kg.",
     should: "The companion proposes a lot mint and a rupee path. The cell approves. The harvest does not die at the portal.",
+  },
+  {
+    id: "w15",
+    title: "Lifetime energy never prices a kilogram",
+    organId: "recie",
+    bridgeId: "b-thought-energy",
+    signal: "energy.philosophy",
+    today: "This organism: the village energy cloud holds a window and a recorded Magh outage. kWh and lifetime ₹/kg stay undeclared. Live IoT and household FUS baskets still missing.",
+    should: "Every kWh that spoils grain is a rupee taken from a farmer cell, shown as ₹/kg.",
   },
 ];

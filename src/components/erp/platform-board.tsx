@@ -66,6 +66,11 @@ export function PlatformBoard() {
               </div>
               <p className="mt-2 text-sm font-medium">{g.title}</p>
               <p className="mt-1 text-[13px] leading-relaxed text-muted">{g.body}</p>
+              {"action" in g && g.action ? (
+                <p className="mt-1 font-mono text-[11px] text-partial">
+                  {g.owner} · {g.impact} · {g.action}
+                </p>
+              ) : null}
               <Link to={g.href} className="mt-3 inline-block text-sm text-partial hover:text-foreground">
                 Open
               </Link>

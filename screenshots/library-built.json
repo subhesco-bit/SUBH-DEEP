@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8081/library",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "AFRERA Rural ERP",
+      "hasCanvas": false,
+      "bodyTextLen": 29543,
+      "bodyTextHash": "5ce9cf43d7c88deaf199f9a1997e0749d9d763a69d4e123581fd4aa4719c8b8c",
+      "bodyTextPrefix": "AFRERA · RURAL ERP · LANGTHASA Hills Chakhao Collective Village ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/library-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "AFRERA Rural ERP",
+      "hasCanvas": false,
+      "bodyTextLen": 29541,
+      "bodyTextHash": "7880fb88a8db7cd0d4f3caef4eba6cf0ba56087346c9ee60975cba1ed15a447e",
+      "bodyTextPrefix": "AFRERA · RURAL ERP · LANGTHASA Hills Chakhao Collective Village ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/library-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/library-built.json",
+  "divergesFromBaseline": false,
+  "baselineReasons": []
+}

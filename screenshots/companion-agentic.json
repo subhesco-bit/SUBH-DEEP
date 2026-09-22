@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/companion",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "AFRERA Rural ERP",
+      "hasCanvas": false,
+      "bodyTextLen": 1373,
+      "bodyTextHash": "32cb83390b9e47060fe9a3cff1c81d7ed099b081880c525e61a7a4f008fa8fe0",
+      "bodyTextPrefix": "AFRERA · RURAL ERP · LANGTHASA Hills Chakhao Collective Village ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/companion-agentic.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "AFRERA Rural ERP",
+      "hasCanvas": false,
+      "bodyTextLen": 1373,
+      "bodyTextHash": "32cb83390b9e47060fe9a3cff1c81d7ed099b081880c525e61a7a4f008fa8fe0",
+      "bodyTextPrefix": "AFRERA · RURAL ERP · LANGTHASA Hills Chakhao Collective Village ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/companion-agentic-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/companion-agentic.json"
+}

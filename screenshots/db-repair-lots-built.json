@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8081/lots",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "AFRERA Rural ERP",
+      "hasCanvas": false,
+      "bodyTextLen": 1059,
+      "bodyTextHash": "c52fe79fd9a503f775f6271875f440c35f471fd579189cde7a1ecec0fdb0c2da",
+      "bodyTextPrefix": "AFRERA · RURAL ERP · LANGTHASA Hills Chakhao Collective Village ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/db-repair-lots-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "AFRERA Rural ERP",
+      "hasCanvas": false,
+      "bodyTextLen": 1059,
+      "bodyTextHash": "c52fe79fd9a503f775f6271875f440c35f471fd579189cde7a1ecec0fdb0c2da",
+      "bodyTextPrefix": "AFRERA · RURAL ERP · LANGTHASA Hills Chakhao Collective Village ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/db-repair-lots-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/db-repair-lots-built.json",
+  "divergesFromBaseline": false,
+  "baselineReasons": []
+}

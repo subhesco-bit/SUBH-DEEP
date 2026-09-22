@@ -1,0 +1,41 @@
+{
+  "url": "http://127.0.0.1:8081/companion",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "AFRERA Rural ERP",
+      "hasCanvas": false,
+      "bodyTextLen": 1737,
+      "bodyTextHash": "e780be1aed9ded57868dfa5aae57a71151c9d6e2c1c9935b45dc54a27c7cecc4",
+      "bodyTextPrefix": "AFRERA · RURAL ERP · LANGTHASA Hills Chakhao Collective Village ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/companion-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "AFRERA Rural ERP",
+      "hasCanvas": false,
+      "bodyTextLen": 1737,
+      "bodyTextHash": "e780be1aed9ded57868dfa5aae57a71151c9d6e2c1c9935b45dc54a27c7cecc4",
+      "bodyTextPrefix": "AFRERA · RURAL ERP · LANGTHASA Hills Chakhao Collective Village ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/companion-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/companion-built.json",
+  "divergesFromBaseline": true,
+  "baselineReasons": [
+    "desktop: body text changed (1398 -> 1737 chars, hash mismatch)",
+    "mobile: body text changed (1398 -> 1737 chars, hash mismatch)"
+  ]
+}

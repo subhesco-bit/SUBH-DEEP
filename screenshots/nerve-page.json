@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/nerve",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "AFRERA Lattice",
+      "hasCanvas": false,
+      "bodyTextLen": 4625,
+      "bodyTextHash": "d47cca2a5dfb424cf9c0ee7150de3cdab8e6d89c47fe0e95325bdc1dcc475731",
+      "bodyTextPrefix": "AFRERA · CONSOLIDATED/FINAL Lattice The library is memory. Auto-",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/nerve-page.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "AFRERA Lattice",
+      "hasCanvas": false,
+      "bodyTextLen": 4625,
+      "bodyTextHash": "d47cca2a5dfb424cf9c0ee7150de3cdab8e6d89c47fe0e95325bdc1dcc475731",
+      "bodyTextPrefix": "AFRERA · CONSOLIDATED/FINAL Lattice The library is memory. Auto-",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/nerve-page-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/nerve-page.json"
+}

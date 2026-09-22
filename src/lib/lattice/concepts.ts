@@ -1,0 +1,562 @@
+import type { Concept } from "./types";
+
+/**
+ * Organs of the AFRERA rural economic organism, drawn from
+ * subhesco-bit/SUBH-DEEP @ consolidated/final — DORA, BIEA, master spec,
+ * missing-platforms analysis, and the enterprise concept audit.
+ *
+ * Coordinates are in a 1000×640 viewBox. Missing organs sit at the fringe
+ * so they read as unattached, not as another module tile.
+ */
+export const CONCEPTS: Concept[] = [
+  {
+    id: "ai",
+    name: "AI Nervous System",
+    short: "AI spine",
+    dora: "Central nervous system",
+    layer: "intelligence",
+    status: "partial",
+    thesis:
+      "Claude coordination, decision, copilot, and domain AIs should be one nervous system that senses, decides, and fires muscles — not sixteen sibling chat services.",
+    silo:
+      "claudeAICoordinator, 16 AI services, and an orchestrator exist as files. Module folders M400–M807 declare WIRED while analysis.isComplete is false. Agentic companion is a 1.1KB re-export with zero live callers. They do not subscribe to harvest, weather, spoilage, or demand as a single pulse.",
+    prosperity:
+      "A recommendation only counts if it changes a farmer rupee — yield, price, cost, or risk — and can explain which organ it moved.",
+    x: 500,
+    y: 52,
+  },
+  {
+    id: "recie",
+    name: "Energy Cost Intelligence",
+    short: "Energy",
+    dora: "Lungs / metabolism",
+    layer: "missing-organ",
+    status: "missing",
+    thesis:
+      "The question is not how many megawatts to install. It is how to cut the lifetime cost of energy for the village economy, measured in ₹ per kg, litre, and hour.",
+    silo:
+      "Named RECIE in the missing-platforms analysis. No service, schema, or UI. Cold-chain, irrigation, processing, and storage still pretend power is free.",
+    prosperity:
+      "Every kWh that spoils grain, idles a pump, or overprices logistics is a rupee taken from a farmer cell.",
+    x: 78,
+    y: 78,
+  },
+  {
+    id: "fvie",
+    name: "Food Value Intelligence",
+    short: "Food value",
+    dora: "Tongue / taste",
+    layer: "missing-organ",
+    status: "missing",
+    thesis:
+      "Food is scored on nutrition, satiety, taste, affordability, culture, digestibility, and convenience — not calories in a catalog row.",
+    silo:
+      "Named FVIE. Marketplace ranks GI products as SKUs. No Food Utility Score, no goal-based basket, no household nutrition loop.",
+    prosperity:
+      "A GI crop that people will actually cook, stay full on, and afford is the only crop that repeats as demand.",
+    x: 922,
+    y: 78,
+  },
+  {
+    id: "marketplace",
+    name: "GI Marketplace",
+    short: "Market",
+    dora: "Hands / exchange",
+    layer: "commerce",
+    status: "partial",
+    thesis:
+      "The market is the public face of the organism: GI lots, provenance, and fair offtake — not an isolated storefront.",
+    silo:
+      "Product and order services plus MarketplacePage exist. Listings are not born from harvest events, not ranked by food-value, not priced with energy or logistics cost.",
+    prosperity:
+      "Price received by the farmer, time-to-pay, and repeat offtake are the only market KPIs that matter.",
+    x: 178,
+    y: 168,
+  },
+  {
+    id: "village",
+    name: "Village Twin",
+    short: "Village",
+    dora: "Habitat / body",
+    layer: "habitat",
+    status: "partial",
+    thesis:
+      "A village is an economy with shared muscle, energy, water, storage, and governance — not a location string on a farmer row.",
+    silo:
+      "villageService stores place data. The economic digital twin, shared-cost model, and village pulse were specified and never attached.",
+    prosperity:
+      "Shared infrastructure only pays when the twin can say how many rupees per year the village saves.",
+    x: 500,
+    y: 168,
+  },
+  {
+    id: "logistics",
+    name: "Cold-chain Logistics",
+    short: "Logistics",
+    dora: "Arteries",
+    layer: "circulation",
+    status: "partial",
+    thesis:
+      "Movement of lots through weather, power, and time. Price of a shipment is energy + spoilage risk + pooling, not a freight table.",
+    silo:
+      "logisticsService, tracking, freight pooling exist. They do not consume harvest events, warehouse intake, or energy cost, and they do not write spoilage back into insurance or RECIE.",
+    prosperity:
+      "Spoilage avoided and hours saved are farmer rupees. Diesel and outage losses are village rupees.",
+    x: 822,
+    y: 168,
+  },
+  {
+    id: "finance",
+    name: "Rural Finance",
+    short: "Finance",
+    dora: "Pancreas / metabolism",
+    layer: "metabolism",
+    status: "partial",
+    thesis:
+      "Credit, advances, EMI, and payouts should metabolise farmer health — FDI in, risk out, cash back after offtake.",
+    silo:
+      "Loans, credit scoring, and EMI modules exist. FDI does not automatically reprice credit or insurance. Settlement does not close the demand loop.",
+    prosperity:
+      "Cost of capital and days-to-payout are as real as farmgate price.",
+    x: 78,
+    y: 278,
+  },
+  {
+    id: "crop",
+    name: "Crop & GI Genome",
+    short: "Crop",
+    dora: "Genome",
+    layer: "habitat",
+    status: "partial",
+    thesis:
+      "Variety, season, GI geography, and planting are the DNA of what the organism can become this year.",
+    silo:
+      "cropService and agriculture calendars exist. crop_plantings vs farms vs farm_plots is an unresolved schema collision. Harvest is not an event on the spine.",
+    prosperity:
+      "The right variety in the right season, already contracted, is the cheapest prosperity lever.",
+    x: 322,
+    y: 248,
+  },
+  {
+    id: "farmer",
+    name: "Farmer Cell",
+    short: "Farmer",
+    dora: "Cell / nucleus",
+    layer: "habitat",
+    status: "partial",
+    thesis:
+      "The farmer is a living cell — identity, household, land, FDI, and cashflow — not a role in an ACL table.",
+    silo:
+      "farmerService and Farmer Portal are the most complete organ. Other modules take farmer_id as a foreign key and never nourish the cell in return.",
+    prosperity:
+      "Architectural rule: every organ must show a measurable path to this cell’s rupees.",
+    x: 500,
+    y: 300,
+  },
+  {
+    id: "livestock",
+    name: "Livestock",
+    short: "Livestock",
+    dora: "Organ",
+    layer: "habitat",
+    status: "partial",
+    thesis:
+      "Animals are a second genome of the rural cell: milk, meat, draught, risk, and veterinary cost.",
+    silo:
+      "livestockService and veterinary specs exist beside crop, not through it. Chilling energy and fodder cost never meet RECIE or RCOP.",
+    prosperity:
+      "₹ per litre chilled is the honest livestock KPI — not headcount.",
+    x: 678,
+    y: 248,
+  },
+  {
+    id: "contract",
+    name: "Contract Farming",
+    short: "Contract",
+    dora: "Ligament",
+    layer: "commerce",
+    status: "partial",
+    thesis:
+      "A contract is a ligament of trust: escrow, milestones, offtake, and next-season planning — not a PDF in a drawer.",
+    silo:
+      "Contracts module exists. It is not born from demand spikes, culinary calendar, or village twin, and it does not write back into crop plans.",
+    prosperity:
+      "A signed offtake before sowing is the farmer’s cheapest insurance.",
+    x: 922,
+    y: 278,
+  },
+  {
+    id: "processing",
+    name: "Processing",
+    short: "Process",
+    dora: "Stomach",
+    layer: "digestion",
+    status: "partial",
+    thesis:
+      "Value addition is digestion: lots become food with energy, labour, and yield. Schedule follows village power, not a static roster.",
+    silo:
+      "Processing appears in specs and some services. It is not driven by harvest intake, energy cloud, or food-value demand.",
+    prosperity:
+      "Margin after energy, packaging, and offtake — attributed back to the farmer cell.",
+    x: 178,
+    y: 378,
+  },
+  {
+    id: "soil",
+    name: "Soil & Climate Sense",
+    short: "Soil",
+    dora: "Feet / ground sense",
+    layer: "sense",
+    status: "partial",
+    thesis:
+      "Sensors, weather, and soil health are the organism’s feet on the ground. They should trigger muscle, not dashboards.",
+    silo:
+      "weatherAdvisory, soilHealth, IoT, and digitalTwin all exist. Ownership is unresolved (farmer_id vs entity_id). Two IoT systems are live and unreconciled.",
+    prosperity:
+      "A weather alert that does not freeze credit, open a claim window, or retask logistics is just a notification.",
+    x: 322,
+    y: 400,
+  },
+  {
+    id: "orders",
+    name: "Orders & Escrow",
+    short: "Orders",
+    dora: "Muscle",
+    layer: "commerce",
+    status: "partial",
+    thesis:
+      "An order is a muscle contraction: cash, lot, logistics, and trust moving together.",
+    silo:
+      "orderService, cart, checkout exist. Settlement does not reliably fire farmer payout, FDI update, and demand-signal in one motion.",
+    prosperity:
+      "Hours from delivery to farmer credit is the order organ’s prosperity metric.",
+    x: 678,
+    y: 400,
+  },
+  {
+    id: "trace",
+    name: "GI Trace & Trust",
+    short: "Trace",
+    dora: "Immune markers",
+    layer: "protection",
+    status: "partial",
+    thesis:
+      "Every lot should carry an immune marker: geography, handler, temperature, and claim. Trust is not a badge, it is a chain.",
+    silo:
+      "certification, blockchainTrace, buyerTrust services exist. They are not minted at harvest and not required at listing.",
+    prosperity:
+      "GI premium captured by the farmer, not diluted by an untraced mix.",
+    x: 822,
+    y: 378,
+  },
+  {
+    id: "insurance",
+    name: "Insurance",
+    short: "Insurance",
+    dora: "Immune system",
+    layer: "protection",
+    status: "partial",
+    thesis:
+      "Crop, transit, and warehouse cover should reflex when weather, spoilage, or outage hits — like immunity, not a separate portal.",
+    silo:
+      "policies and claims services exist. They do not subscribe to weather, spoilage, or FDI, and premiums do not metabolise farmer health.",
+    prosperity:
+      "A claim that pays before the next sowing is prosperity. A policy that never hears the weather is theatre.",
+    x: 78,
+    y: 488,
+  },
+  {
+    id: "warehouse",
+    name: "Warehouse & Storage",
+    short: "Warehouse",
+    dora: "Fat / reserve",
+    layer: "circulation",
+    status: "partial",
+    thesis:
+      "Storage is the body’s reserve: moisture, temperature, tenure, and release into market or process.",
+    silo:
+      "warehouseManagement exists. Intake is not the subscriber of HarvestCompleted. Energy cost of holding is invisible.",
+    prosperity:
+      "₹ of spoilage avoided minus ₹ of holding energy, attributed to the lot’s farmer.",
+    x: 280,
+    y: 520,
+  },
+  {
+    id: "erp",
+    name: "ERP Spine",
+    short: "ERP",
+    dora: "Spine / ESB",
+    layer: "structure",
+    status: "partial",
+    thesis:
+      "SAP/Oracle/custom sync is the bony spine — structure, not intelligence. It should carry the same events the organism already knows.",
+    silo:
+      "erpService can push product, order, farmer. It is a batch hose, not a ligament. Master data and live lots diverge.",
+    prosperity:
+      "ERP is justified only when it shortens settlement or unlocks offtake, not when it mirrors tables.",
+    x: 500,
+    y: 470,
+  },
+  {
+    id: "shared",
+    name: "Shared Infrastructure",
+    short: "Shared",
+    dora: "Bone / muscle share",
+    layer: "structure",
+    status: "partial",
+    thesis:
+      "Tractors, dryers, packhouses, and cold rooms are village muscle. Booking them should reshape the farm calendar and the cost twin.",
+    silo:
+      "Asset rental exists as a catalog. It does not write into crop calendar, yield model, or RCOP’s shared-vs-individual decision.",
+    prosperity:
+      "Hours of asset use that a household could not afford alone, priced as rupees saved.",
+    x: 720,
+    y: 520,
+  },
+  {
+    id: "demand",
+    name: "Demand Feedback",
+    short: "Demand",
+    dora: "Veins",
+    layer: "intelligence",
+    status: "partial",
+    thesis:
+      "Veins return what happened: offtake, recipes, festival spikes, unpaid invoices. Without them the heart pumps blind.",
+    silo:
+      "AI demand-forecast endpoints exist. Culinary calendar, household goals, and order settlement do not feed them. The learning loop was marked partial in the concept audit.",
+    prosperity:
+      "Next season’s contract is the vein’s gift to the farmer cell.",
+    x: 500,
+    y: 575,
+  },
+  {
+    id: "gcip",
+    name: "Culinary Knowledge",
+    short: "Culinary",
+    dora: "Memory / cultural DNA",
+    layer: "missing-organ",
+    status: "missing",
+    thesis:
+      "Recipes are not a blog. They are a knowledge graph from variety to festival to household, the memory of why a crop is grown.",
+    silo:
+      "Named GCIP. Completely missing. No graph from Chakhao to a Karbi kitchen to a festival spike to a sowing plan.",
+    prosperity:
+      "A remembered dish that repeats every winter is more honest demand than a marketplace impression.",
+    x: 78,
+    y: 590,
+  },
+  {
+    id: "rcop",
+    name: "Rural Cost Optimizer",
+    short: "Cost",
+    dora: "Liver / detox",
+    layer: "missing-organ",
+    status: "missing",
+    thesis:
+      "Optimise the cost of living and producing in a village — energy, water, fertiliser, logistics, finance — as one ledger.",
+    silo:
+      "Named RCOP. farmCosting is a module, not a village ledger. No 25-year TCO, no shared-vs-individual AI, no twin.",
+    prosperity:
+      "The only question the liver asks: how many rupees per year does this save the village economy?",
+    x: 922,
+    y: 590,
+  },
+  {
+    id: "water",
+    name: "Water Cost Intelligence",
+    short: "Water",
+    dora: "Kidneys / fluid",
+    layer: "missing-organ",
+    status: "missing",
+    role: "bridge",
+    binds: ["recie", "crop", "livestock", "village", "rcop"],
+    thesis:
+      "Irrigation, drinking, processing, and livestock water are one fluid system. Pumping kWh, aquifer stress, and ₹ per litre must sit on the same ledger as energy.",
+    silo:
+      "Soil and IoT mention moisture. There is no water organ, no pumping-cost engine, no shared-aquifer twin. RECIE and RCOP name water and then look away.",
+    prosperity:
+      "₹ per hour of irrigation and litres not wasted are rupees returned to the cell — the same rupees energy pretends to save alone.",
+    x: 40,
+    y: 168,
+  },
+  {
+    id: "fpo",
+    name: "FPO / Cooperative",
+    short: "FPO",
+    dora: "Collective tissue",
+    layer: "habitat",
+    status: "partial",
+    role: "bridge",
+    binds: ["farmer", "contract", "finance", "marketplace", "shared", "village"],
+    thesis:
+      "An FPO is not an ACL role. It is collective tissue: pooled offtake, group credit, shared muscle, and a village that can bargain as one body.",
+    silo:
+      "GAP-0043/0044: FPO management is partial; cooperative, SHG, PACS, and dairy society are documented only. The portal treats FPO as another login.",
+    prosperity:
+      "A cell that cannot pool offtake or rent a dryer will always sell distress. Collective tissue is how small farms grow a spine.",
+    x: 355,
+    y: 88,
+  },
+  {
+    id: "household",
+    name: "Household Economy",
+    short: "Household",
+    dora: "Family cell",
+    layer: "habitat",
+    status: "missing",
+    role: "bridge",
+    binds: ["farmer", "fvie", "gcip", "finance", "demand"],
+    thesis:
+      "Demand is a household, not a consumer SKU. Nutrition goals, kitchen memory, cashflow, and festival plates live here — the real offtake unit.",
+    silo:
+      "REOS layer 7 is missing. Cart is SKU-in. Farmer is a role. There is no household ledger, no family goal, no kitchen as an economic actor.",
+    prosperity:
+      "A rupee that feeds the household without a distress sale is prosperity. A marketplace that never sees the kitchen is guessing.",
+    x: 645,
+    y: 88,
+  },
+  {
+    id: "scheme",
+    name: "Government Knowledge",
+    short: "Schemes",
+    dora: "External blood / lungs",
+    layer: "missing-organ",
+    status: "missing",
+    role: "bridge",
+    binds: ["farmer", "village", "finance", "recie", "water"],
+    thesis:
+      "Schemes are not a PDF hunt. They are external blood: eligibility, ROI, application, renewal, composed into credit, energy, and water products.",
+    silo:
+      "REOS missing layer 4. Finance products do not auto-compose with PM-KUSUM, irrigation, or warehouse subsidies. The farmer still discovers alone.",
+    prosperity:
+      "A composed subsidy that lands before sowing is inclusion. A scheme the cell must google is exclusion with a portal.",
+    x: 40,
+    y: 378,
+  },
+  {
+    id: "spine",
+    name: "Event Spine",
+    short: "Spine",
+    dora: "Blood / ESB",
+    layer: "structure",
+    status: "partial",
+    role: "bridge",
+    binds: ["crop", "warehouse", "orders", "ai", "erp", "farmer"],
+    thesis:
+      "The event bus is the blood. Harvest, weather, settlement, and spoilage should move as named pulses every organ can subscribe to — not in-memory logs.",
+    silo:
+      "backend/src/platform/events/eventBus.js is an in-process stub: Math.random ids, TODO message queue, TODO event sourcing. Nothing publishes harvest.completed.",
+    prosperity:
+      "Blood that does not reach the cell is theatre. One pulse, many organs, one rupee path.",
+    x: 415,
+    y: 355,
+  },
+  {
+    id: "lot",
+    name: "Living Lot",
+    short: "Lot",
+    dora: "The body of produce",
+    layer: "bridge",
+    status: "missing",
+    role: "bridge",
+    binds: ["crop", "warehouse", "trace", "marketplace", "logistics", "insurance"],
+    thesis:
+      "A sack of Chakhao is one body. Moisture, GI marker, cover, freight, and listing are tissues of the same lot — not six records in six modules.",
+    silo:
+      "Products, warehouse rows, trace certs, and shipments are born separately. The farmer retypes the same harvest four times. No lot object on the spine.",
+    prosperity:
+      "GI premium, spoilage avoided, and hours-to-pay can only be attributed if the lot stays one body from field to plate.",
+    x: 405,
+    y: 198,
+  },
+  {
+    id: "cloud",
+    name: "Village Energy Cloud",
+    short: "Energy cloud",
+    dora: "Breath / energy cloud",
+    layer: "bridge",
+    status: "missing",
+    role: "bridge",
+    binds: ["recie", "processing", "warehouse", "livestock", "village"],
+    thesis:
+      "Mills, chillers, dryers, and cold rooms should run when the village cloud says power is cheapest and most reliable — one breath, many muscles.",
+    silo:
+      "Named in RECIE 1.6. No forecast, no load balance, no cost allocation. Processing rostas are static. Cold chain pretends the grid is a given.",
+    prosperity:
+      "₹ per kg processed and ₹ per litre chilled, scheduled by the cloud, are the only honest energy KPIs.",
+    x: 255,
+    y: 218,
+  },
+  {
+    id: "foodgraph",
+    name: "Food Knowledge Graph",
+    short: "Food graph",
+    dora: "Memory / taste graph",
+    layer: "bridge",
+    status: "missing",
+    role: "bridge",
+    binds: ["gcip", "fvie", "crop", "demand"],
+    thesis:
+      "Recipe → variety → festival → satiety → household → sowing. The graph is the memory that makes demand honest and GI food more than a catalog row.",
+    silo:
+      "GCIP and FVIE are both missing, so there is nothing to join. Marketplace has name, price, GI tag. No grandmother, no Magh, no child-acceptance.",
+    prosperity:
+      "A remembered dish that repeats every winter is a contract the land can plan for. Impressions are not demand.",
+    x: 760,
+    y: 328,
+  },
+  {
+    id: "rupee",
+    name: "Prosperity Ledger",
+    short: "₹ path",
+    dora: "Attribution / liver bile",
+    layer: "bridge",
+    status: "missing",
+    role: "bridge",
+    binds: ["farmer", "rcop", "finance", "ai"],
+    thesis:
+      "Every organ must show a measurable path to a farmer rupee. The ledger is the bile that makes metabolism visible — yield, price, cost, risk, hours-to-pay.",
+    silo:
+      "Master spec states the rule. Concept audit counts files. FDI, farmCosting, and wallet do not share a village or cell ledger. AI cannot explain which organ moved.",
+    prosperity:
+      "If it cannot name the cell, the rupees, and the organ that moved, it is not AFRERA. It is software adjacent to a village.",
+    x: 590,
+    y: 428,
+  },
+  {
+    id: "reflex",
+    name: "Hazard Reflex",
+    short: "Reflex",
+    dora: "Spinal reflex arc",
+    layer: "bridge",
+    status: "missing",
+    role: "bridge",
+    binds: ["soil", "insurance", "finance", "logistics", "ai"],
+    thesis:
+      "Weather, outage, and spoilage should fire a documented reflex: cover window, EMI pause, retask freight, explain in rupees. A chatbot is not a reflex.",
+    silo:
+      "weatherAdvisory is a page. Sixteen AI services do not subscribe as one arc. Insurance, credit, and logistics each wait to be told by a human.",
+    prosperity:
+      "A flood that still extracts EMI is not rural finance. A warning that does not move a muscle is gossip.",
+    x: 200,
+    y: 448,
+  },
+  {
+    id: "module",
+    name: "Module Contract",
+    short: "Module",
+    dora: "Synapse / plug",
+    layer: "intelligence",
+    status: "missing",
+    role: "bridge",
+    binds: ["ai", "farmer", "lot", "spine", "reflex"],
+    thesis:
+      "An AI system is a module with a contract: operations, organs it may move, pulses it emits, commands a human must approve. A folder named M675100 is not a synapse.",
+    silo:
+      "544 module directories. moduleSystemFactory lists them as SYS-M*. moduleContract.js classifies get/list prefixes. Agentic, copilot, fabric, gateway, and brain all say WIRED. analysis.isComplete is false. Canonical services are ~1KB re-exports. Phase 2 — plugging into harvest — was left 'intentionally separate'.",
+    prosperity:
+      "A companion that cannot mint a lot or name a rupee is not a second mind. It is another file next to the cell.",
+    x: 618,
+    y: 28,
+  },
+];

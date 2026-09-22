@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/library",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "AFRERA Lattice",
+      "hasCanvas": false,
+      "bodyTextLen": 25660,
+      "bodyTextHash": "a676e4f451becc1663f54f5071053dd25ccf254019c7492ce449a1ec2746d380",
+      "bodyTextPrefix": "AFRERA · CONSOLIDATED/FINAL Lattice The library is memory. Auto-",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/library-page.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "AFRERA Lattice",
+      "hasCanvas": false,
+      "bodyTextLen": 25660,
+      "bodyTextHash": "a676e4f451becc1663f54f5071053dd25ccf254019c7492ce449a1ec2746d380",
+      "bodyTextPrefix": "AFRERA · CONSOLIDATED/FINAL Lattice The library is memory. Auto-",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/library-page-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/library-page.json"
+}

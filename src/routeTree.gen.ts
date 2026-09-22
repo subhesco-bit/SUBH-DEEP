@@ -28,6 +28,7 @@ import { Route as OrganismRouteImport } from './routes/organism'
 import { Route as OsRouteImport } from './routes/os'
 import { Route as PlatformRouteImport } from './routes/platform'
 import { Route as PulseRouteImport } from './routes/pulse'
+import { Route as ShareRouteImport } from './routes/share'
 import { Route as SystemsRouteImport } from './routes/systems'
 import { Route as TradeRouteImport } from './routes/trade'
 import { Route as VetRouteImport } from './routes/vet'
@@ -128,6 +129,11 @@ const PulseRoute = PulseRouteImport.update({
   path: '/pulse',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShareRoute = ShareRouteImport.update({
+  id: '/share',
+  path: '/share',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SystemsRoute = SystemsRouteImport.update({
   id: '/systems',
   path: '/systems',
@@ -169,6 +175,7 @@ export interface FileRoutesByFullPath {
   '/os': typeof OsRoute
   '/platform': typeof PlatformRoute
   '/pulse': typeof PulseRoute
+  '/share': typeof ShareRoute
   '/systems': typeof SystemsRoute
   '/trade': typeof TradeRoute
   '/vet': typeof VetRoute
@@ -194,6 +201,7 @@ export interface FileRoutesByTo {
   '/os': typeof OsRoute
   '/platform': typeof PlatformRoute
   '/pulse': typeof PulseRoute
+  '/share': typeof ShareRoute
   '/systems': typeof SystemsRoute
   '/trade': typeof TradeRoute
   '/vet': typeof VetRoute
@@ -220,6 +228,7 @@ export interface FileRoutesById {
   '/os': typeof OsRoute
   '/platform': typeof PlatformRoute
   '/pulse': typeof PulseRoute
+  '/share': typeof ShareRoute
   '/systems': typeof SystemsRoute
   '/trade': typeof TradeRoute
   '/vet': typeof VetRoute
@@ -247,6 +256,7 @@ export interface FileRouteTypes {
     | '/os'
     | '/platform'
     | '/pulse'
+    | '/share'
     | '/systems'
     | '/trade'
     | '/vet'
@@ -272,6 +282,7 @@ export interface FileRouteTypes {
     | '/os'
     | '/platform'
     | '/pulse'
+    | '/share'
     | '/systems'
     | '/trade'
     | '/vet'
@@ -297,6 +308,7 @@ export interface FileRouteTypes {
     | '/os'
     | '/platform'
     | '/pulse'
+    | '/share'
     | '/systems'
     | '/trade'
     | '/vet'
@@ -323,6 +335,7 @@ export interface RootRouteChildren {
   OsRoute: typeof OsRoute
   PlatformRoute: typeof PlatformRoute
   PulseRoute: typeof PulseRoute
+  ShareRoute: typeof ShareRoute
   SystemsRoute: typeof SystemsRoute
   TradeRoute: typeof TradeRoute
   VetRoute: typeof VetRoute
@@ -464,6 +477,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PulseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/share': {
+      id: '/share'
+      path: '/share'
+      fullPath: '/share'
+      preLoaderRoute: typeof ShareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/systems': {
       id: '/systems'
       path: '/systems'
@@ -515,6 +535,7 @@ const rootRouteChildren: RootRouteChildren = {
   OsRoute: OsRoute,
   PlatformRoute: PlatformRoute,
   PulseRoute: PulseRoute,
+  ShareRoute: ShareRoute,
   SystemsRoute: SystemsRoute,
   TradeRoute: TradeRoute,
   VetRoute: VetRoute,

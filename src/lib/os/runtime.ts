@@ -99,6 +99,10 @@ export function schemeRule(input: {
   plantingCount: number;
   horticulture: boolean;
   amountPaise: number | null;
+  fpo?: boolean;
+  perishable?: boolean;
+  northEast?: boolean;
+  freightDeclared?: boolean;
 }): { eligible: boolean; amountPaise: null; effective: true; reason: string } {
   if (input.amountPaise != null) throw new Error("Scheme rupees stay undeclared.");
   if (!input.effectiveFrom || !input.effectiveTo) throw new Error("Scheme rules are effective-dated.");
@@ -595,6 +599,10 @@ export function policyLab(input: {
   horticulture: boolean;
   gazette: boolean;
   amountPaise: number | null;
+  fpo?: boolean;
+  perishable?: boolean;
+  northEast?: boolean;
+  freightDeclared?: boolean;
 }): { eligible: boolean; amountPaise: null; gazette: false; live: false; reason: string } {
   if (input.gazette) {
     return {
@@ -610,6 +618,10 @@ export function policyLab(input: {
     acresCenti: input.acresCenti,
     plantingCount: input.plantingCount,
     horticulture: input.horticulture,
+    fpo: input.fpo,
+    perishable: input.perishable,
+    northEast: input.northEast,
+    freightDeclared: input.freightDeclared,
   });
   return {
     eligible: v.eligible,

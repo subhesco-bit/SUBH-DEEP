@@ -125,7 +125,25 @@ export const SECTOR_JOURNEYS: SectorJourney[] = [
     steps: [
       { id: "journal", name: "Journal", status: "living", href: "/platform", organ: "erp" },
       { id: "period", name: "Period close", status: "living", href: "/os", organ: "erp" },
-      { id: "gst", name: "GST", status: "missing", href: "/os", organ: "erp" },
+      { id: "gst", name: "GST", status: "missing", href: "/share", organ: "erp" },
+    ],
+  },
+  {
+    id: "shared-infra",
+    sector: "Shared village muscle",
+    status: "living",
+    thesis:
+      "Hours conserved on FPO muscle. Organic trace lives. GST invoice missing. Subsidy amount blank. Rental rupees missing.",
+    steps: [
+      { id: "share-book", name: "Book hours", status: "living", href: "/share", organ: "shared" },
+      { id: "share-process", name: "Process unit", status: "living", href: "/share", organ: "processing" },
+      { id: "share-pack", name: "Pack unit", status: "living", href: "/share", organ: "processing" },
+      { id: "share-lab", name: "Mobile labs", status: "living", href: "/share", organ: "shared" },
+      { id: "share-cold", name: "Cold bay", status: "living", href: "/share", organ: "warehouse" },
+      { id: "share-organic", name: "Organic trace", status: "living", href: "/share", organ: "trace" },
+      { id: "share-gst", name: "GST invoice", status: "missing", href: "/share", organ: "erp" },
+      { id: "share-subsidy", name: "Subsidy amount", status: "missing", href: "/share", organ: "scheme" },
+      { id: "share-rent", name: "Rental rupees", status: "missing", href: "/share", organ: "finance" },
     ],
   },
 ];

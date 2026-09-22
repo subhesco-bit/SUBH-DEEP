@@ -440,11 +440,19 @@ export function assertDeclaredReading(input: {
   if (!Number.isFinite(input.value)) throw new Error("A clerk must declare the reading.");
 }
 
-export type SchemeCode = "PM-KISAN" | "PMFBY" | "MIDH";
+export type SchemeCode = "PM-KISAN" | "PMFBY" | "MIDH" | "OP-GREEN" | "NE-LOGISTICS";
 
 export function schemeEligible(
   scheme: SchemeCode,
-  cell: { acresCenti: number; plantingCount: number; horticulture: boolean },
+  cell: {
+    acresCenti: number;
+    plantingCount: number;
+    horticulture: boolean;
+    fpo?: boolean;
+    perishable?: boolean;
+    northEast?: boolean;
+    freightDeclared?: boolean;
+  },
 ): { eligible: boolean; amountPaise: null; reason: string } {
   if (scheme === "PM-KISAN") {
     const ok = cell.acresCenti > 0;
@@ -460,6 +468,26 @@ export function schemeEligible(
       eligible: ok,
       amountPaise: null,
       reason: ok ? "Magh planting on the cell. Premium stays undeclared." : "No planted-crop fact.",
+    };
+  }
+  if (scheme === "OP-GREEN") {
+    const ok = Boolean(cell.horticulture && cell.fpo && cell.perishable);
+    return {
+      eligible: ok,
+      amountPaise: null,
+      reason: ok
+        ? "Operation Green: FPO perishable horticulture. Amount blank."
+        : "Operation Green needs FPO + perishable horticulture. Amount blank.",
+    };
+  }
+  if (scheme === "NE-LOGISTICS") {
+    const ok = Boolean(cell.northEast && cell.freightDeclared);
+    return {
+      eligible: ok,
+      amountPaise: null,
+      reason: ok
+        ? "NE logistics policy: declared freight from the North-East. Amount blank."
+        : "NE logistics needs a NE village and declared freight. Amount blank.",
     };
   }
   const ok = cell.horticulture;

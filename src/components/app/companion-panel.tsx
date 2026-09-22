@@ -156,9 +156,11 @@ function ProposalCard({ proposal }: { proposal: CompanionProposal }) {
             <p className="text-sm text-destructive">{local ?? error}</p>
           ) : null}
           <div className="flex flex-wrap gap-2">
-            {proposal.action === "consult" || proposal.action === "code" ? (
+            {proposal.action === "consult" || proposal.action === "code" || proposal.action === "book" ? (
               <Button asChild size="sm" variant="outline">
-                <Link to={proposal.href}>{proposal.action === "code" ? "Open August AI" : "Open library"}</Link>
+                <Link to={proposal.href}>
+                  {proposal.action === "code" ? "Open August AI" : proposal.action === "book" ? "Open shared muscle" : "Open library"}
+                </Link>
               </Button>
             ) : (
               <Button size="sm" disabled={busy} onClick={() => void approve()}>

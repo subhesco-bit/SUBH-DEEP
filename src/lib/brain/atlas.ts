@@ -34,7 +34,7 @@ export type AiScore = {
   githubLivingPlugs: 0;
   githubCadavers: number;
   latticeTissues: 5;
-  signals: 11;
+  signals: 12;
   financeMissing: true;
   procureMissing: true;
   githubPct: 7;
@@ -73,7 +73,7 @@ function u(
 }
 
 export const AI_UNITS: AiUnit[] = [
-  u("cortex", "Village cortex", "One brain", "cortex", "lattice", "living", "remaining", "/brain", "brainDecide is the only mouth. Ten named signals. Decision passport.", "Two brains on GitHub (orchestrator + AIBrainPage)."),
+  u("cortex", "Village cortex", "One brain", "cortex", "lattice", "living", "remaining", "/brain", "brainDecide is the only mouth. Twelve named signals. Decision passport.", "Two brains on GitHub (orchestrator + AIBrainPage)."),
   u("frontier", "Frontier AI", "Edge gates", "frontier", "lattice", "living", "mill-heat", "/brain", "millDecision names outage, alert, heat. Remaining gate conserves grams.", "Model registry, drift."),
   u("agentic", "Agentic AI", "Companion propose", "agentic", "lattice", "living", "harvest-propose", "/companion", "Propose harvest / intake / settle. Clerk names kg and paymentRef.", "GitHub M675100 WIRED skeleton. Zero live callers."),
   u("physical", "Physical AI", "Mill, IoT, sack", "physical", "lattice", "living", "mill-clear", "/warehouse", "Declared temp, kWh, remaining mass. Mill rests on heat.", "Robot fleet. Humanoid teleop refused."),
@@ -81,6 +81,7 @@ export const AI_UNITS: AiUnit[] = [
   u("scientist", "Artificial scientists", "Declared-loss twin", "scientist", "lattice", "living", "hypothesis", "/library", "Hypothesis on declared remaining and loss %. Yield null.", "Invented yield, gazette twin, training loop."),
   u("erp-manage", "AI ERP management", "Passport or named-missing", "cortex", "lattice", "living", "remaining", "/platform", "manageErpModule: living/partial emit a passport. Missing named. Refused refuse.", "SAP copilot, numeric AI writes."),
   u("vet-coding", "August AI veterinary coding", "AFRERA-VET", "agentic", "lattice", "living", "vet-code", "/vet", "proposeVet on cattle, buffalo, goat, pig, poultry, duck, fish, dog, cat. Clerk/vet confirms heads. ASF/AI named, not auto-confirm.", "SNOMED-VET, WOAH lab, milk rupees."),
+  u("share-slot", "Shared-muscle proposer", "Village hours", "agentic", "lattice", "living", "share-slot", "/share", "proposeSlot on cold, mill, process, pack, labs, dryer, polyhouse, equipment. Clerk confirms hours. Rent undeclared.", "Rental rupees, GST invoice, kWh-priced booking."),
 
   u("nerve", "Governed nerve", "Library consult", "agentic", "lattice", "partial", "harvest-propose", "/nerve", "Consult memory first. Coordinator analog lives here.", "Eval SLOs, cost/latency on GitHub."),
   u("library", "Library hippocampus", "Cite or hide", "scientist", "lattice", "partial", "hypothesis", "/library", "Named pulses fire on boot. No API key required.", "OCR graph, permissioned retrieval."),
@@ -128,7 +129,7 @@ export function aiScore(): AiScore {
     githubLivingPlugs: 0,
     githubCadavers: AI_SYSTEMS.length,
     latticeTissues: 5,
-    signals: 11,
+    signals: 12,
     financeMissing: true,
     procureMissing: true,
     githubPct: 7,

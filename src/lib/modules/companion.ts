@@ -8,7 +8,7 @@ import type { AiEnvelope } from "../os/types.ts";
 import { brainDecide } from "../brain/decide.ts";
 import type { DecisionPassport } from "../brain/types.ts";
 
-export type CompanionAction = "intake" | "settle" | "process" | "harvest" | "consult" | "code";
+export type CompanionAction = "intake" | "settle" | "process" | "harvest" | "consult" | "code" | "book";
 
 export type CompanionProposal = {
   id: string;
@@ -135,6 +135,22 @@ export function proposeCompanion(
       lotId: null,
       orderId: null,
       cellId: row.cellId,
+      severity: "note",
+    });
+  }
+
+  if (books.lots.some((l) => l.remainingGrams > 0) && !proposals.some((p) => p.action === "book")) {
+    proposals.push({
+      id: "book-cold",
+      moduleId: "agentic",
+      action: "book",
+      title: "Book the Langthasa cold bay",
+      body: "Hours conserved like remaining grams. The companion proposes a slot. Clerk confirms hours. Rent and GST invoice stay undeclared.",
+      href: "/share",
+      organ: "shared",
+      lotId: null,
+      orderId: null,
+      cellId: null,
       severity: "note",
     });
   }

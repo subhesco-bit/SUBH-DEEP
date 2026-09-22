@@ -13,13 +13,13 @@ const base = {
 };
 
 describe("village brain", () => {
-  it("names five tissues and eleven signals", () => {
+  it("names five tissues and twelve signals", () => {
     assert.equal(TISSUES.length, 5);
     assert.deepEqual(
       TISSUES.map((t) => t.id),
       ["frontier", "agentic", "physical", "security", "scientist"],
     );
-    assert.equal(BRAIN_SIGNALS.length, 11);
+    assert.equal(BRAIN_SIGNALS.length, 12);
   });
 
   it("blocks mill heat, never freezes EMI, never writes a rupee", () => {
@@ -105,9 +105,9 @@ describe("village brain", () => {
 describe("AI atlas", () => {
   it("classifies every analog family without claiming AI parity", () => {
     const score = aiScore();
-    assert.equal(AI_UNITS.length, 34);
-    assert.equal(score.units, 34);
-    assert.equal(score.living, 8);
+    assert.equal(AI_UNITS.length, 35);
+    assert.equal(score.units, 35);
+    assert.equal(score.living, 9);
     assert.equal(score.partial, 11);
     assert.equal(score.missing, 10);
     assert.equal(score.refused, 5);
@@ -118,7 +118,7 @@ describe("AI atlas", () => {
     assert.equal(score.githubLivingPlugs, 0);
     assert.equal(score.githubCadavers, AI_SYSTEMS.length);
     assert.equal(score.latticeTissues, 5);
-    assert.equal(score.signals, 11);
+    assert.equal(score.signals, 12);
     assert.equal(score.financeMissing, true);
     assert.equal(score.procureMissing, true);
     assert.equal(score.githubPct, 7);
@@ -131,7 +131,7 @@ describe("AI atlas", () => {
     const all = ackAllAi({ remainingGrams: 180000, kwh: 12 });
     assert.equal(all.classified, 100);
     assert.equal(all.rupeeWrites, 0);
-    assert.equal(all.livingPassports, 8);
+    assert.equal(all.livingPassports, 9);
     assert.equal(all.named, 10);
     assert.equal(all.refused, 5);
     assert.equal(all.unknownNamed, true);
@@ -180,5 +180,11 @@ describe("AI atlas", () => {
     assert.equal(cadaver.decision, "named");
     assert.equal(cadaver.status, "missing");
     assert.match(cadaver.reason, /named missing/i);
+    const share = ackAi("share-slot");
+    assert.equal(share.status, "living");
+    assert.equal(share.decision, "propose");
+    assert.equal(share.clerkRequired, true);
+    assert.equal(share.passport?.signal, "share-slot");
+    assert.equal(share.rupeeWrite, false);
   });
 });

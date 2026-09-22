@@ -968,7 +968,7 @@ export const MESH_BRIDGES: Bridge[] = [
     kind: "thoughtful",
     status: "missing",
     signal: "philosophy.muscle",
-    today: "Rental is e-commerce for equipment. The habitat does not flex.",
+    today: "Organism: hours may book. Rupees per year on the twin still missing. The habitat does not yet flex as a cost save.",
     contract: "Muscle is booked, felt in the calendar, and justified in rupees per year on the twin.",
     thought: "A brochure of tractors is not a body. Hours a household could not afford alone are.",
   },

@@ -23,7 +23,8 @@ export type BrainSignal =
   | "hypothesis"
   | "physical-teleop"
   | "harvest-propose"
-  | "vet-code";
+  | "vet-code"
+  | "share-slot";
 
 export type DecisionKind = "pass" | "block" | "defer" | "propose";
 

@@ -281,7 +281,7 @@ export const CORE_BRIDGES: Bridge[] = [
     kind: "technical",
     status: "missing",
     signal: "asset.booked { assetId, plotId, window }",
-    today: "Rental is a catalog. The farm calendar does not move.",
+    today: "Organism: hours may book on FPO muscle. The farm calendar and yield model still do not move. Rent stays undeclared.",
     contract: "A booked dryer or tractor writes into the plot calendar and the yield model.",
     thought: "Shared muscle that does not move the body is a brochure.",
   },

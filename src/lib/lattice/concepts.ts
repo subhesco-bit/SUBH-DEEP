@@ -195,7 +195,7 @@ export const CONCEPTS: Concept[] = [
     thesis:
       "Value addition is digestion: lots become food with energy, labour, and yield. Schedule follows village power, not a static roster.",
     silo:
-      "Processing appears in specs and some services. It is not driven by harvest intake, energy cloud, or food-value demand.",
+      "This organism: mobile and static process units book hours on the FPO. Digestion still does not price energy into a rupee margin.",
     prosperity:
       "Margin after energy, packaging, and offtake — attributed back to the farmer cell.",
     x: 178,
@@ -307,7 +307,7 @@ export const CONCEPTS: Concept[] = [
     thesis:
       "Tractors, dryers, packhouses, and cold rooms are village muscle. Booking them should reshape the farm calendar and the cost twin.",
     silo:
-      "Asset rental exists as a catalog. It does not write into crop calendar, yield model, or RCOP’s shared-vs-individual decision.",
+      "Asset hours now book on this kernel: cold, mill, process, pack, labs, dryer, polyhouse, equipment. Rental rupees, GST invoice, and the rupee-save twin stay missing.",
     prosperity:
       "Hours of asset use that a household could not afford alone, priced as rupees saved.",
     x: 720,

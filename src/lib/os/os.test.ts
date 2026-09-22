@@ -111,6 +111,13 @@ describe("digital super-organism registry", () => {
     assert.equal(OS_ITEMS.find((x) => x.id === "n-lineage")?.todo, "done");
     assert.equal(OS_ITEMS.find((x) => x.id === "a-vet-code")?.todo, "done");
     assert.equal(OS_ITEMS.find((x) => x.id === "a-vet-code")?.href, "/vet");
+    assert.equal(OS_ITEMS.find((x) => x.id === "c-share")?.todo, "done");
+    assert.equal(OS_ITEMS.find((x) => x.id === "c-share")?.href, "/share");
+    assert.equal(OS_ITEMS.find((x) => x.id === "c-organic")?.todo, "done");
+    assert.equal(OS_ITEMS.find((x) => x.id === "n-share")?.todo, "done");
+    assert.equal(OS_ITEMS.find((x) => x.id === "a-share")?.todo, "done");
+    assert.equal(OS_ITEMS.find((x) => x.id === "a-share")?.href, "/share");
+    assert.equal(OS_ITEMS.find((x) => x.id === "f-infra")?.href, "/share");
     assert.equal(OS_ITEMS.find((x) => x.id === "f-reflex")?.href, "/body");
     assert.equal(OS_ITEMS.find((x) => x.id === "c-flows")?.todo, "done");
     assert.equal(OS_ITEMS.find((x) => x.id === "c-flows")?.href, "/flows");
@@ -154,6 +161,8 @@ describe("digital super-organism registry", () => {
     assert.ok(NEED_INTENTS.some((i) => i.id === "ack-ai"));
     assert.ok(NEED_INTENTS.some((i) => i.id === "react-now"));
     assert.ok(NEED_INTENTS.some((i) => i.id === "code-herd"));
+    assert.ok(NEED_INTENTS.some((i) => i.id === "book-muscle"));
+    assert.ok(NEED_INTENTS.some((i) => i.id === "trace-organic"));
     assert.ok(NEED_INTENTS.every((i) => i.href.startsWith("/")));
     const ranked = rankIntents(null);
     assert.equal(ranked.length, NEED_INTENTS.length);
@@ -266,11 +275,18 @@ describe("digital super-organism registry", () => {
     assert.equal(herd?.status, "living");
     assert.equal(herd?.steps.find((s) => s.id === "vet-cash")?.status, "missing");
     assert.equal(SECTOR_JOURNEYS.find((j) => j.id === "health")?.status, "named");
+    const muscle = SECTOR_JOURNEYS.find((j) => j.id === "shared-infra");
+    assert.equal(muscle?.status, "living");
+    assert.equal(muscle?.steps.find((s) => s.id === "share-book")?.status, "living");
+    assert.equal(muscle?.steps.find((s) => s.id === "share-gst")?.status, "missing");
+    assert.equal(muscle?.steps.find((s) => s.id === "share-rent")?.status, "missing");
   });
 
   it("living events fire; unknown events fail; flood opens a claim window", () => {
     assert.ok(livingEvents().some((e) => e.id === "harvest.completed"));
     assert.ok(livingEvents().some((e) => e.id === "weather.alert"));
+    assert.ok(livingEvents().some((e) => e.id === "share.booked"));
+    assert.ok(livingEvents().some((e) => e.id === "organic.traced"));
     assert.equal(unknownEventFails("weather.tornado"), true);
     assert.equal(unknownEventFails("harvest.completed"), false);
   });

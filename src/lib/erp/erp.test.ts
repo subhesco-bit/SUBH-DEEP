@@ -149,6 +149,24 @@ describe("named remainder", () => {
     assert.equal(midh.eligible, true);
     const none = schemeEligible("PMFBY", { acresCenti: 120, plantingCount: 0, horticulture: false });
     assert.equal(none.eligible, false);
+    const green = schemeEligible("OP-GREEN", {
+      acresCenti: 180,
+      plantingCount: 1,
+      horticulture: true,
+      fpo: true,
+      perishable: true,
+    });
+    assert.equal(green.eligible, true);
+    assert.equal(green.amountPaise, null);
+    const ne = schemeEligible("NE-LOGISTICS", {
+      acresCenti: 180,
+      plantingCount: 1,
+      horticulture: false,
+      northEast: true,
+      freightDeclared: true,
+    });
+    assert.equal(ne.eligible, true);
+    assert.equal(ne.amountPaise, null);
   });
 
   it("refuses an undeclared IoT reading", () => {

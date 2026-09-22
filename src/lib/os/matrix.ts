@@ -46,6 +46,7 @@ const PAGE_COMPONENT: Record<string, string> = {
   "/mesh": "MeshPanel",
   "/ligaments": "LigamentCatalog",
   "/vet": "VetBoard",
+  "/share": "ShareBoard",
 };
 
 const PAGE_WORKFLOW: Record<string, string> = {
@@ -60,6 +61,7 @@ const PAGE_WORKFLOW: Record<string, string> = {
   "/charter": "platform-bus",
   "/os": "os.classify",
   "/vet": "code-herd",
+  "/share": "book-muscle",
 };
 
 function bound(x: OsItem) {

@@ -52,6 +52,20 @@ function REOSDashboardPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [showForm, setShowForm] = useState(false);
 
+  const normaliseVillageProfiles = (response) => {
+    const profiles = response?.data?.data;
+    if (!Array.isArray(profiles)) {
+      throw new Error('The village registry returned an invalid response.');
+    }
+
+    return profiles.map((profile) => ({
+      ...profile,
+      village_id: profile.village_id ?? profile.id,
+      village_name: profile.village_name ?? profile.name ?? 'Unnamed village',
+      avg_income_per_household: profile.avg_income_per_household ?? profile.avg_income,
+    }));
+  };
+
   const tabs = [
     { id: 'village-profiles', label: 'Village Profiles', icon: Building2 },
     { id: 'procurement-subscriptions', label: 'Procurement Subscriptions', icon: ShoppingCart },
@@ -69,49 +83,74 @@ function REOSDashboardPage() {
   ];
 
   // Village Profiles
-  const { data: villageProfiles, isLoading: villagesLoading } = useQuery({
-    queryKey: ['village-profiles'],
-    queryFn: async () => (await villageProfileAPI.searchVillages({})).data?.data ?? [],
+  const {
+    data: villageProfiles,
+    isLoading: villagesLoading,
+    isError: villagesError,
+    refetch: refetchVillages,
+  } = useQuery({
+    queryKey: ['village-profiles', searchTerm],
+    queryFn: async () => normaliseVillageProfiles(await villageProfileAPI.searchVillages({
+      search: searchTerm,
+      limit: 100,
+    })),
+    enabled: activeTab === 'village-profiles',
   });
 
   // Procurement Subscriptions
   const { data: subscriptions, isLoading: subscriptionsLoading } = useQuery({
     queryKey: ['procurement-subscriptions'],
     queryFn: async () => (await procurementSubscriptionAPI.getStatistics({})).data?.data ?? {},
+    enabled: activeTab === 'procurement-subscriptions',
   });
 
   // Buying Clubs
   const { data: buyingClubs, isLoading: clubsLoading } = useQuery({
     queryKey: ['buying-clubs'],
     queryFn: async () => (await buyingClubAPI.getStatistics({})).data?.data ?? {},
+    enabled: activeTab === 'buying-clubs',
   });
 
   // Rural Enterprises
   const { data: enterprises, isLoading: enterprisesLoading } = useQuery({
     queryKey: ['rural-enterprises'],
     queryFn: async () => (await ruralEnterpriseAPI.getStatistics({})).data?.data ?? {},
+    enabled: activeTab === 'rural-enterprises',
   });
 
   // Renewable Energy
   const { data: energySystems, isLoading: energyLoading } = useQuery({
     queryKey: ['renewable-energy'],
     queryFn: async () => (await renewableEnergyAPI.getStatistics({})).data?.data ?? {},
+    enabled: activeTab === 'renewable-energy',
   });
 
   // AI Advisories
   const { data: advisories, isLoading: advisoriesLoading } = useQuery({
     queryKey: ['ai-advisories'],
     queryFn: async () => (await aiAdvisoryAPI.getStatistics({})).data?.data ?? {},
+    enabled: activeTab === 'ai-advisories',
   });
 
   const renderTabContent = () => {
     switch (activeTab) {
       case 'village-profiles':
+        if (villagesLoading) {
+          return <div role="status" className="bg-white p-6 rounded-lg shadow-sm border">Loading village profiles…</div>;
+        }
+        if (villagesError) {
+          return (
+            <div role="alert" className="bg-white p-6 rounded-lg shadow-sm border">
+              <p>Village profiles could not be loaded.</p>
+              <button type="button" onClick={() => refetchVillages()} className="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg">Try again</button>
+            </div>
+          );
+        }
         return (
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-white p-6 rounded-lg shadow-sm border">
-                <h3 className="text-sm font-medium text-gray-500">Total Villages</h3>
+                <h3 className="text-sm font-medium text-gray-500">Villages Returned</h3>
                 <p className="text-3xl font-bold text-gray-900 mt-2">{villageProfiles?.length || 0}</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-sm border">
@@ -123,7 +162,7 @@ function REOSDashboardPage() {
               <div className="bg-white p-6 rounded-lg shadow-sm border">
                 <h3 className="text-sm font-medium text-gray-500">Avg Literacy Rate</h3>
                 <p className="text-3xl font-bold text-gray-900 mt-2">
-                  {villageProfiles?.length ? Math.round(villageProfiles.reduce((a, b) => a + (b.literacy_rate || 0), 0) / villageProfiles.length) : 0}%
+                  {villageProfiles?.length ? Math.round(villageProfiles.reduce((total, village) => total + (Number(village.literacy_rate) || 0), 0) / villageProfiles.length) : 0}%
                 </p>
               </div>
             </div>
@@ -144,13 +183,16 @@ function REOSDashboardPage() {
                       </tr>
                     </thead>
                     <tbody>
+                      {villageProfiles?.length === 0 && (
+                        <tr><td colSpan="5" className="p-3 text-gray-500">No villages match your search.</td></tr>
+                      )}
                       {villageProfiles?.slice(0, 10).map(v => (
                         <tr key={v.village_id} className="border-b hover:bg-gray-50">
                           <td className="p-3">{v.village_name}</td>
                           <td className="p-3">{v.district}</td>
                           <td className="p-3">{v.block}</td>
                           <td className="p-3">{v.population}</td>
-                          <td className="p-3">₹{v.avg_income_per_household}</td>
+                          <td className="p-3">{v.avg_income_per_household == null ? '—' : `₹${Number(v.avg_income_per_household).toLocaleString('en-IN', { maximumFractionDigits: 0 })}`}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -319,10 +361,19 @@ function REOSDashboardPage() {
 
         <div className="mb-6 flex justify-between items-center">
           <div className="flex gap-2">
-            <button className="flex items-center gap-2 px-4 py-2 bg-white border rounded-lg hover:bg-gray-50">
-              <Search className="w-4 h-4" />
-              Search
-            </button>
+            {activeTab === 'village-profiles' && (
+              <label className="flex items-center gap-2 px-3 py-2 bg-white border rounded-lg">
+                <Search className="w-4 h-4" />
+                <input
+                  type="search"
+                  aria-label="Search villages"
+                  value={searchTerm}
+                  onChange={(event) => setSearchTerm(event.target.value)}
+                  placeholder="Search villages"
+                  className="outline-none"
+                />
+              </label>
+            )}
             <button className="flex items-center gap-2 px-4 py-2 bg-white border rounded-lg hover:bg-gray-50">
               <Filter className="w-4 h-4" />
               Filter

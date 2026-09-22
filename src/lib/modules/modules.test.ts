@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { AI_SYSTEMS } from "../systems/catalog.ts";
-import { aiFirewall } from "./algorithms.ts";
+import { aiFirewall, remainingGate } from "./algorithms.ts";
 import { lastCopilot, modulesCovered, runWorkflow } from "./engine.ts";
 import { MODULE_RUNTIME, runtimeStats } from "./registry.ts";
 import { WORKFLOWS } from "./workflows.ts";
@@ -107,6 +107,38 @@ describe("module OS", () => {
     const count = run.steps.find((s) => s.algorithm === "count-plugs");
     assert.equal(count?.payload.living, AI_SYSTEMS.length);
   });
+
+  it("remaining-gate defers undeclared mass, blocks empty or oversold, never throws", () => {
+    assert.equal(remainingGate({ workflowId: "x" }).decision, "defer");
+    assert.equal(remainingGate({ workflowId: "x", remainingGrams: 0 }).decision, "block");
+    assert.equal(remainingGate({ workflowId: "x", remainingGrams: 100, qtyGrams: 200 }).decision, "block");
+    assert.equal(remainingGate({ workflowId: "x", grams: 100, remainingGrams: 150 }).decision, "block");
+    assert.equal(remainingGate({ workflowId: "x", remainingGrams: 510000, qtyGrams: 0 }).decision, "pass");
+  });
+
+  it("period-close blocks unbalanced books; climate-reflex blocks the mill and names why", () => {
+    const unbalanced = runWorkflow("period-close", { journalBalanced: false, clerk: "Biren" });
+    assert.equal(unbalanced.status, "blocked");
+    const closed = runWorkflow("period-close", { journalBalanced: true, clerk: "Biren" });
+    assert.equal(closed.status, "passed");
+    const noClerk = runWorkflow("period-close", { journalBalanced: true, clerk: " " });
+    assert.equal(noClerk.status, "blocked");
+
+    const mill = runWorkflow("climate-reflex", {
+      status: "outage",
+      alert: true,
+      iotTempC: 31.4,
+      remainingGrams: 180000,
+    });
+    assert.equal(mill.status, "blocked");
+    const energy = mill.steps.find((s) => s.algorithm === "energy-cloud");
+    assert.equal(energy?.decision, "block");
+    assert.match(energy?.reason ?? "", /outage/);
+    assert.ok(!mill.steps.some((s) => s.algorithm === "remaining-gate"), "remaining must not move after mill block");
+
+    const quiet = runWorkflow("climate-reflex", { remainingGrams: 180000, iotTempC: 22 });
+    assert.notEqual(quiet.status, "blocked");
+  });
 });
 
 describe("agentic companion", () => {
@@ -156,5 +188,9 @@ describe("agentic companion", () => {
     assert.ok(reading.proposals.every((p) => !/₹|paise\/kg|invent/i.test(p.title)));
     assert.equal(reading.proposals.find((p) => p.action === "settle")?.moduleId, "agentic");
     assert.ok(reading.proposals.some((p) => p.moduleId === "erp-agents"));
+    assert.equal(reading.passport.rupeeWrite, false);
+    assert.equal(reading.passport.decision, "propose");
+    assert.equal(reading.passport.amountPaise, null);
+    assert.equal(reading.passport.clerkRequired, true);
   });
 });

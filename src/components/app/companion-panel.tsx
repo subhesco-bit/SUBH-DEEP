@@ -26,13 +26,20 @@ export function CompanionPanel({
             Agentic, copilot, ERP agents, and advisory were meant to sit on the farmer cell
             as one companion — not sixteen portals. GitHub still holds a WIRED skeleton.
             This organism proposes the next gate. A clerk names paymentRef, kilograms, and loss.
-            The companion never writes a rupee.
+            The companion never writes a rupee.{" "}
+            <Link to="/brain" className="underline decoration-border underline-offset-4 hover:text-foreground">
+              Village brain
+            </Link>{" "}
+            decides pass / block / defer / propose.
           </p>
         </>
       ) : null}
       <p className="mt-3 text-sm text-live">{reading.next}</p>
       <p className="mt-2 text-[13px] leading-relaxed text-muted">{reading.memory}</p>
       <p className="mt-1 font-mono text-[11px] text-partial">{reading.firewall}</p>
+      <p className="mt-1 font-mono text-[11px] text-live">
+        Brain · {reading.passport.decision} · clerk {reading.passport.clerkRequired ? "required" : "recorded"} · rupee write false
+      </p>
       {reading.libraryHit ? (
         <p className="mt-1 font-mono text-[11px] text-muted">Library · {reading.libraryHit}</p>
       ) : null}

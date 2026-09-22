@@ -3,13 +3,13 @@
 import {
   allocateFifo,
   journalBalances,
+  millDecision,
   remainingAfterCommit,
   settlementAmounts,
   splitQtyWeighted,
   weightedAverageCostPaisePerKg,
   fusForVariety,
   weatherReflex,
-  energyProcessGate,
   schemeEligible,
   evaluateHerdCover,
   evaluateWeatherCover,
@@ -40,6 +40,7 @@ export function aiFirewall(step: WorkflowStepDef): AlgorithmResult {
 }
 
 export function remainingGate(ctx: RunContext): AlgorithmResult {
+  const remainingDeclared = ctx.remainingGrams != null || ctx.grams != null;
   const remaining = ctx.remainingGrams ?? ctx.grams ?? 0;
   const qty = ctx.qtyGrams ?? 0;
   if (remaining < 0) {
@@ -53,11 +54,25 @@ export function remainingGate(ctx: RunContext): AlgorithmResult {
     };
   }
   if ((ctx.grams ?? 0) > 0) {
-    remainingAfterCommit(ctx.grams ?? 0, (ctx.grams ?? 0) - remaining);
+    try {
+      remainingAfterCommit(ctx.grams ?? 0, (ctx.grams ?? 0) - remaining);
+    } catch (err) {
+      return {
+        decision: "block",
+        reason: err instanceof Error ? err.message : "Mass not conserved.",
+        payload: { remaining, qty },
+      };
+    }
+  }
+  if (!remainingDeclared && qty === 0) {
+    return { decision: "defer", reason: "Remaining mass not declared.", payload: { remaining, qty } };
+  }
+  if (remaining <= 0) {
+    return { decision: "block", reason: "No remaining mass.", payload: { remaining, qty } };
   }
   return {
-    decision: remaining > 0 || qty === 0 ? "pass" : "block",
-    reason: remaining > 0 ? `Remaining ${remaining} g still on the same body.` : "No remaining mass.",
+    decision: "pass",
+    reason: `Remaining ${remaining} g still on the same body.`,
     payload: { remaining, qty },
   };
 }
@@ -93,6 +108,15 @@ export function priceWaterfall(ctx: RunContext): AlgorithmResult {
 }
 
 export function journalGate(ctx: RunContext): AlgorithmResult {
+  if (typeof ctx.journalBalanced === "boolean") {
+    if (!ctx.clerk?.trim()) {
+      return { decision: "block", reason: "Clerk must close the period.", payload: {} };
+    }
+    if (!ctx.journalBalanced) {
+      return { decision: "block", reason: "Journal unbalanced. SoD: clerk cannot close.", payload: {} };
+    }
+    return { decision: "pass", reason: "Journal balances. Period may close.", payload: {} };
+  }
   const qty = ctx.qtyGrams ?? 0;
   const price = ctx.pricePaisePerKg ?? 0;
   const freight = ctx.freightPaisePerKg ?? 0;
@@ -287,6 +311,9 @@ export function copilotNext(workflowId: string): AlgorithmResult {
     "nerve-consult": "Next keystroke: name an organ, then a clerk acts.",
     "domain-advise": "Next keystroke: weather may pause EMI; it may not invent a price.",
     "platform-bus": "Next keystroke: run harvest-mint against a living lot.",
+    "claim-file": "Next keystroke: survey is named. Payout stays undeclared.",
+    "period-close": "Next keystroke: Magh closes only if the journal balances.",
+    "climate-reflex": "Next keystroke: clerk names loss grams. Mill stays blocked.",
   };
   return {
     decision: "propose",
@@ -369,15 +396,16 @@ export function herdCoverGate(ctx: RunContext): AlgorithmResult {
 }
 
 export function energyCloudGate(ctx: RunContext): AlgorithmResult {
-  const gate = energyProcessGate({
-    status: ctx.status === "outage" ? "outage" : "ok",
-    kwh: ctx.costPaise == null ? null : ctx.costPaise,
-    active: ctx.status === "outage",
+  const mill = millDecision({
+    outage: ctx.status === "outage",
+    alert: Boolean(ctx.alert),
+    iotTempC: ctx.iotTempC ?? null,
+    kwh: ctx.kwh ?? null,
   });
   return {
-    decision: gate.decision,
-    reason: gate.reason,
-    payload: { kwh: ctx.costPaise ?? null },
+    decision: mill.decision,
+    reason: mill.reason,
+    payload: { kwh: ctx.kwh ?? null },
   };
 }
 

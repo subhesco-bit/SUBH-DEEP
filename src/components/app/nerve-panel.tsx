@@ -45,7 +45,11 @@ export function NervePanel() {
           <Link to="/systems" className="underline decoration-border underline-offset-4 hover:text-foreground">
             Systems rack
           </Link>
-          <span className="text-muted"> — agentic, copilot, fabric remain WIRED skeletons.</span>
+          <span className="text-muted"> — agentic, copilot, fabric remain WIRED skeletons on GitHub. </span>
+          <Link to="/brain" className="underline decoration-border underline-offset-4 hover:text-foreground">
+            Village brain
+          </Link>
+          <span className="text-muted"> is the living mouth.</span>
         </p>
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <Badge variant={autoOp === "living" ? "live" : autoOp === "partial" ? "partial" : "gap"}>

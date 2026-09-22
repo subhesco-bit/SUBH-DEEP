@@ -16,8 +16,10 @@ export const LIFE_EVENTS: LifeEvent[] = [
   { id: "illness", name: "Illness", status: "named", signal: "life.illness", muscle: "none — do not infer health" },
   { id: "price-crash", name: "Price crash", status: "named", signal: "market.crash", muscle: "none — price stays declared" },
   { id: "flood", name: "Flood", status: "living", signal: "weather.flood", muscle: "weather.alert claim window, EMI not frozen" },
-  { id: "heat", name: "Heatwave", status: "named", signal: "weather.heat", muscle: "none" },
-  { id: "transport-failure", name: "Transport failure", status: "named", signal: "logistics.fail", muscle: "none" },
+  { id: "offline.sync", name: "Offline sync", status: "living", signal: "offline.sync", muscle: "queue + receipt. No invented amounts." },
+  { id: "period.close", name: "Period close", status: "living", signal: "period.close", muscle: "SoD: unbalanced journal cannot close" },
+  { id: "climate.reflex", name: "Climate reflex", status: "living", signal: "climate.reflex", muscle: "block mill, open claim, remaining moves only on clerk loss" },
+  { id: "scenario.whatif", name: "Scenario what-if", status: "living", signal: "scenario.whatif", muscle: "declared loss % → remaining after, rupee null, not live" },
 ];
 
 export function livingEvents(): LifeEvent[] {

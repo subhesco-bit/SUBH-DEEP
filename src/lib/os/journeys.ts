@@ -36,15 +36,85 @@ export const SECTOR_JOURNEYS: SectorJourney[] = [
     thesis: "Plot → harvest → godown → offtake → settle. Finance and procure stay missing. No invented ₹.",
     steps: agri,
   },
-  named("marketplace", "Marketplace", "Listing is born from harvest. Returns and trust graph still named."),
-  named("insurance", "Insurance", "Cover binds. Claims, survey, appeal still named."),
-  named("banking", "Banking", "No invented credit score. Underwriting stays missing."),
-  named("logistics", "Logistics", "Freight is a declared deduction, not a control tower."),
-  named("government", "Government schemes", "Static PDF is not eligibility. Effective-dated rules missing."),
-  named("engineering", "Engineering", "Do not fake CFD. Professional approval required."),
-  named("travel", "Travel", "Not this village kernel. Do not clone the agriculture UX."),
+  named("marketplace", "Marketplace", "Listing is born from harvest. Rank on remaining + FUS, never invented price."),
+  {
+    id: "travel",
+    sector: "Village remaining journey",
+    status: "living",
+    thesis:
+      "Remaining grams move plot → harvest → godown → kitchen → next Magh. Tourism itinerary refused. Budget undeclared.",
+    steps: [
+      { id: "v-plot", name: "Plot", status: "living", href: "/cells", organ: "crop" },
+      { id: "v-harvest", name: "Harvest", status: "living", href: "/lots", organ: "lot" },
+      { id: "v-store", name: "Godown", status: "living", href: "/warehouse", organ: "warehouse" },
+      { id: "v-kitchen", name: "Kitchen", status: "living", href: "/trade", organ: "demand" },
+      { id: "v-next", name: "Next Magh", status: "partial", href: "/trade", organ: "contract" },
+      { id: "v-tourism", name: "Tourism itinerary", status: "missing", href: "/os", organ: "demand" },
+    ],
+  },
+  {
+    id: "insurance",
+    sector: "Insurance",
+    status: "living",
+    thesis: "Cover binds. Claim files. Payout and premium stay undeclared. Survey named.",
+    steps: [
+      { id: "cover", name: "Cover", status: "living", href: "/warehouse", organ: "insurance" },
+      { id: "claim", name: "Claim", status: "living", href: "/os", organ: "insurance" },
+      { id: "survey", name: "Survey", status: "missing", href: "/os", organ: "insurance" },
+    ],
+  },
+  {
+    id: "banking",
+    sector: "Banking",
+    status: "named",
+    thesis: "No invented credit score. Pledge gate lives. Underwriting stays missing.",
+    steps: [{ id: "banking-door", name: "Do not invent a score", status: "missing", href: "/ledger", organ: "finance" }],
+  },
+  {
+    id: "logistics",
+    sector: "Logistics",
+    status: "living",
+    thesis: "Freight is declared. PoD is a clerk fact. ETA refused.",
+    steps: [
+      { id: "freight", name: "Freight", status: "living", href: "/trade", organ: "logistics" },
+      { id: "pod", name: "Proof of delivery", status: "living", href: "/os", organ: "logistics" },
+      { id: "eta", name: "ETA", status: "missing", href: "/os", organ: "logistics" },
+    ],
+  },
+  {
+    id: "government",
+    sector: "Government schemes",
+    status: "living",
+    thesis: "Effective-dated eligibility. Amount blank. Gazette twin refused. Policy lab what-if lives.",
+    steps: [
+      { id: "elig", name: "Eligibility", status: "living", href: "/ledger", organ: "scheme" },
+      { id: "amount", name: "Amount", status: "missing", href: "/os", organ: "scheme" },
+      { id: "gazette", name: "Gazette twin", status: "missing", href: "/os", organ: "scheme" },
+    ],
+  },
+  {
+    id: "engineering",
+    sector: "Engineering",
+    status: "living",
+    thesis: "BOQ stamp on declared qty+unit+standard+engineer. CFD refused. Amount only if rate declared.",
+    steps: [
+      { id: "boq", name: "BOQ stamp", status: "living", href: "/os", organ: "shared" },
+      { id: "cfd", name: "CFD", status: "missing", href: "/os", organ: "shared" },
+      { id: "bim", name: "BIM", status: "missing", href: "/os", organ: "shared" },
+    ],
+  },
   named("health", "Health", "Clinical safety boundary. Do not infer health."),
-  named("enterprise", "Enterprise ERP", "Village journal is the GL here. CoA still missing."),
+  {
+    id: "enterprise",
+    sector: "Enterprise ERP",
+    status: "living",
+    thesis: "Village journal is the GL. CoA and period close live. GST still named.",
+    steps: [
+      { id: "journal", name: "Journal", status: "living", href: "/platform", organ: "erp" },
+      { id: "period", name: "Period close", status: "living", href: "/os", organ: "erp" },
+      { id: "gst", name: "GST", status: "missing", href: "/os", organ: "erp" },
+    ],
+  },
 ];
 
 const LIVING_EDGES: Record<string, string[]> = {

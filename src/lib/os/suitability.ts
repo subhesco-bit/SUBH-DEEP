@@ -10,10 +10,15 @@ export function assessSuitability(
     return { offer, suitable: false, refuse: true, reason: "No underwriting on this kernel. Do not invent a credit score." };
   }
   if (offer === "travel") {
-    return { offer, suitable: false, refuse: true, reason: "Travel is not this village. Do not clone agriculture UX." };
+    return { offer, suitable: false, refuse: true, reason: "Tourism is not this village. Remaining journey is a different door." };
   }
   if (offer === "scheme") {
-    return { offer, suitable: false, refuse: true, reason: "Schemes are blood, not PDFs. Eligibility is not effective-dated yet." };
+    return {
+      offer,
+      suitable: true,
+      refuse: true,
+      reason: "Eligibility may be computed. Amount stays undeclared. Do not recommend a rupee.",
+    };
   }
   if (offer === "insurance-quote") {
     return { offer, suitable: false, refuse: true, reason: "Do not invent a premium." };

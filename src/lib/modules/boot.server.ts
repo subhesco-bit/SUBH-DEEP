@@ -262,6 +262,32 @@ const MAGH: Array<{ workflowId: string; ctx: Omit<RunContext, "workflowId"> }> =
       status: "listed",
     },
   },
+  {
+    workflowId: "period-close",
+    ctx: {
+      journalBalanced: true,
+      clerk: "Biren",
+      query: "period close Magh",
+    },
+  },
+  {
+    workflowId: "climate-reflex",
+    ctx: {
+      lotId: "lot-ginger-teron",
+      remainingGrams: 180_000,
+      status: "outage",
+      alert: true,
+      iotTempC: 31.4,
+      query: "climate reflex mill",
+    },
+  },
+  {
+    workflowId: "claim-file",
+    ctx: {
+      lotId: "lot-ginger-teron",
+      query: "flood claim",
+    },
+  },
 ];
 
 async function seedModuleOs(sql: Sql): Promise<void> {
@@ -296,13 +322,46 @@ export async function ensureModuleOs(): Promise<ModuleOsSnapshot> {
   return readModuleOs();
 }
 
+async function hydrateCtx(
+  workflowId: string,
+  ctx: Omit<RunContext, "workflowId">,
+): Promise<Omit<RunContext, "workflowId">> {
+  if (workflowId !== "period-close" && workflowId !== "climate-reflex") return ctx;
+  try {
+    const { ensureBooks } = await import("../erp/boot.server");
+    const books = await ensureBooks();
+    if (workflowId === "period-close") {
+      return {
+        ...ctx,
+        journalBalanced: ctx.journalBalanced ?? books.kpis.journalBalanced,
+        clerk: ctx.clerk ?? "Biren",
+      };
+    }
+    const outage = books.energyWindows.some((w) => w.active && w.status === "outage");
+    const alert = books.weatherAlerts.some((a) => a.claimOpen);
+    const temp = books.iotReadings.find((r) => r.unit === "C" || /temp/i.test(r.kind));
+    const lot = books.lots.find((l) => l.id === ctx.lotId) ?? books.lots[0];
+    const window = books.energyWindows.find((w) => w.active);
+    return {
+      ...ctx,
+      status: outage ? "outage" : ctx.status,
+      alert: ctx.alert ?? alert,
+      iotTempC: ctx.iotTempC ?? temp?.valueNum ?? null,
+      remainingGrams: ctx.remainingGrams ?? lot?.remainingGrams,
+      kwh: ctx.kwh ?? window?.kwh ?? null,
+    };
+  } catch {
+    return ctx;
+  }
+}
+
 export async function executeWorkflow(
   workflowId: string,
   ctx: Omit<RunContext, "workflowId"> = {},
 ): Promise<ModuleOsSnapshot> {
   await ensureModuleOs();
   const sql = await getSql();
-  const run = runWorkflow(workflowId, ctx);
+  const run = runWorkflow(workflowId, await hydrateCtx(workflowId, ctx));
   await persistRun(sql, run);
   await sql.query(
     `insert into spine_events (signal, organ_id, ligament_id, payload)

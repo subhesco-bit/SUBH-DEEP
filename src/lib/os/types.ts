@@ -69,12 +69,13 @@ export type OsSnapshot = {
   items: OsItem[];
   classified: number;
   stage0Pct: number;
-  stageDone: Record<OsStage, { total: number; done: number; pct: number }>;
+  stageDone: Record<OsStage, { total: number; done: number; blocked: number; closed: number; pct: number }>;
   kernelVerified: number;
   kernelPartial: number;
   githubScaffolded: number;
   open: number;
   blocked: number;
+  stagesComplete: boolean;
   thesis: string;
 };
 

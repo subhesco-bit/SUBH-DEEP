@@ -39,63 +39,71 @@ function orchestratorRoute(step: WorkflowStepDef): AlgorithmResult {
 }
 
 function execute(step: WorkflowStepDef, ctx: RunContext): AlgorithmResult {
-  const wall = aiFirewall(step);
-  if (wall.decision === "block") return wall;
+  try {
+    const wall = aiFirewall(step);
+    if (wall.decision === "block") return wall;
 
-  switch (step.algorithm) {
-    case "ai-firewall":
-      return wall;
-    case "remaining-gate":
-      return remainingGate(ctx);
-    case "price-declared":
-      return priceDeclared(ctx);
-    case "price-waterfall":
-      return priceWaterfall(ctx);
-    case "journal-balance":
-      return journalGate(ctx);
-    case "payment-ref":
-      return paymentRefGate(ctx);
-    case "pledge-gate":
-      return pledgeGate(ctx);
-    case "fifo-alloc":
-      return fifoGate(ctx);
-    case "wac-cost":
-      return wacCost(ctx);
-    case "qty-weighted":
-      return qtyWeightedGate(ctx);
-    case "library-consult":
-      return libraryConsult(ctx);
-    case "gi-frame":
-      return giFrame(ctx);
-    case "gi-claim":
-      return giClaimGate(ctx);
-    case "spoilage-mass":
-      return spoilageMass(ctx);
-    case "weather-reflex":
-      return weatherAlert(ctx);
-    case "herd-cover":
-      return herdCoverGate(ctx);
-    case "energy-cloud":
-      return energyCloudGate(ctx);
-    case "scheme-eligible":
-      return schemeGate(ctx);
-    case "fvie-rank":
-      return fvieRank(ctx);
-    case "hours-to-pay":
-      return hoursToPay(ctx);
-    case "human-command":
-      return humanCommand();
-    case "count-plugs":
-      return countPlugs(
-        MODULE_RUNTIME.filter((m) => m.plug === "living").length,
-        AI_SYSTEMS.length,
-      );
-    case "copilot-next":
-      return copilotNext(ctx.workflowId);
-    case "orchestrator-route":
-      return orchestratorRoute(step);
-    default:
-      return { decision: "defer", reason: `No algorithm named ${step.algorithm}.`, payload: {} };
+    switch (step.algorithm) {
+      case "ai-firewall":
+        return wall;
+      case "remaining-gate":
+        return remainingGate(ctx);
+      case "price-declared":
+        return priceDeclared(ctx);
+      case "price-waterfall":
+        return priceWaterfall(ctx);
+      case "journal-balance":
+        return journalGate(ctx);
+      case "payment-ref":
+        return paymentRefGate(ctx);
+      case "pledge-gate":
+        return pledgeGate(ctx);
+      case "fifo-alloc":
+        return fifoGate(ctx);
+      case "wac-cost":
+        return wacCost(ctx);
+      case "qty-weighted":
+        return qtyWeightedGate(ctx);
+      case "library-consult":
+        return libraryConsult(ctx);
+      case "gi-frame":
+        return giFrame(ctx);
+      case "gi-claim":
+        return giClaimGate(ctx);
+      case "spoilage-mass":
+        return spoilageMass(ctx);
+      case "weather-reflex":
+        return weatherAlert(ctx);
+      case "herd-cover":
+        return herdCoverGate(ctx);
+      case "energy-cloud":
+        return energyCloudGate(ctx);
+      case "scheme-eligible":
+        return schemeGate(ctx);
+      case "fvie-rank":
+        return fvieRank(ctx);
+      case "hours-to-pay":
+        return hoursToPay(ctx);
+      case "human-command":
+        return humanCommand();
+      case "count-plugs":
+        return countPlugs(
+          MODULE_RUNTIME.filter((m) => m.plug === "living").length,
+          AI_SYSTEMS.length,
+        );
+      case "copilot-next":
+        return copilotNext(ctx.workflowId);
+      case "orchestrator-route":
+        return orchestratorRoute(step);
+      default:
+        return { decision: "defer", reason: `No algorithm named ${step.algorithm}.`, payload: {} };
+    }
+  } catch (err) {
+    return {
+      decision: "block",
+      reason: err instanceof Error ? err.message : "Gate threw.",
+      payload: {},
+    };
   }
 }
 

@@ -32,10 +32,18 @@ import {
   evaluateHerdCover,
   weatherReflex,
   energyProcessGate,
+  millDecision,
   schemeEligible,
   assertDeclaredReading,
 } from "./kernel.ts";
 import { exceptions, fpoPnl, processMass, trialBalance } from "./platform.ts";
+import {
+  ERP_MODULES,
+  atlasScore,
+  manageErpModule,
+  nestedRemaining,
+  stakeholderMayWrite,
+} from "./atlas.ts";
 
 describe("three stalls", () => {
   it("binds Langthasa godown cover without inventing a premium", () => {
@@ -126,6 +134,11 @@ describe("named remainder", () => {
     assert.equal(energyProcessGate({ status: "outage", kwh: null, active: true }).decision, "block");
     assert.equal(energyProcessGate({ status: "ok", kwh: null, active: true }).decision, "defer");
     assert.equal(energyProcessGate({ status: "ok", kwh: 40, active: true }).decision, "pass");
+    const mill = millDecision({ outage: true, alert: true, iotTempC: 31.4, kwh: null });
+    assert.equal(mill.decision, "block");
+    assert.deepEqual([...mill.signals].sort(), ["alert", "heat", "outage"]);
+    assert.equal(millDecision({ outage: false, alert: false, iotTempC: 22, kwh: null }).decision, "defer");
+    assert.equal(millDecision({ outage: false, alert: false, iotTempC: 22, kwh: 12 }).decision, "pass");
   });
 
   it("computes scheme eligibility with a blank rupee", () => {
@@ -291,5 +304,92 @@ describe("rural ERP platform", () => {
       payouts: [],
     });
     assert.ok(gates.some((g) => g.code === "G2"));
+  });
+});
+
+describe("rural ERP atlas", () => {
+  it("classifies every analog family without claiming SAP parity", () => {
+    const score = atlasScore();
+    assert.equal(ERP_MODULES.length, 32);
+    assert.equal(score.modules, 32);
+    assert.equal(score.living, 7);
+    assert.equal(score.partial, 11);
+    assert.equal(score.missing, 9);
+    assert.equal(score.refused, 5);
+    assert.equal(score.classifiedPct, 100);
+    assert.equal(score.sapParity, false);
+    assert.equal(score.financeMissing, true);
+    assert.equal(score.procureMissing, true);
+    assert.equal(score.githubPct, 7);
+    assert.equal(score.latticePct, 39);
+    const ids = ERP_MODULES.map((m) => m.id);
+    assert.equal(ids.length, new Set(ids).size);
+  });
+
+  it("conserves nested remaining person = home = village", () => {
+    const nested = nestedRemaining(
+      [
+        { id: "c1", name: "Enghi", household: "H1", remainingGrams: 100000 },
+        { id: "c2", name: "Langthasa", household: "H1", remainingGrams: 80000 },
+        { id: "c3", name: "Other", household: "H2", remainingGrams: 20000 },
+      ],
+      [{ variety: "Chakhao Poireiton", remainingGrams: 50000 }],
+      [{ dish: "Chakhao pithas", variety: "Chakhao Poireiton", festival: "Magh" }],
+    );
+    assert.equal(nested.person.length, 3);
+    assert.equal(nested.home.length, 2);
+    assert.equal(nested.village.remainingGrams, 200000);
+    assert.equal(nested.village.cellCount, 3);
+    assert.equal(nested.village.homeCount, 2);
+    const homeSum = nested.home.reduce((n, h) => n + h.remainingGrams, 0);
+    const personSum = nested.person.reduce((n, p) => n + p.remainingGrams, 0);
+    assert.equal(homeSum, personSum);
+    assert.equal(homeSum, nested.village.remainingGrams);
+    assert.equal(nested.conserved, true);
+    assert.equal(nested.kitchenBoundGrams, 50000);
+    const empty = nestedRemaining([]);
+    assert.equal(empty.conserved, true);
+    assert.equal(empty.village.remainingGrams, 0);
+  });
+
+  it("refuses banker and dealer writes; clerk may declare rupees", () => {
+    assert.equal(stakeholderMayWrite("banker", "rupee").allowed, false);
+    assert.equal(stakeholderMayWrite("banker", "remaining").allowed, false);
+    assert.equal(stakeholderMayWrite("dealer", "remaining").allowed, false);
+    assert.equal(stakeholderMayWrite("dealer", "rupee").allowed, false);
+    assert.match(stakeholderMayWrite("banker", "rupee").reason, /finance stays missing/i);
+    assert.match(stakeholderMayWrite("dealer", "remaining").reason, /procure stays missing/i);
+    assert.equal(stakeholderMayWrite("clerk", "rupee").allowed, true);
+    assert.equal(stakeholderMayWrite("farmer", "remaining").allowed, true);
+    assert.equal(stakeholderMayWrite("companion", "propose").allowed, true);
+    assert.equal(stakeholderMayWrite("brain", "rupee").allowed, false);
+    assert.equal(stakeholderMayWrite("brain", "propose").allowed, true);
+  });
+
+  it("names finance and procure missing and refuses tourism, CFD, AI rupee", () => {
+    const ap = manageErpModule("fi-ap");
+    assert.equal(ap.decision, "named");
+    assert.equal(ap.status, "missing");
+    assert.equal(ap.rupeeWrite, false);
+    assert.match(ap.reason, /named missing/i);
+    const pur = manageErpModule("mm-pur");
+    assert.equal(pur.decision, "named");
+    assert.match(pur.reason, /Purchasing/i);
+    const ar = manageErpModule("fi-ar");
+    assert.equal(ar.decision, "named");
+    const bl = manageErpModule("fi-bl");
+    assert.equal(bl.decision, "named");
+    const tour = manageErpModule("sd-tour");
+    assert.equal(tour.decision, "refuse");
+    assert.match(tour.reason, /Tourism/i);
+    const cfd = manageErpModule("eng-cfd");
+    assert.equal(cfd.decision, "refuse");
+    assert.match(cfd.reason, /CFD/i);
+    const ai = manageErpModule("ai-rupee");
+    assert.equal(ai.decision, "refuse");
+    assert.equal(ai.rupeeWrite, false);
+    assert.equal(ai.amountPaise, null);
+    const unknown = manageErpModule("sap-xyz");
+    assert.equal(unknown.decision, "named");
   });
 });

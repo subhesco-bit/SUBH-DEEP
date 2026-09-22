@@ -11,7 +11,7 @@ export const CONSTITUTION: ConstitutionRule[] = [
   { id: "E6", law: "Human command before any consequential write.", binds: "clerk", status: "enforced" },
   { id: "E7", law: "Absent evidence stays absent. Do not fill blanks.", binds: "passport", status: "enforced" },
   { id: "E8", law: "Assistance is not manipulation. Benefit over addiction.", binds: "ethic", status: "enforced" },
-  { id: "E9", law: "Consent receipts, deletion, purpose binding.", binds: "privacy", status: "named" },
+  { id: "E9", law: "Consent receipts, deletion, purpose binding. Voluntary only.", binds: "privacy", status: "enforced" },
 ];
 
 const SENSITIVE = /caste|religion|faith|health|psycholog|dalit|hindu|muslim|christian|sikh/i;

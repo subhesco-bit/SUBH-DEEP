@@ -1,5 +1,6 @@
 /** ERP platform composed from village books. No invented ₹. */
 
+import { nestedRemaining, atlasScore } from "./atlas.ts";
 import { remainingAfterCommit } from "./kernel.ts";
 import type {
   BooksSnapshot,
@@ -248,6 +249,8 @@ export function composePlatform(books: BooksSnapshot, extra: {
     orders: books.orders,
     payouts: books.payouts,
   });
+  const nested = nestedRemaining(books.cells, books.lots, books.kitchen);
+  const atlas = atlasScore();
   return {
     season: extra.season,
     trialBalance: tb,
@@ -258,6 +261,8 @@ export function composePlatform(books: BooksSnapshot, extra: {
     processes: extra.processes,
     blocking: gates.filter((g) => g.severity === "block").length,
     deferred: gates.filter((g) => g.severity === "defer").length,
+    nested,
+    atlas,
   };
 }
 

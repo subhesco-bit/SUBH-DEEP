@@ -77,6 +77,11 @@ export type RunContext = {
   openOfftake?: number;
   /** Declared remaining cost of the lot body. Required for WAC; never invented. */
   costPaise?: number | null;
+  journalBalanced?: boolean;
+  clerk?: string;
+  alert?: boolean;
+  iotTempC?: number | null;
+  kwh?: number | null;
 };
 
 export type StepPayload = {

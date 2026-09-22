@@ -116,6 +116,44 @@ export const WORKFLOWS: WorkflowDef[] = [
       step("D5", "decision", "Scheme eligibility, rupees blank", "decision", "finance", "scheme-eligible", "decision.act"),
     ],
   },
+  {
+    id: "claim-file",
+    name: "Claim file",
+    thesis: "Weather alert opens a claim. Payout stays undeclared. EMI is not frozen.",
+    organ: "insurance",
+    enterprise: "rural-erp",
+    steps: [
+      step("C1", "advisory", "Hazard declared", "gate", "soil", "weather-reflex", "advisory.weather"),
+      step("C2", "fabric", "No invented payout", "decision", "rupee", "ai-firewall", "fabric.allow"),
+      step("C3", "decision", "File claim window", "algorithm", "insurance", "human-command", "claim.file"),
+      step("C4", "agentic", "Propose only", "ai", "farmer", "copilot-next", "agentic.propose"),
+    ],
+  },
+  {
+    id: "period-close",
+    name: "Period close",
+    thesis: "Clerk closes Magh. Unbalanced journal cannot close. No invented ₹.",
+    organ: "erp",
+    enterprise: "rural-erp",
+    steps: [
+      step("R1", "decision", "Journal balanced", "gate", "erp", "journal-balance", "decision.balance"),
+      step("R2", "fabric", "SoD clerk", "decision", "rupee", "ai-firewall", "fabric.allow"),
+      step("R3", "opsintel", "Close season", "algorithm", "erp", "human-command", "period.close"),
+    ],
+  },
+  {
+    id: "climate-reflex",
+    name: "Climate reflex",
+    thesis: "Alert + outage blocks the mill. Remaining moves only on clerk-declared loss.",
+    organ: "reflex",
+    enterprise: "intelligence",
+    steps: [
+      step("X1", "advisory", "Weather + energy", "gate", "soil", "weather-reflex", "advisory.weather"),
+      step("X2", "decision", "Block mill on outage", "gate", "recie", "energy-cloud", "decision.block"),
+      step("X3", "agentic", "Propose spoilage", "ai", "farmer", "copilot-next", "agentic.propose"),
+      step("X4", "decision", "Clerk names grams", "algorithm", "lot", "remaining-gate", "decision.act"),
+    ],
+  },
 ];
 
 export const WORKFLOW_BY_ID: Record<string, WorkflowDef> = Object.fromEntries(

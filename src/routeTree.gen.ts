@@ -10,10 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BodyRouteImport } from './routes/body'
+import { Route as BrainRouteImport } from './routes/brain'
 import { Route as CellsRouteImport } from './routes/cells'
 import { Route as CharterRouteImport } from './routes/charter'
 import { Route as CompanionRouteImport } from './routes/companion'
 import { Route as EconomyRouteImport } from './routes/economy'
+import { Route as FlowsRouteImport } from './routes/flows'
 import { Route as LedgerRouteImport } from './routes/ledger'
 import { Route as LibraryRouteImport } from './routes/library'
 import { Route as LigamentsRouteImport } from './routes/ligaments'
@@ -34,6 +37,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BodyRoute = BodyRouteImport.update({
+  id: '/body',
+  path: '/body',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrainRoute = BrainRouteImport.update({
+  id: '/brain',
+  path: '/brain',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CellsRoute = CellsRouteImport.update({
   id: '/cells',
   path: '/cells',
@@ -52,6 +65,11 @@ const CompanionRoute = CompanionRouteImport.update({
 const EconomyRoute = EconomyRouteImport.update({
   id: '/economy',
   path: '/economy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FlowsRoute = FlowsRouteImport.update({
+  id: '/flows',
+  path: '/flows',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LedgerRoute = LedgerRouteImport.update({
@@ -127,10 +145,13 @@ const WarehouseRoute = WarehouseRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/body': typeof BodyRoute
+  '/brain': typeof BrainRoute
   '/cells': typeof CellsRoute
   '/charter': typeof CharterRoute
   '/companion': typeof CompanionRoute
   '/economy': typeof EconomyRoute
+  '/flows': typeof FlowsRoute
   '/ledger': typeof LedgerRoute
   '/library': typeof LibraryRoute
   '/ligaments': typeof LigamentsRoute
@@ -148,10 +169,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/body': typeof BodyRoute
+  '/brain': typeof BrainRoute
   '/cells': typeof CellsRoute
   '/charter': typeof CharterRoute
   '/companion': typeof CompanionRoute
   '/economy': typeof EconomyRoute
+  '/flows': typeof FlowsRoute
   '/ledger': typeof LedgerRoute
   '/library': typeof LibraryRoute
   '/ligaments': typeof LigamentsRoute
@@ -170,10 +194,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/body': typeof BodyRoute
+  '/brain': typeof BrainRoute
   '/cells': typeof CellsRoute
   '/charter': typeof CharterRoute
   '/companion': typeof CompanionRoute
   '/economy': typeof EconomyRoute
+  '/flows': typeof FlowsRoute
   '/ledger': typeof LedgerRoute
   '/library': typeof LibraryRoute
   '/ligaments': typeof LigamentsRoute
@@ -193,10 +220,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/body'
+    | '/brain'
     | '/cells'
     | '/charter'
     | '/companion'
     | '/economy'
+    | '/flows'
     | '/ledger'
     | '/library'
     | '/ligaments'
@@ -214,10 +244,13 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/body'
+    | '/brain'
     | '/cells'
     | '/charter'
     | '/companion'
     | '/economy'
+    | '/flows'
     | '/ledger'
     | '/library'
     | '/ligaments'
@@ -235,10 +268,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/body'
+    | '/brain'
     | '/cells'
     | '/charter'
     | '/companion'
     | '/economy'
+    | '/flows'
     | '/ledger'
     | '/library'
     | '/ligaments'
@@ -257,10 +293,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BodyRoute: typeof BodyRoute
+  BrainRoute: typeof BrainRoute
   CellsRoute: typeof CellsRoute
   CharterRoute: typeof CharterRoute
   CompanionRoute: typeof CompanionRoute
   EconomyRoute: typeof EconomyRoute
+  FlowsRoute: typeof FlowsRoute
   LedgerRoute: typeof LedgerRoute
   LibraryRoute: typeof LibraryRoute
   LigamentsRoute: typeof LigamentsRoute
@@ -284,6 +323,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/body': {
+      id: '/body'
+      path: '/body'
+      fullPath: '/body'
+      preLoaderRoute: typeof BodyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brain': {
+      id: '/brain'
+      path: '/brain'
+      fullPath: '/brain'
+      preLoaderRoute: typeof BrainRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cells': {
@@ -312,6 +365,13 @@ declare module '@tanstack/react-router' {
       path: '/economy'
       fullPath: '/economy'
       preLoaderRoute: typeof EconomyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/flows': {
+      id: '/flows'
+      path: '/flows'
+      fullPath: '/flows'
+      preLoaderRoute: typeof FlowsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ledger': {
@@ -417,10 +477,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BodyRoute: BodyRoute,
+  BrainRoute: BrainRoute,
   CellsRoute: CellsRoute,
   CharterRoute: CharterRoute,
   CompanionRoute: CompanionRoute,
   EconomyRoute: EconomyRoute,
+  FlowsRoute: FlowsRoute,
   LedgerRoute: LedgerRoute,
   LibraryRoute: LibraryRoute,
   LigamentsRoute: LigamentsRoute,

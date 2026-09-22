@@ -29,7 +29,7 @@ const PAGE_COMPONENT: Record<string, string> = {
   "/trade": "TradeBoard",
   "/ledger": "LedgerBoard",
   "/cells": "CellsBoard",
-  "/platform": "PlatformBoard",
+  "/platform": "AtlasBoard + PlatformBoard",
   "/pulse": "PulseWalk",
   "/modules": "ModulesPanel",
   "/charter": "CharterBoard",
@@ -39,6 +39,7 @@ const PAGE_COMPONENT: Record<string, string> = {
   "/os": "OsBoard",
   "/economy": "EconomyPanel",
   "/organism": "OrganismMap",
+  "/brain": "AiAtlas + BrainBoard",
 };
 
 const PAGE_WORKFLOW: Record<string, string> = {

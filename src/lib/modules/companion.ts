@@ -5,6 +5,8 @@ import type { PlatformException } from "../erp/platform.ts";
 import { queryLibraryKnowledge } from "../library/match.ts";
 import { envelopeFor } from "../os/envelope.ts";
 import type { AiEnvelope } from "../os/types.ts";
+import { brainDecide } from "../brain/decide.ts";
+import type { DecisionPassport } from "../brain/types.ts";
 
 export type CompanionAction = "intake" | "settle" | "process" | "harvest" | "consult";
 
@@ -29,6 +31,7 @@ export type CompanionReading = {
   proposals: CompanionProposal[];
   libraryHit: string | null;
   firewall: "AI cannot write rupees";
+  passport: DecisionPassport;
 };
 
 function lastSettled(orders: OrderRow[]): OrderRow | undefined {
@@ -157,11 +160,27 @@ export function proposeCompanion(
   }));
   const next = ranked[0]?.title ?? "Next keystroke lives on the books.";
   const hits = queryLibraryKnowledge("agentic companion harvest lot remaining rupees", { limit: 1 });
+  const remainingGrams = books.lots.reduce((n, l) => n + l.remainingGrams, 0);
+  const outage = (books.energyWindows ?? []).some((w) => w.active && w.status === "outage");
+  const alert = (books.weatherAlerts ?? []).some((a) => a.claimOpen);
+  const iotTempC = (books.iotReadings ?? []).find((r) => r.unit === "C" || /temp/i.test(r.kind))?.valueNum ?? null;
+  const kwh = (books.iotReadings ?? []).find((r) => r.unit === "kWh" || /kwh/i.test(r.kind))?.valueNum ?? null;
+  const passport = brainDecide({
+    signal: "harvest-propose",
+    remainingGrams,
+    outage,
+    alert,
+    iotTempC,
+    kwh,
+    balanced: books.kpis.journalBalanced,
+    clerk: "Biren",
+  });
   return {
     memory,
     next: `Companion · ${next}`,
     proposals: ranked,
     libraryHit: hits[0]?.title ?? null,
     firewall: "AI cannot write rupees",
+    passport,
   };
 }

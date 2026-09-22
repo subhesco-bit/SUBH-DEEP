@@ -405,6 +405,29 @@ export function energyProcessGate(window: EnergyWindowInput): { decision: "pass"
   return { decision: "pass", reason: `Declared ${window.kwh} kWh.` };
 }
 
+/** Mill blocks on any declared danger. Signals are named so the clerk can see why. */
+export function millDecision(input: {
+  outage: boolean;
+  alert: boolean;
+  iotTempC: number | null;
+  kwh: number | null;
+}): { decision: "pass" | "block" | "defer"; reason: string; signals: string[] } {
+  const signals: string[] = [];
+  if (input.outage) signals.push("outage");
+  if (input.alert) signals.push("alert");
+  if (input.iotTempC != null && input.iotTempC >= 31) signals.push("heat");
+  if (signals.length) {
+    return {
+      decision: "block",
+      reason: `Mill blocked on ${signals.join(" + ")}. EMI not frozen.`,
+      signals,
+    };
+  }
+  const energy = energyProcessGate({ status: "ok", kwh: input.kwh, active: false });
+  return { decision: energy.decision, reason: energy.reason, signals };
+}
+
+
 export function assertDeclaredReading(input: {
   entityId: string;
   kind: string;

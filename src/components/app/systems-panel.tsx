@@ -11,6 +11,7 @@ import {
   type SystemActual,
   type SystemFamily,
 } from "@/lib/systems";
+import { TISSUES } from "@/lib/brain";
 import { useLattice } from "@/lib/lattice/store";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -78,6 +79,10 @@ export function SystemsPanel() {
           />
         </div>
         <p className="mt-4 text-sm text-muted">
+          <Link to="/brain" className="underline decoration-border underline-offset-4 hover:text-foreground">
+            Village brain
+          </Link>
+          <span> is the living mouth of these files. </span>
           <Link to="/library" className="underline decoration-border underline-offset-4 hover:text-foreground">
             Library auto-op
           </Link>
@@ -95,6 +100,31 @@ export function SystemsPanel() {
           </Link>
           <span> scores every module against eighteen criteria.</span>
         </p>
+      </section>
+
+      <section className="rounded-2xl border border-live/30 bg-surface p-5">
+        <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-live">Kernel cortex · dual-truth</p>
+        <h3 className="mt-2 font-display text-xl">Five tissues live here. GitHub stays 7%.</h3>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
+          Frontier, agentic, physical, security, scientist. This kernel fires them. The AI atlas
+          classifies 32 families. GitHub living plugs stay 0. The rack below is still the GitHub
+          cadaver: WIRED skeletons, stub re-exports, zero living plugs.
+        </p>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {TISSUES.map((t) => (
+            <li key={t.id} className="rounded-xl border border-border bg-background px-3 py-3">
+              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-live">{t.id}</p>
+              <p className="mt-1 text-sm font-medium">{t.short}</p>
+              <p className="mt-1 text-[12px] leading-relaxed text-muted">{t.living}</p>
+            </li>
+          ))}
+        </ul>
+        <Link
+          to="/brain"
+          className="mt-4 inline-flex min-h-11 items-center text-sm underline decoration-border underline-offset-4 hover:text-foreground"
+        >
+          Open the brain
+        </Link>
       </section>
 
       <section className="flex flex-col gap-3">

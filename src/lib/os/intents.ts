@@ -14,8 +14,12 @@ export const NEED_INTENTS: NeedIntent[] = [
   { id: "scheme-blood", label: "Scheme eligibility", problem: "Computed on the cell. Amount blank.", href: "/ledger", workflow: null, organ: "finance" },
   { id: "next-season", label: "Offer next Magh", problem: "Last season kg. Price blank until declared.", href: "/trade", workflow: null, organ: "contract" },
   { id: "consult-nerve", label: "Ask the nerve", problem: "Library first. No rupee write.", href: "/nerve", workflow: "nerve-consult", organ: "ai" },
+  { id: "ask-brain", label: "Ask the brain", problem: "Five tissues. One decision. Clerk still writes remaining.", href: "/brain", workflow: null, organ: "ai" },
   { id: "read-charter", label: "Read the laws", problem: "L1–L12. Remaining, declared ₹, human command.", href: "/charter", workflow: null, organ: "module" },
-  { id: "os-matrix", label: "Concept matrix", problem: "Every named concept classified. Nothing removed.", href: "/os", workflow: null, organ: "os" },
+  { id: "see-flows", label: "Walk the flows", problem: "Strategy, payment, material, command, supply chain as living charts.", href: "/flows", workflow: null, organ: "spine" },
+  { id: "see-atlas", label: "See the ERP atlas", problem: "32 SAP analog families classified. Not Oracle/SAP parity. Finance/procure named missing.", href: "/platform", workflow: null, organ: "erp" },
+  { id: "ack-ai", label: "Ack the AI", problem: "32 AI families classified. Five tissues decide. GitHub plugs stay 0. Not AI parity.", href: "/brain", workflow: null, organ: "ai" },
+  { id: "react-now", label: "React now", problem: "Issue arose. Correct relax, not panic. EMI not frozen.", href: "/body", workflow: "climate-reflex", organ: "reflex" },
   { id: "find-loan", label: "Find a loan", problem: "Refuse. No underwriting. No invented score.", href: "/os", workflow: null, organ: "finance" },
   { id: "file-grievance", label: "File a grievance", problem: "Village exception → ack → evidence. No fake close.", href: "/os", workflow: null, organ: "spine" },
   { id: "book-transport", label: "Book transport", problem: "Freight is declared (zero allowed). Not a tower.", href: "/trade", workflow: null, organ: "logistics" },
@@ -32,6 +36,9 @@ export function rankIntents(books?: BooksSnapshot | null): NeedIntent[] {
     if (i.id === "store-lot" && minted > 0) n += 4;
     if (i.id === "sell-crop" && remaining) n += 3;
     if (i.id === "see-books") n += 1;
+    if (i.id === "see-atlas") n += 2;
+    if (i.id === "ack-ai") n += 2;
+    if (i.id === "react-now" && ((books.weatherAlerts ?? []).some((a) => a.claimOpen) || (books.energyWindows ?? []).some((w) => w.active && w.status === "outage"))) n += 5;
     if (i.id === "claim-loss" && remaining) n += 2;
     if (i.id === "next-season" && books.orders.some((o) => o.status === "settled")) n += 3;
     if (i.id === "cover-gap") n += 1;

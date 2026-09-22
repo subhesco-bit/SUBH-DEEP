@@ -165,17 +165,17 @@ export async function processLot(
     [input.lotId],
   );
   assertCanSell(lot[0].status, pledged[0]?.n ?? 0);
+  let win: Array<{ status: "surplus" | "ok" | "outage"; kwh: number | null; active: boolean }> = [];
   try {
-    const win = await sql.query<{ status: "surplus" | "ok" | "outage"; kwh: number | null; active: boolean }>(
+    win = await sql.query<{ status: "surplus" | "ok" | "outage"; kwh: number | null; active: boolean }>(
       "select status, kwh, active from erp_energy_windows where active = true order by created_at desc limit 1",
     );
-    if (win[0]) {
-      const gate = energyProcessGate(win[0]);
-      if (gate.decision === "block") throw new Error(gate.reason);
-    }
-  } catch (err) {
-    if (err instanceof Error && /Active outage/.test(err.message)) throw err;
-    /* 0012 missing — process still runs. */
+  } catch {
+    /* 0012 missing — mill gate stays unnamed, process may still run. */
+  }
+  if (win[0]) {
+    const gate = energyProcessGate(win[0]);
+    if (gate.decision === "block") throw new Error(gate.reason);
   }
   const inGrams = lot[0].remaining_grams;
   if (inGrams <= 0) throw new Error("No remaining mass to process.");

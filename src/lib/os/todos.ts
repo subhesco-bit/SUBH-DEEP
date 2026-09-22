@@ -16,8 +16,10 @@ export function osTodos(): OsTodo[] {
 }
 
 export function remainingWork(limit = 12): OsTodo[] {
-  return osTodos()
-    .filter((t) => t.status !== "done")
+  const rows = osTodos().filter((t) => t.status !== "done");
+  const open = rows.filter((t) => t.status === "open");
+  const blocked = rows.filter((t) => t.status === "blocked");
+  return [...open, ...blocked]
     .sort((a, b) => a.stage - b.stage || a.itemId.localeCompare(b.itemId))
     .slice(0, limit);
 }

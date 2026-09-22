@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { AtlasBoard } from "@/components/erp/atlas-board";
 import { CompanionPanel } from "@/components/app/companion-panel";
 import { proposeCompanion } from "@/lib/modules/companion";
 
@@ -29,6 +30,7 @@ export function PlatformBoard() {
 
   return (
     <div className="space-y-6">
+      <AtlasBoard />
       <section className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
         <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted">
           Rural ERP platform · {snapshot?.season?.name ?? "Magh"} · {snapshot?.fpo?.village ?? "Langthasa"}

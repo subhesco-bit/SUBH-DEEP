@@ -30,6 +30,7 @@ import { Route as PlatformRouteImport } from './routes/platform'
 import { Route as PulseRouteImport } from './routes/pulse'
 import { Route as SystemsRouteImport } from './routes/systems'
 import { Route as TradeRouteImport } from './routes/trade'
+import { Route as VetRouteImport } from './routes/vet'
 import { Route as WarehouseRouteImport } from './routes/warehouse'
 
 const IndexRoute = IndexRouteImport.update({
@@ -137,6 +138,11 @@ const TradeRoute = TradeRouteImport.update({
   path: '/trade',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VetRoute = VetRouteImport.update({
+  id: '/vet',
+  path: '/vet',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WarehouseRoute = WarehouseRouteImport.update({
   id: '/warehouse',
   path: '/warehouse',
@@ -165,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/pulse': typeof PulseRoute
   '/systems': typeof SystemsRoute
   '/trade': typeof TradeRoute
+  '/vet': typeof VetRoute
   '/warehouse': typeof WarehouseRoute
 }
 export interface FileRoutesByTo {
@@ -189,6 +196,7 @@ export interface FileRoutesByTo {
   '/pulse': typeof PulseRoute
   '/systems': typeof SystemsRoute
   '/trade': typeof TradeRoute
+  '/vet': typeof VetRoute
   '/warehouse': typeof WarehouseRoute
 }
 export interface FileRoutesById {
@@ -214,6 +222,7 @@ export interface FileRoutesById {
   '/pulse': typeof PulseRoute
   '/systems': typeof SystemsRoute
   '/trade': typeof TradeRoute
+  '/vet': typeof VetRoute
   '/warehouse': typeof WarehouseRoute
 }
 export interface FileRouteTypes {
@@ -240,6 +249,7 @@ export interface FileRouteTypes {
     | '/pulse'
     | '/systems'
     | '/trade'
+    | '/vet'
     | '/warehouse'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -264,6 +274,7 @@ export interface FileRouteTypes {
     | '/pulse'
     | '/systems'
     | '/trade'
+    | '/vet'
     | '/warehouse'
   id:
     | '__root__'
@@ -288,6 +299,7 @@ export interface FileRouteTypes {
     | '/pulse'
     | '/systems'
     | '/trade'
+    | '/vet'
     | '/warehouse'
   fileRoutesById: FileRoutesById
 }
@@ -313,6 +325,7 @@ export interface RootRouteChildren {
   PulseRoute: typeof PulseRoute
   SystemsRoute: typeof SystemsRoute
   TradeRoute: typeof TradeRoute
+  VetRoute: typeof VetRoute
   WarehouseRoute: typeof WarehouseRoute
 }
 
@@ -465,6 +478,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TradeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vet': {
+      id: '/vet'
+      path: '/vet'
+      fullPath: '/vet'
+      preLoaderRoute: typeof VetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/warehouse': {
       id: '/warehouse'
       path: '/warehouse'
@@ -497,6 +517,7 @@ const rootRouteChildren: RootRouteChildren = {
   PulseRoute: PulseRoute,
   SystemsRoute: SystemsRoute,
   TradeRoute: TradeRoute,
+  VetRoute: VetRoute,
   WarehouseRoute: WarehouseRoute,
 }
 export const routeTree = rootRouteImport

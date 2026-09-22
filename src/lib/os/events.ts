@@ -10,6 +10,7 @@ export const LIFE_EVENTS: LifeEvent[] = [
   { id: "cover.bound", name: "Godown cover bound", status: "living", signal: "cover.bound", muscle: "policyId on the lot" },
   { id: "weather.alert", name: "Weather claim window", status: "living", signal: "weather.alert", muscle: "claim window + moratorium propose, no EMI freeze" },
   { id: "herd.covered", name: "Herd cover bound", status: "living", signal: "herd.covered", muscle: "POL-LANGTHASA-HERD on declared headcount" },
+  { id: "vet.coded", name: "Veterinary code proposed", status: "living", signal: "vet.coded", muscle: "AFRERA-VET propose. Clerk confirms heads. Human ICD refused." },
   { id: "scheme.eligible", name: "Scheme eligibility", status: "living", signal: "scheme.eligible", muscle: "computed, amount blank" },
   { id: "food.utility", name: "FUS rank", status: "living", signal: "food.utility", muscle: "FUS-v1 on declared food axes" },
   { id: "marriage", name: "Household marriage", status: "named", signal: "life.marriage", muscle: "none — do not fan out" },

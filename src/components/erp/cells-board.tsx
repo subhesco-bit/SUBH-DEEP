@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { useBooks } from "@/lib/erp/store";
 import { useVillageBooks } from "@/components/erp/books-boot";
@@ -55,7 +56,9 @@ export function CellsBoard() {
                     .filter((h) => h.cellId === c.id)
                     .map((h) => (
                       <p key={h.id} className="mt-1 font-mono text-[11px] text-live">
-                        {h.kind} · {h.head} head · {h.policyId ?? "cover gap"}
+                        <Link to="/vet" className="underline decoration-border underline-offset-4 hover:text-foreground">
+                          {h.kind} · {h.head} head · {h.policyId ?? "cover gap"}
+                        </Link>
                       </p>
                     ))}
                 </div>

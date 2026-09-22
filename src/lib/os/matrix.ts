@@ -40,6 +40,12 @@ const PAGE_COMPONENT: Record<string, string> = {
   "/economy": "EconomyPanel",
   "/organism": "OrganismMap",
   "/brain": "AiAtlas + BrainBoard",
+  "/body": "BodyBoard",
+  "/flows": "FlowBoard",
+  "/systems": "SystemsPanel",
+  "/mesh": "MeshPanel",
+  "/ligaments": "LigamentCatalog",
+  "/vet": "VetBoard",
 };
 
 const PAGE_WORKFLOW: Record<string, string> = {
@@ -53,6 +59,7 @@ const PAGE_WORKFLOW: Record<string, string> = {
   "/platform": "platform-bus",
   "/charter": "platform-bus",
   "/os": "os.classify",
+  "/vet": "code-herd",
 };
 
 function bound(x: OsItem) {

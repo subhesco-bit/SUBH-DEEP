@@ -285,6 +285,15 @@ const DOCTRINE: LibraryCard[] = [
     signal: "herd.covered",
   },
   {
+    id: "lib-vet-code",
+    kind: "contract",
+    title: "August AI codes the herd, never a hospital",
+    body: "AFRERA-VET names cattle, buffalo, goat, pig, poultry, duck, fish, dog, and cat. August AI proposes. A vet or clerk confirms heads. ASF and avian influenza stay named until a lab speaks. GitHub human ICD / CPT / HCPCS is the wrong genome. Milk rupees stay missing.",
+    source: "src/lib/vet/code.ts",
+    organs: ["livestock", "ai", "farmer"],
+    signal: "vet.coded",
+  },
+  {
     id: "lib-energy-cloud",
     kind: "principle",
     title: "Village energy cloud holds the window, not the watt",

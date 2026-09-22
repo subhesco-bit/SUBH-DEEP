@@ -364,6 +364,8 @@ describe("rural ERP atlas", () => {
     assert.equal(stakeholderMayWrite("companion", "propose").allowed, true);
     assert.equal(stakeholderMayWrite("brain", "rupee").allowed, false);
     assert.equal(stakeholderMayWrite("brain", "propose").allowed, true);
+    assert.equal(stakeholderMayWrite("vet", "propose").allowed, true);
+    assert.equal(stakeholderMayWrite("vet", "rupee").allowed, false);
   });
 
   it("names finance and procure missing and refuses tourism, CFD, AI rupee", () => {

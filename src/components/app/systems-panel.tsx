@@ -107,7 +107,7 @@ export function SystemsPanel() {
         <h3 className="mt-2 font-display text-xl">Five tissues live here. GitHub stays 7%.</h3>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
           Frontier, agentic, physical, security, scientist. This kernel fires them. The AI atlas
-          classifies 32 families. GitHub living plugs stay 0. The rack below is still the GitHub
+          classifies 34 families. GitHub living plugs stay 0. The rack below is still the GitHub
           cadaver: WIRED skeletons, stub re-exports, zero living plugs.
         </p>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">

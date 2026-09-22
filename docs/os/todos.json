@@ -1,8 +1,8 @@
 {
   "generatedAt": "2026-09-22",
   "counts": {
-    "total": 125,
-    "done": 125,
+    "total": 128,
+    "done": 128,
     "open": 0,
     "blocked": 0
   },
@@ -207,6 +207,15 @@
       "exit": "Map, do not metaphor. Muscle rests on climate. Remaining moves only on clerk."
     },
     {
+      "id": "todo-c-vet",
+      "itemId": "c-vet",
+      "stage": 2,
+      "title": "Veterinary medical coding",
+      "status": "done",
+      "why": "SNOMED-VET, WOAH lab confirmation, milk rupees.",
+      "exit": "Map the second genome. Do not dump ICD-10 onto a herd."
+    },
+    {
       "id": "todo-c-flows",
       "itemId": "c-flows",
       "stage": 1,
@@ -230,8 +239,8 @@
       "stage": 2,
       "title": "Agriculture operating system",
       "status": "done",
-      "why": "Finance-procure-operate loop, fisheries, livestock cashflow.",
-      "exit": "Walk is living. Livestock is partial."
+      "why": "Finance-procure-operate loop, fisheries cashflow, livestock cashflow.",
+      "exit": "Walk is living. Livestock coding lives. Livestock cash stays missing."
     },
     {
       "id": "todo-c-erp",
@@ -729,6 +738,15 @@
       "exit": "Correct action is named. Wrong action is refused. Clerk still writes remaining."
     },
     {
+      "id": "todo-n-lineage",
+      "itemId": "n-lineage",
+      "stage": 1,
+      "title": "Token and remaining lineage",
+      "status": "done",
+      "why": "SNOMED custody network, milk settlement lineage.",
+      "exit": "Repair is naming the break. Do not invent a rupee to close a gap."
+    },
+    {
       "id": "todo-a-comp",
       "itemId": "a-comp",
       "stage": 3,
@@ -934,6 +952,15 @@
       "status": "done",
       "why": "Model registry, SAP copilot, numeric AI writes.",
       "exit": "Manage is a passport. Clerk still writes remaining."
+    },
+    {
+      "id": "todo-a-vet-code",
+      "itemId": "a-vet-code",
+      "stage": 3,
+      "title": "August AI veterinary coding",
+      "status": "done",
+      "why": "Lab network, SNOMED-VET, clinic rails.",
+      "exit": "AI proposes. Vet/clerk confirms heads. Never a hospital coder."
     },
     {
       "id": "todo-a-nerve",

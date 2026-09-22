@@ -13,13 +13,13 @@ const base = {
 };
 
 describe("village brain", () => {
-  it("names five tissues and ten signals", () => {
+  it("names five tissues and eleven signals", () => {
     assert.equal(TISSUES.length, 5);
     assert.deepEqual(
       TISSUES.map((t) => t.id),
       ["frontier", "agentic", "physical", "security", "scientist"],
     );
-    assert.equal(BRAIN_SIGNALS.length, 10);
+    assert.equal(BRAIN_SIGNALS.length, 11);
   });
 
   it("blocks mill heat, never freezes EMI, never writes a rupee", () => {
@@ -105,11 +105,11 @@ describe("village brain", () => {
 describe("AI atlas", () => {
   it("classifies every analog family without claiming AI parity", () => {
     const score = aiScore();
-    assert.equal(AI_UNITS.length, 32);
-    assert.equal(score.units, 32);
-    assert.equal(score.living, 7);
+    assert.equal(AI_UNITS.length, 34);
+    assert.equal(score.units, 34);
+    assert.equal(score.living, 8);
     assert.equal(score.partial, 11);
-    assert.equal(score.missing, 9);
+    assert.equal(score.missing, 10);
     assert.equal(score.refused, 5);
     assert.equal(score.classifiedPct, 100);
     assert.equal(score.aiParity, false);
@@ -118,7 +118,7 @@ describe("AI atlas", () => {
     assert.equal(score.githubLivingPlugs, 0);
     assert.equal(score.githubCadavers, AI_SYSTEMS.length);
     assert.equal(score.latticeTissues, 5);
-    assert.equal(score.signals, 10);
+    assert.equal(score.signals, 11);
     assert.equal(score.financeMissing, true);
     assert.equal(score.procureMissing, true);
     assert.equal(score.githubPct, 7);
@@ -131,8 +131,8 @@ describe("AI atlas", () => {
     const all = ackAllAi({ remainingGrams: 180000, kwh: 12 });
     assert.equal(all.classified, 100);
     assert.equal(all.rupeeWrites, 0);
-    assert.equal(all.livingPassports, 7);
-    assert.equal(all.named, 9);
+    assert.equal(all.livingPassports, 8);
+    assert.equal(all.named, 10);
     assert.equal(all.refused, 5);
     assert.equal(all.unknownNamed, true);
     assert.ok(all.results.every((r) => r.rupeeWrite === false));
@@ -170,5 +170,15 @@ describe("AI atlas", () => {
     assert.equal(yieldF.decision, "refuse");
     assert.equal(yieldF.yield, null);
     assert.equal(ackAi("not-a-real-ai").decision, "named");
+    const vet = ackAi("vet-coding");
+    assert.equal(vet.status, "living");
+    assert.equal(vet.decision, "propose");
+    assert.equal(vet.clerkRequired, true);
+    assert.equal(vet.passport?.signal, "vet-code");
+    assert.equal(vet.rupeeWrite, false);
+    const cadaver = ackAi("github-medical");
+    assert.equal(cadaver.decision, "named");
+    assert.equal(cadaver.status, "missing");
+    assert.match(cadaver.reason, /named missing/i);
   });
 });

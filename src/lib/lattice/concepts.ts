@@ -163,7 +163,7 @@ export const CONCEPTS: Concept[] = [
     thesis:
       "Animals are a second genome of the rural cell: milk, meat, draught, risk, and veterinary cost.",
     silo:
-      "livestockService and veterinary specs exist beside crop, not through it. This organism: Ronghang herd is a cell fact under POL-LANGTHASA-HERD. Chilling energy and milk rupees still missing.",
+      "livestockService and veterinary specs exist beside crop, not through it. This organism: Ronghang herd is a cell fact under POL-LANGTHASA-HERD. AFRERA-VET codes the genome. Chilling energy and milk rupees still missing.",
     prosperity:
       "₹ per litre chilled is the honest livestock KPI — not headcount.",
     x: 678,

@@ -26,6 +26,7 @@ const ORGAN_FOR: Record<BrainSignal, string> = {
   hypothesis: "crop",
   "physical-teleop": "warehouse",
   "harvest-propose": "lot",
+  "vet-code": "livestock",
 };
 
 const ALGO_FOR: Record<BrainSignal, string> = {
@@ -39,6 +40,7 @@ const ALGO_FOR: Record<BrainSignal, string> = {
   hypothesis: "farmTwin declared loss %",
   "physical-teleop": "physical AI mill/IoT only",
   "harvest-propose": "agentic propose, clerk mint",
+  "vet-code": "proposeVet + clerk confirm heads",
 };
 
 function tissue(
@@ -104,7 +106,7 @@ export function brainDecide(input: BrainFacts): DecisionPassport {
     ),
     tissue(
       "agentic",
-      signal === "harvest-propose" || signal === "period",
+      signal === "harvest-propose" || signal === "period" || signal === "vet-code",
       signal === "period"
         ? period.status === "closed"
           ? "propose"
@@ -112,7 +114,9 @@ export function brainDecide(input: BrainFacts): DecisionPassport {
         : "propose",
       signal === "period"
         ? period.reason
-        : "Propose harvest mint. Clerk names kilograms. Companion never writes a rupee.",
+        : signal === "vet-code"
+          ? "August AI proposes AFRERA-VET. Clerk/vet confirms heads. Human ICD refused. Milk rupees stay undeclared."
+          : "Propose harvest mint. Clerk names kilograms. Companion never writes a rupee.",
     ),
     tissue(
       "physical",
@@ -142,15 +146,17 @@ export function brainDecide(input: BrainFacts): DecisionPassport {
     ),
     tissue(
       "scientist",
-      signal === "hypothesis" || signal === "tourism",
+      signal === "hypothesis" || signal === "tourism" || signal === "vet-code",
       signal === "tourism"
         ? "refuse"
         : "hypothesis",
       signal === "tourism"
         ? tourism.reason
-        : twin
-          ? `What-if ${lossPct}% declared loss → ${twin.remainingAfter} g remaining. Yield undeclared. Rupee null.`
-          : "Hypothesis waits on declared remaining.",
+        : signal === "vet-code"
+          ? "Named analog on the herd. Not a licensed ICD dump. Yield undeclared. Rupee null."
+          : twin
+            ? `What-if ${lossPct}% declared loss → ${twin.remainingAfter} g remaining. Yield undeclared. Rupee null.`
+            : "Hypothesis waits on declared remaining.",
     ),
   ];
 
@@ -194,4 +200,5 @@ export const BRAIN_SIGNALS: { id: BrainSignal; label: string; body: string }[] =
   { id: "rupee-write", label: "Rupee write", body: "Firewall. AI numeric writes are forbidden." },
   { id: "hypothesis", label: "Hypothesis", body: "Declared loss % → remaining after. Yield stays null." },
   { id: "physical-teleop", label: "Humanoid", body: "Teleop refused. Physical AI is mill and sack." },
+  { id: "vet-code", label: "Vet code", body: "August AI proposes AFRERA-VET. Clerk confirms heads. Human ICD refused." },
 ];

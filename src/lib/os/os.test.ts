@@ -106,6 +106,11 @@ describe("digital super-organism registry", () => {
     assert.equal(OS_ITEMS.find((x) => x.id === "c-body")?.href, "/body");
     assert.equal(OS_ITEMS.find((x) => x.id === "n-relax")?.todo, "done");
     assert.equal(OS_ITEMS.find((x) => x.id === "n-relax")?.href, "/body");
+    assert.equal(OS_ITEMS.find((x) => x.id === "c-vet")?.todo, "done");
+    assert.equal(OS_ITEMS.find((x) => x.id === "c-vet")?.href, "/vet");
+    assert.equal(OS_ITEMS.find((x) => x.id === "n-lineage")?.todo, "done");
+    assert.equal(OS_ITEMS.find((x) => x.id === "a-vet-code")?.todo, "done");
+    assert.equal(OS_ITEMS.find((x) => x.id === "a-vet-code")?.href, "/vet");
     assert.equal(OS_ITEMS.find((x) => x.id === "f-reflex")?.href, "/body");
     assert.equal(OS_ITEMS.find((x) => x.id === "c-flows")?.todo, "done");
     assert.equal(OS_ITEMS.find((x) => x.id === "c-flows")?.href, "/flows");
@@ -148,6 +153,7 @@ describe("digital super-organism registry", () => {
     assert.ok(NEED_INTENTS.some((i) => i.id === "see-atlas"));
     assert.ok(NEED_INTENTS.some((i) => i.id === "ack-ai"));
     assert.ok(NEED_INTENTS.some((i) => i.id === "react-now"));
+    assert.ok(NEED_INTENTS.some((i) => i.id === "code-herd"));
     assert.ok(NEED_INTENTS.every((i) => i.href.startsWith("/")));
     const ranked = rankIntents(null);
     assert.equal(ranked.length, NEED_INTENTS.length);
@@ -256,6 +262,10 @@ describe("digital super-organism registry", () => {
     const trip = SECTOR_JOURNEYS.find((j) => j.id === "travel");
     assert.equal(trip?.status, "living");
     assert.equal(trip?.steps.find((s) => s.id === "v-tourism")?.status, "missing");
+    const herd = SECTOR_JOURNEYS.find((j) => j.id === "livestock");
+    assert.equal(herd?.status, "living");
+    assert.equal(herd?.steps.find((s) => s.id === "vet-cash")?.status, "missing");
+    assert.equal(SECTOR_JOURNEYS.find((j) => j.id === "health")?.status, "named");
   });
 
   it("living events fire; unknown events fail; flood opens a claim window", () => {

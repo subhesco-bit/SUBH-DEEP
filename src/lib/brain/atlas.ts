@@ -34,7 +34,7 @@ export type AiScore = {
   githubLivingPlugs: 0;
   githubCadavers: number;
   latticeTissues: 5;
-  signals: 10;
+  signals: 11;
   financeMissing: true;
   procureMissing: true;
   githubPct: 7;
@@ -80,6 +80,7 @@ export const AI_UNITS: AiUnit[] = [
   u("security", "AI security and trust", "Firewall", "security", "lattice", "living", "remaining", "/charter", "rupeeWrite false. Constitution E1–E9. Consent. Eval harness.", "Pen-test, model-theft, incident playbook on GitHub."),
   u("scientist", "Artificial scientists", "Declared-loss twin", "scientist", "lattice", "living", "hypothesis", "/library", "Hypothesis on declared remaining and loss %. Yield null.", "Invented yield, gazette twin, training loop."),
   u("erp-manage", "AI ERP management", "Passport or named-missing", "cortex", "lattice", "living", "remaining", "/platform", "manageErpModule: living/partial emit a passport. Missing named. Refused refuse.", "SAP copilot, numeric AI writes."),
+  u("vet-coding", "August AI veterinary coding", "AFRERA-VET", "agentic", "lattice", "living", "vet-code", "/vet", "proposeVet on cattle, buffalo, goat, pig, poultry, duck, fish, dog, cat. Clerk/vet confirms heads. ASF/AI named, not auto-confirm.", "SNOMED-VET, WOAH lab, milk rupees."),
 
   u("nerve", "Governed nerve", "Library consult", "agentic", "lattice", "partial", "harvest-propose", "/nerve", "Consult memory first. Coordinator analog lives here.", "Eval SLOs, cost/latency on GitHub."),
   u("library", "Library hippocampus", "Cite or hide", "scientist", "lattice", "partial", "hypothesis", "/library", "Named pulses fire on boot. No API key required.", "OCR graph, permissioned retrieval."),
@@ -102,6 +103,7 @@ export const AI_UNITS: AiUnit[] = [
   u("drift-monitor", "Drift monitor", "Model drift", "none", "github", "missing", null, "/systems", "Named. No live model to drift.", "Feature store, monitors."),
   u("incident-playbook", "Incident playbook", "AI incident", "none", "github", "missing", null, "/charter", "Clerk boundary is the control. Secrets out of repo.", "Pen-test, theft, runbook."),
   u("channel-timing", "Channel timing", "When to nag", "none", "github", "missing", null, "/companion", "Fatigue: no nag. Propose only.", "Channel/timing engine."),
+  u("github-medical", "GitHub human medical coding", "ICD-10 / CPT / HCPCS", "none", "github", "missing", null, "/vet", "SUBH-DEEP completion report claimed 14 human systems. Dietitian and hospital codes are the wrong genome.", "Do not paint a hospital coder living on a village herd."),
 
   u("humanoid-teleop", "Humanoid teleop", "Robot mill", "physical", "lattice", "refused", "physical-teleop", "/warehouse", "Physical AI is mill, IoT, sack.", "Do not fake a robot fleet."),
   u("ai-rupee", "AI rupee write", "Numeric write", "security", "lattice", "refused", "rupee-write", "/charter", "Firewall holds. amountPaise always null.", "Do not let a model post the journal."),
@@ -126,7 +128,7 @@ export function aiScore(): AiScore {
     githubLivingPlugs: 0,
     githubCadavers: AI_SYSTEMS.length,
     latticeTissues: 5,
-    signals: 10,
+    signals: 11,
     financeMissing: true,
     procureMissing: true,
     githubPct: 7,

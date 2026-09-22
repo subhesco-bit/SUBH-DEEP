@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-09-22",
-  "thesis": "AFRERA is a rural economic operating system, not an agriculture website. Stages 0–6 are closed on this kernel. GitHub platform remains 7%. Lattice ligaments stay ~39%. Human-equivalent body lives. Relax is the withdraw reflex: heat/alert/outage rest the mill, remaining holds, EMI is not frozen, wrong unclench is refused. Eleven flow charts live: strategy, work, process, payment, material, vision, decision, command, coordination, algorithms, supply chain. Rural ERP atlas classifies 32 SAP/Baan/Oracle analog families; sapParity is false; nested remaining conserves person=home=village. AI atlas classifies 32 families; aiParity is false; five tissues decide; GitHub living plugs stay 0. Village remaining journey lives; tourism itinerary refused. Engineering BOQ stamp lives; CFD stays refused. Cell inspect lives; no login profile. Federated ask is local remaining. Policy lab what-if, amount blank. Infra twin on declared sensors. Coop license is qty-weighted remaining. One brain, five tissues. AI still cannot write rupees. Agriculture finance and procure stay missing.",
+  "thesis": "AFRERA is a rural economic operating system, not an agriculture website. Stages 0–6 are closed on this kernel. GitHub platform remains 7%. Lattice ligaments stay ~39%. Human-equivalent body lives. Relax is the withdraw reflex: heat/alert/outage rest the mill, remaining holds, EMI is not frozen, wrong unclench is refused. Eleven flow charts live: strategy, work, process, payment, material, vision, decision, command, coordination, algorithms, supply chain. Rural ERP atlas classifies 32 SAP/Baan/Oracle analog families; sapParity is false; nested remaining conserves person=home=village. AI atlas classifies 34 families; aiParity is false; five tissues decide; GitHub living plugs stay 0. August AI veterinary coding lives on AFRERA-VET; GitHub human ICD stays a cadaver; livestock cash stays missing. Village remaining journey lives; tourism itinerary refused. Engineering BOQ stamp lives; CFD stays refused. Cell inspect lives; no login profile. Federated ask is local remaining. Policy lab what-if, amount blank. Infra twin on declared sensors. Coop license is qty-weighted remaining. One brain, five tissues. AI still cannot write rupees. Agriculture finance and procure stay missing.",
   "stages": [
     {
       "stage": 0,
@@ -46,8 +46,8 @@
     }
   ],
   "snapshot": {
-    "items": 125,
-    "classified": 125,
+    "items": 128,
+    "classified": 128,
     "stage0Pct": 100,
     "stageDone": {
       "0": {
@@ -58,24 +58,24 @@
         "pct": 100
       },
       "1": {
-        "total": 36,
-        "done": 36,
+        "total": 37,
+        "done": 37,
         "blocked": 0,
-        "closed": 36,
+        "closed": 37,
         "pct": 100
       },
       "2": {
-        "total": 22,
-        "done": 22,
+        "total": 23,
+        "done": 23,
         "blocked": 0,
-        "closed": 22,
+        "closed": 23,
         "pct": 100
       },
       "3": {
-        "total": 26,
-        "done": 26,
+        "total": 27,
+        "done": 27,
         "blocked": 0,
-        "closed": 26,
+        "closed": 27,
         "pct": 100
       },
       "4": {
@@ -101,14 +101,14 @@
       }
     },
     "kernelVerified": 22,
-    "kernelPartial": 102,
-    "githubScaffolded": 58,
+    "kernelPartial": 105,
+    "githubScaffolded": 59,
     "open": 0,
     "blocked": 0,
     "stagesComplete": true,
     "todo": {
-      "total": 125,
-      "done": 125,
+      "total": 128,
+      "done": 128,
       "open": 0,
       "blocked": 0
     }
@@ -202,7 +202,7 @@
       "area": "ai",
       "kernel": "partial",
       "github": "scaffolded",
-      "present": "32 AI analog families classified. Five tissues, decision passport. GitHub cadavers stay cadavers. AI parity false.",
+      "present": "34 AI analog families classified. Five tissues, decision passport. GitHub cadavers stay cadavers. AI parity false.",
       "missing": "Model registry, drift, citations, outcome feedback.",
       "next": "Library-first. LLM only on miss. Never a rupee write.",
       "organs": [
@@ -316,7 +316,7 @@
       "area": "ai",
       "kernel": "partial",
       "github": "scaffolded",
-      "present": "32 AI families classified. ackAi emits passport or named-missing. Five tissues decide. GitHub living plugs 0.",
+      "present": "34 AI families classified. ackAi emits passport or named-missing. Five tissues decide. GitHub living plugs 0.",
       "missing": "Training, drift, bias, cost, model registry on GitHub.",
       "next": "Evidence or hide. Random wrappers are not AI.",
       "organs": [
@@ -539,6 +539,26 @@
       "todo": "done"
     },
     {
+      "id": "c-vet",
+      "name": "Veterinary medical coding",
+      "table": "concept",
+      "stage": 2,
+      "level": 2,
+      "area": "agriculture",
+      "kernel": "partial",
+      "github": "documented",
+      "present": "AFRERA-VET living codes on cattle, buffalo, goat, pig, poultry, duck, fish, dog, cat. Headcount conserved. August AI proposes. Clerk/vet confirms. GitHub human ICD refused.",
+      "missing": "SNOMED-VET, WOAH lab confirmation, milk rupees.",
+      "next": "Map the second genome. Do not dump ICD-10 onto a herd.",
+      "organs": [
+        "livestock",
+        "ai",
+        "farmer"
+      ],
+      "href": "/vet",
+      "todo": "done"
+    },
+    {
       "id": "c-flows",
       "name": "Village flow charts",
       "table": "concept",
@@ -585,13 +605,14 @@
       "area": "agriculture",
       "kernel": "partial",
       "github": "scaffolded",
-      "present": "Plot/planting, harvest mint, grade, store, sell, settle.",
-      "missing": "Finance-procure-operate loop, fisheries, livestock cashflow.",
-      "next": "Walk is living. Livestock is partial.",
+      "present": "Plot/planting, harvest mint, grade, store, sell, settle. AFRERA-VET codes the second genome.",
+      "missing": "Finance-procure-operate loop, fisheries cashflow, livestock cashflow.",
+      "next": "Walk is living. Livestock coding lives. Livestock cash stays missing.",
       "organs": [
         "crop",
         "lot",
-        "farmer"
+        "farmer",
+        "livestock"
       ],
       "href": "/lots",
       "todo": "done"
@@ -644,7 +665,7 @@
       "area": "ai",
       "kernel": "partial",
       "github": "documented",
-      "present": "32 AI analog families classified living/partial/missing/refused. ackAi emits a passport or named-missing. Five tissues decide. GitHub living plugs 0. AI parity false.",
+      "present": "34 AI analog families classified living/partial/missing/refused. ackAi emits a passport or named-missing. Five tissues decide. GitHub living plugs 0. AI parity false.",
       "missing": "Model registry, OCR, vernacular voice, finance AI, procure AI.",
       "next": "Classify honestly. Decision lives. Do not paint cadavers living.",
       "organs": [
@@ -811,7 +832,7 @@
       "area": "ai",
       "kernel": "partial",
       "github": "duplicated",
-      "present": "One bus, 25 GitHub cadavers, library-first, firewall. One brain, five tissues. Atlas classifies 32 families. AI parity false.",
+      "present": "One bus, 25 GitHub cadavers, library-first, firewall. One brain, five tissues. Atlas classifies 34 families. AI parity false.",
       "missing": "GitHub 16 sibling chats. Model registry missing.",
       "next": "A wrapper is not production AI. Decision lives on the kernel.",
       "organs": [
@@ -1591,7 +1612,7 @@
       "area": "ai",
       "kernel": "partial",
       "github": "documented",
-      "present": "ackAllAi walks 32 families. Living emit passports. Missing named. Refused refuse. rupeeWrite false. Companion carries a harvest-propose passport.",
+      "present": "ackAllAi walks 34 families. Living emit passports. Missing named. Refused refuse. rupeeWrite false. Companion carries a harvest-propose passport.",
       "missing": "Model registry, OCR, voice dictation.",
       "next": "Ack is a passport. Clerk still writes remaining.",
       "organs": [
@@ -1620,6 +1641,26 @@
         "warehouse"
       ],
       "href": "/body",
+      "todo": "done"
+    },
+    {
+      "id": "n-lineage",
+      "name": "Token and remaining lineage",
+      "table": "innovation",
+      "stage": 1,
+      "level": 3,
+      "area": "erp",
+      "kernel": "partial",
+      "github": "documented",
+      "present": "GI lot path mint→intake→settle. Herd headcount on the cell. Person remaining sums to home sums to village. Broken paths named, not painted living.",
+      "missing": "SNOMED custody network, milk settlement lineage.",
+      "next": "Repair is naming the break. Do not invent a rupee to close a gap.",
+      "organs": [
+        "lot",
+        "livestock",
+        "erp"
+      ],
+      "href": "/vet",
       "todo": "done"
     },
     {
@@ -2053,6 +2094,25 @@
         "spine"
       ],
       "href": "/platform",
+      "todo": "done"
+    },
+    {
+      "id": "a-vet-code",
+      "name": "August AI veterinary coding",
+      "table": "ai",
+      "stage": 3,
+      "level": 5,
+      "area": "ai",
+      "kernel": "partial",
+      "github": "scaffolded",
+      "present": "proposeVet on signs. Living codes propose. ASF/AI named, not auto-confirm. Human ICD/diabetes refused. rupeeWrite false.",
+      "missing": "Lab network, SNOMED-VET, clinic rails.",
+      "next": "AI proposes. Vet/clerk confirms heads. Never a hospital coder.",
+      "organs": [
+        "ai",
+        "livestock"
+      ],
+      "href": "/vet",
       "todo": "done"
     },
     {

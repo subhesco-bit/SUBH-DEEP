@@ -8,7 +8,7 @@ import type { AiEnvelope } from "../os/types.ts";
 import { brainDecide } from "../brain/decide.ts";
 import type { DecisionPassport } from "../brain/types.ts";
 
-export type CompanionAction = "intake" | "settle" | "process" | "harvest" | "consult";
+export type CompanionAction = "intake" | "settle" | "process" | "harvest" | "consult" | "code";
 
 export type CompanionProposal = {
   id: string;
@@ -119,6 +119,22 @@ export function proposeCompanion(
       lotId: lot.id,
       orderId: null,
       cellId: lot.cellId,
+      severity: "note",
+    });
+  }
+
+  for (const row of (books.herd ?? []).slice(0, 1)) {
+    proposals.push({
+      id: `code-${row.id}`,
+      moduleId: "agentic",
+      action: "code",
+      title: `Code ${row.kind} on ${row.cellName}`,
+      body: `${row.head} head under ${row.policyId ?? "cover gap"}. August AI proposes AFRERA-VET. Clerk/vet confirms. Milk rupees stay undeclared.`,
+      href: "/vet",
+      organ: "livestock",
+      lotId: null,
+      orderId: null,
+      cellId: row.cellId,
       severity: "note",
     });
   }

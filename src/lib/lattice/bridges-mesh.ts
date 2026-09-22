@@ -19,7 +19,7 @@ export const MESH_BRIDGES: Bridge[] = [
     kind: "technical",
     status: "partial",
     signal: "livestock.owned { farmerId, head, milkYield }",
-    today: "livestockService sits beside farmerService. Headcount does not nourish FDI or household cashflow.",
+    today: "livestockService sits beside farmerService. This organism: AFRERA-VET codes the herd on the cell. Headcount does not nourish FDI or household cashflow.",
     contract: "Every animal is a fact on the cell. Yield, veterinary cost, and chill cost write into FDI.",
     thought: "A second genome that does not feed the nucleus is a side module.",
   },

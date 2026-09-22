@@ -101,7 +101,7 @@ export function BrainBoard() {
         </div>
         <p className="mt-4 text-[11px] uppercase tracking-[0.14em] text-muted">
           Agriculture finance and procure stay missing · CFD refused · tourism refused · humanoid
-          teleop refused · AI atlas classified 32 families · AI parity false
+          teleop refused · AI atlas classified 34 families · AI parity false
         </p>
         <p className="mt-3 text-sm text-muted">
           <Link to="/companion" className="underline decoration-border underline-offset-4 hover:text-foreground">

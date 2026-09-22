@@ -128,7 +128,7 @@ export const STAKEHOLDERS: Stakeholder[] = [
   { id: "mill", name: "Mill operator", scale: "village", writes: "remaining", present: "Process on declared loss. Mill rests on heat.", missing: "Humanoid teleop." },
   { id: "buyer", name: "Buyer", scale: "village", writes: "none", present: "Offtake at declared ₹/kg.", missing: "E-invoice, returns graph." },
   { id: "kitchen", name: "Magh kitchen", scale: "home", writes: "none", present: "Dish implies variety. Next Magh at last kg.", missing: "Tourism itinerary." },
-  { id: "vet", name: "Veterinarian", scale: "home", writes: "none", present: "Herd cover binds. Premium undeclared.", missing: "Livestock cashflow." },
+  { id: "vet", name: "Veterinarian", scale: "home", writes: "propose", present: "AFRERA-VET codes. Clerk/vet confirms heads. Herd cover binds.", missing: "Livestock cashflow. Milk rupees." },
   { id: "scheme", name: "Scheme officer", scale: "village", writes: "none", present: "Eligibility on declared acres. Amount blank.", missing: "Disbursement rails." },
   { id: "engineer", name: "Engineer", scale: "village", writes: "none", present: "BOQ stamp on declared qty+unit+standard.", missing: "CFD refused." },
   { id: "companion", name: "Companion", scale: "person", writes: "propose", present: "Proposes next gate. Never executes alone.", missing: "Delegated consent ledger." },

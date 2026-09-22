@@ -22,7 +22,8 @@ export type BrainSignal =
   | "rupee-write"
   | "hypothesis"
   | "physical-teleop"
-  | "harvest-propose";
+  | "harvest-propose"
+  | "vet-code";
 
 export type DecisionKind = "pass" | "block" | "defer" | "propose";
 

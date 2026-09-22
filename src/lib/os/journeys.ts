@@ -103,7 +103,20 @@ export const SECTOR_JOURNEYS: SectorJourney[] = [
       { id: "bim", name: "BIM", status: "missing", href: "/os", organ: "shared" },
     ],
   },
-  named("health", "Health", "Clinical safety boundary. Do not infer health."),
+  named("health", "Health", "Clinical safety boundary. Do not infer health. Human ICD is the wrong genome for a village herd."),
+  {
+    id: "livestock",
+    sector: "Livestock / veterinary",
+    status: "living",
+    thesis: "AFRERA-VET codes village animals. Headcount conserved. Milk rupees missing. Human ICD refused.",
+    steps: [
+      { id: "vet-code", name: "Veterinary code", status: "living", href: "/vet", organ: "livestock" },
+      { id: "vet-herd", name: "Herd on the cell", status: "living", href: "/cells", organ: "livestock" },
+      { id: "vet-cover", name: "Herd cover", status: "partial", href: "/warehouse", organ: "insurance" },
+      { id: "vet-cash", name: "Milk rupees", status: "missing", href: "/vet", organ: "finance" },
+      { id: "vet-icd", name: "Human ICD", status: "missing", href: "/vet", organ: "ai" },
+    ],
+  },
   {
     id: "enterprise",
     sector: "Enterprise ERP",

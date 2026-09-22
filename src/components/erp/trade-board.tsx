@@ -11,6 +11,10 @@ export function TradeBoard() {
   const orders = books?.orders ?? [];
   const payouts = books?.payouts ?? [];
   const poolable = books?.poolable ?? [];
+  const kitchen = books?.kitchen ?? [];
+  const contracts = books?.contracts ?? [];
+  const acceptContract = useBooks((s) => s.acceptContract);
+  const [seasonPrice, setSeasonPrice] = useState<Record<string, string>>({});
   const busy = useBooks((s) => s.busy);
   const error = useBooks((s) => s.error);
   const settle = useBooks((s) => s.settle);
@@ -204,6 +208,74 @@ export function TradeBoard() {
               </Button>
             </div>
           </form>
+        )}
+      </section>
+
+      <section className="rounded-2xl border border-border bg-surface p-5">
+        <h3 className="font-display text-xl">Kitchen memory</h3>
+        <p className="mt-1 text-sm text-muted">Dishes imply varieties. Magh is not a residual.</p>
+        {kitchen.length === 0 ? (
+          <p className="mt-3 text-sm text-muted">No kitchen graph yet.</p>
+        ) : (
+          <ul className="mt-3 divide-y divide-border">
+            {kitchen.map((k) => (
+              <li key={k.id} className="flex flex-wrap items-center justify-between gap-2 py-3">
+                <p className="text-sm">
+                  {k.dish} → {k.variety}
+                </p>
+                <Badge variant="live">{k.festival}</Badge>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section className="rounded-2xl border border-border bg-surface p-5">
+        <h3 className="font-display text-xl">Next-season offtake</h3>
+        <p className="mt-1 text-sm text-muted">
+          Settlement offers Magh 2027 at the same kilograms. Price stays blank until a clerk declares it.
+        </p>
+        {contracts.length === 0 ? (
+          <p className="mt-3 text-sm text-muted">No next-season offer yet. Settle an offtake.</p>
+        ) : (
+          <ul className="mt-3 divide-y divide-border">
+            {contracts.map((c) => (
+              <li key={c.id} className="py-3">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <p className="text-sm">
+                      {c.cellName} · {c.variety} · {c.season}
+                    </p>
+                    <p className="font-mono text-[11px] text-muted">{formatKg(c.qtyGrams)}</p>
+                  </div>
+                  <Badge variant={c.status === "accepted" ? "live" : "partial"}>{c.status}</Badge>
+                </div>
+                {c.status === "offered" ? (
+                  <form
+                    className="mt-2 flex flex-wrap gap-2"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      void acceptContract(c.id, seasonPrice[c.id] ?? "");
+                    }}
+                  >
+                    <Input
+                      className="h-9 w-28"
+                      inputMode="decimal"
+                      placeholder="₹ / kg"
+                      aria-label={`Declared price for ${c.variety}`}
+                      value={seasonPrice[c.id] ?? ""}
+                      onChange={(e) => setSeasonPrice((s) => ({ ...s, [c.id]: e.target.value }))}
+                    />
+                    <Button size="sm" type="submit" disabled={busy}>
+                      Accept at declared price
+                    </Button>
+                  </form>
+                ) : c.pricePaisePerKg ? (
+                  <p className="mt-1 font-mono text-[11px] text-muted">{formatRupee(c.pricePaisePerKg)} / kg declared</p>
+                ) : null}
+              </li>
+            ))}
+          </ul>
         )}
       </section>
 

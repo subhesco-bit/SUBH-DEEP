@@ -35,6 +35,10 @@ export function LotsBoard() {
                       {lot.remainingGrams !== lot.grams ? ` of ${formatKg(lot.grams)}` : ""} · {lot.commodity}
                       {lot.moistureBp != null ? ` · ${(lot.moistureBp / 100).toFixed(1)}% moisture` : ""}
                     </p>
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                      {lot.giMinted ? <Badge variant="live">GI mint</Badge> : lot.giMarker ? <Badge variant="gap">GI unminted</Badge> : null}
+                      {lot.plantingId ? <Badge variant="partial">planting closed</Badge> : null}
+                    </div>
                   </div>
                   <Badge variant={lot.status === "settled" ? "live" : lot.status === "minted" ? "gap" : "partial"}>
                     {lot.status.replace("_", " ")}

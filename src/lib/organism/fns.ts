@@ -5,6 +5,7 @@ import {
   diagnose,
   queryLibraryKnowledge,
 } from "@/lib/library";
+import { compactEnvelope, shouldCallLlm } from "@/lib/tokens/economy";
 import type { EventRow, OrganismResult, PulseRow } from "./types";
 
 export type { AutoOp, EventRow, OrganismResult, OrganismSnapshot, PulseRow } from "./types";
@@ -114,10 +115,13 @@ export const consultLibrary = createServerFn({ method: "POST" })
     const memory = composeLibraryReading(data.query, hits, diagnosis);
     let reading = memory;
     let source: "library" | "grok" = "library";
-    const enriched = await grokEnrich(data.query, memory);
-    if (enriched) {
-      reading = enriched;
-      source = "grok";
+    if (shouldCallLlm(data.query)) {
+      const packed = compactEnvelope(data.query).text;
+      const enriched = await grokEnrich(data.query, packed);
+      if (enriched) {
+        reading = enriched;
+        source = "grok";
+      }
     }
     await publishEvent("nerve.consult", data.organId ?? "ai", null, {
       source,

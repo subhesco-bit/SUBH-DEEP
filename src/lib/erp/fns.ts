@@ -37,6 +37,9 @@ function emptyKpis(message: string): BooksResult["kpis"] {
     pendingPayouts: 0,
     avgHoursToPay: null,
     journalBalanced: true,
+    villageTcoPaise: 0,
+    spoilageGrams: 0,
+    giMinted: 0,
     integrityNote: message,
   };
 }
@@ -55,6 +58,11 @@ function fail(message: string): BooksResult {
     inputs: [],
     payouts: [],
     poolable: [],
+    kitchen: [],
+    contracts: [],
+    plantings: [],
+    giChain: [],
+    villageLedger: [],
   };
 }
 
@@ -248,7 +256,7 @@ export const recordInput = createServerFn({ method: "POST" })
     if (!data.cellId) return fail("Cell required.");
     if (!amountPaise) return fail("Declared rupees required.");
     if (!Number.isFinite(qty) || qty <= 0) return fail("Quantity required.");
-    const kind = (["seed", "fodder", "energy", "labour", "cover"] as InputKind[]).includes(data.kind)
+    const kind = (["seed", "fodder", "energy", "labour", "cover", "water"] as InputKind[]).includes(data.kind)
       ? data.kind
       : "seed";
     const { ensureBooks, postInput, readBooks } = await import("./boot.server");
@@ -392,5 +400,49 @@ export const processDeclared = createServerFn({ method: "POST" })
       return { ok: true as const, ...snapshot };
     } catch (err) {
       return { ok: false as const, error: err instanceof Error ? err.message : "process failed" };
+    }
+  });
+
+export const acceptSeason = createServerFn({ method: "POST" })
+  .validator((input: { contractId: string; pricePerKg: string }) => ({
+    contractId: String(input?.contractId ?? ""),
+    pricePerKg: String(input?.pricePerKg ?? ""),
+  }))
+  .handler(async ({ data }): Promise<BooksResult> => {
+    const price = parseRupeePerKg(data.pricePerKg);
+    if (!data.contractId) return fail("Contract required.");
+    if (!price) return fail("Declared ₹/kg is required — never invented.");
+    const { ensureBooks, acceptContract, readBooks } = await import("./boot.server");
+    await ensureBooks();
+    const sql = await getSql();
+    try {
+      await acceptContract(sql, { contractId: data.contractId, pricePaisePerKg: price });
+      await pulse("contract.offer", { query: "contract.accept" });
+      return { ok: true, ...(await readBooks()) };
+    } catch (err) {
+      return fail(err instanceof Error ? err.message : "contract failed");
+    }
+  });
+
+export const declareSpoilage = createServerFn({ method: "POST" })
+  .validator((input: { lotId: string; kg: string; cause: string }) => ({
+    lotId: String(input?.lotId ?? ""),
+    kg: String(input?.kg ?? ""),
+    cause: String(input?.cause ?? "power cut").trim().slice(0, 80),
+  }))
+  .handler(async ({ data }): Promise<BooksResult> => {
+    const grams = parseKg(data.kg);
+    if (!data.lotId) return fail("Lot required.");
+    if (!grams) return fail("Declared spoilage kilograms are required.");
+    if (!data.cause) return fail("Cause is required — never invented.");
+    const { ensureBooks, recordSpoilage, readBooks } = await import("./boot.server");
+    await ensureBooks();
+    const sql = await getSql();
+    try {
+      await recordSpoilage(sql, { lotId: data.lotId, lossGrams: grams, cause: data.cause });
+      await pulse("spoilage.event", { lotId: data.lotId, grams, query: "spoilage.event" });
+      return { ok: true, ...(await readBooks()) };
+    } catch (err) {
+      return fail(err instanceof Error ? err.message : "spoilage failed");
     }
   });

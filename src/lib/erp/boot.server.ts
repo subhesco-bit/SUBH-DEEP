@@ -5,10 +5,20 @@ import {
   DEFAULT_FREIGHT_PAISE_PER_KG,
   allocateFifo,
   assertCanSell,
+  assertGiClaim,
+  evaluateCover,
   inputJournal,
   journalBalances,
+  kitchenImplies,
+  mintGiBirth,
+  offerNextSeason,
+  CURRENT_SEASON,
+  GI_GEO,
+  remainingAfterSpoilage,
   settlementAmounts,
   settlementJournal,
+  villageCostPost,
+  villageSpoilagePost,
 } from "./kernel";
 import type {
   BooksKpis,
@@ -25,6 +35,12 @@ import type {
   PoolableRow,
   ReceiptRow,
   ReceiptStatus,
+  CoverStatus,
+  ContractRow,
+  KitchenRow,
+  PlantingRow,
+  GiLinkRow,
+  VillageLedgerRow,
 } from "./types";
 
 let seedChain: Promise<void> | null = null;
@@ -76,7 +92,10 @@ const CELLS = [
 
 async function seedBooks(sql: Sql): Promise<void> {
   const existing = await sql.query<{ n: number }>("select count(*)::int as n from erp_fpo");
-  if ((existing[0]?.n ?? 0) > 0) return;
+  if ((existing[0]?.n ?? 0) > 0) {
+    await seedPulseRemainder(sql);
+    return;
+  }
 
   await sql.query(
     `insert into erp_fpo (id, name, village, district, split_rule)
@@ -91,6 +110,14 @@ async function seedBooks(sql: Sql): Promise<void> {
       [c.id, c.name, c.household, FPO.id, FPO.village, c.acres_centi, c.notes],
     );
   }
+
+  await sql.query(
+    `insert into erp_kitchen (id, dish, variety, festival, village) values
+     ('kit-pithas','Chakhao pithas','Chakhao Poireiton','Magh',$1),
+     ('kit-pickle','Ginger pickle','Nadia ginger','winter',$1)
+     on conflict (id) do nothing`,
+    [FPO.village],
+  );
 
   // Declared books of last Magh — not live GitHub runtime.
   await mintLot(sql, {
@@ -187,6 +214,16 @@ async function seedBooks(sql: Sql): Promise<void> {
     amountPaise: 24000,
     memo: "Not livestock — mulch straw",
   });
+  await postInput(sql, {
+    cellId: "c-ronghang",
+    kind: "water",
+    qty: 18,
+    unit: "h",
+    amountPaise: 14400,
+    memo: "Irrigation hours, declared",
+  });
+
+  await seedPulseRemainder(sql);
 
   await sql.query(
     `insert into spine_events (signal, organ_id, ligament_id, payload)
@@ -208,6 +245,8 @@ export async function ensureBooks(): Promise<BooksSnapshot> {
     });
   }
   await seedChain;
+  const sql = await getSql();
+  await seedPulseRemainder(sql);
   return readBooks();
 }
 
@@ -255,7 +294,10 @@ export async function mintLot(
     lotId?: string;
   },
 ): Promise<string> {
-  const cell = await sql.query<{ fpo_id: string }>("select fpo_id from erp_cells where id = $1", [input.cellId]);
+  const cell = await sql.query<{ fpo_id: string; name: string; village: string; acres_centi: number }>(
+    "select fpo_id, name, village, acres_centi from erp_cells where id = $1",
+    [input.cellId],
+  );
   if (!cell[0]) throw new Error("Unknown cell — a lot must name a farmer cell.");
   if (input.grams <= 0) throw new Error("Declared mass is required.");
   const id = input.lotId ?? nid("lot");
@@ -284,6 +326,49 @@ export async function mintLot(
      values ($1,'spine','b-spine-harvest',$2::jsonb)`,
     ["harvest.completed", JSON.stringify({ lotId: id, cellId: input.cellId })],
   );
+  const plantingId = await closePlanting(sql, {
+    cellId: input.cellId,
+    variety: input.variety,
+    acresCenti: cell[0].acres_centi,
+    lotId: id,
+  });
+  if (plantingId) {
+    await sql.query("update erp_lots set planting_id = $2 where id = $1", [id, plantingId]);
+  }
+  const birth = mintGiBirth({
+    giMarker: input.giMarker ?? null,
+    handler: cell[0].name,
+    geo: `${cell[0].village}, Karbi Anglong`,
+    season: CURRENT_SEASON,
+  });
+  if (birth) {
+    await appendGiLink(sql, {
+      lotId: id,
+      event: birth.event,
+      handler: birth.handler,
+      geo: birth.geo,
+      season: birth.season,
+    });
+    await sql.query(
+      `insert into spine_events (signal, organ_id, ligament_id, payload)
+       values ($1,'trace','b-harvest-trace',$2::jsonb)`,
+      [
+        "trace.mint",
+        JSON.stringify({ lotId: id, geo: birth.geo, handler: birth.handler, season: birth.season }),
+      ],
+    );
+  }
+  const kitchen = await sql.query<{ dish: string; variety: string; festival: string }>(
+    "select dish, variety, festival from erp_kitchen",
+  );
+  const implied = kitchenImplies(kitchen, input.variety);
+  if (implied[0]) {
+    await sql.query(
+      `insert into spine_events (signal, organ_id, ligament_id, payload)
+       values ($1,'foodgraph','b-graph-genome',$2::jsonb)`,
+      ["graph.implies", JSON.stringify({ lotId: id, dish: implied[0].dish, variety: input.variety, festival: implied[0].festival })],
+    );
+  }
   return id;
 }
 
@@ -315,11 +400,38 @@ export async function inwardReceipt(
     [id, input.facility],
   );
   await sql.query("update erp_lots set status = 'in_warehouse' where id = $1 and status = 'minted'", [input.lotId]);
+  const cover = evaluateCover(input.facility);
+  await sql.query("update erp_lots set cover_status = $2, policy_id = $3 where id = $1", [
+    input.lotId,
+    cover.status,
+    cover.policyId,
+  ]);
   await sql.query(
     `insert into spine_events (signal, organ_id, ligament_id, payload)
      values ($1,'warehouse','b-harvest-fanout',$2::jsonb)`,
     ["warehouse.intake", JSON.stringify({ lotId: input.lotId, receiptId: id })],
   );
+  await sql.query(
+    `insert into spine_events (signal, organ_id, ligament_id, payload)
+     values ($1,'insurance',$2,$3::jsonb)`,
+    [
+      cover.signal,
+      cover.status === "bound" ? "b-harvest-insure" : "b-lot-cover",
+      JSON.stringify({ lotId: input.lotId, policyId: cover.policyId, facility: input.facility }),
+    ],
+  );
+  const gi = await sql.query<{ gi_marker: string | null }>("select gi_marker from erp_lots where id = $1", [
+    input.lotId,
+  ]);
+  if (gi[0]?.gi_marker) {
+    await appendGiLink(sql, {
+      lotId: input.lotId,
+      event: "intake",
+      handler: input.facility,
+      geo: GI_GEO,
+      season: CURRENT_SEASON,
+    });
+  }
   return id;
 }
 
@@ -375,16 +487,24 @@ export async function createOrder(
 ): Promise<string> {
   const freight = input.freightPaisePerKg ?? DEFAULT_FREIGHT_PAISE_PER_KG;
   settlementAmounts(input.qtyGrams, input.pricePaisePerKg, freight);
-  const lot = await sql.query<{ grams: number; remaining_grams: number; status: string; cell_id: string }>(
-    "select grams, remaining_grams, status, cell_id from erp_lots where id = $1",
-    [input.lotId],
-  );
+  const lot = await sql.query<{
+    grams: number;
+    remaining_grams: number;
+    status: string;
+    cell_id: string;
+    gi_marker: string | null;
+  }>("select grams, remaining_grams, status, cell_id, gi_marker from erp_lots where id = $1", [input.lotId]);
   if (!lot[0]) throw new Error("Unknown lot.");
   const pledged = await sql.query<{ n: number }>(
     "select count(*)::int as n from erp_receipts where lot_id = $1 and status = 'pledged'",
     [input.lotId],
   );
   assertCanSell(lot[0].status, pledged[0]?.n ?? 0);
+  const mintCount = await sql.query<{ n: number }>(
+    "select count(*)::int as n from erp_gi_chain where lot_id = $1 and event = 'mint'",
+    [input.lotId],
+  );
+  assertGiClaim(lot[0].gi_marker, mintCount[0]?.n ?? 0);
   const remaining = lot[0].remaining_grams ?? lot[0].grams;
   if (input.qtyGrams > remaining) throw new Error("Cannot sell more than the remaining lot body.");
   if (!input.buyer.trim()) throw new Error("Buyer required.");
@@ -597,6 +717,69 @@ export async function settleOrder(
       JSON.stringify({ organ: "orders", paise: farmgate, hoursToPay: input.hoursToPay, cellId: lot[0].cell_id }),
     ],
   );
+  await sql.query(
+    `insert into spine_events (signal, organ_id, ligament_id, payload)
+     values ($1,'demand','b-order-demand',$2::jsonb)`,
+    [
+      "demand.observed",
+      JSON.stringify({ orderId: input.orderId, variety: lot[0].variety, qtyGrams: order[0].qty_grams, cellId: lot[0].cell_id }),
+    ],
+  );
+  const offer = offerNextSeason(order[0].qty_grams, CURRENT_SEASON);
+  const contractId = nid("vc");
+  await sql.query(
+    `insert into erp_contracts (id, cell_id, fpo_id, variety, season, qty_grams, price_paise_per_kg, status, source_order_id)
+     values ($1,$2,$3,$4,$5,$6,null,'offered',$7)
+     on conflict (cell_id, variety, season) do nothing`,
+    [contractId, lot[0].cell_id, lot[0].fpo_id, lot[0].variety, offer.season, offer.qtyGrams, input.orderId],
+  );
+  await sql.query(
+    `insert into spine_events (signal, organ_id, ligament_id, payload)
+     values ($1,'contract','b-demand-contract',$2::jsonb)`,
+    [
+      "contract.offer",
+      JSON.stringify({ cellId: lot[0].cell_id, variety: lot[0].variety, season: offer.season, qtyGrams: offer.qtyGrams }),
+    ],
+  );
+  const gi = await sql.query<{ gi_marker: string | null }>("select gi_marker from erp_lots where id = $1", [
+    order[0].lot_id,
+  ]);
+  if (gi[0]?.gi_marker) {
+    await appendGiLink(sql, {
+      lotId: order[0].lot_id,
+      event: "settle",
+      handler: input.paymentRef.trim(),
+      geo: GI_GEO,
+      season: CURRENT_SEASON,
+    });
+  }
+  if (freight > 0) {
+    const village = await sql.query<{ village: string }>("select village from erp_cells where id = $1", [
+      lot[0].cell_id,
+    ]);
+    const post = villageCostPost("freight", freight, order[0].qty_grams, "declared freight");
+    await postVillage(sql, {
+      village: village[0]?.village ?? FPO.village,
+      cellId: lot[0].cell_id,
+      lotId: order[0].lot_id,
+      memo: `Freight on ${lot[0].variety}`,
+      ...post,
+    });
+  }
+}
+
+export async function acceptContract(
+  sql: Sql,
+  input: { contractId: string; pricePaisePerKg: number },
+): Promise<void> {
+  if (input.pricePaisePerKg <= 0) throw new Error("Declared ₹/kg is required — never invented.");
+  const row = await sql.query<{ status: string }>("select status from erp_contracts where id = $1", [input.contractId]);
+  if (!row[0]) throw new Error("Unknown contract.");
+  if (row[0].status === "accepted") return;
+  await sql.query(
+    "update erp_contracts set status = 'accepted', price_paise_per_kg = $2 where id = $1 and status = 'offered'",
+    [input.contractId, input.pricePaisePerKg],
+  );
 }
 
 export async function settlePool(
@@ -625,7 +808,14 @@ export async function postInput(
      values ($1,$2,$3,$4,$5,$6)`,
     [input.cellId, input.kind, input.qty, input.unit, input.amountPaise, input.memo],
   );
-  const organ = input.kind === "energy" ? "recie" : input.kind === "cover" ? "insurance" : "crop";
+  const organ =
+    input.kind === "energy"
+      ? "recie"
+      : input.kind === "cover"
+        ? "insurance"
+        : input.kind === "water"
+          ? "water"
+          : "crop";
   const lines = inputJournal(input.kind, input.amountPaise, input.memo, organ);
   if (!journalBalances(lines)) throw new Error("Input journal does not balance.");
   const entryId = nid("je");
@@ -635,6 +825,313 @@ export async function postInput(
        values ($1,$2,null,$3,$4,$5,$6,$7)`,
       [entryId, input.cellId, line.organId, line.account, line.side, line.amountPaise, line.memo],
     );
+  }
+  if (input.kind === "energy" || input.kind === "water" || input.kind === "cover") {
+    const cellRow = await sql.query<{ village: string }>("select village from erp_cells where id = $1", [
+      input.cellId,
+    ]);
+    const post = villageCostPost(input.kind, input.amountPaise, 0, input.memo);
+    await postVillage(sql, {
+      village: cellRow[0]?.village ?? FPO.village,
+      cellId: input.cellId,
+      lotId: null,
+      memo: input.memo,
+      ...post,
+    });
+  }
+}
+
+async function appendGiLink(
+  sql: Sql,
+  input: { lotId: string; event: "mint" | "intake" | "settle"; handler: string; geo: string; season: string },
+): Promise<void> {
+  const max = await sql.query<{ n: number }>(
+    "select coalesce(max(seq),0)::int as n from erp_gi_chain where lot_id = $1",
+    [input.lotId],
+  );
+  const seq = (max[0]?.n ?? 0) + 1;
+  await sql.query(
+    `insert into erp_gi_chain (id, lot_id, seq, event, handler, geo, season)
+     values ($1,$2,$3,$4,$5,$6,$7)`,
+    [nid("gi"), input.lotId, seq, input.event, input.handler, input.geo, input.season],
+  );
+}
+
+async function ensurePlot(sql: Sql, cellId: string, acresCenti: number): Promise<string> {
+  const existing = await sql.query<{ id: string }>("select id from erp_plots where cell_id = $1 limit 1", [cellId]);
+  if (existing[0]) return existing[0].id;
+  const cell = await sql.query<{ name: string; village: string }>(
+    "select name, village from erp_cells where id = $1",
+    [cellId],
+  );
+  if (!cell[0]) throw new Error("Unknown cell — a plot must name a farmer cell.");
+  const farmId = nid("farm");
+  const plotId = nid("plot");
+  await sql.query(`insert into erp_farms (id, cell_id, name, village) values ($1,$2,$3,$4)`, [
+    farmId,
+    cellId,
+    `${cell[0].name} farm`,
+    cell[0].village,
+  ]);
+  await sql.query(
+    `insert into erp_plots (id, farm_id, cell_id, name, acres_centi) values ($1,$2,$3,$4,$5)`,
+    [plotId, farmId, cellId, "home plot", Math.max(acresCenti, 1)],
+  );
+  return plotId;
+}
+
+async function closePlanting(
+  sql: Sql,
+  input: { cellId: string; variety: string; acresCenti: number; lotId: string },
+): Promise<string | null> {
+  try {
+    const open = await sql.query<{ id: string; status: string }>(
+      "select id, status from erp_plantings where cell_id = $1 and variety = $2 and season = $3",
+      [input.cellId, input.variety, CURRENT_SEASON],
+    );
+    if (open[0]) {
+      await sql.query(
+        "update erp_plantings set status = 'harvested', lot_id = $2 where id = $1",
+        [open[0].id, input.lotId],
+      );
+      await sql.query(
+        `insert into spine_events (signal, organ_id, ligament_id, payload)
+         values ($1,'crop','b-plantings-schema',$2::jsonb)`,
+        [
+          "crop.harvested",
+          JSON.stringify({
+            plantingId: open[0].id,
+            lotId: input.lotId,
+            variety: input.variety,
+            season: CURRENT_SEASON,
+          }),
+        ],
+      );
+      return open[0].id;
+    }
+    const plotId = await ensurePlot(sql, input.cellId, input.acresCenti);
+    const id = nid("pl");
+    await sql.query(
+      `insert into erp_plantings (id, cell_id, plot_id, variety, season, acres_centi, status, lot_id)
+       values ($1,$2,$3,$4,$5,$6,'harvested',$7)`,
+      [id, input.cellId, plotId, input.variety, CURRENT_SEASON, Math.max(input.acresCenti, 1), input.lotId],
+    );
+    await sql.query(
+      `insert into spine_events (signal, organ_id, ligament_id, payload)
+       values ($1,'crop','b-plantings-schema',$2::jsonb)`,
+      [
+        "crop.harvested",
+        JSON.stringify({ plantingId: id, lotId: input.lotId, variety: input.variety, season: CURRENT_SEASON }),
+      ],
+    );
+    return id;
+  } catch {
+    return null;
+  }
+}
+
+async function postVillage(
+  sql: Sql,
+  input: {
+    village: string;
+    organId: string;
+    account: string;
+    side: "debit" | "credit";
+    amountPaise: number;
+    qtyGrams: number;
+    cause: string;
+    lotId: string | null;
+    cellId: string | null;
+    memo: string;
+  },
+): Promise<void> {
+  await sql.query(
+    `insert into erp_village_ledger
+       (id, village, organ_id, account, side, amount_paise, qty_grams, cause, lot_id, cell_id, memo)
+     values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)`,
+    [
+      nid("vl"),
+      input.village,
+      input.organId,
+      input.account,
+      input.side,
+      input.amountPaise,
+      input.qtyGrams,
+      input.cause,
+      input.lotId,
+      input.cellId,
+      input.memo,
+    ],
+  );
+}
+
+export async function recordSpoilage(
+  sql: Sql,
+  input: { lotId: string; lossGrams: number; cause: string; amountPaise?: number },
+): Promise<void> {
+  const lot = await sql.query<{
+    remaining_grams: number;
+    cell_id: string;
+    variety: string;
+    cover_status: string;
+  }>("select remaining_grams, cell_id, variety, cover_status from erp_lots where id = $1", [input.lotId]);
+  if (!lot[0]) throw new Error("Unknown lot.");
+  const next = remainingAfterSpoilage(lot[0].remaining_grams, input.lossGrams);
+  await sql.query("update erp_lots set remaining_grams = $2 where id = $1", [input.lotId, next]);
+  const rec = await sql.query<{ id: string; remaining_grams: number }>(
+    "select id, remaining_grams from erp_receipts where lot_id = $1 and status <> 'released' order by created_at desc limit 1",
+    [input.lotId],
+  );
+  if (rec[0]) {
+    const recNext = Math.max(0, rec[0].remaining_grams - input.lossGrams);
+    await sql.query("update erp_receipts set remaining_grams = $2 where id = $1", [rec[0].id, recNext]);
+    await sql.query(`insert into erp_receipt_events (receipt_id, event, note) values ($1,'spoilage',$2)`, [
+      rec[0].id,
+      `${input.lossGrams} g · ${input.cause}`,
+    ]);
+  }
+  const cell = await sql.query<{ village: string }>("select village from erp_cells where id = $1", [lot[0].cell_id]);
+  const post = villageSpoilagePost(input.lossGrams, input.amountPaise ?? 0, input.cause);
+  await postVillage(sql, {
+    village: cell[0]?.village ?? FPO.village,
+    cellId: lot[0].cell_id,
+    lotId: input.lotId,
+    memo: `Spoilage ${lot[0].variety} · ${input.cause}`,
+    ...post,
+  });
+  await sql.query(
+    `insert into spine_events (signal, organ_id, ligament_id, payload)
+     values ($1,'rcop','b-spoilage-cascade',$2::jsonb)`,
+    [
+      "spoilage.event",
+      JSON.stringify({
+        lotId: input.lotId,
+        kg: input.lossGrams / 1000,
+        cause: input.cause,
+        cover: lot[0].cover_status,
+      }),
+    ],
+  );
+  await sql.query(
+    `insert into spine_events (signal, organ_id, ligament_id, payload)
+     values ($1,'recie','b-thought-village',$2::jsonb)`,
+    ["village.ledger.post", JSON.stringify({ lotId: input.lotId, cause: input.cause, grams: input.lossGrams })],
+  );
+}
+
+async function seedPulseRemainder(sql: Sql): Promise<void> {
+  try {
+    await sql.query("select 1 from erp_plantings limit 1");
+  } catch {
+    return;
+  }
+
+  const cells = await sql.query<{ id: string; name: string; village: string; acres_centi: number }>(
+    "select id, name, village, acres_centi from erp_cells",
+  );
+  for (const c of cells) {
+    await ensurePlot(sql, c.id, c.acres_centi);
+  }
+
+  const lots = await sql.query<{
+    id: string;
+    cell_id: string;
+    variety: string;
+    gi_marker: string | null;
+    cell_name: string;
+    village: string;
+  }>(
+    `select l.id, l.cell_id, l.variety, l.gi_marker, c.name as cell_name, c.village
+     from erp_lots l join erp_cells c on c.id = l.cell_id`,
+  );
+  for (const lot of lots) {
+    const acres = cells.find((c) => c.id === lot.cell_id)?.acres_centi ?? 100;
+    await closePlanting(sql, {
+      cellId: lot.cell_id,
+      variety: lot.variety,
+      acresCenti: acres,
+      lotId: lot.id,
+    });
+    if (lot.gi_marker) {
+      const minted = await sql.query<{ n: number }>(
+        "select count(*)::int as n from erp_gi_chain where lot_id = $1 and event = 'mint'",
+        [lot.id],
+      );
+      if ((minted[0]?.n ?? 0) === 0) {
+        await appendGiLink(sql, {
+          lotId: lot.id,
+          event: "mint",
+          handler: lot.cell_name,
+          geo: `${lot.village}, Karbi Anglong`,
+          season: CURRENT_SEASON,
+        });
+        await sql.query(
+          `insert into spine_events (signal, organ_id, ligament_id, payload)
+           values ($1,'trace','b-harvest-trace',$2::jsonb)`,
+          [
+            "trace.mint",
+            JSON.stringify({ lotId: lot.id, geo: GI_GEO, handler: lot.cell_name, season: CURRENT_SEASON }),
+          ],
+        );
+      }
+    }
+  }
+
+  const kramsapiPlot = await sql.query<{ id: string }>("select id from erp_plots where cell_id = 'c-kramsapi' limit 1");
+  if (kramsapiPlot[0]) {
+    await sql.query(
+      `insert into erp_plantings (id, cell_id, plot_id, variety, season, acres_centi, status, lot_id)
+       values ('pl-kramsapi-seed','c-kramsapi',$1,'Chakhao Poireiton',$2,120,'planted',null)
+       on conflict (cell_id, variety, season) do nothing`,
+      [kramsapiPlot[0].id, CURRENT_SEASON],
+    );
+    await sql.query(
+      `insert into spine_events (signal, organ_id, ligament_id, payload)
+       values ($1,'crop','b-plantings-schema',$2::jsonb)`,
+      ["crop.planted", JSON.stringify({ cellId: "c-kramsapi", variety: "Chakhao Poireiton", season: CURRENT_SEASON })],
+    );
+  }
+
+  const costs = await sql.query<{ n: number }>(
+    "select count(*)::int as n from erp_village_ledger where account in ('energy','water','cover','freight')",
+  );
+  if ((costs[0]?.n ?? 0) === 0) {
+    const ins = await sql.query<{
+      cell_id: string;
+      kind: string;
+      amount_paise: number;
+      memo: string;
+      village: string;
+    }>(
+      `select i.cell_id, i.kind, i.amount_paise, i.memo, c.village
+       from erp_inputs i join erp_cells c on c.id = i.cell_id
+       where i.kind in ('energy','water','cover')`,
+    );
+    for (const row of ins) {
+      if (row.kind !== "energy" && row.kind !== "water" && row.kind !== "cover") continue;
+      const post = villageCostPost(row.kind, row.amount_paise, 0, row.memo);
+      await postVillage(sql, {
+        village: row.village,
+        cellId: row.cell_id,
+        lotId: null,
+        memo: row.memo,
+        ...post,
+      });
+    }
+  }
+
+  const spoilage = await sql.query<{ n: number }>(
+    "select count(*)::int as n from erp_village_ledger where account = 'spoilage'",
+  );
+  if ((spoilage[0]?.n ?? 0) === 0) {
+    const ginger = await sql.query<{ id: string }>("select id from erp_lots where id = 'lot-ginger-teron'");
+    if (ginger[0]) {
+      await recordSpoilage(sql, {
+        lotId: "lot-ginger-teron",
+        lossGrams: 40_000,
+        cause: "power cut",
+      });
+    }
   }
 }
 
@@ -712,13 +1209,26 @@ export async function readBooks(): Promise<BooksSnapshot> {
     gi_marker: string | null;
     moisture_bp: number | null;
     status: LotStatus;
+    cover_status: CoverStatus;
+    policy_id: string | null;
+    planting_id: string | null;
     minted_at: string | Date;
   }>(
     `select l.id, l.cell_id, c.name as cell_name, l.fpo_id, l.variety, l.commodity, l.grams,
-            l.remaining_grams, l.grade, l.gi_marker, l.moisture_bp, l.status, l.minted_at
+            l.remaining_grams, l.grade, l.gi_marker, l.moisture_bp, l.status,
+            coalesce(l.cover_status, 'gap') as cover_status, l.policy_id, l.planting_id, l.minted_at
      from erp_lots l join erp_cells c on c.id = l.cell_id
      order by l.minted_at desc`,
   );
+  const giMintedSet = new Set<string>();
+  try {
+    const giMintedLots = await sql.query<{ lot_id: string }>(
+      "select distinct lot_id from erp_gi_chain where event = 'mint'",
+    );
+    for (const g of giMintedLots) giMintedSet.add(g.lot_id);
+  } catch {
+    /* 0011 not applied yet */
+  }
   const lots: LotRow[] = lotRows.map((l) => ({
     id: l.id,
     cellId: l.cell_id,
@@ -732,6 +1242,10 @@ export async function readBooks(): Promise<BooksSnapshot> {
     giMarker: l.gi_marker,
     moistureBp: l.moisture_bp,
     status: l.status,
+    coverStatus: l.cover_status,
+    policyId: l.policy_id,
+    plantingId: l.planting_id,
+    giMinted: giMintedSet.has(l.id),
     mintedAt: asTime(l.minted_at),
   }));
 
@@ -955,9 +1469,139 @@ export async function readBooks(): Promise<BooksSnapshot> {
     pendingPayouts: payouts.filter((p) => p.status === "pending").length,
     avgHoursToPay: hours.length ? Math.round(hours.reduce((a, b) => a + b, 0) / hours.length) : null,
     journalBalanced: debit === credit,
+    villageTcoPaise: 0,
+    spoilageGrams: 0,
+    giMinted: giMintedSet.size,
     integrityNote:
       "ERP is bone. It records declared farmgate, freight, and settlement. Remaining mass stays on the same lot. It does not invent ₹ or MT. The nerve may read these books; it may not write them.",
   };
 
-  return { fpo, kpis, cells, lots, receipts, orders, journal, inputs, payouts, poolable };
+  const kitchenRows = await sql.query<{
+    id: string; dish: string; variety: string; festival: string; village: string;
+  }>("select id, dish, variety, festival, village from erp_kitchen order by dish");
+  const kitchen: KitchenRow[] = kitchenRows.map((k) => ({
+    id: k.id, dish: k.dish, variety: k.variety, festival: k.festival, village: k.village,
+  }));
+
+  const contractRows = await sql.query<{
+    id: string; cell_id: string; cell_name: string; fpo_id: string; variety: string; season: string;
+    qty_grams: number; price_paise_per_kg: number | null; status: ContractRow["status"];
+    source_order_id: string | null; created_at: string | Date;
+  }>(
+    `select x.id, x.cell_id, c.name as cell_name, x.fpo_id, x.variety, x.season, x.qty_grams,
+            x.price_paise_per_kg, x.status, x.source_order_id, x.created_at
+     from erp_contracts x join erp_cells c on c.id = x.cell_id
+     order by x.created_at desc`,
+  );
+  const contracts: ContractRow[] = contractRows.map((x) => ({
+    id: x.id,
+    cellId: x.cell_id,
+    cellName: x.cell_name,
+    fpoId: x.fpo_id,
+    variety: x.variety,
+    season: x.season,
+    qtyGrams: x.qty_grams,
+    pricePaisePerKg: x.price_paise_per_kg,
+    status: x.status,
+    sourceOrderId: x.source_order_id,
+    createdAt: asTime(x.created_at),
+  }));
+
+  let plantings: PlantingRow[] = [];
+  let giChain: GiLinkRow[] = [];
+  let villageLedger: VillageLedgerRow[] = [];
+  try {
+    const plantingRows = await sql.query<{
+      id: string;
+      cell_id: string;
+      cell_name: string;
+      plot_id: string;
+      plot_name: string;
+      variety: string;
+      season: string;
+      acres_centi: number;
+      status: PlantingRow["status"];
+      lot_id: string | null;
+    }>(
+      `select p.id, p.cell_id, c.name as cell_name, p.plot_id, x.name as plot_name, p.variety, p.season,
+              p.acres_centi, p.status, p.lot_id
+       from erp_plantings p
+       join erp_cells c on c.id = p.cell_id
+       join erp_plots x on x.id = p.plot_id
+       order by p.season desc, c.name`,
+    );
+    plantings = plantingRows.map((p) => ({
+      id: p.id,
+      cellId: p.cell_id,
+      cellName: p.cell_name,
+      plotId: p.plot_id,
+      plotName: p.plot_name,
+      variety: p.variety,
+      season: p.season,
+      acresCenti: p.acres_centi,
+      status: p.status,
+      lotId: p.lot_id,
+    }));
+    const giRows = await sql.query<{
+      id: string;
+      lot_id: string;
+      seq: number;
+      event: GiLinkRow["event"];
+      handler: string;
+      geo: string;
+      season: string;
+      created_at: string | Date;
+    }>(
+      `select id, lot_id, seq, event, handler, geo, season, created_at
+       from erp_gi_chain order by lot_id, seq`,
+    );
+    giChain = giRows.map((g) => ({
+      id: g.id,
+      lotId: g.lot_id,
+      seq: g.seq,
+      event: g.event,
+      handler: g.handler,
+      geo: g.geo,
+      season: g.season,
+      createdAt: asTime(g.created_at),
+    }));
+    const vlRows = await sql.query<{
+      id: string;
+      village: string;
+      organ_id: string;
+      account: string;
+      side: "debit" | "credit";
+      amount_paise: number;
+      qty_grams: number;
+      cause: string;
+      lot_id: string | null;
+      cell_id: string | null;
+      memo: string;
+      created_at: string | Date;
+    }>(
+      `select id, village, organ_id, account, side, amount_paise, qty_grams, cause, lot_id, cell_id, memo, created_at
+       from erp_village_ledger order by created_at desc`,
+    );
+    villageLedger = vlRows.map((v) => ({
+      id: v.id,
+      village: v.village,
+      organId: v.organ_id,
+      account: v.account,
+      side: v.side,
+      amountPaise: v.amount_paise,
+      qtyGrams: v.qty_grams,
+      cause: v.cause,
+      lotId: v.lot_id,
+      cellId: v.cell_id,
+      memo: v.memo,
+      createdAt: asTime(v.created_at),
+    }));
+  } catch {
+    /* 0011 not applied yet — books still read. */
+  }
+
+  kpis.villageTcoPaise = villageLedger.reduce((n, v) => n + v.amountPaise, 0);
+  kpis.spoilageGrams = villageLedger.filter((v) => v.account === "spoilage").reduce((n, v) => n + v.qtyGrams, 0);
+
+  return { fpo, kpis, cells, lots, receipts, orders, journal, inputs, payouts, poolable, kitchen, contracts, plantings, giChain, villageLedger };
 }

@@ -1,9 +1,12 @@
 export type LotStatus = "minted" | "in_warehouse" | "pledged" | "listed" | "settled";
+export type CoverStatus = "gap" | "bound";
+export type ContractStatus = "offered" | "accepted" | "blocked";
 export type ReceiptStatus = "inward" | "pledged" | "released";
 export type OrderStatus = "open" | "settled";
 export type PayoutStatus = "pending" | "paid";
 export type JournalSide = "debit" | "credit";
-export type InputKind = "seed" | "fodder" | "energy" | "labour" | "cover";
+export type InputKind = "seed" | "fodder" | "energy" | "labour" | "cover" | "water";
+
 
 export type FpoRow = {
   id: string;
@@ -41,6 +44,10 @@ export type LotRow = {
   giMarker: string | null;
   moistureBp: number | null;
   status: LotStatus;
+  coverStatus: CoverStatus;
+  policyId: string | null;
+  plantingId: string | null;
+  giMinted: boolean;
   mintedAt: string;
 };
 
@@ -112,6 +119,70 @@ export type PayoutRow = {
   createdAt: string;
 };
 
+export type KitchenRow = {
+  id: string;
+  dish: string;
+  variety: string;
+  festival: string;
+  village: string;
+};
+
+export type ContractRow = {
+  id: string;
+  cellId: string;
+  cellName: string;
+  fpoId: string;
+  variety: string;
+  season: string;
+  qtyGrams: number;
+  pricePaisePerKg: number | null;
+  status: ContractStatus;
+  sourceOrderId: string | null;
+  createdAt: string;
+};
+
+export type PlantingStatus = "planted" | "harvested";
+export type GiEvent = "mint" | "intake" | "settle";
+
+export type PlantingRow = {
+  id: string;
+  cellId: string;
+  cellName: string;
+  plotId: string;
+  plotName: string;
+  variety: string;
+  season: string;
+  acresCenti: number;
+  status: PlantingStatus;
+  lotId: string | null;
+};
+
+export type GiLinkRow = {
+  id: string;
+  lotId: string;
+  seq: number;
+  event: GiEvent;
+  handler: string;
+  geo: string;
+  season: string;
+  createdAt: string;
+};
+
+export type VillageLedgerRow = {
+  id: string;
+  village: string;
+  organId: string;
+  account: string;
+  side: "debit" | "credit";
+  amountPaise: number;
+  qtyGrams: number;
+  cause: string;
+  lotId: string | null;
+  cellId: string | null;
+  memo: string;
+  createdAt: string;
+};
+
 export type PoolableRow = {
   commodity: string;
   remainingGrams: number;
@@ -131,6 +202,9 @@ export type BooksKpis = {
   pendingPayouts: number;
   avgHoursToPay: number | null;
   journalBalanced: boolean;
+  villageTcoPaise: number;
+  spoilageGrams: number;
+  giMinted: number;
   integrityNote: string;
 };
 
@@ -145,6 +219,11 @@ export type BooksSnapshot = {
   inputs: InputRow[];
   payouts: PayoutRow[];
   poolable: PoolableRow[];
+  kitchen: KitchenRow[];
+  contracts: ContractRow[];
+  plantings: PlantingRow[];
+  giChain: GiLinkRow[];
+  villageLedger: VillageLedgerRow[];
 };
 
 export type BooksResult = BooksSnapshot & {

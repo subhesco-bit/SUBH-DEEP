@@ -71,9 +71,12 @@ export type RunContext = {
   pledged?: number;
   status?: string | null;
   giMarker?: string | null;
+  giChainLength?: number;
   query?: string | null;
   hoursToPay?: number | null;
   openOfftake?: number;
+  /** Declared remaining cost of the lot body. Required for WAC; never invented. */
+  costPaise?: number | null;
 };
 
 export type StepPayload = {
@@ -100,8 +103,11 @@ export type StepPayload = {
   route?: string;
   pledged?: number;
   openOfftake?: number;
-  take?: Array<{ lotId: string; qtyGrams: number }>;
+  take?: Array<{ lotId: string; qtyGrams: number; costPaise?: number }>;
   split?: Array<{ cellId: string; qtyGrams: number; amountPaise: number }>;
+  mintCount?: number;
+  costPaise?: number;
+  wacPaisePerKg?: number;
 };
 
 export type StepResult = {

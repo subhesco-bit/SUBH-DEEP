@@ -11,6 +11,8 @@ import {
   sellLot,
   settlePoolSale,
   settleSale,
+  acceptSeason,
+  declareSpoilage,
 } from "./fns";
 import type { BooksSnapshot } from "./types";
 
@@ -57,6 +59,8 @@ type BooksClient = {
     freightPerKg?: string;
   }) => Promise<boolean>;
   settlePool: (poolId: string, paymentRef: string, hoursToPay: string) => Promise<boolean>;
+  acceptContract: (contractId: string, pricePerKg: string) => Promise<boolean>;
+  spoil: (lotId: string, kg: string, cause: string) => Promise<boolean>;
 };
 
 function apply(
@@ -172,6 +176,24 @@ export const useBooks = create<BooksClient>((set) => ({
       return apply(set, await settlePoolSale({ data: { poolId, paymentRef, hoursToPay } }));
     } catch (err) {
       set({ busy: false, error: err instanceof Error ? err.message : "pool settle failed" });
+      return false;
+    }
+  },
+  acceptContract: async (contractId, pricePerKg) => {
+    set({ busy: true, error: null });
+    try {
+      return apply(set, await acceptSeason({ data: { contractId, pricePerKg } }));
+    } catch (err) {
+      set({ busy: false, error: err instanceof Error ? err.message : "contract failed" });
+      return false;
+    }
+  },
+  spoil: async (lotId, kg, cause) => {
+    set({ busy: true, error: null });
+    try {
+      return apply(set, await declareSpoilage({ data: { lotId, kg, cause } }));
+    } catch (err) {
+      set({ busy: false, error: err instanceof Error ? err.message : "spoilage failed" });
       return false;
     }
   },

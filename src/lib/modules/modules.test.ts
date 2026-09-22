@@ -116,13 +116,13 @@ describe("agentic companion", () => {
       kpis: {
         cells: 4, lots: 2, kgInWarehouse: 0, kgMinted: 1, kgRemaining: 1,
         openPaise: 1, settledPaise: 1, farmgatePaise: 1, pendingPayouts: 0,
-        avgHoursToPay: 18, journalBalanced: true, integrityNote: "",
+        avgHoursToPay: 18, journalBalanced: true, villageTcoPaise: 0, spoilageGrams: 0, giMinted: 0, integrityNote: "",
       },
       cells: [
         { id: "c-kramsapi", name: "Serdihun Kramsapi", household: "Kramsapi house · 3", fpoId: "f", village: "L", acresCenti: 120, notes: "", lotCount: 0, kgOnBooks: 0, remainingGrams: 0, rupeeCreditPaise: 0, rupeeDebitPaise: 0 },
       ],
       lots: [
-        { id: "lot-ginger-teron", cellId: "c-teron", cellName: "Jirsong Teron", fpoId: "f", variety: "Nadia ginger", commodity: "ginger", grams: 220000, remainingGrams: 220000, grade: "A", giMarker: null, moistureBp: null, status: "minted", mintedAt: "" },
+        { id: "lot-ginger-teron", cellId: "c-teron", cellName: "Jirsong Teron", fpoId: "f", variety: "Nadia ginger", commodity: "ginger", grams: 220000, remainingGrams: 220000, grade: "A", giMarker: null, moistureBp: null, status: "minted", coverStatus: "gap", policyId: null, plantingId: null, giMinted: false, mintedAt: "" },
       ],
       receipts: [],
       orders: [
@@ -133,6 +133,11 @@ describe("agentic companion", () => {
       inputs: [],
       payouts: [],
       poolable: [],
+      kitchen: [],
+      contracts: [],
+      plantings: [],
+      giChain: [],
+      villageLedger: [],
     } as BooksSnapshot;
     const reading = proposeCompanion(books);
     assert.match(reading.memory, /UPI-KA-8841/);

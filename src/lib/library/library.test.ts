@@ -41,7 +41,7 @@ describe("AI-integrated library", () => {
     assert.ok(d.bindings > 0);
     assert.ok(d.missingLigaments > 0, "the GitHub body is still unintegrated");
     assert.match(d.verdict, /Auto-operation can fire/);
-    assert.ok(d.priority.length >= 8);
+    assert.ok(d.priority.length >= 1, "FUS, weather, energy cloud still stall");
     assert.equal(d.reflexesAnswered, CANONICAL_QUERY_COUNT);
     assert.equal(d.reflexesMissing, 0);
   });

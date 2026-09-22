@@ -130,6 +130,16 @@ export function filterBridges(opts: {
   });
 }
 
+/** Ligaments page: Living, then Missing, then Partial. */
+export const LIGAMENT_STATUS_ORDER: Array<"all" | BridgeStatus> = ["living", "missing", "partial", "all"];
+
+export function groupBridges(rows: Bridge[]): Array<{ status: BridgeStatus; rows: Bridge[] }> {
+  const order: BridgeStatus[] = ["living", "missing", "partial"];
+  return order
+    .map((status) => ({ status, rows: rows.filter((b) => b.status === status) }))
+    .filter((g) => g.rows.length > 0);
+}
+
 export const VIEWBOX = { w: 1000, h: 640 };
 
 export function bindTargets(c: Concept): Concept[] {

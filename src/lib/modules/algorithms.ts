@@ -6,6 +6,7 @@ import {
   remainingAfterCommit,
   settlementAmounts,
   splitQtyWeighted,
+  weightedAverageCostPaisePerKg,
 } from "../erp/kernel.ts";
 import { queryLibraryKnowledge } from "../library/match.ts";
 import { composeLibraryReading, diagnose } from "../library/diagnose.ts";
@@ -152,6 +153,42 @@ export function fifoGate(ctx: RunContext): AlgorithmResult {
   }
 }
 
+export function wacCost(ctx: RunContext): AlgorithmResult {
+  const remaining = ctx.remainingGrams ?? 0;
+  const cost = ctx.costPaise;
+  if (remaining <= 0) return { decision: "defer", reason: "No remaining mass to average.", payload: {} };
+  if (cost == null) {
+    return {
+      decision: "defer",
+      reason: "No declared remaining cost. WAC stays silent — never invent ₹.",
+      payload: { remaining },
+    };
+  }
+  if (cost < 0) {
+    return {
+      decision: "block",
+      reason: "Declared cost cannot be negative.",
+      payload: { remaining, costPaise: cost },
+    };
+  }
+  try {
+    const wac = weightedAverageCostPaisePerKg([
+      { id: ctx.lotId ?? "lot", remainingGrams: remaining, costPaise: cost },
+    ]);
+    return {
+      decision: "pass",
+      reason: `WAC ${wac} paise/kg on declared remaining cost.`,
+      payload: { remaining, costPaise: cost, wacPaisePerKg: wac },
+    };
+  } catch (err) {
+    return {
+      decision: "block",
+      reason: err instanceof Error ? err.message : "WAC refused.",
+      payload: {},
+    };
+  }
+}
+
 export function qtyWeightedGate(ctx: RunContext): AlgorithmResult {
   const qty = ctx.qtyGrams ?? 0;
   const price = ctx.pricePaisePerKg ?? 0;
@@ -246,4 +283,45 @@ export function copilotNext(workflowId: string): AlgorithmResult {
     reason: next[workflowId] ?? "Next keystroke lives on the books, not a second portal.",
     payload: { next: next[workflowId] ?? "books" },
   };
+}
+
+export function giClaimGate(ctx: RunContext): AlgorithmResult {
+  if (!ctx.giMarker) {
+    return { decision: "pass", reason: "Not a GI lot. No mint required.", payload: { giMarker: null } };
+  }
+  const n = ctx.giChainLength ?? 0;
+  if (n <= 0) {
+    return {
+      decision: "block",
+      reason: "No GI claim without a mint.",
+      payload: { giMarker: ctx.giMarker, mintCount: n },
+    };
+  }
+  return {
+    decision: "pass",
+    reason: `GI mint on the chain (${n}). Listing may claim GI.`,
+    payload: { giMarker: ctx.giMarker, mintCount: n },
+  };
+}
+
+export function spoilageMass(ctx: RunContext): AlgorithmResult {
+  const remaining = ctx.remainingGrams ?? 0;
+  const qty = ctx.qtyGrams ?? 0;
+  if (qty <= 0) {
+    return { decision: "defer", reason: "Declared spoilage kilograms are required.", payload: { remaining } };
+  }
+  try {
+    remainingAfterCommit(remaining, qty);
+    return {
+      decision: "pass",
+      reason: `Spoilage ${qty} g leaves ${remaining - qty} g on the same body.`,
+      payload: { remaining: remaining - qty, qty },
+    };
+  } catch (err) {
+    return {
+      decision: "block",
+      reason: err instanceof Error ? err.message : "Spoilage refused.",
+      payload: { remaining, qty },
+    };
+  }
 }

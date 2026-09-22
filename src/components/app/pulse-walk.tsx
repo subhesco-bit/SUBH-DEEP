@@ -109,7 +109,7 @@ export function PulseWalk() {
         <section className="mt-6 grid gap-4 sm:grid-cols-2">
           <div className="rounded-xl border border-border bg-background p-4">
             <h4 className="text-[11px] font-medium uppercase tracking-[0.16em] text-gap">
-              Today — the signal dies
+              {bridge?.status === "living" ? "Today — this organism" : "Today — the signal dies"}
             </h4>
             <p className="mt-2 text-sm leading-relaxed">{hop.today}</p>
           </div>

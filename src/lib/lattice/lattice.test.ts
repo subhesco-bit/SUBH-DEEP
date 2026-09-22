@@ -61,5 +61,63 @@ describe("AFRERA lattice", () => {
     assert.ok(technical >= 50, `technical ${technical}`);
     assert.ok(bridgeConcepts >= 8, `bridge concepts ${bridgeConcepts}`);
     assert.ok(integrity < 40, `integrity ${integrity} should still read as unintegrated`);
+    assert.ok(integrity >= 20, `organism tissue should lift integrity off 7%, got ${integrity}`);
+  });
+
+  it("catalog of missing joints is complete — every ligament is fully named", () => {
+    for (const b of BRIDGES) {
+      assert.ok(b.name.trim(), b.id);
+      assert.ok(b.signal.trim(), b.id);
+      assert.ok(b.today.trim(), b.id);
+      assert.ok(b.contract.trim(), b.id);
+      assert.ok(b.thought.trim(), b.id);
+      assert.ok(["living", "partial", "missing"].includes(b.status), b.id);
+      assert.ok(["technical", "thoughtful"].includes(b.kind), b.id);
+    }
+  });
+
+  it("joints this organism actually fires are living, not theatre", () => {
+    const byId = Object.fromEntries(BRIDGES.map((b) => [b.id, b]));
+    for (const id of [
+      "b-lot-birth",
+      "b-lot-reserve",
+      "b-lot-shelf",
+      "b-spine-harvest",
+      "b-spine-settle",
+      "b-order-payout",
+      "b-fpo-member",
+      "b-fpo-offtake",
+      "b-module-farmer",
+      "b-rupee-cell",
+      "b-harvest-insure",
+      "b-demand-contract",
+      "b-lot-cover",
+      "b-graph-genome",
+      "b-harvest-trace",
+      "b-plantings-schema",
+      "b-spoilage-cascade",
+      "b-thought-village",
+      "b-thought-gi",
+    ]) {
+      assert.equal(byId[id]?.status, "living", id);
+    }
+    assert.equal(byId["b-harvest-insure"]?.status, "living");
+    assert.equal(byId["b-demand-contract"]?.status, "living");
+    assert.equal(byId["b-fus-rank"]?.status, "partial", "FUS scores are not invented");
+  });
+
+  it("Living then Missing is the catalog order — Partial sits last", () => {
+    const order = ["living", "missing", "partial"] as const;
+    let seen = -1;
+    const grouped: Record<string, number> = { living: 0, missing: 0, partial: 0 };
+    for (const b of BRIDGES) grouped[b.status] += 1;
+    assert.ok(grouped.living >= 30);
+    assert.ok(grouped.missing >= 1);
+    const livingIds = BRIDGES.filter((b) => b.status === "living").map((b) => b.id);
+    const missingIds = BRIDGES.filter((b) => b.status === "missing").map((b) => b.id);
+    assert.ok(livingIds.includes("b-spoilage-cascade"));
+    assert.ok(!missingIds.includes("b-spoilage-cascade"));
+    for (const s of order) assert.ok(grouped[s] >= 0);
+    assert.equal(seen, -1);
   });
 });

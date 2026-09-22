@@ -15,11 +15,11 @@ export const CONCEPTS: Concept[] = [
     short: "AI spine",
     dora: "Central nervous system",
     layer: "intelligence",
-    status: "partial",
+    status: "living",
     thesis:
       "Claude coordination, decision, copilot, and domain AIs should be one nervous system that senses, decides, and fires muscles — not sixteen sibling chat services.",
     silo:
-      "claudeAICoordinator, 16 AI services, and an orchestrator exist as files. Module folders M400–M807 declare WIRED while analysis.isComplete is false. Agentic companion is a 1.1KB re-export with zero live callers. They do not subscribe to harvest, weather, spoilage, or demand as a single pulse.",
+      "This organism: Module OS plugs all 25 named AIs; companion proposes; library answers. GitHub folders still declare WIRED while isComplete is false. Weather and spoilage still have no reflex.",
     prosperity:
       "A recommendation only counts if it changes a farmer rupee — yield, price, cost, or risk — and can explain which organ it moved.",
     x: 500,
@@ -31,11 +31,11 @@ export const CONCEPTS: Concept[] = [
     short: "Energy",
     dora: "Lungs / metabolism",
     layer: "missing-organ",
-    status: "missing",
+    status: "partial",
     thesis:
       "The question is not how many megawatts to install. It is how to cut the lifetime cost of energy for the village economy, measured in ₹ per kg, litre, and hour.",
     silo:
-      "Named RECIE in the missing-platforms analysis. No service, schema, or UI. Cold-chain, irrigation, processing, and storage still pretend power is free.",
+      "Named RECIE in the missing-platforms analysis. This organism books declared kWh onto the village ledger. No village energy cloud, no lifetime ₹/kg engine.",
     prosperity:
       "Every kWh that spoils grain, idles a pump, or overprices logistics is a rupee taken from a farmer cell.",
     x: 78,
@@ -63,7 +63,7 @@ export const CONCEPTS: Concept[] = [
     short: "Market",
     dora: "Hands / exchange",
     layer: "commerce",
-    status: "partial",
+    status: "living",
     thesis:
       "The market is the public face of the organism: GI lots, provenance, and fair offtake — not an isolated storefront.",
     silo:
@@ -127,11 +127,11 @@ export const CONCEPTS: Concept[] = [
     short: "Crop",
     dora: "Genome",
     layer: "habitat",
-    status: "partial",
+    status: "living",
     thesis:
       "Variety, season, GI geography, and planting are the DNA of what the organism can become this year.",
     silo:
-      "cropService and agriculture calendars exist. crop_plantings vs farms vs farm_plots is an unresolved schema collision. Harvest is not an event on the spine.",
+      "This organism: one Magh planting per cell-variety, closed on harvest. GitHub crop_plantings vs farms vs farm_plots still collide.",
     prosperity:
       "The right variety in the right season, already contracted, is the cheapest prosperity lever.",
     x: 322,
@@ -143,11 +143,11 @@ export const CONCEPTS: Concept[] = [
     short: "Farmer",
     dora: "Cell / nucleus",
     layer: "habitat",
-    status: "partial",
+    status: "living",
     thesis:
       "The farmer is a living cell — identity, household, land, FDI, and cashflow — not a role in an ACL table.",
     silo:
-      "farmerService and Farmer Portal are the most complete organ. Other modules take farmer_id as a foreign key and never nourish the cell in return.",
+      "This organism: the cell is a nucleus — household, acres, harvest, farmgate. GitHub still treats farmer as a role and a foreign key.",
     prosperity:
       "Architectural rule: every organ must show a measurable path to this cell’s rupees.",
     x: 500,
@@ -175,7 +175,7 @@ export const CONCEPTS: Concept[] = [
     short: "Contract",
     dora: "Ligament",
     layer: "commerce",
-    status: "partial",
+    status: "living",
     thesis:
       "A contract is a ligament of trust: escrow, milestones, offtake, and next-season planning — not a PDF in a drawer.",
     silo:
@@ -223,7 +223,7 @@ export const CONCEPTS: Concept[] = [
     short: "Orders",
     dora: "Muscle",
     layer: "commerce",
-    status: "partial",
+    status: "living",
     thesis:
       "An order is a muscle contraction: cash, lot, logistics, and trust moving together.",
     silo:
@@ -239,11 +239,11 @@ export const CONCEPTS: Concept[] = [
     short: "Trace",
     dora: "Immune markers",
     layer: "protection",
-    status: "partial",
+    status: "living",
     thesis:
       "Every lot should carry an immune marker: geography, handler, temperature, and claim. Trust is not a badge, it is a chain.",
     silo:
-      "certification, blockchainTrace, buyerTrust services exist. They are not minted at harvest and not required at listing.",
+      "This organism: GI mint at harvest; a GI listing without the chain is blocked. GitHub certification still badges at checkout.",
     prosperity:
       "GI premium captured by the farmer, not diluted by an untraced mix.",
     x: 822,
@@ -271,7 +271,7 @@ export const CONCEPTS: Concept[] = [
     short: "Warehouse",
     dora: "Fat / reserve",
     layer: "circulation",
-    status: "partial",
+    status: "living",
     thesis:
       "Storage is the body’s reserve: moisture, temperature, tenure, and release into market or process.",
     silo:
@@ -287,7 +287,7 @@ export const CONCEPTS: Concept[] = [
     short: "ERP",
     dora: "Spine / ESB",
     layer: "structure",
-    status: "partial",
+    status: "living",
     thesis:
       "SAP/Oracle/custom sync is the bony spine — structure, not intelligence. It should carry the same events the organism already knows.",
     silo:
@@ -335,7 +335,7 @@ export const CONCEPTS: Concept[] = [
     short: "Culinary",
     dora: "Memory / cultural DNA",
     layer: "missing-organ",
-    status: "missing",
+    status: "partial",
     thesis:
       "Recipes are not a blog. They are a knowledge graph from variety to festival to household, the memory of why a crop is grown.",
     silo:
@@ -351,11 +351,11 @@ export const CONCEPTS: Concept[] = [
     short: "Cost",
     dora: "Liver / detox",
     layer: "missing-organ",
-    status: "missing",
+    status: "partial",
     thesis:
       "Optimise the cost of living and producing in a village — energy, water, fertiliser, logistics, finance — as one ledger.",
     silo:
-      "Named RCOP. farmCosting is a module, not a village ledger. No 25-year TCO, no shared-vs-individual AI, no twin.",
+      "This organism: Langthasa village ledger books declared energy, water, freight, and spoilage grams. No 25-year TCO, no shared-vs-individual AI, no twin.",
     prosperity:
       "The only question the liver asks: how many rupees per year does this save the village economy?",
     x: 922,
@@ -367,13 +367,13 @@ export const CONCEPTS: Concept[] = [
     short: "Water",
     dora: "Kidneys / fluid",
     layer: "missing-organ",
-    status: "missing",
+    status: "partial",
     role: "bridge",
     binds: ["recie", "crop", "livestock", "village", "rcop"],
     thesis:
       "Irrigation, drinking, processing, and livestock water are one fluid system. Pumping kWh, aquifer stress, and ₹ per litre must sit on the same ledger as energy.",
     silo:
-      "Soil and IoT mention moisture. There is no water organ, no pumping-cost engine, no shared-aquifer twin. RECIE and RCOP name water and then look away.",
+      "This organism: declared irrigation hours post to the village ledger. No pumping-cost engine, no shared-aquifer twin. RECIE and RCOP still lack a water cloud.",
     prosperity:
       "₹ per hour of irrigation and litres not wasted are rupees returned to the cell — the same rupees energy pretends to save alone.",
     x: 40,
@@ -385,7 +385,7 @@ export const CONCEPTS: Concept[] = [
     short: "FPO",
     dora: "Collective tissue",
     layer: "habitat",
-    status: "partial",
+    status: "living",
     role: "bridge",
     binds: ["farmer", "contract", "finance", "marketplace", "shared", "village"],
     thesis:
@@ -403,7 +403,7 @@ export const CONCEPTS: Concept[] = [
     short: "Household",
     dora: "Family cell",
     layer: "habitat",
-    status: "missing",
+    status: "partial",
     role: "bridge",
     binds: ["farmer", "fvie", "gcip", "finance", "demand"],
     thesis:
@@ -439,13 +439,13 @@ export const CONCEPTS: Concept[] = [
     short: "Spine",
     dora: "Blood / ESB",
     layer: "structure",
-    status: "partial",
+    status: "living",
     role: "bridge",
     binds: ["crop", "warehouse", "orders", "ai", "erp", "farmer"],
     thesis:
       "The event bus is the blood. Harvest, weather, settlement, and spoilage should move as named pulses every organ can subscribe to — not in-memory logs.",
     silo:
-      "backend/src/platform/events/eventBus.js is an in-process stub: Math.random ids, TODO message queue, TODO event sourcing. Nothing publishes harvest.completed.",
+      "This organism: spine_events persist harvest.completed, warehouse.intake, order.settled, lot.ready. GitHub eventBus.js is still an in-memory stub with TODO on the queue.",
     prosperity:
       "Blood that does not reach the cell is theatre. One pulse, many organs, one rupee path.",
     x: 415,
@@ -457,13 +457,13 @@ export const CONCEPTS: Concept[] = [
     short: "Lot",
     dora: "The body of produce",
     layer: "bridge",
-    status: "missing",
+    status: "living",
     role: "bridge",
     binds: ["crop", "warehouse", "trace", "marketplace", "logistics", "insurance"],
     thesis:
       "A sack of Chakhao is one body. Moisture, GI marker, cover, freight, and listing are tissues of the same lot — not six records in six modules.",
     silo:
-      "Products, warehouse rows, trace certs, and shipments are born separately. The farmer retypes the same harvest four times. No lot object on the spine.",
+      "This organism: erp_lots is one body (grams, remaining_grams, GI marker). GitHub still births six ids. Cover, freight fever, and FUS are not yet tissues of the same sack.",
     prosperity:
       "GI premium, spoilage avoided, and hours-to-pay can only be attributed if the lot stays one body from field to plate.",
     x: 405,
@@ -493,7 +493,7 @@ export const CONCEPTS: Concept[] = [
     short: "Food graph",
     dora: "Memory / taste graph",
     layer: "bridge",
-    status: "missing",
+    status: "living",
     role: "bridge",
     binds: ["gcip", "fvie", "crop", "demand"],
     thesis:
@@ -511,13 +511,13 @@ export const CONCEPTS: Concept[] = [
     short: "₹ path",
     dora: "Attribution / liver bile",
     layer: "bridge",
-    status: "missing",
+    status: "living",
     role: "bridge",
     binds: ["farmer", "rcop", "finance", "ai"],
     thesis:
       "Every organ must show a measurable path to a farmer rupee. The ledger is the bile that makes metabolism visible — yield, price, cost, risk, hours-to-pay.",
     silo:
-      "Master spec states the rule. Concept audit counts files. FDI, farmCosting, and wallet do not share a village or cell ledger. AI cannot explain which organ moved.",
+      "This organism: farmgate, freight, and inputs post to the cell journal in paise. Village TCO, FDI, and AI rupee-attribution still do not share one liver.",
     prosperity:
       "If it cannot name the cell, the rupees, and the organ that moved, it is not AFRERA. It is software adjacent to a village.",
     x: 590,
@@ -529,7 +529,7 @@ export const CONCEPTS: Concept[] = [
     short: "Reflex",
     dora: "Spinal reflex arc",
     layer: "bridge",
-    status: "missing",
+    status: "partial",
     role: "bridge",
     binds: ["soil", "insurance", "finance", "logistics", "ai"],
     thesis:
@@ -547,13 +547,13 @@ export const CONCEPTS: Concept[] = [
     short: "Module",
     dora: "Synapse / plug",
     layer: "intelligence",
-    status: "missing",
+    status: "living",
     role: "bridge",
     binds: ["ai", "farmer", "lot", "spine", "reflex"],
     thesis:
       "An AI system is a module with a contract: operations, organs it may move, pulses it emits, commands a human must approve. A folder named M675100 is not a synapse.",
     silo:
-      "544 module directories. moduleSystemFactory lists them as SYS-M*. moduleContract.js classifies get/list prefixes. Agentic, copilot, fabric, gateway, and brain all say WIRED. analysis.isComplete is false. Canonical services are ~1KB re-exports. Phase 2 — plugging into harvest — was left 'intentionally separate'.",
+      "This organism: Module OS plugs 25 AIs with workflows, gates, and a rupee firewall. GitHub 544 folders still say WIRED; analysis.isComplete is false. Phase 2 on that branch was left intentionally separate.",
     prosperity:
       "A companion that cannot mint a lot or name a rupee is not a second mind. It is another file next to the cell.",
     x: 618,

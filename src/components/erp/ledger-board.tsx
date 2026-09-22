@@ -1,19 +1,20 @@
 import { useState } from "react";
 import { useBooks } from "@/lib/erp/store";
 import { useVillageBooks } from "@/components/erp/books-boot";
-import { formatRupee } from "@/lib/erp/money";
+import { formatRupee, formatKg } from "@/lib/erp/money";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CONCEPT_BY_ID } from "@/lib/lattice";
 
-const KINDS = ["seed", "fodder", "energy", "labour", "cover"] as const;
+const KINDS = ["seed", "fodder", "energy", "labour", "cover", "water"] as const;
 
 export function LedgerBoard() {
   const books = useVillageBooks();
   const journal = books?.journal ?? [];
   const inputs = books?.inputs ?? [];
   const cells = books?.cells ?? [];
+  const village = books?.villageLedger ?? [];
   const kpis = books?.kpis;
   const busy = useBooks((s) => s.busy);
   const error = useBooks((s) => s.error);
@@ -44,6 +45,10 @@ export function LedgerBoard() {
           <Badge variant={kpis?.journalBalanced ? "live" : "gap"}>
             {kpis?.journalBalanced ? "balanced" : "gap"}
           </Badge>
+          <span className="text-partial">Village TCO {formatRupee(kpis?.villageTcoPaise ?? 0)}</span>
+          {kpis?.spoilageGrams ? (
+            <span className="text-gap">Spoilage {formatKg(kpis.spoilageGrams)}</span>
+          ) : null}
         </div>
         {journal.length === 0 ? (
           <p className="mt-5 text-sm text-muted">No journal yet. Settle an offtake or post a cost.</p>
@@ -127,6 +132,26 @@ export function LedgerBoard() {
                     {i.cellName} · {i.kind}
                   </span>
                   <span className="ml-2 font-mono tabular-nums">{formatRupee(i.amountPaise)}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+        <section className="rounded-2xl border border-border bg-surface p-5">
+          <h3 className="font-display text-xl">Village ledger</h3>
+          <p className="mt-1 text-sm text-muted">Declared energy, water, freight, spoilage. No invented ₹.</p>
+          {village.length === 0 ? (
+            <p className="mt-3 text-sm text-muted">No village posts yet.</p>
+          ) : (
+            <ul className="mt-3 space-y-2">
+              {village.slice(0, 12).map((v) => (
+                <li key={v.id} className="text-sm">
+                  <span className="text-muted">
+                    {v.account} · {v.cause}
+                  </span>
+                  <span className="ml-2 font-mono tabular-nums">
+                    {v.amountPaise > 0 ? formatRupee(v.amountPaise) : formatKg(v.qtyGrams)}
+                  </span>
                 </li>
               ))}
             </ul>

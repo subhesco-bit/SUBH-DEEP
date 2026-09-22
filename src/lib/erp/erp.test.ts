@@ -11,8 +11,72 @@ import {
   settlementAmounts,
   settlementJournal,
   splitQtyWeighted,
+  evaluateCover,
+  kitchenImplies,
+  offerNextSeason,
+  LANGTHASA_MASTER_POLICY,
+  NEXT_SEASON,
+  remainingAfterSpoilage,
+  mintGiBirth,
+  assertGiClaim,
+  villageSpoilagePost,
+  declaredCostPerKg,
+  weightedAverageCostPaisePerKg,
+  intakeWac,
+  issueAtWac,
 } from "./kernel.ts";
 import { exceptions, fpoPnl, processMass, trialBalance } from "./platform.ts";
+
+describe("three stalls", () => {
+  it("binds Langthasa godown cover without inventing a premium", () => {
+    const v = evaluateCover("Langthasa godown");
+    assert.equal(v.status, "bound");
+    assert.equal(v.policyId, LANGTHASA_MASTER_POLICY);
+    assert.equal(evaluateCover("unknown shed").status, "gap");
+  });
+  it("kitchen implies Chakhao pithas to Chakhao Poireiton", () => {
+    const hits = kitchenImplies(
+      [{ dish: "Chakhao pithas", variety: "Chakhao Poireiton", festival: "Magh" }],
+      "Chakhao Poireiton",
+    );
+    assert.equal(hits[0]?.dish, "Chakhao pithas");
+  });
+  it("offers next Magh at settled kilograms with a blank price", () => {
+    const o = offerNextSeason(510000);
+    assert.equal(o.season, NEXT_SEASON);
+    assert.equal(o.qtyGrams, 510000);
+    assert.equal(o.pricePaisePerKg, null);
+  });
+});
+
+describe("pulse remainder", () => {
+  it("mints a GI birth only when a marker exists, and blocks a GI claim without it", () => {
+    assert.equal(mintGiBirth({ giMarker: null, handler: "Biren Ronghang", geo: "Langthasa, Karbi Anglong", season: "Magh 2026" }), null);
+    const birth = mintGiBirth({
+      giMarker: "GI-AS-CHAKHAO",
+      handler: "Biren Ronghang",
+      geo: "Langthasa, Karbi Anglong",
+      season: "Magh 2026",
+    });
+    assert.equal(birth?.event, "mint");
+    assert.equal(birth?.handler, "Biren Ronghang");
+    assert.doesNotThrow(() => assertGiClaim("GI-AS-CHAKHAO", 1));
+    assert.throws(() => assertGiClaim("GI-AS-CHAKHAO", 0));
+    assert.doesNotThrow(() => assertGiClaim(null, 0));
+  });
+
+  it("cuts remaining grams on declared spoilage and posts village fever without inventing ₹", () => {
+    assert.equal(remainingAfterSpoilage(220000, 40000), 180000);
+    assert.throws(() => remainingAfterSpoilage(220000, 0));
+    assert.throws(() => remainingAfterSpoilage(220000, 300000));
+    const post = villageSpoilagePost(40000, 0, "power cut");
+    assert.equal(post.organId, "rcop");
+    assert.equal(post.amountPaise, 0);
+    assert.equal(post.qtyGrams, 40000);
+    assert.equal(declaredCostPerKg(68800, 840000), 82);
+    assert.equal(declaredCostPerKg(0, 840000), null);
+  });
+});
 
 describe("rural ERP money", () => {
   it("keeps mass in grams and money in paise", () => {
@@ -88,6 +152,45 @@ describe("rural ERP kernel", () => {
     const sum = split.reduce((n, s) => n + s.amountPaise, 0);
     assert.equal(sum, 9231000);
     assert.ok(split[0].amountPaise > split[1].amountPaise);
+  });
+
+  it("blends declared cost as WAC and issues FIFO mass at that average", () => {
+    const wac = weightedAverageCostPaisePerKg([
+      { id: "a", remainingGrams: 400000, costPaise: 7_400_000 },
+      { id: "b", remainingGrams: 600000, costPaise: 9_000_000 },
+    ]);
+    // (74000 + 90000) rupees / 1000 kg = ₹164/kg = 16400 paise/kg
+    assert.equal(wac, 16400);
+    assert.throws(() => weightedAverageCostPaisePerKg([]));
+    assert.throws(() =>
+      weightedAverageCostPaisePerKg([{ id: "a", remainingGrams: 0, costPaise: 100 }]),
+    );
+
+    const blended = intakeWac(400000, 7_400_000, 600000, 9_000_000);
+    assert.equal(blended.remainingGrams, 1_000_000);
+    assert.equal(blended.costPaise, 16_400_000);
+    assert.equal(blended.wacPaisePerKg, 16400);
+
+    const issued = issueAtWac(
+      [
+        { id: "a", remainingGrams: 400000, costPaise: 7_400_000 },
+        { id: "b", remainingGrams: 600000, costPaise: 9_000_000 },
+      ],
+      500000,
+    );
+    assert.equal(issued.wacPaisePerKg, 16400);
+    assert.equal(issued.issuedCostPaise, paiseFromKgPrice(500000, 16400));
+    assert.equal(
+      issued.take.reduce((n, t) => n + t.costPaise, 0),
+      issued.issuedCostPaise,
+    );
+    assert.deepEqual(
+      issued.take.map((t) => ({ lotId: t.lotId, qtyGrams: t.qtyGrams })),
+      [
+        { lotId: "a", qtyGrams: 400000 },
+        { lotId: "b", qtyGrams: 100000 },
+      ],
+    );
   });
 
   it("parses acres as centi-acres", () => {

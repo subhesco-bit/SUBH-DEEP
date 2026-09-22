@@ -73,6 +73,7 @@ export const WORKFLOWS: WorkflowDef[] = [
     enterprise: "rural-erp",
     steps: [
       step("T1", "decision", "Remaining holds", "gate", "lot", "remaining-gate", "decision.hold"),
+      step("T1b", "media", "GI claim needs a mint", "gate", "trace", "gi-claim", "trace.claim"),
       step("T2", "fabric", "AI cannot write price", "decision", "rupee", "ai-firewall", "fabric.allow"),
       step("T3", "erp-agents", "Price declared", "erp", "marketplace", "price-declared", "orders.price"),
       step("T4", "decision", "Price waterfall", "algorithm", "rupee", "price-waterfall", "decision.waterfall"),

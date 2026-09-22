@@ -10,6 +10,7 @@ export function CellsBoard() {
   const books = useVillageBooks();
   const cells = books?.cells ?? [];
   const fpo = books?.fpo;
+  const plantings = books?.plantings ?? [];
   const busy = useBooks((s) => s.busy);
   const error = useBooks((s) => s.error);
   const enroll = useBooks((s) => s.enroll);
@@ -43,6 +44,13 @@ export function CellsBoard() {
                     {c.household} · {(c.acresCenti / 100).toFixed(1)} acres
                   </p>
                   <p className="mt-1 text-xs text-muted">{c.notes}</p>
+                  {plantings
+                    .filter((p) => p.cellId === c.id)
+                    .map((p) => (
+                      <p key={p.id} className="mt-1 font-mono text-[11px] text-partial">
+                        {p.variety} · {p.season} · {p.status} · {p.plotName}
+                      </p>
+                    ))}
                 </div>
                 <div>
                   <Badge>{c.lotCount} lots</Badge>

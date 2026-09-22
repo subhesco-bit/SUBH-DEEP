@@ -17,6 +17,9 @@ import {
   priceWaterfall,
   qtyWeightedGate,
   remainingGate,
+  giClaimGate,
+  spoilageMass,
+  wacCost,
   type AlgorithmResult,
 } from "./algorithms.ts";
 import { MODULE_RUNTIME } from "./registry.ts";
@@ -52,12 +55,18 @@ function execute(step: WorkflowStepDef, ctx: RunContext): AlgorithmResult {
       return pledgeGate(ctx);
     case "fifo-alloc":
       return fifoGate(ctx);
+    case "wac-cost":
+      return wacCost(ctx);
     case "qty-weighted":
       return qtyWeightedGate(ctx);
     case "library-consult":
       return libraryConsult(ctx);
     case "gi-frame":
       return giFrame(ctx);
+    case "gi-claim":
+      return giClaimGate(ctx);
+    case "spoilage-mass":
+      return spoilageMass(ctx);
     case "fvie-rank":
       return fvieRank(ctx);
     case "hours-to-pay":

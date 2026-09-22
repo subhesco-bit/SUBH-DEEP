@@ -76,33 +76,44 @@ export function EconomyPanel() {
       </section>
 
       <section className="rounded-2xl border border-border bg-surface p-5">
-        <h3 className="font-display text-xl">GitHub paste is not this body</h3>
+        <h3 className="font-display text-xl">GitHub health paste is not this body</h3>
         <p className="mt-1 text-sm text-muted">
-          968 routes, 46 stubbed ERP endpoints, 80% coverage — those are cadaver counts. This organism does not inherit them.
+          Do not scaffold those 46 ERP stubs here. The journal is the GL. Token economy packs the consult. OpenAI is not the nerve.
         </p>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          <div className="rounded-xl border border-border bg-background p-4">
-            <p className="text-[11px] uppercase tracking-[0.14em] text-gap">GitHub claim</p>
-            <ul className="mt-2 space-y-1 text-sm text-muted">
-              <li>Routes {GITHUB_CLAIM.routes}</li>
-              <li>Migrations {GITHUB_CLAIM.migrationsPassing}</li>
-              <li>Services ~{GITHUB_CLAIM.services}</li>
-              <li>ERP stubbed {GITHUB_CLAIM.erpStubbed}</li>
-              <li>Tests {GITHUB_CLAIM.coverage}</li>
-            </ul>
-          </div>
-          <div className="rounded-xl border border-border bg-background p-4">
-            <p className="text-[11px] uppercase tracking-[0.14em] text-live">This organism</p>
-            <ul className="mt-2 space-y-1 text-sm text-muted">
-              <li>{ORGANISM_HEALTH.fileRoutes}</li>
-              <li>{ORGANISM_HEALTH.migrations}</li>
-              <li>{ORGANISM_HEALTH.erp}</li>
-              <li>{ORGANISM_HEALTH.llm}</li>
-            </ul>
-          </div>
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full min-w-[520px] text-left text-sm">
+            <thead>
+              <tr className="text-[11px] uppercase tracking-[0.12em] text-muted">
+                <th className="pb-2 pr-3 font-medium">Aspect</th>
+                <th className="pb-2 pr-3 font-medium">GitHub claim</th>
+                <th className="pb-2 font-medium">This organism</th>
+              </tr>
+            </thead>
+            <tbody>
+              <Row aspect="Vulnerabilities" github={GITHUB_CLAIM.vulns} here={ORGANISM_HEALTH.vulns} />
+              <Row aspect="Critical" github={String(GITHUB_CLAIM.critical)} here="None claimed by that paste" />
+              <Row aspect="Routes" github={`${GITHUB_CLAIM.routes} · ${GITHUB_CLAIM.routesClaim}`} here={`${ORGANISM_HEALTH.fileRoutes} living file routes`} />
+              <Row aspect="Migrations" github={`${GITHUB_CLAIM.migrationsPassing} · ${GITHUB_CLAIM.collisions} collisions`} here={ORGANISM_HEALTH.migrations} />
+              <Row aspect="Services" github={`~${GITHUB_CLAIM.services} · ${GITHUB_CLAIM.productionPct} · ${GITHUB_CLAIM.duplicates} dupes`} here={ORGANISM_HEALTH.duplicates} />
+              <Row aspect="Tests" github={`${GITHUB_CLAIM.coverage} · ${GITHUB_CLAIM.testsFailing} failing`} here={ORGANISM_HEALTH.tests} />
+              <Row aspect="ERP / GL" github={`${GITHUB_CLAIM.erpStubbed} stubbed`} here={ORGANISM_HEALTH.erp} />
+              <Row aspect="Missing" github={`${GITHUB_CLAIM.missingCritical} critical services`} here={ORGANISM_HEALTH.missing} />
+              <Row aspect="Tokens" github="Dump the cadaver into OpenAI" here={ORGANISM_HEALTH.llm} />
+            </tbody>
+          </table>
         </div>
       </section>
     </div>
+  );
+}
+
+function Row({ aspect, github, here }: { aspect: string; github: string; here: string }) {
+  return (
+    <tr className="border-t border-border align-top">
+      <td className="py-2 pr-3 font-medium">{aspect}</td>
+      <td className="py-2 pr-3 text-gap">{github}</td>
+      <td className="py-2 text-live">{here}</td>
+    </tr>
   );
 }
 

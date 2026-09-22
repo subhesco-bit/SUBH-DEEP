@@ -1,10 +1,10 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useLattice } from "@/lib/lattice/store";
-import type { BridgeKind, BridgeStatus, ConceptRole } from "@/lib/lattice";
+import { LIGAMENT_STATUS_ORDER, latticeStats } from "@/lib/lattice";
+import type { BridgeKind, ConceptRole } from "@/lib/lattice";
 import { cn } from "@/lib/utils";
 
-const STATUSES: Array<"all" | BridgeStatus> = ["all", "living", "partial", "missing"];
 const KINDS: Array<"all" | BridgeKind> = ["all", "technical", "thoughtful"];
 const ROLES: Array<"all" | ConceptRole> = ["all", "organ", "bridge"];
 
@@ -19,6 +19,13 @@ export function Filters() {
   const setRoleFilter = useLattice((s) => s.setRoleFilter);
   const setQuery = useLattice((s) => s.setQuery);
   const setShowMesh = useLattice((s) => s.setShowMesh);
+  const stats = latticeStats();
+  const counts: Record<string, number | undefined> = {
+    living: stats.living,
+    missing: stats.missing,
+    partial: stats.partial,
+    all: stats.bridges,
+  };
 
   return (
     <div className="flex flex-col gap-3">
@@ -33,8 +40,9 @@ export function Filters() {
         <ChipRow
           label="Status"
           value={statusFilter}
-          options={STATUSES}
+          options={LIGAMENT_STATUS_ORDER}
           onChange={setStatusFilter}
+          counts={counts}
         />
         <ChipRow label="Kind" value={kindFilter} options={KINDS} onChange={setKindFilter} />
       </div>
@@ -59,11 +67,13 @@ function ChipRow<T extends string>({
   value,
   options,
   onChange,
+  counts,
 }: {
   label: string;
   value: T;
   options: T[];
   onChange: (v: T) => void;
+  counts?: Record<string, number | undefined>;
 }) {
   return (
     <div className="flex flex-wrap items-center gap-1.5">
@@ -78,6 +88,9 @@ function ChipRow<T extends string>({
           onClick={() => onChange(opt)}
         >
           {opt}
+          {counts?.[opt] != null ? (
+            <span className="ml-1 font-mono text-[10px] tabular-nums opacity-70">{counts[opt]}</span>
+          ) : null}
         </Button>
       ))}
     </div>

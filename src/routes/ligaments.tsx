@@ -17,9 +17,9 @@ function LigamentsPage() {
           <h2 className="font-display text-2xl font-medium tracking-tight">Ligament ledger</h2>
           <p className="mt-2 text-sm leading-relaxed text-muted">
             {stats.technical} technical contracts and {stats.thoughtful} thoughtful
-            links drawn from consolidated/final. {stats.missing} are missing,{" "}
-            {stats.partial} are only foreign keys or adjacent files. {stats.living}{" "}
-            are living. Propose the ones that should be bound first.
+            links drawn from consolidated/final. Filter Living, then Missing — Partial sits last.
+            {stats.living} living, {stats.missing} missing, {stats.partial} only foreign keys
+            or adjacent files. Propose the ones that should be bound first.
             {proposed.length ? ` ${proposed.length} proposed on this device.` : ""}
           </p>
         </div>

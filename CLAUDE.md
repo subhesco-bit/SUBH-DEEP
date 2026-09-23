@@ -103,8 +103,29 @@ frontend/src/
 ├── handoffs/          # Handoff records
 └── history/           # Implementation history
 
-_EBDESIGN_LIBRARY/     # Module documentation (524 cards)
+modules/               # THE REAL LIBRARY — 206 packages, 202 with module.json
+                       # Each: module.json manifest + backend/ implementation
+                       # (37 also carry frontend/). Indexed by
+                       # libraryKnowledgeService and served at /api/v1/library/*
+
+_EBDESIGN_LIBRARY/     # 3 governance markdown files. NOT a card library.
 ```
+
+> **Correction (2026-09-23, verified against this branch).** This section
+> previously read `_EBDESIGN_LIBRARY/ — Module documentation (524 cards)`.
+> Those cards do not exist. `_EBDESIGN_LIBRARY/` holds exactly three files:
+> `00_GOVERNANCE/LIBRARY_PRODUCTION_COMPLETION_STANDARD.md`,
+> `_CONTROL/LIBRARY_AI_OPERATING_WORKFLOW.md` and
+> `_CONTROL/FILE_INDEX/README.md`. The four paths
+> `libraryKnowledgeService` reads — `00_CATALOG`, `01_MODULES`,
+> `01_MODULES/Module_Cards`, `01_MODULES/Component_Cards` — are all absent,
+> so it built an empty index silently and `/api/v1/library/*` returned
+> structurally valid but permanently empty results.
+>
+> The real library is `modules/`, which this file did not previously mention.
+> The service now indexes it (202 manifests) and `getStatus()` names any
+> missing source, so an empty library can no longer be mistaken for a present
+> one.
 
 ## CRITICAL FILES
 
@@ -219,7 +240,14 @@ npm test
 - Complete authorization system
 - Core business modules (marketplace, finance, logistics, insurance)
 - AI decision engine (original)
-- Library system (524 cards)
+- Library system — **206 module packages under `modules/`** (202 with a
+  parseable `module.json`). Previously recorded here as "524 cards"; that
+  content does not exist on disk. See the correction under IMPORTANT
+  DIRECTORIES.
+  Note on manifest labels: most packages declare `"status": "WIRED"`, but
+  `modules/` is **not loaded by the server bootstrap** — neither `index.js`
+  nor `bootstrap.js` references `moduleRegistry` — so read WIRED as
+  *packaged*, not *mounted*.
 
 **Completed Today (Claude Integration):**
 - Claude AI coordinator

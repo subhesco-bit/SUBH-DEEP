@@ -117,6 +117,21 @@ async function getFallbackUserByEmail(email) {
   return store.users.find((user) => user.email === email.toLowerCase());
 }
 
+/**
+ * Look a fallback-store user up by id.
+ *
+ * Refresh tokens carry only { userId, tokenType } — generateRefreshToken emits
+ * no email — so the no-PostgreSQL refresh path cannot use the by-email lookup.
+ * It did, passing `payload.email || ''`, which made getFallbackUserByEmail('')
+ * match nothing and every refresh fail with "User not found" on any deployment
+ * without PostgreSQL. Reproduced 2026-09-23 before this was added.
+ */
+async function getFallbackUserById(userId) {
+  if (userId === undefined || userId === null || userId === '') return undefined;
+  const store = await readAuthStore();
+  return store.users.find((user) => String(user.id) === String(userId));
+}
+
 function getUserPasswordHash(user) {
   return user.password_hash || user.password || user.passwordHash || user.passwordhash || null;
 }
@@ -594,7 +609,8 @@ async function refreshAccessToken(refreshToken) {
     const pg = getPostgreSQL();
     if (!pg) {
       assertFallbackAuthStoreAllowed();
-      const user = await getFallbackUserByEmail(payload.email || '');
+      // By id: a refresh token carries userId and no email.
+      const user = await getFallbackUserById(payload.userId);
       if (!user) {
         throw new Error('User not found');
       }
@@ -1275,7 +1291,11 @@ router.get('/me', async (req, res) => {
 
     if (!pg) {
       assertFallbackAuthStoreAllowed();
-      const user = await getFallbackUserByEmail(payload.email || '');
+      // Access tokens carry both userId and email; prefer the id, which every
+      // token shape has, and fall back to email for older tokens.
+      const user =
+        (await getFallbackUserById(payload.userId)) ||
+        (await getFallbackUserByEmail(payload.email || ''));
       if (!user) {
         return res.status(404).json({ error: 'User not found' });
       }

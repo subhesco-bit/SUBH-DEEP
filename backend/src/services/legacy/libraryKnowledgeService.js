@@ -13,8 +13,118 @@ class LibraryKnowledgeService {
     this.libraryRoot = path.join(__dirname, '../../../../_EBDESIGN_LIBRARY');
     this.catalogPath = path.join(this.libraryRoot, '00_CATALOG');
     this.modulesPath = path.join(this.libraryRoot, '01_MODULES');
+    // The real, substantial library in this repository: modules/ — one package
+    // per module, each with a module.json manifest and backend code. The card
+    // directories above have never existed here (see buildIndex).
+    this.modulePackagesRoot = path.join(__dirname, '../../../../modules');
     this.index = new Map();
     this.contentHashes = new Map();
+    // Which sources were expected, which were found. Populated by buildIndex so
+    // callers can tell "the library is empty" from "the library is missing".
+    this.sources = [];
+  }
+
+  /**
+   * Report what the index is actually built from.
+   *
+   * WHY THIS EXISTS
+   *
+   * buildIndex used to read four paths under _EBDESIGN_LIBRARY — 00_CATALOG,
+   * 01_MODULES, 01_MODULES/Module_Cards, 01_MODULES/Component_Cards — guard
+   * each with fs.existsSync, find none, and log "Indexed 0 library items"
+   * without error. Verified 2026-09-23 on consolidated/final: all four are
+   * absent; _EBDESIGN_LIBRARY itself holds three governance markdown files and
+   * no cards. So /api/v1/library/* returned structurally valid, permanently
+   * empty results, and a caller could not distinguish an empty library from a
+   * missing one.
+   *
+   * CLAUDE.md's "524 cards" describes content that is not on disk. The 192-plus
+   * packages under modules/ are the real library, and are now indexed.
+   */
+  getStatus() {
+    const found = this.sources.filter((s) => s.found);
+    const missing = this.sources.filter((s) => !s.found);
+    return {
+      indexed: this.index.size,
+      // Empty with every source missing is a deployment problem, not an empty
+      // library; say so rather than returning a bare zero.
+      available: this.index.size > 0,
+      reason:
+        this.index.size > 0
+          ? null
+          : missing.length === this.sources.length
+            ? 'no library source is present on disk'
+            : 'library sources are present but contain no indexable items',
+      sources: this.sources,
+      foundCount: found.length,
+      missingCount: missing.length,
+    };
+  }
+
+  /**
+   * Index modules/<PACKAGE>/module.json — the real library.
+   *
+   * Two manifest shapes exist: a rich one (moduleId, endpoints, dataModels,
+   * claudeIntegration) on a handful of packages, and a lean one on the rest.
+   * Both are read through optional access so the lean majority cannot throw.
+   *
+   * A manifest's own `status` is reported as `declaredStatus`, never as proof
+   * of integration: most declare "WIRED", but modules/ is not loaded by the
+   * server bootstrap — neither index.js nor bootstrap.js references
+   * moduleRegistry — so that label means packaged, not mounted.
+   */
+  indexModulePackages() {
+    const root = this.modulePackagesRoot;
+    const source = { name: 'modules/', path: root, found: false, indexed: 0 };
+
+    if (!fs.existsSync(root)) {
+      this.sources.push(source);
+      return;
+    }
+    source.found = true;
+
+    for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      const manifestPath = path.join(root, entry.name, 'module.json');
+      if (!fs.existsSync(manifestPath)) continue;
+
+      let manifest;
+      try {
+        manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+      } catch (error) {
+        // A malformed manifest is recorded, not skipped silently — an
+        // unparseable module is a defect someone needs to see.
+        this.index.set(`${entry.name}/module.json`, {
+          type: 'module-package',
+          data: { packageName: entry.name, parseError: error.message },
+          path: manifestPath,
+          lastModified: fs.statSync(manifestPath).mtime,
+        });
+        source.indexed += 1;
+        continue;
+      }
+
+      this.index.set(`${entry.name}/module.json`, {
+        type: 'module-package',
+        data: {
+          packageName: entry.name,
+          moduleId: manifest.moduleId || entry.name,
+          name: manifest.name || entry.name,
+          version: manifest.version || null,
+          category: manifest.category || 'uncategorised',
+          description: manifest.description || null,
+          // Declared, not verified — see the note above.
+          declaredStatus: manifest.status || null,
+          mounted: false,
+          dependencies: manifest.dependencies || null,
+        },
+        path: manifestPath,
+        lastModified: fs.statSync(manifestPath).mtime,
+      });
+      source.indexed += 1;
+    }
+
+    this.sources.push(source);
   }
 
   /**
@@ -76,7 +186,34 @@ class LibraryKnowledgeService {
       }
     }
 
-    console.log(`Indexed ${this.index.size} library items`);
+    // Record whether the card directories were present, so getStatus() can
+    // distinguish an empty library from a missing one.
+    this.sources.push({
+      name: '_EBDESIGN_LIBRARY/01_MODULES/Module_Cards',
+      path: modulesDir,
+      found: fs.existsSync(modulesDir),
+    });
+    this.sources.push({
+      name: '_EBDESIGN_LIBRARY/01_MODULES/Component_Cards',
+      path: componentsDir,
+      found: fs.existsSync(componentsDir),
+    });
+
+    // The real library.
+    this.indexModulePackages();
+
+    const status = this.getStatus();
+    if (!status.available) {
+      console.warn(
+        `Library index is EMPTY (${status.reason}). Missing sources: ` +
+          status.sources.filter((x) => !x.found).map((x) => x.name).join(', ')
+      );
+    } else {
+      console.log(
+        `Indexed ${this.index.size} library items from ` +
+          `${status.foundCount}/${status.sources.length} sources`
+      );
+    }
   }
 
   /**
@@ -86,6 +223,7 @@ class LibraryKnowledgeService {
     console.log('Computing content hashes...');
 
     for (const [filename, item] of this.index) {
+      if (!item.path || !fs.existsSync(item.path)) continue;
       const content = fs.readFileSync(item.path, 'utf8');
       const hash = crypto.createHash('sha256').update(content).digest('hex');
 

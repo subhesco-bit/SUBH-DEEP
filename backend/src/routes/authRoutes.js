@@ -1,205 +1,144 @@
-const express = require('express');
-const router = express.Router();
+'use strict';
 
 /**
- * Authentication Routes
- * POST /auth/login - User login
- * POST /auth/register - User registration
- * POST /auth/logout - User logout
- * POST /auth/refresh - Refresh token
+ * Authentication routes.
+ *
+ *   POST /auth/register  - create an account
+ *   POST /auth/login     - exchange credentials for tokens
+ *   POST /auth/refresh   - exchange a refresh token for a new access token
+ *   POST /auth/logout    - revoke a refresh token
+ *
+ * WHAT THIS REPLACED
+ *
+ * This router used to be a mock. It kept users in a process-local Map, stored
+ * and compared passwords in PLAINTEXT (`user.password !== password`), and
+ * minted fabricated non-JWT strings of the form `jwt_<userId>_<timestamp>`.
+ *
+ * It was not inert. index.js requires the file without an app.use, but
+ * DynamicRouteLoader walks the routes directory, so it WAS auto-mounted and
+ * reachable — verified live against a running server:
+ *
+ *   POST /api/v1/auth/register -> 200, token "jwt_user_1789976455307_..."
+ *   POST /api/v1/auth/login    -> 200 with the plaintext password
+ *
+ * Login and authorization were two unrelated systems: middleware/auth.js
+ * verifies real signed JWTs, so a token minted here was rejected everywhere
+ * else. That made it not an authorization bypass, but it was still a live
+ * endpoint accepting and retaining plaintext credentials, and a login that
+ * appeared to succeed while granting no access. No account survived a restart.
+ *
+ * It now delegates to services/dual-use/authService — the module
+ * middleware/auth.js already trusts — which hashes with bcrypt and issues real
+ * signed JWTs carrying the same issuer/audience the verifier checks. A token
+ * from /auth/login is therefore accepted on a protected route, which the mock
+ * could never achieve.
+ *
+ * The mock is gone rather than flag-disabled: a plaintext-credential store
+ * behind an environment variable is still a plaintext-credential store, and
+ * the ALLOW_MOCK_AUTH escape hatch that previously guarded it is no longer
+ * read anywhere. Any account created against the mock must be treated as
+ * compromised — those passwords were held in cleartext in memory.
  */
 
-// ---------------------------------------------------------------------------
-// FAIL-CLOSED GUARD
-//
-// This router is a MOCK. It keeps users in a process-local Map, compares and
-// stores passwords in PLAINTEXT, and issues fabricated non-JWT strings of the
-// form `jwt_<userId>_<timestamp>`.
-//
-// It is not inert. index.js requires this file with no `app.use` registration,
-// but DynamicRouteLoader's discoverAndMountRoutes(routesDir, '/api/v1') walks
-// the routes directory, so it WAS auto-mounted and reachable. Verified live
-// against a running server before this guard was added:
-//
-//   POST /api/v1/auth/register -> 200, token "jwt_user_1789976455307_..."
-//   POST /api/v1/auth/login    -> 200 with the plaintext password
-//
-// The tokens it mints are correctly REJECTED by the real verifier in
-// middleware/auth.js (protected routes answered 401 with and without one), so
-// this was not an authorization bypass. It was still a live endpoint accepting
-// and retaining plaintext credentials, and a login that appears to succeed
-// while granting no access.
-//
-// Per the project rule that nothing is deleted, the implementation is retained
-// but disabled unless explicitly opted into. Set ALLOW_MOCK_AUTH=true (never
-// in a deployed environment) to use it. Replace this router with the real
-// identity service rather than enabling the flag: see
-// .ai/tasks/AFRERA_MASTER_TODO.md items 1.1.1-1.1.7.
-// ---------------------------------------------------------------------------
-const MOCK_AUTH_ENABLED = process.env.ALLOW_MOCK_AUTH === 'true';
+const express = require('express');
 
-router.use((req, res, next) => {
-  if (MOCK_AUTH_ENABLED) return next();
-  return res.status(503).json({
-    success: false,
-    error: {
-      message:
-        'Mock authentication is disabled. This endpoint stores plaintext ' +
-        'passwords and issues non-JWT tokens, and must not serve traffic. ' +
-        'A real identity service has not yet replaced it.',
-      code: 'MOCK_AUTH_DISABLED',
-    },
-    timestamp: new Date().toISOString(),
-  });
-});
+const router = express.Router();
+const authService = require('../services/dual-use/authService');
+const { authMiddleware } = require('../middleware/auth');
+const { logger } = require('../utils/logger');
 
-// Mock user database (in production, use PostgreSQL)
-const users = new Map();
-const sessions = new Map();
-
-// Utility: Generate mock JWT token
-function generateToken(userId) {
-  return `jwt_${userId}_${Date.now()}`;
+/**
+ * The service throws Error with a message. Map the ones that describe a
+ * client mistake onto their status codes; anything else is a 500, because
+ * reporting an internal fault as a 400 sends the caller chasing their own
+ * input for a defect that is ours.
+ */
+function statusForError(message) {
+  const m = String(message || '');
+  if (/already registered|already exists/i.test(m)) return 409;
+  if (/invalid credentials|invalid refresh token|invalid token|expired/i.test(m)) return 401;
+  if (/not found/i.test(m)) return 404;
+  if (/required|invalid|must be|too short/i.test(m)) return 400;
+  if (/unavailable|not configured/i.test(m)) return 503;
+  return 500;
 }
 
-// POST /auth/login
-router.post('/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
+function fail(res, err, context) {
+  const status = statusForError(err && err.message);
+  // Log the detail; return only the message, never a stack or a query.
+  logger.warn(`auth.${context} failed`, { error: err && err.message, status });
+  return res.status(status).json({
+    success: false,
+    error: { message: (err && err.message) || 'Authentication failed', code: `AUTH_${context.toUpperCase()}_FAILED` },
+  });
+}
 
-    if (!email || !password) {
-      return res.status(400).json({
-        success: false,
-        error: 'Email and password required',
-      });
-    }
-
-    // In production: query PostgreSQL, hash password, verify
-    // For now: mock verification
-    const user = Array.from(users.values()).find((u) => u.email === email);
-
-    if (!user || user.password !== password) {
-      return res.status(401).json({
-        success: false,
-        error: 'Invalid email or password',
-      });
-    }
-
-    const token = generateToken(user.id);
-    sessions.set(token, user.id);
-
-    res.json({
-      success: true,
-      data: {
-        token,
-        user: {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-        },
-      },
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+function requireFields(body, fields) {
+  const missing = fields.filter((f) => !body || body[f] === undefined || body[f] === null || body[f] === '');
+  if (missing.length) {
+    const err = new Error(`${missing.join(', ')} ${missing.length > 1 ? 'are' : 'is'} required`);
+    err.expected = true;
+    throw err;
   }
-});
+}
 
-// POST /auth/register
+/** POST /auth/register */
 router.post('/register', async (req, res) => {
   try {
-    const { name, email, password } = req.body;
-
-    if (!name || !email || !password) {
-      return res.status(400).json({
-        success: false,
-        error: 'Name, email, and password required',
-      });
-    }
-
-    // Check if user exists
-    if (Array.from(users.values()).some((u) => u.email === email)) {
-      return res.status(409).json({
-        success: false,
-        error: 'Email already registered',
-      });
-    }
-
-    // Create new user
-    const userId = `user_${Date.now()}`;
-    const newUser = { id: userId, name, email, password };
-    users.set(userId, newUser);
-
-    const token = generateToken(userId);
-    sessions.set(token, userId);
-
-    res.status(201).json({
-      success: true,
-      data: {
-        token,
-        user: {
-          id: userId,
-          name,
-          email,
-        },
-      },
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    requireFields(req.body, ['email', 'password']);
+    const result = await authService.registerUser(req.body);
+    return res.status(201).json({ success: true, data: result });
+  } catch (err) {
+    return fail(res, err, 'register');
   }
 });
 
-// POST /auth/logout
-router.post('/logout', async (req, res) => {
+/** POST /auth/login */
+router.post('/login', async (req, res) => {
   try {
-    const token = req.headers.authorization?.replace('Bearer ', '');
-    if (token) {
-      sessions.delete(token);
-    }
-
-    res.json({
-      success: true,
-      message: 'Logged out successfully',
+    requireFields(req.body, ['email', 'password']);
+    const { email, password } = req.body;
+    const result = await authService.loginUser(email, password, {
+      ip: req.ip,
+      userAgent: req.get('user-agent') || undefined,
     });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    return res.json({ success: true, data: result });
+  } catch (err) {
+    return fail(res, err, 'login');
   }
 });
 
-// POST /auth/refresh
+/** POST /auth/refresh */
 router.post('/refresh', async (req, res) => {
   try {
-    const { token } = req.body;
-
-    if (!token || !sessions.has(token)) {
-      return res.status(401).json({
+    const refreshToken = (req.body && (req.body.refreshToken || req.body.refresh_token)) || null;
+    if (!refreshToken) {
+      return res.status(400).json({
         success: false,
-        error: 'Invalid or expired token',
+        error: { message: 'refreshToken is required', code: 'AUTH_REFRESH_FAILED' },
       });
     }
+    const result = await authService.refreshAccessToken(refreshToken);
+    return res.json({ success: true, data: result });
+  } catch (err) {
+    return fail(res, err, 'refresh');
+  }
+});
 
-    const userId = sessions.get(token);
-    const newToken = generateToken(userId);
-    sessions.set(newToken, userId);
-    sessions.delete(token);
-
-    res.json({
-      success: true,
-      data: { token: newToken },
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+/**
+ * POST /auth/logout
+ *
+ * Authenticated: revoking a refresh token is an action on a specific account,
+ * and req.user.id is the only trustworthy source of whose it is. Taking a
+ * userId from the body would let any caller revoke anyone's session.
+ */
+router.post('/logout', authMiddleware, async (req, res) => {
+  try {
+    const refreshToken = (req.body && (req.body.refreshToken || req.body.refresh_token)) || null;
+    const result = await authService.logoutUser(req.user.id, refreshToken);
+    return res.json({ success: true, data: result });
+  } catch (err) {
+    return fail(res, err, 'logout');
   }
 });
 

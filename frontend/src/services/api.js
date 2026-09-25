@@ -6331,9 +6331,15 @@ export const wearableAPI = {
   disconnect: (id, params) => api.get(`/wearable/connect${id !== undefined ? '/' + id : ''}`, { params }),
 };
 
+// These two were generated stubs that did not match the backend. `login` issued
+// GET /auth/in/<credentials-object> and `register` POST /auth, while
+// backend/src/routes/authRoutes.js exposes POST /auth/login, /register,
+// /logout and /refresh. Every real credential sign-in therefore 404'd; only
+// LoginPage's separate demo-account path, which never calls the API, worked.
+// Verified 2026-09-22 against the backend's route list.
 export const authAPI = {
-  login: (id, params) => api.get(`/auth/in${id !== undefined ? '/' + id : ''}`, { params }),
-  register: (data) => api.post('/auth', data),
+  login: (data) => api.post('/auth/login', data),
+  register: (data) => api.post('/auth/register', data),
 };
 
 export const nutritionIntelligenceAPI = {

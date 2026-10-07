@@ -1,31 +1,6 @@
 import type { ReactNode } from "react";
-import { Link, useRouterState, getRouteApi } from "@tanstack/react-router";
-import {
-  ArrowLeftRight,
-  Activity,
-  BookOpen,
-  Brain,
-  Boxes,
-  Coins,
-  Cpu,
-  Ear,
-  GitBranch,
-  Landmark,
-  Scale,
-  LayoutGrid,
-  Network,
-  PawPrint,
-  PersonStanding,
-  Radio,
-  Share2,
-  Spline,
-  Users,
-  Warehouse,
-  Wheat,
-  Waypoints,
-  Workflow,
-  Orbit,
-} from "lucide-react";
+import { useEffect, useState } from "react";
+import { useRouterState, getRouteApi } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import { formatRupee } from "@/lib/erp/money";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -34,35 +9,12 @@ import { ModulesBoot } from "@/components/app/modules-boot";
 import { BooksBoot, useVillageBooks } from "@/components/erp/books-boot";
 import { useBooks } from "@/lib/erp/store";
 import { useOrganism } from "@/lib/organism/store";
+import { CommandPalette, openCommandPalette } from "@/components/app/command-palette";
+import { AtlasPanel, MobileDock, PrimaryNav } from "@/components/app/atlas-nav";
+import { latticeStats } from "@/lib/lattice";
+import { Button } from "@/components/ui/button";
 
 const rootRoute = getRouteApi("__root__");
-
-const NAV = [
-  { to: "/", label: "Books", icon: Landmark },
-  { to: "/cells", label: "Cells", icon: Users },
-  { to: "/lots", label: "Lots", icon: Wheat },
-  { to: "/warehouse", label: "Warehouse", icon: Warehouse },
-  { to: "/ledger", label: "Ledger", icon: Boxes },
-  { to: "/trade", label: "Trade", icon: ArrowLeftRight },
-  { to: "/platform", label: "Platform", icon: LayoutGrid },
-  { to: "/organism", label: "Organism", icon: Spline },
-  { to: "/body", label: "Body", icon: PersonStanding },
-  { to: "/vet", label: "Vet", icon: PawPrint },
-  { to: "/share", label: "Share", icon: Share2 },
-  { to: "/mesh", label: "Mesh", icon: Network },
-  { to: "/ligaments", label: "Ligaments", icon: GitBranch },
-  { to: "/pulse", label: "Pulse", icon: Activity },
-  { to: "/library", label: "Library", icon: BookOpen },
-  { to: "/nerve", label: "Nerve", icon: Radio },
-  { to: "/brain", label: "Brain", icon: Brain },
-  { to: "/economy", label: "Economy", icon: Coins },
-  { to: "/companion", label: "Companion", icon: Ear },
-  { to: "/modules", label: "Modules", icon: Workflow },
-  { to: "/flows", label: "Flows", icon: Waypoints },
-  { to: "/charter", label: "Charter", icon: Scale },
-  { to: "/os", label: "OS", icon: Orbit },
-  { to: "/systems", label: "Systems", icon: Cpu },
-] as const;
 
 export function Shell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -77,13 +29,31 @@ export function Shell({ children }: { children: ReactNode }) {
   const error = useBooks((s) => s.error) ?? (root.books?.ok ? null : root.books?.error ?? null);
   const fpo = books?.fpo;
   const kpis = books?.kpis;
+  const [atlasOpen, setAtlasOpen] = useState(false);
+  const lattice = latticeStats();
+
+  useEffect(() => {
+    setAtlasOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setAtlasOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   return (
     <TooltipProvider delayDuration={180}>
       <OrganismBoot />
       <BooksBoot />
       <ModulesBoot />
+      <CommandPalette />
       <div className="min-h-dvh overflow-x-hidden bg-background text-foreground">
+        <a href="#main" className="skip-link">
+          Skip to books
+        </a>
         <header className="border-b border-border">
           <div className="mx-auto flex max-w-[1400px] flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="min-w-0">
@@ -94,60 +64,45 @@ export function Shell({ children }: { children: ReactNode }) {
                 {fpo?.name ?? "Hills Chakhao Collective"}
               </h1>
               <p className="mt-1 max-w-xl text-sm text-muted">
-                Village books: cells, living lots, warehouse receipts, declared
-                farmgate. The organism map still shows every missing ligament.
+                Village books for a rural organism. Lattice ~{lattice.integrity}%. GitHub 7%.
+                Missing ligaments stay dashed.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <Stat label="Cells" value={kpis?.cells ?? "—"} />
               <Stat label="Lots" value={kpis?.lots ?? "—"} />
-              <Stat
-                label="Open"
-                value={kpis ? formatRupee(kpis.openPaise) : "—"}
-                accent="gap"
-              />
+              <Stat label="Open" value={kpis ? formatRupee(kpis.openPaise) : "—"} accent="gap" />
               <Stat
                 label="Auto-op"
                 value={autoOp}
                 accent={
-                  autoOp === "living"
-                    ? "live"
-                    : autoOp === "partial" || autoOp === "booting"
-                      ? "partial"
-                      : "gap"
+                  autoOp === "living" ? "live" : autoOp === "partial" || autoOp === "booting" ? "partial" : "gap"
                 }
               />
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="md:hidden"
+                onClick={openCommandPalette}
+              >
+                Jump
+              </Button>
             </div>
           </div>
           {error ? (
             <p className="mx-auto max-w-[1400px] px-4 pb-3 text-sm text-destructive sm:px-6">{error}</p>
           ) : null}
-          <nav className="mx-auto flex max-w-[1400px] gap-1 overflow-x-auto px-2 sm:px-4">
-            {NAV.map((item) => {
-              const active =
-                item.to === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(item.to);
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className={cn(
-                    "flex h-11 shrink-0 items-center gap-2 rounded-t-md px-3 text-sm font-medium transition-colors duration-150",
-                    active
-                      ? "bg-surface text-foreground"
-                      : "text-muted hover:text-foreground",
-                  )}
-                >
-                  <Icon className="size-4" strokeWidth={1.75} />
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
+          <PrimaryNav pathname={pathname} atlasOpen={atlasOpen} onToggleAtlas={() => setAtlasOpen((v) => !v)} />
         </header>
-        <div className="mx-auto max-w-[1400px]">{children}</div>
+        <AtlasPanel open={atlasOpen} pathname={pathname} onClose={() => setAtlasOpen(false)} />
+        <div id="main" className="mx-auto max-w-[1400px] pb-24 md:pb-10">
+          {children}
+        </div>
+        <footer className="mx-auto hidden max-w-[1400px] px-4 pb-10 pt-2 text-[11px] text-muted sm:px-6 md:block">
+          Clerk writes remaining. AI cannot write rupees. Kernel bus living. GitHub disk 7%.
+        </footer>
+        <MobileDock pathname={pathname} onMore={() => setAtlasOpen((v) => !v)} />
       </div>
     </TooltipProvider>
   );

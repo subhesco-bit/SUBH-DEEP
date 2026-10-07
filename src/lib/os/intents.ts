@@ -17,8 +17,9 @@ export const NEED_INTENTS: NeedIntent[] = [
   { id: "ask-brain", label: "Ask the brain", problem: "Five tissues. One decision. Clerk still writes remaining.", href: "/brain", workflow: null, organ: "ai" },
   { id: "read-charter", label: "Read the laws", problem: "L1–L12. Remaining, declared ₹, human command.", href: "/charter", workflow: null, organ: "module" },
   { id: "see-flows", label: "Walk the flows", problem: "Strategy, payment, material, command, supply chain as living charts.", href: "/flows", workflow: null, organ: "spine" },
-  { id: "see-atlas", label: "See the ERP atlas", problem: "32 SAP analog families classified. Not Oracle/SAP parity. Finance/procure named missing.", href: "/platform", workflow: null, organ: "erp" },
-  { id: "ack-ai", label: "Ack the AI", problem: "35 AI families classified. Five tissues decide. GitHub plugs stay 0. Not AI parity.", href: "/brain", workflow: null, organ: "ai" },
+  { id: "see-atlas", label: "See the organism", problem: "Organs and dashed missing ligaments. Lattice stays honest.", href: "/organism", workflow: null, organ: "os" },
+  { id: "see-complete", label: "See completion", problem: "Classified complete. GitHub 7%. Named missing stay missing.", href: "/os", workflow: null, organ: "os" },
+  { id: "ack-ai", label: "Ack the AI", problem: "35 AI families classified. Five tissues decide. GitHub disk plugs stay 0. Kernel bus living. Not AI parity.", href: "/brain", workflow: null, organ: "ai" },
   { id: "code-herd", label: "Code the herd", problem: "AFRERA-VET on village animals. August AI proposes. Clerk confirms heads. Human ICD refused.", href: "/vet", workflow: "code-herd", organ: "livestock" },
   { id: "book-muscle", label: "Book village muscle", problem: "Hours on cold, mill, process, pack, labs. Rent undeclared. GST invoice refused.", href: "/share", workflow: "book-muscle", organ: "shared" },
   { id: "trace-organic", label: "Trace organic", problem: "PGS/NPOP on the lot body. GST pack named. Certificate rupee refused.", href: "/share", workflow: "book-muscle", organ: "trace" },
@@ -39,7 +40,7 @@ export function rankIntents(books?: BooksSnapshot | null): NeedIntent[] {
     if (i.id === "store-lot" && minted > 0) n += 4;
     if (i.id === "sell-crop" && remaining) n += 3;
     if (i.id === "see-books") n += 1;
-    if (i.id === "see-atlas") n += 2;
+    if (i.id === "see-complete") n += 3;
     if (i.id === "ack-ai") n += 2;
     if (i.id === "code-herd" && (books.herd ?? []).length) n += 4;
     if (i.id === "book-muscle") n += 3;

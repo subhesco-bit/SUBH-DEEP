@@ -13,4 +13,6 @@ export { LIFE_EVENTS, livingEvents, eventById, unknownEventFails } from "./event
 export { grievancesFrom, GRIEVANCE_FLOW, canClose } from "./grievance.ts";
 export { assessSuitability } from "./suitability.ts";
 export * from "./runtime.ts";
-export { TERMS, term, neverTranslate } from "./terms.ts";
+export { TERMS, neverTranslate, term } from "./terms.ts";
+export { completionScore, NAMED_MISSING, REFUSED, PAGES } from "./completion.ts";
+export type { CompletionGate, CompletionScore, GateKind } from "./completion.ts";

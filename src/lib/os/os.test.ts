@@ -6,7 +6,7 @@ import { NEED_INTENTS, rankIntents } from "./intents.ts";
 import { evidencePassport } from "./passport.ts";
 import { MATRIX_LINKS } from "./matrix.ts";
 import { enhanceFor } from "./enhance.ts";
-import { remainingWork, todoCounts } from "./todos.ts";
+import { completionScore } from "./completion.ts";
 import { evaluateConstitution } from "./constitution.ts";
 import { envelopeFor, envelopeInventedRupee } from "./envelope.ts";
 import { canAdvance, livingAgriculture, SECTOR_JOURNEYS } from "./journeys.ts";
@@ -38,10 +38,12 @@ import {
   policyLab,
   proofOfDelivery,
   protectionGap,
+  remainingWork,
   scenario,
   schemeRule,
   syncOffline,
   term,
+  todoCounts,
   travelPlan,
 } from "./index.ts";
 import type { BooksSnapshot, LotRow } from "../erp/types.ts";
@@ -115,6 +117,9 @@ describe("digital super-organism registry", () => {
     assert.equal(OS_ITEMS.find((x) => x.id === "c-share")?.href, "/share");
     assert.equal(OS_ITEMS.find((x) => x.id === "c-organic")?.todo, "done");
     assert.equal(OS_ITEMS.find((x) => x.id === "n-share")?.todo, "done");
+    assert.equal(OS_ITEMS.find((x) => x.id === "n-complete")?.todo, "done");
+    assert.equal(OS_ITEMS.find((x) => x.id === "n-complete")?.href, "/os");
+    assert.equal(OS_ITEMS.find((x) => x.id === "n-complete")?.kernel, "verified");
     assert.equal(OS_ITEMS.find((x) => x.id === "a-share")?.todo, "done");
     assert.equal(OS_ITEMS.find((x) => x.id === "a-share")?.href, "/share");
     assert.equal(OS_ITEMS.find((x) => x.id === "f-infra")?.href, "/share");
@@ -158,7 +163,7 @@ describe("digital super-organism registry", () => {
     assert.ok(NEED_INTENTS.some((i) => i.id === "sell-crop"));
     assert.ok(NEED_INTENTS.some((i) => i.id === "see-flows"));
     assert.ok(NEED_INTENTS.some((i) => i.id === "see-atlas"));
-    assert.ok(NEED_INTENTS.some((i) => i.id === "ack-ai"));
+    assert.ok(NEED_INTENTS.some((i) => i.id === "see-complete"));
     assert.ok(NEED_INTENTS.some((i) => i.id === "react-now"));
     assert.ok(NEED_INTENTS.some((i) => i.id === "code-herd"));
     assert.ok(NEED_INTENTS.some((i) => i.id === "book-muscle"));
@@ -641,5 +646,23 @@ describe("digital super-organism registry", () => {
     assert.equal(blank.license[0]?.sharePaise, null);
 
     assert.equal(OS_ITEMS.filter((x) => x.todo === "blocked").map((x) => x.id).join(","), "");
+  });
+
+  it("scores honest completion without painting GitHub 100%", () => {
+    const score = completionScore();
+    assert.equal(score.complete, true);
+    assert.equal(score.classifiedPct, 100);
+    assert.equal(score.githubPct, 7);
+    assert.equal(score.sapParity, false);
+    assert.equal(score.aiParity, false);
+    assert.equal(score.githubLivingPlugs, 0);
+    assert.ok(score.kernelLivingPlugs >= 20, `kernel plugs ${score.kernelLivingPlugs}`);
+    assert.equal(score.rupeeWrite, false);
+    assert.equal(score.open, 0);
+    assert.equal(score.blocked, 0);
+    assert.ok(score.namedMissing.some((g) => g.id === "finance"));
+    assert.ok(score.namedMissing.some((g) => g.id === "gst"));
+    assert.ok(score.refused.some((g) => g.id === "ai-rupee"));
+    assert.equal(score.pagesWired, 24);
   });
 });

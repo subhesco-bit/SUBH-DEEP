@@ -18,9 +18,11 @@ describe("AI systems as modules", () => {
     }
   });
 
-  it("none of the systems is a living plug", () => {
+  it("none of the systems is a living GitHub plug — the kernel bus is the other truth", () => {
     const stats = systemStats();
     assert.equal(stats.livingPlugs, 0);
+    assert.equal(stats.githubLivingPlugs, 0);
+    assert.ok(stats.kernelLivingPlugs >= 20, `kernel plugs ${stats.kernelLivingPlugs}`);
     assert.ok(stats.wiredButSkeleton >= 10, `wired-but-skeleton ${stats.wiredButSkeleton}`);
     assert.ok(stats.stubs >= 8, `stubs ${stats.stubs}`);
     assert.ok(stats.duplicates >= 1);

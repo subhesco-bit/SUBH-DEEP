@@ -11,6 +11,9 @@ import { CompanionPanel } from "@/components/app/companion-panel";
 import { NeedNav } from "@/components/app/need-nav";
 import { exceptions } from "@/lib/erp/platform";
 import { proposeCompanion } from "@/lib/modules/companion";
+import { completionScore } from "@/lib/os/completion";
+import { latticeStats } from "@/lib/lattice";
+import { systemStats } from "@/lib/systems";
 
 const FLOW = [
   { n: "01", label: "Mint", hint: "Harvest names a cell" },
@@ -38,6 +41,9 @@ export function BooksHome() {
         }),
       )
     : null;
+  const score = completionScore();
+  const lattice = latticeStats();
+  const systems = systemStats();
 
   return (
     <div className="space-y-4">
@@ -57,6 +63,19 @@ export function BooksHome() {
           </p>
         ) : null}
         {error ? <p className="mt-3 text-sm text-destructive">{error}</p> : null}
+
+        <dl className="mt-5 grid grid-cols-2 gap-2 lg:grid-cols-4" data-qa="integrity">
+          <Truth label="Lattice" value={`~${lattice.integrity}%`} hint={`${lattice.living} living ligaments`} />
+          <Truth label="GitHub disk" value={`${score.githubPct}%`} hint="Storefront + stubs" gap />
+          <Truth
+            label="Kernel plugs"
+            value={String(systems.kernelLivingPlugs)}
+            hint="Named AIs on this bus"
+            live
+          />
+          <Truth label="GitHub plugs" value="0" hint="Folders still cadavers" gap />
+        </dl>
+
         {companion ? (
           <div className="mt-4">
             <CompanionPanel reading={companion} compact />
@@ -67,7 +86,7 @@ export function BooksHome() {
           </p>
         ) : null}
         {books ? (
-          <div className="mt-5">
+          <div className="mt-4">
             <NeedNav books={books} />
           </div>
         ) : null}
@@ -141,7 +160,10 @@ export function BooksHome() {
               <Link to="/trade">Trade</Link>
             </Button>
             <Button asChild variant="outline" size="sm">
-              <Link to="/platform">Platform</Link>
+              <Link to="/organism">Organism</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/systems">Systems</Link>
             </Button>
           </div>
         </section>
@@ -190,6 +212,30 @@ export function BooksHome() {
           </ul>
         )}
       </section>
+    </div>
+  );
+}
+
+function Truth({
+  label,
+  value,
+  hint,
+  live,
+  gap,
+}: {
+  label: string;
+  value: string;
+  hint: string;
+  live?: boolean;
+  gap?: boolean;
+}) {
+  return (
+    <div className="rounded-xl border border-border bg-background px-3 py-3">
+      <dt className="text-[10px] uppercase tracking-[0.14em] text-muted">{label}</dt>
+      <dd className={`mt-1 font-mono text-lg tabular-nums ${live ? "text-live" : gap ? "text-gap" : "text-foreground"}`}>
+        {value}
+      </dd>
+      <p className="mt-1 text-[11px] text-muted">{hint}</p>
     </div>
   );
 }

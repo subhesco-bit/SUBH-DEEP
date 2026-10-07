@@ -1,4 +1,5 @@
 import { CONCEPTS } from "../lattice/concepts.ts";
+import { runtimeStats } from "../modules/registry.ts";
 import { AI_SYSTEMS, MODULE_DIRS_ON_DISK, NAMED_AI_MODULE_FOLDERS } from "./catalog.ts";
 import type { AiSystem, SystemActual, SystemFamily, SystemStats } from "./types.ts";
 
@@ -23,12 +24,15 @@ export function systemStats(): SystemStats {
   ).length;
   const stubs = AI_SYSTEMS.filter((s) => s.bytesCanonical > 0 && s.bytesCanonical < 2000).length;
   const duplicates = AI_SYSTEMS.filter((s) => s.actual === "duplicate").length;
+  const kernel = runtimeStats();
   return {
     systems: AI_SYSTEMS.length,
     wiredButSkeleton,
     stubs,
     duplicates,
     livingPlugs: 0,
+    kernelLivingPlugs: kernel.livingPlugs,
+    githubLivingPlugs: 0,
     partialPlugs: AI_SYSTEMS.filter((s) => s.actual === "partial").length,
     missingPlugs: AI_SYSTEMS.filter((s) => s.actual !== "partial").length,
     moduleDirs: MODULE_DIRS_ON_DISK,

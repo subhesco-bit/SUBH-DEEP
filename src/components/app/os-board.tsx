@@ -37,6 +37,7 @@ import {
   type RuntimeChain,
 } from "@/lib/os";
 import { NeedNav } from "@/components/app/need-nav";
+import { CompletionBoard } from "@/components/app/completion-board";
 import { useVillageBooks } from "@/components/erp/books-boot";
 import { evidencePassport } from "@/lib/os/passport";
 import { exceptions } from "@/lib/erp/platform";
@@ -132,6 +133,7 @@ export function OsBoard() {
 
   return (
     <div className="space-y-6">
+      <CompletionBoard />
       <section className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
         <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted">
           Digital super-organism · India-first economic OS · no invented ₹

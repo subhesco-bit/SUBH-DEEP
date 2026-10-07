@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-09-22",
-  "thesis": "AFRERA is a rural economic operating system, not an agriculture website. Stages 0–6 are closed on this kernel. GitHub platform remains 7%. Lattice ligaments stay ~39%. Human-equivalent body lives. Relax is the withdraw reflex: heat/alert/outage rest the mill, remaining holds, EMI is not frozen, wrong unclench is refused. Eleven flow charts live: strategy, work, process, payment, material, vision, decision, command, coordination, algorithms, supply chain. Rural ERP atlas classifies 32 SAP/Baan/Oracle analog families; sapParity is false; nested remaining conserves person=home=village. AI atlas classifies 35 families; aiParity is false; five tissues decide; GitHub living plugs stay 0. August AI veterinary coding lives on AFRERA-VET; GitHub human ICD stays a cadaver; livestock cash stays missing. Shared village muscle lives as conserved hours on cold, mill, process, pack, labs, dryer, polyhouse, equipment; organic tracing lives; GST invoice stays missing; Operation Green and NE logistics eligibility compute with amount blank; rental rupees stay missing. Village remaining journey lives; tourism itinerary refused. Engineering BOQ stamp lives; CFD stays refused. Cell inspect lives; no login profile. Federated ask is local remaining. Policy lab what-if, amount blank. Infra twin on declared sensors. Coop license is qty-weighted remaining. One brain, five tissues. AI still cannot write rupees. Agriculture finance and procure stay missing.",
+  "thesis": "AFRERA is a rural economic operating system, not an agriculture website. Stages 0–6 are closed on this kernel. Honest completion is classified + living walk + named missing — not GitHub 100%. GitHub platform remains 7%. Lattice ligaments stay ~39%. Human-equivalent body lives. Relax is the withdraw reflex: heat/alert/outage rest the mill, remaining holds, EMI is not frozen, wrong unclench is refused. Eleven flow charts live: strategy, work, process, payment, material, vision, decision, command, coordination, algorithms, supply chain. Rural ERP atlas classifies 32 SAP/Baan/Oracle analog families; sapParity is false; nested remaining conserves person=home=village. AI atlas classifies 35 families; aiParity is false; five tissues decide; GitHub living plugs stay 0. August AI veterinary coding lives on AFRERA-VET; GitHub human ICD stays a cadaver; livestock cash stays missing. Shared village muscle lives as conserved hours on cold, mill, process, pack, labs, dryer, polyhouse, equipment; organic tracing lives; GST invoice stays missing; Operation Green and NE logistics eligibility compute with amount blank; rental rupees stay missing. Village remaining journey lives; tourism itinerary refused. Engineering BOQ stamp lives; CFD stays refused. Cell inspect lives; no login profile. Federated ask is local remaining. Policy lab what-if, amount blank. Infra twin on declared sensors. Coop license is qty-weighted remaining. One brain, five tissues. AI still cannot write rupees. Agriculture finance and procure stay missing.",
   "stages": [
     {
       "stage": 0,
@@ -46,15 +46,15 @@
     }
   ],
   "snapshot": {
-    "items": 132,
-    "classified": 132,
+    "items": 133,
+    "classified": 133,
     "stage0Pct": 100,
     "stageDone": {
       "0": {
-        "total": 7,
-        "done": 7,
+        "total": 8,
+        "done": 8,
         "blocked": 0,
-        "closed": 7,
+        "closed": 8,
         "pct": 100
       },
       "1": {
@@ -100,15 +100,15 @@
         "pct": 100
       }
     },
-    "kernelVerified": 22,
+    "kernelVerified": 23,
     "kernelPartial": 109,
     "githubScaffolded": 60,
     "open": 0,
     "blocked": 0,
     "stagesComplete": true,
     "todo": {
-      "total": 132,
-      "done": 132,
+      "total": 133,
+      "done": 133,
       "open": 0,
       "blocked": 0
     }
@@ -1721,6 +1721,26 @@
         "fpo"
       ],
       "href": "/share",
+      "todo": "done"
+    },
+    {
+      "id": "n-complete",
+      "name": "Honest completion scorecard",
+      "table": "innovation",
+      "stage": 0,
+      "level": 1,
+      "area": "architecture",
+      "kernel": "verified",
+      "github": "disconnected",
+      "present": "Classified + living walk + named missing. Stages 0–6 closed. GitHub 7%. Lattice ~39%. sapParity false. aiParity false. Clerk still writes remaining.",
+      "missing": "GitHub 100%, SAP parity, invented rupees, painted missing living.",
+      "next": "Complete is classified. Do not paint the cadaver.",
+      "organs": [
+        "os",
+        "erp",
+        "ai"
+      ],
+      "href": "/os",
       "todo": "done"
     },
     {

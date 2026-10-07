@@ -39,6 +39,8 @@ export type SystemStats = {
   stubs: number;
   duplicates: number;
   livingPlugs: number;
+  kernelLivingPlugs: number;
+  githubLivingPlugs: 0;
   partialPlugs: number;
   missingPlugs: number;
   moduleDirs: number;

@@ -16,7 +16,7 @@ const DUAL_TRUTH = Object.freeze({
 });
 
 const STAGES = Object.freeze([
-  { stage: 0, name: "Concept reconciliation", done: 7, total: 7, pct: 100 },
+  { stage: 0, name: "Concept reconciliation", done: 8, total: 8, pct: 100 },
   { stage: 1, name: "Industry baseline", done: 38, total: 38, pct: 100 },
   { stage: 2, name: "Sector excellence", done: 25, total: 25, pct: 100 },
   { stage: 3, name: "Intelligent assistance", done: 28, total: 28, pct: 100 },
@@ -26,12 +26,12 @@ const STAGES = Object.freeze([
 ]);
 
 const SNAPSHOT = Object.freeze({
-  items: 132,
-  classified: 132,
+  items: 133,
+  classified: 133,
   stage0Pct: 100,
-  kernelVerified: 22,
+  kernelVerified: 23,
   kernelPartial: 109,
-  todoDone: 132,
+  todoDone: 133,
   todoOpen: 0,
   todoBlocked: 0,
   stagesComplete: true,
@@ -39,7 +39,7 @@ const SNAPSHOT = Object.freeze({
   aiParity: false,
   aiUnits: 35,
   thesis:
-    "AFRERA is a rural economic operating system, not an agriculture website. Stages 0–6 are closed on this kernel. GitHub platform remains 7%. Lattice ligaments stay ~39%. August AI veterinary coding lives on AFRERA-VET; GitHub human ICD stays a cadaver; livestock cash stays missing. Shared village muscle lives as conserved hours; organic tracing lives; GST invoice stays missing; Operation Green and NE logistics eligibility compute with amount blank; rental rupees stay missing. AI still cannot write rupees. Agriculture finance and procure stay missing.",
+    "AFRERA is a rural economic operating system, not an agriculture website. Stages 0–6 are closed on this kernel. Honest completion is classified + living walk + named missing — not GitHub 100%. GitHub platform remains 7%. Lattice ligaments stay ~39%. August AI veterinary coding lives on AFRERA-VET; GitHub human ICD stays a cadaver; livestock cash stays missing. Shared village muscle lives as conserved hours; organic tracing lives; GST invoice stays missing; Operation Green and NE logistics eligibility compute with amount blank; rental rupees stay missing. AI still cannot write rupees. Agriculture finance and procure stay missing.",
 });
 
 /** Next ligaments. Classification is done. Finance/procure stay missing, not open TODOs. */

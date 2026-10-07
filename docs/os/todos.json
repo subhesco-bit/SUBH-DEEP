@@ -1,8 +1,8 @@
 {
   "generatedAt": "2026-09-22",
   "counts": {
-    "total": 132,
-    "done": 132,
+    "total": 133,
+    "done": 133,
     "open": 0,
     "blocked": 0
   },
@@ -772,6 +772,15 @@
       "status": "done",
       "why": "Rental ledger, kWh-priced booking, yield model calendar.",
       "exit": "Hours are the remaining. Do not invent ₹/hour."
+    },
+    {
+      "id": "todo-n-complete",
+      "itemId": "n-complete",
+      "stage": 0,
+      "title": "Honest completion scorecard",
+      "status": "done",
+      "why": "GitHub 100%, SAP parity, invented rupees, painted missing living.",
+      "exit": "Complete is classified. Do not paint the cadaver."
     },
     {
       "id": "todo-a-comp",
